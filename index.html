@@ -3,11 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tour de France 2026</title>
+<meta name="color-scheme" content="light">
+<title>Tour de France 2026 — reitit, profiilit & tulokset</title>
+<meta name="description" content="Interaktiivinen roadbook Tour de France 2026 -kilpailuun: kaikki 21 etappia, reitit, korkeusprofiilit, mäkipisteet (KOM), kirisprintit sekä päivittyvät tulokset. 4.–26.7.2026. · Interactive roadbook for the 2026 Tour de France.">
+<link rel="canonical" href="https://juusimaa.github.io/Tdf2026/">
+
+<!-- Some-jaot (Open Graph / Twitter). Ei kuvaa toistaiseksi — kortti näkyy
+     tekstimuodossa. Jos haluat kuvan, lisää PNG ja og:image-tagi. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tour de France 2026">
+<meta property="og:title" content="Tour de France 2026 — reitit, profiilit & tulokset">
+<meta property="og:description" content="Interaktiivinen roadbook: 21 etappia, korkeusprofiilit, mäkipisteet, kirisprintit ja päivittyvät tulokset. 4.–26.7.2026.">
+<meta property="og:url" content="https://juusimaa.github.io/Tdf2026/">
+<meta property="og:locale" content="fi_FI">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tour de France 2026 — reitit, profiilit & tulokset">
+<meta name="twitter:description" content="Interaktiivinen roadbook: 21 etappia, korkeusprofiilit, mäkipisteet, kirisprintit ja päivittyvät tulokset.">
+
+<!-- Favicon: on-teema-vaakuna (kultainen korkeusprofiili + punainen KOM-piste)
+     SVG data-URI:na, ei erillistä binääritiedostoa. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
+    color-scheme:light;
     --paper:#E9ECE4;
     --paper-panel:#F4F6EF;
     --ink:#1E2A22;
@@ -114,8 +137,9 @@
   .rank-select:hover{border-color:var(--grey-road);}
   .rank-select:focus{outline:2px solid var(--gold-deep);outline-offset:1px;}
   .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+  .results-grid > *{min-width:0;} /* salli solun kutistua -> taulukko rullaa kortin sisällä */
   @media (max-width:900px){.results-grid{grid-template-columns:1fr;}}
-  .cls-card{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+  .cls-card{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;overflow:hidden;min-width:0;}
   .cls-head{
     display:flex;align-items:center;gap:12px;padding:14px 16px;
     border-bottom:1px solid var(--line);
@@ -134,7 +158,7 @@
     display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
     color:var(--ink-soft);letter-spacing:.08em;text-transform:none;
   }
-  .cls-body{padding:6px 16px 14px;}
+  .cls-body{padding:6px 16px 14px;overflow-x:auto;}
   table.results{width:100%;border-collapse:collapse;font-size:13px;}
   table.results th{
     text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;
@@ -245,7 +269,9 @@
   .leg-swatch{width:12px;height:12px;border-radius:3px;display:inline-block;}
 
   .twocol{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:18px;}
+  .twocol > *{min-width:0;}
   @media (max-width:700px){.twocol{grid-template-columns:1fr;}}
+  .block{overflow-x:auto;}
   .block h3{
     font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;
     letter-spacing:.08em;color:var(--ink-soft);margin:0 0 8px;
@@ -286,19 +312,37 @@
   }
   .made-with svg{width:14px;height:14px;flex:0 0 auto;color:var(--gold-deep);}
 
+  .noscript-note{
+    max-width:760px;margin:24px auto;padding:16px 18px;
+    background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--red);
+    border-radius:2px;font-size:14px;line-height:1.6;color:var(--ink);
+  }
+  .noscript-note b{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;}
+
   ::-webkit-scrollbar{width:8px;}
   ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
 </style>
 </head>
 <body>
+<noscript>
+  <div class="noscript-note">
+    <b>JavaScript pois käytöstä</b><br>
+    Tämä sivu rakentaa etapit, profiilit ja tulokset selaimessa JavaScriptillä.
+    Ota JavaScript käyttöön nähdäksesi sisällön. Viralliset tulokset: letour.fr, procyclingstats.com.
+    <hr style="border:none;border-top:1px dashed var(--line);margin:10px 0;">
+    <b>JavaScript is disabled</b><br>
+    This page builds the stages, profiles and results in your browser with JavaScript.
+    Please enable JavaScript to view the content. Official results: letour.fr, procyclingstats.com.
+  </div>
+</noscript>
 <div class="wrap">
 
   <header class="top">
     <div class="top-row">
       <div class="eyebrow" id="eyebrow"></div>
-      <div class="langsel" id="langSel">
-        <button data-lang="fi">FI</button>
-        <button data-lang="en">EN</button>
+      <div class="langsel" id="langSel" role="group" aria-label="Kieli / Language">
+        <button data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+        <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
       </div>
     </div>
     <h1>Tour de France 2026</h1>
@@ -306,12 +350,14 @@
     <div class="stat-row" id="topstats"></div>
   </header>
 
-  <nav class="tabs" role="tablist">
-    <button class="tab active" data-view="etapit" role="tab" id="tabStages"></button>
-    <button class="tab" data-view="tulokset" role="tab" id="tabResults"></button>
+  <nav class="tabs" role="tablist" aria-label="Näkymät / Views">
+    <button class="tab active" data-view="etapit" role="tab" id="tabStages"
+            aria-controls="view-etapit" aria-selected="true" tabindex="0"></button>
+    <button class="tab" data-view="tulokset" role="tab" id="tabResults"
+            aria-controls="view-tulokset" aria-selected="false" tabindex="-1"></button>
   </nav>
 
-  <section class="view active" id="view-etapit">
+  <section class="view active" id="view-etapit" role="tabpanel" aria-labelledby="tabStages" tabindex="0">
   <div class="layout">
     <nav class="stagelist">
       <div class="listhead" id="stageListHeader"></div>
@@ -322,7 +368,7 @@
   </div>
   </section>
 
-  <section class="view" id="view-tulokset">
+  <section class="view" id="view-tulokset" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
     <div class="results-toolbar">
       <label class="rank-select-label" id="rankSelectLabel" for="rankStageSelect"></label>
       <select class="rank-select" id="rankStageSelect"></select>
@@ -1196,7 +1242,9 @@ function applyStaticText(){
 /* ---------- LANGUAGE SWITCHER ---------- */
 function updateLangButtons(){
   document.querySelectorAll('#langSel button').forEach(b=>{
-    b.classList.toggle('active', b.dataset.lang===lang);
+    const active = b.dataset.lang===lang;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', active ? 'true' : 'false');
   });
 }
 
@@ -1227,12 +1275,30 @@ document.getElementById('rankStageSelect').addEventListener('change', e=>{
   renderResults();
 });
 
-/* ---------- TAB SWITCHING ---------- */
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click', ()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active', x===t));
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    document.getElementById('view-'+t.dataset.view).classList.add('active');
+/* ---------- TAB SWITCHING (WAI-ARIA tabs -malli) ---------- */
+const tabButtons = Array.from(document.querySelectorAll('.tab'));
+
+function activateTab(tab, setFocus){
+  tabButtons.forEach(x=>{
+    const selected = x===tab;
+    x.classList.toggle('active', selected);
+    x.setAttribute('aria-selected', selected ? 'true' : 'false');
+    x.tabIndex = selected ? 0 : -1; // roving tabindex
+  });
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+tab.dataset.view).classList.add('active');
+  if(setFocus) tab.focus();
+}
+
+tabButtons.forEach((tab, i)=>{
+  tab.addEventListener('click', ()=>activateTab(tab, false));
+  tab.addEventListener('keydown', e=>{
+    let idx = null;
+    if(e.key==='ArrowRight' || e.key==='ArrowDown') idx = (i+1) % tabButtons.length;
+    else if(e.key==='ArrowLeft' || e.key==='ArrowUp') idx = (i-1+tabButtons.length) % tabButtons.length;
+    else if(e.key==='Home') idx = 0;
+    else if(e.key==='End') idx = tabButtons.length-1;
+    if(idx!==null){ e.preventDefault(); activateTab(tabButtons[idx], true); }
   });
 });
 
