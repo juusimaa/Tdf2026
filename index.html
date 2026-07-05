@@ -278,6 +278,14 @@
     border:1px dashed var(--line);padding:10px 12px;border-radius:2px;margin-top:14px;line-height:1.55;
   }
 
+  .made-with{
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;
+    color:var(--ink-soft);
+  }
+  .made-with svg{width:14px;height:14px;flex:0 0 auto;color:var(--gold-deep);}
+
   ::-webkit-scrollbar{width:8px;}
   ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
 </style>
@@ -330,6 +338,13 @@
       <b id="sourcesTitle"></b><br>
       <span id="sourcesBody"></span>
     </div>
+    <div class="made-with">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2 L13.9 8.1 L20 10 L13.9 11.9 L12 18 L10.1 11.9 L4 10 L10.1 8.1 Z" fill="currentColor"/>
+        <path d="M19 15 L19.8 17.2 L22 18 L19.8 18.8 L19 21 L18.2 18.8 L16 18 L18.2 17.2 Z" fill="currentColor" opacity="0.7"/>
+      </svg>
+      <span id="madeWith"></span>
+    </div>
   </footer>
 </div>
 
@@ -378,6 +393,7 @@ const STRINGS = {
     stageResultEmpty: 'Tämän etapin tuloksia ei ole vielä saatavilla.',
     disclaimerLabel: 'Huom korkeusprofiileista:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.',
+    madeWith: 'Tehty Claudella',
     sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
     sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV-lähetysten alkamisajat (CEST): tntsports.co.uk ja procyclinguk.com heinäkuun 2026 lähetysaikatauluista (HBO Max / TNT Sports / Eurosport) — nämä ovat lähetyksen alkamisaikoja, eivät välttämättä virallista lähtöaikaa, ja voivat vielä muuttua.<br>Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).',
     typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', ttt:'Joukkueaika-ajo', itt:'Yksilöaika-ajo'},
@@ -430,6 +446,7 @@ const STRINGS = {
     stageResultEmpty: 'Results for this stage are not available yet.',
     disclaimerLabel: 'Note on elevation profiles:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type, total elevation gain, and known climbs (location, length, average gradient) — they are not GPS-measured elevation data. ASO has not yet publicly released exact kilometre markers for the intermediate sprints across the whole route; the number of sprints shown per stage (1 or 2) and the points system are based on confirmed sources, but the marked sprint location on the route is an estimate.',
+    madeWith: 'Made with Claude',
     sourcesTitle: 'Sources (checked against ≥2 independent sources for key facts):',
     sourcesBody: 'Route, stages, dates, elevation gain: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Points system and double intermediate sprints: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV coverage start times (CEST): tntsports.co.uk and procyclinguk.com July 2026 broadcast schedules (HBO Max / TNT Sports / Eurosport) — these are broadcast start times, not necessarily the official start of racing, and may still change.<br>Results (Results tab): official sources letour.fr and procyclingstats.com — opening-stage start times confirmed via cyclingnews.com and idlprocycling.com (first team off at 17:05 CET, last expected to finish around 19:15 CET on 4 Jul 2026).',
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain stage', ttt:'Team time trial', itt:'Individual time trial'},
@@ -1173,6 +1190,7 @@ function applyStaticText(){
   document.getElementById('disclaimerText').textContent = t('disclaimer');
   document.getElementById('sourcesTitle').textContent = t('sourcesTitle');
   document.getElementById('sourcesBody').innerHTML = t('sourcesBody');
+  document.getElementById('madeWith').textContent = t('madeWith');
 }
 
 /* ---------- LANGUAGE SWITCHER ---------- */
