@@ -148,14 +148,14 @@ def main() -> int:
     stage_no = int(general["itg"].split("/")[4])
     print(f"Uusimmat tulokset: etappi {stage_no}")
 
-    data = {
-        "updated": datetime.now(ZoneInfo("Europe/Helsinki")).isoformat(),
-        "updatedText": datetime.now(ZoneInfo("Europe/Helsinki")).strftime(
-            "Päivitetty %d.%m.%Y klo %H.%M (Suomen aikaa)"
-        ),
-        "afterStage": stage_no,
-        "stageWinners": [],
-    }
+    prev = {}
+    if OUT.exists():
+        try:
+            prev = json.loads(OUT.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
+    data = {"afterStage": stage_no, "stageWinners": []}
 
     for key, cfg in CLASS_CONFIG.items():
         url = general.get(cfg["code"])
@@ -171,15 +171,9 @@ def main() -> int:
     # Aiemmin löydetyt etappivoittajat kelpaavat sellaisenaan; haetaan vain
     # ne joita ei vielä tiedetä, jotta jokaisella ajolla ei tehdä turhia
     # pyyntöjä kaikille jo ajetuille etapeille.
-    previous_winners = {}
-    if OUT.exists():
-        try:
-            prev = json.loads(OUT.read_text(encoding="utf-8"))
-            for w in prev.get("stageWinners", []):
-                if w.get("winner"):
-                    previous_winners[w["n"]] = w["winner"]
-        except Exception:
-            pass
+    previous_winners = {
+        w["n"]: w["winner"] for w in prev.get("stageWinners", []) if w.get("winner")
+    }
 
     for n in range(1, stage_no + 1):
         winner = previous_winners.get(n, "")
@@ -190,6 +184,19 @@ def main() -> int:
                 print(f"  etappi {n} voittaja: {e}")
                 winner = ""
         data["stageWinners"].append({"n": n, "winner": winner})
+
+    # "updated"/"updatedText" päivitetään vain kun jokin muu kenttä oikeasti
+    # muuttui — muuten workflow'n "commitoi jos muuttunut" -tarkistus
+    # commitoisi joka ajolla pelkän aikaleiman takia.
+    prev_content = {k: v for k, v in prev.items() if k not in ("updated", "updatedText")}
+    if prev_content == data and prev.get("updated"):
+        data["updated"] = prev["updated"]
+        data["updatedText"] = prev["updatedText"]
+    else:
+        data["updated"] = datetime.now(ZoneInfo("Europe/Helsinki")).isoformat()
+        data["updatedText"] = datetime.now(ZoneInfo("Europe/Helsinki")).strftime(
+            "Päivitetty %d.%m.%Y klo %H.%M (Suomen aikaa)"
+        )
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
