@@ -168,6 +168,17 @@ def main() -> int:
                 print(f"  varoitus: {key} haku epäonnistui: {e}")
         data[key] = {"rows": rows}
 
+    # letour.fr vaihtaa /en/rankings-sivun "uusin etappi" -osoittimen jo
+    # etapin alkaessa, ennen kuin kyseisen etapin tulostaulukot on
+    # julkaistu — jolloin stage_no kasvaisi mutta taulukot olisivat vielä
+    # tyhjiä. Jos GC-taulukossa (aina ensimmäisenä valmistuva) ei ole
+    # yhtään riviä, kyseisen etapin tuloksia ei siis vielä ole: säilytetään
+    # edellinen tunnettu hyvä data koskemattomana ja yritetään uudelleen
+    # seuraavalla ajolla.
+    if not data["gc"]["rows"]:
+        print(f"Etapin {stage_no} tuloksia ei ole vielä julkaistu — ei päivitetä.")
+        return 0
+
     # Aiemmin löydetyt etappivoittajat kelpaavat sellaisenaan; haetaan vain
     # ne joita ei vielä tiedetä, jotta jokaisella ajolla ei tehdä turhia
     # pyyntöjä kaikille jo ajetuille etapeille.
