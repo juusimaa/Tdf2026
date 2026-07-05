@@ -325,7 +325,8 @@ const STRINGS = {
     statMountainFinish: 'Vuoristomaalia', statMountainFinishVal: 'Alpe d’Huez ×2, muut 5',
     stagePrefix: 'Etappi',
     profileAria: n => `Etapin ${n} korkeusprofiili`,
-    factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä',
+    factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä', factStart: 'Lähetys alkaa',
+    startNote: 'TV-lähetyksen arvioitu alkamisaika (HBO Max / TNT Sports / Eurosport), muunnettu omaan aikavyöhykkeeseesi — perustuu CEST-aikatauluun, joka voi vielä muuttua kisan lähestyessä.',
     legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendSprint: 'Kirisprintti',
     chartCaption: 'Havainnollistava profiili — ei GPS-mitattua korkeusdataa. X-akseli km, Y-akseli suhteellinen korkeus.',
     descHeader: 'Etapin kuvaus', climbsHeader: 'Mäkipisteet (KOM)', sprintsHeader: 'Kirisprintit',
@@ -346,7 +347,7 @@ const STRINGS = {
     disclaimerLabel: 'Huom korkeusprofiileista:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.',
     sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
-    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).',
+    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV-lähetysten alkamisajat (CEST): tntsports.co.uk ja procyclinguk.com heinäkuun 2026 lähetysaikatauluista (HBO Max / TNT Sports / Eurosport) — nämä ovat lähetyksen alkamisaikoja, eivät välttämättä virallista lähtöaikaa, ja voivat vielä muuttua.<br>Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).',
     typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', ttt:'Joukkueaika-ajo', itt:'Yksilöaika-ajo'},
     catLabels: {HC:'HC', C1:'1. lk', C2:'2. lk', C3:'3. lk', C4:'4. lk'},
     classifications: {
@@ -370,7 +371,8 @@ const STRINGS = {
     statMountainFinish: 'Mountain finishes', statMountainFinishVal: 'Alpe d’Huez ×2, others 5',
     stagePrefix: 'Stage',
     profileAria: n => `Stage ${n} elevation profile`,
-    factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints',
+    factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints', factStart: 'Coverage starts',
+    startNote: 'Estimated TV coverage start time (HBO Max / TNT Sports / Eurosport), converted to your own time zone — based on the published CEST schedule, which may still shift closer to the stage.',
     legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendSprint: 'Intermediate sprint',
     chartCaption: 'Illustrative profile — not GPS-measured elevation data. X-axis: km, Y-axis: relative elevation.',
     descHeader: 'Stage description', climbsHeader: 'Climb points (KOM)', sprintsHeader: 'Intermediate sprints',
@@ -391,7 +393,7 @@ const STRINGS = {
     disclaimerLabel: 'Note on elevation profiles:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type, total elevation gain, and known climbs (location, length, average gradient) — they are not GPS-measured elevation data. ASO has not yet publicly released exact kilometre markers for the intermediate sprints across the whole route; the number of sprints shown per stage (1 or 2) and the points system are based on confirmed sources, but the marked sprint location on the route is an estimate.',
     sourcesTitle: 'Sources (checked against ≥2 independent sources for key facts):',
-    sourcesBody: 'Route, stages, dates, elevation gain: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Points system and double intermediate sprints: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>Results (Results tab): official sources letour.fr and procyclingstats.com — opening-stage start times confirmed via cyclingnews.com and idlprocycling.com (first team off at 17:05 CET, last expected to finish around 19:15 CET on 4 Jul 2026).',
+    sourcesBody: 'Route, stages, dates, elevation gain: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Points system and double intermediate sprints: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV coverage start times (CEST): tntsports.co.uk and procyclinguk.com July 2026 broadcast schedules (HBO Max / TNT Sports / Eurosport) — these are broadcast start times, not necessarily the official start of racing, and may still change.<br>Results (Results tab): official sources letour.fr and procyclingstats.com — opening-stage start times confirmed via cyclingnews.com and idlprocycling.com (first team off at 17:05 CET, last expected to finish around 19:15 CET on 4 Jul 2026).',
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain stage', ttt:'Team time trial', itt:'Individual time trial'},
     catLabels: {HC:'HC', C1:'Cat 1', C2:'Cat 2', C3:'Cat 3', C4:'Cat 4'},
     classifications: {
@@ -423,7 +425,7 @@ const TYPE_COLOR = {
 
 // profile keypoints: relative elevation 0-100 (illustrative, not surveyed)
 const stages = [
-{n:1, dateIso:'2026-07-04', start:'Barcelona', finish:'Barcelona', km:19.6, type:'ttt', gain:200,
+{n:1, dateIso:'2026-07-04', start:'Barcelona', finish:'Barcelona', km:19.6, type:'ttt', gain:200, startCEST:'16:30',
  profile:[[0,18],[10,17],[15,20],[17.9,55],[18.7,75],[19.6,90]],
  climbs:[
    {name:{fi:'Montjuïc (välinousu)',en:'Montjuïc (intermediate climb)'},km:17.9,len:1.1,grad:null,cat:'C4'},
@@ -435,7 +437,7 @@ const stages = [
   en:`<p>The opening stage is a team time trial through the streets of Barcelona — under the new rule format where each rider's own time counts (no longer the fourth rider's time, as was traditional). The first 15 km are flat, followed by Montjuïc hill's 1.1 km climb and finally an even steeper 800 m section (approx. 7%) right at the finish.</p><p>The stage gives the best-prepared teams and puncheur-type riders a chance to grab the first yellow jersey.</p>`
  }},
 
-{n:2, dateIso:'2026-07-05', start:'Tarragona', finish:'Barcelona', km:168.5, type:'hilly', gain:2500,
+{n:2, dateIso:'2026-07-05', start:'Tarragona', finish:'Barcelona', km:168.5, type:'hilly', gain:2500, startCEST:'13:30',
  profile:[[0,15],[60,18],[110,25],[138,35],[150,45],[158,70],[163,60],[166,80],[168.5,88]],
  climbs:[
    {name:{fi:'Montjuïc-kierros (3×)',en:'Montjuïc circuit (3×)'},km:140,len:3,grad:null,cat:'C3'},
@@ -448,7 +450,7 @@ const stages = [
   en:`<p>The second stage gives puncheurs a chance at the yellow jersey. Most of the climbing comes in the second half: the final 30 km include three laps around Montjuïc, six climbs in total. The last five kilometres feature two sharp ramps (1.6 km / 9.3% and 700 m / 7%), and the stage finishes at the top of the latter.</p>`
  }},
 
-{n:3, dateIso:'2026-07-06', start:'Granollers', finish:'Les Angles', km:195.9, type:'mountain', gain:3850,
+{n:3, dateIso:'2026-07-06', start:'Granollers', finish:'Les Angles', km:195.9, type:'mountain', gain:3850, startCEST:'11:45',
  profile:[[0,15],[70,20],[120,30],[150,45],[170,50],[185,65],[192,78],[195.9,90]],
  climbs:[
    {name:{fi:'1. luokan nousu (Pyreneet)',en:'Category 1 climb (Pyrenees)'},km:150,len:10,grad:7,cat:'C1'},
@@ -460,7 +462,7 @@ const stages = [
   en:`<p>The stage takes the caravan from Spain across the Pyrenees into France, with almost 4,000 metres of elevation gain along the way. The route includes one category-1 climb before finishing uphill at the Les Angles ski resort. The climb isn't especially hard (6.5% average), which could suit both puncheurs and a breakaway group — GC riders may also join the fight.</p>`
  }},
 
-{n:4, dateIso:'2026-07-07', start:'Carcassonne', finish:'Foix', km:181.9, type:'hilly', gain:2800,
+{n:4, dateIso:'2026-07-07', start:'Carcassonne', finish:'Foix', km:181.9, type:'hilly', gain:2800, startCEST:'13:00',
  profile:[[0,20],[40,30],[80,42],[110,55],[140,60],[147,72],[165,40],[181.9,35]],
  climbs:[{name:{fi:'Pyreneiden esivuoret',en:'Pyrenean foothills'},km:140,len:8,grad:5,cat:'C2'}],
  sprints:[{km:95,pts:'25-20-16…'}],
@@ -469,7 +471,7 @@ const stages = [
   en:`<p>The route rolls through the undulating foothills of the Pyrenees toward Foix, where breakaway groups have reached the finish several times before (including Hugo Houle in 2022). The final roughly 35 km are mostly downhill, favouring escapees over a bunch sprint.</p>`
  }},
 
-{n:5, dateIso:'2026-07-08', start:'Lannemezan', finish:'Pau', km:158.3, type:'flat', gain:600,
+{n:5, dateIso:'2026-07-08', start:'Lannemezan', finish:'Pau', km:158.3, type:'flat', gain:600, startCEST:'13:30',
  profile:[[0,22],[40,24],[90,26],[130,24],[158.3,20]],
  climbs:[],
  sprints:[{km:55,pts:'70-50-40…'},{km:120,pts:'70-50-40…'}],
@@ -478,7 +480,7 @@ const stages = [
   en:`<p>A mostly flat stage from Lannemezan to the town of Pau — one of the Tour's most-visited finish towns. The stage is one of seven "flat" stages featuring two intermediate sprints, where the stage winner earns 70 points in the points classification.</p>`
  }},
 
-{n:6, dateIso:'2026-07-09', start:'Pau', finish:'Gavarnie-Gèdre', km:186.2, type:'mountain', gain:4400,
+{n:6, dateIso:'2026-07-09', start:'Pau', finish:'Gavarnie-Gèdre', km:186.2, type:'mountain', gain:4400, startCEST:'12:00',
  profile:[[0,20],[60,25],[90,35],[110,50],[125,42],[140,60],[160,50],[174,75],[186.2,95]],
  climbs:[
    {name:{fi:'Col d’Aspin',en:'Col d’Aspin'},km:113,len:12,grad:6.5,cat:'C1'},
@@ -491,7 +493,7 @@ const stages = [
   en:`<p>The first big mountain stage, and the first real test for the GC riders. The route climbs both the Col d’Aspin (12 km / 6.5%) and the legendary Col du Tourmalet, before a descent toward the finish at Cirque de Gavarnie — a place the Tour has never finished at before.</p>`
  }},
 
-{n:7, dateIso:'2026-07-10', start:'Hagetmau', finish:'Bordeaux', km:175.1, type:'flat', gain:500,
+{n:7, dateIso:'2026-07-10', start:'Hagetmau', finish:'Bordeaux', km:175.1, type:'flat', gain:500, startCEST:'13:00',
  profile:[[0,18],[50,20],[100,19],[150,17],[175.1,15]],
  climbs:[],
  sprints:[{km:55,pts:'70-50-40…'},{km:125,pts:'70-50-40…'}],
@@ -500,7 +502,7 @@ const stages = [
   en:`<p>An expected sprinters' stage into Bordeaux — a city the Tour is visiting for the 83rd time. Jasper Philipsen won here most recently in 2023. Two intermediate sprints offer extra points for green jersey contenders.</p>`
  }},
 
-{n:8, dateIso:'2026-07-11', start:'Périgueux', finish:'Bergerac', km:180.4, type:'flat', gain:900,
+{n:8, dateIso:'2026-07-11', start:'Périgueux', finish:'Bergerac', km:180.4, type:'flat', gain:900, startCEST:'13:00',
  profile:[[0,20],[60,22],[110,24],[150,21],[180.4,18]],
  climbs:[],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
@@ -509,7 +511,7 @@ const stages = [
   en:`<p>The whole stage runs through the Dordogne region from Périgueux to Bergerac — another day dominated by the sprinters' teams, and another stage with two intermediate sprints.</p>`
  }},
 
-{n:9, dateIso:'2026-07-12', start:'Malemort', finish:'Ussel', km:185.5, type:'hilly', gain:2400,
+{n:9, dateIso:'2026-07-12', start:'Malemort', finish:'Ussel', km:185.5, type:'hilly', gain:2400, startCEST:'13:00',
  profile:[[0,20],[60,25],[100,35],[140,45],[170,55],[185.5,50]],
  climbs:[{name:{fi:'Corrèzen kukkulat',en:'Hills of Corrèze'},km:150,len:6,grad:5,cat:'C3'}],
  sprints:[{km:80,pts:'25-20-16…'}],
@@ -520,7 +522,7 @@ const stages = [
 
 {n:'lepo', dateIso:'2026-07-13', labelKey:'rest1'},
 
-{n:10, dateIso:'2026-07-14', start:'Aurillac', finish:'Le Lioran', km:166.6, type:'mountain', gain:4100,
+{n:10, dateIso:'2026-07-14', start:'Aurillac', finish:'Le Lioran', km:166.6, type:'mountain', gain:4100, startCEST:'13:00',
  profile:[[0,25],[40,35],[70,50],[95,45],[115,65],[135,55],[150,75],[166.6,70]],
  climbs:[
    {name:{fi:'Puy Mary — Pas de Peyrol',en:'Puy Mary — Pas de Peyrol'},km:120,len:5.4,grad:8,cat:'C1'},
@@ -532,7 +534,7 @@ const stages = [
   en:`<p>The Bastille Day stage crosses the Massif Central with a demanding climbing profile. The finish at Le Lioran is a familiar one — Jonas Vingegaard narrowly beat Tadej Pogačar here two years earlier. The finale is identical to 2024: the Puy Mary climb via Pas de Peyrol and the Col du Pertus before the descent to the finish.</p>`
  }},
 
-{n:11, dateIso:'2026-07-15', start:'Vichy', finish:'Nevers', km:161.3, type:'flat', gain:700,
+{n:11, dateIso:'2026-07-15', start:'Vichy', finish:'Nevers', km:161.3, type:'flat', gain:700, startCEST:'13:30',
  profile:[[0,20],[50,22],[100,20],[161.3,17]],
  climbs:[],
  sprints:[{km:55,pts:'70-50-40…'},{km:115,pts:'70-50-40…'}],
@@ -541,7 +543,7 @@ const stages = [
   en:`<p>The stage from Vichy to Nevers is a likely sprint stage and again offers two intermediate sprints for green jersey contenders.</p>`
  }},
 
-{n:12, dateIso:'2026-07-16', start:'Magny-Cours', finish:'Chalon-sur-Saône', km:179.1, type:'flat', gain:800,
+{n:12, dateIso:'2026-07-16', start:'Magny-Cours', finish:'Chalon-sur-Saône', km:179.1, type:'flat', gain:800, startCEST:'13:00',
  profile:[[0,18],[60,20],[120,19],[179.1,16]],
  climbs:[],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
@@ -550,7 +552,7 @@ const stages = [
   en:`<p>The start is at the Magny-Cours motor racing circuit, heading toward Chalon-sur-Saône — again a likely bunch-sprint stage with two intermediate sprints.</p>`
  }},
 
-{n:13, dateIso:'2026-07-17', start:'Dole', finish:'Belfort', km:205.8, type:'hilly', gain:2600,
+{n:13, dateIso:'2026-07-17', start:'Dole', finish:'Belfort', km:205.8, type:'hilly', gain:2600, startCEST:'12:45',
  profile:[[0,20],[50,25],[100,30],[150,28],[190,40],[205.8,45]],
  climbs:[{name:{fi:'Vogeesien esivuoret',en:'Vosges foothills'},km:180,len:6,grad:5,cat:'C3'}],
  sprints:[{km:90,pts:'25-20-16…'}],
@@ -559,7 +561,7 @@ const stages = [
   en:`<p>The longest day of the 2026 race (205.8 km) heads toward the Swiss and German border regions. The rolling terrain prepares legs for the back-to-back mountain days that follow.</p>`
  }},
 
-{n:14, dateIso:'2026-07-18', start:'Mulhouse', finish:'Le Markstein', km:155.3, type:'mountain', gain:3800,
+{n:14, dateIso:'2026-07-18', start:'Mulhouse', finish:'Le Markstein', km:155.3, type:'mountain', gain:3800, startCEST:'12:45',
  profile:[[0,20],[30,30],[55,45],[75,40],[95,60],[115,50],[135,70],[144,60],[155.3,88]],
  climbs:[
    {name:{fi:'1. luokan nousu I',en:'Category 1 climb I'},km:60,len:9,grad:7,cat:'C1'},
@@ -573,7 +575,7 @@ const stages = [
   en:`<p>The Vosges mountains come out in full force: four category-1 climbs are packed into just 155 km. The toughest section is the Col du Haag (11.2 km / 7.3%), before the final climb to the Le Markstein ski resort.</p>`
  }},
 
-{n:15, dateIso:'2026-07-19', start:'Champagnole', finish:'Plateau de Solaison', km:183.9, type:'mountain', gain:4500,
+{n:15, dateIso:'2026-07-19', start:'Champagnole', finish:'Plateau de Solaison', km:183.9, type:'mountain', gain:4500, startCEST:'12:45',
  profile:[[0,20],[50,28],[90,35],[120,32],[145,50],[160,45],[172.6,60],[183.9,95]],
  climbs:[
    {name:{fi:'Jura-nousuja',en:'Jura climbs'},km:100,len:8,grad:6,cat:'C2'},
@@ -587,7 +589,7 @@ const stages = [
 
 {n:'lepo', dateIso:'2026-07-20', labelKey:'rest2'},
 
-{n:16, dateIso:'2026-07-21', start:'Evian-les-Bains', finish:'Thonon-les-Bains', km:26.1, type:'itt', gain:250,
+{n:16, dateIso:'2026-07-21', start:'Evian-les-Bains', finish:'Thonon-les-Bains', km:26.1, type:'itt', gain:250, startCEST:'12:30',
  profile:[[0,20],[8,25],[14,30],[20,22],[26.1,18]],
  climbs:[],
  sprints:[],
@@ -596,7 +598,7 @@ const stages = [
   en:`<p>The third week opens with a 26.1 km individual time trial south of Lake Geneva, between Evian-les-Bains and Thonon-les-Bains. This test could significantly reshape the GC order ahead of the final Alpine block.</p>`
  }},
 
-{n:17, dateIso:'2026-07-22', start:'Chambéry', finish:'Voiron', km:174.7, type:'flat', gain:1200,
+{n:17, dateIso:'2026-07-22', start:'Chambéry', finish:'Voiron', km:174.7, type:'flat', gain:1200, startCEST:'13:00',
  profile:[[0,25],[60,30],[110,26],[150,22],[174.7,18]],
  climbs:[],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
@@ -605,7 +607,7 @@ const stages = [
   en:`<p>The last clear opportunity for sprinters before the Alps. Two intermediate sprints still offer a big haul of points for the green jersey battle right before the mountains take over.</p>`
  }},
 
-{n:18, dateIso:'2026-07-23', start:'Voiron', finish:'Orcières-Merlette', km:185.2, type:'mountain', gain:3600,
+{n:18, dateIso:'2026-07-23', start:'Voiron', finish:'Orcières-Merlette', km:185.2, type:'mountain', gain:3600, startCEST:'12:15',
  profile:[[0,22],[50,28],[90,35],[130,32],[160,45],[178.1,55],[185.2,85]],
  climbs:[
    {name:{fi:'Alppien esivuoret',en:'Alpine foothills'},km:120,len:9,grad:5,cat:'C2'},
@@ -617,7 +619,7 @@ const stages = [
   en:`<p>The Alpine section opens relatively gently: the final climb to the Orcières-Merlette ski resort is a steady 7.1 km / 6.7%, which favours GC riders who ride at a consistent, even power.</p>`
  }},
 
-{n:19, dateIso:'2026-07-24', start:'Gap', finish:'Alpe d’Huez', km:127.9, type:'mountain', gain:3300,
+{n:19, dateIso:'2026-07-24', start:'Gap', finish:'Alpe d’Huez', km:127.9, type:'mountain', gain:3300, startCEST:'13:30',
  profile:[[0,25],[35,30],[65,40],[90,35],[114.1,60],[127.9,98]],
  climbs:[{name:{fi:'Alpe d’Huez (klassinen puoli, maali, HC)',en:'Alpe d’Huez (classic side, finish, HC)'},km:114.1,len:13.8,grad:8.1,cat:'HC'}],
  sprints:[{km:40,pts:'25-20-16…'}],
@@ -626,7 +628,7 @@ const stages = [
   en:`<p>A short but explosive stage that culminates on the classic climb of Alpe d’Huez: 21 hairpin bends, 13.8 km, and an 8.1% average gradient. The compact distance favours aggressive, early attacks.</p>`
  }},
 
-{n:20, dateIso:'2026-07-25', start:'Bourg d’Oisans', finish:'Alpe d’Huez', km:170.9, type:'mountain', gain:5600,
+{n:20, dateIso:'2026-07-25', start:'Bourg d’Oisans', finish:'Alpe d’Huez', km:170.9, type:'mountain', gain:5600, startCEST:'11:00',
  profile:[[0,25],[35,45],[55,35],[80,65],[100,50],[125,80],[140,65],[158.7,60],[170.9,98]],
  climbs:[
    {name:{fi:'Col de la Croix de Fer',en:'Col de la Croix de Fer'},km:50,len:22,grad:5.2,cat:'HC'},
@@ -640,7 +642,7 @@ const stages = [
   en:`<p>The Tour's hardest day: 5,600 metres of elevation gain and four major climbs — Col de la Croix de Fer, Col du Télégraphe, and Col du Galibier — before Alpe d’Huez for a second time, this time via the rarer Col de Sarenne approach. The GC could well be decided for good on this stage.</p>`
  }},
 
-{n:21, dateIso:'2026-07-26', start:'Thoiry', finish:'Paris', km:133.0, type:'flat', gain:900,
+{n:21, dateIso:'2026-07-26', start:'Thoiry', finish:'Paris', km:133.0, type:'flat', gain:900, startCEST:'15:30',
  profile:[[0,20],[50,22],[90,25],[115,35],[125,40],[133,45]],
  climbs:[{name:{fi:'Montmartren mukulakivinousut',en:'Montmartre cobbled climbs'},km:120,len:1,grad:8,cat:'C4'}],
  sprints:[{km:45,pts:'70-50-40…'},{km:95,pts:'70-50-40…'}],
@@ -677,6 +679,17 @@ function fmtUpdated(iso){
     timeZone:'Europe/Helsinki'
   }).format(d);
   return lang==='fi' ? `Päivitetty ${formatted} (Suomen aikaa)` : `Updated ${formatted} (Helsinki time)`;
+}
+
+function fmtStartLocal(stage){
+  // startCEST on TV-lähetyksen alkamisaika Keski-Euroopan kesäajassa
+  // (HBO Max / TNT Sports / Eurosport -aikataulun mukaan). Muunnetaan
+  // katsojan omaan aikavyöhykkeeseen selaimen oletusasetuksella.
+  if(!stage.startCEST) return null;
+  const d = new Date(`${stage.dateIso}T${stage.startCEST}:00+02:00`);
+  return new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', {
+    hour:'2-digit', minute:'2-digit', timeZoneName:'short'
+  }).format(d);
 }
 
 function catLabel(c){
@@ -834,11 +847,13 @@ function renderPanel(stage){
     </div>
 
     <div class="factbar">
+      ${fmtStartLocal(stage) ? `<div class="fact">${t('factStart')}<b>${fmtStartLocal(stage)}</b></div>` : ''}
       <div class="fact">${t('factDistance')}<b>${fmtKm(stage.km)}</b></div>
       <div class="fact">${t('factGain')}${stage.gain?`<b>${fmtGain(stage.gain)}</b>`:`<b>—</b>`}</div>
       <div class="fact">${t('factClimbs')}<b>${(stage.climbs||[]).length}</b></div>
       <div class="fact">${t('factSprints')}<b>${(stage.sprints||[]).length}</b></div>
     </div>
+    ${fmtStartLocal(stage) ? `<div class="chart-caption" style="margin-top:-2px;">${t('startNote')}</div>` : ''}
 
     <div class="chartbox">
       ${renderProfile(stage)}
