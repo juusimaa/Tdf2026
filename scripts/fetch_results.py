@@ -110,26 +110,48 @@ def parse_table(html: str, team_only: bool, kind: str):
     return rows
 
 
-def stage_winner(stage_no: int) -> str:
-    """Hakee etapin voittajan (ajaja, tai joukkueaika-ajossa joukkue)."""
+def stage_table_rows(stage_no: int):
+    """
+    Hakee etapin oman tulostaulukon (maaliintulojärjestys aikoineen).
+    Sama ajax-stack-mekaniikka kuin yleisluokituksissa, mutta stacks[1]
+    sisältää etappikohtaisen luokituksen (ete/ite) URL:n.
+    """
     html = fetch(f"{BASE}/en/rankings/stage-{stage_no}")
     stacks = ajax_stacks(html)
-    if len(stacks) < 2:
-        return ""
+    if len(stacks) < 2 or not stacks[1]:
+        return []
     stage_dict = stacks[1]
-    if not stage_dict:
-        return ""
-    _, url = next(iter(stage_dict.items()))
-    table_html = fetch(BASE + url)
-    tree = HTMLParser(table_html)
-    tr = tree.css_first("tbody tr.rankingTables__row")
-    if tr is None:
-        return ""
-    img = tr.css_first(".rankingTables__row__profile.runner img")
-    if img and img.attributes.get("alt"):
-        return img.attributes["alt"].strip()
-    tds = tr.css("td")
-    return tds[1].text(strip=True) if len(tds) > 1 else ""
+
+    # 'ite' = yksilön etappitulos (normaali etappi). Jos se on tyhjä — kuten
+    # joukkueaika-ajossa (TTT) — käytetään 'ete' = joukkueiden etappitulosta.
+    # Muut koodit kokeillaan varmuuden vuoksi viimeisenä.
+    attempts = []
+    if "ite" in stage_dict:
+        attempts.append(("ite", False))
+    if "ete" in stage_dict:
+        attempts.append(("ete", True))
+    for code in stage_dict:
+        if code not in ("ite", "ete"):
+            attempts.append((code, False))
+
+    for code, team_only in attempts:
+        url = stage_dict.get(code)
+        if not url:
+            continue
+        try:
+            table_html = fetch(BASE + url)
+        except Exception:
+            continue
+        rows = parse_table(table_html, team_only=team_only, kind="time")
+        if rows:
+            return rows
+    return []
+
+
+def stage_winner(stage_no: int) -> str:
+    """Hakee etapin voittajan (ajaja, tai joukkueaika-ajossa joukkue)."""
+    rows = stage_table_rows(stage_no)
+    return rows[0]["rider"] if rows else ""
 
 
 def main() -> int:
@@ -179,21 +201,29 @@ def main() -> int:
         print(f"Etapin {stage_no} tuloksia ei ole vielä julkaistu — ei päivitetä.")
         return 0
 
-    # Aiemmin löydetyt etappivoittajat kelpaavat sellaisenaan; haetaan vain
-    # ne joita ei vielä tiedetä, jotta jokaisella ajolla ei tehdä turhia
-    # pyyntöjä kaikille jo ajetuille etapeille.
+    # Aiemmin haetut etappitulokset ja -voittajat kelpaavat sellaisenaan;
+    # haetaan vain ne joita ei vielä tiedetä, jotta jokaisella ajolla ei
+    # tehdä turhia pyyntöjä kaikille jo ajetuille etapeille.
     previous_winners = {
         w["n"]: w["winner"] for w in prev.get("stageWinners", []) if w.get("winner")
     }
+    prev_stage_results = prev.get("stageResults", {}) or {}
+    data["stageResults"] = {}
 
     for n in range(1, stage_no + 1):
+        key = str(n)
         winner = previous_winners.get(n, "")
-        if not winner:
+        rows = (prev_stage_results.get(key) or {}).get("rows") or []
+        if not rows:
             try:
-                winner = stage_winner(n)
+                rows = stage_table_rows(n)
             except Exception as e:
-                print(f"  etappi {n} voittaja: {e}")
-                winner = ""
+                print(f"  etappi {n} tulokset: {e}")
+                rows = []
+        if rows:
+            data["stageResults"][key] = {"rows": rows}
+            if not winner:
+                winner = rows[0].get("rider", "")
         data["stageWinners"].append({"n": n, "winner": winner})
 
     # "updated"/"updatedText" päivitetään vain kun jokin muu kenttä oikeasti

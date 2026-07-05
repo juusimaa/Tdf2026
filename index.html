@@ -95,6 +95,24 @@
   .view.active{display:block;}
 
   /* Results view */
+  .results-toolbar{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;
+  }
+  .rank-select-label{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .rank-select{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
+    letter-spacing:.02em;color:var(--ink);
+    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
+    padding:8px 34px 8px 12px;cursor:pointer;max-width:100%;
+    appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='%234C5A50' stroke-width='1.6'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;
+  }
+  .rank-select:hover{border-color:var(--grey-road);}
+  .rank-select:focus{outline:2px solid var(--gold-deep);outline-offset:1px;}
   .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
   @media (max-width:900px){.results-grid{grid-template-columns:1fr;}}
   .cls-card{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;overflow:hidden;}
@@ -297,6 +315,10 @@
   </section>
 
   <section class="view" id="view-tulokset">
+    <div class="results-toolbar">
+      <label class="rank-select-label" id="rankSelectLabel" for="rankStageSelect"></label>
+      <select class="rank-select" id="rankStageSelect"></select>
+    </div>
     <div class="results-grid" id="resultsGrid"></div>
   </section>
 
@@ -320,7 +342,7 @@ const STRINGS = {
     eyebrow: 'Roadbook · 113. Tour de France · 4.–26.7.2026',
     subDesc: 'Interaktiivinen katsaus kaikkiin 21 etappiin: reitit, korkeusprofiilien havainnollistus, tärkeimmät mäkipisteet (KOM) sekä kirisprinttien sijainnit ja pistejärjestelmä. Kilpailu käynnistyy Barcelonasta la 4.7. ja päättyy Paris’iin su 26.7.2026.',
     tabStages: 'Etapit & profiilit',
-    tabResults: 'Tulokset & kategoriat',
+    tabResults: 'Sijoitukset',
     stageListHeader: '21 etappia',
     statDistance: 'Kokonaismatka', statDistanceVal: '3 333 km',
     statGain: 'Nousumetrit yhteensä', statGainVal: '54 450 m',
@@ -348,6 +370,12 @@ const STRINGS = {
     expandLess: '▲ Näytä vain top 10', expandMore: n => `▼ Näytä kaikki (${n})`,
     stageWinnersTitle: 'Etappivoittajat', stageWinnersFr: n => `${n}/21 etappia ajettu`,
     colStage: 'Etappi', colWinner: 'Voittaja',
+    rankShowLabel: 'Näytä',
+    rankGeneral: 'Kokonaistilanne — kaikki paidat',
+    rankStageOpt: (n,route) => `Etappi ${n} · ${route}`,
+    stageResultTitle: n => `Etapin ${n} tulos`,
+    stageResultValHead: 'Aika / ero',
+    stageResultEmpty: 'Tämän etapin tuloksia ei ole vielä saatavilla.',
     disclaimerLabel: 'Huom korkeusprofiileista:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.',
     sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
@@ -366,7 +394,7 @@ const STRINGS = {
     eyebrow: 'Roadbook · 113th Tour de France · 4–26 Jul 2026',
     subDesc: 'An interactive look at all 21 stages: routes, illustrative elevation profiles, the key climb points (KOM), and the location and points system for the intermediate sprints. The race starts from Barcelona on Sat 4 Jul and finishes in Paris on Sun 26 Jul 2026.',
     tabStages: 'Stages & profiles',
-    tabResults: 'Results & categories',
+    tabResults: 'Rankings',
     stageListHeader: '21 stages',
     statDistance: 'Total distance', statDistanceVal: '3,333 km',
     statGain: 'Total elevation gain', statGainVal: '54,450 m',
@@ -394,6 +422,12 @@ const STRINGS = {
     expandLess: '▲ Show top 10 only', expandMore: n => `▼ Show all (${n})`,
     stageWinnersTitle: 'Stage winners', stageWinnersFr: n => `${n}/21 stages raced`,
     colStage: 'Stage', colWinner: 'Winner',
+    rankShowLabel: 'Show',
+    rankGeneral: 'General rankings — all jerseys',
+    rankStageOpt: (n,route) => `Stage ${n} · ${route}`,
+    stageResultTitle: n => `Stage ${n} result`,
+    stageResultValHead: 'Time / gap',
+    stageResultEmpty: 'Results for this stage are not available yet.',
     disclaimerLabel: 'Note on elevation profiles:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type, total elevation gain, and known climbs (location, length, average gradient) — they are not GPS-measured elevation data. ASO has not yet publicly released exact kilometre markers for the intermediate sprints across the whole route; the number of sprints shown per stage (1 or 2) and the points system are based on confirmed sources, but the marked sprint location on the route is an estimate.',
     sourcesTitle: 'Sources (checked against ≥2 independent sources for key facts):',
@@ -917,6 +951,11 @@ const RESULTS = {
   youth:    {rows: []}, // Valkoinen paita — nuorten kilpailu (aika)
   teams:    {rows: []}, // Joukkuekilpailu (aika)
 
+  // Etappikohtaiset tulokset: { "1": {rows:[...]}, ... }. Kunkin ajetun
+  // etapin maaliintuloJÄRJESTYS (aika + ero voittajaan). Täytetään
+  // automaattisesti fetch_results.py:llä; tyhjä ennen kisaa.
+  stageResults: {},
+
   stageWinners: [
     {n:1, route:'Barcelona → Barcelona (TTT)', winner:''},
     {n:2, route:'Tarragona → Barcelona', winner:''},
@@ -966,8 +1005,49 @@ const CLASS_JERSEY = {
 const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 
 const expandState = {}; // key -> bool
+let rankView = 'general'; // 'general' tai valitun etapin numero
+
+/* Yksittäisen tulosrivin HTML (jaettu luokitusten ja etappitulosten kesken) */
+function resultRowHTML(r){
+  return `
+    <tr class="${r.pos<=3?'podium':''}">
+      <td class="pos">${r.pos}</td>
+      <td class="rider"><b>${r.rider}</b>${r.team?`<span class="tm">${r.team}${r.nat?' · '+r.nat:''}</span>`:''}</td>
+      <td class="val">${r.gap!==undefined && r.pos>1 ? r.gap : r.val}</td>
+    </tr>`;
+}
+
+/* Etapit jotka voi valita pudotusvalikosta: joko tulosrivit tai voittaja tiedossa */
+function riddenStages(){
+  return RESULTS.stageWinners.filter(s=>{
+    const sr = RESULTS.stageResults[s.n];
+    return (sr && Array.isArray(sr.rows) && sr.rows.length) || s.winner;
+  });
+}
+
+/* Rakentaa pudotusvalikon (kokonaistilanne + ajetut etapit) ja säilyttää valinnan */
+function renderRankSelect(){
+  const sel = document.getElementById('rankStageSelect');
+  const ridden = riddenStages();
+  const valid = rankView==='general' || ridden.some(s=>String(s.n)===String(rankView));
+  if(!valid) rankView = 'general';
+
+  let opts = `<option value="general">${t('rankGeneral')}</option>`;
+  ridden.forEach(s=>{
+    opts += `<option value="${s.n}">${t('rankStageOpt')(s.n, s.route)}</option>`;
+  });
+  sel.innerHTML = opts;
+  sel.value = String(rankView);
+}
 
 function renderResults(){
+  renderRankSelect();
+  if(rankView==='general') renderGeneralRankings();
+  else renderStageResult(rankView);
+}
+
+/* Kokonaistilanne: viisi paitaa + etappivoittajat */
+function renderGeneralRankings(){
   const grid = document.getElementById('resultsGrid');
   const anyData = CLASS_KEYS.some(k=>RESULTS[k].rows.length>0);
   let html = '';
@@ -993,12 +1073,7 @@ function renderResults(){
       body = `<table class="results">
         <thead><tr><th>${t('colHash')}</th><th>${key==='teams'?t('colTeam'):t('colRider')}</th><th style="text-align:right">${c.valHead}</th></tr></thead>
         <tbody>` +
-        shown.map(r=>`
-          <tr class="${r.pos<=3?'podium':''}">
-            <td class="pos">${r.pos}</td>
-            <td class="rider"><b>${r.rider}</b>${r.team?`<span class="tm">${r.team}${r.nat?' · '+r.nat:''}</span>`:''}</td>
-            <td class="val">${r.gap!==undefined && r.pos>1 ? r.gap : r.val}</td>
-          </tr>`).join('') +
+        shown.map(resultRowHTML).join('') +
         `</tbody></table>`;
       if(rows.length>10){
         body += `<button class="expander" data-cls="${key}">
@@ -1038,6 +1113,46 @@ function renderResults(){
   </div>`;
 
   grid.innerHTML = html;
+  bindExpanders(grid);
+}
+
+/* Yksittäisen etapin maaliintulojärjestys */
+function renderStageResult(n){
+  const grid = document.getElementById('resultsGrid');
+  const sr = RESULTS.stageResults[n];
+  const rows = (sr && Array.isArray(sr.rows)) ? sr.rows : [];
+  const meta = RESULTS.stageWinners.find(s=>String(s.n)===String(n));
+  const route = meta ? meta.route : '';
+  const expanded = !!expandState['__stage'];
+  const shown = expanded ? rows : rows.slice(0,10);
+
+  let body;
+  if(!rows.length){
+    body = `<div class="empty-cls">${t('stageResultEmpty')}</div>`;
+  } else {
+    body = `<table class="results">
+      <thead><tr><th>${t('colHash')}</th><th>${t('colRider')}</th><th style="text-align:right">${t('stageResultValHead')}</th></tr></thead>
+      <tbody>` +
+      shown.map(resultRowHTML).join('') +
+      `</tbody></table>`;
+    if(rows.length>10){
+      body += `<button class="expander" data-cls="__stage">
+        ${expanded ? t('expandLess') : t('expandMore')(rows.length)}
+      </button>`;
+    }
+  }
+
+  grid.innerHTML = `<div class="cls-card stagewins-card">
+    <div class="cls-head">
+      <span class="jersey">${jerseySVG('#3B6485')}</span>
+      <h3>${t('stageResultTitle')(n)}<span class="fr">${route}</span></h3>
+    </div>
+    <div class="cls-body">${body}</div>
+  </div>`;
+  bindExpanders(grid);
+}
+
+function bindExpanders(grid){
   grid.querySelectorAll('.expander').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       expandState[btn.dataset.cls] = !expandState[btn.dataset.cls];
@@ -1052,6 +1167,7 @@ function applyStaticText(){
   document.getElementById('subDesc').textContent = t('subDesc');
   document.getElementById('tabStages').textContent = t('tabStages');
   document.getElementById('tabResults').textContent = t('tabResults');
+  document.getElementById('rankSelectLabel').textContent = t('rankShowLabel');
   document.getElementById('stageListHeader').textContent = t('stageListHeader');
   document.getElementById('disclaimerLabel').textContent = t('disclaimerLabel');
   document.getElementById('disclaimerText').textContent = t('disclaimer');
@@ -1087,6 +1203,12 @@ document.querySelectorAll('#langSel button').forEach(btn=>{
   btn.addEventListener('click', ()=>setLang(btn.dataset.lang));
 });
 
+/* ---------- RANKINGS STAGE SELECTOR ---------- */
+document.getElementById('rankStageSelect').addEventListener('change', e=>{
+  rankView = e.target.value==='general' ? 'general' : Number(e.target.value);
+  renderResults();
+});
+
 /* ---------- TAB SWITCHING ---------- */
 document.querySelectorAll('.tab').forEach(t=>{
   t.addEventListener('click', ()=>{
@@ -1110,6 +1232,9 @@ async function loadResults(){
     ['gc','points','mountains','youth','teams'].forEach(k=>{
       if(data[k] && Array.isArray(data[k].rows)) RESULTS[k].rows = data[k].rows;
     });
+    if(data.stageResults && typeof data.stageResults==='object'){
+      RESULTS.stageResults = data.stageResults;
+    }
     if(Array.isArray(data.stageWinners)){
       data.stageWinners.forEach(w=>{
         const row = RESULTS.stageWinners.find(s=>s.n===w.n);
