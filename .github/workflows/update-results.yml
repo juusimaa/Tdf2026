@@ -1,29 +1,39 @@
-name: Päivitä TdF-tulokset
+name: Päivitä tulokset ja julkaise
 
 on:
   schedule:
-    # GitHub Actions käyttää AINA UTC-aikaa (ei aikavyöhykevalintaa cronille).
-    # Etapit päättyvät tyypillisesti n. klo 15–18 UTC; avausetapin TTT
-    # poikkeuksellisesti n. 17.15 UTC. Ajetaan 30 min välein klo 14–20 UTC
-    # heinäkuussa = 17–23 Suomen aikaa.
+    # GitHub Actions käyttää AINA UTC-aikaa. Etapit päättyvät tyypillisesti
+    # n. klo 14–18 UTC. Ajetaan 30 min välein klo 14–20 UTC heinäkuussa
+    # = 17–23 Suomen aikaa (kesäaika UTC+3).
     - cron: '*/30 14-20 * 7 *'
-    # Kevyt varmistusajo kerran aamulla (esim. myöhään kirjatut korjaukset).
+    # Kevyt varmistusajo aamulla myöhään kirjattujen korjausten varalta.
     - cron: '15 6 * 7 *'
-  # workflow_dispatch mahdollistaa manuaalisen käynnistyksen Actions-välilehdeltä
-  # — hyödyllinen testaukseen, koska cron-ajot voivat viivästyä 10–30 min.
+  # Redeploy myös aina kun mainiin työnnetään (esim. käsin muokattu index.html).
+  push:
+    branches: [main]
+  # Manuaalinen käynnistys Actions-välilehdeltä (testaukseen).
   workflow_dispatch:
 
-# Estä päällekkäiset ajot.
-concurrency:
-  group: tdf-results
-  cancel-in-progress: true
-
+# Oikeudet: contents:write = botti saa commitoida results.jsonin;
+# pages:write + id-token:write = deploy-pages-action saa julkaista Pagesiin.
+# Nämä yliajavat repon oletusoikeudet, joten erillistä asetusta ei
+# välttämättä tarvita — mutta se on silti hyvä varmistaa (ks. README).
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+# Älä keskeytä käynnissä olevaa julkaisua; jonota päällekkäiset ajot.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  update:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -34,9 +44,14 @@ jobs:
       - name: Asenna riippuvuudet
         run: pip install procyclingstats
 
+      # Jos haku kaatuu (esim. PCS muuttaa sivurakennettaan), julkaisu
+      # jatkuu silti — sivu näyttää edellisen onnistuneen datan.
       - name: Hae tulokset
         run: python scripts/fetch_results.py
+        continue-on-error: true
 
+      # Säilö tulokset repoon (persistointi + historia). GITHUB_TOKENin
+      # tekemä commit EI laukaise workflow'ta uudelleen -> ei silmukkaa.
       - name: Commitoi jos muuttunut
         run: |
           git config user.name "tdf-bot"
@@ -48,3 +63,14 @@ jobs:
             git commit -m "Tulokset päivitetty $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
+
+      - uses: actions/configure-pages@v5
+
+      # Paketoi koko sivu (index.html + data/) Pages-artefaktiksi.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Julkaise GitHub Pagesiin
+        id: deployment
+        uses: actions/deploy-pages@v4
