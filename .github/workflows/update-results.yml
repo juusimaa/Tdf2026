@@ -42,7 +42,9 @@ jobs:
           python-version: '3.12'
 
       - name: Asenna riippuvuudet
-        run: pip install procyclingstats
+        # cloudscraper tarvitaan, koska procyclingstats.com estää tavalliset
+        # requests-kutsut Cloudflaren bottitunnistuksella (403 "Just a moment").
+        run: pip install procyclingstats cloudscraper
 
       # Jos haku kaatuu (esim. PCS muuttaa sivurakennettaan), julkaisu
       # jatkuu silti — sivu näyttää edellisen onnistuneen datan.
