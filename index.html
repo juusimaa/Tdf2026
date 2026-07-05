@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tour de France 2026 — Etappien korkeusprofiilit</title>
+<title>Tour de France 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -36,11 +36,21 @@
     padding-bottom:22px;margin-bottom:22px;
     border-bottom:3px solid var(--ink);
   }
+  .top-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
   .eyebrow{
     font-family:'JetBrains Mono',monospace;
     font-size:11px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--ink-soft);
   }
+  .langsel{display:flex;gap:0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;}
+  .langsel button{
+    background:transparent;border:1px solid var(--line);
+    padding:4px 10px;cursor:pointer;color:var(--ink-soft);
+  }
+  .langsel button:first-child{border-radius:2px 0 0 2px;}
+  .langsel button:last-child{border-radius:0 2px 2px 0;border-left:none;}
+  .langsel button.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .langsel button:hover:not(.active){color:var(--ink);}
   h1{
     font-family:'Oswald',sans-serif;
     font-weight:700;
@@ -254,21 +264,27 @@
 <div class="wrap">
 
   <header class="top">
-    <div class="eyebrow">Roadbook · 113. Tour de France · 4.–26.7.2026</div>
-    <h1>Tour de France 2026 <span>— etappien profiilit</span></h1>
-    <div class="sub">Interaktiivinen katsaus kaikkiin 21 etappiin: reitit, korkeusprofiilien havainnollistus, tärkeimmät mäkipisteet (KOM) sekä kirisprinttien sijainnit ja pistejärjestelmä. Kilpailu käynnistyy Barcelonasta la 4.7. ja päättyy Paris'iin su 26.7.2026.</div>
+    <div class="top-row">
+      <div class="eyebrow" id="eyebrow"></div>
+      <div class="langsel" id="langSel">
+        <button data-lang="fi">FI</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
+    <h1>Tour de France 2026 <span id="h1Span"></span></h1>
+    <div class="sub" id="subDesc"></div>
     <div class="stat-row" id="topstats"></div>
   </header>
 
   <nav class="tabs" role="tablist">
-    <button class="tab active" data-view="etapit" role="tab">Etapit &amp; profiilit</button>
-    <button class="tab" data-view="tulokset" role="tab">Tulokset &amp; kategoriat</button>
+    <button class="tab active" data-view="etapit" role="tab" id="tabStages"></button>
+    <button class="tab" data-view="tulokset" role="tab" id="tabResults"></button>
   </nav>
 
   <section class="view active" id="view-etapit">
   <div class="layout">
     <nav class="stagelist">
-      <div class="listhead">21 etappia</div>
+      <div class="listhead" id="stageListHeader"></div>
       <ul class="stages" id="stageList"></ul>
     </nav>
 
@@ -282,170 +298,391 @@
 
   <footer>
     <div class="disclaimer">
-      <b>Huom korkeusprofiileista:</b> SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.
+      <b id="disclaimerLabel"></b> <span id="disclaimerText"></span>
     </div>
     <div class="sources" style="margin-top:12px;">
-      <b>Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):</b><br>
-      Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>
-      Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>
-      Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).
+      <b id="sourcesTitle"></b><br>
+      <span id="sourcesBody"></span>
     </div>
   </footer>
 </div>
 
 <script>
+/* ---------- I18N ---------- */
+const LANG_KEY = 'tdf2026-lang';
+
+const STRINGS = {
+  fi: {
+    eyebrow: 'Roadbook · 113. Tour de France · 4.–26.7.2026',
+    titleSpan: '— etappien profiilit',
+    subDesc: 'Interaktiivinen katsaus kaikkiin 21 etappiin: reitit, korkeusprofiilien havainnollistus, tärkeimmät mäkipisteet (KOM) sekä kirisprinttien sijainnit ja pistejärjestelmä. Kilpailu käynnistyy Barcelonasta la 4.7. ja päättyy Paris’iin su 26.7.2026.',
+    tabStages: 'Etapit & profiilit',
+    tabResults: 'Tulokset & kategoriat',
+    stageListHeader: '21 etappia',
+    statDistance: 'Kokonaismatka', statDistanceVal: '3 333 km',
+    statGain: 'Nousumetrit yhteensä', statGainVal: '54 450 m',
+    statStages: 'Etappeja', statStagesVal: '21',
+    statRestDays: 'Lepopäiviä', statRestDaysVal: '2',
+    statMountainFinish: 'Vuoristomaalia', statMountainFinishVal: 'Alpe d’Huez ×2, muut 5',
+    stagePrefix: 'Etappi',
+    profileAria: n => `Etapin ${n} korkeusprofiili`,
+    factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä',
+    legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendSprint: 'Kirisprintti',
+    chartCaption: 'Havainnollistava profiili — ei GPS-mitattua korkeusdataa. X-akseli km, Y-akseli suhteellinen korkeus.',
+    descHeader: 'Etapin kuvaus', climbsHeader: 'Mäkipisteet (KOM)', sprintsHeader: 'Kirisprintit',
+    climbTableHead: ['Nousu','Lk','Pituus','Kalt.','Sijainti'],
+    sprintTableHead: ['Sprintti','Sijainti','Pisteet'],
+    noClimbs: 'Ei luokiteltuja nousuja tällä etapilla.',
+    noSprintTT: 'Aika-ajoetapeilla ei ajeta kirisprinttiä.',
+    noSprint: 'Ei kirisprinttiä.',
+    sprintChip: 'Kirisprintti', sprintPtsSuffix: 'pistettä',
+    restDayLabel: 'LEPOPÄIVÄ',
+    resultsEmpty: 'Kilpailu käynnissä — tuloksia ei vielä saatavilla.<br>Avausetappi (joukkueaika-ajo Barcelonassa) ajetaan la 4.7.2026: ensimmäinen joukkue lähtee klo 17.05 CET ja viimeinen on maalissa n. klo 19.15 CET (n. 20.15 Suomen aikaa). Kun etappi on ajettu, tämän näkymän taulukot täytetään — kaikki data on tiedoston alussa yhdessä <code>RESULTS</code>-objektissa, jonka voi päivittää etappi kerrallaan (esim. pyytämällä Claudea hakemaan tuoreet tulokset). Viralliset tulokset: letour.fr, procyclingstats.com.',
+    resultsStatus: (updatedIso, after) => `<b>Tilanne:</b> ${fmtUpdated(updatedIso)} (etapin ${after}/21 jälkeen).`,
+    classEmpty: 'Ei tuloksia vielä — täyttyy avausetapin jälkeen.',
+    colHash: '#', colRider: 'Ajaja', colTeam: 'Joukkue',
+    expandLess: '▲ Näytä vain top 10', expandMore: n => `▼ Näytä kaikki (${n})`,
+    stageWinnersTitle: 'Etappivoittajat', stageWinnersFr: n => `${n}/21 etappia ajettu`,
+    colStage: 'Etappi', colWinner: 'Voittaja',
+    disclaimerLabel: 'Huom korkeusprofiileista:',
+    disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.',
+    sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
+    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).',
+    typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', ttt:'Joukkueaika-ajo', itt:'Yksilöaika-ajo'},
+    catLabels: {HC:'HC', C1:'1. lk', C2:'2. lk', C3:'3. lk', C4:'4. lk'},
+    classifications: {
+      gc:{name:'Kokonaiskilpailu', fr:'Maillot jaune — keltainen paita', valHead:'Aika/ero'},
+      points:{name:'Pistekilpailu', fr:'Maillot vert — vihreä paita', valHead:'Pisteet'},
+      mountains:{name:'Mäkikilpailu', fr:'Maillot à pois — pallopaita', valHead:'Pisteet'},
+      youth:{name:'Nuorten kilpailu', fr:'Maillot blanc — valkoinen paita (alle 26 v)', valHead:'Aika/ero'},
+      teams:{name:'Joukkuekilpailu', fr:'Classement par équipes', valHead:'Aika/ero'}
+    }
+  },
+  en: {
+    eyebrow: 'Roadbook · 113th Tour de France · 4–26 Jul 2026',
+    titleSpan: '— stage profiles',
+    subDesc: 'An interactive look at all 21 stages: routes, illustrative elevation profiles, the key climb points (KOM), and the location and points system for the intermediate sprints. The race starts from Barcelona on Sat 4 Jul and finishes in Paris on Sun 26 Jul 2026.',
+    tabStages: 'Stages & profiles',
+    tabResults: 'Results & categories',
+    stageListHeader: '21 stages',
+    statDistance: 'Total distance', statDistanceVal: '3,333 km',
+    statGain: 'Total elevation gain', statGainVal: '54,450 m',
+    statStages: 'Stages', statStagesVal: '21',
+    statRestDays: 'Rest days', statRestDaysVal: '2',
+    statMountainFinish: 'Mountain finishes', statMountainFinishVal: 'Alpe d’Huez ×2, others 5',
+    stagePrefix: 'Stage',
+    profileAria: n => `Stage ${n} elevation profile`,
+    factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints',
+    legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendSprint: 'Intermediate sprint',
+    chartCaption: 'Illustrative profile — not GPS-measured elevation data. X-axis: km, Y-axis: relative elevation.',
+    descHeader: 'Stage description', climbsHeader: 'Climb points (KOM)', sprintsHeader: 'Intermediate sprints',
+    climbTableHead: ['Climb','Cat.','Length','Grad.','Location'],
+    sprintTableHead: ['Sprint','Location','Points'],
+    noClimbs: 'No categorized climbs on this stage.',
+    noSprintTT: 'No intermediate sprints on time-trial stages.',
+    noSprint: 'No intermediate sprint.',
+    sprintChip: 'Intermediate sprint', sprintPtsSuffix: 'points',
+    restDayLabel: 'REST DAY',
+    resultsEmpty: 'Race in progress — no results available yet.<br>The opening stage (team time trial in Barcelona) is raced on Sat 4 Jul 2026: the first team starts at 17:05 CET and the last is expected to finish around 19:15 CET. Once the stage has been raced, the tables in this view will fill in — all the data lives in one <code>RESULTS</code> object near the top of the file, which can be updated stage by stage (e.g. by asking Claude to fetch the latest results). Official results: letour.fr, procyclingstats.com.',
+    resultsStatus: (updatedIso, after) => `<b>Status:</b> ${fmtUpdated(updatedIso)} (after stage ${after}/21).`,
+    classEmpty: 'No results yet — will populate after the opening stage.',
+    colHash: '#', colRider: 'Rider', colTeam: 'Team',
+    expandLess: '▲ Show top 10 only', expandMore: n => `▼ Show all (${n})`,
+    stageWinnersTitle: 'Stage winners', stageWinnersFr: n => `${n}/21 stages raced`,
+    colStage: 'Stage', colWinner: 'Winner',
+    disclaimerLabel: 'Note on elevation profiles:',
+    disclaimer: 'The SVG curves are illustrative sketches built from the stage type, total elevation gain, and known climbs (location, length, average gradient) — they are not GPS-measured elevation data. ASO has not yet publicly released exact kilometre markers for the intermediate sprints across the whole route; the number of sprints shown per stage (1 or 2) and the points system are based on confirmed sources, but the marked sprint location on the route is an estimate.',
+    sourcesTitle: 'Sources (checked against ≥2 independent sources for key facts):',
+    sourcesBody: 'Route, stages, dates, elevation gain: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Points system and double intermediate sprints: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>Results (Results tab): official sources letour.fr and procyclingstats.com — opening-stage start times confirmed via cyclingnews.com and idlprocycling.com (first team off at 17:05 CET, last expected to finish around 19:15 CET on 4 Jul 2026).',
+    typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain stage', ttt:'Team time trial', itt:'Individual time trial'},
+    catLabels: {HC:'HC', C1:'Cat 1', C2:'Cat 2', C3:'Cat 3', C4:'Cat 4'},
+    classifications: {
+      gc:{name:'General classification', fr:'Maillot jaune — yellow jersey', valHead:'Time/Gap'},
+      points:{name:'Points classification', fr:'Maillot vert — green jersey', valHead:'Points'},
+      mountains:{name:'Mountains classification', fr:'Maillot à pois — polka dot jersey', valHead:'Points'},
+      youth:{name:'Young rider classification', fr:'Maillot blanc — white jersey (under 26)', valHead:'Time/Gap'},
+      teams:{name:'Team classification', fr:'Classement par équipes', valHead:'Time/Gap'}
+    }
+  }
+};
+
+function detectLang(){
+  const saved = localStorage.getItem(LANG_KEY);
+  if(saved==='fi' || saved==='en') return saved;
+  const nav = (navigator.language||'en').toLowerCase();
+  return nav.startsWith('fi') ? 'fi' : 'en';
+}
+let lang = detectLang();
+function t(key){ return STRINGS[lang][key]; }
+
 /* ---------- DATA ---------- */
 // climb categories -> color
 const CAT_COLOR = {HC:'#B23B32', C1:'#C9622E', C2:'#C99A2E', C3:'#7E8A46', C4:'#8B9C7A'};
 const TYPE_COLOR = {
-  'tasainen':'#3B6485', 'kukkulainen':'#7E8A46', 'vuoristo':'#B23B32',
-  'joukkueaika-ajo':'#4C5A50', 'aika-ajo':'#4C5A50'
-};
-const TYPE_LABEL_FI = {
-  'tasainen':'Tasainen', 'kukkulainen':'Kukkulainen / mäkinen', 'vuoristo':'Vuoristoetappi',
-  'joukkueaika-ajo':'Joukkueaika-ajo', 'aika-ajo':'Yksilöaika-ajo'
+  flat:'#3B6485', hilly:'#7E8A46', mountain:'#B23B32',
+  ttt:'#4C5A50', itt:'#4C5A50'
 };
 
 // profile keypoints: relative elevation 0-100 (illustrative, not surveyed)
 const stages = [
-{n:1, date:'la 4.7.', start:'Barcelona', finish:'Barcelona', km:19.6, type:'joukkueaika-ajo', gain:200,
+{n:1, dateIso:'2026-07-04', start:'Barcelona', finish:'Barcelona', km:19.6, type:'ttt', gain:200,
  profile:[[0,18],[10,17],[15,20],[17.9,55],[18.7,75],[19.6,90]],
- climbs:[{name:'Montjuïc (välinousu)',km:17.9,len:1.1,grad:null,cat:'C4'},{name:'Maalinousu',km:18.8,len:0.8,grad:7,cat:'C4'}],
+ climbs:[
+   {name:{fi:'Montjuïc (välinousu)',en:'Montjuïc (intermediate climb)'},km:17.9,len:1.1,grad:null,cat:'C4'},
+   {name:{fi:'Maalinousu',en:'Finish climb'},km:18.8,len:0.8,grad:7,cat:'C4'}
+ ],
  sprints:[],
- desc:`<p>Avausetappi on joukkueaika-ajo Barcelonan kaduilla — uudella sääntömallilla, jossa jokaisen ajajan oma aika lasketaan (ei enää neljännen ajajan aika, kuten perinteisesti). Ensimmäiset 15 km ovat tasaisia, minkä jälkeen nousee Montjuïcin kukkulan 1,1 km:n nousu ja lopuksi vielä jyrkempi 800 metrin pätkä (n. 7 %) aivan maalissa.</p><p>Etappi antaa parhaiten valmistautuneille joukkueille ja puncheur-tyyppisille ajajille mahdollisuuden nappia ensimmäinen keltainen paita.</p>`},
+ desc:{
+  fi:`<p>Avausetappi on joukkueaika-ajo Barcelonan kaduilla — uudella sääntömallilla, jossa jokaisen ajajan oma aika lasketaan (ei enää neljännen ajajan aika, kuten perinteisesti). Ensimmäiset 15 km ovat tasaisia, minkä jälkeen nousee Montjuïcin kukkulan 1,1 km:n nousu ja lopuksi vielä jyrkempi 800 metrin pätkä (n. 7 %) aivan maalissa.</p><p>Etappi antaa parhaiten valmistautuneille joukkueille ja puncheur-tyyppisille ajajille mahdollisuuden nappia ensimmäinen keltainen paita.</p>`,
+  en:`<p>The opening stage is a team time trial through the streets of Barcelona — under the new rule format where each rider's own time counts (no longer the fourth rider's time, as was traditional). The first 15 km are flat, followed by Montjuïc hill's 1.1 km climb and finally an even steeper 800 m section (approx. 7%) right at the finish.</p><p>The stage gives the best-prepared teams and puncheur-type riders a chance to grab the first yellow jersey.</p>`
+ }},
 
-{n:2, date:'su 5.7.', start:'Tarragona', finish:'Barcelona', km:168.5, type:'kukkulainen', gain:2500,
+{n:2, dateIso:'2026-07-05', start:'Tarragona', finish:'Barcelona', km:168.5, type:'hilly', gain:2500,
  profile:[[0,15],[60,18],[110,25],[138,35],[150,45],[158,70],[163,60],[166,80],[168.5,88]],
- climbs:[{name:'Montjuïc-kierros (3×)',km:140,len:3,grad:null,cat:'C3'},{name:'Montjuïc, viim. nousu 1',km:163,len:1.6,grad:9.3,cat:'C3'},{name:'Montjuïc, maalinousu',km:167.8,len:0.7,grad:7,cat:'C4'}],
+ climbs:[
+   {name:{fi:'Montjuïc-kierros (3×)',en:'Montjuïc circuit (3×)'},km:140,len:3,grad:null,cat:'C3'},
+   {name:{fi:'Montjuïc, viim. nousu 1',en:'Montjuïc, final climb 1'},km:163,len:1.6,grad:9.3,cat:'C3'},
+   {name:{fi:'Montjuïc, maalinousu',en:'Montjuïc, finish climb'},km:167.8,len:0.7,grad:7,cat:'C4'}
+ ],
  sprints:[{km:80,pts:'25-20-16…'}],
- desc:`<p>Toinen etappi tarjoaa puncheureille mahdollisuuden keltaiseen paitaan. Suurin osa noususta ajoittuu loppupuoliskolle: viimeisillä 30 km:llä ajetaan kolme kierrosta Montjuïcin ympäri, yhteensä kuusi nousua. Viimeiset viisi kilometriä sisältävät kaksi terävää rampia (1,6 km / 9,3 % ja 700 m / 7 %), joista jälkimmäisen huipulle etappi päättyy.</p>`},
+ desc:{
+  fi:`<p>Toinen etappi tarjoaa puncheureille mahdollisuuden keltaiseen paitaan. Suurin osa noususta ajoittuu loppupuoliskolle: viimeisillä 30 km:llä ajetaan kolme kierrosta Montjuïcin ympäri, yhteensä kuusi nousua. Viimeiset viisi kilometriä sisältävät kaksi terävää rampia (1,6 km / 9,3 % ja 700 m / 7 %), joista jälkimmäisen huipulle etappi päättyy.</p>`,
+  en:`<p>The second stage gives puncheurs a chance at the yellow jersey. Most of the climbing comes in the second half: the final 30 km include three laps around Montjuïc, six climbs in total. The last five kilometres feature two sharp ramps (1.6 km / 9.3% and 700 m / 7%), and the stage finishes at the top of the latter.</p>`
+ }},
 
-{n:3, date:'ma 6.7.', start:'Granollers', finish:'Les Angles', km:195.9, type:'vuoristo', gain:3850,
+{n:3, dateIso:'2026-07-06', start:'Granollers', finish:'Les Angles', km:195.9, type:'mountain', gain:3850,
  profile:[[0,15],[70,20],[120,30],[150,45],[170,50],[185,65],[192,78],[195.9,90]],
- climbs:[{name:'1. luokan nousu (Pyreneet)',km:150,len:10,grad:7,cat:'C1'},{name:'Les Angles / Pla del Mir (maali)',km:189.4,len:6.5,grad:6.5,cat:'C3'}],
+ climbs:[
+   {name:{fi:'1. luokan nousu (Pyreneet)',en:'Category 1 climb (Pyrenees)'},km:150,len:10,grad:7,cat:'C1'},
+   {name:{fi:'Les Angles / Pla del Mir (maali)',en:'Les Angles / Pla del Mir (finish)'},km:189.4,len:6.5,grad:6.5,cat:'C3'}
+ ],
  sprints:[{km:75,pts:'25-20-16…'}],
- desc:`<p>Etappi vie karavaanin Espanjasta Ranskan puolelle Pyreneiden yli, lähes 4 000 korkeusmetrin saattelemana. Reitillä ajetaan yhden luokan ykkösnousu, ennen kuin etappi päättyy ylämäkeen Les Angles -hiihtokeskukseen. Nousu ei ole erityisen raskas (6,5 % keskimäärin), mikä voi suosia sekä puncheureita että karkaamaan lähtevää ryhmää — myös kokonaiskilpailun ajajat voivat osallistua kamppailuun.</p>`},
+ desc:{
+  fi:`<p>Etappi vie karavaanin Espanjasta Ranskan puolelle Pyreneiden yli, lähes 4 000 korkeusmetrin saattelemana. Reitillä ajetaan yhden luokan ykkösnousu, ennen kuin etappi päättyy ylämäkeen Les Angles -hiihtokeskukseen. Nousu ei ole erityisen raskas (6,5 % keskimäärin), mikä voi suosia sekä puncheureita että karkaamaan lähtevää ryhmää — myös kokonaiskilpailun ajajat voivat osallistua kamppailuun.</p>`,
+  en:`<p>The stage takes the caravan from Spain across the Pyrenees into France, with almost 4,000 metres of elevation gain along the way. The route includes one category-1 climb before finishing uphill at the Les Angles ski resort. The climb isn't especially hard (6.5% average), which could suit both puncheurs and a breakaway group — GC riders may also join the fight.</p>`
+ }},
 
-{n:4, date:'ti 7.7.', start:'Carcassonne', finish:'Foix', km:181.9, type:'kukkulainen', gain:2800,
+{n:4, dateIso:'2026-07-07', start:'Carcassonne', finish:'Foix', km:181.9, type:'hilly', gain:2800,
  profile:[[0,20],[40,30],[80,42],[110,55],[140,60],[147,72],[165,40],[181.9,35]],
- climbs:[{name:'Pyreneiden esivuoret',km:140,len:8,grad:5,cat:'C2'}],
+ climbs:[{name:{fi:'Pyreneiden esivuoret',en:'Pyrenean foothills'},km:140,len:8,grad:5,cat:'C2'}],
  sprints:[{km:95,pts:'25-20-16…'}],
- desc:`<p>Reitti kulkee Pyreneiden alarinteiden aaltoilevassa maastossa kohti Foix'ta, jonne on aiemmin noussut maaliin useita irtiottoryhmiä (mm. Hugo Houle 2022). Viimeiset noin 35 km ovat pääosin laskevia, mikä suosii karanneita ajajia loppukirin sijaan.</p>`},
+ desc:{
+  fi:`<p>Reitti kulkee Pyreneiden alarinteiden aaltoilevassa maastossa kohti Foix'ta, jonne on aiemmin noussut maaliin useita irtiottoryhmiä (mm. Hugo Houle 2022). Viimeiset noin 35 km ovat pääosin laskevia, mikä suosii karanneita ajajia loppukirin sijaan.</p>`,
+  en:`<p>The route rolls through the undulating foothills of the Pyrenees toward Foix, where breakaway groups have reached the finish several times before (including Hugo Houle in 2022). The final roughly 35 km are mostly downhill, favouring escapees over a bunch sprint.</p>`
+ }},
 
-{n:5, date:'ke 8.7.', start:'Lannemezan', finish:'Pau', km:158.3, type:'tasainen', gain:600,
+{n:5, dateIso:'2026-07-08', start:'Lannemezan', finish:'Pau', km:158.3, type:'flat', gain:600,
  profile:[[0,22],[40,24],[90,26],[130,24],[158.3,20]],
  climbs:[],
  sprints:[{km:55,pts:'70-50-40…'},{km:120,pts:'70-50-40…'}],
- desc:`<p>Pääosin tasainen etappi Lannemezanista Paun kaupunkiin — yksi Tourin useimmin vierailluista maaleista. Etappi kuuluu seitsemään "tasaiseen" etappiin, joilla ajetaan kaksi kirisprinttiä ja joissa etapin voittaja saa 70 pistettä pisteluokituksessa.</p>`},
+ desc:{
+  fi:`<p>Pääosin tasainen etappi Lannemezanista Paun kaupunkiin — yksi Tourin useimmin vierailluista maaleista. Etappi kuuluu seitsemään "tasaiseen" etappiin, joilla ajetaan kaksi kirisprinttiä ja joissa etapin voittaja saa 70 pistettä pisteluokituksessa.</p>`,
+  en:`<p>A mostly flat stage from Lannemezan to the town of Pau — one of the Tour's most-visited finish towns. The stage is one of seven "flat" stages featuring two intermediate sprints, where the stage winner earns 70 points in the points classification.</p>`
+ }},
 
-{n:6, date:'to 9.7.', start:'Pau', finish:'Gavarnie-Gèdre', km:186.2, type:'vuoristo', gain:4400,
+{n:6, dateIso:'2026-07-09', start:'Pau', finish:'Gavarnie-Gèdre', km:186.2, type:'mountain', gain:4400,
  profile:[[0,20],[60,25],[90,35],[110,50],[125,42],[140,60],[160,50],[174,75],[186.2,95]],
- climbs:[{name:'Col d’Aspin',km:113,len:12,grad:6.5,cat:'C1'},{name:'Col du Tourmalet',km:150,len:17,grad:7.4,cat:'HC'},{name:'Cirque de Gavarnie (maali)',km:180,len:6,grad:5,cat:'C2'}],
+ climbs:[
+   {name:{fi:'Col d’Aspin',en:'Col d’Aspin'},km:113,len:12,grad:6.5,cat:'C1'},
+   {name:{fi:'Col du Tourmalet',en:'Col du Tourmalet'},km:150,len:17,grad:7.4,cat:'HC'},
+   {name:{fi:'Cirque de Gavarnie (maali)',en:'Cirque de Gavarnie (finish)'},km:180,len:6,grad:5,cat:'C2'}
+ ],
  sprints:[{km:45,pts:'25-20-16…'}],
- desc:`<p>Ensimmäinen suuri vuoristoetappi ja samalla GC-ajajien ensimmäinen todellinen koetinkivi. Reitillä nousevat sekä Col d’Aspin (12 km / 6,5 %) että legendaarinen Col du Tourmalet, ennen laskua kohti maalia Cirque de Gavarnie'lla — paikassa, jossa Tour ei ole koskaan aiemmin päättynyt.</p>`},
+ desc:{
+  fi:`<p>Ensimmäinen suuri vuoristoetappi ja samalla GC-ajajien ensimmäinen todellinen koetinkivi. Reitillä nousevat sekä Col d’Aspin (12 km / 6,5 %) että legendaarinen Col du Tourmalet, ennen laskua kohti maalia Cirque de Gavarnie'lla — paikassa, jossa Tour ei ole koskaan aiemmin päättynyt.</p>`,
+  en:`<p>The first big mountain stage, and the first real test for the GC riders. The route climbs both the Col d’Aspin (12 km / 6.5%) and the legendary Col du Tourmalet, before a descent toward the finish at Cirque de Gavarnie — a place the Tour has never finished at before.</p>`
+ }},
 
-{n:7, date:'pe 10.7.', start:'Hagetmau', finish:'Bordeaux', km:175.1, type:'tasainen', gain:500,
+{n:7, dateIso:'2026-07-10', start:'Hagetmau', finish:'Bordeaux', km:175.1, type:'flat', gain:500,
  profile:[[0,18],[50,20],[100,19],[150,17],[175.1,15]],
  climbs:[],
  sprints:[{km:55,pts:'70-50-40…'},{km:125,pts:'70-50-40…'}],
- desc:`<p>Odotettu sprintterien etappi Bordeaux'hon — kaupunkiin, jossa Tour vierailee 83. kertaa. Jasper Philipsen voitti täällä viimeksi vuonna 2023. Kaksi kirisprinttiä tarjoaa lisäpisteitä pistepaidan tavoittelijoille.</p>`},
+ desc:{
+  fi:`<p>Odotettu sprintterien etappi Bordeaux'hon — kaupunkiin, jossa Tour vierailee 83. kertaa. Jasper Philipsen voitti täällä viimeksi vuonna 2023. Kaksi kirisprinttiä tarjoaa lisäpisteitä pistepaidan tavoittelijoille.</p>`,
+  en:`<p>An expected sprinters' stage into Bordeaux — a city the Tour is visiting for the 83rd time. Jasper Philipsen won here most recently in 2023. Two intermediate sprints offer extra points for green jersey contenders.</p>`
+ }},
 
-{n:8, date:'la 11.7.', start:'Périgueux', finish:'Bergerac', km:180.4, type:'tasainen', gain:900,
+{n:8, dateIso:'2026-07-11', start:'Périgueux', finish:'Bergerac', km:180.4, type:'flat', gain:900,
  profile:[[0,20],[60,22],[110,24],[150,21],[180.4,18]],
  climbs:[],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
- desc:`<p>Koko etappi kulkee Dordognen maakunnan halki Périgueux'sta Bergeraciin — jälleen sprintterien joukkueiden hallitsema päivä ja toinen kahden kirisprintin etappi.</p>`},
+ desc:{
+  fi:`<p>Koko etappi kulkee Dordognen maakunnan halki Périgueux'sta Bergeraciin — jälleen sprintterien joukkueiden hallitsema päivä ja toinen kahden kirisprintin etappi.</p>`,
+  en:`<p>The whole stage runs through the Dordogne region from Périgueux to Bergerac — another day dominated by the sprinters' teams, and another stage with two intermediate sprints.</p>`
+ }},
 
-{n:9, date:'su 12.7.', start:'Malemort', finish:'Ussel', km:185.5, type:'kukkulainen', gain:2400,
+{n:9, dateIso:'2026-07-12', start:'Malemort', finish:'Ussel', km:185.5, type:'hilly', gain:2400,
  profile:[[0,20],[60,25],[100,35],[140,45],[170,55],[185.5,50]],
- climbs:[{name:'Corrèzen kukkulat',km:150,len:6,grad:5,cat:'C3'}],
+ climbs:[{name:{fi:'Corrèzen kukkulat',en:'Hills of Corrèze'},km:150,len:6,grad:5,cat:'C3'}],
  sprints:[{km:80,pts:'25-20-16…'}],
- desc:`<p>Reitti ylittää Corrèzen departementin aaltoilevaa maastoa pitkin, päättyen Usseliin. Ennen ensimmäistä lepopäivää ajettava etappi voi houkutella karkulaisia, jos sprinttijoukkueet eivät hallitse tahtia.</p>`},
+ desc:{
+  fi:`<p>Reitti ylittää Corrèzen departementin aaltoilevaa maastoa pitkin, päättyen Usseliin. Ennen ensimmäistä lepopäivää ajettava etappi voi houkutella karkulaisia, jos sprinttijoukkueet eivät hallitse tahtia.</p>`,
+  en:`<p>The route crosses the undulating terrain of the Corrèze department, finishing in Ussel. Raced right before the first rest day, this stage could tempt breakaway riders if the sprinters' teams don't control the pace.</p>`
+ }},
 
-{n:'lepo', date:'ma 13.7.', label:'LEPOPÄIVÄ 1'},
+{n:'lepo', dateIso:'2026-07-13', labelKey:'rest1'},
 
-{n:10, date:'ti 14.7.', start:'Aurillac', finish:'Le Lioran', km:166.6, type:'vuoristo', gain:4100,
+{n:10, dateIso:'2026-07-14', start:'Aurillac', finish:'Le Lioran', km:166.6, type:'mountain', gain:4100,
  profile:[[0,25],[40,35],[70,50],[95,45],[115,65],[135,55],[150,75],[166.6,70]],
- climbs:[{name:'Puy Mary — Pas de Peyrol',km:120,len:5.4,grad:8,cat:'C1'},{name:'Col du Pertus',km:150,len:5,grad:6.5,cat:'C2'}],
+ climbs:[
+   {name:{fi:'Puy Mary — Pas de Peyrol',en:'Puy Mary — Pas de Peyrol'},km:120,len:5.4,grad:8,cat:'C1'},
+   {name:{fi:'Col du Pertus',en:'Col du Pertus'},km:150,len:5,grad:6.5,cat:'C2'}
+ ],
  sprints:[{km:50,pts:'25-20-16…'}],
- desc:`<p>Bastillipäivän etappi vie Massif Centralin läpi raskaan nousuprofiilin saattelemana. Maali Le Lioranissa on tuttu — täällä Jonas Vingegaard voitti niukasti Tadej Pogačarilta kaksi vuotta aiemmin. Loppusuora on identtinen vuoden 2024 kanssa: Puy Maryn Pas de Peyrol -nousu ja Col du Pertus ennen laskua maaliin.</p>`},
+ desc:{
+  fi:`<p>Bastillipäivän etappi vie Massif Centralin läpi raskaan nousuprofiilin saattelemana. Maali Le Lioranissa on tuttu — täällä Jonas Vingegaard voitti niukasti Tadej Pogačarilta kaksi vuotta aiemmin. Loppusuora on identtinen vuoden 2024 kanssa: Puy Maryn Pas de Peyrol -nousu ja Col du Pertus ennen laskua maaliin.</p>`,
+  en:`<p>The Bastille Day stage crosses the Massif Central with a demanding climbing profile. The finish at Le Lioran is a familiar one — Jonas Vingegaard narrowly beat Tadej Pogačar here two years earlier. The finale is identical to 2024: the Puy Mary climb via Pas de Peyrol and the Col du Pertus before the descent to the finish.</p>`
+ }},
 
-{n:11, date:'ke 15.7.', start:'Vichy', finish:'Nevers', km:161.3, type:'tasainen', gain:700,
+{n:11, dateIso:'2026-07-15', start:'Vichy', finish:'Nevers', km:161.3, type:'flat', gain:700,
  profile:[[0,20],[50,22],[100,20],[161.3,17]],
  climbs:[],
  sprints:[{km:55,pts:'70-50-40…'},{km:115,pts:'70-50-40…'}],
- desc:`<p>Vichystä Nevers'iin ajettava etappi on todennäköinen sprinttietappi ja tarjoaa jälleen kaksi kirisprinttiä pistepaidan tavoittelijoille.</p>`},
+ desc:{
+  fi:`<p>Vichystä Nevers'iin ajettava etappi on todennäköinen sprinttietappi ja tarjoaa jälleen kaksi kirisprinttiä pistepaidan tavoittelijoille.</p>`,
+  en:`<p>The stage from Vichy to Nevers is a likely sprint stage and again offers two intermediate sprints for green jersey contenders.</p>`
+ }},
 
-{n:12, date:'to 16.7.', start:'Magny-Cours', finish:'Chalon-sur-Saône', km:179.1, type:'tasainen', gain:800,
+{n:12, dateIso:'2026-07-16', start:'Magny-Cours', finish:'Chalon-sur-Saône', km:179.1, type:'flat', gain:800,
  profile:[[0,18],[60,20],[120,19],[179.1,16]],
  climbs:[],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
- desc:`<p>Lähtö Magny-Coursin autourheilurata-alueelta kohti Chalon-sur-Saônea — jälleen todennäköinen ryhmäspurttien etappi kahdella kirisprintillä.</p>`},
+ desc:{
+  fi:`<p>Lähtö Magny-Coursin autourheilurata-alueelta kohti Chalon-sur-Saônea — jälleen todennäköinen ryhmäspurttien etappi kahdella kirisprintillä.</p>`,
+  en:`<p>The start is at the Magny-Cours motor racing circuit, heading toward Chalon-sur-Saône — again a likely bunch-sprint stage with two intermediate sprints.</p>`
+ }},
 
-{n:13, date:'pe 17.7.', start:'Dole', finish:'Belfort', km:205.8, type:'kukkulainen', gain:2600,
+{n:13, dateIso:'2026-07-17', start:'Dole', finish:'Belfort', km:205.8, type:'hilly', gain:2600,
  profile:[[0,20],[50,25],[100,30],[150,28],[190,40],[205.8,45]],
- climbs:[{name:'Vogeesien esivuoret',km:180,len:6,grad:5,cat:'C3'}],
+ climbs:[{name:{fi:'Vogeesien esivuoret',en:'Vosges foothills'},km:180,len:6,grad:5,cat:'C3'}],
  sprints:[{km:90,pts:'25-20-16…'}],
- desc:`<p>Etapin 2026 pisin päivä (205,8 km) vie kohti Sveitsin ja Saksan rajaseutuja. Aaltoileva maasto valmistelee jalkoja tulevaan kahden peräkkäisen vuoristopäivän rykelmään.</p>`},
+ desc:{
+  fi:`<p>Etapin 2026 pisin päivä (205,8 km) vie kohti Sveitsin ja Saksan rajaseutuja. Aaltoileva maasto valmistelee jalkoja tulevaan kahden peräkkäisen vuoristopäivän rykelmään.</p>`,
+  en:`<p>The longest day of the 2026 race (205.8 km) heads toward the Swiss and German border regions. The rolling terrain prepares legs for the back-to-back mountain days that follow.</p>`
+ }},
 
-{n:14, date:'la 18.7.', start:'Mulhouse', finish:'Le Markstein', km:155.3, type:'vuoristo', gain:3800,
+{n:14, dateIso:'2026-07-18', start:'Mulhouse', finish:'Le Markstein', km:155.3, type:'mountain', gain:3800,
  profile:[[0,20],[30,30],[55,45],[75,40],[95,60],[115,50],[135,70],[144,60],[155.3,88]],
- climbs:[{name:'1. luokan nousu I',km:60,len:9,grad:7,cat:'C1'},{name:'1. luokan nousu II',km:95,len:8,grad:7,cat:'C1'},{name:'Col du Haag',km:130,len:11.2,grad:7.3,cat:'C1'},{name:'Le Markstein (maali)',km:150,len:5,grad:6,cat:'C1'}],
+ climbs:[
+   {name:{fi:'1. luokan nousu I',en:'Category 1 climb I'},km:60,len:9,grad:7,cat:'C1'},
+   {name:{fi:'1. luokan nousu II',en:'Category 1 climb II'},km:95,len:8,grad:7,cat:'C1'},
+   {name:{fi:'Col du Haag',en:'Col du Haag'},km:130,len:11.2,grad:7.3,cat:'C1'},
+   {name:{fi:'Le Markstein (maali)',en:'Le Markstein (finish)'},km:150,len:5,grad:6,cat:'C1'}
+ ],
  sprints:[{km:40,pts:'25-20-16…'}],
- desc:`<p>Vogeesien vuoret nousevat esiin täydellä voimalla: neljä ykkösluokan nousua mahtuu vain 155 km:n matkalle. Raskain pala on Col du Haag (11,2 km / 7,3 %), ennen viimeistä nousua Le Marksteinin hiihtokeskukseen.</p>`},
+ desc:{
+  fi:`<p>Vogeesien vuoret nousevat esiin täydellä voimalla: neljä ykkösluokan nousua mahtuu vain 155 km:n matkalle. Raskain pala on Col du Haag (11,2 km / 7,3 %), ennen viimeistä nousua Le Marksteinin hiihtokeskukseen.</p>`,
+  en:`<p>The Vosges mountains come out in full force: four category-1 climbs are packed into just 155 km. The toughest section is the Col du Haag (11.2 km / 7.3%), before the final climb to the Le Markstein ski resort.</p>`
+ }},
 
-{n:15, date:'su 19.7.', start:'Champagnole', finish:'Plateau de Solaison', km:183.9, type:'vuoristo', gain:4500,
+{n:15, dateIso:'2026-07-19', start:'Champagnole', finish:'Plateau de Solaison', km:183.9, type:'mountain', gain:4500,
  profile:[[0,20],[50,28],[90,35],[120,32],[145,50],[160,45],[172.6,60],[183.9,95]],
- climbs:[{name:'Jura-nousuja',km:100,len:8,grad:6,cat:'C2'},{name:'Plateau de Solaison (maali, HC)',km:172.6,len:11.3,grad:9.2,cat:'HC'}],
+ climbs:[
+   {name:{fi:'Jura-nousuja',en:'Jura climbs'},km:100,len:8,grad:6,cat:'C2'},
+   {name:{fi:'Plateau de Solaison (maali, HC)',en:'Plateau de Solaison (finish, HC)'},km:172.6,len:11.3,grad:9.2,cat:'HC'}
+ ],
  sprints:[{km:55,pts:'25-20-16…'}],
- desc:`<p>Toisen viikon päättävä etappi on jopa raskaampi kuin edellinen: noin 4 500 korkeusmetriä ja viimeisenä 11,3 km:n nousu 9,2 %:n keskikaltevuudella Plateau de Solaisoniin. Jos kokonaiskilpailu on vielä tiivis tässä vaiheessa, tarjolla on todennäköisesti suuria aikaeroja ennen toista lepopäivää.</p>`},
+ desc:{
+  fi:`<p>Toisen viikon päättävä etappi on jopa raskaampi kuin edellinen: noin 4 500 korkeusmetriä ja viimeisenä 11,3 km:n nousu 9,2 %:n keskikaltevuudella Plateau de Solaisoniin. Jos kokonaiskilpailu on vielä tiivis tässä vaiheessa, tarjolla on todennäköisesti suuria aikaeroja ennen toista lepopäivää.</p>`,
+  en:`<p>The stage that closes the second week is even harder than the last: around 4,500 metres of elevation gain and, at the end, an 11.3 km climb averaging 9.2% up to Plateau de Solaison. If the GC is still tight at this point, expect significant time gaps before the second rest day.</p>`
+ }},
 
-{n:'lepo', date:'ma 20.7.', label:'LEPOPÄIVÄ 2'},
+{n:'lepo', dateIso:'2026-07-20', labelKey:'rest2'},
 
-{n:16, date:'ti 21.7.', start:'Evian-les-Bains', finish:'Thonon-les-Bains', km:26.1, type:'aika-ajo', gain:250,
+{n:16, dateIso:'2026-07-21', start:'Evian-les-Bains', finish:'Thonon-les-Bains', km:26.1, type:'itt', gain:250,
  profile:[[0,20],[8,25],[14,30],[20,22],[26.1,18]],
  climbs:[],
  sprints:[],
- desc:`<p>Kolmas viikko avautuu 26,1 km:n yksilöaika-ajolla Geneven­järven eteläpuolella, Evian-les-Bainsin ja Thonon-les-Bainsin välillä. Matka voi ratkaista kokonaiskilpailun järjestystä merkittävästi ennen Alppien loppurypistystä.</p>`},
+ desc:{
+  fi:`<p>Kolmas viikko avautuu 26,1 km:n yksilöaika-ajolla Geneven­järven eteläpuolella, Evian-les-Bainsin ja Thonon-les-Bainsin välillä. Matka voi ratkaista kokonaiskilpailun järjestystä merkittävästi ennen Alppien loppurypistystä.</p>`,
+  en:`<p>The third week opens with a 26.1 km individual time trial south of Lake Geneva, between Evian-les-Bains and Thonon-les-Bains. This test could significantly reshape the GC order ahead of the final Alpine block.</p>`
+ }},
 
-{n:17, date:'ke 22.7.', start:'Chambéry', finish:'Voiron', km:174.7, type:'tasainen', gain:1200,
+{n:17, dateIso:'2026-07-22', start:'Chambéry', finish:'Voiron', km:174.7, type:'flat', gain:1200,
  profile:[[0,25],[60,30],[110,26],[150,22],[174.7,18]],
  climbs:[],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
- desc:`<p>Viimeinen selkeä mahdollisuus sprinttereille ennen Alppeja. Kaksi kirisprinttiä tarjoaa vielä ison potin pisteitä pistepaidan taistoon juuri ennen vuoristoloppua.</p>`},
+ desc:{
+  fi:`<p>Viimeinen selkeä mahdollisuus sprinttereille ennen Alppeja. Kaksi kirisprinttiä tarjoaa vielä ison potin pisteitä pistepaidan taistoon juuri ennen vuoristoloppua.</p>`,
+  en:`<p>The last clear opportunity for sprinters before the Alps. Two intermediate sprints still offer a big haul of points for the green jersey battle right before the mountains take over.</p>`
+ }},
 
-{n:18, date:'to 23.7.', start:'Voiron', finish:'Orcières-Merlette', km:185.2, type:'vuoristo', gain:3600,
+{n:18, dateIso:'2026-07-23', start:'Voiron', finish:'Orcières-Merlette', km:185.2, type:'mountain', gain:3600,
  profile:[[0,22],[50,28],[90,35],[130,32],[160,45],[178.1,55],[185.2,85]],
- climbs:[{name:'Alppien esivuoret',km:120,len:9,grad:5,cat:'C2'},{name:'Orcières-Merlette (maali)',km:178.1,len:7.1,grad:6.7,cat:'C1'}],
+ climbs:[
+   {name:{fi:'Alppien esivuoret',en:'Alpine foothills'},km:120,len:9,grad:5,cat:'C2'},
+   {name:{fi:'Orcières-Merlette (maali)',en:'Orcières-Merlette (finish)'},km:178.1,len:7.1,grad:6.7,cat:'C1'}
+ ],
  sprints:[{km:65,pts:'25-20-16…'}],
- desc:`<p>Alppiosuus avautuu suhteellisen maltillisesti: viimeinen nousu Orcières-Merletten hiihtokeskukseen on tasainen 7,1 km / 6,7 %, joka suosii tasaista voimaa polkevia kokonaiskilpailun ajajia.</p>`},
+ desc:{
+  fi:`<p>Alppiosuus avautuu suhteellisen maltillisesti: viimeinen nousu Orcières-Merletten hiihtokeskukseen on tasainen 7,1 km / 6,7 %, joka suosii tasaista voimaa polkevia kokonaiskilpailun ajajia.</p>`,
+  en:`<p>The Alpine section opens relatively gently: the final climb to the Orcières-Merlette ski resort is a steady 7.1 km / 6.7%, which favours GC riders who ride at a consistent, even power.</p>`
+ }},
 
-{n:19, date:'pe 24.7.', start:'Gap', finish:'Alpe d’Huez', km:127.9, type:'vuoristo', gain:3300,
+{n:19, dateIso:'2026-07-24', start:'Gap', finish:'Alpe d’Huez', km:127.9, type:'mountain', gain:3300,
  profile:[[0,25],[35,30],[65,40],[90,35],[114.1,60],[127.9,98]],
- climbs:[{name:'Alpe d’Huez (klassinen puoli, maali, HC)',km:114.1,len:13.8,grad:8.1,cat:'HC'}],
+ climbs:[{name:{fi:'Alpe d’Huez (klassinen puoli, maali, HC)',en:'Alpe d’Huez (classic side, finish, HC)'},km:114.1,len:13.8,grad:8.1,cat:'HC'}],
  sprints:[{km:40,pts:'25-20-16…'}],
- desc:`<p>Lyhyt mutta räjähdysherkkä etappi, joka huipentuu Alpe d’Huezin klassiselle nousulle: 21 hiuspinnettä, 13,8 km matkaa ja 8,1 % keskikaltevuus. Kompakti matka suosii aggressiivista, aikaista hyökkäämistä.</p>`},
+ desc:{
+  fi:`<p>Lyhyt mutta räjähdysherkkä etappi, joka huipentuu Alpe d’Huezin klassiselle nousulle: 21 hiuspinnettä, 13,8 km matkaa ja 8,1 % keskikaltevuus. Kompakti matka suosii aggressiivista, aikaista hyökkäämistä.</p>`,
+  en:`<p>A short but explosive stage that culminates on the classic climb of Alpe d’Huez: 21 hairpin bends, 13.8 km, and an 8.1% average gradient. The compact distance favours aggressive, early attacks.</p>`
+ }},
 
-{n:20, date:'la 25.7.', start:'Bourg d’Oisans', finish:'Alpe d’Huez', km:170.9, type:'vuoristo', gain:5600,
+{n:20, dateIso:'2026-07-25', start:'Bourg d’Oisans', finish:'Alpe d’Huez', km:170.9, type:'mountain', gain:5600,
  profile:[[0,25],[35,45],[55,35],[80,65],[100,50],[125,80],[140,65],[158.7,60],[170.9,98]],
- climbs:[{name:'Col de la Croix de Fer',km:50,len:22,grad:5.2,cat:'HC'},{name:'Col du Télégraphe',km:90,len:12,grad:7,cat:'C1'},{name:'Col du Galibier',km:112,len:8,grad:6.9,cat:'HC'},{name:'Col de Sarenne → Alpe d’Huez (maali, harvinainen suunta)',km:150,len:20,grad:5,cat:'HC'}],
+ climbs:[
+   {name:{fi:'Col de la Croix de Fer',en:'Col de la Croix de Fer'},km:50,len:22,grad:5.2,cat:'HC'},
+   {name:{fi:'Col du Télégraphe',en:'Col du Télégraphe'},km:90,len:12,grad:7,cat:'C1'},
+   {name:{fi:'Col du Galibier',en:'Col du Galibier'},km:112,len:8,grad:6.9,cat:'HC'},
+   {name:{fi:'Col de Sarenne → Alpe d’Huez (maali, harvinainen suunta)',en:'Col de Sarenne → Alpe d’Huez (finish, rare approach)'},km:150,len:20,grad:5,cat:'HC'}
+ ],
  sprints:[{km:35,pts:'25-20-16…'}],
- desc:`<p>Tourin raskain päivä: 5 600 korkeusmetriä ja neljä suurta nousua — Col de la Croix de Fer, Col du Télégraphe ja Col du Galibier — ennen Alpe d’Huezia toistamiseen, tällä kertaa harvinaisemmalta Col de Sarennen suunnalta. Kokonaiskilpailu voi ratketa lopullisesti tässä etapissa.</p>`},
+ desc:{
+  fi:`<p>Tourin raskain päivä: 5 600 korkeusmetriä ja neljä suurta nousua — Col de la Croix de Fer, Col du Télégraphe ja Col du Galibier — ennen Alpe d’Huezia toistamiseen, tällä kertaa harvinaisemmalta Col de Sarennen suunnalta. Kokonaiskilpailu voi ratketa lopullisesti tässä etapissa.</p>`,
+  en:`<p>The Tour's hardest day: 5,600 metres of elevation gain and four major climbs — Col de la Croix de Fer, Col du Télégraphe, and Col du Galibier — before Alpe d’Huez for a second time, this time via the rarer Col de Sarenne approach. The GC could well be decided for good on this stage.</p>`
+ }},
 
-{n:21, date:'su 26.7.', start:'Thoiry', finish:'Paris', km:133.0, type:'tasainen', gain:900,
+{n:21, dateIso:'2026-07-26', start:'Thoiry', finish:'Paris', km:133.0, type:'flat', gain:900,
  profile:[[0,20],[50,22],[90,25],[115,35],[125,40],[133,45]],
- climbs:[{name:'Montmartren mukulakivinousut',km:120,len:1,grad:8,cat:'C4'}],
+ climbs:[{name:{fi:'Montmartren mukulakivinousut',en:'Montmartre cobbled climbs'},km:120,len:1,grad:8,cat:'C4'}],
  sprints:[{km:45,pts:'70-50-40…'},{km:95,pts:'70-50-40…'}],
- desc:`<p>Päätösetappi huipentuu perinteisesti Champs-Élysées'lle, mutta viime vuoden tapaan reitti kiertää myös Montmartren jyrkät mukulakivikadut, jotka voivat sotkea puhtaan sprinttiratkaisun. Kaksi kirisprinttiä jakaa vielä viimeiset pisteet pistepaitakamppailuun.</p>`}
+ desc:{
+  fi:`<p>Päätösetappi huipentuu perinteisesti Champs-Élysées'lle, mutta viime vuoden tapaan reitti kiertää myös Montmartren jyrkät mukulakivikadut, jotka voivat sotkea puhtaan sprinttiratkaisun. Kaksi kirisprinttiä jakaa vielä viimeiset pisteet pistepaitakamppailuun.</p>`,
+  en:`<p>The final stage culminates, as tradition dictates, on the Champs-Élysées, but as last year, the route also loops through Montmartre's steep cobbled streets, which could upset a clean bunch sprint. Two intermediate sprints hand out the last points in the green jersey battle.</p>`
+ }}
 ];
 
 /* ---------- HELPERS ---------- */
 function typeColor(t){return TYPE_COLOR[t]||'#888';}
-function fmtKm(k){return (Math.round(k*10)/10).toString().replace('.',',')+' km';}
+
+function fmtKm(k){
+  const s = (Math.round(k*10)/10).toString();
+  return (lang==='fi' ? s.replace('.',',') : s) + ' km';
+}
+function fmtGain(m){
+  return m.toLocaleString(lang==='fi'?'fi-FI':'en-US') + ' m';
+}
+function fmtDate(iso){
+  const d = new Date(iso+'T12:00:00');
+  const opts = lang==='fi'
+    ? {weekday:'short', day:'numeric', month:'numeric'}
+    : {weekday:'short', day:'numeric', month:'short'};
+  return new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', opts).format(d);
+}
+function fmtUpdated(iso){
+  // data/results.json:n "updated"-kenttä on ISO-aikaleima; muotoillaan
+  // aina Suomen ajassa (kisan virallinen aikavyöhyke), mutta kielen
+  // mukaisella tekstillä, koska tiedosto itse ei ole kaksikielinen.
+  const d = new Date(iso);
+  const formatted = new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', {
+    day:'numeric', month:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit',
+    timeZone:'Europe/Helsinki'
+  }).format(d);
+  return lang==='fi' ? `Päivitetty ${formatted} (Suomen aikaa)` : `Updated ${formatted} (Helsinki time)`;
+}
 
 function catLabel(c){
-  const m={HC:'HC',C1:'1. lk',C2:'2. lk',C3:'3. lk',C4:'4. lk'};
-  return m[c]||c;
+  return t('catLabels')[c] || c;
 }
 
 /* Build smooth-ish SVG path from keypoints (simple quadratic smoothing) */
@@ -473,7 +710,7 @@ function renderProfile(stage){
   const {d, ys, plotH} = buildPath(stage.profile, totalKm, W,H,padL,padR,padT,padB);
   const baseY = padT+plotH;
 
-  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Etapin ${stage.n} korkeusprofiili">`;
+  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${t('profileAria')(stage.n)}">`;
 
   // grid lines
   for(let g=0; g<=4; g++){
@@ -508,7 +745,6 @@ function renderProfile(stage){
   // sprint markers
   (stage.sprints||[]).forEach(s=>{
     const sx = xForKm(s.km,totalKm,W,padL,padR);
-    svg += `<polygon points="${sx-5},${baseY+2} ${sx+5},${baseY+2} ${sx},${padT-2}" fill="none" stroke="#3E7A57" stroke-width="0" opacity="0"/>`;
     svg += `<circle cx="${sx}" cy="${baseY+6}" r="5" fill="#3E7A57"/>`;
     svg += `<line x1="${sx}" y1="${padT}" x2="${sx}" y2="${baseY}" stroke="#3E7A57" stroke-width="1.2" stroke-dasharray="1,3" opacity="0.7"/>`;
   });
@@ -522,31 +758,36 @@ const listEl = document.getElementById('stageList');
 let activeIdx = 0;
 const raceStages = stages.filter(s=>s.n!=='lepo');
 
-stages.forEach((s, idx)=>{
-  const li = document.createElement('li');
-  li.className='stage-item';
-  if(s.n==='lepo'){
-    const div = document.createElement('div');
-    div.className='rest-row';
-    div.textContent = `${s.date} · ${s.label}`;
-    li.appendChild(div);
+function renderStageList(){
+  listEl.innerHTML = '';
+  stages.forEach((s, idx)=>{
+    const li = document.createElement('li');
+    li.className='stage-item';
+    if(s.n==='lepo'){
+      const div = document.createElement('div');
+      div.className='rest-row';
+      const restNum = s.labelKey==='rest1' ? 1 : 2;
+      div.textContent = `${fmtDate(s.dateIso)} · ${t('restDayLabel')} ${restNum}`;
+      li.appendChild(div);
+      listEl.appendChild(li);
+      return;
+    }
+    const btn = document.createElement('button');
+    btn.className='stage-btn';
+    btn.dataset.idx = idx;
+    if(idx===activeIdx) btn.classList.add('active');
+    btn.innerHTML = `
+      <span class="num">${String(s.n).padStart(2,'0')}</span>
+      <span class="typedot" style="background:${typeColor(s.type)}"></span>
+      <span class="btn-text">
+        <div class="btn-route">${s.start} → ${s.finish}</div>
+        <div class="btn-meta">${fmtDate(s.dateIso)} · ${fmtKm(s.km)}</div>
+      </span>`;
+    btn.addEventListener('click', ()=>selectStage(idx));
+    li.appendChild(btn);
     listEl.appendChild(li);
-    return;
-  }
-  const btn = document.createElement('button');
-  btn.className='stage-btn';
-  btn.dataset.idx = idx;
-  btn.innerHTML = `
-    <span class="num">${String(s.n).padStart(2,'0')}</span>
-    <span class="typedot" style="background:${typeColor(s.type)}"></span>
-    <span class="btn-text">
-      <div class="btn-route">${s.start} → ${s.finish}</div>
-      <div class="btn-meta">${s.date} · ${fmtKm(s.km)}</div>
-    </span>`;
-  btn.addEventListener('click', ()=>selectStage(idx));
-  li.appendChild(btn);
-  listEl.appendChild(li);
-});
+  });
+}
 
 function selectStage(idx){
   activeIdx = idx;
@@ -565,7 +806,7 @@ function renderPanel(stage){
   if(stage.climbs && stage.climbs.length){
     climbRows = stage.climbs.map(c=>`
       <tr>
-        <td>${c.name}</td>
+        <td>${c.name[lang]}</td>
         <td><span class="catchip" style="background:${CAT_COLOR[c.cat]||'#B23B32'}">${catLabel(c.cat)}</span></td>
         <td>${c.len} km</td>
         <td>${c.grad? c.grad+' %':'—'}</td>
@@ -577,63 +818,67 @@ function renderPanel(stage){
   if(stage.sprints && stage.sprints.length){
     sprintRows = stage.sprints.map((s,i)=>`
       <tr>
-        <td><span class="flagchip">Kirisprintti ${stage.sprints.length>1?(i+1):''}</span></td>
+        <td><span class="flagchip">${t('sprintChip')}${stage.sprints.length>1?' '+(i+1):''}</span></td>
         <td>~km ${Math.round(s.km)}</td>
-        <td>${s.pts} pistettä</td>
+        <td>${s.pts} ${t('sprintPtsSuffix')}</td>
       </tr>`).join('');
   }
+
+  const isTT = stage.type==='itt' || stage.type==='ttt';
 
   panel.innerHTML = `
     <div class="stagehead">
       <div>
-        <h2>Etappi ${stage.n} — ${stage.start} → ${stage.finish}</h2>
-        <span class="typepill" style="background:${tc}">${TYPE_LABEL_FI[stage.type]}</span>
+        <h2>${t('stagePrefix')} ${stage.n} — ${stage.start} → ${stage.finish}</h2>
+        <span class="typepill" style="background:${tc}">${t('typeLabels')[stage.type]}</span>
       </div>
-      <span class="datebadge">${stage.date}</span>
+      <span class="datebadge">${fmtDate(stage.dateIso)}</span>
     </div>
 
     <div class="factbar">
-      <div class="fact">Matka<b>${fmtKm(stage.km)}</b></div>
-      <div class="fact">Nousumetrit${stage.gain?`<b>${stage.gain.toLocaleString('fi-FI')} m</b>`:`<b>—</b>`}</div>
-      <div class="fact">Mäkipisteitä<b>${(stage.climbs||[]).length}</b></div>
-      <div class="fact">Kirisprinttejä<b>${(stage.sprints||[]).length}</b></div>
+      <div class="fact">${t('factDistance')}<b>${fmtKm(stage.km)}</b></div>
+      <div class="fact">${t('factGain')}${stage.gain?`<b>${fmtGain(stage.gain)}</b>`:`<b>—</b>`}</div>
+      <div class="fact">${t('factClimbs')}<b>${(stage.climbs||[]).length}</b></div>
+      <div class="fact">${t('factSprints')}<b>${(stage.sprints||[]).length}</b></div>
     </div>
 
     <div class="chartbox">
       ${renderProfile(stage)}
       <div class="legend">
-        <span><span class="leg-swatch" style="background:#B23B32"></span> HC-nousu</span>
-        <span><span class="leg-swatch" style="background:#C9622E"></span> 1. luokka</span>
-        <span><span class="leg-swatch" style="background:#C99A2E"></span> 2. luokka</span>
-        <span><span class="leg-swatch" style="background:#7E8A46"></span> 3. luokka</span>
-        <span><span class="leg-swatch" style="background:#3E7A57;border-radius:50%"></span> Kirisprintti</span>
+        <span><span class="leg-swatch" style="background:#B23B32"></span> ${t('legendHC')}</span>
+        <span><span class="leg-swatch" style="background:#C9622E"></span> ${t('legendC1')}</span>
+        <span><span class="leg-swatch" style="background:#C99A2E"></span> ${t('legendC2')}</span>
+        <span><span class="leg-swatch" style="background:#7E8A46"></span> ${t('legendC3')}</span>
+        <span><span class="leg-swatch" style="background:#3E7A57;border-radius:50%"></span> ${t('legendSprint')}</span>
       </div>
-      <div class="chart-caption">Havainnollistava profiili — ei GPS-mitattua korkeusdataa. X-akseli km, Y-akseli suhteellinen korkeus.</div>
+      <div class="chart-caption">${t('chartCaption')}</div>
     </div>
 
     <div class="twocol">
       <div class="block narrative">
-        <h3>Etapin kuvaus</h3>
-        ${stage.desc}
+        <h3>${t('descHeader')}</h3>
+        ${stage.desc[lang]}
       </div>
       <div class="block">
-        <h3>Mäkipisteet (KOM)</h3>
-        ${climbRows ? `<table class="points"><thead><tr><th>Nousu</th><th>Lk</th><th>Pituus</th><th>Kalt.</th><th>Sijainti</th></tr></thead><tbody>${climbRows}</tbody></table>` : `<p class="empty-note">Ei luokiteltuja nousuja tällä etapilla.</p>`}
-        <h3 style="margin-top:16px;">Kirisprintit</h3>
-        ${sprintRows ? `<table class="points"><thead><tr><th>Sprintti</th><th>Sijainti</th><th>Pisteet</th></tr></thead><tbody>${sprintRows}</tbody></table>` : `<p class="empty-note">${stage.type.includes('aika-ajo')?'Aika-ajoetapeilla ei ajeta kirisprinttiä.':'Ei kirisprinttiä.'}</p>`}
+        <h3>${t('climbsHeader')}</h3>
+        ${climbRows ? `<table class="points"><thead><tr><th>${t('climbTableHead')[0]}</th><th>${t('climbTableHead')[1]}</th><th>${t('climbTableHead')[2]}</th><th>${t('climbTableHead')[3]}</th><th>${t('climbTableHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>` : `<p class="empty-note">${t('noClimbs')}</p>`}
+        <h3 style="margin-top:16px;">${t('sprintsHeader')}</h3>
+        ${sprintRows ? `<table class="points"><thead><tr><th>${t('sprintTableHead')[0]}</th><th>${t('sprintTableHead')[1]}</th><th>${t('sprintTableHead')[2]}</th></tr></thead><tbody>${sprintRows}</tbody></table>` : `<p class="empty-note">${isTT?t('noSprintTT'):t('noSprint')}</p>`}
       </div>
     </div>
   `;
 }
 
 /* ---------- TOP STATS ---------- */
-document.getElementById('topstats').innerHTML = `
-  <div class="stat">Kokonaismatka<b>3 333 km</b></div>
-  <div class="stat">Nousumetrit yhteensä<b>54 450 m</b></div>
-  <div class="stat">Etappeja<b>21</b></div>
-  <div class="stat">Lepopäiviä<b>2</b></div>
-  <div class="stat">Vuoristomaalia<b>Alpe d’Huez ×2, muut 5</b></div>
-`;
+function renderTopStats(){
+  document.getElementById('topstats').innerHTML = `
+    <div class="stat">${t('statDistance')}<b>${t('statDistanceVal')}</b></div>
+    <div class="stat">${t('statGain')}<b>${t('statGainVal')}</b></div>
+    <div class="stat">${t('statStages')}<b>${t('statStagesVal')}</b></div>
+    <div class="stat">${t('statRestDays')}<b>${t('statRestDaysVal')}</b></div>
+    <div class="stat">${t('statMountainFinish')}<b>${t('statMountainFinishVal')}</b></div>
+  `;
+}
 
 /* ==========================================================
    TULOKSET — PÄIVITETTÄVÄ DATA
@@ -694,41 +939,42 @@ function jerseySVG(fill, dots){
   </svg>`;
 }
 
-const CLASSIFICATIONS = [
-  {key:'gc', name:'Kokonaiskilpailu', fr:'Maillot jaune — keltainen paita', jersey:jerseySVG('#F5D33F'), valHead:'Aika/ero'},
-  {key:'points', name:'Pistekilpailu', fr:'Maillot vert — vihreä paita', jersey:jerseySVG('#3E9B4F'), valHead:'Pisteet'},
-  {key:'mountains', name:'Mäkikilpailu', fr:'Maillot à pois — pallopaita', jersey:jerseySVG('#FFFFFF', true), valHead:'Pisteet'},
-  {key:'youth', name:'Nuorten kilpailu', fr:'Maillot blanc — valkoinen paita (alle 26 v)', jersey:jerseySVG('#F4F4F4'), valHead:'Aika/ero'},
-  {key:'teams', name:'Joukkuekilpailu', fr:'Classement par équipes', jersey:jerseySVG('#C99A2E'), valHead:'Aika/ero'}
-];
+const CLASS_JERSEY = {
+  gc: jerseySVG('#F5D33F'),
+  points: jerseySVG('#3E9B4F'),
+  mountains: jerseySVG('#FFFFFF', true),
+  youth: jerseySVG('#F4F4F4'),
+  teams: jerseySVG('#C99A2E')
+};
+const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 
 const expandState = {}; // key -> bool
 
 function renderResults(){
   const grid = document.getElementById('resultsGrid');
-  const anyData = CLASSIFICATIONS.some(c=>RESULTS[c.key].rows.length>0);
+  const anyData = CLASS_KEYS.some(k=>RESULTS[k].rows.length>0);
   let html = '';
 
   if(!anyData){
     html += `<div class="status-card">
-      <b>Kilpailu käynnissä — tuloksia ei vielä saatavilla.</b><br>
-      Avausetappi (joukkueaika-ajo Barcelonassa) ajetaan la 4.7.2026: ensimmäinen joukkue lähtee klo 17.05 CET ja viimeinen on maalissa n. klo 19.15 CET (n. 20.15 Suomen aikaa). Kun etappi on ajettu, tämän näkymän taulukot täytetään — kaikki data on tiedoston alussa yhdessä <code>RESULTS</code>-objektissa, jonka voi päivittää etappi kerrallaan (esim. pyytämällä Claudea hakemaan tuoreet tulokset). Viralliset tulokset: letour.fr, procyclingstats.com.
+      ${t('resultsEmpty')}
     </div>`;
   } else if(RESULTS.updated){
-    html += `<div class="status-card"><b>Tilanne:</b> ${RESULTS.updated} (etapin ${RESULTS.afterStage}/21 jälkeen).</div>`;
+    html += `<div class="status-card">${t('resultsStatus')(RESULTS.updated, RESULTS.afterStage)}</div>`;
   }
 
-  CLASSIFICATIONS.forEach(c=>{
-    const rows = RESULTS[c.key].rows;
-    const expanded = !!expandState[c.key];
+  CLASS_KEYS.forEach(key=>{
+    const c = t('classifications')[key];
+    const rows = RESULTS[key].rows;
+    const expanded = !!expandState[key];
     const shown = expanded ? rows : rows.slice(0,10);
 
     let body;
     if(!rows.length){
-      body = `<div class="empty-cls">Ei tuloksia vielä — täyttyy avausetapin jälkeen.</div>`;
+      body = `<div class="empty-cls">${t('classEmpty')}</div>`;
     } else {
       body = `<table class="results">
-        <thead><tr><th>#</th><th>${c.key==='teams'?'Joukkue':'Ajaja'}</th><th style="text-align:right">${c.valHead}</th></tr></thead>
+        <thead><tr><th>${t('colHash')}</th><th>${key==='teams'?t('colTeam'):t('colRider')}</th><th style="text-align:right">${c.valHead}</th></tr></thead>
         <tbody>` +
         shown.map(r=>`
           <tr class="${r.pos<=3?'podium':''}">
@@ -738,15 +984,15 @@ function renderResults(){
           </tr>`).join('') +
         `</tbody></table>`;
       if(rows.length>10){
-        body += `<button class="expander" data-cls="${c.key}">
-          ${expanded ? '▲ Näytä vain top 10' : `▼ Näytä kaikki (${rows.length})`}
+        body += `<button class="expander" data-cls="${key}">
+          ${expanded ? t('expandLess') : t('expandMore')(rows.length)}
         </button>`;
       }
     }
 
     html += `<div class="cls-card">
       <div class="cls-head">
-        <span class="jersey">${c.jersey}</span>
+        <span class="jersey">${CLASS_JERSEY[key]}</span>
         <h3>${c.name}<span class="fr">${c.fr}</span></h3>
       </div>
       <div class="cls-body">${body}</div>
@@ -758,11 +1004,11 @@ function renderResults(){
   html += `<div class="cls-card stagewins-card">
     <div class="cls-head">
       <span class="jersey">${jerseySVG('#3B6485')}</span>
-      <h3>Etappivoittajat<span class="fr">${ridden.length}/21 etappia ajettu</span></h3>
+      <h3>${t('stageWinnersTitle')}<span class="fr">${t('stageWinnersFr')(ridden.length)}</span></h3>
     </div>
     <div class="cls-body">
       <table class="results">
-        <thead><tr><th>#</th><th>Etappi</th><th style="text-align:right">Voittaja</th></tr></thead>
+        <thead><tr><th>${t('colHash')}</th><th>${t('colStage')}</th><th style="text-align:right">${t('colWinner')}</th></tr></thead>
         <tbody>` +
         RESULTS.stageWinners.map(s=>`
           <tr>
@@ -782,6 +1028,48 @@ function renderResults(){
     });
   });
 }
+
+/* ---------- STATIC TEXT (header/tabs/footer) ---------- */
+function applyStaticText(){
+  document.getElementById('eyebrow').textContent = t('eyebrow');
+  document.getElementById('h1Span').textContent = t('titleSpan');
+  document.getElementById('subDesc').textContent = t('subDesc');
+  document.getElementById('tabStages').textContent = t('tabStages');
+  document.getElementById('tabResults').textContent = t('tabResults');
+  document.getElementById('stageListHeader').textContent = t('stageListHeader');
+  document.getElementById('disclaimerLabel').textContent = t('disclaimerLabel');
+  document.getElementById('disclaimerText').textContent = t('disclaimer');
+  document.getElementById('sourcesTitle').textContent = t('sourcesTitle');
+  document.getElementById('sourcesBody').innerHTML = t('sourcesBody');
+}
+
+/* ---------- LANGUAGE SWITCHER ---------- */
+function updateLangButtons(){
+  document.querySelectorAll('#langSel button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang===lang);
+  });
+}
+
+function setLang(newLang){
+  if(newLang!==('fi') && newLang!=='en') return;
+  lang = newLang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.documentElement.lang = lang;
+  renderAll();
+}
+
+function renderAll(){
+  applyStaticText();
+  updateLangButtons();
+  renderTopStats();
+  renderStageList();
+  renderPanel(stages[activeIdx]);
+  renderResults();
+}
+
+document.querySelectorAll('#langSel button').forEach(btn=>{
+  btn.addEventListener('click', ()=>setLang(btn.dataset.lang));
+});
 
 /* ---------- TAB SWITCHING ---------- */
 document.querySelectorAll('.tab').forEach(t=>{
@@ -812,7 +1100,7 @@ async function loadResults(){
         if(row && w.winner) row.winner = w.winner;
       });
     }
-    if(data.updatedText) RESULTS.updated = data.updatedText;
+    if(data.updated) RESULTS.updated = data.updated;
     if(data.afterStage) RESULTS.afterStage = data.afterStage;
     renderResults();
   }catch(e){
@@ -846,8 +1134,9 @@ function todayStageIndex(){
 }
 
 /* init */
-selectStage(todayStageIndex());
-renderResults();
+document.documentElement.lang = lang;
+activeIdx = todayStageIndex();
+renderAll();
 loadResults();
 </script>
 </body>
