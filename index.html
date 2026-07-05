@@ -271,7 +271,7 @@
         <button data-lang="en">EN</button>
       </div>
     </div>
-    <h1>Tour de France 2026 <span id="h1Span"></span></h1>
+    <h1>Tour de France 2026</h1>
     <div class="sub" id="subDesc"></div>
     <div class="stat-row" id="topstats"></div>
   </header>
@@ -314,7 +314,6 @@ const LANG_KEY = 'tdf2026-lang';
 const STRINGS = {
   fi: {
     eyebrow: 'Roadbook · 113. Tour de France · 4.–26.7.2026',
-    titleSpan: '— etappien profiilit',
     subDesc: 'Interaktiivinen katsaus kaikkiin 21 etappiin: reitit, korkeusprofiilien havainnollistus, tärkeimmät mäkipisteet (KOM) sekä kirisprinttien sijainnit ja pistejärjestelmä. Kilpailu käynnistyy Barcelonasta la 4.7. ja päättyy Paris’iin su 26.7.2026.',
     tabStages: 'Etapit & profiilit',
     tabResults: 'Tulokset & kategoriat',
@@ -360,7 +359,6 @@ const STRINGS = {
   },
   en: {
     eyebrow: 'Roadbook · 113th Tour de France · 4–26 Jul 2026',
-    titleSpan: '— stage profiles',
     subDesc: 'An interactive look at all 21 stages: routes, illustrative elevation profiles, the key climb points (KOM), and the location and points system for the intermediate sprints. The race starts from Barcelona on Sat 4 Jul and finishes in Paris on Sun 26 Jul 2026.',
     tabStages: 'Stages & profiles',
     tabResults: 'Results & categories',
@@ -1032,7 +1030,6 @@ function renderResults(){
 /* ---------- STATIC TEXT (header/tabs/footer) ---------- */
 function applyStaticText(){
   document.getElementById('eyebrow').textContent = t('eyebrow');
-  document.getElementById('h1Span').textContent = t('titleSpan');
   document.getElementById('subDesc').textContent = t('subDesc');
   document.getElementById('tabStages').textContent = t('tabStages');
   document.getElementById('tabResults').textContent = t('tabResults');
