@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour de France 2026 — Etappien korkeusprofiilit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E9ECE4;
+    --paper-panel:#F4F6EF;
+    --ink:#1E2A22;
+    --ink-soft:#4C5A50;
+    --line:#C6CCBC;
+    --gold:#C99A2E;
+    --gold-deep:#9C7620;
+    --red:#B23B32;
+    --green:#3E7A57;
+    --blue:#3B6485;
+    --grey-road:#8B8F84;
+    --shadow: 0 2px 10px rgba(30,42,34,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+
+  header.top{
+    display:flex;flex-direction:column;gap:6px;
+    padding-bottom:22px;margin-bottom:22px;
+    border-bottom:3px solid var(--ink);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  h1{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,46px);
+    letter-spacing:.01em;
+    text-transform:uppercase;
+    margin:2px 0 4px;
+    line-height:1.02;
+  }
+  h1 span{color:var(--gold-deep);}
+  .sub{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    max-width:760px;
+    line-height:1.5;
+  }
+  .stat-row{
+    display:flex;flex-wrap:wrap;gap:22px;
+    margin-top:14px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .stat{font-size:12.5px;color:var(--ink-soft);}
+  .stat b{
+    display:block;font-family:'Oswald',sans-serif;
+    font-size:19px;color:var(--ink);font-weight:600;letter-spacing:.01em;
+  }
+
+  .layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start;}
+  @media (max-width:860px){.layout{grid-template-columns:1fr;}}
+
+  /* Tabs */
+  .tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:2px solid var(--ink);}
+  .tab{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
+    text-transform:uppercase;letter-spacing:.05em;
+    background:transparent;border:none;cursor:pointer;color:var(--ink-soft);
+    padding:10px 22px 8px;border-bottom:3px solid transparent;margin-bottom:-2px;
+  }
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--ink);border-bottom:3px solid var(--gold-deep);}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  /* Results view */
+  .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+  @media (max-width:900px){.results-grid{grid-template-columns:1fr;}}
+  .cls-card{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+  .cls-head{
+    display:flex;align-items:center;gap:12px;padding:14px 16px;
+    border-bottom:1px solid var(--line);
+  }
+  .jersey{
+    width:34px;height:34px;border-radius:4px;flex:0 0 auto;
+    border:1px solid rgba(0,0,0,0.15);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .jersey svg{width:22px;height:22px;}
+  .cls-head h3{
+    font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.04em;margin:0;
+  }
+  .cls-head .fr{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
+    color:var(--ink-soft);letter-spacing:.08em;text-transform:none;
+  }
+  .cls-body{padding:6px 16px 14px;}
+  table.results{width:100%;border-collapse:collapse;font-size:13px;}
+  table.results th{
+    text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;
+    text-transform:uppercase;color:var(--ink-soft);letter-spacing:.05em;
+    padding:6px 6px 4px;border-bottom:1px solid var(--line);
+  }
+  table.results td{padding:6px 6px;border-bottom:1px solid var(--line);}
+  table.results td.pos{font-family:'Oswald',sans-serif;font-weight:600;width:28px;color:var(--ink-soft);}
+  table.results tr.podium td.pos{color:var(--gold-deep);}
+  table.results td.val{font-family:'JetBrains Mono',monospace;font-size:12px;text-align:right;white-space:nowrap;}
+  table.results td.rider b{font-weight:600;}
+  table.results td.rider .tm{display:block;font-size:11px;color:var(--ink-soft);}
+  .expander{
+    display:block;width:100%;margin-top:10px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    background:transparent;border:1px dashed var(--line);border-radius:2px;
+    color:var(--ink-soft);padding:8px;cursor:pointer;
+  }
+  .expander:hover{background:rgba(0,0,0,0.04);color:var(--ink);}
+  .status-card{
+    grid-column:1/-1;
+    background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--gold-deep);
+    border-radius:2px;padding:16px 18px;font-size:14px;line-height:1.6;
+  }
+  .status-card b{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;}
+  .empty-cls{padding:18px 4px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  .stagewins-card{grid-column:1/-1;}
+  .updated-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-left:auto;}
+
+  /* Stage list */
+  .stagelist{
+    background:var(--paper-panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+    max-height:none;
+    position:sticky;top:16px;
+  }
+  .stagelist .listhead{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-soft);padding:12px 14px 8px;
+  }
+  ul.stages{list-style:none;margin:0;padding:0 6px 10px;max-height:74vh;overflow-y:auto;}
+  li.stage-item{margin:2px 0;}
+  button.stage-btn{
+    width:100%;text-align:left;
+    display:flex;align-items:center;gap:10px;
+    background:transparent;border:none;cursor:pointer;
+    padding:8px 8px;border-radius:2px;
+    font-family:'Inter',sans-serif;color:var(--ink);
+    border-left:3px solid transparent;
+  }
+  button.stage-btn:hover{background:rgba(0,0,0,0.04);}
+  button.stage-btn.active{
+    background:var(--paper);
+    border-left:3px solid var(--gold-deep);
+  }
+  .num{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
+    width:26px;flex:0 0 auto;color:var(--ink-soft);
+  }
+  .stage-btn.active .num{color:var(--gold-deep);}
+  .btn-text{flex:1;min-width:0;}
+  .btn-route{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .btn-meta{font-size:10.5px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;}
+  .typedot{width:8px;height:8px;border-radius:50%;flex:0 0 auto;}
+
+  .rest-row{
+    padding:6px 14px;font-size:10.5px;font-family:'JetBrains Mono',monospace;
+    color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;
+    border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);
+    margin:4px 0;
+  }
+
+  /* Main panel */
+  .panel{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;padding:22px 24px 26px;}
+  .stagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:4px;}
+  .stagehead h2{
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);
+    text-transform:uppercase;margin:0;letter-spacing:.01em;
+  }
+  .datebadge{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    color:#fff;background:var(--ink);padding:5px 9px;border-radius:2px;white-space:nowrap;
+  }
+  .typepill{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;
+    color:#fff;margin-top:8px;
+  }
+  .factbar{
+    display:flex;flex-wrap:wrap;gap:18px 28px;margin:16px 0 6px;
+    padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .fact{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);}
+  .fact b{display:block;font-family:'Oswald',sans-serif;font-size:17px;color:var(--ink);font-weight:600;}
+
+  .chartbox{margin:18px 0 6px;}
+  .chart-caption{font-size:11px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-top:6px;}
+  svg.profile{width:100%;height:auto;display:block;}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 4px;font-size:11.5px;color:var(--ink-soft);}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .leg-swatch{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  .twocol{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:18px;}
+  @media (max-width:700px){.twocol{grid-template-columns:1fr;}}
+  .block h3{
+    font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--ink-soft);margin:0 0 8px;
+  }
+  .narrative{font-size:14.5px;line-height:1.62;}
+  .narrative p{margin:0 0 10px;}
+
+  table.points{width:100%;border-collapse:collapse;font-size:13px;}
+  table.points th{
+    text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;
+    text-transform:uppercase;color:var(--ink-soft);letter-spacing:.05em;
+    padding:4px 6px;border-bottom:1px solid var(--line);
+  }
+  table.points td{padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .catchip{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
+    color:#fff;padding:1px 6px;border-radius:20px;
+  }
+  .flagchip{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
+    color:#fff;background:var(--green);padding:1px 6px;border-radius:20px;
+  }
+  .empty-note{color:var(--ink-soft);font-size:13px;font-style:italic;}
+
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);}
+  .sources{font-size:11.5px;color:var(--ink-soft);line-height:1.7;}
+  .sources a{color:var(--blue);}
+  .disclaimer{
+    font-size:12px;color:var(--ink-soft);background:var(--paper-panel);
+    border:1px dashed var(--line);padding:10px 12px;border-radius:2px;margin-top:14px;line-height:1.55;
+  }
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">Roadbook · 113. Tour de France · 4.–26.7.2026</div>
+    <h1>Tour de France 2026 <span>— etappien profiilit</span></h1>
+    <div class="sub">Interaktiivinen katsaus kaikkiin 21 etappiin: reitit, korkeusprofiilien havainnollistus, tärkeimmät mäkipisteet (KOM) sekä kirisprinttien sijainnit ja pistejärjestelmä. Kilpailu käynnistyy Barcelonasta la 4.7. ja päättyy Paris'iin su 26.7.2026.</div>
+    <div class="stat-row" id="topstats"></div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-view="etapit" role="tab">Etapit &amp; profiilit</button>
+    <button class="tab" data-view="tulokset" role="tab">Tulokset &amp; kategoriat</button>
+  </nav>
+
+  <section class="view active" id="view-etapit">
+  <div class="layout">
+    <nav class="stagelist">
+      <div class="listhead">21 etappia</div>
+      <ul class="stages" id="stageList"></ul>
+    </nav>
+
+    <main class="panel" id="panel"></main>
+  </div>
+  </section>
+
+  <section class="view" id="view-tulokset">
+    <div class="results-grid" id="resultsGrid"></div>
+  </section>
+
+  <footer>
+    <div class="disclaimer">
+      <b>Huom korkeusprofiileista:</b> SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.
+    </div>
+    <div class="sources" style="margin-top:12px;">
+      <b>Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):</b><br>
+      Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>
+      Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>
+      Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ---------- DATA ---------- */
+// climb categories -> color
+const CAT_COLOR = {HC:'#B23B32', C1:'#C9622E', C2:'#C99A2E', C3:'#7E8A46', C4:'#8B9C7A'};
+const TYPE_COLOR = {
+  'tasainen':'#3B6485', 'kukkulainen':'#7E8A46', 'vuoristo':'#B23B32',
+  'joukkueaika-ajo':'#4C5A50', 'aika-ajo':'#4C5A50'
+};
+const TYPE_LABEL_FI = {
+  'tasainen':'Tasainen', 'kukkulainen':'Kukkulainen / mäkinen', 'vuoristo':'Vuoristoetappi',
+  'joukkueaika-ajo':'Joukkueaika-ajo', 'aika-ajo':'Yksilöaika-ajo'
+};
+
+// profile keypoints: relative elevation 0-100 (illustrative, not surveyed)
+const stages = [
+{n:1, date:'la 4.7.', start:'Barcelona', finish:'Barcelona', km:19.6, type:'joukkueaika-ajo', gain:200,
+ profile:[[0,18],[10,17],[15,20],[17.9,55],[18.7,75],[19.6,90]],
+ climbs:[{name:'Montjuïc (välinousu)',km:17.9,len:1.1,grad:null,cat:'C4'},{name:'Maalinousu',km:18.8,len:0.8,grad:7,cat:'C4'}],
+ sprints:[],
+ desc:`<p>Avausetappi on joukkueaika-ajo Barcelonan kaduilla — uudella sääntömallilla, jossa jokaisen ajajan oma aika lasketaan (ei enää neljännen ajajan aika, kuten perinteisesti). Ensimmäiset 15 km ovat tasaisia, minkä jälkeen nousee Montjuïcin kukkulan 1,1 km:n nousu ja lopuksi vielä jyrkempi 800 metrin pätkä (n. 7 %) aivan maalissa.</p><p>Etappi antaa parhaiten valmistautuneille joukkueille ja puncheur-tyyppisille ajajille mahdollisuuden nappia ensimmäinen keltainen paita.</p>`},
+
+{n:2, date:'su 5.7.', start:'Tarragona', finish:'Barcelona', km:168.5, type:'kukkulainen', gain:2500,
+ profile:[[0,15],[60,18],[110,25],[138,35],[150,45],[158,70],[163,60],[166,80],[168.5,88]],
+ climbs:[{name:'Montjuïc-kierros (3×)',km:140,len:3,grad:null,cat:'C3'},{name:'Montjuïc, viim. nousu 1',km:163,len:1.6,grad:9.3,cat:'C3'},{name:'Montjuïc, maalinousu',km:167.8,len:0.7,grad:7,cat:'C4'}],
+ sprints:[{km:80,pts:'25-20-16…'}],
+ desc:`<p>Toinen etappi tarjoaa puncheureille mahdollisuuden keltaiseen paitaan. Suurin osa noususta ajoittuu loppupuoliskolle: viimeisillä 30 km:llä ajetaan kolme kierrosta Montjuïcin ympäri, yhteensä kuusi nousua. Viimeiset viisi kilometriä sisältävät kaksi terävää rampia (1,6 km / 9,3 % ja 700 m / 7 %), joista jälkimmäisen huipulle etappi päättyy.</p>`},
+
+{n:3, date:'ma 6.7.', start:'Granollers', finish:'Les Angles', km:195.9, type:'vuoristo', gain:3850,
+ profile:[[0,15],[70,20],[120,30],[150,45],[170,50],[185,65],[192,78],[195.9,90]],
+ climbs:[{name:'1. luokan nousu (Pyreneet)',km:150,len:10,grad:7,cat:'C1'},{name:'Les Angles / Pla del Mir (maali)',km:189.4,len:6.5,grad:6.5,cat:'C3'}],
+ sprints:[{km:75,pts:'25-20-16…'}],
+ desc:`<p>Etappi vie karavaanin Espanjasta Ranskan puolelle Pyreneiden yli, lähes 4 000 korkeusmetrin saattelemana. Reitillä ajetaan yhden luokan ykkösnousu, ennen kuin etappi päättyy ylämäkeen Les Angles -hiihtokeskukseen. Nousu ei ole erityisen raskas (6,5 % keskimäärin), mikä voi suosia sekä puncheureita että karkaamaan lähtevää ryhmää — myös kokonaiskilpailun ajajat voivat osallistua kamppailuun.</p>`},
+
+{n:4, date:'ti 7.7.', start:'Carcassonne', finish:'Foix', km:181.9, type:'kukkulainen', gain:2800,
+ profile:[[0,20],[40,30],[80,42],[110,55],[140,60],[147,72],[165,40],[181.9,35]],
+ climbs:[{name:'Pyreneiden esivuoret',km:140,len:8,grad:5,cat:'C2'}],
+ sprints:[{km:95,pts:'25-20-16…'}],
+ desc:`<p>Reitti kulkee Pyreneiden alarinteiden aaltoilevassa maastossa kohti Foix'ta, jonne on aiemmin noussut maaliin useita irtiottoryhmiä (mm. Hugo Houle 2022). Viimeiset noin 35 km ovat pääosin laskevia, mikä suosii karanneita ajajia loppukirin sijaan.</p>`},
+
+{n:5, date:'ke 8.7.', start:'Lannemezan', finish:'Pau', km:158.3, type:'tasainen', gain:600,
+ profile:[[0,22],[40,24],[90,26],[130,24],[158.3,20]],
+ climbs:[],
+ sprints:[{km:55,pts:'70-50-40…'},{km:120,pts:'70-50-40…'}],
+ desc:`<p>Pääosin tasainen etappi Lannemezanista Paun kaupunkiin — yksi Tourin useimmin vierailluista maaleista. Etappi kuuluu seitsemään "tasaiseen" etappiin, joilla ajetaan kaksi kirisprinttiä ja joissa etapin voittaja saa 70 pistettä pisteluokituksessa.</p>`},
+
+{n:6, date:'to 9.7.', start:'Pau', finish:'Gavarnie-Gèdre', km:186.2, type:'vuoristo', gain:4400,
+ profile:[[0,20],[60,25],[90,35],[110,50],[125,42],[140,60],[160,50],[174,75],[186.2,95]],
+ climbs:[{name:'Col d’Aspin',km:113,len:12,grad:6.5,cat:'C1'},{name:'Col du Tourmalet',km:150,len:17,grad:7.4,cat:'HC'},{name:'Cirque de Gavarnie (maali)',km:180,len:6,grad:5,cat:'C2'}],
+ sprints:[{km:45,pts:'25-20-16…'}],
+ desc:`<p>Ensimmäinen suuri vuoristoetappi ja samalla GC-ajajien ensimmäinen todellinen koetinkivi. Reitillä nousevat sekä Col d’Aspin (12 km / 6,5 %) että legendaarinen Col du Tourmalet, ennen laskua kohti maalia Cirque de Gavarnie'lla — paikassa, jossa Tour ei ole koskaan aiemmin päättynyt.</p>`},
+
+{n:7, date:'pe 10.7.', start:'Hagetmau', finish:'Bordeaux', km:175.1, type:'tasainen', gain:500,
+ profile:[[0,18],[50,20],[100,19],[150,17],[175.1,15]],
+ climbs:[],
+ sprints:[{km:55,pts:'70-50-40…'},{km:125,pts:'70-50-40…'}],
+ desc:`<p>Odotettu sprintterien etappi Bordeaux'hon — kaupunkiin, jossa Tour vierailee 83. kertaa. Jasper Philipsen voitti täällä viimeksi vuonna 2023. Kaksi kirisprinttiä tarjoaa lisäpisteitä pistepaidan tavoittelijoille.</p>`},
+
+{n:8, date:'la 11.7.', start:'Périgueux', finish:'Bergerac', km:180.4, type:'tasainen', gain:900,
+ profile:[[0,20],[60,22],[110,24],[150,21],[180.4,18]],
+ climbs:[],
+ sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
+ desc:`<p>Koko etappi kulkee Dordognen maakunnan halki Périgueux'sta Bergeraciin — jälleen sprintterien joukkueiden hallitsema päivä ja toinen kahden kirisprintin etappi.</p>`},
+
+{n:9, date:'su 12.7.', start:'Malemort', finish:'Ussel', km:185.5, type:'kukkulainen', gain:2400,
+ profile:[[0,20],[60,25],[100,35],[140,45],[170,55],[185.5,50]],
+ climbs:[{name:'Corrèzen kukkulat',km:150,len:6,grad:5,cat:'C3'}],
+ sprints:[{km:80,pts:'25-20-16…'}],
+ desc:`<p>Reitti ylittää Corrèzen departementin aaltoilevaa maastoa pitkin, päättyen Usseliin. Ennen ensimmäistä lepopäivää ajettava etappi voi houkutella karkulaisia, jos sprinttijoukkueet eivät hallitse tahtia.</p>`},
+
+{n:'lepo', date:'ma 13.7.', label:'LEPOPÄIVÄ 1'},
+
+{n:10, date:'ti 14.7.', start:'Aurillac', finish:'Le Lioran', km:166.6, type:'vuoristo', gain:4100,
+ profile:[[0,25],[40,35],[70,50],[95,45],[115,65],[135,55],[150,75],[166.6,70]],
+ climbs:[{name:'Puy Mary — Pas de Peyrol',km:120,len:5.4,grad:8,cat:'C1'},{name:'Col du Pertus',km:150,len:5,grad:6.5,cat:'C2'}],
+ sprints:[{km:50,pts:'25-20-16…'}],
+ desc:`<p>Bastillipäivän etappi vie Massif Centralin läpi raskaan nousuprofiilin saattelemana. Maali Le Lioranissa on tuttu — täällä Jonas Vingegaard voitti niukasti Tadej Pogačarilta kaksi vuotta aiemmin. Loppusuora on identtinen vuoden 2024 kanssa: Puy Maryn Pas de Peyrol -nousu ja Col du Pertus ennen laskua maaliin.</p>`},
+
+{n:11, date:'ke 15.7.', start:'Vichy', finish:'Nevers', km:161.3, type:'tasainen', gain:700,
+ profile:[[0,20],[50,22],[100,20],[161.3,17]],
+ climbs:[],
+ sprints:[{km:55,pts:'70-50-40…'},{km:115,pts:'70-50-40…'}],
+ desc:`<p>Vichystä Nevers'iin ajettava etappi on todennäköinen sprinttietappi ja tarjoaa jälleen kaksi kirisprinttiä pistepaidan tavoittelijoille.</p>`},
+
+{n:12, date:'to 16.7.', start:'Magny-Cours', finish:'Chalon-sur-Saône', km:179.1, type:'tasainen', gain:800,
+ profile:[[0,18],[60,20],[120,19],[179.1,16]],
+ climbs:[],
+ sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
+ desc:`<p>Lähtö Magny-Coursin autourheilurata-alueelta kohti Chalon-sur-Saônea — jälleen todennäköinen ryhmäspurttien etappi kahdella kirisprintillä.</p>`},
+
+{n:13, date:'pe 17.7.', start:'Dole', finish:'Belfort', km:205.8, type:'kukkulainen', gain:2600,
+ profile:[[0,20],[50,25],[100,30],[150,28],[190,40],[205.8,45]],
+ climbs:[{name:'Vogeesien esivuoret',km:180,len:6,grad:5,cat:'C3'}],
+ sprints:[{km:90,pts:'25-20-16…'}],
+ desc:`<p>Etapin 2026 pisin päivä (205,8 km) vie kohti Sveitsin ja Saksan rajaseutuja. Aaltoileva maasto valmistelee jalkoja tulevaan kahden peräkkäisen vuoristopäivän rykelmään.</p>`},
+
+{n:14, date:'la 18.7.', start:'Mulhouse', finish:'Le Markstein', km:155.3, type:'vuoristo', gain:3800,
+ profile:[[0,20],[30,30],[55,45],[75,40],[95,60],[115,50],[135,70],[144,60],[155.3,88]],
+ climbs:[{name:'1. luokan nousu I',km:60,len:9,grad:7,cat:'C1'},{name:'1. luokan nousu II',km:95,len:8,grad:7,cat:'C1'},{name:'Col du Haag',km:130,len:11.2,grad:7.3,cat:'C1'},{name:'Le Markstein (maali)',km:150,len:5,grad:6,cat:'C1'}],
+ sprints:[{km:40,pts:'25-20-16…'}],
+ desc:`<p>Vogeesien vuoret nousevat esiin täydellä voimalla: neljä ykkösluokan nousua mahtuu vain 155 km:n matkalle. Raskain pala on Col du Haag (11,2 km / 7,3 %), ennen viimeistä nousua Le Marksteinin hiihtokeskukseen.</p>`},
+
+{n:15, date:'su 19.7.', start:'Champagnole', finish:'Plateau de Solaison', km:183.9, type:'vuoristo', gain:4500,
+ profile:[[0,20],[50,28],[90,35],[120,32],[145,50],[160,45],[172.6,60],[183.9,95]],
+ climbs:[{name:'Jura-nousuja',km:100,len:8,grad:6,cat:'C2'},{name:'Plateau de Solaison (maali, HC)',km:172.6,len:11.3,grad:9.2,cat:'HC'}],
+ sprints:[{km:55,pts:'25-20-16…'}],
+ desc:`<p>Toisen viikon päättävä etappi on jopa raskaampi kuin edellinen: noin 4 500 korkeusmetriä ja viimeisenä 11,3 km:n nousu 9,2 %:n keskikaltevuudella Plateau de Solaisoniin. Jos kokonaiskilpailu on vielä tiivis tässä vaiheessa, tarjolla on todennäköisesti suuria aikaeroja ennen toista lepopäivää.</p>`},
+
+{n:'lepo', date:'ma 20.7.', label:'LEPOPÄIVÄ 2'},
+
+{n:16, date:'ti 21.7.', start:'Evian-les-Bains', finish:'Thonon-les-Bains', km:26.1, type:'aika-ajo', gain:250,
+ profile:[[0,20],[8,25],[14,30],[20,22],[26.1,18]],
+ climbs:[],
+ sprints:[],
+ desc:`<p>Kolmas viikko avautuu 26,1 km:n yksilöaika-ajolla Geneven­järven eteläpuolella, Evian-les-Bainsin ja Thonon-les-Bainsin välillä. Matka voi ratkaista kokonaiskilpailun järjestystä merkittävästi ennen Alppien loppurypistystä.</p>`},
+
+{n:17, date:'ke 22.7.', start:'Chambéry', finish:'Voiron', km:174.7, type:'tasainen', gain:1200,
+ profile:[[0,25],[60,30],[110,26],[150,22],[174.7,18]],
+ climbs:[],
+ sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
+ desc:`<p>Viimeinen selkeä mahdollisuus sprinttereille ennen Alppeja. Kaksi kirisprinttiä tarjoaa vielä ison potin pisteitä pistepaidan taistoon juuri ennen vuoristoloppua.</p>`},
+
+{n:18, date:'to 23.7.', start:'Voiron', finish:'Orcières-Merlette', km:185.2, type:'vuoristo', gain:3600,
+ profile:[[0,22],[50,28],[90,35],[130,32],[160,45],[178.1,55],[185.2,85]],
+ climbs:[{name:'Alppien esivuoret',km:120,len:9,grad:5,cat:'C2'},{name:'Orcières-Merlette (maali)',km:178.1,len:7.1,grad:6.7,cat:'C1'}],
+ sprints:[{km:65,pts:'25-20-16…'}],
+ desc:`<p>Alppiosuus avautuu suhteellisen maltillisesti: viimeinen nousu Orcières-Merletten hiihtokeskukseen on tasainen 7,1 km / 6,7 %, joka suosii tasaista voimaa polkevia kokonaiskilpailun ajajia.</p>`},
+
+{n:19, date:'pe 24.7.', start:'Gap', finish:'Alpe d’Huez', km:127.9, type:'vuoristo', gain:3300,
+ profile:[[0,25],[35,30],[65,40],[90,35],[114.1,60],[127.9,98]],
+ climbs:[{name:'Alpe d’Huez (klassinen puoli, maali, HC)',km:114.1,len:13.8,grad:8.1,cat:'HC'}],
+ sprints:[{km:40,pts:'25-20-16…'}],
+ desc:`<p>Lyhyt mutta räjähdysherkkä etappi, joka huipentuu Alpe d’Huezin klassiselle nousulle: 21 hiuspinnettä, 13,8 km matkaa ja 8,1 % keskikaltevuus. Kompakti matka suosii aggressiivista, aikaista hyökkäämistä.</p>`},
+
+{n:20, date:'la 25.7.', start:'Bourg d’Oisans', finish:'Alpe d’Huez', km:170.9, type:'vuoristo', gain:5600,
+ profile:[[0,25],[35,45],[55,35],[80,65],[100,50],[125,80],[140,65],[158.7,60],[170.9,98]],
+ climbs:[{name:'Col de la Croix de Fer',km:50,len:22,grad:5.2,cat:'HC'},{name:'Col du Télégraphe',km:90,len:12,grad:7,cat:'C1'},{name:'Col du Galibier',km:112,len:8,grad:6.9,cat:'HC'},{name:'Col de Sarenne → Alpe d’Huez (maali, harvinainen suunta)',km:150,len:20,grad:5,cat:'HC'}],
+ sprints:[{km:35,pts:'25-20-16…'}],
+ desc:`<p>Tourin raskain päivä: 5 600 korkeusmetriä ja neljä suurta nousua — Col de la Croix de Fer, Col du Télégraphe ja Col du Galibier — ennen Alpe d’Huezia toistamiseen, tällä kertaa harvinaisemmalta Col de Sarennen suunnalta. Kokonaiskilpailu voi ratketa lopullisesti tässä etapissa.</p>`},
+
+{n:21, date:'su 26.7.', start:'Thoiry', finish:'Paris', km:133.0, type:'tasainen', gain:900,
+ profile:[[0,20],[50,22],[90,25],[115,35],[125,40],[133,45]],
+ climbs:[{name:'Montmartren mukulakivinousut',km:120,len:1,grad:8,cat:'C4'}],
+ sprints:[{km:45,pts:'70-50-40…'},{km:95,pts:'70-50-40…'}],
+ desc:`<p>Päätösetappi huipentuu perinteisesti Champs-Élysées'lle, mutta viime vuoden tapaan reitti kiertää myös Montmartren jyrkät mukulakivikadut, jotka voivat sotkea puhtaan sprinttiratkaisun. Kaksi kirisprinttiä jakaa vielä viimeiset pisteet pistepaitakamppailuun.</p>`}
+];
+
+/* ---------- HELPERS ---------- */
+function typeColor(t){return TYPE_COLOR[t]||'#888';}
+function fmtKm(k){return (Math.round(k*10)/10).toString().replace('.',',')+' km';}
+
+function catLabel(c){
+  const m={HC:'HC',C1:'1. lk',C2:'2. lk',C3:'3. lk',C4:'4. lk'};
+  return m[c]||c;
+}
+
+/* Build smooth-ish SVG path from keypoints (simple quadratic smoothing) */
+function buildPath(points, totalKm, W, H, padL, padR, padT, padB){
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const xs = points.map(p=>padL + (p[0]/totalKm)*plotW);
+  const ys = points.map(p=>padT + plotH - (p[1]/100)*plotH);
+  let d = `M ${xs[0]},${ys[0]}`;
+  for(let i=1;i<xs.length;i++){
+    const mx = (xs[i-1]+xs[i])/2;
+    d += ` Q ${xs[i-1]},${ys[i-1]} ${mx},${(ys[i-1]+ys[i])/2}`;
+  }
+  d += ` L ${xs[xs.length-1]},${ys[ys.length-1]}`;
+  return {d, xs, ys, plotW, plotH};
+}
+
+function xForKm(km, totalKm, W, padL, padR){
+  const plotW = W - padL - padR;
+  return padL + (km/totalKm)*plotW;
+}
+
+function renderProfile(stage){
+  const W=900,H=260,padL=34,padR=18,padT=18,padB=34;
+  const totalKm = stage.km;
+  const {d, ys, plotH} = buildPath(stage.profile, totalKm, W,H,padL,padR,padT,padB);
+  const baseY = padT+plotH;
+
+  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Etapin ${stage.n} korkeusprofiili">`;
+
+  // grid lines
+  for(let g=0; g<=4; g++){
+    const gy = padT + plotH*g/4;
+    svg += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="#C6CCBC" stroke-width="1" opacity="0.6"/>`;
+  }
+  // km ticks
+  const step = totalKm > 150 ? 50 : (totalKm > 60 ? 20 : (totalKm>25?5:5));
+  for(let k=0;k<=totalKm+0.01;k+=step){
+    const kx = xForKm(k,totalKm,W,padL,padR);
+    svg += `<line x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke="#C6CCBC" stroke-width="1" opacity="0.4"/>`;
+    svg += `<text x="${kx}" y="${H-10}" font-family="JetBrains Mono, monospace" font-size="9" fill="#4C5A50" text-anchor="middle">${Math.round(k)}</text>`;
+  }
+
+  // area fill
+  const areaColor = typeColor(stage.type);
+  svg += `<path d="${d} L ${xForKm(totalKm,totalKm,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="${areaColor}" opacity="0.16"/>`;
+  svg += `<path d="${d}" fill="none" stroke="${areaColor}" stroke-width="2.4" stroke-linejoin="round"/>`;
+
+  // climbs markers
+  (stage.climbs||[]).forEach(c=>{
+    const topKm = c.km;
+    const startKm = Math.max(0, c.km - c.len);
+    const cx1 = xForKm(startKm,totalKm,W,padL,padR);
+    const cx2 = xForKm(topKm,totalKm,W,padL,padR);
+    const color = CAT_COLOR[c.cat]||'#B23B32';
+    svg += `<rect x="${cx1}" y="${padT}" width="${Math.max(2,cx2-cx1)}" height="${plotH}" fill="${color}" opacity="0.16"/>`;
+    svg += `<line x1="${cx2}" y1="${padT}" x2="${cx2}" y2="${baseY}" stroke="${color}" stroke-width="1.6" stroke-dasharray="2,2"/>`;
+    svg += `<circle cx="${cx2}" cy="${padT-4}" r="4.5" fill="${color}"/>`;
+  });
+
+  // sprint markers
+  (stage.sprints||[]).forEach(s=>{
+    const sx = xForKm(s.km,totalKm,W,padL,padR);
+    svg += `<polygon points="${sx-5},${baseY+2} ${sx+5},${baseY+2} ${sx},${padT-2}" fill="none" stroke="#3E7A57" stroke-width="0" opacity="0"/>`;
+    svg += `<circle cx="${sx}" cy="${baseY+6}" r="5" fill="#3E7A57"/>`;
+    svg += `<line x1="${sx}" y1="${padT}" x2="${sx}" y2="${baseY}" stroke="#3E7A57" stroke-width="1.2" stroke-dasharray="1,3" opacity="0.7"/>`;
+  });
+
+  svg += `</svg>`;
+  return svg;
+}
+
+/* ---------- RENDER STAGE LIST ---------- */
+const listEl = document.getElementById('stageList');
+let activeIdx = 0;
+const raceStages = stages.filter(s=>s.n!=='lepo');
+
+stages.forEach((s, idx)=>{
+  const li = document.createElement('li');
+  li.className='stage-item';
+  if(s.n==='lepo'){
+    const div = document.createElement('div');
+    div.className='rest-row';
+    div.textContent = `${s.date} · ${s.label}`;
+    li.appendChild(div);
+    listEl.appendChild(li);
+    return;
+  }
+  const btn = document.createElement('button');
+  btn.className='stage-btn';
+  btn.dataset.idx = idx;
+  btn.innerHTML = `
+    <span class="num">${String(s.n).padStart(2,'0')}</span>
+    <span class="typedot" style="background:${typeColor(s.type)}"></span>
+    <span class="btn-text">
+      <div class="btn-route">${s.start} → ${s.finish}</div>
+      <div class="btn-meta">${s.date} · ${fmtKm(s.km)}</div>
+    </span>`;
+  btn.addEventListener('click', ()=>selectStage(idx));
+  li.appendChild(btn);
+  listEl.appendChild(li);
+});
+
+function selectStage(idx){
+  activeIdx = idx;
+  document.querySelectorAll('.stage-btn').forEach(b=>b.classList.toggle('active', +b.dataset.idx===idx));
+  const activeBtn = document.querySelector(`.stage-btn[data-idx="${idx}"]`);
+  if(activeBtn) activeBtn.scrollIntoView({block:'nearest'});
+  renderPanel(stages[idx]);
+}
+
+/* ---------- RENDER MAIN PANEL ---------- */
+function renderPanel(stage){
+  const panel = document.getElementById('panel');
+  const tc = typeColor(stage.type);
+
+  let climbRows = '';
+  if(stage.climbs && stage.climbs.length){
+    climbRows = stage.climbs.map(c=>`
+      <tr>
+        <td>${c.name}</td>
+        <td><span class="catchip" style="background:${CAT_COLOR[c.cat]||'#B23B32'}">${catLabel(c.cat)}</span></td>
+        <td>${c.len} km</td>
+        <td>${c.grad? c.grad+' %':'—'}</td>
+        <td>~km ${Math.round(c.km)}</td>
+      </tr>`).join('');
+  }
+
+  let sprintRows = '';
+  if(stage.sprints && stage.sprints.length){
+    sprintRows = stage.sprints.map((s,i)=>`
+      <tr>
+        <td><span class="flagchip">Kirisprintti ${stage.sprints.length>1?(i+1):''}</span></td>
+        <td>~km ${Math.round(s.km)}</td>
+        <td>${s.pts} pistettä</td>
+      </tr>`).join('');
+  }
+
+  panel.innerHTML = `
+    <div class="stagehead">
+      <div>
+        <h2>Etappi ${stage.n} — ${stage.start} → ${stage.finish}</h2>
+        <span class="typepill" style="background:${tc}">${TYPE_LABEL_FI[stage.type]}</span>
+      </div>
+      <span class="datebadge">${stage.date}</span>
+    </div>
+
+    <div class="factbar">
+      <div class="fact">Matka<b>${fmtKm(stage.km)}</b></div>
+      <div class="fact">Nousumetrit${stage.gain?`<b>${stage.gain.toLocaleString('fi-FI')} m</b>`:`<b>—</b>`}</div>
+      <div class="fact">Mäkipisteitä<b>${(stage.climbs||[]).length}</b></div>
+      <div class="fact">Kirisprinttejä<b>${(stage.sprints||[]).length}</b></div>
+    </div>
+
+    <div class="chartbox">
+      ${renderProfile(stage)}
+      <div class="legend">
+        <span><span class="leg-swatch" style="background:#B23B32"></span> HC-nousu</span>
+        <span><span class="leg-swatch" style="background:#C9622E"></span> 1. luokka</span>
+        <span><span class="leg-swatch" style="background:#C99A2E"></span> 2. luokka</span>
+        <span><span class="leg-swatch" style="background:#7E8A46"></span> 3. luokka</span>
+        <span><span class="leg-swatch" style="background:#3E7A57;border-radius:50%"></span> Kirisprintti</span>
+      </div>
+      <div class="chart-caption">Havainnollistava profiili — ei GPS-mitattua korkeusdataa. X-akseli km, Y-akseli suhteellinen korkeus.</div>
+    </div>
+
+    <div class="twocol">
+      <div class="block narrative">
+        <h3>Etapin kuvaus</h3>
+        ${stage.desc}
+      </div>
+      <div class="block">
+        <h3>Mäkipisteet (KOM)</h3>
+        ${climbRows ? `<table class="points"><thead><tr><th>Nousu</th><th>Lk</th><th>Pituus</th><th>Kalt.</th><th>Sijainti</th></tr></thead><tbody>${climbRows}</tbody></table>` : `<p class="empty-note">Ei luokiteltuja nousuja tällä etapilla.</p>`}
+        <h3 style="margin-top:16px;">Kirisprintit</h3>
+        ${sprintRows ? `<table class="points"><thead><tr><th>Sprintti</th><th>Sijainti</th><th>Pisteet</th></tr></thead><tbody>${sprintRows}</tbody></table>` : `<p class="empty-note">${stage.type.includes('aika-ajo')?'Aika-ajoetapeilla ei ajeta kirisprinttiä.':'Ei kirisprinttiä.'}</p>`}
+      </div>
+    </div>
+  `;
+}
+
+/* ---------- TOP STATS ---------- */
+document.getElementById('topstats').innerHTML = `
+  <div class="stat">Kokonaismatka<b>3 333 km</b></div>
+  <div class="stat">Nousumetrit yhteensä<b>54 450 m</b></div>
+  <div class="stat">Etappeja<b>21</b></div>
+  <div class="stat">Lepopäiviä<b>2</b></div>
+  <div class="stat">Vuoristomaalia<b>Alpe d’Huez ×2, muut 5</b></div>
+`;
+
+/* ==========================================================
+   TULOKSET — PÄIVITETTÄVÄ DATA
+   ----------------------------------------------------------
+   Täytä jokaisen etapin jälkeen. Muoto per kategoria:
+     rows: [ {pos:1, rider:'SUKUNIMI Etunimi', team:'Joukkue',
+              nat:'SLO', val:'12:34' tai '350 p.' , gap:'+0:12'}, ... ]
+   - Top 10 näytetään oletuksena, loput "Näytä kaikki" -napista.
+   - updated: milloin data on viimeksi päivitetty.
+   - stageWinners: etappivoittajat (winner:'' = ei vielä ajettu).
+   ========================================================== */
+const RESULTS = {
+  updated: null, // esim. 'Päivitetty etapin 1 jälkeen, 4.7.2026'
+  afterStage: 0, // monenko etapin jälkeen tilanne on
+
+  gc:       {rows: []}, // Keltainen paita — kokonaiskilpailu (aika)
+  points:   {rows: []}, // Vihreä paita — pistekilpailu
+  mountains:{rows: []}, // Pallopaita — mäkikilpailu
+  youth:    {rows: []}, // Valkoinen paita — nuorten kilpailu (aika)
+  teams:    {rows: []}, // Joukkuekilpailu (aika)
+
+  stageWinners: [
+    {n:1, route:'Barcelona → Barcelona (TTT)', winner:''},
+    {n:2, route:'Tarragona → Barcelona', winner:''},
+    {n:3, route:'Granollers → Les Angles', winner:''},
+    {n:4, route:'Carcassonne → Foix', winner:''},
+    {n:5, route:'Lannemezan → Pau', winner:''},
+    {n:6, route:'Pau → Gavarnie-Gèdre', winner:''},
+    {n:7, route:'Hagetmau → Bordeaux', winner:''},
+    {n:8, route:'Périgueux → Bergerac', winner:''},
+    {n:9, route:'Malemort → Ussel', winner:''},
+    {n:10, route:'Aurillac → Le Lioran', winner:''},
+    {n:11, route:'Vichy → Nevers', winner:''},
+    {n:12, route:'Magny-Cours → Chalon-sur-Saône', winner:''},
+    {n:13, route:'Dole → Belfort', winner:''},
+    {n:14, route:'Mulhouse → Le Markstein', winner:''},
+    {n:15, route:'Champagnole → Plateau de Solaison', winner:''},
+    {n:16, route:'Evian-les-Bains → Thonon-les-Bains (ITT)', winner:''},
+    {n:17, route:'Chambéry → Voiron', winner:''},
+    {n:18, route:'Voiron → Orcières-Merlette', winner:''},
+    {n:19, route:'Gap → Alpe d’Huez', winner:''},
+    {n:20, route:'Bourg d’Oisans → Alpe d’Huez', winner:''},
+    {n:21, route:'Thoiry → Paris', winner:''}
+  ]
+};
+
+/* Jersey icon (simple maillot silhouette) */
+function jerseySVG(fill, dots){
+  let extra='';
+  if(dots){
+    extra = [[8,9],[14,7],[11,13],[16,12],[7,15],[15,17],[11,18]]
+      .map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="#B23B32"/>`).join('');
+  }
+  return `<svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 3 L9 2 C9.5 3.5 12.5 3.5 13 2 L16 3 L20 7 L17 10 L16 8.5 L16 20 L6 20 L6 8.5 L5 10 L2 7 Z"
+      fill="${fill}" stroke="rgba(0,0,0,0.25)" stroke-width="0.7"/>
+    ${extra}
+  </svg>`;
+}
+
+const CLASSIFICATIONS = [
+  {key:'gc', name:'Kokonaiskilpailu', fr:'Maillot jaune — keltainen paita', jersey:jerseySVG('#F5D33F'), valHead:'Aika/ero'},
+  {key:'points', name:'Pistekilpailu', fr:'Maillot vert — vihreä paita', jersey:jerseySVG('#3E9B4F'), valHead:'Pisteet'},
+  {key:'mountains', name:'Mäkikilpailu', fr:'Maillot à pois — pallopaita', jersey:jerseySVG('#FFFFFF', true), valHead:'Pisteet'},
+  {key:'youth', name:'Nuorten kilpailu', fr:'Maillot blanc — valkoinen paita (alle 26 v)', jersey:jerseySVG('#F4F4F4'), valHead:'Aika/ero'},
+  {key:'teams', name:'Joukkuekilpailu', fr:'Classement par équipes', jersey:jerseySVG('#C99A2E'), valHead:'Aika/ero'}
+];
+
+const expandState = {}; // key -> bool
+
+function renderResults(){
+  const grid = document.getElementById('resultsGrid');
+  const anyData = CLASSIFICATIONS.some(c=>RESULTS[c.key].rows.length>0);
+  let html = '';
+
+  if(!anyData){
+    html += `<div class="status-card">
+      <b>Kilpailu käynnissä — tuloksia ei vielä saatavilla.</b><br>
+      Avausetappi (joukkueaika-ajo Barcelonassa) ajetaan la 4.7.2026: ensimmäinen joukkue lähtee klo 17.05 CET ja viimeinen on maalissa n. klo 19.15 CET (n. 20.15 Suomen aikaa). Kun etappi on ajettu, tämän näkymän taulukot täytetään — kaikki data on tiedoston alussa yhdessä <code>RESULTS</code>-objektissa, jonka voi päivittää etappi kerrallaan (esim. pyytämällä Claudea hakemaan tuoreet tulokset). Viralliset tulokset: letour.fr, procyclingstats.com.
+    </div>`;
+  } else if(RESULTS.updated){
+    html += `<div class="status-card"><b>Tilanne:</b> ${RESULTS.updated} (etapin ${RESULTS.afterStage}/21 jälkeen).</div>`;
+  }
+
+  CLASSIFICATIONS.forEach(c=>{
+    const rows = RESULTS[c.key].rows;
+    const expanded = !!expandState[c.key];
+    const shown = expanded ? rows : rows.slice(0,10);
+
+    let body;
+    if(!rows.length){
+      body = `<div class="empty-cls">Ei tuloksia vielä — täyttyy avausetapin jälkeen.</div>`;
+    } else {
+      body = `<table class="results">
+        <thead><tr><th>#</th><th>${c.key==='teams'?'Joukkue':'Ajaja'}</th><th style="text-align:right">${c.valHead}</th></tr></thead>
+        <tbody>` +
+        shown.map(r=>`
+          <tr class="${r.pos<=3?'podium':''}">
+            <td class="pos">${r.pos}</td>
+            <td class="rider"><b>${r.rider}</b>${r.team?`<span class="tm">${r.team}${r.nat?' · '+r.nat:''}</span>`:''}</td>
+            <td class="val">${r.gap!==undefined && r.pos>1 ? r.gap : r.val}</td>
+          </tr>`).join('') +
+        `</tbody></table>`;
+      if(rows.length>10){
+        body += `<button class="expander" data-cls="${c.key}">
+          ${expanded ? '▲ Näytä vain top 10' : `▼ Näytä kaikki (${rows.length})`}
+        </button>`;
+      }
+    }
+
+    html += `<div class="cls-card">
+      <div class="cls-head">
+        <span class="jersey">${c.jersey}</span>
+        <h3>${c.name}<span class="fr">${c.fr}</span></h3>
+      </div>
+      <div class="cls-body">${body}</div>
+    </div>`;
+  });
+
+  // Stage winners
+  const ridden = RESULTS.stageWinners.filter(s=>s.winner);
+  html += `<div class="cls-card stagewins-card">
+    <div class="cls-head">
+      <span class="jersey">${jerseySVG('#3B6485')}</span>
+      <h3>Etappivoittajat<span class="fr">${ridden.length}/21 etappia ajettu</span></h3>
+    </div>
+    <div class="cls-body">
+      <table class="results">
+        <thead><tr><th>#</th><th>Etappi</th><th style="text-align:right">Voittaja</th></tr></thead>
+        <tbody>` +
+        RESULTS.stageWinners.map(s=>`
+          <tr>
+            <td class="pos">${s.n}</td>
+            <td>${s.route}</td>
+            <td class="val">${s.winner || '—'}</td>
+          </tr>`).join('') +
+      `</tbody></table>
+    </div>
+  </div>`;
+
+  grid.innerHTML = html;
+  grid.querySelectorAll('.expander').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      expandState[btn.dataset.cls] = !expandState[btn.dataset.cls];
+      renderResults();
+    });
+  });
+}
+
+/* ---------- TAB SWITCHING ---------- */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active', x===t));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById('view-'+t.dataset.view).classList.add('active');
+  });
+});
+
+/* ---------- AUTOMAATTINEN DATAN LATAUS ----------
+   Sivu yrittää hakea tuoreet tulokset tiedostosta data/results.json
+   (saman hakemiston alta). Jos tiedostoa ei ole (esim. sivu avattu
+   suoraan levyltä file://-protokollalla), käytetään yllä olevaa
+   RESULTS-objektia sellaisenaan. GitHub Actions -workflow päivittää
+   results.json-tiedoston automaattisesti — ks. README-ohje. */
+async function loadResults(){
+  try{
+    const resp = await fetch('data/results.json', {cache:'no-store'});
+    if(!resp.ok) throw new Error('not found');
+    const data = await resp.json();
+    ['gc','points','mountains','youth','teams'].forEach(k=>{
+      if(data[k] && Array.isArray(data[k].rows)) RESULTS[k].rows = data[k].rows;
+    });
+    if(Array.isArray(data.stageWinners)){
+      data.stageWinners.forEach(w=>{
+        const row = RESULTS.stageWinners.find(s=>s.n===w.n);
+        if(row && w.winner) row.winner = w.winner;
+      });
+    }
+    if(data.updatedText) RESULTS.updated = data.updatedText;
+    if(data.afterStage) RESULTS.afterStage = data.afterStage;
+    renderResults();
+  }catch(e){
+    /* Ei automaattidataa saatavilla — näytetään sisäänrakennettu tila. */
+  }
+}
+
+/* ---------- PÄIVÄN ETAPIN AUTOMAATTINEN VALINTA ----------
+   Kartta: päivämäärä (YYYY-MM-DD, paikallinen aika) -> etapin numero.
+   Lepopäivänä valitaan seuraava etappi; ennen kisaa etappi 1;
+   kisan jälkeen etappi 21. */
+const STAGE_DATES = {
+  '2026-07-04':1,'2026-07-05':2,'2026-07-06':3,'2026-07-07':4,'2026-07-08':5,
+  '2026-07-09':6,'2026-07-10':7,'2026-07-11':8,'2026-07-12':9,
+  '2026-07-13':10, /* lepopäivä -> näytetään seuraava etappi */
+  '2026-07-14':10,'2026-07-15':11,'2026-07-16':12,'2026-07-17':13,
+  '2026-07-18':14,'2026-07-19':15,
+  '2026-07-20':16, /* lepopäivä -> seuraava etappi */
+  '2026-07-21':16,'2026-07-22':17,'2026-07-23':18,'2026-07-24':19,
+  '2026-07-25':20,'2026-07-26':21
+};
+function todayStageIndex(){
+  const d = new Date();
+  const key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  let n;
+  if(key in STAGE_DATES) n = STAGE_DATES[key];
+  else if(key < '2026-07-04') n = 1;
+  else n = 21;
+  const idx = stages.findIndex(s=>s.n===n);
+  return idx >= 0 ? idx : 0;
+}
+
+/* init */
+selectStage(todayStageIndex());
+renderResults();
+loadResults();
+</script>
+</body>
+</html>
