@@ -15,9 +15,13 @@ on:
   workflow_dispatch:
 
 # Älä keskeytä käynnissä olevaa julkaisua; jonota päällekkäiset ajot.
+# cancel-in-progress: false on tässä olennainen — jos uusi ajastettu ajo
+# keskeyttäisi käynnissä olevan deployn (cancel-in-progress: true), Pages
+# palauttaa usein "Deployment failed, try again later". Tämä on myös
+# GitHubin oman Pages-mallipohjan suositusarvo.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 # build ja deploy ovat omat jobinsa (GitHubin oma Pages-mallipohja tekee
 # samoin). Jos deploy-job joskus epäonnistuu ja sen ajaa uudelleen
@@ -88,8 +92,23 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     steps:
+      # GitHub Pagesin taustapalvelu palauttaa ajoittain ohimenevän
+      # "Deployment failed, try again later" -virheen, vaikka artefakti on
+      # kunnossa. Ensimmäinen yritys tehdään continue-on-error-lipulla, jotta
+      # job ei kaadu heti, ja epäonnistuessa yritetään kerran uudelleen pienen
+      # odotuksen jälkeen. Näin ohimenevät virheet korjautuvat ilman käsityötä.
       - name: Julkaise GitHub Pagesiin
         id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Odota ennen uusintayritystä
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 30
+
+      - name: Julkaise uudelleen (uusintayritys)
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
