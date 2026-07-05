@@ -42,9 +42,11 @@ jobs:
           python-version: '3.12'
 
       - name: Asenna riippuvuudet
-        # cloudscraper tarvitaan, koska procyclingstats.com estää tavalliset
-        # requests-kutsut Cloudflaren bottitunnistuksella (403 "Just a moment").
-        run: pip install procyclingstats cloudscraper
+        # letour.fr:n tulossivut scrapataan suoraan requests + selectolax
+        # -yhdistelmällä (procyclingstats.com esti GitHub Actionsin
+        # Cloudflare-bottitunnistuksella, letour.fr ei ole samanlaisen
+        # suojauksen takana).
+        run: pip install requests selectolax
 
       # Jos haku kaatuu (esim. PCS muuttaa sivurakennettaan), julkaisu
       # jatkuu silti — sivu näyttää edellisen onnistuneen datan.
