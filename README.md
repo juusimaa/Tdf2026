@@ -1,67 +1,44 @@
-# Tour de France 2026 — automaattisesti päivittyvä tulossivu
+# Tour de France 2026 — self-updating results page
 
-Kokonaisuus koostuu kolmesta osasta:
+A static results page for the 2026 Tour de France that keeps itself up to
+date, with no manual work required once it's deployed.
 
 ```
-index.html                        # sivu (etapit + tulokset -välilehdet)
-data/results.json                 # automaattisesti päivittyvä tulosdata
-scripts/fetch_results.py          # hakuskripti (procyclingstats-paketti)
-.github/workflows/update-results.yml  # ajastettu GitHub Actions -workflow
+index.html                            # the page (stages + results tabs)
+data/results.json                     # auto-updated results data
+scripts/fetch_results.py              # fetch script (scrapes letour.fr)
+.github/workflows/update-results.yml  # scheduled GitHub Actions workflow
 ```
 
-## Miten automaatio toimii
+## How it works
 
-1. GitHub Actions käynnistää workflow'n ajastetusti (30 min välein klo
-   17–23 Suomen aikaa heinäkuussa, kun etapit päättyvät).
-2. Workflow ajaa `fetch_results.py`-skriptin, joka hakee procyclingstats.com-
-   sivustolta viimeisimmän ajetun etapin jälkeiset tilanteet: kokonaiskilpailu,
-   piste-, mäki-, nuorten- ja joukkuekilpailu sekä etappivoittajat.
-3. Skripti kirjoittaa `data/results.json`-tiedoston. Jos data muuttui,
-   workflow commitoi sen repoon.
-4. GitHub Pages tarjoilee sivun, ja `index.html` lukee JSONin selaimessa
-   (`fetch('data/results.json')`). Sivu näyttää siis aina tuoreimman
-   commitoidun tilanteen ilman käsityötä.
+1. GitHub Actions runs the workflow on a schedule (every 30 minutes,
+   14:00–20:00 UTC in July — stages typically finish in that window — plus
+   a light morning run to catch late corrections).
+2. The workflow runs `fetch_results.py`, which scrapes the official
+   **letour.fr** rankings pages for the latest completed stage: general
+   classification, points, mountains, youth, and team classifications,
+   plus the winner of every stage raced so far.
+3. The script writes `data/results.json`. If the content changed, the
+   workflow commits it back to the repo.
+4. GitHub Pages serves the site, and `index.html` fetches the JSON in the
+   browser (`fetch('data/results.json')`). The page therefore always shows
+   the latest committed standings with zero manual intervention.
 
-Lisäksi sivu valitsee **päivän etapin automaattisesti** avattaessa
-(lepopäivinä seuraavan etapin, kisan jälkeen päätösetapin).
+The page also **auto-selects the stage of the day** when opened (the next
+stage on rest days, the final stage once the race is over).
 
-## Käyttöönotto (kertaluontoinen, ~10 min)
+## Why letour.fr and not procyclingstats.com
 
-1. Luo uusi **julkinen** GitHub-repo (julkisissa repoissa Actions-minuutit
-   ovat rajattomat; yksityisissä free-tierissä 2 000 min/kk).
-2. Kopioi tämän paketin tiedostot repoon ja pushaa `main`-haaraan.
-   Ajastetut workflow't toimivat vain oletushaarassa.
-3. Ota GitHub Pages käyttöön: *Settings → Pages → Source: Deploy from a
-   branch → main / root*.
-4. Testaa heti: *Actions → Päivitä TdF-tulokset → Run workflow*
-   (`workflow_dispatch`). Tarkista että `data/results.json` ilmestyy/päivittyy.
-5. Avaa sivu osoitteessa `https://<käyttäjä>.github.io/<repo>/`.
+The site originally scraped procyclingstats.com via the `procyclingstats`
+Python package. That site sits behind Cloudflare bot protection, which
+blocks plain scraper traffic — and blocks it *harder* from GitHub Actions'
+datacenter IPs than from a home network, to the point where even
+`cloudscraper` (a Cloudflare-bypass library) couldn't reliably get through.
+letour.fr, the official race site, serves its rankings as plain
+server-rendered HTML with no such protection, so `fetch_results.py` scrapes
+it directly with `requests` + `selectolax` instead.
 
-## Hyvä tietää — rajoitukset ja varoitukset
-
-- **Cron ei ole täsmällinen.** GitHub jonottaa ajastetut ajot; 10–30 min
-  viiveet ovat tavallisia ruuhka-aikoina. Siksi ajo on 30 min välein usean
-  tunnin ikkunassa yksittäisen kellonajan sijaan.
-- **60 päivän sääntö:** jos repossa ei ole aktiivisuutta 60 päivään, GitHub
-  kytkee ajastetut workflow't pois päältä (sähköposti-ilmoitus tulee).
-  Tour kestää 3 viikkoa, joten tämä ei ehdi vaikuttaa — mutta jos haluat
-  käyttää samaa pohjaa Vueltaan syyskuussa, tee välissä jokin commit.
-- **procyclingstats on epävirallinen scraper.** PCS:llä ei ole virallista
-  APIa, ja sivurakenteen muuttuessa parsinta voi hajota. Skripti sietää
-  yksittäisten kategorioiden virheet (varoitus lokiin, muu data päivittyy),
-  ja korjaus on yleensä `pip install procyclingstats --upgrade`.
-  Ole kohtuullinen hakutiheydessä — tämä asetus tekee ~15 hakua/vrk,
-  mikä on maltillista.
-- **file://-avaus:** jos avaat index.html:n suoraan levyltä, selain estää
-  fetch-kutsun (CORS), ja sivu näyttää sisäänrakennetun tyhjän tilan.
-  Automaattipäivitys edellyttää siis http(s)-tarjoilua (GitHub Pages,
-  tai paikallisesti `python -m http.server`).
-
-## Vaihtoehtoiset toteutukset (jos et halua GitHubia)
-
-- **Cloudflare Workers + Cron Triggers:** sama logiikka JS:llä, JSON
-  KV-varastoon; ilmainen taso riittää. Enemmän koodattavaa kuin ylläoleva.
-- **Kotipalvelin/NAS + cron:** `fetch_results.py` cronilla ja tiedostot
-  vaikka pCloud-julkisjakoon — toimii, mutta vaatii aina päällä olevan koneen.
-- **Puoliautomaattinen:** aja skripti läppärillä etapin jälkeen ja pushaa —
-  automaation arvo on lähinnä siinä, ettei tätä tarvitse muistaa.
+Each classification is fetched and parsed independently, so a change to
+letour.fr's HTML that breaks one table (e.g. mountains) doesn't take down
+the others — check the Actions log for warnings if a table stops updating.
