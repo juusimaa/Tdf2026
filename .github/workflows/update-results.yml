@@ -17,7 +17,7 @@ on:
 # Älä keskeytä käynnissä olevaa julkaisua; jonota päällekkäiset ajot.
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 # build ja deploy ovat omat jobinsa (GitHubin oma Pages-mallipohja tekee
 # samoin). Jos deploy-job joskus epäonnistuu ja sen ajaa uudelleen
