@@ -14,26 +14,26 @@ on:
   # Manuaalinen käynnistys Actions-välilehdeltä (testaukseen).
   workflow_dispatch:
 
-# Oikeudet: contents:write = botti saa commitoida results.jsonin;
-# pages:write + id-token:write = deploy-pages-action saa julkaista Pagesiin.
-# Nämä yliajavat repon oletusoikeudet, joten erillistä asetusta ei
-# välttämättä tarvita — mutta se on silti hyvä varmistaa (ks. README).
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 # Älä keskeytä käynnissä olevaa julkaisua; jonota päällekkäiset ajot.
 concurrency:
   group: pages
   cancel-in-progress: false
 
+# build ja deploy ovat omat jobinsa (GitHubin oma Pages-mallipohja tekee
+# samoin). Jos deploy-job joskus epäonnistuu ja sen ajaa uudelleen
+# Actions-välilehdeltä ("Re-run failed jobs"), build-job EI ajeta
+# uudelleen, eikä upload-pages-artifact-askel siis suorita toista kertaa.
+# Muuten sama artefakti "github-pages" saattaisi syntyä ajon aikana
+# kahdesti, mikä kaataa deploy-pages-actionin virheeseen "Multiple
+# artifacts named github-pages were unexpectedly found" (tunnettu,
+# vielä korjaamaton ongelma actions/deploy-pages-projektissa, ks.
+# https://github.com/actions/deploy-pages/issues/338).
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # contents:write = botti saa commitoida results.jsonin.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v5
 
@@ -79,6 +79,17 @@ jobs:
         with:
           path: .
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # pages:write + id-token:write = deploy-pages-action saa julkaista Pagesiin.
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Julkaise GitHub Pagesiin
         id: deployment
         uses: actions/deploy-pages@v4
