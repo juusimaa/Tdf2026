@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9ECE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12160F">
 <title>Tour de France 2026 — reitit, profiilit & tulokset</title>
 <meta name="description" content="Interaktiivinen roadbook Tour de France 2026 -kilpailuun: kaikki 21 etappia, reitit, korkeusprofiilit, mäkipisteet (KOM), kirisprintit sekä päivittyvät tulokset. 4.–26.7.2026. · Interactive roadbook for the 2026 Tour de France.">
 <link rel="canonical" href="https://juusimaa.github.io/Tdf2026/">
@@ -30,7 +32,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    color-scheme:light;
+    color-scheme:light dark;
     --paper:#E9ECE4;
     --paper-panel:#F4F6EF;
     --ink:#1E2A22;
@@ -43,6 +45,35 @@
     --blue:#3B6485;
     --grey-road:#8B8F84;
     --shadow: 0 2px 10px rgba(30,42,34,0.08);
+    /* Solid "chip" (datebadge, active language button): dark bg + light text
+       in light mode, inverted in dark mode. */
+    --solid-bg:#1E2A22;
+    --solid-fg:#ffffff;
+    /* Subtle hover overlay — flipped to a light film in dark mode. */
+    --hover:rgba(0,0,0,0.04);
+  }
+
+  /* Dark theme: follows the OS / browser (prefers-color-scheme: dark).
+     Only the palette is overridden; the layout and components reuse these
+     same custom properties. */
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#12160F;
+      --paper-panel:#1B211A;
+      --ink:#E7ECDF;
+      --ink-soft:#9FA99A;
+      --line:#333B31;
+      --gold:#D8AC44;
+      --gold-deep:#E3BE63;
+      --red:#D3574C;
+      --green:#3E7A57; /* kept dark enough that the white-text sprint chip stays AA-legible */
+      --blue:#77ABD2;
+      --grey-road:#8B8F84;
+      --shadow: 0 2px 14px rgba(0,0,0,0.45);
+      --solid-bg:#E7ECDF;
+      --solid-fg:#12160F;
+      --hover:rgba(255,255,255,0.06);
+    }
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -72,7 +103,7 @@
   }
   .langsel button:first-child{border-radius:2px 0 0 2px;}
   .langsel button:last-child{border-radius:0 2px 2px 0;border-left:none;}
-  .langsel button.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .langsel button.active{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--solid-bg);}
   .langsel button:hover:not(.active){color:var(--ink);}
   h1{
     font-family:'Oswald',sans-serif;
@@ -136,6 +167,12 @@
   }
   .rank-select:hover{border-color:var(--grey-road);}
   .rank-select:focus{outline:2px solid var(--gold-deep);outline-offset:1px;}
+  /* Dark mode: swap the baked-in dropdown arrow for a light-stroked one. */
+  @media (prefers-color-scheme: dark){
+    .rank-select{
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='%239FA99A' stroke-width='1.6'/></svg>");
+    }
+  }
   .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
   .results-grid > *{min-width:0;} /* let the cell shrink -> table scrolls inside the card */
   @media (max-width:900px){.results-grid{grid-template-columns:1fr;}}
@@ -177,7 +214,7 @@
     background:transparent;border:1px dashed var(--line);border-radius:2px;
     color:var(--ink-soft);padding:8px;cursor:pointer;
   }
-  .expander:hover{background:rgba(0,0,0,0.04);color:var(--ink);}
+  .expander:hover{background:var(--hover);color:var(--ink);}
   .status-card{
     grid-column:1/-1;
     background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--gold-deep);
@@ -215,7 +252,7 @@
     font-family:'Inter',sans-serif;color:var(--ink);
     border-left:3px solid transparent;
   }
-  button.stage-btn:hover{background:rgba(0,0,0,0.04);}
+  button.stage-btn:hover{background:var(--hover);}
   button.stage-btn.active{
     background:var(--paper);
     border-left:3px solid var(--gold-deep);
@@ -246,7 +283,7 @@
   }
   .datebadge{
     font-family:'JetBrains Mono',monospace;font-size:11.5px;
-    color:#fff;background:var(--ink);padding:5px 9px;border-radius:2px;white-space:nowrap;
+    color:var(--solid-fg);background:var(--solid-bg);padding:5px 9px;border-radius:2px;white-space:nowrap;
   }
   .typepill{
     display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
@@ -263,6 +300,10 @@
   .chartbox{margin:18px 0 6px;}
   .chart-caption{font-size:11px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-top:6px;}
   svg.profile{width:100%;height:auto;display:block;}
+  /* Gridlines/labels styled via CSS (not baked-in attributes) so they follow
+     the theme live, without re-rendering the SVG. */
+  svg.profile .pf-grid{stroke:var(--line);}
+  svg.profile .pf-tick{fill:var(--ink-soft);}
 
   .legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 4px;font-size:11.5px;color:var(--ink-soft);}
   .legend span{display:inline-flex;align-items:center;gap:6px;}
@@ -827,14 +868,14 @@ function renderProfile(stage){
   // grid lines
   for(let g=0; g<=4; g++){
     const gy = padT + plotH*g/4;
-    svg += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="#C6CCBC" stroke-width="1" opacity="0.6"/>`;
+    svg += `<line class="pf-grid" x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke-width="1" opacity="0.6"/>`;
   }
   // km ticks
   const step = totalKm > 150 ? 50 : (totalKm > 60 ? 20 : (totalKm>25?5:5));
   for(let k=0;k<=totalKm+0.01;k+=step){
     const kx = xForKm(k,totalKm,W,padL,padR);
-    svg += `<line x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke="#C6CCBC" stroke-width="1" opacity="0.4"/>`;
-    svg += `<text x="${kx}" y="${H-10}" font-family="JetBrains Mono, monospace" font-size="9" fill="#4C5A50" text-anchor="middle">${Math.round(k)}</text>`;
+    svg += `<line class="pf-grid" x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke-width="1" opacity="0.4"/>`;
+    svg += `<text class="pf-tick" x="${kx}" y="${H-10}" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">${Math.round(k)}</text>`;
   }
 
   // area fill
