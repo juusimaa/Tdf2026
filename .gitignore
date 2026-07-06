@@ -1,2 +1,6 @@
 .DS_Store
 .claude/settings.json
+
+# Python
+__pycache__/
+*.py[cod]
