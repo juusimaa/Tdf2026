@@ -1,41 +1,41 @@
-name: Päivitä tulokset ja julkaise
+name: Update results and publish
 
 on:
   schedule:
-    # GitHub Actions käyttää AINA UTC-aikaa. Etapit päättyvät tyypillisesti
-    # n. klo 14–18 UTC. Ajetaan 30 min välein klo 14–20 UTC heinäkuussa
-    # = 17–23 Suomen aikaa (kesäaika UTC+3).
+    # GitHub Actions ALWAYS uses UTC. Stages typically finish around
+    # 14:00–18:00 UTC. Run every 30 min from 14:00–20:00 UTC in July
+    # = 17:00–23:00 Finnish time (summer time, UTC+3).
     - cron: '*/30 14-20 * 7 *'
-    # Kevyt varmistusajo aamulla myöhään kirjattujen korjausten varalta.
+    # Light safety run in the morning in case of late-recorded corrections.
     - cron: '15 6 * 7 *'
-  # Redeploy myös aina kun mainiin työnnetään (esim. käsin muokattu index.html).
+  # Also redeploy whenever something is pushed to main (e.g. a hand-edited index.html).
   push:
     branches: [main]
-  # Manuaalinen käynnistys Actions-välilehdeltä (testaukseen).
+  # Manual trigger from the Actions tab (for testing).
   workflow_dispatch:
 
-# Älä keskeytä käynnissä olevaa julkaisua; jonota päällekkäiset ajot.
-# cancel-in-progress: false on tässä olennainen — jos uusi ajastettu ajo
-# keskeyttäisi käynnissä olevan deployn (cancel-in-progress: true), Pages
-# palauttaa usein "Deployment failed, try again later". Tämä on myös
-# GitHubin oman Pages-mallipohjan suositusarvo.
+# Don't interrupt a running deployment; queue overlapping runs.
+# cancel-in-progress: false is essential here — if a new scheduled run
+# interrupted an in-progress deploy (cancel-in-progress: true), Pages
+# often returns "Deployment failed, try again later". This is also the
+# recommended value in GitHub's own Pages template.
 concurrency:
   group: pages
   cancel-in-progress: false
 
-# build ja deploy ovat omat jobinsa (GitHubin oma Pages-mallipohja tekee
-# samoin). Jos deploy-job joskus epäonnistuu ja sen ajaa uudelleen
-# Actions-välilehdeltä ("Re-run failed jobs"), build-job EI ajeta
-# uudelleen, eikä upload-pages-artifact-askel siis suorita toista kertaa.
-# Muuten sama artefakti "github-pages" saattaisi syntyä ajon aikana
-# kahdesti, mikä kaataa deploy-pages-actionin virheeseen "Multiple
-# artifacts named github-pages were unexpectedly found" (tunnettu,
-# vielä korjaamaton ongelma actions/deploy-pages-projektissa, ks.
+# build and deploy are separate jobs (GitHub's own Pages template does the
+# same). If the deploy job ever fails and is re-run from the Actions tab
+# ("Re-run failed jobs"), the build job does NOT run again, so the
+# upload-pages-artifact step does not run a second time. Otherwise the same
+# "github-pages" artifact could be created twice during a run, which makes
+# the deploy-pages action fail with "Multiple artifacts named github-pages
+# were unexpectedly found" (a known, still-unfixed issue in the
+# actions/deploy-pages project, see
 # https://github.com/actions/deploy-pages/issues/338).
 jobs:
   build:
     runs-on: ubuntu-latest
-    # contents:write = botti saa commitoida results.jsonin.
+    # contents:write = the bot may commit results.json.
     permissions:
       contents: write
     steps:
@@ -45,43 +45,43 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Asenna riippuvuudet
-        # letour.fr:n tulossivut scrapataan suoraan requests + selectolax
-        # -yhdistelmällä (procyclingstats.com esti GitHub Actionsin
-        # Cloudflare-bottitunnistuksella, letour.fr ei ole samanlaisen
-        # suojauksen takana).
+      - name: Install dependencies
+        # letour.fr's result pages are scraped directly with requests +
+        # selectolax (procyclingstats.com blocked GitHub Actions with
+        # Cloudflare bot detection; letour.fr is not behind the same
+        # protection).
         run: pip install requests selectolax
 
-      # Jos haku kaatuu (esim. PCS muuttaa sivurakennettaan), julkaisu
-      # jatkuu silti — sivu näyttää edellisen onnistuneen datan.
-      - name: Hae tulokset
+      # If the fetch crashes (e.g. the site structure changes), publishing
+      # still continues — the page shows the last successful data.
+      - name: Fetch results
         run: python scripts/fetch_results.py
         continue-on-error: true
 
-      # Säilö tulokset repoon (persistointi + historia). GITHUB_TOKENin
-      # tekemä commit EI laukaise workflow'ta uudelleen -> ei silmukkaa.
-      - name: Commitoi jos muuttunut
+      # Persist results into the repo (persistence + history). A commit made
+      # by GITHUB_TOKEN does NOT trigger the workflow again -> no loop.
+      - name: Commit if changed
         run: |
           git config user.name "tdf-bot"
           git config user.email "actions@users.noreply.github.com"
           if [ ! -f data/results.json ]; then
-            echo "Ei tuloksia vielä saatavilla, ei committoitavaa."
+            echo "No results available yet, nothing to commit."
             exit 0
           fi
           git add data/results.json
           if git diff --cached --quiet; then
-            echo "Ei muutoksia."
+            echo "No changes."
           else
-            git commit -m "Tulokset päivitetty $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "Results updated $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
 
       - uses: actions/configure-pages@v6
 
-      # Paketoi koko sivu (index.html + data/) Pages-artefaktiksi.
-      # upload-pages-artifact@v5 + deploy-pages@v5 kuuluvat yhteen (uusi
-      # artefaktimuoto) ja käyttävät Node 24:ää — poistavat Node 20
-      # -vanhentumisvaroituksen.
+      # Package the whole site (index.html + data/) as a Pages artifact.
+      # upload-pages-artifact@v5 + deploy-pages@v5 belong together (new
+      # artifact format) and use Node 24 — removing the Node 20 deprecation
+      # warning.
       - uses: actions/upload-pages-artifact@v5
         with:
           path: .
@@ -89,7 +89,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # pages:write + id-token:write = deploy-pages-action saa julkaista Pagesiin.
+    # pages:write + id-token:write = the deploy-pages action may publish to Pages.
     permissions:
       pages: write
       id-token: write
@@ -97,21 +97,21 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     steps:
-      # GitHub Pagesin taustapalvelu palauttaa ajoittain ohimenevän
-      # "Deployment failed, try again later" -virheen, vaikka artefakti on
-      # kunnossa. Ensimmäinen yritys tehdään continue-on-error-lipulla, jotta
-      # job ei kaadu heti, ja epäonnistuessa yritetään kerran uudelleen pienen
-      # odotuksen jälkeen. Näin ohimenevät virheet korjautuvat ilman käsityötä.
-      - name: Julkaise GitHub Pagesiin
+      # The GitHub Pages backend occasionally returns a transient
+      # "Deployment failed, try again later" error even when the artifact is
+      # fine. The first attempt runs with continue-on-error so the job
+      # doesn't fail immediately, and on failure it retries once after a
+      # short wait. This way transient errors recover without manual work.
+      - name: Publish to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
         continue-on-error: true
 
-      - name: Odota ennen uusintayritystä
+      - name: Wait before retry
         if: steps.deployment.outcome == 'failure'
         run: sleep 30
 
-      - name: Julkaise uudelleen (uusintayritys)
+      - name: Publish again (retry)
         id: deployment_retry
         if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v5

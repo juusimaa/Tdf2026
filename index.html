@@ -8,8 +8,8 @@
 <meta name="description" content="Interaktiivinen roadbook Tour de France 2026 -kilpailuun: kaikki 21 etappia, reitit, korkeusprofiilit, mäkipisteet (KOM), kirisprintit sekä päivittyvät tulokset. 4.–26.7.2026. · Interactive roadbook for the 2026 Tour de France.">
 <link rel="canonical" href="https://juusimaa.github.io/Tdf2026/">
 
-<!-- Some-jaot (Open Graph / Twitter). Ei kuvaa toistaiseksi — kortti näkyy
-     tekstimuodossa. Jos haluat kuvan, lisää PNG ja og:image-tagi. -->
+<!-- Social sharing (Open Graph / Twitter). No image for now — the card
+     renders as text. To add an image, add a PNG and an og:image tag. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tour de France 2026">
 <meta property="og:title" content="Tour de France 2026 — reitit, profiilit & tulokset">
@@ -21,8 +21,8 @@
 <meta name="twitter:title" content="Tour de France 2026 — reitit, profiilit & tulokset">
 <meta name="twitter:description" content="Interaktiivinen roadbook: 21 etappia, korkeusprofiilit, mäkipisteet, kirisprintit ja päivittyvät tulokset.">
 
-<!-- Favicon: on-teema-vaakuna (kultainen korkeusprofiili + punainen KOM-piste)
-     SVG data-URI:na, ei erillistä binääritiedostoa. -->
+<!-- Favicon: on-theme emblem (gold elevation profile + red KOM dot)
+     as an SVG data-URI, no separate binary file. -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -137,7 +137,7 @@
   .rank-select:hover{border-color:var(--grey-road);}
   .rank-select:focus{outline:2px solid var(--gold-deep);outline-offset:1px;}
   .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
-  .results-grid > *{min-width:0;} /* salli solun kutistua -> taulukko rullaa kortin sisällä */
+  .results-grid > *{min-width:0;} /* let the cell shrink -> table scrolls inside the card */
   @media (max-width:900px){.results-grid{grid-template-columns:1fr;}}
   .cls-card{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;overflow:hidden;min-width:0;}
   .cls-head{
@@ -771,9 +771,9 @@ function fmtDate(iso){
   return new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', opts).format(d);
 }
 function fmtUpdated(iso){
-  // data/results.json:n "updated"-kenttä on ISO-aikaleima; muotoillaan
-  // aina Suomen ajassa (kisan virallinen aikavyöhyke), mutta kielen
-  // mukaisella tekstillä, koska tiedosto itse ei ole kaksikielinen.
+  // The "updated" field in data/results.json is an ISO timestamp; it is
+  // always formatted in Finnish time (the race's official time zone), but
+  // with language-appropriate text, since the file itself is not bilingual.
   const d = new Date(iso);
   const formatted = new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', {
     day:'numeric', month:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit',
@@ -783,9 +783,9 @@ function fmtUpdated(iso){
 }
 
 function fmtStartLocal(stage){
-  // startCEST on TV-lähetyksen alkamisaika Keski-Euroopan kesäajassa
-  // (HBO Max / TNT Sports / Eurosport -aikataulun mukaan). Muunnetaan
-  // katsojan omaan aikavyöhykkeeseen selaimen oletusasetuksella.
+  // startCEST is the TV broadcast start time in Central European Summer
+  // Time (per the HBO Max / TNT Sports / Eurosport schedule). Converted to
+  // the viewer's own time zone using the browser default.
   if(!stage.startCEST) return null;
   const d = new Date(`${stage.dateIso}T${stage.startCEST}:00+02:00`);
   return new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', {
@@ -995,28 +995,28 @@ function renderTopStats(){
 }
 
 /* ==========================================================
-   TULOKSET — PÄIVITETTÄVÄ DATA
+   RESULTS — UPDATABLE DATA
    ----------------------------------------------------------
-   Täytä jokaisen etapin jälkeen. Muoto per kategoria:
-     rows: [ {pos:1, rider:'SUKUNIMI Etunimi', team:'Joukkue',
-              nat:'SLO', val:'12:34' tai '350 p.' , gap:'+0:12'}, ... ]
-   - Top 10 näytetään oletuksena, loput "Näytä kaikki" -napista.
-   - updated: milloin data on viimeksi päivitetty.
-   - stageWinners: etappivoittajat (winner:'' = ei vielä ajettu).
+   Fill in after each stage. Format per category:
+     rows: [ {pos:1, rider:'SURNAME Firstname', team:'Team',
+              nat:'SLO', val:'12:34' or '350 pt' , gap:'+0:12'}, ... ]
+   - Top 10 shown by default, the rest via the "Show all" button.
+   - updated: when the data was last updated.
+   - stageWinners: stage winners (winner:'' = not raced yet).
    ========================================================== */
 const RESULTS = {
-  updated: null, // esim. 'Päivitetty etapin 1 jälkeen, 4.7.2026'
-  afterStage: 0, // monenko etapin jälkeen tilanne on
+  updated: null, // e.g. 'Updated after stage 1, 4 Jul 2026'
+  afterStage: 0, // how many stages the standings are after
 
-  gc:       {rows: []}, // Keltainen paita — kokonaiskilpailu (aika)
-  points:   {rows: []}, // Vihreä paita — pistekilpailu
-  mountains:{rows: []}, // Pallopaita — mäkikilpailu
-  youth:    {rows: []}, // Valkoinen paita — nuorten kilpailu (aika)
-  teams:    {rows: []}, // Joukkuekilpailu (aika)
+  gc:       {rows: []}, // Yellow jersey — general classification (time)
+  points:   {rows: []}, // Green jersey — points classification
+  mountains:{rows: []}, // Polka-dot jersey — mountains classification
+  youth:    {rows: []}, // White jersey — young rider classification (time)
+  teams:    {rows: []}, // Team classification (time)
 
-  // Etappikohtaiset tulokset: { "1": {rows:[...]}, ... }. Kunkin ajetun
-  // etapin maaliintuloJÄRJESTYS (aika + ero voittajaan). Täytetään
-  // automaattisesti fetch_results.py:llä; tyhjä ennen kisaa.
+  // Per-stage results: { "1": {rows:[...]}, ... }. Each raced stage's
+  // finishing order (time + gap to the winner). Populated automatically
+  // by fetch_results.py; empty before the race.
   stageResults: {},
 
   stageWinners: [
@@ -1068,9 +1068,9 @@ const CLASS_JERSEY = {
 const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 
 const expandState = {}; // key -> bool
-let rankView = 'general'; // 'general' tai valitun etapin numero
+let rankView = 'general'; // 'general' or the selected stage number
 
-/* Yksittäisen tulosrivin HTML (jaettu luokitusten ja etappitulosten kesken) */
+/* HTML for a single result row (shared by classifications and stage results) */
 function resultRowHTML(r){
   return `
     <tr class="${r.pos<=3?'podium':''}">
@@ -1080,7 +1080,7 @@ function resultRowHTML(r){
     </tr>`;
 }
 
-/* Etapit jotka voi valita pudotusvalikosta: joko tulosrivit tai voittaja tiedossa */
+/* Stages selectable in the dropdown: those with result rows or a known winner */
 function riddenStages(){
   return RESULTS.stageWinners.filter(s=>{
     const sr = RESULTS.stageResults[s.n];
@@ -1088,7 +1088,7 @@ function riddenStages(){
   });
 }
 
-/* Rakentaa pudotusvalikon (kokonaistilanne + ajetut etapit) ja säilyttää valinnan */
+/* Builds the dropdown (general standings + raced stages) and keeps the selection */
 function renderRankSelect(){
   const sel = document.getElementById('rankStageSelect');
   const ridden = riddenStages();
@@ -1109,7 +1109,7 @@ function renderResults(){
   else renderStageResult(rankView);
 }
 
-/* Kokonaistilanne: viisi paitaa + etappivoittajat */
+/* General standings: five jerseys + stage winners */
 function renderGeneralRankings(){
   const grid = document.getElementById('resultsGrid');
   const anyData = CLASS_KEYS.some(k=>RESULTS[k].rows.length>0);
@@ -1179,7 +1179,7 @@ function renderGeneralRankings(){
   bindExpanders(grid);
 }
 
-/* Yksittäisen etapin maaliintulojärjestys */
+/* A single stage's finishing order */
 function renderStageResult(n){
   const grid = document.getElementById('resultsGrid');
   const sr = RESULTS.stageResults[n];
@@ -1275,7 +1275,7 @@ document.getElementById('rankStageSelect').addEventListener('change', e=>{
   renderResults();
 });
 
-/* ---------- TAB SWITCHING (WAI-ARIA tabs -malli) ---------- */
+/* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
 const tabButtons = Array.from(document.querySelectorAll('.tab'));
 
 function activateTab(tab, setFocus){
@@ -1302,12 +1302,12 @@ tabButtons.forEach((tab, i)=>{
   });
 });
 
-/* ---------- AUTOMAATTINEN DATAN LATAUS ----------
-   Sivu yrittää hakea tuoreet tulokset tiedostosta data/results.json
-   (saman hakemiston alta). Jos tiedostoa ei ole (esim. sivu avattu
-   suoraan levyltä file://-protokollalla), käytetään yllä olevaa
-   RESULTS-objektia sellaisenaan. GitHub Actions -workflow päivittää
-   results.json-tiedoston automaattisesti — ks. README-ohje. */
+/* ---------- AUTOMATIC DATA LOADING ----------
+   The page tries to fetch fresh results from data/results.json (in the
+   same directory). If the file is missing (e.g. the page was opened
+   directly from disk via the file:// protocol), the RESULTS object above
+   is used as-is. A GitHub Actions workflow updates results.json
+   automatically — see the README. */
 async function loadResults(){
   try{
     const resp = await fetch('data/results.json', {cache:'no-store'});
@@ -1329,21 +1329,21 @@ async function loadResults(){
     if(data.afterStage) RESULTS.afterStage = data.afterStage;
     renderResults();
   }catch(e){
-    /* Ei automaattidataa saatavilla — näytetään sisäänrakennettu tila. */
+    /* No automatic data available — show the built-in state. */
   }
 }
 
-/* ---------- PÄIVÄN ETAPIN AUTOMAATTINEN VALINTA ----------
-   Kartta: päivämäärä (YYYY-MM-DD, paikallinen aika) -> etapin numero.
-   Lepopäivänä valitaan seuraava etappi; ennen kisaa etappi 1;
-   kisan jälkeen etappi 21. */
+/* ---------- AUTOMATIC SELECTION OF TODAY'S STAGE ----------
+   Map: date (YYYY-MM-DD, local time) -> stage number. On a rest day the
+   next stage is selected; before the race, stage 1; after the race,
+   stage 21. */
 const STAGE_DATES = {
   '2026-07-04':1,'2026-07-05':2,'2026-07-06':3,'2026-07-07':4,'2026-07-08':5,
   '2026-07-09':6,'2026-07-10':7,'2026-07-11':8,'2026-07-12':9,
-  '2026-07-13':10, /* lepopäivä -> näytetään seuraava etappi */
+  '2026-07-13':10, /* rest day -> show the next stage */
   '2026-07-14':10,'2026-07-15':11,'2026-07-16':12,'2026-07-17':13,
   '2026-07-18':14,'2026-07-19':15,
-  '2026-07-20':16, /* lepopäivä -> seuraava etappi */
+  '2026-07-20':16, /* rest day -> next stage */
   '2026-07-21':16,'2026-07-22':17,'2026-07-23':18,'2026-07-24':19,
   '2026-07-25':20,'2026-07-26':21
 };

@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 """
-Tour de France 2026 — tulosten automaattihaku.
+Tour de France 2026 — automatic results fetch.
 
-Hakee letour.fr:n (virallinen kisasivusto) tulossivuilta viimeisimmän
-ajetun etapin jälkeiset tilanteet kaikissa kategorioissa ja kirjoittaa ne
-tiedostoon data/results.json, jonka index.html lukee automaattisesti.
+Fetches the standings in all categories after the most recently raced
+stage from letour.fr (the official race site) and writes them to
+data/results.json, which index.html reads automatically.
 
-Käyttö:  python scripts/fetch_results.py
-Riippuvuudet:  pip install requests selectolax
+Usage:  python scripts/fetch_results.py
+Dependencies:  pip install requests selectolax
 
-Huom: käytimme aiemmin procyclingstats-pakettia, mutta procyclingstats.com
-on Cloudflaren bottisuojauksen takana eikä GitHub Actionsin ajoympäristöstä
-pääse sinne läpi edes cloudscraperilla. letour.fr ei ole samanlaisen
-suojauksen takana ja tarjoaa tulostaulukot suoraan HTML:nä, joten
-scrapataan sieltä.
+Note: we previously used the procyclingstats package, but procyclingstats.com
+is behind Cloudflare bot protection and cannot be reached from the GitHub
+Actions runner even with cloudscraper. letour.fr is not behind the same
+protection and serves the result tables directly as HTML, so we scrape it.
 """
 
 import json
@@ -37,7 +36,7 @@ HEADERS = {
     "Accept-Language": "en-US,en;q=0.9",
 }
 
-# RESULTS-avain -> (letour-luokan koodi, arvon tyyppi, onko rivi joukkue eikä ajaja)
+# RESULTS key -> (letour class code, value type, whether the row is a team not a rider)
 CLASS_CONFIG = {
     "gc":        {"code": "itg", "kind": "time",   "team_only": False},
     "points":    {"code": "ipg", "kind": "points", "team_only": False},
@@ -58,10 +57,10 @@ def fetch(url: str) -> str:
 
 def ajax_stacks(html: str):
     """
-    letour.fr upottaa sivun HTML:ään data-ajax-stack-attribuutteja, jotka
-    sisältävät JSON-sanakirjan { luokkakoodi: ajax-url }. Sivulla on
-    tyypillisesti kaksi: yksi yleisluokituksille (itg/ipg/img/ijg/etg) ja
-    yksi etappiluokitukselle (esim. ete/ite).
+    letour.fr embeds data-ajax-stack attributes in the page HTML, each
+    containing a JSON dict { class_code: ajax_url }. A page typically has
+    two: one for the general classifications (itg/ipg/img/ijg/etg) and one
+    for the stage classification (e.g. ete/ite).
     """
     stacks = []
     for m in re.finditer(r"data-ajax-stack\s*=\s*(\{.*?\})", html):
@@ -74,7 +73,7 @@ def ajax_stacks(html: str):
 
 
 def parse_table(html: str, team_only: bool, kind: str):
-    """Muuntaa letour.fr:n rankingTables-HTML-fragmentin front-endin rivimuotoon."""
+    """Converts a letour.fr rankingTables HTML fragment into front-end row form."""
     tree = HTMLParser(html)
     rows = []
     for tr in tree.css("tbody tr.rankingTables__row"):
@@ -112,9 +111,9 @@ def parse_table(html: str, team_only: bool, kind: str):
 
 def stage_table_rows(stage_no: int):
     """
-    Hakee etapin oman tulostaulukon (maaliintulojärjestys aikoineen).
-    Sama ajax-stack-mekaniikka kuin yleisluokituksissa, mutta stacks[1]
-    sisältää etappikohtaisen luokituksen (ete/ite) URL:n.
+    Fetches a stage's own result table (finishing order with times).
+    Same ajax-stack mechanics as the general classifications, but stacks[1]
+    holds the stage-specific classification (ete/ite) URL.
     """
     html = fetch(f"{BASE}/en/rankings/stage-{stage_no}")
     stacks = ajax_stacks(html)
@@ -122,9 +121,9 @@ def stage_table_rows(stage_no: int):
         return []
     stage_dict = stacks[1]
 
-    # 'ite' = yksilön etappitulos (normaali etappi). Jos se on tyhjä — kuten
-    # joukkueaika-ajossa (TTT) — käytetään 'ete' = joukkueiden etappitulosta.
-    # Muut koodit kokeillaan varmuuden vuoksi viimeisenä.
+    # 'ite' = individual stage result (normal stage). If it is empty — as in
+    # a team time trial (TTT) — use 'ete' = the teams' stage result. Any other
+    # codes are tried last as a fallback.
     attempts = []
     if "ite" in stage_dict:
         attempts.append(("ite", False))
@@ -149,7 +148,7 @@ def stage_table_rows(stage_no: int):
 
 
 def stage_winner(stage_no: int) -> str:
-    """Hakee etapin voittajan (ajaja, tai joukkueaika-ajossa joukkue)."""
+    """Fetches the stage winner (rider, or team in a team time trial)."""
     rows = stage_table_rows(stage_no)
     return rows[0]["rider"] if rows else ""
 
@@ -158,17 +157,17 @@ def main() -> int:
     try:
         main_html = fetch(f"{BASE}/en/rankings")
     except Exception as e:
-        print(f"Tilanteen haku epäonnistui: {e}")
+        print(f"Failed to fetch standings: {e}")
         return 0
 
     stacks = ajax_stacks(main_html)
     if not stacks or "itg" not in stacks[0]:
-        print("Kisa ei ole vielä alkanut, tai tuloksia ei ole vielä julkaistu.")
+        print("The race has not started yet, or no results have been published yet.")
         return 0
 
     general = stacks[0]
     stage_no = int(general["itg"].split("/")[4])
-    print(f"Uusimmat tulokset: etappi {stage_no}")
+    print(f"Latest results: stage {stage_no}")
 
     prev = {}
     if OUT.exists():
@@ -187,23 +186,22 @@ def main() -> int:
                 table_html = fetch(BASE + url)
                 rows = parse_table(table_html, cfg["team_only"], cfg["kind"])
             except Exception as e:
-                print(f"  varoitus: {key} haku epäonnistui: {e}")
+                print(f"  warning: fetching {key} failed: {e}")
         data[key] = {"rows": rows}
 
-    # letour.fr vaihtaa /en/rankings-sivun "uusin etappi" -osoittimen jo
-    # etapin alkaessa, ennen kuin kyseisen etapin tulostaulukot on
-    # julkaistu — jolloin stage_no kasvaisi mutta taulukot olisivat vielä
-    # tyhjiä. Jos GC-taulukossa (aina ensimmäisenä valmistuva) ei ole
-    # yhtään riviä, kyseisen etapin tuloksia ei siis vielä ole: säilytetään
-    # edellinen tunnettu hyvä data koskemattomana ja yritetään uudelleen
-    # seuraavalla ajolla.
+    # letour.fr flips the "latest stage" pointer on /en/rankings already when
+    # a stage starts, before that stage's result tables are published — so
+    # stage_no would increase while the tables are still empty. If the GC
+    # table (always the first to be finalized) has no rows, that stage's
+    # results are not out yet: keep the previous known-good data untouched
+    # and try again on the next run.
     if not data["gc"]["rows"]:
-        print(f"Etapin {stage_no} tuloksia ei ole vielä julkaistu — ei päivitetä.")
+        print(f"Results for stage {stage_no} are not published yet — not updating.")
         return 0
 
-    # Aiemmin haetut etappitulokset ja -voittajat kelpaavat sellaisenaan;
-    # haetaan vain ne joita ei vielä tiedetä, jotta jokaisella ajolla ei
-    # tehdä turhia pyyntöjä kaikille jo ajetuille etapeille.
+    # Previously fetched stage results and winners are reused as-is; only the
+    # unknown ones are fetched, so we don't make pointless requests for all
+    # already-raced stages on every run.
     previous_winners = {
         w["n"]: w["winner"] for w in prev.get("stageWinners", []) if w.get("winner")
     }
@@ -218,7 +216,7 @@ def main() -> int:
             try:
                 rows = stage_table_rows(n)
             except Exception as e:
-                print(f"  etappi {n} tulokset: {e}")
+                print(f"  stage {n} results: {e}")
                 rows = []
         if rows:
             data["stageResults"][key] = {"rows": rows}
@@ -226,9 +224,9 @@ def main() -> int:
                 winner = rows[0].get("rider", "")
         data["stageWinners"].append({"n": n, "winner": winner})
 
-    # "updated"/"updatedText" päivitetään vain kun jokin muu kenttä oikeasti
-    # muuttui — muuten workflow'n "commitoi jos muuttunut" -tarkistus
-    # commitoisi joka ajolla pelkän aikaleiman takia.
+    # "updated"/"updatedText" are refreshed only when some other field
+    # actually changed — otherwise the workflow's "commit if changed" check
+    # would commit on every run just because of the timestamp.
     prev_content = {k: v for k, v in prev.items() if k not in ("updated", "updatedText")}
     if prev_content == data and prev.get("updated"):
         data["updated"] = prev["updated"]
@@ -241,7 +239,7 @@ def main() -> int:
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"Kirjoitettu {OUT} (GC-rivejä: {len(data['gc']['rows'])})")
+    print(f"Wrote {OUT} (GC rows: {len(data['gc']['rows'])})")
     return 0
 
 
