@@ -38,6 +38,11 @@ jobs:
     # contents:write = the bot may commit results.json.
     permissions:
       contents: write
+    # Expose the afterStage value that is about to be published so the deploy
+    # job can confirm the live site really serves it (see "Verify published
+    # results" below).
+    outputs:
+      expected_after_stage: ${{ steps.expected.outputs.after_stage }}
     steps:
       - uses: actions/checkout@v5
 
@@ -74,6 +79,21 @@ jobs:
           else
             git commit -m "Results updated $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
+          fi
+
+      # Read the afterStage from the exact file about to be uploaded, so the
+      # deploy job can verify the live site matches. Empty when there is no
+      # data yet (fetch failed / before the race) -> verification is skipped.
+      - name: Record expected afterStage
+        id: expected
+        run: |
+          if [ -f data/results.json ]; then
+            v=$(python3 -c 'import json; print(json.load(open("data/results.json")).get("afterStage",""))')
+            echo "after_stage=$v" >> "$GITHUB_OUTPUT"
+            echo "Expecting the live site to serve afterStage=$v"
+          else
+            echo "after_stage=" >> "$GITHUB_OUTPUT"
+            echo "No data/results.json yet; verification will be skipped."
           fi
 
       - uses: actions/configure-pages@v6
@@ -115,3 +135,35 @@ jobs:
         id: deployment_retry
         if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v5
+
+      # A deploy-pages step can report "success" while the live site keeps
+      # serving the previous build (observed 2026-07-06: stage 3 was committed
+      # and the deploy went green, but juusimaa.github.io still served the
+      # stage-2 artifact, so the stage dropdown was missing stage 3). This step
+      # fetches the freshly published data/results.json and fails the run
+      # loudly if afterStage does not match what was uploaded. Cache-busting
+      # query + no-cache headers avoid reading a stale CDN copy; it polls for a
+      # few minutes to allow propagation.
+      - name: Verify published results
+        if: needs.build.outputs.expected_after_stage != ''
+        env:
+          EXPECTED: ${{ needs.build.outputs.expected_after_stage }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
+        run: |
+          url="${PAGE_URL}data/results.json"
+          echo "Verifying $url serves afterStage=$EXPECTED"
+          live=""
+          for i in $(seq 1 10); do
+            live=$(curl -s -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
+              "${url}?cb=$(date +%s)-$i" \
+              | python3 -c 'import json,sys; print(json.load(sys.stdin).get("afterStage",""))' \
+              2>/dev/null || echo "")
+            echo "Attempt $i/10: live afterStage=${live:-<none>}"
+            if [ "$live" = "$EXPECTED" ]; then
+              echo "✅ Live site serves afterStage=$EXPECTED"
+              exit 0
+            fi
+            sleep 30
+          done
+          echo "::error::Live site still serves afterStage='${live}' but expected '${EXPECTED}'. The Pages deployment did not update the published content."
+          exit 1
