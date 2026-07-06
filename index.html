@@ -19,6 +19,7 @@
 <meta property="og:url" content="https://juusimaa.github.io/Tdf2026/">
 <meta property="og:locale" content="fi_FI">
 <meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tour de France 2026 — reitit, profiilit & tulokset">
 <meta name="twitter:description" content="Interaktiivinen roadbook: 21 etappia, korkeusprofiilit, mäkipisteet, kirisprintit ja päivittyvät tulokset.">
@@ -102,7 +103,8 @@
     padding:4px 10px;cursor:pointer;color:var(--ink-soft);
   }
   .langsel button:first-child{border-radius:2px 0 0 2px;}
-  .langsel button:last-child{border-radius:0 2px 2px 0;border-left:none;}
+  .langsel button:last-child{border-radius:0 2px 2px 0;}
+  .langsel button:not(:first-child){border-left:none;}
   .langsel button.active{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--solid-bg);}
   .langsel button:hover:not(.active){color:var(--ink);}
   h1{
@@ -383,6 +385,7 @@
       <div class="eyebrow" id="eyebrow"></div>
       <div class="langsel" id="langSel" role="group" aria-label="Kieli / Language">
         <button data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+        <button data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
         <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
       </div>
     </div>
@@ -545,17 +548,76 @@ const STRINGS = {
       youth:{name:'Young rider classification', fr:'Maillot blanc — white jersey (under 26)', valHead:'Time/Gap'},
       teams:{name:'Team classification', fr:'Classement par équipes', valHead:'Time/Gap'}
     }
+  },
+  fr: {
+    eyebrow: 'Roadbook · 113e Tour de France · 4–26 juil. 2026',
+    subDesc: 'Un tour d’horizon interactif des 21 étapes : parcours, profils d’altitude illustratifs, principaux points de côte (KOM) ainsi que l’emplacement et le barème de points des sprints intermédiaires. La course s’élance de Barcelone le samedi 4 juillet et s’achève à Paris le dimanche 26 juillet 2026.',
+    tabStages: 'Étapes & profils',
+    tabResults: 'Classements',
+    stageListHeader: '21 étapes',
+    statDistance: 'Distance totale', statDistanceVal: '3 333 km',
+    statGain: 'Dénivelé total', statGainVal: '54 450 m',
+    statStages: 'Étapes', statStagesVal: '21',
+    statRestDays: 'Jours de repos', statRestDaysVal: '2',
+    statMountainFinish: 'Arrivées en altitude', statMountainFinishVal: 'Alpe d’Huez ×2, autres 5',
+    stagePrefix: 'Étape',
+    profileAria: n => `Profil d’altitude de l’étape ${n}`,
+    factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Points de côte', factSprints: 'Sprints intermédiaires', factStart: 'Début de diffusion',
+    startNote: 'Heure estimée de début de la diffusion TV (HBO Max / TNT Sports / Eurosport), convertie dans votre propre fuseau horaire — d’après la grille CEST, susceptible d’évoluer à l’approche de l’étape.',
+    legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendSprint: 'Sprint intermédiaire',
+    chartCaption: 'Profil illustratif — pas de données d’altitude mesurées par GPS. Axe X : km, axe Y : altitude relative.',
+    descHeader: 'Description de l’étape', climbsHeader: 'Points de côte (KOM)', sprintsHeader: 'Sprints intermédiaires',
+    climbTableHead: ['Côte','Cat.','Longueur','Pente','Emplacement'],
+    sprintTableHead: ['Sprint','Emplacement','Points'],
+    noClimbs: 'Aucune côte classée sur cette étape.',
+    noSprintTT: 'Pas de sprint intermédiaire sur les étapes contre-la-montre.',
+    noSprint: 'Pas de sprint intermédiaire.',
+    sprintChip: 'Sprint intermédiaire', sprintPtsSuffix: 'points',
+    restDayLabel: 'JOUR DE REPOS',
+    resultsEmpty: 'Course en cours — aucun résultat disponible pour l’instant.<br>L’étape d’ouverture (contre-la-montre par équipes à Barcelone) se dispute le samedi 4 juillet 2026 : la première équipe s’élance à 17 h 05 CET et la dernière est attendue à l’arrivée vers 19 h 15 CET. Une fois l’étape courue, les tableaux de cette vue se remplissent — toutes les données figurent dans un seul objet <code>RESULTS</code> en haut du fichier, qui peut être mis à jour étape par étape (par exemple en demandant à Claude de récupérer les derniers résultats). Résultats officiels : letour.fr, procyclingstats.com.',
+    resultsStatus: (updatedIso, after) => `<b>Situation :</b> ${fmtUpdated(updatedIso)} (après l’étape ${after}/21).`,
+    classEmpty: 'Pas encore de résultats — se remplira après l’étape d’ouverture.',
+    colHash: '#', colRider: 'Coureur', colTeam: 'Équipe',
+    expandLess: '▲ Afficher seulement le top 10', expandMore: n => `▼ Tout afficher (${n})`,
+    stageWinnersTitle: 'Vainqueurs d’étape', stageWinnersFr: n => `${n}/21 étapes courues`,
+    colStage: 'Étape', colWinner: 'Vainqueur',
+    rankShowLabel: 'Afficher',
+    rankGeneral: 'Classement général — tous les maillots',
+    rankStageOpt: (n,route) => `Étape ${n} · ${route}`,
+    stageResultTitle: n => `Résultat de l’étape ${n}`,
+    stageResultValHead: 'Temps / écart',
+    stageResultEmpty: 'Les résultats de cette étape ne sont pas encore disponibles.',
+    disclaimerLabel: 'Remarque sur les profils d’altitude :',
+    disclaimer: 'Les courbes SVG sont des esquisses illustratives construites à partir du type d’étape, du dénivelé total et des ascensions connues (emplacement, longueur, pente moyenne) — ce ne sont pas des données d’altitude mesurées par GPS. L’ASO n’a pas encore publié les points kilométriques exacts des sprints intermédiaires sur l’ensemble du parcours ; le nombre de sprints indiqué par étape (1 ou 2) et le barème de points reposent sur des sources confirmées, mais l’emplacement des sprints sur le parcours est une estimation.',
+    madeWith: 'Réalisé avec Claude',
+    sourcesTitle: 'Sources (vérifiées auprès d’au moins 2 sources indépendantes pour les faits clés) :',
+    sourcesBody: 'Parcours, étapes, dates, dénivelé : cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Barème de points et doubles sprints intermédiaires : inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>Heures de début de diffusion TV (CEST) : tntsports.co.uk et procyclinguk.com d’après les grilles de diffusion de juillet 2026 (HBO Max / TNT Sports / Eurosport) — ce sont des heures de début de diffusion, pas nécessairement le départ officiel de la course, et elles peuvent encore changer.<br>Résultats (onglet Classements) : sources officielles letour.fr et procyclingstats.com — horaires de départ de l’étape d’ouverture confirmés via cyclingnews.com et idlprocycling.com (première équipe à 17 h 05 CET, dernière à l’arrivée vers 19 h 15 CET le 4 juillet 2026).',
+    typeLabels: {flat:'Plat', hilly:'Vallonné / accidenté', mountain:'Étape de montagne', ttt:'Contre-la-montre par équipes', itt:'Contre-la-montre individuel'},
+    catLabels: {HC:'HC', C1:'1re cat.', C2:'2e cat.', C3:'3e cat.', C4:'4e cat.'},
+    classifications: {
+      gc:{name:'Classement général', fr:'Maillot jaune', valHead:'Temps/écart'},
+      points:{name:'Classement par points', fr:'Maillot vert', valHead:'Points'},
+      mountains:{name:'Classement de la montagne', fr:'Maillot à pois', valHead:'Points'},
+      youth:{name:'Classement du meilleur jeune', fr:'Maillot blanc (moins de 26 ans)', valHead:'Temps/écart'},
+      teams:{name:'Classement par équipes', fr:'Classement par équipes', valHead:'Temps/écart'}
+    }
   }
 };
 
 function detectLang(){
   const saved = localStorage.getItem(LANG_KEY);
-  if(saved==='fi' || saved==='en') return saved;
+  if(saved==='fi' || saved==='en' || saved==='fr') return saved;
   const nav = (navigator.language||'en').toLowerCase();
-  return nav.startsWith('fi') ? 'fi' : 'en';
+  if(nav.startsWith('fi')) return 'fi';
+  if(nav.startsWith('fr')) return 'fr';
+  return 'en';
 }
 let lang = detectLang();
-function t(key){ return STRINGS[lang][key]; }
+// Fall back to English for any key a language is missing, so nothing renders blank.
+function t(key){
+  const v = STRINGS[lang][key];
+  return v !== undefined ? v : STRINGS.en[key];
+}
 
 /* ---------- DATA ---------- */
 // climb categories -> color
@@ -570,47 +632,51 @@ const stages = [
 {n:1, dateIso:'2026-07-04', start:'Barcelona', finish:'Barcelona', km:19.6, type:'ttt', gain:200, startCEST:'16:30',
  profile:[[0,18],[10,17],[15,20],[17.9,55],[18.7,75],[19.6,90]],
  climbs:[
-   {name:{fi:'Montjuïc (välinousu)',en:'Montjuïc (intermediate climb)'},km:17.9,len:1.1,grad:null,cat:'C4'},
-   {name:{fi:'Maalinousu',en:'Finish climb'},km:18.8,len:0.8,grad:7,cat:'C4'}
+   {name:{fi:'Montjuïc (välinousu)',en:'Montjuïc (intermediate climb)',fr:'Montjuïc (ascension intermédiaire)'},km:17.9,len:1.1,grad:null,cat:'C4'},
+   {name:{fi:'Maalinousu',en:'Finish climb',fr:'Montée d’arrivée'},km:18.8,len:0.8,grad:7,cat:'C4'}
  ],
  sprints:[],
  desc:{
   fi:`<p>Avausetappi on joukkueaika-ajo Barcelonan kaduilla — uudella sääntömallilla, jossa jokaisen ajajan oma aika lasketaan (ei enää neljännen ajajan aika, kuten perinteisesti). Ensimmäiset 15 km ovat tasaisia, minkä jälkeen nousee Montjuïcin kukkulan 1,1 km:n nousu ja lopuksi vielä jyrkempi 800 metrin pätkä (n. 7 %) aivan maalissa.</p><p>Etappi antaa parhaiten valmistautuneille joukkueille ja puncheur-tyyppisille ajajille mahdollisuuden nappia ensimmäinen keltainen paita.</p>`,
-  en:`<p>The opening stage is a team time trial through the streets of Barcelona — under the new rule format where each rider's own time counts (no longer the fourth rider's time, as was traditional). The first 15 km are flat, followed by Montjuïc hill's 1.1 km climb and finally an even steeper 800 m section (approx. 7%) right at the finish.</p><p>The stage gives the best-prepared teams and puncheur-type riders a chance to grab the first yellow jersey.</p>`
+  en:`<p>The opening stage is a team time trial through the streets of Barcelona — under the new rule format where each rider's own time counts (no longer the fourth rider's time, as was traditional). The first 15 km are flat, followed by Montjuïc hill's 1.1 km climb and finally an even steeper 800 m section (approx. 7%) right at the finish.</p><p>The stage gives the best-prepared teams and puncheur-type riders a chance to grab the first yellow jersey.</p>`,
+  fr:`<p>L’étape d’ouverture est un contre-la-montre par équipes dans les rues de Barcelone — sous le nouveau format de règlement où le temps propre de chaque coureur compte (et non plus celui du quatrième coureur, comme le voulait la tradition). Les 15 premiers kilomètres sont plats, suivis de l’ascension de 1,1 km de la colline de Montjuïc puis d’un secteur encore plus raide de 800 m (env. 7 %) juste avant l’arrivée.</p><p>L’étape offre aux équipes les mieux préparées et aux puncheurs l’occasion de s’emparer du premier maillot jaune.</p>`
  }},
 
 {n:2, dateIso:'2026-07-05', start:'Tarragona', finish:'Barcelona', km:168.5, type:'hilly', gain:2500, startCEST:'13:30',
  profile:[[0,15],[60,18],[110,25],[138,35],[150,45],[158,70],[163,60],[166,80],[168.5,88]],
  climbs:[
-   {name:{fi:'Montjuïc-kierros (3×)',en:'Montjuïc circuit (3×)'},km:140,len:3,grad:null,cat:'C3'},
-   {name:{fi:'Montjuïc, viim. nousu 1',en:'Montjuïc, final climb 1'},km:163,len:1.6,grad:9.3,cat:'C3'},
-   {name:{fi:'Montjuïc, maalinousu',en:'Montjuïc, finish climb'},km:167.8,len:0.7,grad:7,cat:'C4'}
+   {name:{fi:'Montjuïc-kierros (3×)',en:'Montjuïc circuit (3×)',fr:'Circuit de Montjuïc (3×)'},km:140,len:3,grad:null,cat:'C3'},
+   {name:{fi:'Montjuïc, viim. nousu 1',en:'Montjuïc, final climb 1',fr:'Montjuïc, dernière ascension 1'},km:163,len:1.6,grad:9.3,cat:'C3'},
+   {name:{fi:'Montjuïc, maalinousu',en:'Montjuïc, finish climb',fr:'Montjuïc, montée d’arrivée'},km:167.8,len:0.7,grad:7,cat:'C4'}
  ],
  sprints:[{km:80,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Toinen etappi tarjoaa puncheureille mahdollisuuden keltaiseen paitaan. Suurin osa noususta ajoittuu loppupuoliskolle: viimeisillä 30 km:llä ajetaan kolme kierrosta Montjuïcin ympäri, yhteensä kuusi nousua. Viimeiset viisi kilometriä sisältävät kaksi terävää rampia (1,6 km / 9,3 % ja 700 m / 7 %), joista jälkimmäisen huipulle etappi päättyy.</p>`,
-  en:`<p>The second stage gives puncheurs a chance at the yellow jersey. Most of the climbing comes in the second half: the final 30 km include three laps around Montjuïc, six climbs in total. The last five kilometres feature two sharp ramps (1.6 km / 9.3% and 700 m / 7%), and the stage finishes at the top of the latter.</p>`
+  en:`<p>The second stage gives puncheurs a chance at the yellow jersey. Most of the climbing comes in the second half: the final 30 km include three laps around Montjuïc, six climbs in total. The last five kilometres feature two sharp ramps (1.6 km / 9.3% and 700 m / 7%), and the stage finishes at the top of the latter.</p>`,
+  fr:`<p>La deuxième étape offre aux puncheurs une chance de maillot jaune. L’essentiel du dénivelé se situe dans la seconde moitié : les 30 derniers kilomètres comprennent trois tours autour de Montjuïc, soit six ascensions au total. Les cinq derniers kilomètres présentent deux rampes sèches (1,6 km / 9,3 % et 700 m / 7 %), l’étape s’achevant au sommet de la seconde.</p>`
  }},
 
 {n:3, dateIso:'2026-07-06', start:'Granollers', finish:'Les Angles', km:195.9, type:'mountain', gain:3850, startCEST:'11:45',
  profile:[[0,15],[70,20],[120,30],[150,45],[170,50],[185,65],[192,78],[195.9,90]],
  climbs:[
-   {name:{fi:'1. luokan nousu (Pyreneet)',en:'Category 1 climb (Pyrenees)'},km:150,len:10,grad:7,cat:'C1'},
-   {name:{fi:'Les Angles / Pla del Mir (maali)',en:'Les Angles / Pla del Mir (finish)'},km:189.4,len:6.5,grad:6.5,cat:'C3'}
+   {name:{fi:'1. luokan nousu (Pyreneet)',en:'Category 1 climb (Pyrenees)',fr:'Ascension de 1re catégorie (Pyrénées)'},km:150,len:10,grad:7,cat:'C1'},
+   {name:{fi:'Les Angles / Pla del Mir (maali)',en:'Les Angles / Pla del Mir (finish)',fr:'Les Angles / Pla del Mir (arrivée)'},km:189.4,len:6.5,grad:6.5,cat:'C3'}
  ],
  sprints:[{km:75,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Etappi vie karavaanin Espanjasta Ranskan puolelle Pyreneiden yli, lähes 4 000 korkeusmetrin saattelemana. Reitillä ajetaan yhden luokan ykkösnousu, ennen kuin etappi päättyy ylämäkeen Les Angles -hiihtokeskukseen. Nousu ei ole erityisen raskas (6,5 % keskimäärin), mikä voi suosia sekä puncheureita että karkaamaan lähtevää ryhmää — myös kokonaiskilpailun ajajat voivat osallistua kamppailuun.</p>`,
-  en:`<p>The stage takes the caravan from Spain across the Pyrenees into France, with almost 4,000 metres of elevation gain along the way. The route includes one category-1 climb before finishing uphill at the Les Angles ski resort. The climb isn't especially hard (6.5% average), which could suit both puncheurs and a breakaway group — GC riders may also join the fight.</p>`
+  en:`<p>The stage takes the caravan from Spain across the Pyrenees into France, with almost 4,000 metres of elevation gain along the way. The route includes one category-1 climb before finishing uphill at the Les Angles ski resort. The climb isn't especially hard (6.5% average), which could suit both puncheurs and a breakaway group — GC riders may also join the fight.</p>`,
+  fr:`<p>L’étape emmène la caravane d’Espagne vers la France en franchissant les Pyrénées, avec près de 4 000 m de dénivelé en chemin. Le parcours comprend une ascension de 1re catégorie avant une arrivée en montée à la station des Angles. La montée n’est pas particulièrement difficile (6,5 % de moyenne), ce qui pourrait convenir aussi bien aux puncheurs qu’à un groupe d’échappée — les leaders du général peuvent aussi entrer dans la bataille.</p>`
  }},
 
 {n:4, dateIso:'2026-07-07', start:'Carcassonne', finish:'Foix', km:181.9, type:'hilly', gain:2800, startCEST:'13:00',
  profile:[[0,20],[40,30],[80,42],[110,55],[140,60],[147,72],[165,40],[181.9,35]],
- climbs:[{name:{fi:'Pyreneiden esivuoret',en:'Pyrenean foothills'},km:140,len:8,grad:5,cat:'C2'}],
+ climbs:[{name:{fi:'Pyreneiden esivuoret',en:'Pyrenean foothills',fr:'Contreforts des Pyrénées'},km:140,len:8,grad:5,cat:'C2'}],
  sprints:[{km:95,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Reitti kulkee Pyreneiden alarinteiden aaltoilevassa maastossa kohti Foix'ta, jonne on aiemmin noussut maaliin useita irtiottoryhmiä (mm. Hugo Houle 2022). Viimeiset noin 35 km ovat pääosin laskevia, mikä suosii karanneita ajajia loppukirin sijaan.</p>`,
-  en:`<p>The route rolls through the undulating foothills of the Pyrenees toward Foix, where breakaway groups have reached the finish several times before (including Hugo Houle in 2022). The final roughly 35 km are mostly downhill, favouring escapees over a bunch sprint.</p>`
+  en:`<p>The route rolls through the undulating foothills of the Pyrenees toward Foix, where breakaway groups have reached the finish several times before (including Hugo Houle in 2022). The final roughly 35 km are mostly downhill, favouring escapees over a bunch sprint.</p>`,
+  fr:`<p>Le parcours ondule dans les contreforts des Pyrénées en direction de Foix, où des groupes d’échappée ont déjà rejoint l’arrivée à plusieurs reprises (dont Hugo Houle en 2022). Les 35 derniers kilomètres environ sont majoritairement en descente, favorisant les échappés plutôt qu’un sprint massif.</p>`
  }},
 
 {n:5, dateIso:'2026-07-08', start:'Lannemezan', finish:'Pau', km:158.3, type:'flat', gain:600, startCEST:'13:30',
@@ -619,7 +685,8 @@ const stages = [
  sprints:[{km:55,pts:'70-50-40…'},{km:120,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Pääosin tasainen etappi Lannemezanista Paun kaupunkiin — yksi Tourin useimmin vierailluista maaleista. Etappi kuuluu seitsemään "tasaiseen" etappiin, joilla ajetaan kaksi kirisprinttiä ja joissa etapin voittaja saa 70 pistettä pisteluokituksessa.</p>`,
-  en:`<p>A mostly flat stage from Lannemezan to the town of Pau — one of the Tour's most-visited finish towns. The stage is one of seven "flat" stages featuring two intermediate sprints, where the stage winner earns 70 points in the points classification.</p>`
+  en:`<p>A mostly flat stage from Lannemezan to the town of Pau — one of the Tour's most-visited finish towns. The stage is one of seven "flat" stages featuring two intermediate sprints, where the stage winner earns 70 points in the points classification.</p>`,
+  fr:`<p>Une étape essentiellement plate de Lannemezan vers la ville de Pau — l’une des villes-arrivées les plus visitées du Tour. L’étape fait partie des sept étapes « plates » comportant deux sprints intermédiaires, où le vainqueur d’étape marque 70 points au classement par points.</p>`
  }},
 
 {n:6, dateIso:'2026-07-09', start:'Pau', finish:'Gavarnie-Gèdre', km:186.2, type:'mountain', gain:4400, startCEST:'12:00',
@@ -627,12 +694,13 @@ const stages = [
  climbs:[
    {name:{fi:'Col d’Aspin',en:'Col d’Aspin'},km:113,len:12,grad:6.5,cat:'C1'},
    {name:{fi:'Col du Tourmalet',en:'Col du Tourmalet'},km:150,len:17,grad:7.4,cat:'HC'},
-   {name:{fi:'Cirque de Gavarnie (maali)',en:'Cirque de Gavarnie (finish)'},km:180,len:6,grad:5,cat:'C2'}
+   {name:{fi:'Cirque de Gavarnie (maali)',en:'Cirque de Gavarnie (finish)',fr:'Cirque de Gavarnie (arrivée)'},km:180,len:6,grad:5,cat:'C2'}
  ],
  sprints:[{km:45,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Ensimmäinen suuri vuoristoetappi ja samalla GC-ajajien ensimmäinen todellinen koetinkivi. Reitillä nousevat sekä Col d’Aspin (12 km / 6,5 %) että legendaarinen Col du Tourmalet, ennen laskua kohti maalia Cirque de Gavarnie'lla — paikassa, jossa Tour ei ole koskaan aiemmin päättynyt.</p>`,
-  en:`<p>The first big mountain stage, and the first real test for the GC riders. The route climbs both the Col d’Aspin (12 km / 6.5%) and the legendary Col du Tourmalet, before a descent toward the finish at Cirque de Gavarnie — a place the Tour has never finished at before.</p>`
+  en:`<p>The first big mountain stage, and the first real test for the GC riders. The route climbs both the Col d’Aspin (12 km / 6.5%) and the legendary Col du Tourmalet, before a descent toward the finish at Cirque de Gavarnie — a place the Tour has never finished at before.</p>`,
+  fr:`<p>La première grande étape de montagne, et le premier vrai test pour les leaders du général. Le parcours gravit le Col d’Aspin (12 km / 6,5 %) et le légendaire Col du Tourmalet, avant une descente vers l’arrivée au Cirque de Gavarnie — un lieu où le Tour ne s’est encore jamais achevé.</p>`
  }},
 
 {n:7, dateIso:'2026-07-10', start:'Hagetmau', finish:'Bordeaux', km:175.1, type:'flat', gain:500, startCEST:'13:00',
@@ -641,7 +709,8 @@ const stages = [
  sprints:[{km:55,pts:'70-50-40…'},{km:125,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Odotettu sprintterien etappi Bordeaux'hon — kaupunkiin, jossa Tour vierailee 83. kertaa. Jasper Philipsen voitti täällä viimeksi vuonna 2023. Kaksi kirisprinttiä tarjoaa lisäpisteitä pistepaidan tavoittelijoille.</p>`,
-  en:`<p>An expected sprinters' stage into Bordeaux — a city the Tour is visiting for the 83rd time. Jasper Philipsen won here most recently in 2023. Two intermediate sprints offer extra points for green jersey contenders.</p>`
+  en:`<p>An expected sprinters' stage into Bordeaux — a city the Tour is visiting for the 83rd time. Jasper Philipsen won here most recently in 2023. Two intermediate sprints offer extra points for green jersey contenders.</p>`,
+  fr:`<p>Une étape attendue pour les sprinteurs vers Bordeaux — une ville que le Tour visite pour la 83e fois. Jasper Philipsen s’y est imposé pour la dernière fois en 2023. Deux sprints intermédiaires offrent des points supplémentaires aux prétendants au maillot vert.</p>`
  }},
 
 {n:8, dateIso:'2026-07-11', start:'Périgueux', finish:'Bergerac', km:180.4, type:'flat', gain:900, startCEST:'13:00',
@@ -650,16 +719,18 @@ const stages = [
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Koko etappi kulkee Dordognen maakunnan halki Périgueux'sta Bergeraciin — jälleen sprintterien joukkueiden hallitsema päivä ja toinen kahden kirisprintin etappi.</p>`,
-  en:`<p>The whole stage runs through the Dordogne region from Périgueux to Bergerac — another day dominated by the sprinters' teams, and another stage with two intermediate sprints.</p>`
+  en:`<p>The whole stage runs through the Dordogne region from Périgueux to Bergerac — another day dominated by the sprinters' teams, and another stage with two intermediate sprints.</p>`,
+  fr:`<p>Toute l’étape traverse la région de la Dordogne, de Périgueux à Bergerac — une nouvelle journée dominée par les équipes de sprinteurs, et une nouvelle étape à deux sprints intermédiaires.</p>`
  }},
 
 {n:9, dateIso:'2026-07-12', start:'Malemort', finish:'Ussel', km:185.5, type:'hilly', gain:2400, startCEST:'13:00',
  profile:[[0,20],[60,25],[100,35],[140,45],[170,55],[185.5,50]],
- climbs:[{name:{fi:'Corrèzen kukkulat',en:'Hills of Corrèze'},km:150,len:6,grad:5,cat:'C3'}],
+ climbs:[{name:{fi:'Corrèzen kukkulat',en:'Hills of Corrèze',fr:'Collines de la Corrèze'},km:150,len:6,grad:5,cat:'C3'}],
  sprints:[{km:80,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Reitti ylittää Corrèzen departementin aaltoilevaa maastoa pitkin, päättyen Usseliin. Ennen ensimmäistä lepopäivää ajettava etappi voi houkutella karkulaisia, jos sprinttijoukkueet eivät hallitse tahtia.</p>`,
-  en:`<p>The route crosses the undulating terrain of the Corrèze department, finishing in Ussel. Raced right before the first rest day, this stage could tempt breakaway riders if the sprinters' teams don't control the pace.</p>`
+  en:`<p>The route crosses the undulating terrain of the Corrèze department, finishing in Ussel. Raced right before the first rest day, this stage could tempt breakaway riders if the sprinters' teams don't control the pace.</p>`,
+  fr:`<p>Le parcours traverse le terrain vallonné du département de la Corrèze, pour s’achever à Ussel. Disputée juste avant le premier jour de repos, cette étape pourrait tenter les échappés si les équipes de sprinteurs ne contrôlent pas l’allure.</p>`
  }},
 
 {n:'lepo', dateIso:'2026-07-13', labelKey:'rest1'},
@@ -673,7 +744,8 @@ const stages = [
  sprints:[{km:50,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Bastillipäivän etappi vie Massif Centralin läpi raskaan nousuprofiilin saattelemana. Maali Le Lioranissa on tuttu — täällä Jonas Vingegaard voitti niukasti Tadej Pogačarilta kaksi vuotta aiemmin. Loppusuora on identtinen vuoden 2024 kanssa: Puy Maryn Pas de Peyrol -nousu ja Col du Pertus ennen laskua maaliin.</p>`,
-  en:`<p>The Bastille Day stage crosses the Massif Central with a demanding climbing profile. The finish at Le Lioran is a familiar one — Jonas Vingegaard narrowly beat Tadej Pogačar here two years earlier. The finale is identical to 2024: the Puy Mary climb via Pas de Peyrol and the Col du Pertus before the descent to the finish.</p>`
+  en:`<p>The Bastille Day stage crosses the Massif Central with a demanding climbing profile. The finish at Le Lioran is a familiar one — Jonas Vingegaard narrowly beat Tadej Pogačar here two years earlier. The finale is identical to 2024: the Puy Mary climb via Pas de Peyrol and the Col du Pertus before the descent to the finish.</p>`,
+  fr:`<p>L’étape du 14 Juillet traverse le Massif central avec un profil d’ascensions exigeant. L’arrivée au Lioran est connue — Jonas Vingegaard y avait battu de justesse Tadej Pogačar deux ans plus tôt. Le final est identique à 2024 : la montée du Puy Mary par le Pas de Peyrol et le Col du Pertus avant la descente vers l’arrivée.</p>`
  }},
 
 {n:11, dateIso:'2026-07-15', start:'Vichy', finish:'Nevers', km:161.3, type:'flat', gain:700, startCEST:'13:30',
@@ -682,7 +754,8 @@ const stages = [
  sprints:[{km:55,pts:'70-50-40…'},{km:115,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Vichystä Nevers'iin ajettava etappi on todennäköinen sprinttietappi ja tarjoaa jälleen kaksi kirisprinttiä pistepaidan tavoittelijoille.</p>`,
-  en:`<p>The stage from Vichy to Nevers is a likely sprint stage and again offers two intermediate sprints for green jersey contenders.</p>`
+  en:`<p>The stage from Vichy to Nevers is a likely sprint stage and again offers two intermediate sprints for green jersey contenders.</p>`,
+  fr:`<p>L’étape de Vichy à Nevers est une probable étape de sprint et propose de nouveau deux sprints intermédiaires pour les prétendants au maillot vert.</p>`
  }},
 
 {n:12, dateIso:'2026-07-16', start:'Magny-Cours', finish:'Chalon-sur-Saône', km:179.1, type:'flat', gain:800, startCEST:'13:00',
@@ -691,42 +764,46 @@ const stages = [
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Lähtö Magny-Coursin autourheilurata-alueelta kohti Chalon-sur-Saônea — jälleen todennäköinen ryhmäspurttien etappi kahdella kirisprintillä.</p>`,
-  en:`<p>The start is at the Magny-Cours motor racing circuit, heading toward Chalon-sur-Saône — again a likely bunch-sprint stage with two intermediate sprints.</p>`
+  en:`<p>The start is at the Magny-Cours motor racing circuit, heading toward Chalon-sur-Saône — again a likely bunch-sprint stage with two intermediate sprints.</p>`,
+  fr:`<p>Départ du circuit automobile de Magny-Cours en direction de Chalon-sur-Saône — de nouveau une probable étape de sprint massif avec deux sprints intermédiaires.</p>`
  }},
 
 {n:13, dateIso:'2026-07-17', start:'Dole', finish:'Belfort', km:205.8, type:'hilly', gain:2600, startCEST:'12:45',
  profile:[[0,20],[50,25],[100,30],[150,28],[190,40],[205.8,45]],
- climbs:[{name:{fi:'Vogeesien esivuoret',en:'Vosges foothills'},km:180,len:6,grad:5,cat:'C3'}],
+ climbs:[{name:{fi:'Vogeesien esivuoret',en:'Vosges foothills',fr:'Contreforts des Vosges'},km:180,len:6,grad:5,cat:'C3'}],
  sprints:[{km:90,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Etapin 2026 pisin päivä (205,8 km) vie kohti Sveitsin ja Saksan rajaseutuja. Aaltoileva maasto valmistelee jalkoja tulevaan kahden peräkkäisen vuoristopäivän rykelmään.</p>`,
-  en:`<p>The longest day of the 2026 race (205.8 km) heads toward the Swiss and German border regions. The rolling terrain prepares legs for the back-to-back mountain days that follow.</p>`
+  en:`<p>The longest day of the 2026 race (205.8 km) heads toward the Swiss and German border regions. The rolling terrain prepares legs for the back-to-back mountain days that follow.</p>`,
+  fr:`<p>La plus longue journée de l’édition 2026 (205,8 km) file vers les régions frontalières de la Suisse et de l’Allemagne. Le terrain vallonné prépare les jambes au bloc de deux étapes de montagne consécutives qui suit.</p>`
  }},
 
 {n:14, dateIso:'2026-07-18', start:'Mulhouse', finish:'Le Markstein', km:155.3, type:'mountain', gain:3800, startCEST:'12:45',
  profile:[[0,20],[30,30],[55,45],[75,40],[95,60],[115,50],[135,70],[144,60],[155.3,88]],
  climbs:[
-   {name:{fi:'1. luokan nousu I',en:'Category 1 climb I'},km:60,len:9,grad:7,cat:'C1'},
-   {name:{fi:'1. luokan nousu II',en:'Category 1 climb II'},km:95,len:8,grad:7,cat:'C1'},
+   {name:{fi:'1. luokan nousu I',en:'Category 1 climb I',fr:'Ascension de 1re catégorie I'},km:60,len:9,grad:7,cat:'C1'},
+   {name:{fi:'1. luokan nousu II',en:'Category 1 climb II',fr:'Ascension de 1re catégorie II'},km:95,len:8,grad:7,cat:'C1'},
    {name:{fi:'Col du Haag',en:'Col du Haag'},km:130,len:11.2,grad:7.3,cat:'C1'},
-   {name:{fi:'Le Markstein (maali)',en:'Le Markstein (finish)'},km:150,len:5,grad:6,cat:'C1'}
+   {name:{fi:'Le Markstein (maali)',en:'Le Markstein (finish)',fr:'Le Markstein (arrivée)'},km:150,len:5,grad:6,cat:'C1'}
  ],
  sprints:[{km:40,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Vogeesien vuoret nousevat esiin täydellä voimalla: neljä ykkösluokan nousua mahtuu vain 155 km:n matkalle. Raskain pala on Col du Haag (11,2 km / 7,3 %), ennen viimeistä nousua Le Marksteinin hiihtokeskukseen.</p>`,
-  en:`<p>The Vosges mountains come out in full force: four category-1 climbs are packed into just 155 km. The toughest section is the Col du Haag (11.2 km / 7.3%), before the final climb to the Le Markstein ski resort.</p>`
+  en:`<p>The Vosges mountains come out in full force: four category-1 climbs are packed into just 155 km. The toughest section is the Col du Haag (11.2 km / 7.3%), before the final climb to the Le Markstein ski resort.</p>`,
+  fr:`<p>Les Vosges se dressent de toute leur force : quatre ascensions de 1re catégorie tiennent en seulement 155 km. Le passage le plus dur est le Col du Haag (11,2 km / 7,3 %), avant la dernière montée vers la station du Markstein.</p>`
  }},
 
 {n:15, dateIso:'2026-07-19', start:'Champagnole', finish:'Plateau de Solaison', km:183.9, type:'mountain', gain:4500, startCEST:'12:45',
  profile:[[0,20],[50,28],[90,35],[120,32],[145,50],[160,45],[172.6,60],[183.9,95]],
  climbs:[
-   {name:{fi:'Jura-nousuja',en:'Jura climbs'},km:100,len:8,grad:6,cat:'C2'},
-   {name:{fi:'Plateau de Solaison (maali, HC)',en:'Plateau de Solaison (finish, HC)'},km:172.6,len:11.3,grad:9.2,cat:'HC'}
+   {name:{fi:'Jura-nousuja',en:'Jura climbs',fr:'Ascensions du Jura'},km:100,len:8,grad:6,cat:'C2'},
+   {name:{fi:'Plateau de Solaison (maali, HC)',en:'Plateau de Solaison (finish, HC)',fr:'Plateau de Solaison (arrivée, HC)'},km:172.6,len:11.3,grad:9.2,cat:'HC'}
  ],
  sprints:[{km:55,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Toisen viikon päättävä etappi on jopa raskaampi kuin edellinen: noin 4 500 korkeusmetriä ja viimeisenä 11,3 km:n nousu 9,2 %:n keskikaltevuudella Plateau de Solaisoniin. Jos kokonaiskilpailu on vielä tiivis tässä vaiheessa, tarjolla on todennäköisesti suuria aikaeroja ennen toista lepopäivää.</p>`,
-  en:`<p>The stage that closes the second week is even harder than the last: around 4,500 metres of elevation gain and, at the end, an 11.3 km climb averaging 9.2% up to Plateau de Solaison. If the GC is still tight at this point, expect significant time gaps before the second rest day.</p>`
+  en:`<p>The stage that closes the second week is even harder than the last: around 4,500 metres of elevation gain and, at the end, an 11.3 km climb averaging 9.2% up to Plateau de Solaison. If the GC is still tight at this point, expect significant time gaps before the second rest day.</p>`,
+  fr:`<p>L’étape qui referme la deuxième semaine est encore plus dure que la précédente : environ 4 500 m de dénivelé et, pour finir, une montée de 11,3 km à 9,2 % de moyenne vers le Plateau de Solaison. Si le général est encore serré à ce stade, on peut s’attendre à des écarts importants avant le second jour de repos.</p>`
  }},
 
 {n:'lepo', dateIso:'2026-07-20', labelKey:'rest2'},
@@ -737,7 +814,8 @@ const stages = [
  sprints:[],
  desc:{
   fi:`<p>Kolmas viikko avautuu 26,1 km:n yksilöaika-ajolla Geneven­järven eteläpuolella, Evian-les-Bainsin ja Thonon-les-Bainsin välillä. Matka voi ratkaista kokonaiskilpailun järjestystä merkittävästi ennen Alppien loppurypistystä.</p>`,
-  en:`<p>The third week opens with a 26.1 km individual time trial south of Lake Geneva, between Evian-les-Bains and Thonon-les-Bains. This test could significantly reshape the GC order ahead of the final Alpine block.</p>`
+  en:`<p>The third week opens with a 26.1 km individual time trial south of Lake Geneva, between Evian-les-Bains and Thonon-les-Bains. This test could significantly reshape the GC order ahead of the final Alpine block.</p>`,
+  fr:`<p>La troisième semaine s’ouvre par un contre-la-montre individuel de 26,1 km au sud du lac Léman, entre Évian-les-Bains et Thonon-les-Bains. Ce test pourrait redessiner sensiblement l’ordre du général avant le bloc alpestre final.</p>`
  }},
 
 {n:17, dateIso:'2026-07-22', start:'Chambéry', finish:'Voiron', km:174.7, type:'flat', gain:1200, startCEST:'13:00',
@@ -746,28 +824,31 @@ const stages = [
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Viimeinen selkeä mahdollisuus sprinttereille ennen Alppeja. Kaksi kirisprinttiä tarjoaa vielä ison potin pisteitä pistepaidan taistoon juuri ennen vuoristoloppua.</p>`,
-  en:`<p>The last clear opportunity for sprinters before the Alps. Two intermediate sprints still offer a big haul of points for the green jersey battle right before the mountains take over.</p>`
+  en:`<p>The last clear opportunity for sprinters before the Alps. Two intermediate sprints still offer a big haul of points for the green jersey battle right before the mountains take over.</p>`,
+  fr:`<p>La dernière occasion nette pour les sprinteurs avant les Alpes. Deux sprints intermédiaires offrent encore une grosse récolte de points pour la bataille du maillot vert, juste avant que la montagne ne prenne le relais.</p>`
  }},
 
 {n:18, dateIso:'2026-07-23', start:'Voiron', finish:'Orcières-Merlette', km:185.2, type:'mountain', gain:3600, startCEST:'12:15',
  profile:[[0,22],[50,28],[90,35],[130,32],[160,45],[178.1,55],[185.2,85]],
  climbs:[
-   {name:{fi:'Alppien esivuoret',en:'Alpine foothills'},km:120,len:9,grad:5,cat:'C2'},
-   {name:{fi:'Orcières-Merlette (maali)',en:'Orcières-Merlette (finish)'},km:178.1,len:7.1,grad:6.7,cat:'C1'}
+   {name:{fi:'Alppien esivuoret',en:'Alpine foothills',fr:'Contreforts des Alpes'},km:120,len:9,grad:5,cat:'C2'},
+   {name:{fi:'Orcières-Merlette (maali)',en:'Orcières-Merlette (finish)',fr:'Orcières-Merlette (arrivée)'},km:178.1,len:7.1,grad:6.7,cat:'C1'}
  ],
  sprints:[{km:65,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Alppiosuus avautuu suhteellisen maltillisesti: viimeinen nousu Orcières-Merletten hiihtokeskukseen on tasainen 7,1 km / 6,7 %, joka suosii tasaista voimaa polkevia kokonaiskilpailun ajajia.</p>`,
-  en:`<p>The Alpine section opens relatively gently: the final climb to the Orcières-Merlette ski resort is a steady 7.1 km / 6.7%, which favours GC riders who ride at a consistent, even power.</p>`
+  en:`<p>The Alpine section opens relatively gently: the final climb to the Orcières-Merlette ski resort is a steady 7.1 km / 6.7%, which favours GC riders who ride at a consistent, even power.</p>`,
+  fr:`<p>Le secteur alpestre s’ouvre relativement en douceur : la dernière montée vers la station d’Orcières-Merlette est régulière, 7,1 km / 6,7 %, ce qui favorise les leaders du général qui roulent à puissance constante et régulière.</p>`
  }},
 
 {n:19, dateIso:'2026-07-24', start:'Gap', finish:'Alpe d’Huez', km:127.9, type:'mountain', gain:3300, startCEST:'13:30',
  profile:[[0,25],[35,30],[65,40],[90,35],[114.1,60],[127.9,98]],
- climbs:[{name:{fi:'Alpe d’Huez (klassinen puoli, maali, HC)',en:'Alpe d’Huez (classic side, finish, HC)'},km:114.1,len:13.8,grad:8.1,cat:'HC'}],
+ climbs:[{name:{fi:'Alpe d’Huez (klassinen puoli, maali, HC)',en:'Alpe d’Huez (classic side, finish, HC)',fr:'Alpe d’Huez (versant classique, arrivée, HC)'},km:114.1,len:13.8,grad:8.1,cat:'HC'}],
  sprints:[{km:40,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Lyhyt mutta räjähdysherkkä etappi, joka huipentuu Alpe d’Huezin klassiselle nousulle: 21 hiuspinnettä, 13,8 km matkaa ja 8,1 % keskikaltevuus. Kompakti matka suosii aggressiivista, aikaista hyökkäämistä.</p>`,
-  en:`<p>A short but explosive stage that culminates on the classic climb of Alpe d’Huez: 21 hairpin bends, 13.8 km, and an 8.1% average gradient. The compact distance favours aggressive, early attacks.</p>`
+  en:`<p>A short but explosive stage that culminates on the classic climb of Alpe d’Huez: 21 hairpin bends, 13.8 km, and an 8.1% average gradient. The compact distance favours aggressive, early attacks.</p>`,
+  fr:`<p>Une étape courte mais explosive qui culmine sur la montée classique de l’Alpe d’Huez : 21 virages en épingle, 13,8 km et 8,1 % de moyenne. La distance compacte favorise les attaques agressives et précoces.</p>`
  }},
 
 {n:20, dateIso:'2026-07-25', start:'Bourg d’Oisans', finish:'Alpe d’Huez', km:170.9, type:'mountain', gain:5600, startCEST:'11:00',
@@ -776,51 +857,61 @@ const stages = [
    {name:{fi:'Col de la Croix de Fer',en:'Col de la Croix de Fer'},km:50,len:22,grad:5.2,cat:'HC'},
    {name:{fi:'Col du Télégraphe',en:'Col du Télégraphe'},km:90,len:12,grad:7,cat:'C1'},
    {name:{fi:'Col du Galibier',en:'Col du Galibier'},km:112,len:8,grad:6.9,cat:'HC'},
-   {name:{fi:'Col de Sarenne → Alpe d’Huez (maali, harvinainen suunta)',en:'Col de Sarenne → Alpe d’Huez (finish, rare approach)'},km:150,len:20,grad:5,cat:'HC'}
+   {name:{fi:'Col de Sarenne → Alpe d’Huez (maali, harvinainen suunta)',en:'Col de Sarenne → Alpe d’Huez (finish, rare approach)',fr:'Col de Sarenne → Alpe d’Huez (arrivée, versant rare)'},km:150,len:20,grad:5,cat:'HC'}
  ],
  sprints:[{km:35,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Tourin raskain päivä: 5 600 korkeusmetriä ja neljä suurta nousua — Col de la Croix de Fer, Col du Télégraphe ja Col du Galibier — ennen Alpe d’Huezia toistamiseen, tällä kertaa harvinaisemmalta Col de Sarennen suunnalta. Kokonaiskilpailu voi ratketa lopullisesti tässä etapissa.</p>`,
-  en:`<p>The Tour's hardest day: 5,600 metres of elevation gain and four major climbs — Col de la Croix de Fer, Col du Télégraphe, and Col du Galibier — before Alpe d’Huez for a second time, this time via the rarer Col de Sarenne approach. The GC could well be decided for good on this stage.</p>`
+  en:`<p>The Tour's hardest day: 5,600 metres of elevation gain and four major climbs — Col de la Croix de Fer, Col du Télégraphe, and Col du Galibier — before Alpe d’Huez for a second time, this time via the rarer Col de Sarenne approach. The GC could well be decided for good on this stage.</p>`,
+  fr:`<p>La journée la plus dure du Tour : 5 600 m de dénivelé et quatre grandes ascensions — Col de la Croix de Fer, Col du Télégraphe et Col du Galibier — avant l’Alpe d’Huez une deuxième fois, cette fois par le versant plus rare du Col de Sarenne. Le classement général pourrait se décider définitivement sur cette étape.</p>`
  }},
 
 {n:21, dateIso:'2026-07-26', start:'Thoiry', finish:'Paris', km:133.0, type:'flat', gain:900, startCEST:'15:30',
  profile:[[0,20],[50,22],[90,25],[115,35],[125,40],[133,45]],
- climbs:[{name:{fi:'Montmartren mukulakivinousut',en:'Montmartre cobbled climbs'},km:120,len:1,grad:8,cat:'C4'}],
+ climbs:[{name:{fi:'Montmartren mukulakivinousut',en:'Montmartre cobbled climbs',fr:'Montées pavées de Montmartre'},km:120,len:1,grad:8,cat:'C4'}],
  sprints:[{km:45,pts:'70-50-40…'},{km:95,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Päätösetappi huipentuu perinteisesti Champs-Élysées'lle, mutta viime vuoden tapaan reitti kiertää myös Montmartren jyrkät mukulakivikadut, jotka voivat sotkea puhtaan sprinttiratkaisun. Kaksi kirisprinttiä jakaa vielä viimeiset pisteet pistepaitakamppailuun.</p>`,
-  en:`<p>The final stage culminates, as tradition dictates, on the Champs-Élysées, but as last year, the route also loops through Montmartre's steep cobbled streets, which could upset a clean bunch sprint. Two intermediate sprints hand out the last points in the green jersey battle.</p>`
+  en:`<p>The final stage culminates, as tradition dictates, on the Champs-Élysées, but as last year, the route also loops through Montmartre's steep cobbled streets, which could upset a clean bunch sprint. Two intermediate sprints hand out the last points in the green jersey battle.</p>`,
+  fr:`<p>L’étape finale culmine, comme le veut la tradition, sur les Champs-Élysées, mais comme l’an dernier, le parcours emprunte aussi les rues pavées et pentues de Montmartre, susceptibles de perturber un sprint massif propre. Deux sprints intermédiaires distribuent les derniers points de la bataille du maillot vert.</p>`
  }}
 ];
 
 /* ---------- HELPERS ---------- */
 function typeColor(t){return TYPE_COLOR[t]||'#888';}
 
+// Intl locale tag for the current language (fi/fr use comma decimals & spaced
+// thousands; en uses en-GB).
+function localeTag(){
+  return lang==='fi' ? 'fi-FI' : lang==='fr' ? 'fr-FR' : 'en-GB';
+}
 function fmtKm(k){
   const s = (Math.round(k*10)/10).toString();
-  return (lang==='fi' ? s.replace('.',',') : s) + ' km';
+  // English uses a decimal point; fi and fr use a comma.
+  return (lang==='en' ? s : s.replace('.',',')) + ' km';
 }
 function fmtGain(m){
-  return m.toLocaleString(lang==='fi'?'fi-FI':'en-US') + ' m';
+  return m.toLocaleString(localeTag()) + ' m';
 }
 function fmtDate(iso){
   const d = new Date(iso+'T12:00:00');
   const opts = lang==='fi'
     ? {weekday:'short', day:'numeric', month:'numeric'}
     : {weekday:'short', day:'numeric', month:'short'};
-  return new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', opts).format(d);
+  return new Intl.DateTimeFormat(localeTag(), opts).format(d);
 }
 function fmtUpdated(iso){
   // The "updated" field in data/results.json is an ISO timestamp; it is
   // always formatted in Finnish time (the race's official time zone), but
   // with language-appropriate text, since the file itself is not bilingual.
   const d = new Date(iso);
-  const formatted = new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', {
+  const formatted = new Intl.DateTimeFormat(localeTag(), {
     day:'numeric', month:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit',
     timeZone:'Europe/Helsinki'
   }).format(d);
-  return lang==='fi' ? `Päivitetty ${formatted} (Suomen aikaa)` : `Updated ${formatted} (Helsinki time)`;
+  if(lang==='fi') return `Päivitetty ${formatted} (Suomen aikaa)`;
+  if(lang==='fr') return `Mis à jour ${formatted} (heure d’Helsinki)`;
+  return `Updated ${formatted} (Helsinki time)`;
 }
 
 function fmtStartLocal(stage){
@@ -829,7 +920,7 @@ function fmtStartLocal(stage){
   // the viewer's own time zone using the browser default.
   if(!stage.startCEST) return null;
   const d = new Date(`${stage.dateIso}T${stage.startCEST}:00+02:00`);
-  return new Intl.DateTimeFormat(lang==='fi'?'fi-FI':'en-GB', {
+  return new Intl.DateTimeFormat(localeTag(), {
     hour:'2-digit', minute:'2-digit', timeZoneName:'short'
   }).format(d);
 }
@@ -959,7 +1050,7 @@ function renderPanel(stage){
   if(stage.climbs && stage.climbs.length){
     climbRows = stage.climbs.map(c=>`
       <tr>
-        <td>${c.name[lang]}</td>
+        <td>${c.name[lang]||c.name.en}</td>
         <td><span class="catchip" style="background:${CAT_COLOR[c.cat]||'#B23B32'}">${catLabel(c.cat)}</span></td>
         <td>${c.len} km</td>
         <td>${c.grad? c.grad+' %':'—'}</td>
@@ -1012,7 +1103,7 @@ function renderPanel(stage){
     <div class="twocol">
       <div class="block narrative">
         <h3>${t('descHeader')}</h3>
-        ${stage.desc[lang]}
+        ${stage.desc[lang]||stage.desc.en}
       </div>
       <div class="block">
         <h3>${t('climbsHeader')}</h3>
@@ -1290,7 +1381,7 @@ function updateLangButtons(){
 }
 
 function setLang(newLang){
-  if(newLang!==('fi') && newLang!=='en') return;
+  if(newLang!=='fi' && newLang!=='en' && newLang!=='fr') return;
   lang = newLang;
   localStorage.setItem(LANG_KEY, lang);
   document.documentElement.lang = lang;
