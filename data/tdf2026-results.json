@@ -2369,6 +2369,14 @@
    },
    {
     "pos": 36,
+    "rider": "J. TARLING",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "GBR",
+    "val": "14h 12' 43''",
+    "gap": "+ 01h 06' 07''"
+   },
+   {
+    "pos": 37,
     "rider": "P. BITTNER",
     "team": "TEAM PICNIC POSTNL",
     "nat": "CZE",
@@ -2376,7 +2384,7 @@
     "gap": "+ 01h 06' 24''"
    },
    {
-    "pos": 37,
+    "pos": 38,
     "rider": "M. FRETIN",
     "team": "COFIDIS",
     "nat": "BEL",
@@ -2384,7 +2392,15 @@
     "gap": "+ 01h 08' 04''"
    },
    {
-    "pos": 38,
+    "pos": 39,
+    "rider": "H. ARTZ",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "NED",
+    "val": "14h 15' 53''",
+    "gap": "+ 01h 09' 17''"
+   },
+   {
+    "pos": 40,
     "rider": "O. KOOIJ",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "NED",
@@ -6702,6 +6718,6 @@
    ]
   }
  },
- "updated": "2026-07-07T19:19:33.769264+03:00",
- "updatedText": "Päivitetty 07.07.2026 klo 19.19 (Suomen aikaa)"
+ "updated": "2026-07-07T20:17:26.201000+03:00",
+ "updatedText": "Päivitetty 07.07.2026 klo 20.17 (Suomen aikaa)"
 }
