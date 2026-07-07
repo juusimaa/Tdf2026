@@ -439,6 +439,13 @@
 </div>
 
 <script>
+/* ---------- TOUR ----------
+   The site is being extended to cover all three grand tours; each tour has
+   its own results file at data/<TOUR>-results.json. This page currently
+   shows the 2026 Tour de France. */
+const TOUR = 'tdf2026';
+const RESULTS_URL = `data/${TOUR}-results.json`;
+
 /* ---------- I18N ---------- */
 const LANG_KEY = 'tdf2026-lang';
 
@@ -953,7 +960,7 @@ function fmtDate(iso){
   return new Intl.DateTimeFormat(localeTag(), opts).format(d);
 }
 function fmtUpdated(iso){
-  // The "updated" field in data/results.json is an ISO timestamp; it is
+  // The "updated" field in the results JSON is an ISO timestamp; it is
   // always formatted in Finnish time (the race's official time zone), but
   // with language-appropriate text, since the file itself is not bilingual.
   const d = new Date(iso);
@@ -1487,14 +1494,14 @@ tabButtons.forEach((tab, i)=>{
 });
 
 /* ---------- AUTOMATIC DATA LOADING ----------
-   The page tries to fetch fresh results from data/results.json (in the
-   same directory). If the file is missing (e.g. the page was opened
+   The page tries to fetch fresh results from data/<TOUR>-results.json (in
+   the same directory). If the file is missing (e.g. the page was opened
    directly from disk via the file:// protocol), the RESULTS object above
-   is used as-is. A GitHub Actions workflow updates results.json
+   is used as-is. A GitHub Actions workflow updates the results file
    automatically — see the README. */
 async function loadResults(){
   try{
-    const resp = await fetch('data/results.json', {cache:'no-store'});
+    const resp = await fetch(RESULTS_URL, {cache:'no-store'});
     if(!resp.ok) throw new Error('not found');
     const data = await resp.json();
     ['gc','points','mountains','youth','teams'].forEach(k=>{

@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 """
-Tour de France 2026 — automatic results fetch.
+Grand tour results fetch — self-updating standings.
 
 Fetches the standings in all categories after the most recently raced
-stage from letour.fr (the official race site) and writes them to
-data/results.json, which index.html reads automatically.
+stage and writes them to data/<tour>-results.json, which index.html reads
+automatically.
 
-Usage:  python scripts/fetch_results.py
+This scaffolding is tour-aware so the site can cover all three grand tours.
+Each tour is registered in TOURS with its own source and output file. Today
+only the Tour de France (tdf2026) is configured; the Giro d'Italia and Vuelta
+a España will be added there with their own source handler (letour.fr only
+covers the Tour de France).
+
+Usage:
+    python scripts/fetch_results.py               # fetch every registered tour
+    python scripts/fetch_results.py tdf2026        # fetch specific tour(s)
 Dependencies:  pip install requests selectolax
 
 Note: we previously used the procyclingstats package, but procyclingstats.com
@@ -25,8 +33,18 @@ from zoneinfo import ZoneInfo
 import requests
 from selectolax.parser import HTMLParser
 
-BASE = "https://www.letour.fr"
-OUT = Path(__file__).resolve().parent.parent / "data" / "results.json"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+
+# Registry of grand tours the site covers. Each entry names the scraper
+# ("source") to use, the site base URL, and the output file under data/.
+# Add giro2026 / vuelta2026 here once their source handler exists.
+TOURS = {
+    "tdf2026": {
+        "source": "letour",
+        "base": "https://www.letour.fr",
+        "out": "tdf2026-results.json",
+    },
+}
 
 HEADERS = {
     "User-Agent": (
@@ -109,13 +127,13 @@ def parse_table(html: str, team_only: bool, kind: str):
     return rows
 
 
-def stage_table_rows(stage_no: int):
+def stage_table_rows(base: str, stage_no: int):
     """
     Fetches a stage's own result table (finishing order with times).
     Same ajax-stack mechanics as the general classifications, but stacks[1]
     holds the stage-specific classification (ete/ite) URL.
     """
-    html = fetch(f"{BASE}/en/rankings/stage-{stage_no}")
+    html = fetch(f"{base}/en/rankings/stage-{stage_no}")
     stacks = ajax_stacks(html)
     if len(stacks) < 2 or not stacks[1]:
         return []
@@ -138,7 +156,7 @@ def stage_table_rows(stage_no: int):
         if not url:
             continue
         try:
-            table_html = fetch(BASE + url)
+            table_html = fetch(base + url)
         except Exception:
             continue
         rows = parse_table(table_html, team_only=team_only, kind="time")
@@ -147,15 +165,16 @@ def stage_table_rows(stage_no: int):
     return []
 
 
-def stage_winner(stage_no: int) -> str:
+def stage_winner(base: str, stage_no: int) -> str:
     """Fetches the stage winner (rider, or team in a team time trial)."""
-    rows = stage_table_rows(stage_no)
+    rows = stage_table_rows(base, stage_no)
     return rows[0]["rider"] if rows else ""
 
 
-def main() -> int:
+def fetch_letour(base: str, out: Path) -> int:
+    """Scrape one letour.fr-hosted tour into `out`. Returns 0 always."""
     try:
-        main_html = fetch(f"{BASE}/en/rankings")
+        main_html = fetch(f"{base}/en/rankings")
     except Exception as e:
         print(f"Failed to fetch standings: {e}")
         return 0
@@ -170,9 +189,9 @@ def main() -> int:
     print(f"Latest results: stage {stage_no}")
 
     prev = {}
-    if OUT.exists():
+    if out.exists():
         try:
-            prev = json.loads(OUT.read_text(encoding="utf-8"))
+            prev = json.loads(out.read_text(encoding="utf-8"))
         except Exception:
             pass
 
@@ -183,7 +202,7 @@ def main() -> int:
         rows = []
         if url:
             try:
-                table_html = fetch(BASE + url)
+                table_html = fetch(base + url)
                 rows = parse_table(table_html, cfg["team_only"], cfg["kind"])
             except Exception as e:
                 print(f"  warning: fetching {key} failed: {e}")
@@ -214,7 +233,7 @@ def main() -> int:
         rows = (prev_stage_results.get(key) or {}).get("rows") or []
         if not rows:
             try:
-                rows = stage_table_rows(n)
+                rows = stage_table_rows(base, n)
             except Exception as e:
                 print(f"  stage {n} results: {e}")
                 rows = []
@@ -237,9 +256,36 @@ def main() -> int:
             "Päivitetty %d.%m.%Y klo %H.%M (Suomen aikaa)"
         )
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"Wrote {OUT} (GC rows: {len(data['gc']['rows'])})")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"Wrote {out} (GC rows: {len(data['gc']['rows'])})")
+    return 0
+
+
+# Map a tour's "source" to the scraper that handles it. New sources (e.g. for
+# the Giro or Vuelta) get their own function and an entry here.
+SOURCES = {
+    "letour": fetch_letour,
+}
+
+
+def fetch_tour(tour_id: str, cfg: dict) -> int:
+    handler = SOURCES.get(cfg["source"])
+    if handler is None:
+        print(f"[{tour_id}] no handler for source '{cfg['source']}' — skipping.")
+        return 0
+    print(f"=== {tour_id} ===")
+    return handler(cfg["base"], DATA_DIR / cfg["out"])
+
+
+def main() -> int:
+    requested = sys.argv[1:] or list(TOURS)
+    unknown = [t for t in requested if t not in TOURS]
+    if unknown:
+        print(f"Unknown tour(s): {', '.join(unknown)}. Known: {', '.join(TOURS)}")
+        return 1
+    for tour_id in requested:
+        fetch_tour(tour_id, TOURS[tour_id])
     return 0
 
 

@@ -1,14 +1,21 @@
-# Tour de France 2026 — self-updating results page
+# Grand tour — self-updating results page
 
 A static results page for the 2026 Tour de France that keeps itself up to
-date, with no manual work required once it's deployed.
+date, with no manual work required once it's deployed. The data and scripts
+are **tour-aware**: results live in per-tour files (`data/<tour>-results.json`)
+so the site can be extended to cover all three grand tours (Tour de France,
+Giro d'Italia, Vuelta a España). Today only `tdf2026` is configured.
 
 ```
 index.html                            # the page (stages + results tabs)
-data/results.json                     # auto-updated results data
+data/tdf2026-results.json             # auto-updated results data (per tour)
 scripts/fetch_results.py              # fetch script (scrapes letour.fr)
 .github/workflows/update-results.yml  # scheduled GitHub Actions workflow
 ```
+
+To add another tour later, register it in the `TOURS` dict in
+`scripts/fetch_results.py` (with a source handler) and point a page at its
+`data/<tour>-results.json`.
 
 ## How it works
 
@@ -19,11 +26,12 @@ scripts/fetch_results.py              # fetch script (scrapes letour.fr)
    **letour.fr** rankings pages for the latest completed stage: general
    classification, points, mountains, youth, and team classifications,
    plus the winner of every stage raced so far.
-3. The script writes `data/results.json`. If the content changed, the
-   workflow commits it back to the repo.
-4. GitHub Pages serves the site, and `index.html` fetches the JSON in the
-   browser (`fetch('data/results.json')`). The page therefore always shows
-   the latest committed standings with zero manual intervention.
+3. The script writes `data/tdf2026-results.json` (one file per registered
+   tour). If the content changed, the workflow commits it back to the repo.
+4. GitHub Pages serves the site, and `index.html` fetches the JSON for its
+   tour in the browser (`fetch('data/tdf2026-results.json')`). The page
+   therefore always shows the latest committed standings with zero manual
+   intervention.
 
 The page also **auto-selects the stage of the day** when opened (the next
 stage on rest days, the final stage once the race is over).

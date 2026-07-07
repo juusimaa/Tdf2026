@@ -38,11 +38,11 @@ jobs:
     # contents:write = the bot may commit results.json.
     permissions:
       contents: write
-    # Expose the afterStage value that is about to be published so the deploy
-    # job can confirm the live site really serves it (see "Verify published
-    # results" below).
+    # Expose, per tour, the afterStage value that is about to be published so
+    # the deploy job can confirm the live site really serves it (see "Verify
+    # published results" below). Space-separated "<file>=<afterStage>" pairs.
     outputs:
-      expected_after_stage: ${{ steps.expected.outputs.after_stage }}
+      expected_pairs: ${{ steps.expected.outputs.pairs }}
     steps:
       - uses: actions/checkout@v5
 
@@ -59,6 +59,8 @@ jobs:
 
       # If the fetch crashes (e.g. the site structure changes), publishing
       # still continues — the page shows the last successful data.
+      # Fetches every tour registered in fetch_results.py (currently just
+      # tdf2026), writing data/<tour>-results.json for each.
       - name: Fetch results
         run: python scripts/fetch_results.py
         continue-on-error: true
@@ -69,11 +71,11 @@ jobs:
         run: |
           git config user.name "tdf-bot"
           git config user.email "actions@users.noreply.github.com"
-          if [ ! -f data/results.json ]; then
+          if ! ls data/*-results.json >/dev/null 2>&1; then
             echo "No results available yet, nothing to commit."
             exit 0
           fi
-          git add data/results.json
+          git add data/*-results.json
           if git diff --cached --quiet; then
             echo "No changes."
           else
@@ -81,19 +83,26 @@ jobs:
             git push
           fi
 
-      # Read the afterStage from the exact file about to be uploaded, so the
-      # deploy job can verify the live site matches. Empty when there is no
-      # data yet (fetch failed / before the race) -> verification is skipped.
+      # Read each tour's afterStage from the exact files about to be uploaded,
+      # so the deploy job can verify the live site matches. Emits space-
+      # separated "<file>=<afterStage>" pairs; empty when there is no data yet
+      # (fetch failed / before the race) -> verification is skipped.
       - name: Record expected afterStage
         id: expected
         run: |
-          if [ -f data/results.json ]; then
-            v=$(python3 -c 'import json; print(json.load(open("data/results.json")).get("afterStage",""))')
-            echo "after_stage=$v" >> "$GITHUB_OUTPUT"
-            echo "Expecting the live site to serve afterStage=$v"
+          pairs=""
+          for f in data/*-results.json; do
+            [ -e "$f" ] || continue
+            v=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('afterStage',''))" "$f")
+            [ -n "$v" ] || continue
+            pairs="$pairs $(basename "$f")=$v"
+          done
+          pairs="$(echo "$pairs" | sed 's/^ *//')"
+          echo "pairs=$pairs" >> "$GITHUB_OUTPUT"
+          if [ -n "$pairs" ]; then
+            echo "Expecting the live site to serve: $pairs"
           else
-            echo "after_stage=" >> "$GITHUB_OUTPUT"
-            echo "No data/results.json yet; verification will be skipped."
+            echo "No results files yet; verification will be skipped."
           fi
 
       - uses: actions/configure-pages@v6
@@ -140,30 +149,40 @@ jobs:
       # serving the previous build (observed 2026-07-06: stage 3 was committed
       # and the deploy went green, but juusimaa.github.io still served the
       # stage-2 artifact, so the stage dropdown was missing stage 3). This step
-      # fetches the freshly published data/results.json and fails the run
-      # loudly if afterStage does not match what was uploaded. Cache-busting
+      # fetches each freshly published data/<tour>-results.json and fails the
+      # run loudly if afterStage does not match what was uploaded. Cache-busting
       # query + no-cache headers avoid reading a stale CDN copy; it polls for a
       # few minutes to allow propagation.
       - name: Verify published results
-        if: needs.build.outputs.expected_after_stage != ''
+        if: needs.build.outputs.expected_pairs != ''
         env:
-          EXPECTED: ${{ needs.build.outputs.expected_after_stage }}
+          EXPECTED_PAIRS: ${{ needs.build.outputs.expected_pairs }}
           PAGE_URL: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
         run: |
-          url="${PAGE_URL}data/results.json"
-          echo "Verifying $url serves afterStage=$EXPECTED"
-          live=""
-          for i in $(seq 1 10); do
-            live=$(curl -s -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
-              "${url}?cb=$(date +%s)-$i" \
-              | python3 -c 'import json,sys; print(json.load(sys.stdin).get("afterStage",""))' \
-              2>/dev/null || echo "")
-            echo "Attempt $i/10: live afterStage=${live:-<none>}"
-            if [ "$live" = "$EXPECTED" ]; then
-              echo "✅ Live site serves afterStage=$EXPECTED"
-              exit 0
+          fail=0
+          for pair in $EXPECTED_PAIRS; do
+            file="${pair%%=*}"
+            expected="${pair#*=}"
+            url="${PAGE_URL}data/${file}"
+            echo "Verifying $url serves afterStage=$expected"
+            live=""
+            ok=0
+            for i in $(seq 1 10); do
+              live=$(curl -s -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
+                "${url}?cb=$(date +%s)-$i" \
+                | python3 -c 'import json,sys; print(json.load(sys.stdin).get("afterStage",""))' \
+                2>/dev/null || echo "")
+              echo "  $file attempt $i/10: live afterStage=${live:-<none>}"
+              if [ "$live" = "$expected" ]; then
+                echo "✅ $file serves afterStage=$expected"
+                ok=1
+                break
+              fi
+              sleep 30
+            done
+            if [ "$ok" != "1" ]; then
+              echo "::error::$file still serves afterStage='${live}' but expected '${expected}'. The Pages deployment did not update the published content."
+              fail=1
             fi
-            sleep 30
           done
-          echo "::error::Live site still serves afterStage='${live}' but expected '${EXPECTED}'. The Pages deployment did not update the published content."
-          exit 1
+          exit $fail
