@@ -631,10 +631,7 @@ const TYPE_COLOR = {
 const stages = [
 {n:1, dateIso:'2026-07-04', start:'Barcelona', finish:'Barcelona', km:19.6, type:'ttt', gain:200, startCEST:'16:30',
  profile:[[0,18],[10,17],[15,20],[17.9,55],[18.7,75],[19.6,90]],
- climbs:[
-   {name:{fi:'Montjuïc (välinousu)',en:'Montjuïc (intermediate climb)',fr:'Montjuïc (ascension intermédiaire)'},km:17.9,len:1.1,grad:null,cat:'C4'},
-   {name:{fi:'Maalinousu',en:'Finish climb',fr:'Montée d’arrivée'},km:18.8,len:0.8,grad:7,cat:'C4'}
- ],
+ climbs:[],
  sprints:[],
  desc:{
   fi:`<p>Avausetappi on joukkueaika-ajo Barcelonan kaduilla — uudella sääntömallilla, jossa jokaisen ajajan oma aika lasketaan (ei enää neljännen ajajan aika, kuten perinteisesti). Ensimmäiset 15 km ovat tasaisia, minkä jälkeen nousee Montjuïcin kukkulan 1,1 km:n nousu ja lopuksi vielä jyrkempi 800 metrin pätkä (n. 7 %) aivan maalissa.</p><p>Etappi antaa parhaiten valmistautuneille joukkueille ja puncheur-tyyppisille ajajille mahdollisuuden nappia ensimmäinen keltainen paita.</p>`,
@@ -643,11 +640,10 @@ const stages = [
  }},
 
 {n:2, dateIso:'2026-07-05', start:'Tarragona', finish:'Barcelona', km:168.5, type:'hilly', gain:2500, startCEST:'13:30',
- profile:[[0,15],[60,18],[110,25],[138,35],[150,45],[158,70],[163,60],[166,80],[168.5,88]],
+ profile:[[0,15],[60,20],[94,45],[120,30],[141,60],[150,45],[154,62],[163,48],[165.6,66],[168.5,80]],
  climbs:[
-   {name:{fi:'Montjuïc-kierros (3×)',en:'Montjuïc circuit (3×)',fr:'Circuit de Montjuïc (3×)'},km:140,len:3,grad:null,cat:'C3'},
-   {name:{fi:'Montjuïc, viim. nousu 1',en:'Montjuïc, final climb 1',fr:'Montjuïc, dernière ascension 1'},km:163,len:1.6,grad:9.3,cat:'C3'},
-   {name:{fi:'Montjuïc, maalinousu',en:'Montjuïc, finish climb',fr:'Montjuïc, montée d’arrivée'},km:167.8,len:0.7,grad:7,cat:'C4'}
+   {name:{fi:'Côte de Bègues',en:'Côte de Bègues'},km:94,len:6.1,grad:5.6,cat:'C2'},
+   {name:{fi:'Côte du Château de Montjuïc (3×)',en:'Côte du Château de Montjuïc (3×)'},km:165.6,len:1.6,grad:8.1,cat:'C3'}
  ],
  sprints:[{km:80,pts:'25-20-16…'}],
  desc:{
@@ -657,10 +653,12 @@ const stages = [
  }},
 
 {n:3, dateIso:'2026-07-06', start:'Granollers', finish:'Les Angles', km:195.9, type:'mountain', gain:3850, startCEST:'11:45',
- profile:[[0,15],[70,20],[120,30],[150,45],[170,50],[185,65],[192,78],[195.9,90]],
+ profile:[[0,18],[17,40],[45,28],[100,35],[127.7,60],[150,45],[172.3,62],[185,50],[195.9,72]],
  climbs:[
-   {name:{fi:'1. luokan nousu (Pyreneet)',en:'Category 1 climb (Pyrenees)',fr:'Ascension de 1re catégorie (Pyrénées)'},km:150,len:10,grad:7,cat:'C1'},
-   {name:{fi:'Les Angles / Pla del Mir (maali)',en:'Les Angles / Pla del Mir (finish)',fr:'Les Angles / Pla del Mir (arrivée)'},km:189.4,len:6.5,grad:6.5,cat:'C3'}
+   {name:{fi:'Côte de Saint-Feliu de Codines',en:'Côte de Saint-Feliu de Codines'},km:17.1,len:7.6,grad:4.6,cat:'C3'},
+   {name:{fi:'Col de Toses',en:'Col de Toses'},km:127.7,len:9.3,grad:6.6,cat:'C1'},
+   {name:{fi:'Col du Calvaire',en:'Col du Calvaire'},km:172.3,len:11.4,grad:4.1,cat:'C3'},
+   {name:{fi:'Les Angles / Pla del Mir (maali)',en:'Les Angles / Pla del Mir (finish)',fr:'Les Angles / Pla del Mir (arrivée)'},km:196.0,len:1.7,grad:6,cat:'C3'}
  ],
  sprints:[{km:75,pts:'25-20-16…'}],
  desc:{
@@ -670,8 +668,13 @@ const stages = [
  }},
 
 {n:4, dateIso:'2026-07-07', start:'Carcassonne', finish:'Foix', km:181.9, type:'hilly', gain:2800, startCEST:'13:00',
- profile:[[0,20],[40,30],[80,42],[110,55],[140,60],[147,72],[165,40],[181.9,35]],
- climbs:[{name:{fi:'Pyreneiden esivuoret',en:'Pyrenean foothills',fr:'Contreforts des Pyrénées'},km:140,len:8,grad:5,cat:'C2'}],
+ profile:[[0,20],[48,46],[65,52],[90,35],[105,66],[125,46],[147,76],[165,42],[181.9,30]],
+ climbs:[
+   {name:{fi:'Col de Bedos',en:'Col de Bedos'},km:48.2,len:3.3,grad:4.3,cat:'C4'},
+   {name:{fi:'Col du Paradis',en:'Col du Paradis'},km:64.8,len:5.8,grad:4.1,cat:'C3'},
+   {name:{fi:'Col de Coudons',en:'Col de Coudons'},km:104.8,len:10.8,grad:5.5,cat:'C2'},
+   {name:{fi:'Col de Montségur',en:'Col de Montségur'},km:146.6,len:6.9,grad:6.3,cat:'C2'}
+ ],
  sprints:[{km:95,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Reitti kulkee Pyreneiden alarinteiden aaltoilevassa maastossa kohti Foix'ta, jonne on aiemmin noussut maaliin useita irtiottoryhmiä (mm. Hugo Houle 2022). Viimeiset noin 35 km ovat pääosin laskevia, mikä suosii karanneita ajajia loppukirin sijaan.</p>`,
@@ -680,8 +683,10 @@ const stages = [
  }},
 
 {n:5, dateIso:'2026-07-08', start:'Lannemezan', finish:'Pau', km:158.3, type:'flat', gain:600, startCEST:'13:30',
- profile:[[0,22],[40,24],[90,26],[130,24],[158.3,20]],
- climbs:[],
+ profile:[[0,22],[40,24],[90,26],[130,30],[133,32],[138,25],[158.3,20]],
+ climbs:[
+   {name:{fi:'Côte de Baleix',en:'Côte de Baleix'},km:132.7,len:1,grad:7.7,cat:'C3'}
+ ],
  sprints:[{km:55,pts:'70-50-40…'},{km:120,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Pääosin tasainen etappi Lannemezanista Paun kaupunkiin — yksi Tourin useimmin vierailluista maaleista. Etappi kuuluu seitsemään "tasaiseen" etappiin, joilla ajetaan kaksi kirisprinttiä ja joissa etapin voittaja saa 70 pistettä pisteluokituksessa.</p>`,
@@ -690,11 +695,13 @@ const stages = [
  }},
 
 {n:6, dateIso:'2026-07-09', start:'Pau', finish:'Gavarnie-Gèdre', km:186.2, type:'mountain', gain:4400, startCEST:'12:00',
- profile:[[0,20],[60,25],[90,35],[110,50],[125,42],[140,60],[160,50],[174,75],[186.2,95]],
+ profile:[[0,20],[51,32],[77,42],[100,45],[118,68],[135,55],[147.7,90],[168,52],[186.2,80]],
  climbs:[
-   {name:{fi:'Col d’Aspin',en:'Col d’Aspin'},km:113,len:12,grad:6.5,cat:'C1'},
-   {name:{fi:'Col du Tourmalet',en:'Col du Tourmalet'},km:150,len:17,grad:7.4,cat:'HC'},
-   {name:{fi:'Cirque de Gavarnie (maali)',en:'Cirque de Gavarnie (finish)',fr:'Cirque de Gavarnie (arrivée)'},km:180,len:6,grad:5,cat:'C2'}
+   {name:{fi:'Côte de Loucrup',en:'Côte de Loucrup'},km:50.9,len:1.9,grad:7.2,cat:'C4'},
+   {name:{fi:'Côte de Mauvezin',en:'Côte de Mauvezin'},km:77.2,len:3,grad:6.6,cat:'C3'},
+   {name:{fi:'Col d’Aspin',en:'Col d’Aspin'},km:118,len:12,grad:6.4,cat:'C1'},
+   {name:{fi:'Col du Tourmalet',en:'Col du Tourmalet'},km:147.7,len:16.7,grad:7.4,cat:'HC'},
+   {name:{fi:'Gavarnie-Gèdre / Cirque de Gavarnie (maali)',en:'Gavarnie-Gèdre / Cirque de Gavarnie (finish)',fr:'Gavarnie-Gèdre / Cirque de Gavarnie (arrivée)'},km:186.2,len:18.7,grad:3.6,cat:'C2'}
  ],
  sprints:[{km:45,pts:'25-20-16…'}],
  desc:{
@@ -704,8 +711,10 @@ const stages = [
  }},
 
 {n:7, dateIso:'2026-07-10', start:'Hagetmau', finish:'Bordeaux', km:175.1, type:'flat', gain:500, startCEST:'13:00',
- profile:[[0,18],[50,20],[100,19],[150,17],[175.1,15]],
- climbs:[],
+ profile:[[0,18],[50,20],[100,19],[137,26],[145,18],[175.1,15]],
+ climbs:[
+   {name:{fi:'Côte de Béguey',en:'Côte de Béguey'},km:137.4,len:1.2,grad:5.6,cat:'C4'}
+ ],
  sprints:[{km:55,pts:'70-50-40…'},{km:125,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Odotettu sprintterien etappi Bordeaux'hon — kaupunkiin, jossa Tour vierailee 83. kertaa. Jasper Philipsen voitti täällä viimeksi vuonna 2023. Kaksi kirisprinttiä tarjoaa lisäpisteitä pistepaidan tavoittelijoille.</p>`,
@@ -714,8 +723,11 @@ const stages = [
  }},
 
 {n:8, dateIso:'2026-07-11', start:'Périgueux', finish:'Bergerac', km:180.4, type:'flat', gain:900, startCEST:'13:00',
- profile:[[0,20],[60,22],[110,24],[150,21],[180.4,18]],
- climbs:[],
+ profile:[[0,20],[60,22],[102,30],[120,24],[140,30],[160,22],[180.4,18]],
+ climbs:[
+   {name:{fi:'Côte de Domme',en:'Côte de Domme'},km:102.5,len:3.6,grad:3.1,cat:'C4'},
+   {name:{fi:'Côte du Buisson-de-Cadouin',en:'Côte du Buisson-de-Cadouin'},km:140.4,len:2.1,grad:4.9,cat:'C4'}
+ ],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Koko etappi kulkee Dordognen maakunnan halki Périgueux'sta Bergeraciin — jälleen sprintterien joukkueiden hallitsema päivä ja toinen kahden kirisprintin etappi.</p>`,
@@ -724,8 +736,13 @@ const stages = [
  }},
 
 {n:9, dateIso:'2026-07-12', start:'Malemort', finish:'Ussel', km:185.5, type:'hilly', gain:2400, startCEST:'13:00',
- profile:[[0,20],[60,25],[100,35],[140,45],[170,55],[185.5,50]],
- climbs:[{name:{fi:'Corrèzen kukkulat',en:'Hills of Corrèze',fr:'Collines de la Corrèze'},km:150,len:6,grad:5,cat:'C3'}],
+ profile:[[0,20],[60,28],[77,44],[95,35],[105,54],[120,40],[129,50],[150,40],[161,52],[185.5,46]],
+ climbs:[
+   {name:{fi:'Côte de Naves',en:'Côte de Naves'},km:76.9,len:2.3,grad:7.6,cat:'C3'},
+   {name:{fi:'Suc au May',en:'Suc au May'},km:105,len:3.8,grad:7.1,cat:'C2'},
+   {name:{fi:'Côte de la Croix du Pey',en:'Côte de la Croix du Pey'},km:129.4,len:6.9,grad:4.9,cat:'C3'},
+   {name:{fi:'Mont Bessou',en:'Mont Bessou'},km:161,len:0.8,grad:6.1,cat:'C4'}
+ ],
  sprints:[{km:80,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Reitti ylittää Corrèzen departementin aaltoilevaa maastoa pitkin, päättyen Usseliin. Ennen ensimmäistä lepopäivää ajettava etappi voi houkutella karkulaisia, jos sprinttijoukkueet eivät hallitse tahtia.</p>`,
@@ -736,10 +753,15 @@ const stages = [
 {n:'lepo', dateIso:'2026-07-13', labelKey:'rest1'},
 
 {n:10, dateIso:'2026-07-14', start:'Aurillac', finish:'Le Lioran', km:166.6, type:'mountain', gain:4100, startCEST:'13:00',
- profile:[[0,25],[40,35],[70,50],[95,45],[115,65],[135,55],[150,75],[166.6,70]],
+ profile:[[0,25],[40,35],[68,52],[85,45],[97,64],[104,60],[119,62],[135.7,76],[145,58],[152,74],[163.8,68],[166.6,64]],
  climbs:[
-   {name:{fi:'Puy Mary — Pas de Peyrol',en:'Puy Mary — Pas de Peyrol'},km:120,len:5.4,grad:8,cat:'C1'},
-   {name:{fi:'Col du Pertus',en:'Col du Pertus'},km:150,len:5,grad:6.5,cat:'C2'}
+   {name:{fi:'Côte de Pailherols',en:'Côte de Pailherols'},km:68,len:3,grad:6.9,cat:'C3'},
+   {name:{fi:'Col de la Griffoul',en:'Col de la Griffoul'},km:97.3,len:5.8,grad:7.1,cat:'C2'},
+   {name:{fi:'Col de Prat de Bouc',en:'Col de Prat de Bouc'},km:103.7,len:3.1,grad:5.8,cat:'C3'},
+   {name:{fi:'Côte de Murat',en:'Côte de Murat'},km:118.8,len:5.2,grad:5.1,cat:'C3'},
+   {name:{fi:'Puy Mary — Pas de Peyrol',en:'Puy Mary — Pas de Peyrol'},km:135.7,len:7.8,grad:5.8,cat:'C1'},
+   {name:{fi:'Col de Pertus',en:'Col de Pertus'},km:152,len:4.4,grad:8.2,cat:'C1'},
+   {name:{fi:'Col de Font de Cère',en:'Col de Font de Cère'},km:163.8,len:3.1,grad:5.3,cat:'C3'}
  ],
  sprints:[{km:50,pts:'25-20-16…'}],
  desc:{
@@ -749,8 +771,11 @@ const stages = [
  }},
 
 {n:11, dateIso:'2026-07-15', start:'Vichy', finish:'Nevers', km:161.3, type:'flat', gain:700, startCEST:'13:30',
- profile:[[0,20],[50,22],[100,20],[161.3,17]],
- climbs:[],
+ profile:[[0,20],[33,28],[60,22],[100,20],[123,26],[140,20],[161.3,17]],
+ climbs:[
+   {name:{fi:'Côte de Billonnière',en:'Côte de Billonnière'},km:32.8,len:1,grad:6.1,cat:'C4'},
+   {name:{fi:'Côte de Billy-Chevannes',en:'Côte de Billy-Chevannes'},km:123.4,len:1.4,grad:4.8,cat:'C4'}
+ ],
  sprints:[{km:55,pts:'70-50-40…'},{km:115,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Vichystä Nevers'iin ajettava etappi on todennäköinen sprinttietappi ja tarjoaa jälleen kaksi kirisprinttiä pistepaidan tavoittelijoille.</p>`,
@@ -759,8 +784,12 @@ const stages = [
  }},
 
 {n:12, dateIso:'2026-07-16', start:'Magny-Cours', finish:'Chalon-sur-Saône', km:179.1, type:'flat', gain:800, startCEST:'13:00',
- profile:[[0,18],[60,20],[120,19],[179.1,16]],
- climbs:[],
+ profile:[[0,18],[60,22],[76,28],[98,28],[130,22],[159,28],[179.1,16]],
+ climbs:[
+   {name:{fi:'Côte de Lanty',en:'Côte de Lanty'},km:76.4,len:2,grad:3.8,cat:'C4'},
+   {name:{fi:'Côte de Cuzy',en:'Côte de Cuzy'},km:97.6,len:2.4,grad:4.2,cat:'C4'},
+   {name:{fi:'Côte de Montagny-lès-Buxy',en:'Côte de Montagny-lès-Buxy'},km:159.2,len:2.6,grad:3.8,cat:'C4'}
+ ],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Lähtö Magny-Coursin autourheilurata-alueelta kohti Chalon-sur-Saônea — jälleen todennäköinen ryhmäspurttien etappi kahdella kirisprintillä.</p>`,
@@ -769,8 +798,11 @@ const stages = [
  }},
 
 {n:13, dateIso:'2026-07-17', start:'Dole', finish:'Belfort', km:205.8, type:'hilly', gain:2600, startCEST:'12:45',
- profile:[[0,20],[50,25],[100,30],[150,28],[190,40],[205.8,45]],
- climbs:[{name:{fi:'Vogeesien esivuoret',en:'Vosges foothills',fr:'Contreforts des Vosges'},km:180,len:6,grad:5,cat:'C3'}],
+ profile:[[0,20],[50,25],[100,30],[150,32],[157,46],[170,38],[175.7,68],[190,50],[205.8,45]],
+ climbs:[
+   {name:{fi:'Col des Croix',en:'Col des Croix'},km:157.3,len:5.1,grad:4.6,cat:'C3'},
+   {name:{fi:'Ballon d’Alsace',en:'Ballon d’Alsace'},km:175.7,len:8.9,grad:6.8,cat:'C1'}
+ ],
  sprints:[{km:90,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Etapin 2026 pisin päivä (205,8 km) vie kohti Sveitsin ja Saksan rajaseutuja. Aaltoileva maasto valmistelee jalkoja tulevaan kahden peräkkäisen vuoristopäivän rykelmään.</p>`,
@@ -779,12 +811,12 @@ const stages = [
  }},
 
 {n:14, dateIso:'2026-07-18', start:'Mulhouse', finish:'Le Markstein', km:155.3, type:'mountain', gain:3800, startCEST:'12:45',
- profile:[[0,20],[30,30],[55,45],[75,40],[95,60],[115,50],[135,70],[144,60],[155.3,88]],
+ profile:[[0,20],[36.5,62],[55,45],[71,56],[85,48],[94.3,64],[120,46],[149.3,86],[155.3,80]],
  climbs:[
-   {name:{fi:'1. luokan nousu I',en:'Category 1 climb I',fr:'Ascension de 1re catégorie I'},km:60,len:9,grad:7,cat:'C1'},
-   {name:{fi:'1. luokan nousu II',en:'Category 1 climb II',fr:'Ascension de 1re catégorie II'},km:95,len:8,grad:7,cat:'C1'},
-   {name:{fi:'Col du Haag',en:'Col du Haag'},km:130,len:11.2,grad:7.3,cat:'C1'},
-   {name:{fi:'Le Markstein (maali)',en:'Le Markstein (finish)',fr:'Le Markstein (arrivée)'},km:150,len:5,grad:6,cat:'C1'}
+   {name:{fi:'Grand Ballon',en:'Grand Ballon'},km:36.5,len:21.7,grad:4.8,cat:'C1'},
+   {name:{fi:'Col du Page',en:'Col du Page'},km:71.3,len:9.8,grad:4.7,cat:'C2'},
+   {name:{fi:'Ballon d’Alsace',en:'Ballon d’Alsace'},km:94.3,len:8.8,grad:6.9,cat:'C1'},
+   {name:{fi:'Col du Haag → Le Markstein (maali)',en:'Col du Haag → Le Markstein (finish)',fr:'Col du Haag → Le Markstein (arrivée)'},km:149.3,len:11.2,grad:7.2,cat:'C1'}
  ],
  sprints:[{km:40,pts:'25-20-16…'}],
  desc:{
@@ -794,10 +826,12 @@ const stages = [
  }},
 
 {n:15, dateIso:'2026-07-19', start:'Champagnole', finish:'Plateau de Solaison', km:183.9, type:'mountain', gain:4500, startCEST:'12:45',
- profile:[[0,20],[50,28],[90,35],[120,32],[145,50],[160,45],[172.6,60],[183.9,95]],
+ profile:[[0,20],[37,44],[60,32],[90,36],[120,32],[135.9,62],[146,60],[172,46],[183.8,95]],
  climbs:[
-   {name:{fi:'Jura-nousuja',en:'Jura climbs',fr:'Ascensions du Jura'},km:100,len:8,grad:6,cat:'C2'},
-   {name:{fi:'Plateau de Solaison (maali, HC)',en:'Plateau de Solaison (finish, HC)',fr:'Plateau de Solaison (arrivée, HC)'},km:172.6,len:11.3,grad:9.2,cat:'HC'}
+   {name:{fi:'Côte des Rousses',en:'Côte des Rousses'},km:36.8,len:6.6,grad:5.6,cat:'C3'},
+   {name:{fi:'Le Salève — Col de la Croisette',en:'Le Salève — Col de la Croisette'},km:135.9,len:4.7,grad:11,cat:'C1'},
+   {name:{fi:'Côte du Mont',en:'Côte du Mont'},km:146,len:2.1,grad:9.2,cat:'C3'},
+   {name:{fi:'Plateau de Solaison (maali, HC)',en:'Plateau de Solaison (finish, HC)',fr:'Plateau de Solaison (arrivée, HC)'},km:183.8,len:11.3,grad:8.9,cat:'HC'}
  ],
  sprints:[{km:55,pts:'25-20-16…'}],
  desc:{
@@ -809,8 +843,10 @@ const stages = [
 {n:'lepo', dateIso:'2026-07-20', labelKey:'rest2'},
 
 {n:16, dateIso:'2026-07-21', start:'Evian-les-Bains', finish:'Thonon-les-Bains', km:26.1, type:'itt', gain:250, startCEST:'12:30',
- profile:[[0,20],[8,25],[14,30],[20,22],[26.1,18]],
- climbs:[],
+ profile:[[0,20],[9.6,55],[16,35],[22,25],[26.1,18]],
+ climbs:[
+   {name:{fi:'Côte de Larringes',en:'Côte de Larringes'},km:9.6,len:9.5,grad:4.4,cat:'C1'}
+ ],
  sprints:[],
  desc:{
   fi:`<p>Kolmas viikko avautuu 26,1 km:n yksilöaika-ajolla Geneven­järven eteläpuolella, Evian-les-Bainsin ja Thonon-les-Bainsin välillä. Matka voi ratkaista kokonaiskilpailun järjestystä merkittävästi ennen Alppien loppurypistystä.</p>`,
@@ -819,8 +855,13 @@ const stages = [
  }},
 
 {n:17, dateIso:'2026-07-22', start:'Chambéry', finish:'Voiron', km:174.7, type:'flat', gain:1200, startCEST:'13:00',
- profile:[[0,25],[60,30],[110,26],[150,22],[174.7,18]],
- climbs:[],
+ profile:[[0,25],[19,40],[35,38],[49,48],[59,44],[90,30],[130,24],[174.7,18]],
+ climbs:[
+   {name:{fi:'Côte de Bassa',en:'Côte de Bassa'},km:19.1,len:1.5,grad:7.7,cat:'C4'},
+   {name:{fi:'Côte de Rossillon',en:'Côte de Rossillon'},km:35.5,len:1.7,grad:5.9,cat:'C4'},
+   {name:{fi:'Col des Près',en:'Col des Près'},km:49.5,len:3.5,grad:6.6,cat:'C3'},
+   {name:{fi:'Côte de Saint-Jean d’Arvey',en:'Côte de Saint-Jean d’Arvey'},km:59.4,len:1.1,grad:7.3,cat:'C4'}
+ ],
  sprints:[{km:60,pts:'70-50-40…'},{km:130,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Viimeinen selkeä mahdollisuus sprinttereille ennen Alppeja. Kaksi kirisprinttiä tarjoaa vielä ison potin pisteitä pistepaidan taistoon juuri ennen vuoristoloppua.</p>`,
@@ -829,10 +870,13 @@ const stages = [
  }},
 
 {n:18, dateIso:'2026-07-23', start:'Voiron', finish:'Orcières-Merlette', km:185.2, type:'mountain', gain:3600, startCEST:'12:15',
- profile:[[0,22],[50,28],[90,35],[130,32],[160,45],[178.1,55],[185.2,85]],
+ profile:[[0,22],[36.7,56],[60,40],[92,54],[113,58],[140,42],[166,54],[178,48],[185.1,85]],
  climbs:[
-   {name:{fi:'Alppien esivuoret',en:'Alpine foothills',fr:'Contreforts des Alpes'},km:120,len:9,grad:5,cat:'C2'},
-   {name:{fi:'Orcières-Merlette (maali)',en:'Orcières-Merlette (finish)',fr:'Orcières-Merlette (arrivée)'},km:178.1,len:7.1,grad:6.7,cat:'C1'}
+   {name:{fi:'Côte d’Engins',en:'Côte d’Engins'},km:36.7,len:11.4,grad:5.5,cat:'C1'},
+   {name:{fi:'Côte de Monteynard',en:'Côte de Monteynard'},km:92.2,len:9.7,grad:5.1,cat:'C2'},
+   {name:{fi:'Côte des Terrasses',en:'Côte des Terrasses'},km:112.8,len:3.4,grad:6.9,cat:'C3'},
+   {name:{fi:'Côte de Saint-Léger-les-Mélèzes',en:'Côte de Saint-Léger-les-Mélèzes'},km:166.2,len:2.5,grad:7.1,cat:'C3'},
+   {name:{fi:'Orcières-Merlette (maali)',en:'Orcières-Merlette (finish)',fr:'Orcières-Merlette (arrivée)'},km:185.1,len:7.1,grad:6.5,cat:'C1'}
  ],
  sprints:[{km:65,pts:'25-20-16…'}],
  desc:{
@@ -842,8 +886,13 @@ const stages = [
  }},
 
 {n:19, dateIso:'2026-07-24', start:'Gap', finish:'Alpe d’Huez', km:127.9, type:'mountain', gain:3300, startCEST:'13:30',
- profile:[[0,25],[35,30],[65,40],[90,35],[114.1,60],[127.9,98]],
- climbs:[{name:{fi:'Alpe d’Huez (klassinen puoli, maali, HC)',en:'Alpe d’Huez (classic side, finish, HC)',fr:'Alpe d’Huez (versant classique, arrivée, HC)'},km:114.1,len:13.8,grad:8.1,cat:'HC'}],
+ profile:[[0,25],[5,38],[25,58],[50,38],[80,42],[99,58],[114,62],[127.9,98]],
+ climbs:[
+   {name:{fi:'Col Bayard',en:'Col Bayard'},km:4.7,len:4.7,grad:7.2,cat:'C2'},
+   {name:{fi:'Col du Noyer',en:'Col du Noyer'},km:25.1,len:7.2,grad:8.4,cat:'C1'},
+   {name:{fi:'Col d’Ornon',en:'Col d’Ornon'},km:99.1,len:5.4,grad:6.2,cat:'C2'},
+   {name:{fi:'Alpe d’Huez (klassinen puoli, maali, HC)',en:'Alpe d’Huez (classic side, finish, HC)',fr:'Alpe d’Huez (versant classique, arrivée, HC)'},km:127.9,len:13.7,grad:8,cat:'HC'}
+ ],
  sprints:[{km:40,pts:'25-20-16…'}],
  desc:{
   fi:`<p>Lyhyt mutta räjähdysherkkä etappi, joka huipentuu Alpe d’Huezin klassiselle nousulle: 21 hiuspinnettä, 13,8 km matkaa ja 8,1 % keskikaltevuus. Kompakti matka suosii aggressiivista, aikaista hyökkäämistä.</p>`,
@@ -852,12 +901,12 @@ const stages = [
  }},
 
 {n:20, dateIso:'2026-07-25', start:'Bourg d’Oisans', finish:'Alpe d’Huez', km:170.9, type:'mountain', gain:5600, startCEST:'11:00',
- profile:[[0,25],[35,45],[55,35],[80,65],[100,50],[125,80],[140,65],[158.7,60],[170.9,98]],
+ profile:[[0,25],[33.7,62],[55,40],[87.5,70],[110.5,90],[135,52],[156.5,82],[170.9,96]],
  climbs:[
-   {name:{fi:'Col de la Croix de Fer',en:'Col de la Croix de Fer'},km:50,len:22,grad:5.2,cat:'HC'},
-   {name:{fi:'Col du Télégraphe',en:'Col du Télégraphe'},km:90,len:12,grad:7,cat:'C1'},
-   {name:{fi:'Col du Galibier',en:'Col du Galibier'},km:112,len:8,grad:6.9,cat:'HC'},
-   {name:{fi:'Col de Sarenne → Alpe d’Huez (maali, harvinainen suunta)',en:'Col de Sarenne → Alpe d’Huez (finish, rare approach)',fr:'Col de Sarenne → Alpe d’Huez (arrivée, versant rare)'},km:150,len:20,grad:5,cat:'HC'}
+   {name:{fi:'Col de la Croix de Fer',en:'Col de la Croix de Fer'},km:33.7,len:24.1,grad:5.3,cat:'HC'},
+   {name:{fi:'Col du Télégraphe',en:'Col du Télégraphe'},km:87.5,len:11.8,grad:7.1,cat:'C1'},
+   {name:{fi:'Col du Galibier',en:'Col du Galibier'},km:110.5,len:17.8,grad:6.8,cat:'HC'},
+   {name:{fi:'Col de Sarenne → Alpe d’Huez (maali, harvinainen suunta)',en:'Col de Sarenne → Alpe d’Huez (finish, rare approach)',fr:'Col de Sarenne → Alpe d’Huez (arrivée, versant rare)'},km:156.5,len:12.8,grad:7.2,cat:'HC'}
  ],
  sprints:[{km:35,pts:'25-20-16…'}],
  desc:{
@@ -867,8 +916,11 @@ const stages = [
  }},
 
 {n:21, dateIso:'2026-07-26', start:'Thoiry', finish:'Paris', km:133.0, type:'flat', gain:900, startCEST:'15:30',
- profile:[[0,20],[50,22],[90,25],[115,35],[125,40],[133,45]],
- climbs:[{name:{fi:'Montmartren mukulakivinousut',en:'Montmartre cobbled climbs',fr:'Montées pavées de Montmartre'},km:120,len:1,grad:8,cat:'C4'}],
+ profile:[[0,20],[43,32],[70,24],[90,34],[106,32],[122,36],[133,40]],
+ climbs:[
+   {name:{fi:'Côte du Pavé des Gardes',en:'Côte du Pavé des Gardes'},km:43,len:0.7,grad:8.7,cat:'C4'},
+   {name:{fi:'Côte de la Butte Montmartre (3×)',en:'Côte de la Butte Montmartre (3×)'},km:121.9,len:1.1,grad:5.3,cat:'C4'}
+ ],
  sprints:[{km:45,pts:'70-50-40…'},{km:95,pts:'70-50-40…'}],
  desc:{
   fi:`<p>Päätösetappi huipentuu perinteisesti Champs-Élysées'lle, mutta viime vuoden tapaan reitti kiertää myös Montmartren jyrkät mukulakivikadut, jotka voivat sotkea puhtaan sprinttiratkaisun. Kaksi kirisprinttiä jakaa vielä viimeiset pisteet pistepaitakamppailuun.</p>`,
