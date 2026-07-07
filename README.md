@@ -42,3 +42,24 @@ it directly with `requests` + `selectolax` instead.
 Each classification is fetched and parsed independently, so a change to
 letour.fr's HTML that breaks one table (e.g. mountains) doesn't take down
 the others — check the Actions log for warnings if a table stops updating.
+
+## License & disclaimer
+
+The **source code** of this project (`index.html`, `scripts/`, and the
+GitHub Actions workflow) is released under the [MIT License](LICENSE) — feel
+free to use, modify, and share it.
+
+The **results data**, however, is a different matter and the MIT license does
+**not** extend to it:
+
+- This is an unofficial, non-commercial fan project. It is **not affiliated
+  with, endorsed by, or connected to** Amaury Sport Organisation (A.S.O.),
+  letour.fr, or the Tour de France.
+- Race results shown here are fetched from **letour.fr** and remain the
+  property of their respective owners. No ownership of, or rights to, that
+  data are claimed or granted by this project.
+- "Tour de France" and related names and logos are trademarks of A.S.O. and
+  are used here only descriptively to identify the event.
+
+If you reuse this code, you are responsible for sourcing your own data and
+complying with the terms of whatever source you use.
