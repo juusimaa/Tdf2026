@@ -131,7 +131,13 @@
   table.points{width:100%;border-collapse:collapse;font-size:13px;}
   table.points th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;color:var(--ink-soft);letter-spacing:.05em;padding:4px 6px;border-bottom:1px solid var(--line);}
   table.points td{padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
-  .flagchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;background:var(--rosa-deep);padding:1px 6px;border-radius:20px;}
+  td.atkm{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);white-space:nowrap;}
+  .catchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;min-width:16px;text-align:center;padding:1px 6px;border-radius:20px;}
+  .dash{color:var(--ink-soft);}
+  .flagchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;background:var(--green);padding:1px 6px;border-radius:20px;}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 2px;font-size:11.5px;color:var(--ink-soft);}
+  .legend span{display:inline-flex;align-items:center;gap:5px;}
+  .leg-swatch{width:11px;height:11px;border-radius:3px;display:inline-block;}
   .empty-note{color:var(--ink-soft);font-size:13px;font-style:italic;}
 
   /* Results view (classifications + stage winners) */
@@ -236,10 +242,13 @@ const STRINGS = {
     restDay: 'Lepopäivä',
     stagePrefix: 'Etappi',
     factDistance: 'Matka', factGain: 'Nousumetrit', factType: 'Tyyppi', factWinner: 'Etappivoitto',
-    descHeader: 'Etapin kuvaus', climbsHeader: 'Avainnousut',
-    climbHead: ['Nousu', 'Pituus', 'Keskikaltevuus'],
-    noClimbs: 'Ei merkittäviä luokiteltuja nousuja.',
-    chartCaption: 'Havainnollistava profiili — ei mitattua GPS-korkeusdataa.',
+    descHeader: 'Etapin kuvaus', climbsHeader: 'Nousut (GPM)',
+    climbHead: ['Nousu', 'Lk.', 'Pituus', 'Kaltevuus', 'Kohta'],
+    noClimbs: 'Ei luokiteltuja nousuja.',
+    sprintsHeader: 'Välisprintit', sprintHead: ['Sprintti', 'Kohta'],
+    sprintChip: 'Sprintti', noSprints: 'Ei välisprinttejä.', atKm: 'km',
+    legCat: 'Lk.', legUncat: 'Luokittelematon', legSprint: 'Välisprintti',
+    chartCaption: 'Havainnollistava profiili — nousut ja sprintit on merkitty todelliseen kilometrikohtaan; korkeuskäyrä ei ole mitattua GPS-dataa.',
     profileAria: n => `Etapin ${n} havainnollistava korkeusprofiili`,
     summitNote: name => `Maalinousu: ${name}.`,
     winnerNote: w => `Etappivoitto: ${w}.`,
@@ -252,7 +261,7 @@ const STRINGS = {
     teamsName: 'Joukkuekilpailu', teamsJersey: 'Joukkueet',
     colPos: '#', colRider: 'Ajaja', colTime: 'Aika', colGap: 'Ero', colPts: 'Pisteet',
     colStage: 'Etappi', colRoute: 'Reitti', colWinner: 'Voittaja',
-    profileDisclaimer: 'Korkeusprofiilit ovat havainnollistavia luonnoksia, jotka on rakennettu etapin tyypin, matkan ja tunnettujen nousujen perusteella — ne eivät ole GPS-mitattua korkeusdataa. Etappivoittajat haetaan Tulokset-välilehden tiedoista.',
+    profileDisclaimer: 'Korkeusprofiilit ovat havainnollistavia: käyrän muoto on rakennettu nousujen sijainneista, mutta se ei ole GPS-mitattua korkeusdataa. Nousut ja välisprintit on merkitty julkaistuun kilometrikohtaan (osa likimääräisiä). Nousujen luokat (GPM) näytetään vain, kun järjestäjä on ne julkaissut — muutoin "—". Nousujen pituudet ja kaltevuudet: cyclingstage.com. Etappivoittajat: Tulokset-välilehti.',
     disclaimerLabel: 'Ei-virallinen fanisivusto.',
     disclaimerText: 'Tämä on epävirallinen, ei-kaupallinen fanisivusto, joka ei liity RCS Sportiin tai Giro d’Italiaan. Tulokset ovat oikeudenomistajiensa omaisuutta.',
     sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit, matkat ja tyypit: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Tulokset: cyclinguptodate.com, giroditalia.it (tarkistettu ristiin).',
@@ -269,10 +278,13 @@ const STRINGS = {
     restDay: 'Rest day',
     stagePrefix: 'Stage',
     factDistance: 'Distance', factGain: 'Elevation gain', factType: 'Type', factWinner: 'Stage winner',
-    descHeader: 'Stage description', climbsHeader: 'Key climbs',
-    climbHead: ['Climb', 'Length', 'Avg gradient'],
-    noClimbs: 'No major categorized climbs.',
-    chartCaption: 'Illustrative profile — not GPS-measured elevation data.',
+    descHeader: 'Stage description', climbsHeader: 'Climbs (KOM)',
+    climbHead: ['Climb', 'Cat', 'Length', 'Gradient', 'At'],
+    noClimbs: 'No categorized climbs.',
+    sprintsHeader: 'Intermediate sprints', sprintHead: ['Sprint', 'At'],
+    sprintChip: 'Sprint', noSprints: 'No intermediate sprints.', atKm: 'km',
+    legCat: 'Cat', legUncat: 'Uncategorized', legSprint: 'Sprint',
+    chartCaption: 'Illustrative profile — climbs and sprints are marked at their real kilometre point; the elevation curve is not GPS-measured data.',
     profileAria: n => `Illustrative elevation profile of stage ${n}`,
     summitNote: name => `Summit finish at ${name}.`,
     winnerNote: w => `Stage won by ${w}.`,
@@ -285,7 +297,7 @@ const STRINGS = {
     teamsName: 'Teams classification', teamsJersey: 'Teams',
     colPos: '#', colRider: 'Rider', colTime: 'Time', colGap: 'Gap', colPts: 'Points',
     colStage: 'Stage', colRoute: 'Route', colWinner: 'Winner',
-    profileDisclaimer: 'The elevation profiles are illustrative sketches built from the stage type, distance and known climbs — they are not GPS-measured elevation data. Stage winners are read from the Results tab data.',
+    profileDisclaimer: 'The elevation profiles are illustrative: the curve is built from the climb positions and is not GPS-measured data. Climbs and intermediate sprints are marked at their published kilometre point (some approximate). Climb categories (GPM) are shown only where the organiser published them — otherwise "—". Climb lengths and average gradients: cyclingstage.com. Stage winners: the Results tab.',
     disclaimerLabel: 'Unofficial fan project.',
     disclaimerText: 'This is an unofficial, non-commercial fan project, not affiliated with RCS Sport or the Giro d’Italia. Results remain the property of their respective owners.',
     sourcesLabel: 'Sources:', sourcesText: 'Route, stages, distances and types: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Results: cyclinguptodate.com, giroditalia.it (cross-checked).',
@@ -302,10 +314,13 @@ const STRINGS = {
     restDay: 'Jour de repos',
     stagePrefix: 'Étape',
     factDistance: 'Distance', factGain: 'Dénivelé', factType: 'Type', factWinner: 'Vainqueur',
-    descHeader: 'Description de l’étape', climbsHeader: 'Ascensions clés',
-    climbHead: ['Ascension', 'Longueur', 'Pente moy.'],
-    noClimbs: 'Pas d’ascension catégorisée majeure.',
-    chartCaption: 'Profil illustratif — pas de données d’altitude mesurées au GPS.',
+    descHeader: 'Description de l’étape', climbsHeader: 'Ascensions (GPM)',
+    climbHead: ['Ascension', 'Cat.', 'Longueur', 'Pente', 'Au'],
+    noClimbs: 'Aucune ascension catégorisée.',
+    sprintsHeader: 'Sprints intermédiaires', sprintHead: ['Sprint', 'Au'],
+    sprintChip: 'Sprint', noSprints: 'Pas de sprint intermédiaire.', atKm: 'km',
+    legCat: 'Cat.', legUncat: 'Non catégorisée', legSprint: 'Sprint',
+    chartCaption: 'Profil illustratif — ascensions et sprints placés à leur kilomètre réel ; la courbe d’altitude n’est pas mesurée au GPS.',
     profileAria: n => `Profil d’altitude illustratif de l’étape ${n}`,
     summitNote: name => `Arrivée au sommet à ${name}.`,
     winnerNote: w => `Étape remportée par ${w}.`,
@@ -318,7 +333,7 @@ const STRINGS = {
     teamsName: 'Classement par équipes', teamsJersey: 'Équipes',
     colPos: '#', colRider: 'Coureur', colTime: 'Temps', colGap: 'Écart', colPts: 'Points',
     colStage: 'Étape', colRoute: 'Parcours', colWinner: 'Vainqueur',
-    profileDisclaimer: 'Les profils d’altitude sont des esquisses illustratives construites à partir du type d’étape, de la distance et des ascensions connues — ce ne sont pas des données d’altitude mesurées au GPS. Les vainqueurs d’étape proviennent des données de l’onglet Classements.',
+    profileDisclaimer: 'Les profils sont illustratifs : la courbe est construite à partir de la position des ascensions et n’est pas mesurée au GPS. Ascensions et sprints intermédiaires sont placés à leur kilomètre publié (certains approximatifs). Les catégories (GPM) ne sont indiquées que lorsqu’elles ont été publiées par l’organisateur — sinon « — ». Longueurs et pentes moyennes : cyclingstage.com. Vainqueurs d’étape : onglet Classements.',
     disclaimerLabel: 'Projet de fans non officiel.',
     disclaimerText: 'Projet de fans non officiel et non commercial, sans lien avec RCS Sport ni le Giro d’Italia. Les résultats restent la propriété de leurs ayants droit.',
     sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes, distances et types : en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Classements : cyclinguptodate.com, giroditalia.it (recoupés).',
@@ -339,41 +354,73 @@ function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRING
 let RESULTS = null;
 
 /* ---------- STAGE DATA ----------
-   Distances and types from Wikipedia / cyclingstage.com; elevation gain shown
-   only where a source published it. Profiles are generated illustratively from
-   the stage type + summit-finish flag (see the disclaimer). */
+   Distances/types: Wikipedia + cyclingstage.com. Climbs (name, summit km, length,
+   gradient) and intermediate-sprint km: the per-stage cyclingstage.com route
+   pages. Climb `cat` (GPM category) is included only where the organiser's
+   category was published; it is left off where no official category was found
+   (shown as "—") rather than guessed. Summit-finish climbs use the finish km.
+   Elevation gain shown only where a source published it. Profiles are
+   illustrative, built from the climb positions — see the disclaimer. */
 const TYPE_COLOR = {flat:'var(--blue)', hilly:'var(--green)', mountain:'var(--red)', itt:'var(--grey)'};
+const CAT_COLOR = {1:'#B23B32', 2:'#C9622E', 3:'#C99A2E', 4:'#7E8A46'};
+const SPRINT_COLOR = '#3E7A57';
 function typeColor(tp){ return TYPE_COLOR[tp] || 'var(--grey)'; }
 
 const stages = [
-  {n:1,  date:'2026-05-08', start:'Nessebar', finish:'Burgas', km:147, type:'flat'},
-  {n:2,  date:'2026-05-09', start:'Burgas', finish:'Veliko Tarnovo', km:221, type:'hilly'},
-  {n:3,  date:'2026-05-10', start:'Plovdiv', finish:'Sofia', km:175, type:'flat'},
-  {n:4,  date:'2026-05-12', start:'Catanzaro', finish:'Cosenza', km:138, type:'flat'},
-  {n:5,  date:'2026-05-13', start:'Praia a Mare', finish:'Potenza', km:203, type:'hilly'},
-  {n:6,  date:'2026-05-14', start:'Paestum', finish:'Naples', km:142, type:'flat'},
+  {n:1,  date:'2026-05-08', start:'Nessebar', finish:'Burgas', km:147, type:'flat',
+   climbs:[], sprints:[{km:114.7}]},
+  {n:2,  date:'2026-05-09', start:'Burgas', finish:'Veliko Tarnovo', km:221, type:'hilly',
+   climbs:[{name:'Byala Pass',km:87.7,len:7.7,grad:4.6},{name:'Vratnik Pass',km:96.9,len:9.2,grad:4.0},{name:'Lyaskovets Monastery',km:210,len:3.9,grad:6.8}],
+   sprints:[{km:205.5}]},
+  {n:3,  date:'2026-05-10', start:'Plovdiv', finish:'Sofia', km:175, type:'flat',
+   climbs:[{name:'Borovec Pass',km:103.8,len:9.2,grad:5.4}], sprints:[{km:162}]},
+  {n:4,  date:'2026-05-12', start:'Catanzaro', finish:'Cosenza', km:138, type:'flat',
+   climbs:[{name:'Salita di Cosenza',km:94.6,len:14.4,grad:5.9}], sprints:[{km:126.4}]},
+  {n:5,  date:'2026-05-13', start:'Praia a Mare', finish:'Potenza', km:203, type:'hilly',
+   climbs:[{name:'Prestieri',len:13.6,grad:4.8},{name:'Viggiano',len:5.5,grad:5.5},{name:'Montagna Grande di Viggiano',len:6.6,grad:9.1}],
+   sprints:[{km:174.2}]},
+  {n:6,  date:'2026-05-14', start:'Paestum', finish:'Naples', km:142, type:'flat',
+   climbs:[], sprints:[{km:118.3}]},
   {n:7,  date:'2026-05-15', start:'Formia', finish:'Blockhaus', km:244, type:'mountain', summit:'Blockhaus (Maiella)',
-   climbs:[{name:'Blockhaus (Maiella)'}]},
-  {n:8,  date:'2026-05-16', start:'Chieti', finish:'Fermo', km:156, type:'hilly'},
+   climbs:[{name:'Rionero Sannitico',km:50,len:9.5,grad:5.0,cat:4},{name:'Roccaraso',km:95,len:6.9,grad:6.5,cat:3},{name:'Passo Forchetta',km:105,len:1.9,grad:7.1,cat:4},{name:'Passo San Leonardo',km:113,len:8.4,grad:3.1,cat:4},{name:'Blockhaus',km:244,len:13.6,grad:8.4,cat:1}],
+   sprints:[{km:232.1}]},
+  {n:8,  date:'2026-05-16', start:'Chieti', finish:'Fermo', km:156, type:'hilly',
+   climbs:[{name:'Monterubbiano',len:4.7,grad:5.7},{name:'Capodarco',len:2.5,grad:6.3},{name:'Fermo (arrivo)',len:3.7,grad:5.7}],
+   sprints:[{km:131.7}]},
   {n:9,  date:'2026-05-17', start:'Cervia', finish:'Corno alle Scale', km:184, type:'mountain', summit:'Corno alle Scale',
-   climbs:[{name:'Corno alle Scale'}]},
-  {n:10, date:'2026-05-19', start:'Viareggio', finish:'Massa', km:42, type:'itt'},
-  {n:11, date:'2026-05-20', start:'Porcari', finish:'Chiavari', km:195, type:'hilly'},
-  {n:12, date:'2026-05-21', start:'Imperia', finish:'Novi Ligure', km:175, type:'flat'},
-  {n:13, date:'2026-05-22', start:'Alessandria', finish:'Verbania', km:189, type:'hilly'},
+   climbs:[{name:'Gaggio Montano',km:135,len:3.5,grad:7.2,cat:2},{name:'Querciola',km:146.3,len:11.3,grad:4.3,cat:2},{name:'Corno alle Scale',km:184,len:12.8,grad:5.9,cat:1}],
+   sprints:[{km:172.6}]},
+  {n:10, date:'2026-05-19', start:'Viareggio', finish:'Massa', km:42, type:'itt',
+   climbs:[], sprints:[]},
+  {n:11, date:'2026-05-20', start:'Porcari', finish:'Chiavari', km:195, type:'hilly',
+   climbs:[{name:'La Foce',km:2.6,len:2.6,grad:6.8},{name:'Pignone',km:4.6,len:2,grad:7.2},{name:'Passo del Termine',km:11.6,len:7.4,grad:4.9},{name:'Colle di Guaitarola',km:21.3,len:9.7,grad:6.3},{name:'Colla dei Scioli',km:176.7,len:5.7,grad:6.4},{name:'Cogorno',km:185.3,len:4.6,grad:6.7}],
+   sprints:[{km:182.4}]},
+  {n:12, date:'2026-05-21', start:'Imperia', finish:'Novi Ligure', km:175, type:'flat',
+   climbs:[{name:'Colle Giovo',len:11.4,grad:4.4},{name:'Bric Berton',len:5.5,grad:5.9}], sprints:[{km:161.6}]},
+  {n:13, date:'2026-05-22', start:'Alessandria', finish:'Verbania', km:189, type:'hilly',
+   climbs:[{name:'Bieno',len:2.4,grad:5.5},{name:'Ungiasca',len:4.7,grad:7.1}], sprints:[{km:172.3}]},
   {n:14, date:'2026-05-23', start:'Aosta', finish:'Pila', km:133, type:'mountain', summit:'Pila',
-   climbs:[{name:'Pila'}]},
-  {n:15, date:'2026-05-24', start:'Voghera', finish:'Milan', km:157, type:'flat'},
+   climbs:[{name:'Col du Saint-Barthélemy',km:15.8,len:15.8,grad:6.1},{name:'Roisan',km:25,len:3.5,grad:5.5},{name:'Doues',km:32,len:5.8,grad:6.2},{name:'Lin Noir',km:47,len:7.4,grad:7.9},{name:'Verrogne',km:57,len:5.6,grad:6.9},{name:'Pila',km:133,len:16.5,grad:7.1}],
+   sprints:[{km:116}]},
+  {n:15, date:'2026-05-24', start:'Voghera', finish:'Milan', km:157, type:'flat',
+   climbs:[], sprints:[{km:114.8}]},
   {n:16, date:'2026-05-26', start:'Bellinzona', finish:'Carì', km:113, type:'mountain', summit:'Carì',
-   climbs:[{name:'Carì'}]},
-  {n:17, date:'2026-05-27', start:"Cassano d'Adda", finish:'Andalo', km:202, type:'hilly', gain:3300},
+   climbs:[{name:'Torre',len:4.7,grad:5.6},{name:'Leontica',len:3,grad:8.5},{name:'Carì',km:113,len:11.7,grad:7.9}],
+   sprints:[{km:100.6}]},
+  {n:17, date:'2026-05-27', start:"Cassano d'Adda", finish:'Andalo', km:202, type:'hilly', gain:3300,
+   climbs:[{name:'Passo dei Tre Termini',km:8.2,len:8.2,grad:5.9},{name:'Cocca de Lodrino',km:20,len:8.2,grad:4.1},{name:'Roncone',km:55,len:4.8,grad:5.0},{name:'Stenico',km:90,len:2,grad:4.7},{name:'San Lorenzo Dorsino',km:100,len:2.9,grad:6.4},{name:'Andalo',km:195,len:2,grad:6.2}],
+   sprints:[{km:186.6}]},
   {n:18, date:'2026-05-28', start:'Fai della Paganella', finish:'Pieve di Soligo', km:171, type:'flat',
-   climbs:[{name:"Muro di Ca' del Poggio"}]},
+   climbs:[{name:'Fastro',km:81.6,len:3.2,grad:3.9,cat:4},{name:"Muro di Ca' del Poggio",km:157.7,len:1.1,grad:12.3}],
+   sprints:[{km:135.4}]},
   {n:19, date:'2026-05-29', start:'Feltre', finish:'Alleghe', km:151, type:'mountain', gain:5000, summit:'Piani di Pezzè (Alleghe)',
-   climbs:[{name:'Passo Duran'},{name:'Passo Staulanza'},{name:'Passo Giau'},{name:'Passo Falzarego'},{name:'Piani di Pezzè'}]},
+   climbs:[{name:'Passo Duran',km:60,len:12.1,grad:8.2,cat:1},{name:'Passo Staulanza',km:78,len:12.1,grad:7.7,cat:1},{name:'Passo Giau',km:98,len:9.9,grad:9.3,cat:1},{name:'Passo Falzarego',km:118,len:10.1,grad:5.6,cat:2},{name:'Piani di Pezzè',km:151,len:5,grad:9.8,cat:1}],
+   sprints:[{km:118.6}]},
   {n:20, date:'2026-05-30', start:'Gemona del Friuli', finish:'Piancavallo', km:200, type:'mountain', gain:3750, summit:'Piancavallo',
-   climbs:[{name:'Piancavallo', len:14.5, grad:7.8}]},
-  {n:21, date:'2026-05-31', start:'Rome', finish:'Rome', km:131, type:'flat'},
+   climbs:[{name:'Forgaria del Friuli',km:25,len:1.3,grad:8.5},{name:'Clauzetto',km:45,len:6.9,grad:5.7,cat:3},{name:'Piancavallo (1ª asc.)',km:179,len:11.1,grad:8.0},{name:'Piancavallo',km:200,len:14.5,grad:7.8,cat:1}],
+   sprints:[{km:176.3}]},
+  {n:21, date:'2026-05-31', start:'Rome', finish:'Rome', km:131, type:'flat',
+   climbs:[], sprints:[{km:77.7}]},
 ];
 // Rest days shown in the list after these stage numbers.
 const REST_AFTER = {3:'2026-05-11', 9:'2026-05-18', 15:'2026-05-25'};
@@ -389,16 +436,42 @@ function fmtDate(iso){
 }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
-/* ---------- ILLUSTRATIVE PROFILE ---------- */
-function genProfile(st){
-  const k=st.km;
-  const P=(frac,h)=>[+(k*frac).toFixed(1),h];
+/* ---------- ILLUSTRATIVE PROFILE ----------
+   Climbs with a known summit km drive the profile shape, so the climb markers
+   line up with the bumps. Stages whose climbs have no published km fall back to
+   a generic shape by type (markers are then omitted for those climbs). */
+function climbsWithKm(st){ return (st.climbs||[]).filter(c=>c.km!=null).sort((a,b)=>a.km-b.km); }
+function genericProfile(st){
+  const k=st.km, P=(frac,h)=>[+(k*frac).toFixed(1),h];
   if(st.type==='itt') return [P(0,20),P(.5,26),P(1,22)];
   if(st.type==='flat') return [P(0,20),P(.3,25),P(.5,19),P(.7,27),P(1,18)];
   if(st.type==='hilly') return [P(0,24),P(.2,46),P(.4,32),P(.6,55),P(.8,38),P(1,st.summit?88:44)];
-  // mountain
   if(st.summit) return [P(0,24),P(.28,50),P(.48,34),P(.68,60),P(.82,46),P(1,94)];
   return [P(0,30),P(.25,62),P(.45,40),P(.65,74),P(.85,46),P(1,56)];
+}
+function climbHeight(c){ // illustrative peak height 40–95 from length × gradient
+  const gain=(c.len||4)*(c.grad||5); // ~ metres/10
+  return Math.max(40, Math.min(95, 36 + gain*0.4));
+}
+function genProfile(st){
+  const cs=climbsWithKm(st);
+  if(st.type==='itt' || !cs.length) return genericProfile(st);
+  const total=st.km, pts=[[0,18]];
+  let last=0;
+  cs.forEach(c=>{
+    const foot=Math.max(last+1, Math.max(1, c.km-(c.len||4)));
+    if(foot>last+1) pts.push([+foot.toFixed(1),22]);
+    pts.push([c.km, climbHeight(c)]);
+    if(c.km < total-4) pts.push([+Math.min(total, c.km+Math.max(3,(c.len||4)*0.5)).toFixed(1),28]);
+    last=c.km;
+  });
+  const lastPt=pts[pts.length-1];
+  if(lastPt[0] < total-0.5) pts.push([total, st.summit?90:18]);
+  else if(st.summit) lastPt[1]=Math.max(lastPt[1],90);
+  // enforce strictly increasing x
+  const out=[];
+  pts.forEach(p=>{ const x=Math.max(0,Math.min(total,p[0])); if(!out.length || x>out[out.length-1][0]) out.push([+x.toFixed(1),p[1]]); });
+  return out;
 }
 function buildPath(points,totalKm,W,H,padL,padR,padT,padB){
   const plotW=W-padL-padR, plotH=H-padT-padB;
@@ -425,6 +498,21 @@ function renderProfile(st){
   const col=typeColor(st.type);
   svg+=`<path d="${d} L ${xForKm(totalKm,totalKm,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="${col}" opacity="0.16"/>`;
   svg+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="2.4" stroke-linejoin="round"/>`;
+  // climb markers (only for climbs whose summit km is known)
+  climbsWithKm(st).forEach(c=>{
+    const cx=xForKm(c.km,totalKm,W,padL,padR);
+    const foot=xForKm(Math.max(0,c.km-(c.len||4)),totalKm,W,padL,padR);
+    const cc=CAT_COLOR[c.cat]||'#8B8F84';
+    svg+=`<rect x="${foot}" y="${padT}" width="${Math.max(2,cx-foot)}" height="${plotH}" fill="${cc}" opacity="0.14"/>`;
+    svg+=`<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${baseY}" stroke="${cc}" stroke-width="1.5" stroke-dasharray="2,2"/>`;
+    svg+=`<circle cx="${cx}" cy="${padT-3}" r="4.5" fill="${cc}"/>`;
+  });
+  // intermediate sprint markers
+  (st.sprints||[]).forEach(s=>{
+    const sx=xForKm(s.km,totalKm,W,padL,padR);
+    svg+=`<line x1="${sx}" y1="${padT}" x2="${sx}" y2="${baseY}" stroke="${SPRINT_COLOR}" stroke-width="1.2" stroke-dasharray="1,3" opacity="0.75"/>`;
+    svg+=`<circle cx="${sx}" cy="${baseY+5}" r="4.5" fill="${SPRINT_COLOR}"/>`;
+  });
   svg+=`</svg>`;
   return svg;
 }
@@ -474,13 +562,29 @@ function selectStage(idx){
   const b=document.querySelector(`.stage-btn[data-idx="${idx}"]`); if(b) b.scrollIntoView({block:'nearest'});
   renderPanel(stages[idx]);
 }
+function catChip(cat){
+  if(!cat) return '<span class="dash">—</span>';
+  return `<span class="catchip" style="background:${CAT_COLOR[cat]||'#8B8F84'}">${cat}</span>`;
+}
 function renderPanel(st){
   const panel=document.getElementById('panel');
   const tc=typeColor(st.type);
   const climbs=st.climbs||[];
   let climbRows='';
   if(climbs.length){
-    climbRows=climbs.map(c=>`<tr><td>${esc(c.name)}</td><td>${c.len?fmtKm(c.len):'—'}</td><td>${c.grad?esc(c.grad)+' %':'—'}</td></tr>`).join('');
+    climbRows=climbs.map(c=>`<tr>
+      <td>${esc(c.name)}</td>
+      <td>${catChip(c.cat)}</td>
+      <td>${c.len?fmtKm(c.len):'—'}</td>
+      <td>${c.grad?esc(c.grad)+' %':'—'}</td>
+      <td class="atkm">${c.km!=null?'~ '+t('atKm')+' '+Math.round(c.km):'—'}</td></tr>`).join('');
+  }
+  const sprints=st.sprints||[];
+  let sprintRows='';
+  if(sprints.length){
+    sprintRows=sprints.map((s,i)=>`<tr>
+      <td><span class="flagchip">${t('sprintChip')}${sprints.length>1?' '+(i+1):''}</span></td>
+      <td class="atkm">~ ${t('atKm')} ${Math.round(s.km)}</td></tr>`).join('');
   }
   const w=winnerFor(st.n);
   panel.innerHTML=`
@@ -499,14 +603,25 @@ function renderPanel(st){
     </div>
     <div class="chartbox">
       ${renderProfile(st)}
+      <div class="legend">
+        <span><span class="leg-swatch" style="background:${CAT_COLOR[1]}"></span> ${t('legCat')} 1</span>
+        <span><span class="leg-swatch" style="background:${CAT_COLOR[2]}"></span> 2</span>
+        <span><span class="leg-swatch" style="background:${CAT_COLOR[3]}"></span> 3</span>
+        <span><span class="leg-swatch" style="background:${CAT_COLOR[4]}"></span> 4</span>
+        <span><span class="leg-swatch" style="background:#8B8F84"></span> ${t('legUncat')}</span>
+        <span><span class="leg-swatch" style="background:${SPRINT_COLOR};border-radius:50%"></span> ${t('legSprint')}</span>
+      </div>
       <div class="chart-caption">${t('chartCaption')}</div>
     </div>
     <div class="twocol">
       <div class="block narrative"><h3>${t('descHeader')}</h3>${genDesc(st)}</div>
       <div class="block">
         <h3>${t('climbsHeader')}</h3>
-        ${climbRows ? `<table class="points"><thead><tr><th>${t('climbHead')[0]}</th><th>${t('climbHead')[1]}</th><th>${t('climbHead')[2]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
+        ${climbRows ? `<table class="points"><thead><tr><th>${t('climbHead')[0]}</th><th>${t('climbHead')[1]}</th><th>${t('climbHead')[2]}</th><th>${t('climbHead')[3]}</th><th>${t('climbHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
                     : `<p class="empty-note">${t('noClimbs')}</p>`}
+        <h3 style="margin-top:16px;">${t('sprintsHeader')}</h3>
+        ${sprintRows ? `<table class="points"><thead><tr><th>${t('sprintHead')[0]}</th><th>${t('sprintHead')[1]}</th></tr></thead><tbody>${sprintRows}</tbody></table>`
+                     : `<p class="empty-note">${t('noSprints')}</p>`}
       </div>
     </div>`;
 }
