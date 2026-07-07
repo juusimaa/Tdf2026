@@ -8,7 +8,7 @@ France, Giro d'Italia, Vuelta a España) from one **tour-aware** codebase.
 ```
 index.html                            # "Grand Tours" landing page (tour picker)
 tdf2026.html                          # Tour de France — stages + auto-updating results
-giro2026.html                         # Giro d'Italia — final results (static)
+giro2026.html                         # Giro d'Italia — stages, profiles & final results (static)
 vuelta2026.html                       # Vuelta a España — placeholder (title only)
 data/tdf2026-results.json             # Tour de France results — auto-updated
 data/giro2026-results.json            # Giro d'Italia final results — static
@@ -28,7 +28,9 @@ the landing page. The Vuelta opens a placeholder page for now.
   its final classifications and stage winners are stored once in
   `data/giro2026-results.json` (same schema as the Tour file) and never
   refetched. It is deliberately **not** in the `TOURS` registry, so the
-  workflow leaves it untouched. `giro2026.html` just reads that JSON.
+  workflow leaves it untouched. `giro2026.html` reads that JSON for the
+  Results tab; its Stages tab (routes, distances, illustrative profiles) is
+  built from a small hardcoded `stages` array in the page itself.
 
 To add a live tour, register it in `TOURS` (with a source handler) and point a
 page at its `data/<tour>-results.json`. To add a finished race, drop a static
