@@ -199,11 +199,11 @@
       </a>
     </li>
     <li>
-      <a class="tourcard soon" href="giro2026.html" style="--accent:var(--pink)">
-        <span class="badge-soon" id="giroBadge"></span>
+      <a class="tourcard" href="giro2026.html" style="--accent:var(--pink)">
         <span class="tour-tld">ITA</span>
         <span class="tour-name">Giro d'Italia</span>
         <span class="tour-dates" id="giroDates"></span>
+        <span class="tour-desc" id="giroDesc"></span>
         <span class="tour-cta"><span id="giroCta"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
@@ -235,10 +235,11 @@ const LANG_KEY = 'tdf2026-lang';
 const STRINGS = {
   fi: {
     eyebrow: 'Kausi 2026 · Grand tourit',
-    subDesc: 'Valitse kilpailu. Tällä hetkellä avoinna on Tour de France 2026 — Giro d’Italia ja Vuelta a España tulevat myöhemmin.',
+    subDesc: 'Valitse kilpailu. Tour de France ja Giro d’Italia ovat avoinna — Vuelta a España tulee myöhemmin.',
     tdfDates: '4.–26. heinäkuuta 2026',
     tdfDesc: 'Kaikki 21 etappia, reitit, korkeusprofiilit ja päivittyvät tulokset.',
-    giroDates: 'Toukokuu 2026',
+    giroDates: '8.–31. toukokuuta 2026',
+    giroDesc: 'Lopulliset luokitukset ja etappivoittajat — Vingegaard voitti.',
     vueltaDates: 'Elo–syyskuu 2026',
     open: 'Avaa',
     soon: 'Tulossa',
@@ -246,10 +247,11 @@ const STRINGS = {
   },
   en: {
     eyebrow: '2026 season · Grand Tours',
-    subDesc: 'Pick a race. The Tour de France 2026 is available now — the Giro d’Italia and Vuelta a España are coming later.',
+    subDesc: 'Pick a race. The Tour de France and Giro d’Italia are available now — the Vuelta a España is coming later.',
     tdfDates: '4–26 July 2026',
     tdfDesc: 'All 21 stages, routes, elevation profiles and live-updating results.',
-    giroDates: 'May 2026',
+    giroDates: '8–31 May 2026',
+    giroDesc: 'Final classifications and stage winners — Vingegaard wins.',
     vueltaDates: 'August–September 2026',
     open: 'Open',
     soon: 'Coming soon',
@@ -257,10 +259,11 @@ const STRINGS = {
   },
   fr: {
     eyebrow: 'Saison 2026 · Grands Tours',
-    subDesc: 'Choisissez une course. Le Tour de France 2026 est disponible — le Giro d’Italia et la Vuelta a España arrivent bientôt.',
+    subDesc: 'Choisissez une course. Le Tour de France et le Giro d’Italia sont disponibles — la Vuelta a España arrive bientôt.',
     tdfDates: '4–26 juillet 2026',
     tdfDesc: 'Les 21 étapes, parcours, profils et classements mis à jour.',
-    giroDates: 'Mai 2026',
+    giroDates: '8–31 mai 2026',
+    giroDesc: 'Classements finals et vainqueurs d’étape — victoire de Vingegaard.',
     vueltaDates: 'Août–septembre 2026',
     open: 'Ouvrir',
     soon: 'Bientôt',
@@ -289,8 +292,8 @@ function render(){
   document.getElementById('tdfDesc').textContent = t('tdfDesc');
   document.getElementById('tdfCta').textContent = t('open');
   document.getElementById('giroDates').textContent = t('giroDates');
-  document.getElementById('giroCta').textContent = t('soon');
-  document.getElementById('giroBadge').textContent = t('soon');
+  document.getElementById('giroDesc').textContent = t('giroDesc');
+  document.getElementById('giroCta').textContent = t('open');
   document.getElementById('vueltaDates').textContent = t('vueltaDates');
   document.getElementById('vueltaCta').textContent = t('soon');
   document.getElementById('vueltaBadge').textContent = t('soon');

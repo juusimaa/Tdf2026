@@ -6,61 +6,297 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9ECE4">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12160F">
-<title>Giro d'Italia 2026</title>
-<meta name="description" content="Giro d'Italia 2026 — coming soon.">
+<title>Giro d'Italia 2026 — lopputulokset & luokitukset</title>
+<meta name="description" content="Giro d'Italia 2026 — lopulliset luokitukset ja etappivoittajat. Jonas Vingegaard voitti. · Final classifications and stage winners of the 2026 Giro d'Italia.">
+<link rel="canonical" href="https://juusimaa.github.io/Tdf2026/giro2026.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Grand Tours 2026">
+<meta property="og:title" content="Giro d'Italia 2026 — final results">
+<meta property="og:description" content="Final classifications and stage winners of the 2026 Giro d'Italia.">
+<meta property="og:url" content="https://juusimaa.github.io/Tdf2026/giro2026.html">
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme:light dark;
-    --paper:#E9ECE4;--ink:#1E2A22;--ink-soft:#4C5A50;--line:#C6CCBC;--accent:#D14E7C;
+    --paper:#E9ECE4;--paper-panel:#F4F6EF;--ink:#1E2A22;--ink-soft:#4C5A50;--line:#C6CCBC;
+    --gold-deep:#9C7620;
+    --rosa:#E0518A;--ciclamino:#8E4BB0;--azzurra:#2E7CBF;--bianca:#8B8F84;--grey:#8B8F84;
+    --shadow:0 2px 10px rgba(30,42,34,0.08);
+    --solid-bg:#1E2A22;--solid-fg:#fff;--hover:rgba(0,0,0,0.04);
   }
   @media (prefers-color-scheme: dark){
-    :root{--paper:#12160F;--ink:#E7ECDF;--ink-soft:#9FA99A;--line:#333B31;--accent:#E06A93;}
+    :root{
+      --paper:#12160F;--paper-panel:#1B211A;--ink:#E7ECDF;--ink-soft:#9FA99A;--line:#333B31;
+      --gold-deep:#E3BE63;
+      --rosa:#EE6E9F;--ciclamino:#B173D0;--azzurra:#5CA0DA;--bianca:#AEB4A6;--grey:#8B8F84;
+      --shadow:0 2px 14px rgba(0,0,0,0.45);
+      --solid-bg:#E7ECDF;--solid-fg:#12160F;--hover:rgba(255,255,255,0.06);
+    }
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{
-    background:var(--paper);color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
-    min-height:100vh;display:flex;flex-direction:column;
-  }
-  .wrap{max-width:1180px;width:100%;margin:0 auto;padding:28px 20px 60px;flex:1;display:flex;flex-direction:column;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+
+  header.top{display:flex;flex-direction:column;gap:6px;padding-bottom:22px;margin-bottom:26px;border-bottom:3px solid var(--ink);}
   .backlink{
-    display:inline-flex;align-items:center;gap:5px;align-self:flex-start;
-    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--ink-soft);text-decoration:none;
+    display:inline-flex;align-items:center;gap:5px;align-self:flex-start;margin-bottom:6px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-soft);text-decoration:none;
   }
   .backlink svg{width:14px;height:14px;}
   .backlink:hover{color:var(--ink);}
-  .backlink:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
-  .center{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;}
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--accent);
+  .backlink:focus-visible{outline:2px solid var(--rosa);outline-offset:3px;border-radius:2px;}
+  .top-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+  .langsel{display:flex;gap:0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;}
+  .langsel button{background:transparent;border:1px solid var(--line);padding:4px 10px;cursor:pointer;color:var(--ink-soft);}
+  .langsel button:first-child{border-radius:2px 0 0 2px;}
+  .langsel button:last-child{border-radius:0 2px 2px 0;}
+  .langsel button:not(:first-child){border-left:none;}
+  .langsel button.active{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--solid-bg);}
+  .langsel button:hover:not(.active){color:var(--ink);}
+  h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(28px,5vw,46px);letter-spacing:.01em;text-transform:uppercase;margin:2px 0 4px;line-height:1.02;}
+  h1 span{color:var(--rosa);}
+  .sub{font-size:clamp(14px,2vw,16px);color:var(--ink-soft);max-width:70ch;line-height:1.5;}
+  .finaltag{
+    display:inline-flex;align-items:center;gap:6px;margin-top:10px;align-self:flex-start;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--solid-fg);background:var(--solid-bg);padding:4px 10px;border-radius:20px;
   }
-  h1{
-    font-family:'Oswald',sans-serif;font-weight:700;
-    font-size:clamp(34px,8vw,72px);text-transform:uppercase;
-    letter-spacing:.01em;line-height:1;margin:0;
-  }
-  .soon{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-soft);letter-spacing:.05em;}
+
+  h2.section{font-family:'Oswald',sans-serif;font-weight:600;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:34px 0 14px;}
+
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+  .card{background:var(--paper-panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;}
+  .card__head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);}
+  .jersey{width:14px;height:20px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,0.15);}
+  .card__title{font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.02em;line-height:1.1;}
+  .card__sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:baseline;}
+  thead th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;}
+  tbody tr:last-child td{border-bottom:none;}
+  td.pos{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);width:1%;white-space:nowrap;}
+  tr.leader td.pos{color:var(--gold-deep);font-weight:600;}
+  .rider{font-weight:600;}
+  .nat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-soft);margin-left:6px;letter-spacing:.04em;}
+  .team{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:1px;}
+  td.num{font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+  td.gap{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);white-space:nowrap;}
+
+  /* Stage winners table spans full width */
+  .stages-card{margin-top:0;}
+  table.stages td.route{color:var(--ink);}
+  table.stages td.win{font-weight:600;}
+  table.stages tr.pink td.win{color:var(--rosa);}
+
+  .tablewrap{overflow-x:auto;}
+
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft);line-height:1.55;}
+  footer b{color:var(--ink);}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a class="backlink" href="index.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-    Grand Tours
-  </a>
-  <div class="center">
-    <div class="eyebrow">Grand Tour · Italia · 2026</div>
-    <h1>Giro d'Italia</h1>
-    <div class="soon">Coming soon · Tulossa · Bientôt</div>
+  <header class="top">
+    <a class="backlink" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      <span id="backLinkText"></span>
+    </a>
+    <div class="top-row">
+      <div class="eyebrow" id="eyebrow"></div>
+      <div class="langsel" id="langSel" role="group" aria-label="Kieli / Language">
+        <button data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+        <button data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
+        <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
+      </div>
+    </div>
+    <h1>Giro d'Italia <span>2026</span></h1>
+    <div class="sub" id="subDesc"></div>
+    <div class="finaltag" id="finalTag"></div>
+  </header>
+
+  <h2 class="section" id="classHeading"></h2>
+  <div class="grid" id="classGrid"></div>
+
+  <h2 class="section" id="stagesHeading"></h2>
+  <div class="card stages-card">
+    <div class="tablewrap"><table class="stages"><thead id="stagesThead"></thead><tbody id="stagesTbody"></tbody></table></div>
   </div>
+
+  <footer>
+    <div><b id="disclaimerLabel"></b> <span id="disclaimerText"></span></div>
+    <div style="margin-top:10px;"><b id="sourcesLabel"></b> <span id="sourcesText"></span></div>
+  </footer>
 </div>
+
+<script>
+/* Language preference is shared with the rest of the site via the same key. */
+const LANG_KEY = 'tdf2026-lang';
+const DATA_URL = 'data/giro2026-results.json';
+
+const STRINGS = {
+  fi: {
+    backToTours: 'Grand Tourit',
+    eyebrow: 'Lopputulokset · 109. Giro d’Italia · 8.–31.5.2026',
+    subDesc: 'Jonas Vingegaard voitti uransa ensimmäisen Giron ja täydensi Grand Tour ‑kokoelmansa. Grande Partenza ajettiin Nessebarista Bulgariasta, maali Roomassa — 21 etappia, 3 459 km.',
+    finalTag: 'Lopulliset luokitukset · kilpailu päättynyt',
+    classHeading: 'Loppuluokitukset',
+    stagesHeading: 'Etappivoittajat',
+    gcName: 'Kokonaiskilpailu', gcJersey: 'Maglia Rosa',
+    pointsName: 'Pistekilpailu', pointsJersey: 'Maglia Ciclamino',
+    momName: 'Vuorikilpailu', momJersey: 'Maglia Azzurra',
+    youthName: 'Nuorten kilpailu', youthJersey: 'Maglia Bianca',
+    teamsName: 'Joukkuekilpailu', teamsJersey: 'Joukkueet',
+    colPos: '#', colRider: 'Ajaja', colTime: 'Aika', colGap: 'Ero', colPts: 'Pisteet',
+    colStage: 'Etappi', colRoute: 'Reitti', colWinner: 'Voittaja',
+    disclaimerLabel: 'Ei-virallinen fanisivusto.',
+    disclaimerText: 'Tämä on epävirallinen, ei-kaupallinen fanisivusto, joka ei liity RCS Sportiin tai Giro d’Italiaan. Tulokset ovat oikeudenomistajiensa omaisuutta.',
+    sourcesLabel: 'Lähteet:', sourcesText: 'en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclinguptodate.com, giroditalia.it (lopulliset luokitukset, tarkistettu ristiin).',
+  },
+  en: {
+    backToTours: 'Grand Tours',
+    eyebrow: 'Final results · 109th Giro d’Italia · 8–31 May 2026',
+    subDesc: 'Jonas Vingegaard won his first Giro d’Italia to complete the Grand Tour set. The Grande Partenza was held in Nessebar, Bulgaria, finishing in Rome — 21 stages, 3,459 km.',
+    finalTag: 'Final classifications · race over',
+    classHeading: 'Final classifications',
+    stagesHeading: 'Stage winners',
+    gcName: 'General classification', gcJersey: 'Maglia Rosa',
+    pointsName: 'Points classification', pointsJersey: 'Maglia Ciclamino',
+    momName: 'Mountains classification', momJersey: 'Maglia Azzurra',
+    youthName: 'Young rider classification', youthJersey: 'Maglia Bianca',
+    teamsName: 'Teams classification', teamsJersey: 'Teams',
+    colPos: '#', colRider: 'Rider', colTime: 'Time', colGap: 'Gap', colPts: 'Points',
+    colStage: 'Stage', colRoute: 'Route', colWinner: 'Winner',
+    disclaimerLabel: 'Unofficial fan project.',
+    disclaimerText: 'This is an unofficial, non-commercial fan project, not affiliated with RCS Sport or the Giro d’Italia. Results remain the property of their respective owners.',
+    sourcesLabel: 'Sources:', sourcesText: 'en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclinguptodate.com, giroditalia.it (final classifications, cross-checked).',
+  },
+  fr: {
+    backToTours: 'Grands Tours',
+    eyebrow: 'Classement final · 109e Giro d’Italia · 8–31 mai 2026',
+    subDesc: 'Jonas Vingegaard a remporté son premier Giro d’Italia et complète ainsi la collection des Grands Tours. Grande Partenza à Nessebar (Bulgarie), arrivée à Rome — 21 étapes, 3 459 km.',
+    finalTag: 'Classement final · course terminée',
+    classHeading: 'Classements finals',
+    stagesHeading: 'Vainqueurs d’étape',
+    gcName: 'Classement général', gcJersey: 'Maglia Rosa',
+    pointsName: 'Classement par points', pointsJersey: 'Maglia Ciclamino',
+    momName: 'Classement de la montagne', momJersey: 'Maglia Azzurra',
+    youthName: 'Classement du meilleur jeune', youthJersey: 'Maglia Bianca',
+    teamsName: 'Classement par équipes', teamsJersey: 'Équipes',
+    colPos: '#', colRider: 'Coureur', colTime: 'Temps', colGap: 'Écart', colPts: 'Points',
+    colStage: 'Étape', colRoute: 'Parcours', colWinner: 'Vainqueur',
+    disclaimerLabel: 'Projet de fans non officiel.',
+    disclaimerText: 'Projet de fans non officiel et non commercial, sans lien avec RCS Sport ni le Giro d’Italia. Les résultats restent la propriété de leurs ayants droit.',
+    sourcesLabel: 'Sources :', sourcesText: 'en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclinguptodate.com, giroditalia.it (classements finals, recoupés).',
+  },
+};
+
+function detectLang(){
+  const saved = localStorage.getItem(LANG_KEY);
+  if(saved==='fi'||saved==='en'||saved==='fr') return saved;
+  const nav = (navigator.language||'en').toLowerCase();
+  if(nav.startsWith('fi')) return 'fi';
+  if(nav.startsWith('fr')) return 'fr';
+  return 'en';
+}
+let lang = detectLang();
+function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRINGS.en[key]; }
+
+let RESULTS = null; // filled from the JSON
+
+// Classification render config: which column set + jersey colour.
+const CLASSES = [
+  {key:'gc',        nameKey:'gcName',     jerseyKey:'gcJersey',     colour:'var(--rosa)',      cols:'time'},
+  {key:'points',    nameKey:'pointsName', jerseyKey:'pointsJersey', colour:'var(--ciclamino)', cols:'pts'},
+  {key:'mountains', nameKey:'momName',    jerseyKey:'momJersey',    colour:'var(--azzurra)',   cols:'pts'},
+  {key:'youth',     nameKey:'youthName',  jerseyKey:'youthJersey',  colour:'var(--bianca)',    cols:'time'},
+  {key:'teams',     nameKey:'teamsName',  jerseyKey:'teamsJersey',  colour:'var(--grey)',      cols:'time', team:true},
+];
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function riderCell(row, teamOnly){
+  if(teamOnly) return `<span class="rider">${esc(row.rider)}</span>`;
+  const nat = row.nat ? `<span class="nat">${esc(row.nat)}</span>` : '';
+  const team = row.team ? `<span class="team">${esc(row.team)}</span>` : '';
+  return `<span class="rider">${esc(row.rider)}</span>${nat}${team}`;
+}
+
+function classCard(cfg){
+  const rows = (RESULTS && RESULTS[cfg.key] && RESULTS[cfg.key].rows) || [];
+  const isPts = cfg.cols==='pts';
+  let head = `<tr><th>${t('colPos')}</th><th>${t('colRider')}</th>`;
+  head += isPts ? `<th>${t('colPts')}</th></tr>`
+                : `<th>${t('colTime')}</th><th>${t('colGap')}</th></tr>`;
+  let body = '';
+  rows.forEach(r=>{
+    const leader = r.pos===1 ? ' class="leader"' : '';
+    let tail = isPts ? `<td class="num">${esc(r.val)}</td>`
+                     : `<td class="num">${esc(r.val)}</td><td class="gap">${esc(r.gap||(r.pos===1?'—':''))}</td>`;
+    body += `<tr${leader}><td class="pos">${esc(r.pos)}</td><td>${riderCell(r, cfg.team)}</td>${tail}</tr>`;
+  });
+  return `<div class="card">
+    <div class="card__head">
+      <span class="jersey" style="background:${cfg.colour}"></span>
+      <div><div class="card__title">${esc(t(cfg.nameKey))}</div><div class="card__sub">${esc(t(cfg.jerseyKey))}</div></div>
+    </div>
+    <div class="tablewrap"><table><thead>${head}</thead><tbody>${body}</tbody></table></div>
+  </div>`;
+}
+
+function render(){
+  document.getElementById('backLinkText').textContent = t('backToTours');
+  document.getElementById('eyebrow').textContent = t('eyebrow');
+  document.getElementById('subDesc').textContent = t('subDesc');
+  document.getElementById('finalTag').textContent = t('finalTag');
+  document.getElementById('classHeading').textContent = t('classHeading');
+  document.getElementById('stagesHeading').textContent = t('stagesHeading');
+  document.getElementById('disclaimerLabel').textContent = t('disclaimerLabel');
+  document.getElementById('disclaimerText').textContent = t('disclaimerText');
+  document.getElementById('sourcesLabel').textContent = t('sourcesLabel');
+  document.getElementById('sourcesText').textContent = t('sourcesText');
+
+  document.getElementById('classGrid').innerHTML = CLASSES.map(classCard).join('');
+
+  // Stage winners table
+  const winners = (RESULTS && RESULTS.stageWinners) || [];
+  const gcWinner = (RESULTS && RESULTS.gc && RESULTS.gc.rows[0] && RESULTS.gc.rows[0].rider) || '';
+  document.getElementById('stagesThead').innerHTML =
+    `<tr><th>${t('colStage')}</th><th>${t('colRoute')}</th><th>${t('colWinner')}</th></tr>`;
+  document.getElementById('stagesTbody').innerHTML = winners.map(w=>{
+    const pink = w.winner && w.winner===gcWinner ? ' class="pink"' : '';
+    return `<tr${pink}><td class="pos">${esc(w.n)}</td><td class="route">${esc(w.route||'')}</td><td class="win">${esc(w.winner||'')}</td></tr>`;
+  }).join('');
+
+  document.querySelectorAll('#langSel button').forEach(b=>{
+    const active = b.dataset.lang===lang;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', active?'true':'false');
+  });
+  document.documentElement.lang = lang;
+}
+
+document.querySelectorAll('#langSel button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{ lang = btn.dataset.lang; localStorage.setItem(LANG_KEY, lang); render(); });
+});
+
+async function load(){
+  try{
+    const resp = await fetch(DATA_URL, {cache:'no-store'});
+    if(resp.ok) RESULTS = await resp.json();
+  }catch(e){ /* file:// or offline — tables render empty */ }
+  render();
+}
+load();
+</script>
 </body>
 </html>

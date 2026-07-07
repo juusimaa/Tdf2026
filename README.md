@@ -1,28 +1,39 @@
 # Grand tour — self-updating results page
 
-A static results page for the 2026 Tour de France that keeps itself up to
-date, with no manual work required once it's deployed. The data and scripts
-are **tour-aware**: results live in per-tour files (`data/<tour>-results.json`)
-so the site can be extended to cover all three grand tours (Tour de France,
-Giro d'Italia, Vuelta a España). Today only `tdf2026` is configured.
+A results site for the 2026 grand tours. The Tour de France page keeps itself
+up to date automatically; results live in per-tour files
+(`data/<tour>-results.json`) so the site covers all three grand tours (Tour de
+France, Giro d'Italia, Vuelta a España) from one **tour-aware** codebase.
 
 ```
 index.html                            # "Grand Tours" landing page (tour picker)
-tdf2026.html                          # Tour de France page (stages + results tabs)
-giro2026.html                         # Giro d'Italia — placeholder (title only)
+tdf2026.html                          # Tour de France — stages + auto-updating results
+giro2026.html                         # Giro d'Italia — final results (static)
 vuelta2026.html                       # Vuelta a España — placeholder (title only)
-data/tdf2026-results.json             # auto-updated results data (per tour)
+data/tdf2026-results.json             # Tour de France results — auto-updated
+data/giro2026-results.json            # Giro d'Italia final results — static
 scripts/fetch_results.py              # fetch script (scrapes letour.fr)
 .github/workflows/update-results.yml  # scheduled GitHub Actions workflow
 ```
 
-`index.html` lets the visitor pick a race; the Tour de France opens
-`tdf2026.html` (which has a back arrow to the landing page), and the Giro /
-Vuelta open placeholder pages for now.
+`index.html` lets the visitor pick a race; each tour page has a back arrow to
+the landing page. The Vuelta opens a placeholder page for now.
 
-To add another tour later, register it in the `TOURS` dict in
-`scripts/fetch_results.py` (with a source handler), fill in its placeholder
-page, and point that page at its `data/<tour>-results.json`.
+### Live vs. static tours
+
+- **Tour de France** (`tdf2026`) is a *live* tour: it is registered in the
+  `TOURS` dict in `scripts/fetch_results.py`, and the scheduled workflow
+  scrapes letour.fr and rewrites `data/tdf2026-results.json` as stages finish.
+- **Giro d'Italia** (`giro2026`) is a *finished* race, so it is **static**:
+  its final classifications and stage winners are stored once in
+  `data/giro2026-results.json` (same schema as the Tour file) and never
+  refetched. It is deliberately **not** in the `TOURS` registry, so the
+  workflow leaves it untouched. `giro2026.html` just reads that JSON.
+
+To add a live tour, register it in `TOURS` (with a source handler) and point a
+page at its `data/<tour>-results.json`. To add a finished race, drop a static
+`data/<tour>-results.json` in place and build a page that reads it — no script
+or registry entry needed.
 
 ## How it works
 

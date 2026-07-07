@@ -1,0 +1,510 @@
+{
+ "afterStage": 21,
+ "final": true,
+ "stageWinners": [
+  {
+   "n": 1,
+   "route": "Nessebar → Burgas",
+   "winner": "Paul MAGNIER"
+  },
+  {
+   "n": 2,
+   "route": "Burgas → Veliko Tarnovo",
+   "winner": "Guillermo Thomas SILVA"
+  },
+  {
+   "n": 3,
+   "route": "Plovdiv → Sofia",
+   "winner": "Paul MAGNIER"
+  },
+  {
+   "n": 4,
+   "route": "Catanzaro → Cosenza",
+   "winner": "Jhonatan NARVAEZ"
+  },
+  {
+   "n": 5,
+   "route": "Praia a Mare → Potenza",
+   "winner": "Igor ARRIETA"
+  },
+  {
+   "n": 6,
+   "route": "Paestum → Naples",
+   "winner": "Davide BALLERINI"
+  },
+  {
+   "n": 7,
+   "route": "Formia → Blockhaus",
+   "winner": "Jonas VINGEGAARD"
+  },
+  {
+   "n": 8,
+   "route": "Chieti → Fermo",
+   "winner": "Jhonatan NARVAEZ"
+  },
+  {
+   "n": 9,
+   "route": "Cervia → Corno alle Scale",
+   "winner": "Jonas VINGEGAARD"
+  },
+  {
+   "n": 10,
+   "route": "Viareggio → Massa (ITT)",
+   "winner": "Filippo GANNA"
+  },
+  {
+   "n": 11,
+   "route": "Porcari → Chiavari",
+   "winner": "Jhonatan NARVAEZ"
+  },
+  {
+   "n": 12,
+   "route": "Imperia → Novi Ligure",
+   "winner": "Alec SEGAERT"
+  },
+  {
+   "n": 13,
+   "route": "Alessandria → Verbania",
+   "winner": "Alberto BETTIOL"
+  },
+  {
+   "n": 14,
+   "route": "Aosta → Pila",
+   "winner": "Jonas VINGEGAARD"
+  },
+  {
+   "n": 15,
+   "route": "Voghera → Milan",
+   "winner": "Fredrik DVERSNES"
+  },
+  {
+   "n": 16,
+   "route": "Bellinzona → Carì",
+   "winner": "Jonas VINGEGAARD"
+  },
+  {
+   "n": 17,
+   "route": "Cassano d'Adda → Andalo",
+   "winner": "Michael VALGREN"
+  },
+  {
+   "n": 18,
+   "route": "Fai della Paganella → Pieve di Soligo",
+   "winner": "Paul MAGNIER"
+  },
+  {
+   "n": 19,
+   "route": "Feltre → Alleghe",
+   "winner": "Sepp KUSS"
+  },
+  {
+   "n": 20,
+   "route": "Gemona del Friuli → Piancavallo",
+   "winner": "Jonas VINGEGAARD"
+  },
+  {
+   "n": 21,
+   "route": "Rome → Rome",
+   "winner": "Jonathan MILAN"
+  }
+ ],
+ "gc": {
+  "rows": [
+   {
+    "pos": 1,
+    "rider": "Jonas VINGEGAARD",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "DEN",
+    "val": "83h 22' 51''"
+   },
+   {
+    "pos": 2,
+    "rider": "Felix GALL",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUT",
+    "val": "83h 28' 13''",
+    "gap": "+ 00h 05' 22''"
+   },
+   {
+    "pos": 3,
+    "rider": "Jai HINDLEY",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "AUS",
+    "val": "83h 29' 16''",
+    "gap": "+ 00h 06' 25''"
+   },
+   {
+    "pos": 4,
+    "rider": "Thymen ARENSMAN",
+    "team": "NETCOMPANY INEOS",
+    "nat": "NED",
+    "val": "83h 29' 53''",
+    "gap": "+ 00h 07' 02''"
+   },
+   {
+    "pos": 5,
+    "rider": "Derek GEE-WEST",
+    "team": "LIDL-TREK",
+    "nat": "CAN",
+    "val": "83h 30' 47''",
+    "gap": "+ 00h 07' 56''"
+   },
+   {
+    "pos": 6,
+    "rider": "Afonso EULALIO",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "POR",
+    "val": "83h 32' 30''",
+    "gap": "+ 00h 09' 39''"
+   },
+   {
+    "pos": 7,
+    "rider": "Michael STORER",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "AUS",
+    "val": "83h 33' 04''",
+    "gap": "+ 00h 10' 13''"
+   },
+   {
+    "pos": 8,
+    "rider": "Davide PIGANZOLI",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "ITA",
+    "val": "83h 33' 43''",
+    "gap": "+ 00h 10' 52''"
+   },
+   {
+    "pos": 9,
+    "rider": "Damiano CARUSO",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "ITA",
+    "val": "83h 34' 15''",
+    "gap": "+ 00h 11' 24''"
+   },
+   {
+    "pos": 10,
+    "rider": "Egan BERNAL",
+    "team": "NETCOMPANY INEOS",
+    "nat": "COL",
+    "val": "83h 35' 45''",
+    "gap": "+ 00h 12' 54''"
+   }
+  ]
+ },
+ "points": {
+  "rows": [
+   {
+    "pos": 1,
+    "rider": "Paul MAGNIER",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "FRA",
+    "val": "200 PTS"
+   },
+   {
+    "pos": 2,
+    "rider": "Jonathan MILAN",
+    "team": "LIDL-TREK",
+    "nat": "ITA",
+    "val": "153 PTS"
+   },
+   {
+    "pos": 3,
+    "rider": "Guillermo Thomas SILVA",
+    "team": "XDS ASTANA TEAM",
+    "nat": "URU",
+    "val": "99 PTS"
+   },
+   {
+    "pos": 4,
+    "rider": "Andreas LEKNESSUND",
+    "team": "UNO-X MOBILITY",
+    "nat": "NOR",
+    "val": "87 PTS"
+   },
+   {
+    "pos": 5,
+    "rider": "Jonas VINGEGAARD",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "DEN",
+    "val": "81 PTS"
+   },
+   {
+    "pos": 6,
+    "rider": "Jasper STUYVEN",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "BEL",
+    "val": "75 PTS"
+   },
+   {
+    "pos": 7,
+    "rider": "Mattia BAIS",
+    "team": "TEAM POLTI VISITMALTA",
+    "nat": "ITA",
+    "val": "74 PTS"
+   },
+   {
+    "pos": 8,
+    "rider": "Giulio CICCONE",
+    "team": "LIDL-TREK",
+    "nat": "ITA",
+    "val": "69 PTS"
+   },
+   {
+    "pos": 9,
+    "rider": "Felix GALL",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUT",
+    "val": "67 PTS"
+   },
+   {
+    "pos": 10,
+    "rider": "Manuele TAROZZI",
+    "team": "BARDIANI CSF 7 SABER",
+    "nat": "ITA",
+    "val": "66 PTS"
+   }
+  ]
+ },
+ "mountains": {
+  "rows": [
+   {
+    "pos": 1,
+    "rider": "Giulio CICCONE",
+    "team": "LIDL-TREK",
+    "nat": "ITA",
+    "val": "277 PTS"
+   },
+   {
+    "pos": 2,
+    "rider": "Jonas VINGEGAARD",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "DEN",
+    "val": "266 PTS"
+   },
+   {
+    "pos": 3,
+    "rider": "Einer RUBIO",
+    "team": "MOVISTAR TEAM",
+    "nat": "COL",
+    "val": "164 PTS"
+   },
+   {
+    "pos": 4,
+    "rider": "Felix GALL",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUT",
+    "val": "124 PTS"
+   },
+   {
+    "pos": 5,
+    "rider": "Jardi VAN DER LEE",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "NED",
+    "val": "108 PTS"
+   },
+   {
+    "pos": 6,
+    "rider": "Jai HINDLEY",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "AUS",
+    "val": "65 PTS"
+   },
+   {
+    "pos": 7,
+    "rider": "Diego Pablo SEVILLA",
+    "team": "TEAM POLTI VISITMALTA",
+    "nat": "ESP",
+    "val": "63 PTS"
+   },
+   {
+    "pos": 8,
+    "rider": "Igor ARRIETA",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "ESP",
+    "val": "55 PTS"
+   },
+   {
+    "pos": 9,
+    "rider": "Derek GEE-WEST",
+    "team": "LIDL-TREK",
+    "nat": "CAN",
+    "val": "54 PTS"
+   },
+   {
+    "pos": 10,
+    "rider": "Jack HAIG",
+    "team": "NETCOMPANY INEOS",
+    "nat": "AUS",
+    "val": "40 PTS"
+   }
+  ]
+ },
+ "youth": {
+  "rows": [
+   {
+    "pos": 1,
+    "rider": "Afonso EULALIO",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "POR",
+    "val": "83h 32' 30''"
+   },
+   {
+    "pos": 2,
+    "rider": "Davide PIGANZOLI",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "ITA",
+    "val": "83h 33' 43''",
+    "gap": "+ 00h 01' 13''"
+   },
+   {
+    "pos": 3,
+    "rider": "Mathys RONDEL",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "FRA",
+    "val": "83h 38' 03''",
+    "gap": "+ 00h 05' 33''"
+   },
+   {
+    "pos": 4,
+    "rider": "Johannes KULSET",
+    "team": "UNO-X MOBILITY",
+    "nat": "NOR",
+    "val": "83h 57' 17''",
+    "gap": "+ 00h 24' 47''"
+   },
+   {
+    "pos": 5,
+    "rider": "Igor ARRIETA",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "ESP",
+    "val": "84h 18' 41''",
+    "gap": "+ 00h 46' 11''"
+   },
+   {
+    "pos": 6,
+    "rider": "Giulio PELLIZZARI",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "ITA",
+    "val": "84h 21' 07''",
+    "gap": "+ 00h 48' 37''"
+   },
+   {
+    "pos": 7,
+    "rider": "Embret SVESTAD-BARDSENG",
+    "team": "NETCOMPANY INEOS",
+    "nat": "NOR",
+    "val": "84h 36' 30''",
+    "gap": "+ 01h 04' 00''"
+   },
+   {
+    "pos": 8,
+    "rider": "Ludovico CRESCIOLI",
+    "team": "TEAM POLTI VISITMALTA",
+    "nat": "ITA",
+    "val": "84h 45' 48''",
+    "gap": "+ 01h 13' 18''"
+   },
+   {
+    "pos": 9,
+    "rider": "Gianmarco GAROFOLI",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "ITA",
+    "val": "85h 01' 54''",
+    "gap": "+ 01h 29' 24''"
+   },
+   {
+    "pos": 10,
+    "rider": "Johannes STAUNE-MITTET",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "NOR",
+    "val": "85h 17' 12''",
+    "gap": "+ 01h 44' 42''"
+   }
+  ]
+ },
+ "teams": {
+  "rows": [
+   {
+    "pos": 1,
+    "rider": "TEAM VISMA | LEASE A BIKE",
+    "team": "",
+    "nat": "",
+    "val": "250h 42' 41''"
+   },
+   {
+    "pos": 2,
+    "rider": "NETCOMPANY INEOS",
+    "team": "",
+    "nat": "",
+    "val": "251h 22' 48''",
+    "gap": "+ 00h 40' 07''"
+   },
+   {
+    "pos": 3,
+    "rider": "RED BULL - BORA - HANSGROHE",
+    "team": "",
+    "nat": "",
+    "val": "251h 31' 08''",
+    "gap": "+ 00h 48' 27''"
+   },
+   {
+    "pos": 4,
+    "rider": "TUDOR PRO CYCLING TEAM",
+    "team": "",
+    "nat": "",
+    "val": "251h 47' 08''",
+    "gap": "+ 01h 04' 27''"
+   },
+   {
+    "pos": 5,
+    "rider": "DECATHLON CMA CGM TEAM",
+    "team": "",
+    "nat": "",
+    "val": "252h 07' 40''",
+    "gap": "+ 01h 24' 59''"
+   },
+   {
+    "pos": 6,
+    "rider": "PINARELLO - Q36.5 PRO CYCLING TEAM",
+    "team": "",
+    "nat": "",
+    "val": "252h 38' 59''",
+    "gap": "+ 01h 56' 18''"
+   },
+   {
+    "pos": 7,
+    "rider": "BAHRAIN VICTORIOUS",
+    "team": "",
+    "nat": "",
+    "val": "252h 56' 13''",
+    "gap": "+ 02h 13' 32''"
+   },
+   {
+    "pos": 8,
+    "rider": "LIDL-TREK",
+    "team": "",
+    "nat": "",
+    "val": "253h 46' 02''",
+    "gap": "+ 03h 03' 21''"
+   },
+   {
+    "pos": 9,
+    "rider": "MOVISTAR TEAM",
+    "team": "",
+    "nat": "",
+    "val": "253h 47' 49''",
+    "gap": "+ 03h 05' 08''"
+   },
+   {
+    "pos": 10,
+    "rider": "TEAM JAYCO - ALULA",
+    "team": "",
+    "nat": "",
+    "val": "254h 06' 30''",
+    "gap": "+ 03h 23' 49''"
+   }
+  ]
+ },
+ "stageResults": {},
+ "updated": "2026-05-31"
+}
