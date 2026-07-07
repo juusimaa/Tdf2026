@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9ECE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12160F">
+<title>Giro d'Italia 2026</title>
+<meta name="description" content="Giro d'Italia 2026 — coming soon.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme:light dark;
+    --paper:#E9ECE4;--ink:#1E2A22;--ink-soft:#4C5A50;--line:#C6CCBC;--accent:#D14E7C;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--paper:#12160F;--ink:#E7ECDF;--ink-soft:#9FA99A;--line:#333B31;--accent:#E06A93;}
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+  .wrap{max-width:1180px;width:100%;margin:0 auto;padding:28px 20px 60px;flex:1;display:flex;flex-direction:column;}
+  .backlink{
+    display:inline-flex;align-items:center;gap:5px;align-self:flex-start;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-soft);text-decoration:none;
+  }
+  .backlink svg{width:14px;height:14px;}
+  .backlink:hover{color:var(--ink);}
+  .backlink:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+  .center{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);
+  }
+  h1{
+    font-family:'Oswald',sans-serif;font-weight:700;
+    font-size:clamp(34px,8vw,72px);text-transform:uppercase;
+    letter-spacing:.01em;line-height:1;margin:0;
+  }
+  .soon{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-soft);letter-spacing:.05em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    Grand Tours
+  </a>
+  <div class="center">
+    <div class="eyebrow">Grand Tour · Italia · 2026</div>
+    <h1>Giro d'Italia</h1>
+    <div class="soon">Coming soon · Tulossa · Bientôt</div>
+  </div>
+</div>
+</body>
+</html>

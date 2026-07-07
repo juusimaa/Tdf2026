@@ -7,15 +7,22 @@ so the site can be extended to cover all three grand tours (Tour de France,
 Giro d'Italia, Vuelta a España). Today only `tdf2026` is configured.
 
 ```
-index.html                            # the page (stages + results tabs)
+index.html                            # "Grand Tours" landing page (tour picker)
+tdf2026.html                          # Tour de France page (stages + results tabs)
+giro2026.html                         # Giro d'Italia — placeholder (title only)
+vuelta2026.html                       # Vuelta a España — placeholder (title only)
 data/tdf2026-results.json             # auto-updated results data (per tour)
 scripts/fetch_results.py              # fetch script (scrapes letour.fr)
 .github/workflows/update-results.yml  # scheduled GitHub Actions workflow
 ```
 
+`index.html` lets the visitor pick a race; the Tour de France opens
+`tdf2026.html` (which has a back arrow to the landing page), and the Giro /
+Vuelta open placeholder pages for now.
+
 To add another tour later, register it in the `TOURS` dict in
-`scripts/fetch_results.py` (with a source handler) and point a page at its
-`data/<tour>-results.json`.
+`scripts/fetch_results.py` (with a source handler), fill in its placeholder
+page, and point that page at its `data/<tour>-results.json`.
 
 ## How it works
 
@@ -28,10 +35,10 @@ To add another tour later, register it in the `TOURS` dict in
    plus the winner of every stage raced so far.
 3. The script writes `data/tdf2026-results.json` (one file per registered
    tour). If the content changed, the workflow commits it back to the repo.
-4. GitHub Pages serves the site, and `index.html` fetches the JSON for its
-   tour in the browser (`fetch('data/tdf2026-results.json')`). The page
-   therefore always shows the latest committed standings with zero manual
-   intervention.
+4. GitHub Pages serves the site, and each tour page fetches the JSON for its
+   tour in the browser (`tdf2026.html` → `fetch('data/tdf2026-results.json')`).
+   The page therefore always shows the latest committed standings with zero
+   manual intervention.
 
 The page also **auto-selects the stage of the day** when opened (the next
 stage on rest days, the final stage once the race is over).
