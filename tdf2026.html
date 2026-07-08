@@ -1065,11 +1065,16 @@ function renderProfile(stage){
     svg += `<circle cx="${cx2}" cy="${padT-4}" r="4.5" fill="${color}"/>`;
   });
 
-  // sprint markers
+  // intermediate-sprint markers — a green flag rising from the route to the
+  // sprint's kilometre point, so the location is clearly visible on the graph
+  // (previously just a faint dot in the bottom margin, easy to miss).
   (stage.sprints||[]).forEach(s=>{
     const sx = xForKm(s.km,totalKm,W,padL,padR);
-    svg += `<circle cx="${sx}" cy="${baseY+6}" r="5" fill="#3E7A57"/>`;
-    svg += `<line x1="${sx}" y1="${padT}" x2="${sx}" y2="${baseY}" stroke="#3E7A57" stroke-width="1.2" stroke-dasharray="1,3" opacity="0.7"/>`;
+    const flagTop = padT + plotH*0.30;
+    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${baseY}" stroke="#3E7A57" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.55"/>`;
+    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${flagTop+16}" stroke="#3E7A57" stroke-width="1.8"/>`;
+    svg += `<path d="M ${sx} ${flagTop} L ${sx+12} ${flagTop+4.5} L ${sx} ${flagTop+9} Z" fill="#3E7A57"/>`;
+    svg += `<circle cx="${sx}" cy="${baseY}" r="3.4" fill="#3E7A57" stroke="var(--paper-panel)" stroke-width="1"/>`;
   });
 
   svg += `</svg>`;

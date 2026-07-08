@@ -507,11 +507,15 @@ function renderProfile(st){
     svg+=`<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${baseY}" stroke="${cc}" stroke-width="1.5" stroke-dasharray="2,2"/>`;
     svg+=`<circle cx="${cx}" cy="${padT-3}" r="4.5" fill="${cc}"/>`;
   });
-  // intermediate sprint markers
+  // intermediate-sprint markers — a green flag rising from the route to the
+  // sprint's kilometre point, so the location is clearly visible on the graph.
   (st.sprints||[]).forEach(s=>{
     const sx=xForKm(s.km,totalKm,W,padL,padR);
-    svg+=`<line x1="${sx}" y1="${padT}" x2="${sx}" y2="${baseY}" stroke="${SPRINT_COLOR}" stroke-width="1.2" stroke-dasharray="1,3" opacity="0.75"/>`;
-    svg+=`<circle cx="${sx}" cy="${baseY+5}" r="4.5" fill="${SPRINT_COLOR}"/>`;
+    const flagTop=padT+plotH*0.30;
+    svg+=`<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${baseY}" stroke="${SPRINT_COLOR}" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.55"/>`;
+    svg+=`<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${flagTop+16}" stroke="${SPRINT_COLOR}" stroke-width="1.8"/>`;
+    svg+=`<path d="M ${sx} ${flagTop} L ${sx+12} ${flagTop+4.5} L ${sx} ${flagTop+9} Z" fill="${SPRINT_COLOR}"/>`;
+    svg+=`<circle cx="${sx}" cy="${baseY}" r="3.4" fill="${SPRINT_COLOR}" stroke="var(--paper-panel)" stroke-width="1"/>`;
   });
   svg+=`</svg>`;
   return svg;
