@@ -127,6 +127,17 @@
     line-height:1.02;
   }
   h1 span{color:var(--gold-deep);}
+  /* Title text striped in the French tricolore. The character split matches
+     the flag's 1/3-1/3-1/3 ratio (12 letters -> 4/4/4; spaces don't count).
+     The white stripe gets a thin ink stroke so it stays legible on light
+     paper; in dark mode plain white already reads, so the stroke fades. */
+  .fr-b{color:#0055A4;}
+  .fr-w{color:#fff;-webkit-text-stroke:.022em rgba(30,42,34,.55);text-shadow:0 1px 2px rgba(30,42,34,.18);}
+  .fr-r{color:#EF4135;}
+  @media (prefers-color-scheme: dark){
+    .fr-b{color:#5B93DE;}
+    .fr-w{-webkit-text-stroke:.014em rgba(0,0,0,.35);text-shadow:none;}
+  }
   .sub{
     color:var(--ink-soft);
     font-size:14.5px;
@@ -406,7 +417,7 @@
         <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
       </div>
     </div>
-    <h1>Tour de France 2026</h1>
+    <h1><span class="fr-b">Tour</span><span class="fr-w"> de Fr</span><span class="fr-r">ance</span> 2026</h1>
     <div class="sub" id="subDesc"></div>
     <div class="stat-row" id="topstats"></div>
   </header>

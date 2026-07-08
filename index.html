@@ -143,6 +143,24 @@
     font-family:'Oswald',sans-serif;font-weight:600;
     font-size:26px;line-height:1.05;text-transform:uppercase;letter-spacing:.01em;
   }
+  /* Tour names striped in their nation's flag colours; character split follows
+     the flag's stripe ratio (FR/IT 1/3 each, ES 1/4-1/2-1/4; spaces don't
+     count). White-stripe letters get a thin ink stroke for legibility on
+     light paper; in dark mode plain white already reads. */
+  .fr-b{color:#0055A4;}
+  .it-g{color:#009246;}
+  .fr-r{color:#EF4135;}
+  .it-r{color:#CE2B37;}
+  .es-r{color:#AA151B;}
+  .es-y{color:#F1BF00;}
+  .fs-w{color:#fff;-webkit-text-stroke:.022em rgba(30,42,34,.55);text-shadow:0 1px 2px rgba(30,42,34,.18);}
+  @media (prefers-color-scheme: dark){
+    .fr-b{color:#5B93DE;}
+    .it-g{color:#2FB56A;}
+    .it-r{color:#E04A55;}
+    .es-r{color:#D8474D;}
+    .fs-w{-webkit-text-stroke:.014em rgba(0,0,0,.35);text-shadow:none;}
+  }
   .tour-dates{
     font-family:'JetBrains Mono',monospace;font-size:12px;
     color:var(--ink-soft);letter-spacing:.03em;
@@ -189,7 +207,7 @@
     <li>
       <a class="tourcard" href="tdf2026.html" style="--accent:var(--gold)">
         <span class="tour-tld">FRA</span>
-        <span class="tour-name">Tour de France</span>
+        <span class="tour-name"><span class="fr-b">Tour</span><span class="fs-w"> de Fr</span><span class="fr-r">ance</span></span>
         <span class="tour-dates" id="tdfDates"></span>
         <span class="tour-desc" id="tdfDesc"></span>
         <span class="tour-cta"><span id="tdfCta"></span>
@@ -201,7 +219,7 @@
     <li>
       <a class="tourcard" href="giro2026.html" style="--accent:var(--pink)">
         <span class="tour-tld">ITA</span>
-        <span class="tour-name">Giro d'Italia</span>
+        <span class="tour-name"><span class="it-g">Giro</span><span class="fs-w"> d'It</span><span class="it-r">alia</span></span>
         <span class="tour-dates" id="giroDates"></span>
         <span class="tour-desc" id="giroDesc"></span>
         <span class="tour-cta"><span id="giroCta"></span>
@@ -214,7 +232,7 @@
       <a class="tourcard soon" href="vuelta2026.html" style="--accent:var(--red)">
         <span class="badge-soon" id="vueltaBadge"></span>
         <span class="tour-tld">ESP</span>
-        <span class="tour-name">Vuelta a España</span>
+        <span class="tour-name"><span class="es-r">Vue</span><span class="es-y">lta a Esp</span><span class="es-r">aña</span></span>
         <span class="tour-dates" id="vueltaDates"></span>
         <span class="tour-cta"><span id="vueltaCta"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
