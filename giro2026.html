@@ -232,6 +232,7 @@
     <div class="disclaimer" id="profileDisclaimer"></div>
     <div style="margin-top:12px;"><b id="disclaimerLabel"></b> <span id="disclaimerText"></span></div>
     <div style="margin-top:10px;"><b id="sourcesLabel"></b> <span id="sourcesText"></span></div>
+    <div style="margin-top:12px;"><span id="footerNote"></span></div>
   </footer>
 </div>
 
@@ -276,6 +277,7 @@ const STRINGS = {
     disclaimerLabel: 'Ei-virallinen fanisivusto.',
     disclaimerText: 'Tämä on epävirallinen, ei-kaupallinen fanisivusto, joka ei liity RCS Sportiin tai Giro d’Italiaan. Tulokset ovat oikeudenomistajiensa omaisuutta.',
     sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit, matkat ja tyypit: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Tulokset: cyclinguptodate.com, giroditalia.it (tarkistettu ristiin).',
+    footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi).',
   },
   en: {
     backToTours: 'Grand Tours',
@@ -312,6 +314,7 @@ const STRINGS = {
     disclaimerLabel: 'Unofficial fan project.',
     disclaimerText: 'This is an unofficial, non-commercial fan project, not affiliated with RCS Sport or the Giro d’Italia. Results remain the property of their respective owners.',
     sourcesLabel: 'Sources:', sourcesText: 'Route, stages, distances and types: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Results: cyclinguptodate.com, giroditalia.it (cross-checked).',
+    footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence.',
   },
   fr: {
     backToTours: 'Grands Tours',
@@ -348,6 +351,7 @@ const STRINGS = {
     disclaimerLabel: 'Projet de fans non officiel.',
     disclaimerText: 'Projet de fans non officiel et non commercial, sans lien avec RCS Sport ni le Giro d’Italia. Les résultats restent la propriété de leurs ayants droit.',
     sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes, distances et types : en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Classements : cyclinguptodate.com, giroditalia.it (recoupés).',
+    footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT.',
   },
 };
 
@@ -698,6 +702,7 @@ function render(){
   document.getElementById('disclaimerText').textContent=t('disclaimerText');
   document.getElementById('sourcesLabel').textContent=t('sourcesLabel');
   document.getElementById('sourcesText').textContent=t('sourcesText');
+  document.getElementById('footerNote').textContent=t('footerNote');
   renderStageList();
   renderPanel(stages[activeIdx]);
   renderResults();
