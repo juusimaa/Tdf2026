@@ -2206,17 +2206,17 @@
    },
    {
     "pos": 7,
-    "rider": "T. PIDCOCK",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "GBR",
-    "val": "28 PTS"
-   },
-   {
-    "pos": 8,
     "rider": "L. MARTINEZ",
     "team": "BAHRAIN VICTORIOUS",
     "nat": "FRA",
     "val": "22 PTS"
+   },
+   {
+    "pos": 8,
+    "rider": "T. PIDCOCK",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "GBR",
+    "val": "20 PTS"
    },
    {
     "pos": 9,
@@ -18329,6 +18329,6 @@
    ]
   }
  },
- "updated": "2026-07-19T19:21:43.480276+03:00",
- "updatedText": "Päivitetty 19.07.2026 klo 19.21 (Suomen aikaa)"
+ "updated": "2026-07-19T20:49:17.828170+03:00",
+ "updatedText": "Päivitetty 19.07.2026 klo 20.49 (Suomen aikaa)"
 }
