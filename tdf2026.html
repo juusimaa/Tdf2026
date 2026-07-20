@@ -520,8 +520,12 @@ const STRINGS = {
       mountains:{name:'Etapilla jaetut mäkipisteet', fr:'Pallopaidan pisteet tältä etapilta', valHead:'Pisteet'},
       youth:{name:'Nuorten etappitulos', fr:'Alle 26-vuotiaiden ajat tällä etapilla', valHead:'Aika / ero'},
       teams:{name:'Joukkueiden etappitulos', fr:'Joukkueiden ajat tällä etapilla', valHead:'Aika / ero'},
-      combative:{name:'Taistelevin ajaja', fr:'Prix de la combativité — etapin aktiivisin ajaja'}
+      combative:{name:'Taistelevin ajaja', fr:'Prix de la combativité — etapin aktiivisin ajaja'},
+      withdrawals:{name:'Keskeyttäneet', fr:'Kilpailusta poisjääneet tällä etapilla'}
     },
+    noWithdrawals: 'Ei keskeyttäneitä tällä etapilla.',
+    colReason: 'Syy',
+    withdrawalReasons: {DNS:'Ei startannut (DNS)', DNF:'Keskeytti (DNF)', OTL:'Aikaraja ylittyi (OTL)'},
     disclaimerLabel: 'Huom korkeusprofiileista:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon tai Tour de Franceen. Tulokset ovat oikeudenomistajiensa omaisuutta. Tulokset: letour.fr, procyclingstats.com.',
@@ -583,8 +587,12 @@ const STRINGS = {
       mountains:{name:'KOM points won on the stage', fr:'Polka dot points from this stage', valHead:'Points'},
       youth:{name:'Young riders’ stage result', fr:'Under-26 times on this stage', valHead:'Time / gap'},
       teams:{name:'Teams’ stage result', fr:'Team times on this stage', valHead:'Time / gap'},
-      combative:{name:'Combativity award', fr:'Most aggressive rider of the stage'}
+      combative:{name:'Combativity award', fr:'Most aggressive rider of the stage'},
+      withdrawals:{name:'Withdrawals', fr:'Riders who left the race on this stage'}
     },
+    noWithdrawals: 'No withdrawals on this stage.',
+    colReason: 'Reason',
+    withdrawalReasons: {DNS:'Did not start (DNS)', DNF:'Abandoned (DNF)', OTL:'Outside the time limit (OTL)'},
     disclaimerLabel: 'Note on elevation profiles:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type, total elevation gain, and known climbs (location, length, average gradient) — they are not GPS-measured elevation data. ASO has not yet publicly released exact kilometre markers for the intermediate sprints across the whole route; the number of sprints shown per stage (1 or 2) and the points system are based on confirmed sources, but the marked sprint location on the route is an estimate.',
     footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O. or the Tour de France. Results remain the property of their respective owners. Results: letour.fr, procyclingstats.com.',
@@ -646,8 +654,12 @@ const STRINGS = {
       mountains:{name:'Points de la montagne sur l’étape', fr:'Points du maillot à pois sur cette étape', valHead:'Points'},
       youth:{name:'Résultat d’étape des jeunes', fr:'Temps des moins de 26 ans sur cette étape', valHead:'Temps / écart'},
       teams:{name:'Résultat d’étape par équipes', fr:'Temps des équipes sur cette étape', valHead:'Temps / écart'},
-      combative:{name:'Prix de la combativité', fr:'Coureur le plus combatif de l’étape'}
+      combative:{name:'Prix de la combativité', fr:'Coureur le plus combatif de l’étape'},
+      withdrawals:{name:'Abandons', fr:'Coureurs ayant quitté la course sur cette étape'}
     },
+    noWithdrawals: 'Aucun abandon sur cette étape.',
+    colReason: 'Motif',
+    withdrawalReasons: {DNS:'Non-partant (DNS)', DNF:'Abandon (DNF)', OTL:'Hors délai (OTL)'},
     disclaimerLabel: 'Remarque sur les profils d’altitude :',
     disclaimer: 'Les courbes SVG sont des esquisses illustratives construites à partir du type d’étape, du dénivelé total et des ascensions connues (emplacement, longueur, pente moyenne) — ce ne sont pas des données d’altitude mesurées par GPS. L’ASO n’a pas encore publié les points kilométriques exacts des sprints intermédiaires sur l’ensemble du parcours ; le nombre de sprints indiqué par étape (1 ou 2) et le barème de points reposent sur des sources confirmées, mais l’emplacement des sprints sur le parcours est une estimation.',
     footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec A.S.O. ni le Tour de France. Les résultats restent la propriété de leurs détenteurs. Résultats : letour.fr, procyclingstats.com.',
@@ -1265,10 +1277,12 @@ const RESULTS = {
   teams:    {rows: []}, // Team classification (time)
 
   // Per-stage results: { "1": {rows:[...], points:[...], mountains:[...],
-  // youth:[...], teams:[...], combative:{rider,team,nat}|null}, ... }.
+  // youth:[...], teams:[...], combative:{rider,team,nat}|null,
+  // withdrawals:[{bib,rider,team,reason}]}, ... }.
   // rows = finishing order (time + gap to the winner); points/mountains =
   // points won on the stage; youth/teams = the stage result for those
-  // classifications; combative = the stage's combativity award. Populated
+  // classifications; combative = the stage's combativity award; withdrawals =
+  // riders who left the race on the stage (reason DNS/DNF/OTL). Populated
   // automatically by fetch_results.py; empty before the race.
   stageResults: {},
 
@@ -1539,6 +1553,28 @@ function renderStageResult(n){
         <h3>${cc.name}<span class="fr">${cc.fr}</span></h3>
       </div>
       <div class="cls-body">${combBody}</div>
+    </div>`;
+
+    const wt = t('stageStats').withdrawals;
+    const wd = Array.isArray(sr.withdrawals) ? sr.withdrawals : [];
+    const wBody = !wd.length
+      ? `<div class="empty-cls">${t('noWithdrawals')}</div>`
+      : `<table class="results">
+          <thead><tr><th>${t('colHash')}</th><th>${t('colRider')}</th><th style="text-align:right">${t('colReason')}</th></tr></thead>
+          <tbody>` +
+          wd.map(w=>`
+            <tr>
+              <td class="pos">${w.bib}</td>
+              <td class="rider"><b>${w.rider}</b>${w.team?`<span class="tm">${w.team}</span>`:''}</td>
+              <td class="val">${t('withdrawalReasons')[w.reason] || w.reason}</td>
+            </tr>`).join('') +
+          `</tbody></table>`;
+    html += `<div class="cls-card">
+      <div class="cls-head">
+        <span class="jersey">${jerseySVG('#8C8C8C')}</span>
+        <h3>${wt.name}<span class="fr">${wt.fr}</span></h3>
+      </div>
+      <div class="cls-body">${wBody}</div>
     </div>`;
   }
 

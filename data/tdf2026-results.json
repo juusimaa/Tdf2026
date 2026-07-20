@@ -3381,7 +3381,8 @@
      "gap": "+ 00h 02' 18''"
     }
    ],
-   "combative": null
+   "combative": null,
+   "withdrawals": []
   },
   "2": {
    "rows": [
@@ -5678,7 +5679,15 @@
     "rider": "Felix ENGELHARDT",
     "team": "TEAM JAYCO ALULA",
     "nat": "GER"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 182,
+     "rider": "BERTHET Clément",
+     "team": "GROUPAMA-FDJ UNITED",
+     "reason": "DNS"
+    }
+   ]
   },
   "3": {
    "rows": [
@@ -7976,7 +7985,15 @@
     "rider": "Alex BAUDIN",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "FRA"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 151,
+     "rider": "DE LIE Arnaud",
+     "team": "LOTTO INTERMARCHE",
+     "reason": "DNF"
+    }
+   ]
   },
   "4": {
    "rows": [
@@ -10245,7 +10262,15 @@
     "rider": "Pablo CASTRILLO ZAPATER",
     "team": "MOVISTAR TEAM",
     "nat": "ESP"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 116,
+     "rider": "O’BRIEN Kelland",
+     "team": "TEAM JAYCO ALULA",
+     "reason": "OTL"
+    }
+   ]
   },
   "5": {
    "rows": [
@@ -12449,7 +12474,8 @@
     "rider": "Baptiste VEISTROFFER",
     "team": "LOTTO INTERMARCHE",
     "nat": "FRA"
-   }
+   },
+   "withdrawals": []
   },
   "6": {
    "rows": [
@@ -14765,7 +14791,33 @@
     "rider": "Tadej POGACAR",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "SLO"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 96,
+     "rider": "VAN LERBERGHE Bert",
+     "team": "SOUDAL QUICK-STEP",
+     "reason": "DNF"
+    },
+    {
+     "bib": 141,
+     "rider": "UIJTDEBROEKS Cian",
+     "team": "MOVISTAR TEAM",
+     "reason": "DNF"
+    },
+    {
+     "bib": 192,
+     "rider": "DE KLEIJN Arvid",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "reason": "DNF"
+    },
+    {
+     "bib": 224,
+     "rider": "MOLENAAR Alex",
+     "team": "CAJA RURAL-SEGUROS RGA",
+     "reason": "DNS"
+    }
+   ]
   },
   "7": {
    "rows": [
@@ -16797,7 +16849,15 @@
     "rider": "Baptiste VEISTROFFER",
     "team": "LOTTO INTERMARCHE",
     "nat": "FRA"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 127,
+     "rider": "TRÆEN Torstein",
+     "team": "UNO-X MOBILITY",
+     "reason": "DNS"
+    }
+   ]
   },
   "8": {
    "rows": [
@@ -18854,7 +18914,8 @@
     "rider": "Liam SLOCK",
     "team": "LOTTO INTERMARCHE",
     "nat": "BEL"
-   }
+   },
+   "withdrawals": []
   },
   "9": {
    "rows": [
@@ -21072,7 +21133,8 @@
     "rider": "Mathieu VAN DER POEL",
     "team": "ALPECIN-PREMIER TECH",
     "nat": "NED"
-   }
+   },
+   "withdrawals": []
   },
   "10": {
    "rows": [
@@ -23405,7 +23467,15 @@
     "rider": "Richard CARAPAZ",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "ECU"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 197,
+     "rider": "TRENTIN Matteo",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "reason": "DNS"
+    }
+   ]
   },
   "11": {
    "rows": [
@@ -25408,7 +25478,15 @@
     "rider": "Anthon CHARMIG",
     "team": "UNO-X MOBILITY",
     "nat": "DEN"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 173,
+     "rider": "HARPER Christopher",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "reason": "DNS"
+    }
+   ]
   },
   "12": {
    "rows": [
@@ -27384,7 +27462,8 @@
     "rider": "Baptiste VEISTROFFER",
     "team": "LOTTO INTERMARCHE",
     "nat": "FRA"
-   }
+   },
+   "withdrawals": []
   },
   "13": {
    "rows": [
@@ -29531,7 +29610,27 @@
     "rider": "Tom PIDCOCK",
     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
     "nat": "GBR"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 153,
+     "rider": "BERCKMOES Jenno",
+     "team": "LOTTO INTERMARCHE",
+     "reason": "DNS"
+    },
+    {
+     "bib": 212,
+     "rider": "BIESTERBOS Frits",
+     "team": "TEAM PICNIC POSTNL",
+     "reason": "DNS"
+    },
+    {
+     "bib": 221,
+     "rider": "GAVIRIA Fernando",
+     "team": "CAJA RURAL-SEGUROS RGA",
+     "reason": "DNS"
+    }
+   ]
   },
   "14": {
    "rows": [
@@ -31762,7 +31861,21 @@
     "rider": "Richard CARAPAZ",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "ECU"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 102,
+     "rider": "DEBRUYNE Ramses",
+     "team": "ALPECIN-PREMIER TECH",
+     "reason": "DNS"
+    },
+    {
+     "bib": 123,
+     "rider": "CHARMIG Anthon",
+     "team": "UNO-X MOBILITY",
+     "reason": "OTL"
+    }
+   ]
   },
   "15": {
    "rows": [
@@ -33941,9 +34054,29 @@
     "rider": "Quinn SIMMONS",
     "team": "LIDL-TREK",
     "nat": "USA"
-   }
+   },
+   "withdrawals": [
+    {
+     "bib": 11,
+     "rider": "VINGEGAARD Jonas",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "reason": "DNF"
+    },
+    {
+     "bib": 91,
+     "rider": "MERLIER Tim",
+     "team": "SOUDAL QUICK-STEP",
+     "reason": "DNF"
+    },
+    {
+     "bib": 138,
+     "rider": "VAN ASBROECK Tom",
+     "team": "NSN CYCLING TEAM",
+     "reason": "DNF"
+    }
+   ]
   }
  },
- "updated": "2026-07-20T08:23:42.168513+03:00",
- "updatedText": "Päivitetty 20.07.2026 klo 08.23 (Suomen aikaa)"
+ "updated": "2026-07-20T08:36:45.449048+03:00",
+ "updatedText": "Päivitetty 20.07.2026 klo 08.36 (Suomen aikaa)"
 }

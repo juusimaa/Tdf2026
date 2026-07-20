@@ -160,6 +160,37 @@ def parse_sections(html: str, team_only: bool, kind: str):
     return sections
 
 
+# letour.fr reason text (lowercased) -> normalized code the front-end translates
+WITHDRAWAL_CODES = {
+    "dns": "DNS",
+    "withdrawal": "DNF",
+    "outside the time limit": "OTL",
+}
+
+
+def fetch_withdrawals(base: str):
+    """
+    Fetches the per-stage withdrawal lists — one page (/en/withdrawal) covers
+    every stage, split into id="stage-N" sections. Returns
+    {stage_no: [{bib, rider, team, reason}]}, with reason normalized to
+    DNS (did not start), DNF (abandoned during the stage) or OTL (outside the
+    time limit); an unrecognized reason keeps the source text.
+    """
+    html = fetch(f"{base}/en/withdrawal")
+    parts = re.split(r'id="stage-(\d+)"', html)
+    out = {}
+    for i in range(1, len(parts) - 1, 2):
+        rows = []
+        for tr in HTMLParser(parts[i + 1]).css("tbody tr"):
+            cells = [td.text(strip=True) for td in tr.css("td")]
+            if len(cells) < 4 or not cells[0].isdigit():
+                continue  # header row or a "No withdrawal" placeholder
+            reason = WITHDRAWAL_CODES.get(cells[3].lower(), cells[3])
+            rows.append({"bib": int(cells[0]), "rider": cells[1], "team": cells[2], "reason": reason})
+        out[int(parts[i])] = rows
+    return out
+
+
 def parse_combative(html: str):
     """
     Parses the combativity award table (ice). Unlike the other rankings it has
@@ -326,6 +357,19 @@ def fetch_letour(base: str, out: Path) -> int:
             if not winner:
                 winner = entry["rows"][0].get("rider", "")
         data["stageWinners"].append({"n": n, "winner": winner})
+
+    # Withdrawals come from one page covering every stage, so they are cheap
+    # to refresh on every run (unlike the cached per-stage tables — and a DNS
+    # for stage N appears there before stage N has results). Only raced stages
+    # get the key: the page shows future stages as "No withdrawal" too, which
+    # must not be stored as fact. If the fetch fails, entries reused from the
+    # previous run keep their stored withdrawals.
+    try:
+        withdrawals = fetch_withdrawals(base)
+        for key, entry in data["stageResults"].items():
+            entry["withdrawals"] = withdrawals.get(int(key), [])
+    except Exception as e:
+        print(f"  warning: fetching withdrawals failed: {e}")
 
     # "updated"/"updatedText" are refreshed only when some other field
     # actually changed — otherwise the workflow's "commit if changed" check
