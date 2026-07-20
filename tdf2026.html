@@ -524,6 +524,9 @@ const STRINGS = {
       withdrawals:{name:'Keskeyttäneet', fr:'Kilpailusta poisjääneet tällä etapilla'}
     },
     noWithdrawals: 'Ei keskeyttäneitä tällä etapilla.',
+    noWithdrawalsRace: 'Ei keskeyttäneitä toistaiseksi.',
+    allWithdrawalsTitle: 'Keskeyttäneet',
+    allWithdrawalsFr: n => `${n} ajajaa jäänyt pois kilpailusta`,
     colReason: 'Syy',
     withdrawalReasons: {DNS:'Ei startannut (DNS)', DNF:'Keskeytti (DNF)', OTL:'Aikaraja ylittyi (OTL)'},
     disclaimerLabel: 'Huom korkeusprofiileista:',
@@ -591,6 +594,9 @@ const STRINGS = {
       withdrawals:{name:'Withdrawals', fr:'Riders who left the race on this stage'}
     },
     noWithdrawals: 'No withdrawals on this stage.',
+    noWithdrawalsRace: 'No withdrawals so far.',
+    allWithdrawalsTitle: 'Withdrawals',
+    allWithdrawalsFr: n => `${n} riders out of the race`,
     colReason: 'Reason',
     withdrawalReasons: {DNS:'Did not start (DNS)', DNF:'Abandoned (DNF)', OTL:'Outside the time limit (OTL)'},
     disclaimerLabel: 'Note on elevation profiles:',
@@ -658,6 +664,9 @@ const STRINGS = {
       withdrawals:{name:'Abandons', fr:'Coureurs ayant quitté la course sur cette étape'}
     },
     noWithdrawals: 'Aucun abandon sur cette étape.',
+    noWithdrawalsRace: 'Aucun abandon pour l’instant.',
+    allWithdrawalsTitle: 'Abandons',
+    allWithdrawalsFr: n => `${n} coureurs hors course`,
     colReason: 'Motif',
     withdrawalReasons: {DNS:'Non-partant (DNS)', DNF:'Abandon (DNF)', OTL:'Hors délai (OTL)'},
     disclaimerLabel: 'Remarque sur les profils d’altitude :',
@@ -1465,6 +1474,32 @@ function renderGeneralRankings(){
         }).join('') +
       `</tbody></table>
     </div>
+  </div>`;
+
+  // All withdrawals across the race, in stage order
+  const allWd = [];
+  RESULTS.stageWinners.forEach(s=>{
+    const sr = RESULTS.stageResults[s.n];
+    (sr && Array.isArray(sr.withdrawals) ? sr.withdrawals : []).forEach(w=>allWd.push({stage:s.n, ...w}));
+  });
+  const wdBody = !allWd.length
+    ? `<div class="empty-cls">${t('noWithdrawalsRace')}</div>`
+    : `<table class="results">
+        <thead><tr><th>${t('colStage')}</th><th>${t('colRider')}</th><th style="text-align:right">${t('colReason')}</th></tr></thead>
+        <tbody>` +
+        allWd.map(w=>`
+          <tr>
+            <td class="pos">${w.stage}</td>
+            <td class="rider"><b>${w.rider}</b>${w.team?`<span class="tm">${w.team}</span>`:''}</td>
+            <td class="val">${t('withdrawalReasons')[w.reason] || w.reason}</td>
+          </tr>`).join('') +
+      `</tbody></table>`;
+  html += `<div class="cls-card stagewins-card">
+    <div class="cls-head">
+      <span class="jersey">${jerseySVG('#8C8C8C')}</span>
+      <h3>${t('allWithdrawalsTitle')}<span class="fr">${t('allWithdrawalsFr')(allWd.length)}</span></h3>
+    </div>
+    <div class="cls-body">${wdBody}</div>
   </div>`;
 
   grid.innerHTML = html;
