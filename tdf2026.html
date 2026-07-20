@@ -245,6 +245,8 @@
   }
   .status-card b{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;}
   .empty-cls{padding:18px 4px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  .sec-label{margin:14px 4px 4px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+  .sec-label:first-child{margin-top:4px;}
   .stagewins-card{grid-column:1/-1;}
   .updated-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-left:auto;}
 
@@ -511,6 +513,14 @@ const STRINGS = {
     stageResultTitle: n => `Etapin ${n} tulos`,
     stageResultValHead: 'Aika / ero',
     stageResultEmpty: 'Tämän etapin tuloksia ei ole vielä saatavilla.',
+    stageStatEmpty: 'Ei jaettu tällä etapilla.',
+    stageStats: {
+      points:{name:'Etapilla jaetut pisteet', fr:'Vihreän paidan pisteet tältä etapilta', valHead:'Pisteet'},
+      mountains:{name:'Etapilla jaetut mäkipisteet', fr:'Pallopaidan pisteet tältä etapilta', valHead:'Pisteet'},
+      youth:{name:'Nuorten etappitulos', fr:'Alle 26-vuotiaiden ajat tällä etapilla', valHead:'Aika / ero'},
+      teams:{name:'Joukkueiden etappitulos', fr:'Joukkueiden ajat tällä etapilla', valHead:'Aika / ero'},
+      combative:{name:'Taistelevin ajaja', fr:'Prix de la combativité — etapin aktiivisin ajaja'}
+    },
     disclaimerLabel: 'Huom korkeusprofiileista:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien tarkkoja kilometrimerkintöjä ASO ei ole vielä julkaissut julkisesti läpi koko reitistön; sivulla näkyvä sprinttien lukumäärä (1 tai 2 per etappi) ja pistejärjestelmä perustuvat vahvistettuihin lähteisiin, mutta sprinttien merkitty sijainti reitillä on arvio.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon tai Tour de Franceen. Tulokset ovat oikeudenomistajiensa omaisuutta. Tulokset: letour.fr, procyclingstats.com.',
@@ -565,6 +575,14 @@ const STRINGS = {
     stageResultTitle: n => `Stage ${n} result`,
     stageResultValHead: 'Time / gap',
     stageResultEmpty: 'Results for this stage are not available yet.',
+    stageStatEmpty: 'Not awarded on this stage.',
+    stageStats: {
+      points:{name:'Points won on the stage', fr:'Green jersey points from this stage', valHead:'Points'},
+      mountains:{name:'KOM points won on the stage', fr:'Polka dot points from this stage', valHead:'Points'},
+      youth:{name:'Young riders’ stage result', fr:'Under-26 times on this stage', valHead:'Time / gap'},
+      teams:{name:'Teams’ stage result', fr:'Team times on this stage', valHead:'Time / gap'},
+      combative:{name:'Combativity award', fr:'Most aggressive rider of the stage'}
+    },
     disclaimerLabel: 'Note on elevation profiles:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type, total elevation gain, and known climbs (location, length, average gradient) — they are not GPS-measured elevation data. ASO has not yet publicly released exact kilometre markers for the intermediate sprints across the whole route; the number of sprints shown per stage (1 or 2) and the points system are based on confirmed sources, but the marked sprint location on the route is an estimate.',
     footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O. or the Tour de France. Results remain the property of their respective owners. Results: letour.fr, procyclingstats.com.',
@@ -619,6 +637,14 @@ const STRINGS = {
     stageResultTitle: n => `Résultat de l’étape ${n}`,
     stageResultValHead: 'Temps / écart',
     stageResultEmpty: 'Les résultats de cette étape ne sont pas encore disponibles.',
+    stageStatEmpty: 'Non attribué sur cette étape.',
+    stageStats: {
+      points:{name:'Points gagnés sur l’étape', fr:'Points du maillot vert sur cette étape', valHead:'Points'},
+      mountains:{name:'Points de la montagne sur l’étape', fr:'Points du maillot à pois sur cette étape', valHead:'Points'},
+      youth:{name:'Résultat d’étape des jeunes', fr:'Temps des moins de 26 ans sur cette étape', valHead:'Temps / écart'},
+      teams:{name:'Résultat d’étape par équipes', fr:'Temps des équipes sur cette étape', valHead:'Temps / écart'},
+      combative:{name:'Prix de la combativité', fr:'Coureur le plus combatif de l’étape'}
+    },
     disclaimerLabel: 'Remarque sur les profils d’altitude :',
     disclaimer: 'Les courbes SVG sont des esquisses illustratives construites à partir du type d’étape, du dénivelé total et des ascensions connues (emplacement, longueur, pente moyenne) — ce ne sont pas des données d’altitude mesurées par GPS. L’ASO n’a pas encore publié les points kilométriques exacts des sprints intermédiaires sur l’ensemble du parcours ; le nombre de sprints indiqué par étape (1 ou 2) et le barème de points reposent sur des sources confirmées, mais l’emplacement des sprints sur le parcours est une estimation.',
     footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec A.S.O. ni le Tour de France. Les résultats restent la propriété de leurs détenteurs. Résultats : letour.fr, procyclingstats.com.',
@@ -1235,9 +1261,12 @@ const RESULTS = {
   youth:    {rows: []}, // White jersey — young rider classification (time)
   teams:    {rows: []}, // Team classification (time)
 
-  // Per-stage results: { "1": {rows:[...]}, ... }. Each raced stage's
-  // finishing order (time + gap to the winner). Populated automatically
-  // by fetch_results.py; empty before the race.
+  // Per-stage results: { "1": {rows:[...], points:[...], mountains:[...],
+  // youth:[...], teams:[...], combative:{rider,team,nat}|null}, ... }.
+  // rows = finishing order (time + gap to the winner); points/mountains =
+  // points won on the stage; youth/teams = the stage result for those
+  // classifications; combative = the stage's combativity award. Populated
+  // automatically by fetch_results.py; empty before the race.
   stageResults: {},
 
   stageWinners: [
@@ -1400,39 +1429,90 @@ function renderGeneralRankings(){
   bindExpanders(grid);
 }
 
-/* A single stage's finishing order */
+/* A single stage: finishing order + the stage's other statistics
+   (points and KOM points won, youth and team stage results, combativity) */
+const STAGE_STAT_KEYS = ['points','mountains','youth','teams'];
+
+function stageStatTable(rows, expKey, riderHead, valHead){
+  if(!rows.length) return `<div class="empty-cls">${t('stageStatEmpty')}</div>`;
+  const expanded = !!expandState[expKey];
+  const shown = expanded ? rows : rows.slice(0,10);
+  let body = `<table class="results">
+    <thead><tr><th>${t('colHash')}</th><th>${riderHead}</th><th style="text-align:right">${valHead}</th></tr></thead>
+    <tbody>` +
+    shown.map(resultRowHTML).join('') +
+    `</tbody></table>`;
+  if(rows.length>10){
+    body += `<button class="expander" data-cls="${expKey}">
+      ${expanded ? t('expandLess') : t('expandMore')(rows.length)}
+    </button>`;
+  }
+  return body;
+}
+
 function renderStageResult(n){
   const grid = document.getElementById('resultsGrid');
-  const sr = RESULTS.stageResults[n];
-  const rows = (sr && Array.isArray(sr.rows)) ? sr.rows : [];
+  const sr = RESULTS.stageResults[n] || {};
+  const rows = Array.isArray(sr.rows) ? sr.rows : [];
   const meta = RESULTS.stageWinners.find(s=>String(s.n)===String(n));
   const route = meta ? meta.route : '';
-  const expanded = !!expandState['__stage'];
-  const shown = expanded ? rows : rows.slice(0,10);
 
-  let body;
+  let mainBody;
   if(!rows.length){
-    body = `<div class="empty-cls">${t('stageResultEmpty')}</div>`;
+    mainBody = `<div class="empty-cls">${t('stageResultEmpty')}</div>`;
   } else {
-    body = `<table class="results">
-      <thead><tr><th>${t('colHash')}</th><th>${t('colRider')}</th><th style="text-align:right">${t('stageResultValHead')}</th></tr></thead>
-      <tbody>` +
-      shown.map(resultRowHTML).join('') +
-      `</tbody></table>`;
-    if(rows.length>10){
-      body += `<button class="expander" data-cls="__stage">
-        ${expanded ? t('expandLess') : t('expandMore')(rows.length)}
-      </button>`;
-    }
+    mainBody = stageStatTable(rows, '__stage', t('colRider'), t('stageResultValHead'));
   }
 
-  grid.innerHTML = `<div class="cls-card stagewins-card">
+  let html = `<div class="cls-card stagewins-card">
     <div class="cls-head">
       <span class="jersey">${jerseySVG('#3B6485')}</span>
       <h3>${t('stageResultTitle')(n)}<span class="fr">${route}</span></h3>
     </div>
-    <div class="cls-body">${body}</div>
+    <div class="cls-body">${mainBody}</div>
   </div>`;
+
+  // The other per-stage statistics only exist once the stage has results.
+  if(rows.length){
+    STAGE_STAT_KEYS.forEach(key=>{
+      const c = t('stageStats')[key];
+      const data = Array.isArray(sr[key]) ? sr[key] : [];
+      let body;
+      if(key==='points' || key==='mountains'){
+        // Sectioned: one sub-table per intermediate sprint / finish / climb.
+        body = !data.length
+          ? `<div class="empty-cls">${t('stageStatEmpty')}</div>`
+          : data.map((sec,i)=>
+              (sec.label?`<div class="sec-label">${sec.label}</div>`:'') +
+              stageStatTable(sec.rows||[], `__stage_${key}_${i}`, t('colRider'), c.valHead)
+            ).join('');
+      } else {
+        body = stageStatTable(data, '__stage_'+key, key==='teams'?t('colTeam'):t('colRider'), c.valHead);
+      }
+      html += `<div class="cls-card">
+        <div class="cls-head">
+          <span class="jersey">${CLASS_JERSEY[key]}</span>
+          <h3>${c.name}<span class="fr">${c.fr}</span></h3>
+        </div>
+        <div class="cls-body">${body}</div>
+      </div>`;
+    });
+
+    const cc = t('stageStats').combative;
+    const comb = sr.combative;
+    const combBody = comb && comb.rider
+      ? `<table class="results"><tbody>${resultRowHTML({pos:1, rider:comb.rider, team:comb.team, nat:comb.nat, val:''})}</tbody></table>`
+      : `<div class="empty-cls">${t('stageStatEmpty')}</div>`;
+    html += `<div class="cls-card">
+      <div class="cls-head">
+        <span class="jersey">${jerseySVG('#B23B32')}</span>
+        <h3>${cc.name}<span class="fr">${cc.fr}</span></h3>
+      </div>
+      <div class="cls-body">${combBody}</div>
+    </div>`;
+  }
+
+  grid.innerHTML = html;
   bindExpanders(grid);
 }
 
@@ -1494,6 +1574,7 @@ document.querySelectorAll('#langSel button').forEach(btn=>{
 /* ---------- RANKINGS STAGE SELECTOR ---------- */
 document.getElementById('rankStageSelect').addEventListener('change', e=>{
   rankView = e.target.value==='general' ? 'general' : Number(e.target.value);
+  Object.keys(expandState).forEach(k=>{ if(k.startsWith('__stage')) delete expandState[k]; });
   renderResults();
 });
 

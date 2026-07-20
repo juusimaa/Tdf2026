@@ -63,6 +63,19 @@ CLASS_CONFIG = {
     "teams":     {"code": "etg", "kind": "time",   "team_only": True},
 }
 
+# Per-stage statistics beyond the finishing order (stageResults[n] key ->
+# letour per-stage class code). The finishing order itself ("rows", ite/ete)
+# and the combativity award ("combative", ice) are handled separately.
+# "sectioned" tables hold one sub-table per scoring point (each intermediate
+# sprint / the finish for ipe, each categorized climb for ime), and are stored
+# as [{label, rows}] instead of a flat row list.
+STAGE_CLASS_CONFIG = {
+    "points":    {"code": "ipe", "kind": "points", "team_only": False, "sectioned": True},
+    "mountains": {"code": "ime", "kind": "points", "team_only": False, "sectioned": True},
+    "youth":     {"code": "ije", "kind": "time",   "team_only": False, "sectioned": False},
+    "teams":     {"code": "ete", "kind": "time",   "team_only": True,  "sectioned": False},
+}
+
 session = requests.Session()
 session.headers.update(HEADERS)
 
@@ -127,48 +140,118 @@ def parse_table(html: str, team_only: bool, kind: str):
     return rows
 
 
-def stage_table_rows(base: str, stage_no: int):
+def parse_sections(html: str, team_only: bool, kind: str):
     """
-    Fetches a stage's own result table (finishing order with times).
-    Same ajax-stack mechanics as the general classifications, but stacks[1]
-    holds the stage-specific classification (ete/ite) URL.
+    Splits a rankingTables fragment into its captioned sub-tables (one per
+    intermediate sprint / finish, or one per climb) and parses each.
+    Returns [{label, rows}, ...]; a fragment without captions becomes a
+    single unlabeled section.
+    """
+    parts = re.split(r'<div class="rankingTables__caption">(.*?)</div>', html, flags=re.S)
+    if len(parts) < 3:
+        rows = parse_table(html, team_only=team_only, kind=kind)
+        return [{"label": "", "rows": rows}] if rows else []
+    sections = []
+    for i in range(1, len(parts) - 1, 2):
+        label = re.sub(r"<[^>]+>", "", parts[i]).strip()
+        rows = parse_table(parts[i + 1], team_only=team_only, kind=kind)
+        if rows:
+            sections.append({"label": label, "rows": rows})
+    return sections
+
+
+def parse_combative(html: str):
+    """
+    Parses the combativity award table (ice). Unlike the other rankings it has
+    no value column — just rank / rider / bib / team — and holds a single row:
+    the stage's most combative rider. Returns {rider, team, nat} or None.
+    """
+    tree = HTMLParser(html)
+    tr = tree.css_first("tbody tr.rankingTables__row")
+    if tr is None:
+        return None
+    tds = tr.css("td")
+    if len(tds) < 2:
+        return None
+    img = tr.css_first(".rankingTables__row__profile.runner img")
+    rider = (img.attributes.get("alt") or "").strip() if img else tds[1].text(strip=True)
+    if not rider:
+        return None
+    team_td = tr.css_first("td.team")
+    team = team_td.text(strip=True) if team_td else ""
+    flag = tr.css_first("[data-class]")
+    nat = (flag.attributes.get("data-class") or "").replace("flag--", "").upper() if flag else ""
+    return {"rider": rider, "team": team, "nat": nat}
+
+
+def fetch_stage_data(base: str, stage_no: int):
+    """
+    Fetches everything letour.fr publishes for a single stage: the finishing
+    order ("rows") plus the per-stage classifications (points and mountain
+    points won on the stage, the young riders' and teams' stage results) and
+    the combativity award. Same ajax-stack mechanics as the general
+    classifications, but stacks[1] holds the stage-specific URLs.
     """
     html = fetch(f"{base}/en/rankings/stage-{stage_no}")
     stacks = ajax_stacks(html)
     if len(stacks) < 2 or not stacks[1]:
-        return []
+        return {}
     stage_dict = stacks[1]
+
+    def table(code, team_only, kind, sectioned=False):
+        url = stage_dict.get(code)
+        if not url:
+            return []
+        try:
+            html = fetch(base + url)
+        except Exception:
+            return []
+        if sectioned:
+            return parse_sections(html, team_only=team_only, kind=kind)
+        return parse_table(html, team_only=team_only, kind=kind)
 
     # 'ite' = individual stage result (normal stage). If it is empty — as in
     # a team time trial (TTT) — use 'ete' = the teams' stage result. Any other
     # codes are tried last as a fallback.
-    attempts = []
-    if "ite" in stage_dict:
-        attempts.append(("ite", False))
-    if "ete" in stage_dict:
-        attempts.append(("ete", True))
-    for code in stage_dict:
-        if code not in ("ite", "ete"):
-            attempts.append((code, False))
-
+    attempts = [("ite", False), ("ete", True)]
+    attempts += [(c, False) for c in stage_dict if c not in ("ite", "ete")]
+    rows = []
     for code, team_only in attempts:
-        url = stage_dict.get(code)
-        if not url:
-            continue
-        try:
-            table_html = fetch(base + url)
-        except Exception:
-            continue
-        rows = parse_table(table_html, team_only=team_only, kind="time")
+        rows = table(code, team_only, "time")
         if rows:
-            return rows
-    return []
+            break
+    if not rows:
+        return {}
+
+    data = {"rows": rows}
+    for key, cfg in STAGE_CLASS_CONFIG.items():
+        data[key] = table(cfg["code"], cfg["team_only"], cfg["kind"], cfg["sectioned"])
+
+    combative = None
+    if stage_dict.get("ice"):
+        try:
+            combative = parse_combative(fetch(base + stage_dict["ice"]))
+        except Exception:
+            combative = None
+    data["combative"] = combative
+    return data
 
 
-def stage_winner(base: str, stage_no: int) -> str:
-    """Fetches the stage winner (rider, or team in a team time trial)."""
-    rows = stage_table_rows(base, stage_no)
-    return rows[0]["rider"] if rows else ""
+# A cached stage entry is reused only if it already has every per-stage
+# statistic in the current format — entries written before those were scraped
+# (or in the pre-section flat format) get refetched once.
+STAGE_KEYS = ("rows", "points", "mountains", "youth", "teams", "combative")
+
+
+def stage_entry_complete(entry) -> bool:
+    if not entry.get("rows") or any(k not in entry for k in STAGE_KEYS):
+        return False
+    for key, cfg in STAGE_CLASS_CONFIG.items():
+        if cfg["sectioned"] and any(
+            not isinstance(s, dict) or "rows" not in s for s in entry[key]
+        ):
+            return False
+    return True
 
 
 def fetch_letour(base: str, out: Path) -> int:
@@ -220,7 +303,9 @@ def fetch_letour(base: str, out: Path) -> int:
 
     # Previously fetched stage results and winners are reused as-is; only the
     # unknown ones are fetched, so we don't make pointless requests for all
-    # already-raced stages on every run.
+    # already-raced stages on every run. The latest stage is always refetched,
+    # because its slower tables (combativity, points) can trail the finish
+    # times by a while — once the next stage exists, the entry is frozen.
     previous_winners = {
         w["n"]: w["winner"] for w in prev.get("stageWinners", []) if w.get("winner")
     }
@@ -230,17 +315,16 @@ def fetch_letour(base: str, out: Path) -> int:
     for n in range(1, stage_no + 1):
         key = str(n)
         winner = previous_winners.get(n, "")
-        rows = (prev_stage_results.get(key) or {}).get("rows") or []
-        if not rows:
+        entry = prev_stage_results.get(key) or {}
+        if n == stage_no or not stage_entry_complete(entry):
             try:
-                rows = stage_table_rows(base, n)
+                entry = fetch_stage_data(base, n) or entry
             except Exception as e:
                 print(f"  stage {n} results: {e}")
-                rows = []
-        if rows:
-            data["stageResults"][key] = {"rows": rows}
+        if entry.get("rows"):
+            data["stageResults"][key] = entry
             if not winner:
-                winner = rows[0].get("rider", "")
+                winner = entry["rows"][0].get("rider", "")
         data["stageWinners"].append({"n": n, "winner": winner})
 
     # "updated"/"updatedText" are refreshed only when some other field
