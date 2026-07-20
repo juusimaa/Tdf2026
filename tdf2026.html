@@ -506,7 +506,8 @@ const STRINGS = {
     colHash: '#', colRider: 'Ajaja', colTeam: 'Joukkue',
     expandLess: '▲ Näytä vain top 10', expandMore: n => `▼ Näytä kaikki (${n})`,
     stageWinnersTitle: 'Etappivoittajat', stageWinnersFr: n => `${n}/21 etappia ajettu`,
-    colStage: 'Etappi', colWinner: 'Voittaja',
+    colStage: 'Etappi', colWinner: 'Voittaja', colSpeed: 'km/h',
+    avgSpeed: v => `keskinopeus ${v} km/h`,
     rankShowLabel: 'Näytä',
     rankGeneral: 'Kokonaistilanne — kaikki paidat',
     rankStageOpt: (n,route) => `Etappi ${n} · ${route}`,
@@ -568,7 +569,8 @@ const STRINGS = {
     colHash: '#', colRider: 'Rider', colTeam: 'Team',
     expandLess: '▲ Show top 10 only', expandMore: n => `▼ Show all (${n})`,
     stageWinnersTitle: 'Stage winners', stageWinnersFr: n => `${n}/21 stages raced`,
-    colStage: 'Stage', colWinner: 'Winner',
+    colStage: 'Stage', colWinner: 'Winner', colSpeed: 'km/h',
+    avgSpeed: v => `avg speed ${v} km/h`,
     rankShowLabel: 'Show',
     rankGeneral: 'General rankings — all jerseys',
     rankStageOpt: (n,route) => `Stage ${n} · ${route}`,
@@ -630,7 +632,8 @@ const STRINGS = {
     colHash: '#', colRider: 'Coureur', colTeam: 'Équipe',
     expandLess: '▲ Afficher seulement le top 10', expandMore: n => `▼ Tout afficher (${n})`,
     stageWinnersTitle: 'Vainqueurs d’étape', stageWinnersFr: n => `${n}/21 étapes courues`,
-    colStage: 'Étape', colWinner: 'Vainqueur',
+    colStage: 'Étape', colWinner: 'Vainqueur', colSpeed: 'km/h',
+    avgSpeed: v => `vitesse moyenne ${v} km/h`,
     rankShowLabel: 'Afficher',
     rankGeneral: 'Classement général — tous les maillots',
     rankStageOpt: (n,route) => `Étape ${n} · ${route}`,
@@ -1320,6 +1323,27 @@ const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 const expandState = {}; // key -> bool
 let rankView = 'general'; // 'general' or the selected stage number
 
+/* Average stage speed, derived client-side: the roadbook distance (stages[].km)
+   divided by the winner's time from the stage result. The roadbook distance is
+   the planned route length, so this is an estimate — if a stage is shortened
+   on the day, the km value must be corrected by hand. */
+function timeToHours(s){
+  const m = /(\d+)h\s*(\d+)'\s*(\d+)/.exec(s||'');
+  if(!m) return null;
+  return (+m[1]) + (+m[2])/60 + (+m[3])/3600;
+}
+function stageAvgSpeed(n){
+  const sr = RESULTS.stageResults[n];
+  const st = stages.find(s=>s.n===Number(n));
+  if(!sr || !st || !Array.isArray(sr.rows) || !sr.rows.length) return null;
+  const h = timeToHours(sr.rows[0].val);
+  return h ? st.km / h : null;
+}
+function fmtSpeed(v){
+  const s = v.toFixed(1);
+  return lang==='en' ? s : s.replace('.', ',');
+}
+
 /* HTML for a single result row (shared by classifications and stage results) */
 function resultRowHTML(r){
   return `
@@ -1413,14 +1437,18 @@ function renderGeneralRankings(){
     </div>
     <div class="cls-body">
       <table class="results">
-        <thead><tr><th>${t('colHash')}</th><th>${t('colStage')}</th><th style="text-align:right">${t('colWinner')}</th></tr></thead>
+        <thead><tr><th>${t('colHash')}</th><th>${t('colStage')}</th><th style="text-align:right">${t('colWinner')}</th><th style="text-align:right">${t('colSpeed')}</th></tr></thead>
         <tbody>` +
-        RESULTS.stageWinners.map(s=>`
+        RESULTS.stageWinners.map(s=>{
+          const spd = stageAvgSpeed(s.n);
+          return `
           <tr>
             <td class="pos">${s.n}</td>
             <td>${s.route}</td>
             <td class="val">${s.winner || '—'}</td>
-          </tr>`).join('') +
+            <td class="val">${spd ? fmtSpeed(spd) : '—'}</td>
+          </tr>`;
+        }).join('') +
       `</tbody></table>
     </div>
   </div>`;
@@ -1464,10 +1492,12 @@ function renderStageResult(n){
     mainBody = stageStatTable(rows, '__stage', t('colRider'), t('stageResultValHead'));
   }
 
+  const spd = stageAvgSpeed(n);
+  const sub = route + (spd ? ` · ${t('avgSpeed')(fmtSpeed(spd))}` : '');
   let html = `<div class="cls-card stagewins-card">
     <div class="cls-head">
       <span class="jersey">${jerseySVG('#3B6485')}</span>
-      <h3>${t('stageResultTitle')(n)}<span class="fr">${route}</span></h3>
+      <h3>${t('stageResultTitle')(n)}<span class="fr">${sub}</span></h3>
     </div>
     <div class="cls-body">${mainBody}</div>
   </div>`;
