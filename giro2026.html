@@ -95,22 +95,21 @@
   .view.active{display:block;}
 
   /* Stages layout
-     .stagelist gets align-self:stretch (rather than the grid's default
-     align-items:start) so it can grow to match the detail panel's row height
-     when the panel is taller, and is laid out as a column so ul.stages can
-     fill that extra height. Without this, a short stage list next to a tall
-     panel (e.g. a stage with a long description) would hit the bottom of its
-     own box early and "let go" mid-scroll — jumping from stuck to
-     scrolling-with-the-page. The panel itself is left at the default
-     align-items:start, so it's never force-stretched the other way (a short
-     panel next to the full stage list would otherwise gain a large blank
-     area below its content). */
+     .stagelist's height is set in pixels by JS (syncStageListHeight),
+     copied straight from the detail panel's rendered height, so the two
+     columns are always exactly the same height regardless of viewport size
+     or stage content — CSS alone (grid stretch, flex, vh-based caps) kept
+     producing one-sided mismatches, because whichever column got a size cap
+     fed back into how tall Grid made the row, throwing off the other
+     column. If the list's own content doesn't fit in that height it just
+     scrolls internally (overflow-y:auto below); the panel is never resized,
+     so a short panel never gains a blank area under its content either. */
   .layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start;}
   @media (max-width:860px){.layout{grid-template-columns:1fr;}}
-  .stagelist{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;display:flex;flex-direction:column;align-self:stretch;position:sticky;top:16px;max-height:calc(100vh - 32px);}
+  .stagelist{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;display:flex;flex-direction:column;position:sticky;top:16px;}
   .stagelist .listhead{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:12px 14px 8px;flex:0 0 auto;}
   ul.stages{list-style:none;margin:0;padding:0 6px 10px;flex:1 1 auto;min-height:0;overflow-y:auto;}
-  @media (max-width:860px){.stagelist{position:static;max-height:none;}ul.stages{overflow-y:visible;}}
+  @media (max-width:860px){.stagelist{position:static;}ul.stages{overflow-y:visible;}}
   li.stage-item{margin:2px 0;}
   button.stage-btn{
     width:100%;text-align:left;display:flex;align-items:center;gap:10px;
@@ -585,11 +584,30 @@ function renderStageList(){
     }
   });
 }
+/* Keeps the stage-list column exactly as tall as the detail panel next to
+   it (see the .stagelist comment in the stylesheet for why this is done in
+   JS rather than pure CSS). Skipped below the 860px breakpoint, where the
+   layout drops to a single column and .stagelist reverts to position:static
+   — an inline height there would just add dead space under a short list. */
+function syncStageListHeight(){
+  const list=document.querySelector('.stagelist');
+  const panel=document.getElementById('panel');
+  const stagesView=document.getElementById('view-stages');
+  if(!list||!panel||!stagesView) return;
+  if(window.innerWidth<=860 || !stagesView.classList.contains('active')){
+    list.style.height='';
+    return;
+  }
+  list.style.height=panel.offsetHeight+'px';
+}
+window.addEventListener('resize', syncStageListHeight);
+
 function selectStage(idx){
   activeIdx=idx;
   document.querySelectorAll('.stage-btn').forEach(b=>b.classList.toggle('active',+b.dataset.idx===idx));
   const b=document.querySelector(`.stage-btn[data-idx="${idx}"]`); if(b) b.scrollIntoView({block:'nearest'});
   renderPanel(stages[idx]);
+  syncStageListHeight();
 }
 function catChip(cat){
   if(!cat) return '<span class="dash">—</span>';
@@ -722,6 +740,7 @@ function render(){
     b.setAttribute('aria-pressed',active?'true':'false');
   });
   document.documentElement.lang=lang;
+  syncStageListHeight();
 }
 
 /* ---------- TABS ---------- */
@@ -730,6 +749,7 @@ document.querySelectorAll('.tab').forEach(tab=>{
     document.querySelectorAll('.tab').forEach(x=>{ x.classList.toggle('active',x===tab); x.setAttribute('aria-selected',x===tab?'true':'false'); });
     const v=tab.dataset.view;
     document.querySelectorAll('.view').forEach(sec=>sec.classList.toggle('active', sec.id==='view-'+v));
+    syncStageListHeight();
   });
 });
 
