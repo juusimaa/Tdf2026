@@ -31,6 +31,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Leaflet (real map in the expanded stage locator). Loaded from unpkg with
+     Subresource Integrity so a tampered CDN response is rejected. Only used by
+     the expanded map; the collapsed minimap is the self-contained SVG below. -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <style>
   :root{
     color-scheme:light dark;
@@ -342,12 +350,21 @@
      into the side margins, which is fine — svg overflow stays visible
      within the element box). */
   .mapbox{position:relative;margin:16px 0 4px;}
-  svg.minimap-lg{width:100%;height:min(60vh,460px);padding:10px;cursor:pointer;}
-  svg.minimap .mm-ghost{stroke:var(--grey-road);stroke-width:1.1;stroke-linecap:round;opacity:.45;fill:none;}
-  svg.minimap .mm-ghost-dot{fill:var(--grey-road);opacity:.45;}
-  svg.minimap .mm-label{
-    font-family:'JetBrains Mono',monospace;font-size:3.1px;fill:var(--ink);
-    paint-order:stroke;stroke:var(--paper);stroke-width:0.9;stroke-linejoin:round;
+  /* Expanded view: a real Leaflet + OpenStreetMap map. Fixed height so the
+     panel's layout height is known immediately (before tiles load), which
+     keeps syncStageListHeight correct. */
+  #stage-map{
+    width:100%;height:min(60vh,460px);
+    border:1px solid var(--line);border-radius:2px;
+    background:var(--paper);z-index:0;
+  }
+  .leaflet-container{font-family:'Inter',system-ui,sans-serif;}
+  .leaflet-control-attribution{font-size:9px;}
+  /* Dark mode: invert only the raster tile pane so the light OSM map doesn't
+     glare against the dark UI. Route/markers live in the overlay pane and are
+     left untouched. A pragmatic stand-in for a dedicated dark tile set. */
+  @media (prefers-color-scheme: dark){
+    #stage-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9);}
   }
   .mm-close{
     position:absolute;top:8px;right:8px;z-index:1;
@@ -516,6 +533,7 @@
    shows the 2026 Tour de France. */
 const TOUR = 'tdf2026';
 const RESULTS_URL = `data/${TOUR}-results.json`;
+const ROUTES_URL = `data/${TOUR}-routes.json`;
 
 /* ---------- I18N ---------- */
 const LANG_KEY = 'tdf2026-lang';
@@ -538,7 +556,8 @@ const STRINGS = {
     minimapAria: n => `Etapin ${n} likimääräinen sijainti Ranskan kartalla`,
     minimapExpand: 'Suurenna kartta',
     minimapCollapse: '✕ Pienennä kartta',
-    minimapCaption: 'Likimääräiset sijainnit — muiden etappien reitit himmeällä. Sulje ✕-painikkeesta tai klikkaamalla karttaa.',
+    minimapCaption: 'Etapin oikea reitti OpenStreetMap-kartalla. Kulta = lähtö, punainen = maali. Sulje ✕-painikkeesta.',
+    minimapCaptionApprox: 'Reittidataa ei vielä saatavilla — näytetään suora viiva lähdöstä maaliin. Sulje ✕-painikkeesta.',
     factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä', factStart: 'Lähetys alkaa',
     startNote: 'TV-lähetyksen arvioitu alkamisaika (HBO Max / TNT Sports / Eurosport), muunnettu omaan aikavyöhykkeeseesi — perustuu CEST-aikatauluun, joka voi vielä muuttua kisan lähestyessä.',
     legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendSprint: 'Kirisprintti',
@@ -612,7 +631,8 @@ const STRINGS = {
     minimapAria: n => `Approximate location of stage ${n} on a map of France`,
     minimapExpand: 'Enlarge map',
     minimapCollapse: '✕ Shrink map',
-    minimapCaption: 'Approximate locations — other stages’ routes shown faded. Close with the ✕ button or by clicking the map.',
+    minimapCaption: 'Actual stage route on OpenStreetMap. Gold = start, red = finish. Close with the ✕ button.',
+    minimapCaptionApprox: 'Route data not available yet — showing a straight line from start to finish. Close with the ✕ button.',
     factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints', factStart: 'Coverage starts',
     startNote: 'Estimated TV coverage start time (HBO Max / TNT Sports / Eurosport), converted to your own time zone — based on the published CEST schedule, which may still shift closer to the stage.',
     legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendSprint: 'Intermediate sprint',
@@ -686,7 +706,8 @@ const STRINGS = {
     minimapAria: n => `Situation approximative de l’étape ${n} sur la carte de France`,
     minimapExpand: 'Agrandir la carte',
     minimapCollapse: '✕ Réduire la carte',
-    minimapCaption: 'Emplacements approximatifs — parcours des autres étapes en grisé. Fermer avec le bouton ✕ ou en cliquant sur la carte.',
+    minimapCaption: 'Parcours réel de l’étape sur OpenStreetMap. Or = départ, rouge = arrivée. Fermer avec le bouton ✕.',
+    minimapCaptionApprox: 'Données du parcours indisponibles — ligne droite du départ à l’arrivée. Fermer avec le bouton ✕.',
     factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Points de côte', factSprints: 'Sprints intermédiaires', factStart: 'Début de diffusion',
     startNote: 'Heure estimée de début de la diffusion TV (HBO Max / TNT Sports / Eurosport), convertie dans votre propre fuseau horaire — d’après la grille CEST, susceptible d’évoluer à l’approche de l’étape.',
     legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendSprint: 'Sprint intermédiaire',
@@ -1280,35 +1301,93 @@ function renderMinimap(stage){
   return `<button class="mm-btn" data-mm-toggle aria-expanded="false" title="${t('minimapExpand')}">${svg}</button>`;
 }
 
+// Expanded view markup: a container Leaflet mounts into (see initStageMap).
+// Only the ✕ button collapses — the map itself stays interactive (pan/zoom),
+// so it is not a collapse target.
 function renderMinimapLarge(stage){
-  const g = mmStageGeom(stage.n);
-  if(!g) return '';
-  let svg = mmBase(stage,'minimap minimap-lg');
-  // Every other stage as a faint route, for "where in the tour" context.
-  Object.keys(STAGE_COORDS).forEach(n=>{
-    if(+n===stage.n) return;
-    const o = mmStageGeom(+n);
-    if(o.same) svg += `<circle class="mm-ghost-dot" cx="${o.fx}" cy="${o.fy}" r="1.3"/>`;
-    else svg += `<line class="mm-ghost" x1="${o.sx}" y1="${o.sy}" x2="${o.fx}" y2="${o.fy}"/>`;
-  });
-  svg += mmRouteMarks(g);
-  // City labels. For a single-dot stage one combined label; otherwise the
-  // labels flee in opposite directions along the route so they don't collide.
-  if(g.same){
-    const lbl = stage.start===stage.finish ? stage.start : `${stage.start} → ${stage.finish}`;
-    svg += `<text class="mm-label" x="${+g.fx+4.5}" y="${+g.fy+1.1}">${lbl}</text>`;
-  }else{
-    const sLeft = +g.sx <= +g.fx;
-    svg += `<text class="mm-label" x="${+g.sx+(sLeft?-3.8:3.8)}" y="${+g.sy+1.1}" text-anchor="${sLeft?'end':'start'}">${stage.start}</text>`;
-    svg += `<text class="mm-label" x="${+g.fx+(sLeft?3.8:-3.8)}" y="${+g.fy+1.1}" text-anchor="${sLeft?'start':'end'}">${stage.finish}</text>`;
-  }
-  svg += `</svg>`;
+  if(!STAGE_COORDS[stage.n]) return '';
   return `
     <div class="mapbox">
       <button class="mm-close" data-mm-toggle aria-expanded="true">${t('minimapCollapse')}</button>
-      <div data-mm-toggle title="${t('minimapCollapse').replace('✕ ','')}">${svg}</div>
-      <div class="chart-caption">${t('minimapCaption')}</div>
+      <div id="stage-map" role="application" aria-label="${t('minimapAria')(stage.n)}"></div>
+      <div class="chart-caption" id="stage-map-caption">${t('minimapCaption')}</div>
     </div>`;
+}
+
+/* ---------- REAL ROUTE MAP (Leaflet + OpenStreetMap) ----------
+   Per-stage route polylines live in data/<TOUR>-routes.json (built by
+   scripts/fetch_routes.py from cyclingstage.com GPX). Loaded once, lazily, on
+   first expand. Stages missing a route fall back to a straight start→finish
+   line derived from STAGE_COORDS. */
+let routesData = null, routesPromise = null;
+function loadRoutes(){
+  if(routesData) return Promise.resolve(routesData);
+  if(!routesPromise){
+    routesPromise = fetch(ROUTES_URL, {cache:'force-cache'})
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { routesData = (d && d.stages) ? d : {stages:{}}; return routesData; })
+      .catch(() => { routesData = {stages:{}}; return routesData; });
+  }
+  return routesPromise;
+}
+
+let stageMap = null; // active Leaflet instance (null when collapsed)
+function destroyStageMap(){
+  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; }
+}
+
+function initStageMap(stage){
+  if(!mapExpanded) return;
+  // Leaflet is a deferred script; if the user somehow expands before it lands,
+  // retry shortly. In practice expansion is a post-load click, so L is ready.
+  if(!window.L){ setTimeout(()=>initStageMap(stage), 120); return; }
+  const el = document.getElementById('stage-map');
+  if(!el) return;
+  destroyStageMap();
+
+  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true});
+  stageMap = map;
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom:17,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  // Route/marker colours pulled from the live theme variables so they track
+  // light/dark. Leaflet SVG overlays can't reference CSS vars directly.
+  const css = getComputedStyle(document.documentElement);
+  const GOLD = css.getPropertyValue('--gold-deep').trim() || '#9C7620';
+  const RED  = css.getPropertyValue('--red').trim() || '#B23B32';
+
+  const draw = () => {
+    if(stageMap !== map) return; // a newer render superseded this one
+    const pts = (routesData.stages || {})[stage.n];      // [[lat,lon]…] or undefined
+    const c = STAGE_COORDS[stage.n];                      // [[lon,lat],[lon,lat]]
+    let line, startLL, finishLL, approx = false;
+    if(pts && pts.length){
+      line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
+    }else{
+      approx = true;
+      startLL = [c[0][1], c[0][0]];
+      finishLL = [c[1][1], c[1][0]];
+      line = [startLL, finishLL];
+    }
+    const poly = L.polyline(line, approx
+      ? {color:GOLD, weight:3, opacity:.9, dashArray:'6,8'}
+      : {color:GOLD, weight:4, opacity:.95}).addTo(map);
+    const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
+    if(!same){
+      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:GOLD, fillOpacity:1}).addTo(map);
+    }
+    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:RED, fillOpacity:1}).addTo(map);
+    map.fitBounds(poly.getBounds(), {padding:[26,26]});
+    map.invalidateSize();
+    const cap = document.getElementById('stage-map-caption');
+    if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
+  };
+
+  if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
+  // A tick later the container has its final size — re-measure so tiles fill it.
+  setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
 }
 
 /* ---------- RENDER STAGE LIST ---------- */
@@ -1378,6 +1457,9 @@ function selectStage(idx){
 function renderPanel(stage){
   const panel = document.getElementById('panel');
   const tc = typeColor(stage.type);
+  // Tear down any live map before its container is replaced by innerHTML, so
+  // Leaflet doesn't leak the old instance's global (resize) listeners.
+  destroyStageMap();
 
   let climbRows = '';
   if(stage.climbs && stage.climbs.length){
@@ -1451,9 +1533,9 @@ function renderPanel(stage){
     </div>
   `;
 
-  // Minimap ↔ full-width map toggle (small map, the ✕ button and the large
-  // map itself all carry data-mm-toggle). Re-rendering the panel swaps the
-  // variants; the list height is re-synced since the panel height changes.
+  // Minimap ↔ full-width map toggle. The collapsed minimap expands; the ✕
+  // button collapses. Re-rendering the panel swaps the variants; the list
+  // height is re-synced since the panel height changes.
   panel.querySelectorAll('[data-mm-toggle]').forEach(el=>{
     el.addEventListener('click', ()=>{
       mapExpanded = !mapExpanded;
@@ -1461,6 +1543,9 @@ function renderPanel(stage){
       syncStageListHeight();
     });
   });
+
+  // Mount the real map once the expanded container is in the DOM.
+  if(mapExpanded) initStageMap(stage);
 }
 
 /* ---------- TOP STATS ---------- */
