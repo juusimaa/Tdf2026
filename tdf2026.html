@@ -320,6 +320,19 @@
     font-family:'JetBrains Mono',monospace;font-size:11.5px;
     color:var(--solid-fg);background:var(--solid-bg);padding:5px 9px;border-radius:2px;white-space:nowrap;
   }
+  .stagehead-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  /* Locator minimap: a rough France outline with a start→finish marker.
+     All strokes/fills use theme variables so it follows light/dark live. */
+  svg.minimap{
+    width:112px;height:auto;display:block;
+    background:var(--paper);border:1px solid var(--line);border-radius:2px;
+    padding:5px;
+  }
+  svg.minimap .mm-land{fill:var(--hover);stroke:var(--grey-road);stroke-width:1;stroke-linejoin:round;}
+  svg.minimap .mm-coast{fill:none;stroke:var(--grey-road);stroke-width:1;stroke-dasharray:2,2;opacity:.55;}
+  svg.minimap .mm-route{stroke:var(--gold-deep);stroke-width:2.2;stroke-linecap:round;}
+  svg.minimap .mm-start{fill:var(--paper);stroke:var(--gold-deep);stroke-width:1.4;}
+  svg.minimap .mm-finish{fill:var(--red);}
   .typepill{
     display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
     letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;
@@ -498,6 +511,7 @@ const STRINGS = {
     statMountainFinish: 'Vuoristomaalia', statMountainFinishVal: 'Alpe d’Huez ×2, muut 5',
     stagePrefix: 'Etappi',
     profileAria: n => `Etapin ${n} korkeusprofiili`,
+    minimapAria: n => `Etapin ${n} likimääräinen sijainti Ranskan kartalla`,
     factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä', factStart: 'Lähetys alkaa',
     startNote: 'TV-lähetyksen arvioitu alkamisaika (HBO Max / TNT Sports / Eurosport), muunnettu omaan aikavyöhykkeeseesi — perustuu CEST-aikatauluun, joka voi vielä muuttua kisan lähestyessä.',
     legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendSprint: 'Kirisprintti',
@@ -568,6 +582,7 @@ const STRINGS = {
     statMountainFinish: 'Mountain finishes', statMountainFinishVal: 'Alpe d’Huez ×2, others 5',
     stagePrefix: 'Stage',
     profileAria: n => `Stage ${n} elevation profile`,
+    minimapAria: n => `Approximate location of stage ${n} on a map of France`,
     factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints', factStart: 'Coverage starts',
     startNote: 'Estimated TV coverage start time (HBO Max / TNT Sports / Eurosport), converted to your own time zone — based on the published CEST schedule, which may still shift closer to the stage.',
     legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendSprint: 'Intermediate sprint',
@@ -638,6 +653,7 @@ const STRINGS = {
     statMountainFinish: 'Arrivées en altitude', statMountainFinishVal: 'Alpe d’Huez ×2, autres 5',
     stagePrefix: 'Étape',
     profileAria: n => `Profil d’altitude de l’étape ${n}`,
+    minimapAria: n => `Situation approximative de l’étape ${n} sur la carte de France`,
     factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Points de côte', factSprints: 'Sprints intermédiaires', factStart: 'Début de diffusion',
     startNote: 'Heure estimée de début de la diffusion TV (HBO Max / TNT Sports / Eurosport), convertie dans votre propre fuseau horaire — d’après la grille CEST, susceptible d’évoluer à l’approche de l’étape.',
     legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendSprint: 'Sprint intermédiaire',
@@ -1146,6 +1162,71 @@ function renderProfile(stage){
   return svg;
 }
 
+/* ---------- LOCATOR MINIMAP ----------
+   Very simplified, hand-traced outline of metropolitan France ([lon,lat]
+   pairs) plus a short dashed stretch of the Catalan coast for the Barcelona
+   Grand Départ. Only meant to give a rough "where in the country is this
+   stage" cue — not cartographically accurate. */
+const MM_FRANCE = [
+  [2.38,51.05],[1.85,50.96],[1.40,50.06],[0.10,49.50],[-1.14,49.40],[-1.62,49.66],
+  [-1.51,48.64],[-2.60,48.60],[-3.60,48.70],[-4.77,48.40],[-4.74,48.03],[-3.37,47.75],
+  [-2.25,47.28],[-1.79,46.50],[-1.15,46.16],[-1.03,45.62],[-1.16,44.66],[-1.56,43.48],
+  [-1.77,43.36],[-0.50,43.00],[0.60,42.75],[1.50,42.55],[2.50,42.40],[3.04,42.43],
+  [3.70,43.40],[4.13,43.53],[4.85,43.35],[5.37,43.29],[5.93,43.10],[6.64,43.27],
+  [7.50,43.79],[7.00,44.25],[6.90,44.85],[7.10,45.30],[6.80,45.80],[6.17,46.28],
+  [6.80,46.43],[7.05,47.00],[7.59,47.56],[7.58,48.12],[8.23,48.97],[7.45,49.17],
+  [6.36,49.46],[5.47,49.50],[4.87,49.79],[4.83,50.17],[4.20,49.95],[3.90,50.35],
+  [3.18,50.52],[2.55,51.09]
+];
+const MM_CATALONIA = [
+  [3.28,42.32],[3.17,42.26],[2.79,41.67],[2.17,41.39],[1.25,41.12],[0.72,40.85]
+];
+// Approximate start/finish coordinates ([lon,lat]) per stage number.
+const STAGE_COORDS = {
+  1:[[2.17,41.39],[2.17,41.39]],   2:[[1.25,41.12],[2.17,41.39]],
+  3:[[2.29,41.61],[2.07,42.57]],   4:[[2.35,43.21],[1.61,42.96]],
+  5:[[0.38,43.13],[-0.37,43.30]],  6:[[-0.37,43.30],[0.01,42.73]],
+  7:[[-0.66,43.66],[-0.58,44.84]], 8:[[0.72,45.18],[0.48,44.85]],
+  9:[[1.56,45.17],[2.31,45.55]],  10:[[2.44,44.93],[2.75,45.08]],
+ 11:[[3.42,46.13],[3.16,46.99]],  12:[[3.16,46.88],[4.85,46.78]],
+ 13:[[5.49,47.09],[6.86,47.64]],  14:[[7.34,47.75],[7.03,47.92]],
+ 15:[[5.91,46.75],[6.35,46.06]],  16:[[6.59,46.40],[6.48,46.37]],
+ 17:[[5.92,45.56],[5.59,45.36]],  18:[[5.59,45.36],[6.34,44.69]],
+ 19:[[6.08,44.56],[6.07,45.09]],  20:[[6.03,45.06],[6.07,45.09]],
+ 21:[[1.80,48.87],[2.35,48.86]]
+};
+
+// Equirectangular projection: longitudes squeezed by cos(46°) so France
+// keeps roughly its true proportions at this latitude.
+const MM_BOX = {lonMin:-5.1, lonMax:8.5, latMin:40.7, latMax:51.3};
+const MM_K = Math.cos(46*Math.PI/180);
+function mmXY(p){
+  return [((p[0]-MM_BOX.lonMin)*MM_K*10).toFixed(1),
+          ((MM_BOX.latMax-p[1])*10).toFixed(1)];
+}
+function mmPath(pts, close){
+  return pts.map((p,i)=>(i?'L':'M')+mmXY(p).join(' ')).join(' ')+(close?' Z':'');
+}
+function renderMinimap(stage){
+  const c = STAGE_COORDS[stage.n];
+  if(!c) return '';
+  const W = ((MM_BOX.lonMax-MM_BOX.lonMin)*MM_K*10).toFixed(1);
+  const H = ((MM_BOX.latMax-MM_BOX.latMin)*10).toFixed(1);
+  const [sx,sy] = mmXY(c[0]), [fx,fy] = mmXY(c[1]);
+  // Same start & finish town (time trials): a single dot instead of a line.
+  const same = Math.abs(c[0][0]-c[1][0])<0.05 && Math.abs(c[0][1]-c[1][1])<0.05;
+  let svg = `<svg class="minimap" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${t('minimapAria')(stage.n)}">`;
+  svg += `<path class="mm-land" d="${mmPath(MM_FRANCE,true)}"/>`;
+  svg += `<path class="mm-coast" d="${mmPath(MM_CATALONIA,false)}"/>`;
+  if(!same){
+    svg += `<line class="mm-route" x1="${sx}" y1="${sy}" x2="${fx}" y2="${fy}"/>`;
+    svg += `<circle class="mm-start" cx="${sx}" cy="${sy}" r="2.4"/>`;
+  }
+  svg += `<circle class="mm-finish" cx="${fx}" cy="${fy}" r="${same?3.2:2.6}"/>`;
+  svg += `</svg>`;
+  return svg;
+}
+
 /* ---------- RENDER STAGE LIST ---------- */
 const listEl = document.getElementById('stageList');
 let activeIdx = 0;
@@ -1244,7 +1325,10 @@ function renderPanel(stage){
         <h2>${t('stagePrefix')} ${stage.n} — ${stage.start} → ${stage.finish}</h2>
         <span class="typepill" style="background:${tc}">${t('typeLabels')[stage.type]}</span>
       </div>
-      <span class="datebadge">${fmtDate(stage.dateIso)}</span>
+      <div class="stagehead-side">
+        <span class="datebadge">${fmtDate(stage.dateIso)}</span>
+        ${renderMinimap(stage)}
+      </div>
     </div>
 
     <div class="factbar">
