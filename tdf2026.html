@@ -39,51 +39,9 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- Shared colour theme (light + dark palettes, flag-stripe classes). -->
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    color-scheme:light dark;
-    --paper:#E9ECE4;
-    --paper-panel:#F4F6EF;
-    --ink:#1E2A22;
-    --ink-soft:#4C5A50;
-    --line:#C6CCBC;
-    --gold:#C99A2E;
-    --gold-deep:#9C7620;
-    --red:#B23B32;
-    --green:#3E7A57;
-    --blue:#3B6485;
-    --grey-road:#8B8F84;
-    --shadow: 0 2px 10px rgba(30,42,34,0.08);
-    /* Solid "chip" (datebadge, active language button): dark bg + light text
-       in light mode, inverted in dark mode. */
-    --solid-bg:#1E2A22;
-    --solid-fg:#ffffff;
-    /* Subtle hover overlay — flipped to a light film in dark mode. */
-    --hover:rgba(0,0,0,0.04);
-  }
-
-  /* Dark theme: follows the OS / browser (prefers-color-scheme: dark).
-     Only the palette is overridden; the layout and components reuse these
-     same custom properties. */
-  @media (prefers-color-scheme: dark){
-    :root{
-      --paper:#12160F;
-      --paper-panel:#1B211A;
-      --ink:#E7ECDF;
-      --ink-soft:#9FA99A;
-      --line:#333B31;
-      --gold:#D8AC44;
-      --gold-deep:#E3BE63;
-      --red:#D3574C;
-      --green:#3E7A57; /* kept dark enough that the white-text sprint chip stays AA-legible */
-      --blue:#77ABD2;
-      --grey-road:#8B8F84;
-      --shadow: 0 2px 14px rgba(0,0,0,0.45);
-      --solid-bg:#E7ECDF;
-      --solid-fg:#12160F;
-      --hover:rgba(255,255,255,0.06);
-    }
-  }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
@@ -135,17 +93,8 @@
     line-height:1.02;
   }
   h1 span{color:var(--gold-deep);}
-  /* Title text striped in the French tricolore. The character split matches
-     the flag's 1/3-1/3-1/3 ratio (12 letters -> 4/4/4; spaces don't count).
-     The white stripe gets a thin ink stroke so it stays legible on light
-     paper; in dark mode plain white already reads, so the stroke fades. */
-  .fr-b{color:#0055A4;}
-  .fr-w{color:#fff;-webkit-text-stroke:.022em rgba(30,42,34,.55);text-shadow:0 1px 2px rgba(30,42,34,.18);}
-  .fr-r{color:#EF4135;}
-  @media (prefers-color-scheme: dark){
-    .fr-b{color:#5B93DE;}
-    .fr-w{-webkit-text-stroke:.014em rgba(0,0,0,.35);text-shadow:none;}
-  }
+  /* Title text striped in the French tricolore — colours come from theme.css
+     (.fr-b, .fs-w, .fr-r). */
   .sub{
     color:var(--ink-soft);
     font-size:14.5px;
@@ -483,7 +432,7 @@
         <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
       </div>
     </div>
-    <h1><span class="fr-b">Tour</span><span class="fr-w"> de Fr</span><span class="fr-r">ance</span> 2026</h1>
+    <h1><span class="fr-b">Tour</span><span class="fs-w"> de Fr</span><span class="fr-r">ance</span> 2026</h1>
     <div class="sub" id="subDesc"></div>
     <div class="stat-row" id="topstats"></div>
   </header>
@@ -783,10 +732,12 @@ function t(key){
 
 /* ---------- DATA ---------- */
 // climb categories -> color
-const CAT_COLOR = {HC:'#B23B32', C1:'#C9622E', C2:'#C99A2E', C3:'#7E8A46', C4:'#8B9C7A'};
+/* All values resolve in theme.css; var() strings work in the generated
+   inline-SVG presentation attributes and follow light/dark live. */
+const CAT_COLOR = {HC:'var(--climb-1)', C1:'var(--climb-2)', C2:'var(--climb-3)', C3:'var(--climb-4)', C4:'var(--climb-5)'};
 const TYPE_COLOR = {
-  flat:'#3B6485', hilly:'#7E8A46', mountain:'#B23B32',
-  ttt:'#4C5A50', itt:'#4C5A50'
+  flat:'var(--blue)', hilly:'var(--olive)', mountain:'var(--red)',
+  ttt:'var(--ink-soft)', itt:'var(--ink-soft)'
 };
 
 // profile keypoints: relative elevation 0-100 (illustrative, not surveyed)
@@ -1092,7 +1043,7 @@ const stages = [
 ];
 
 /* ---------- HELPERS ---------- */
-function typeColor(t){return TYPE_COLOR[t]||'#888';}
+function typeColor(t){return TYPE_COLOR[t]||'var(--grey)';}
 
 // Intl locale tag for the current language (fi/fr use comma decimals & spaced
 // thousands; en uses en-GB).
@@ -1194,7 +1145,7 @@ function renderProfile(stage){
     const startKm = Math.max(0, c.km - c.len);
     const cx1 = xForKm(startKm,totalKm,W,padL,padR);
     const cx2 = xForKm(topKm,totalKm,W,padL,padR);
-    const color = CAT_COLOR[c.cat]||'#B23B32';
+    const color = CAT_COLOR[c.cat]||'var(--climb-1)';
     svg += `<rect x="${cx1}" y="${padT}" width="${Math.max(2,cx2-cx1)}" height="${plotH}" fill="${color}" opacity="0.16"/>`;
     svg += `<line x1="${cx2}" y1="${padT}" x2="${cx2}" y2="${baseY}" stroke="${color}" stroke-width="1.6" stroke-dasharray="2,2"/>`;
     svg += `<circle cx="${cx2}" cy="${padT-4}" r="4.5" fill="${color}"/>`;
@@ -1206,10 +1157,10 @@ function renderProfile(stage){
   (stage.sprints||[]).forEach(s=>{
     const sx = xForKm(s.km,totalKm,W,padL,padR);
     const flagTop = padT + plotH*0.30;
-    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${baseY}" stroke="#3E7A57" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.55"/>`;
-    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${flagTop+16}" stroke="#3E7A57" stroke-width="1.8"/>`;
-    svg += `<path d="M ${sx} ${flagTop} L ${sx+12} ${flagTop+4.5} L ${sx} ${flagTop+9} Z" fill="#3E7A57"/>`;
-    svg += `<circle cx="${sx}" cy="${baseY}" r="3.4" fill="#3E7A57" stroke="var(--paper-panel)" stroke-width="1"/>`;
+    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${baseY}" stroke="var(--green)" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.55"/>`;
+    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${flagTop+16}" stroke="var(--green)" stroke-width="1.8"/>`;
+    svg += `<path d="M ${sx} ${flagTop} L ${sx+12} ${flagTop+4.5} L ${sx} ${flagTop+9} Z" fill="var(--green)"/>`;
+    svg += `<circle cx="${sx}" cy="${baseY}" r="3.4" fill="var(--green)" stroke="var(--paper-panel)" stroke-width="1"/>`;
   });
 
   svg += `</svg>`;
@@ -1466,7 +1417,7 @@ function renderPanel(stage){
     climbRows = stage.climbs.map(c=>`
       <tr>
         <td>${c.name[lang]||c.name.en}</td>
-        <td><span class="catchip" style="background:${CAT_COLOR[c.cat]||'#B23B32'}">${catLabel(c.cat)}</span></td>
+        <td><span class="catchip" style="background:${CAT_COLOR[c.cat]||'var(--climb-1)'}">${catLabel(c.cat)}</span></td>
         <td>${c.len} km</td>
         <td>${c.grad? c.grad+' %':'—'}</td>
         <td>~km ${Math.round(c.km)}</td>
@@ -1510,11 +1461,11 @@ function renderPanel(stage){
     <div class="chartbox">
       ${renderProfile(stage)}
       <div class="legend">
-        <span><span class="leg-swatch" style="background:#B23B32"></span> ${t('legendHC')}</span>
-        <span><span class="leg-swatch" style="background:#C9622E"></span> ${t('legendC1')}</span>
-        <span><span class="leg-swatch" style="background:#C99A2E"></span> ${t('legendC2')}</span>
-        <span><span class="leg-swatch" style="background:#7E8A46"></span> ${t('legendC3')}</span>
-        <span><span class="leg-swatch" style="background:#3E7A57;border-radius:50%"></span> ${t('legendSprint')}</span>
+        <span><span class="leg-swatch" style="background:var(--climb-1)"></span> ${t('legendHC')}</span>
+        <span><span class="leg-swatch" style="background:var(--climb-2)"></span> ${t('legendC1')}</span>
+        <span><span class="leg-swatch" style="background:var(--climb-3)"></span> ${t('legendC2')}</span>
+        <span><span class="leg-swatch" style="background:var(--climb-4)"></span> ${t('legendC3')}</span>
+        <span><span class="leg-swatch" style="background:var(--green);border-radius:50%"></span> ${t('legendSprint')}</span>
       </div>
       <div class="chart-caption">${t('chartCaption')}</div>
     </div>

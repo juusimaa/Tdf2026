@@ -1,0 +1,129 @@
+/* ============================================================================
+   Grand Tours 2026 — shared colour theme
+   Single source of truth for every colour used by index.html, tdf2026.html,
+   giro2026.html and vuelta2026.html. Light palette in :root; the dark palette
+   overrides the same custom properties in the prefers-color-scheme block
+   below, so layout/component CSS in the pages never needs its own dark rules
+   for colour.
+
+   The pages' inline JS also reads these: chart/marker colours are baked into
+   generated inline SVG as var(--…) strings (presentation attributes resolve
+   CSS custom properties in all modern browsers), and the Leaflet route
+   colours are read at runtime via getComputedStyle (with hex fallbacks that
+   should mirror the light values here).
+
+   Colours that must stay inline in each page, because HTML metadata cannot
+   reference CSS custom properties:
+     - <meta name="theme-color"> (light #E9ECE4 / dark #12160F = --paper)
+     - the favicon SVG data-URI (--solid-bg / --gold / --red)
+   ============================================================================ */
+
+:root{
+  color-scheme:light dark;
+
+  /* --- Base surfaces & text ------------------------------------------------ */
+  --paper:#E9ECE4;          /* page background */
+  --paper-panel:#F4F6EF;    /* cards / panels */
+  --ink:#1E2A22;            /* primary text */
+  --ink-soft:#4C5A50;       /* secondary text */
+  --line:#C6CCBC;           /* borders / rules */
+  --hover:rgba(0,0,0,0.04); /* subtle hover film — flips to a light film in dark mode */
+  --shadow:0 2px 10px rgba(30,42,34,0.08);
+  --shadow-lift:0 8px 26px rgba(30,42,34,0.14);
+  /* Solid "chip" (datebadge, active language button): dark bg + light text
+     in light mode, inverted in dark mode. */
+  --solid-bg:#1E2A22;
+  --solid-fg:#ffffff;
+
+  /* --- Accent hues --------------------------------------------------------- */
+  --gold:#C99A2E;
+  --gold-deep:#9C7620;
+  --red:#B23B32;
+  --green:#3E7A57;          /* kept identical in dark mode so the white-text
+                               sprint chip stays AA-legible */
+  --blue:#3B6485;
+  --olive:#7E8A46;          /* hilly-stage colour; same in both themes */
+  --pink:#D14E7C;           /* Giro card accent on the index page */
+  --grey:#8B8F84;           /* same in both themes */
+  --grey-road:var(--grey);  /* alias used by the TdF page */
+
+  /* --- Giro (maglia colours) ----------------------------------------------- */
+  --rosa:#D6497F;
+  --rosa-deep:#B23368;
+  --ciclamino:#8E4BB0;
+  --azzurra:#2E7CBF;
+  --bianca:#8B8F84;
+
+  /* --- Vuelta (La Roja) ---------------------------------------------------- */
+  /* Named --roja (not --accent): index.html uses --accent as a per-card
+     custom property, so a global --accent would shadow its fallback. */
+  --roja:#C6362F;
+  --roja-deep:#9E241E;
+
+  /* --- Climb-category chart colours ---------------------------------------- */
+  /* Numbered by severity, hardest first, so each race maps its own category
+     names onto them: TdF HC,C1..C4 -> climb-1..5; Giro/Vuelta cat 1..4 ->
+     climb-1..4. Deliberately identical in light and dark mode: these are
+     fixed categorical chart colours used at low opacity over theme-coloured
+     profiles, and the legends must match the markers exactly. */
+  --climb-1:#B23B32;
+  --climb-2:#C9622E;
+  --climb-3:#C99A2E;
+  --climb-4:#7E8A46;
+  --climb-5:#8B9C7A;
+  --climb-none:var(--grey); /* uncategorised climbs */
+}
+
+/* Dark theme: follows the OS / browser. Only the palette is overridden; the
+   pages' layout and components reuse these same custom properties. */
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#12160F;
+    --paper-panel:#1B211A;
+    --ink:#E7ECDF;
+    --ink-soft:#9FA99A;
+    --line:#333B31;
+    --hover:rgba(255,255,255,0.06);
+    --shadow:0 2px 14px rgba(0,0,0,0.45);
+    --shadow-lift:0 10px 30px rgba(0,0,0,0.55);
+    --solid-bg:#E7ECDF;
+    --solid-fg:#12160F;
+
+    --gold:#D8AC44;
+    --gold-deep:#E3BE63;
+    --red:#D3574C;
+    --blue:#77ABD2;
+    --pink:#E06A93;
+
+    --rosa:#EE6E9F;
+    --rosa-deep:#EE6E9F;
+    --ciclamino:#B173D0;
+    --azzurra:#5CA0DA;
+    --bianca:#AEB4A6;
+
+    --roja:#E15A50;
+    --roja-deep:#E15A50;
+  }
+}
+
+/* --- National flag stripes for the striped race titles ----------------------
+   Character split follows each flag's stripe ratio (FR/IT 1/3 each,
+   ES 1/4-1/2-1/4; spaces don't count). White-stripe letters (.fs-w, shared by
+   all flags) and the Spanish yellow get a thin ink stroke so they stay
+   legible on light paper; in dark mode they already read, so the stroke
+   fades. */
+.fr-b{color:#0055A4;}
+.fr-r{color:#EF4135;}
+.it-g{color:#009246;}
+.it-r{color:#CE2B37;}
+.es-r{color:#AA151B;}
+.es-y{color:#F1BF00;-webkit-text-stroke:.02em rgba(30,42,34,.5);text-shadow:0 1px 2px rgba(30,42,34,.16);}
+.fs-w{color:#fff;-webkit-text-stroke:.022em rgba(30,42,34,.55);text-shadow:0 1px 2px rgba(30,42,34,.18);}
+@media (prefers-color-scheme: dark){
+  .fr-b{color:#5B93DE;}
+  .it-g{color:#2FB56A;}
+  .it-r{color:#E04A55;}
+  .es-r{color:#D8474D;}
+  .es-y{color:#F1C33B;-webkit-text-stroke:.012em rgba(0,0,0,.3);text-shadow:none;}
+  .fs-w{-webkit-text-stroke:.014em rgba(0,0,0,.35);text-shadow:none;}
+}

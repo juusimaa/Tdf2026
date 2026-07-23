@@ -28,42 +28,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Shared colour theme (light + dark palettes, flag-stripe classes). -->
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    color-scheme:light dark;
-    --paper:#E9ECE4;
-    --paper-panel:#F4F6EF;
-    --ink:#1E2A22;
-    --ink-soft:#4C5A50;
-    --line:#C6CCBC;
-    --gold:#C99A2E;
-    --gold-deep:#9C7620;
-    --red:#B23B32;
-    --pink:#D14E7C;
-    --shadow: 0 2px 10px rgba(30,42,34,0.08);
-    --shadow-lift: 0 8px 26px rgba(30,42,34,0.14);
-    --solid-bg:#1E2A22;
-    --solid-fg:#ffffff;
-    --hover:rgba(0,0,0,0.04);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --paper:#12160F;
-      --paper-panel:#1B211A;
-      --ink:#E7ECDF;
-      --ink-soft:#9FA99A;
-      --line:#333B31;
-      --gold:#D8AC44;
-      --gold-deep:#E3BE63;
-      --red:#D3574C;
-      --pink:#E06A93;
-      --shadow: 0 2px 14px rgba(0,0,0,0.45);
-      --shadow-lift: 0 10px 30px rgba(0,0,0,0.55);
-      --solid-bg:#E7ECDF;
-      --solid-fg:#12160F;
-      --hover:rgba(255,255,255,0.06);
-    }
-  }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
@@ -143,24 +111,8 @@
     font-family:'Oswald',sans-serif;font-weight:600;
     font-size:26px;line-height:1.05;text-transform:uppercase;letter-spacing:.01em;
   }
-  /* Tour names striped in their nation's flag colours; character split follows
-     the flag's stripe ratio (FR/IT 1/3 each, ES 1/4-1/2-1/4; spaces don't
-     count). White-stripe letters get a thin ink stroke for legibility on
-     light paper; in dark mode plain white already reads. */
-  .fr-b{color:#0055A4;}
-  .it-g{color:#009246;}
-  .fr-r{color:#EF4135;}
-  .it-r{color:#CE2B37;}
-  .es-r{color:#AA151B;}
-  .es-y{color:#F1BF00;}
-  .fs-w{color:#fff;-webkit-text-stroke:.022em rgba(30,42,34,.55);text-shadow:0 1px 2px rgba(30,42,34,.18);}
-  @media (prefers-color-scheme: dark){
-    .fr-b{color:#5B93DE;}
-    .it-g{color:#2FB56A;}
-    .it-r{color:#E04A55;}
-    .es-r{color:#D8474D;}
-    .fs-w{-webkit-text-stroke:.014em rgba(0,0,0,.35);text-shadow:none;}
-  }
+  /* Flag-striped tour names: colours come from theme.css (.fr-*, .it-*,
+     .es-*, .fs-w). */
   .tour-dates{
     font-family:'JetBrains Mono',monospace;font-size:12px;
     color:var(--ink-soft);letter-spacing:.03em;
