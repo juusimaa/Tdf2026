@@ -320,17 +320,19 @@
   }
   .leaflet-container{font-family:'Inter',system-ui,sans-serif;}
   .leaflet-control-attribution{font-size:9px;}
-  /* Icon-only shrink button (accessible name via aria-label/title). */
-  .mm-close{
+  /* Icon-only map buttons (accessible names via aria-label/title):
+     shrink (top) and recenter-on-route (below it). */
+  .mm-close,.mm-recenter{
     position:absolute;top:8px;right:8px;z-index:1;
     display:flex;align-items:center;justify-content:center;
     width:26px;height:26px;padding:0;
     background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
     color:var(--ink-soft);cursor:pointer;
   }
-  .mm-close svg{width:12px;height:12px;display:block;}
-  .mm-close:hover{background:var(--hover);color:var(--ink);}
-  .mm-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .mm-recenter{top:40px;}
+  .mm-close svg,.mm-recenter svg{width:12px;height:12px;display:block;}
+  .mm-close:hover,.mm-recenter:hover{background:var(--hover);color:var(--ink);}
+  .mm-close:focus-visible,.mm-recenter:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
   .typepill{
     display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
     letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;
@@ -513,6 +515,7 @@ const STRINGS = {
     minimapAria: n => `Etapin ${n} likimääräinen sijainti Ranskan kartalla`,
     minimapExpand: 'Suurenna kartta',
     minimapCollapse: 'Pienennä kartta',
+    minimapRecenter: 'Keskitä kartta reittiin',
     minimapCaption: 'Etapin oikea reitti OpenStreetMap-kartalla. Kulta = lähtö, punainen = maali. Sulje oikean yläkulman painikkeesta.',
     minimapCaptionApprox: 'Reittidataa ei vielä saatavilla — näytetään suora viiva lähdöstä maaliin. Sulje oikean yläkulman painikkeesta.',
     factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä', factStart: 'Lähetys alkaa',
@@ -588,6 +591,7 @@ const STRINGS = {
     minimapAria: n => `Approximate location of stage ${n} on a map of France`,
     minimapExpand: 'Enlarge map',
     minimapCollapse: 'Shrink map',
+    minimapRecenter: 'Center map on route',
     minimapCaption: 'Actual stage route on OpenStreetMap. Gold = start, red = finish. Close with the button in the top-right corner.',
     minimapCaptionApprox: 'Route data not available yet — showing a straight line from start to finish. Close with the button in the top-right corner.',
     factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints', factStart: 'Coverage starts',
@@ -663,6 +667,7 @@ const STRINGS = {
     minimapAria: n => `Situation approximative de l’étape ${n} sur la carte de France`,
     minimapExpand: 'Agrandir la carte',
     minimapCollapse: 'Réduire la carte',
+    minimapRecenter: 'Centrer la carte sur le parcours',
     minimapCaption: 'Parcours réel de l’étape sur OpenStreetMap. Or = départ, rouge = arrivée. Fermer avec le bouton en haut à droite.',
     minimapCaptionApprox: 'Données du parcours indisponibles — ligne droite du départ à l’arrivée. Fermer avec le bouton en haut à droite.',
     factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Points de côte', factSprints: 'Sprints intermédiaires', factStart: 'Début de diffusion',
@@ -1268,6 +1273,7 @@ function renderMinimapLarge(stage){
   return `
     <div class="mapbox">
       <button class="mm-close" data-mm-toggle aria-expanded="true" aria-label="${t('minimapCollapse')}" title="${t('minimapCollapse')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M3 21l7-7"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/></svg></button>
+      <button class="mm-recenter" aria-label="${t('minimapRecenter')}" title="${t('minimapRecenter')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/></svg></button>
       <div id="stage-map" role="application" aria-label="${t('minimapAria')(stage.n)}"></div>
       <div class="chart-caption" id="stage-map-caption">${t('minimapCaption')}</div>
     </div>`;
@@ -1350,6 +1356,9 @@ function initStageMap(stage){
     L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:RED, fillOpacity:1}).addTo(map);
     map.fitBounds(poly.getBounds(), {padding:[26,26]});
     map.invalidateSize();
+    // Recenter button: refit the route after the user has panned/zoomed away.
+    const rc = document.querySelector('.mm-recenter');
+    if(rc) rc.onclick = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[26,26]}); };
     const cap = document.getElementById('stage-map-caption');
     if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
   };
