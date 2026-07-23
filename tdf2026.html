@@ -310,7 +310,7 @@
      into the side margins, which is fine — svg overflow stays visible
      within the element box). */
   .mapbox{position:relative;margin:16px 0 4px;}
-  /* Expanded view: a real Leaflet + OpenStreetMap map. Fixed height so the
+  /* Expanded view: a real Leaflet map on Stadia tiles. Fixed height so the
      panel's layout height is known immediately (before tiles load), which
      keeps syncStageListHeight correct. */
   #stage-map{
@@ -320,12 +320,6 @@
   }
   .leaflet-container{font-family:'Inter',system-ui,sans-serif;}
   .leaflet-control-attribution{font-size:9px;}
-  /* Dark mode: invert only the raster tile pane so the light OSM map doesn't
-     glare against the dark UI. Route/markers live in the overlay pane and are
-     left untouched. A pragmatic stand-in for a dedicated dark tile set. */
-  @media (prefers-color-scheme: dark){
-    #stage-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9);}
-  }
   /* Icon-only shrink button (accessible name via aria-label/title). */
   .mm-close{
     position:absolute;top:8px;right:8px;z-index:1;
@@ -1279,7 +1273,7 @@ function renderMinimapLarge(stage){
     </div>`;
 }
 
-/* ---------- REAL ROUTE MAP (Leaflet + OpenStreetMap) ----------
+/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
    Per-stage route polylines live in data/<TOUR>-routes.json (built by
    scripts/fetch_routes.py from cyclingstage.com GPX). Loaded once, lazily, on
    first expand. Stages missing a route fall back to a straight start→finish
@@ -1301,6 +1295,12 @@ function destroyStageMap(){
   if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; }
 }
 
+/* Stadia Maps basemap (domain-authenticated — no API key in code). Dedicated
+   light/dark styles replace the old CSS invert hack on the tile pane. */
+const darkMapMQ = matchMedia('(prefers-color-scheme: dark)');
+const stadiaTileUrl = dark =>
+  `https://tiles.stadiamaps.com/tiles/${dark ? 'alidade_smooth_dark' : 'alidade_smooth'}/{z}/{x}/{y}{r}.png`;
+
 function initStageMap(stage){
   if(!mapExpanded) return;
   // Leaflet is a deferred script; if the user somehow expands before it lands,
@@ -1312,10 +1312,14 @@ function initStageMap(stage){
 
   const map = L.map(el, {scrollWheelZoom:false, attributionControl:true});
   stageMap = map;
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const tiles = L.tileLayer(stadiaTileUrl(darkMapMQ.matches), {
     maxZoom:17,
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
+  // Retile if the OS theme flips while the map is open; unhook on map teardown.
+  const retheme = e => tiles.setUrl(stadiaTileUrl(e.matches));
+  darkMapMQ.addEventListener('change', retheme);
+  map.on('unload', () => darkMapMQ.removeEventListener('change', retheme));
 
   // Route/marker colours pulled from the live theme variables so they track
   // light/dark. Leaflet SVG overlays can't reference CSS vars directly.

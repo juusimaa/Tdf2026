@@ -118,15 +118,12 @@
   }
   .mm-expand svg{width:10px;height:10px;display:block;}
   .mm-btn:hover .mm-expand{color:var(--ink);border-color:var(--grey);}
-  /* Expanded view: a real Leaflet + OpenStreetMap map. Fixed height so the
+  /* Expanded view: a real Leaflet map on Stadia tiles. Fixed height so the
      panel's layout height is known immediately (before tiles load). */
   .mapbox{position:relative;margin:16px 0 4px;}
   #stage-map{width:100%;height:min(60vh,460px);border:1px solid var(--line);border-radius:2px;background:var(--paper);z-index:0;}
   .leaflet-container{font-family:'Inter',system-ui,sans-serif;}
   .leaflet-control-attribution{font-size:9px;}
-  @media (prefers-color-scheme: dark){
-    #stage-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9);}
-  }
   /* Icon-only shrink button (accessible name via aria-label/title). */
   .mm-close{
     position:absolute;top:8px;right:8px;z-index:1;
@@ -543,7 +540,7 @@ function renderMinimapLarge(st){
     </div>`;
 }
 
-/* ---------- REAL ROUTE MAP (Leaflet + OpenStreetMap) ---------- */
+/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ---------- */
 let routesData = null, routesPromise = null;
 function loadRoutes(){
   if(routesData) return Promise.resolve(routesData);
@@ -559,6 +556,11 @@ let stageMap = null;
 function destroyStageMap(){
   if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; }
 }
+/* Stadia Maps basemap (domain-authenticated — no API key in code). Dedicated
+   light/dark styles replace the old CSS invert hack on the tile pane. */
+const darkMapMQ = matchMedia('(prefers-color-scheme: dark)');
+const stadiaTileUrl = dark =>
+  `https://tiles.stadiamaps.com/tiles/${dark ? 'alidade_smooth_dark' : 'alidade_smooth'}/{z}/{x}/{y}{r}.png`;
 function initStageMap(st){
   if(!mapExpanded) return;
   if(!window.L){ setTimeout(()=>initStageMap(st), 120); return; }
@@ -567,10 +569,14 @@ function initStageMap(st){
   destroyStageMap();
   const map = L.map(el, {scrollWheelZoom:false, attributionControl:true});
   stageMap = map;
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const tiles = L.tileLayer(stadiaTileUrl(darkMapMQ.matches), {
     maxZoom:17,
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
+  // Retile if the OS theme flips while the map is open; unhook on map teardown.
+  const retheme = e => tiles.setUrl(stadiaTileUrl(e.matches));
+  darkMapMQ.addEventListener('change', retheme);
+  map.on('unload', () => darkMapMQ.removeEventListener('change', retheme));
   const css = getComputedStyle(document.documentElement);
   const ACC = css.getPropertyValue('--roja-deep').trim() || '#9E241E';
   const RED = css.getPropertyValue('--red').trim() || '#B23B32';
