@@ -229,11 +229,11 @@
       </a>
     </li>
     <li>
-      <a class="tourcard soon" href="vuelta2026.html" style="--accent:var(--red)">
-        <span class="badge-soon" id="vueltaBadge"></span>
+      <a class="tourcard" href="vuelta2026.html" style="--accent:var(--red)">
         <span class="tour-tld">ESP</span>
         <span class="tour-name"><span class="es-r">Vue</span><span class="es-y">lta a Esp</span><span class="es-r">aña</span></span>
         <span class="tour-dates" id="vueltaDates"></span>
+        <span class="tour-desc" id="vueltaDesc"></span>
         <span class="tour-cta"><span id="vueltaCta"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
@@ -253,36 +253,39 @@ const LANG_KEY = 'tdf2026-lang';
 const STRINGS = {
   fi: {
     eyebrow: 'Kausi 2026 · Grand tourit',
-    subDesc: 'Valitse kilpailu. Tour de France ja Giro d’Italia ovat avoinna — Vuelta a España tulee myöhemmin.',
+    subDesc: 'Valitse kilpailu. Kaikki kolme grand touria ovat avoinna — Vuelta a España ennakkona ennen kisan alkua.',
     tdfDates: '4.–26. heinäkuuta 2026',
     tdfDesc: 'Kaikki 21 etappia, reitit, korkeusprofiilit ja päivittyvät tulokset.',
     giroDates: '8.–31. toukokuuta 2026',
     giroDesc: 'Kaikki 21 etappia, profiilit ja lopulliset luokitukset — Vingegaard voitti.',
-    vueltaDates: 'Elo–syyskuu 2026',
+    vueltaDates: '22.8.–13.9.2026',
+    vueltaDesc: 'Kaikki 21 etappia, reitit ja profiilit — ennakko (kisa ei ole vielä alkanut).',
     open: 'Avaa',
     soon: 'Tulossa',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon, RCS Sportiin, Unipublic’iin tai näiden kilpailuihin. Tulokset: letour.fr, procyclingstats.com.',
   },
   en: {
     eyebrow: '2026 season · Grand Tours',
-    subDesc: 'Pick a race. The Tour de France and Giro d’Italia are available now — the Vuelta a España is coming later.',
+    subDesc: 'Pick a race. All three Grand Tours are available — the Vuelta a España as a preview ahead of the race.',
     tdfDates: '4–26 July 2026',
     tdfDesc: 'All 21 stages, routes, elevation profiles and live-updating results.',
     giroDates: '8–31 May 2026',
     giroDesc: 'All 21 stages, profiles and final classifications — Vingegaard wins.',
-    vueltaDates: 'August–September 2026',
+    vueltaDates: '22 Aug – 13 Sep 2026',
+    vueltaDesc: 'All 21 stages, routes and profiles — preview (race has not started yet).',
     open: 'Open',
     soon: 'Coming soon',
     footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O., RCS Sport, Unipublic, or these races. Results: letour.fr, procyclingstats.com.',
   },
   fr: {
     eyebrow: 'Saison 2026 · Grands Tours',
-    subDesc: 'Choisissez une course. Le Tour de France et le Giro d’Italia sont disponibles — la Vuelta a España arrive bientôt.',
+    subDesc: 'Choisissez une course. Les trois Grands Tours sont disponibles — la Vuelta a España en avant-première avant la course.',
     tdfDates: '4–26 juillet 2026',
     tdfDesc: 'Les 21 étapes, parcours, profils et classements mis à jour.',
     giroDates: '8–31 mai 2026',
     giroDesc: 'Les 21 étapes, profils et classements finals — victoire de Vingegaard.',
-    vueltaDates: 'Août–septembre 2026',
+    vueltaDates: '22 août – 13 sept. 2026',
+    vueltaDesc: 'Les 21 étapes, parcours et profils — avant-première (la course n’a pas commencé).',
     open: 'Ouvrir',
     soon: 'Bientôt',
     footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec A.S.O., RCS Sport, Unipublic ou ces courses. Résultats : letour.fr, procyclingstats.com.',
@@ -313,8 +316,8 @@ function render(){
   document.getElementById('giroDesc').textContent = t('giroDesc');
   document.getElementById('giroCta').textContent = t('open');
   document.getElementById('vueltaDates').textContent = t('vueltaDates');
-  document.getElementById('vueltaCta').textContent = t('soon');
-  document.getElementById('vueltaBadge').textContent = t('soon');
+  document.getElementById('vueltaDesc').textContent = t('vueltaDesc');
+  document.getElementById('vueltaCta').textContent = t('open');
   document.getElementById('footerNote').textContent = t('footerNote');
   document.querySelectorAll('#langSel button').forEach(b=>{
     const active = b.dataset.lang===lang;

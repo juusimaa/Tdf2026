@@ -38,6 +38,10 @@ RACES = {
         "url": "https://cdn.cyclingstage.com/images/giro-italy/2026/stage-{n}-route.gpx",
         "referer": "https://www.cyclingstage.com/giro-2026-gpx/",
     },
+    "vuelta2026": {
+        "url": "https://cdn.cyclingstage.com/images/vuelta-spain/2026/stage-{n}-route.gpx",
+        "referer": "https://www.cyclingstage.com/vuelta-2026-gpx/",
+    },
 }
 
 STAGES = range(1, 22)
@@ -113,6 +117,7 @@ def build_race(race):
     cfg = RACES[race]
     print(f"== {race} ==")
     stages = {}
+    ends = {}
     for n in STAGES:
         gpx = fetch(cfg["url"].format(n=n), cfg["referer"])
         if not gpx:
@@ -124,6 +129,9 @@ def build_race(race):
             continue
         simp = rdp(pts, EPSILON)
         stages[str(n)] = [[round(la, 5), round(lo, 5)] for la, lo in simp]
+        # Start/finish as [lon, lat] (the page's minimap convention), 3 dp.
+        ends[str(n)] = [[round(pts[0][1], 3), round(pts[0][0], 3)],
+                        [round(pts[-1][1], 3), round(pts[-1][0], 3)]]
         print(f"stage {n:2d}: {len(pts):5d} -> {len(simp):4d} points")
 
     payload = {
@@ -135,7 +143,11 @@ def build_race(race):
     out.write_text(json.dumps(payload, separators=(",", ":")) + "\n")
     kb = out.stat().st_size / 1024
     print(f"wrote {out.relative_to(out.parent.parent)} "
-          f"({len(stages)}/{len(list(STAGES))} stages, {kb:.1f} KB)\n")
+          f"({len(stages)}/{len(list(STAGES))} stages, {kb:.1f} KB)")
+    # Convenience dump: STAGE_COORDS literal for the page's collapsed minimap
+    # (derived from the GPX endpoints so no town coords are hand-entered).
+    literal = ", ".join(f"{n}:{v}" for n, v in ends.items()).replace(" ", "")
+    print(f"STAGE_COORDS = {{{literal}}}\n")
 
 
 def main():
