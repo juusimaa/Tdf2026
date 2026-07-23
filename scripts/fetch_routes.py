@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Fetch per-stage GPX route tracks for the 2026 Tour de France and write a
+"""Fetch per-stage GPX route tracks for the 2026 grand tours and write a
 compact JSON the roadbook loads to draw the real route on the expanded
-Leaflet map (tdf2026.html).
+Leaflet map (tdf2026.html / giro2026.html).
 
 Source: cyclingstage.com GPX exports (public, free to download). Each track
 is simplified with Ramer-Douglas-Peucker so the shipped file stays small —
@@ -9,13 +9,16 @@ the map is an overview locator, not a turn-by-turn nav, so ~50 m of
 simplification is invisible at that zoom. Coordinates are stored as
 [lat, lon] rounded to 5 decimals (~1 m).
 
-Re-run after the route is finalised, or to pick up stages that were not yet
-uploaded to the CDN (some 404 until the organiser publishes them):
+Usage — one race, or all of them:
 
-    python3 scripts/fetch_routes.py
+    python3 scripts/fetch_routes.py            # default: tdf2026
+    python3 scripts/fetch_routes.py giro2026
+    python3 scripts/fetch_routes.py all
 
-Missing stages are simply omitted from the JSON; the page falls back to a
-straight start->finish line for those.
+Re-run after a route is finalised, or to pick up stages that were not yet
+uploaded to the CDN (some 404 until the organiser publishes them). Missing
+stages are simply omitted from the JSON; the page falls back to a straight
+start->finish line for those.
 """
 import json
 import re
@@ -24,30 +27,39 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Per-race GPX source. cyclingstage.com uses a slightly different filename per
+# race (…-parcours.gpx for the Tour, …-route.gpx for the Giro).
+RACES = {
+    "tdf2026": {
+        "url": "https://cdn.cyclingstage.com/images/tour-de-france/2026/stage-{n}-parcours.gpx",
+        "referer": "https://www.cyclingstage.com/tour-de-france-2026-gpx/",
+    },
+    "giro2026": {
+        "url": "https://cdn.cyclingstage.com/images/giro-italy/2026/stage-{n}-route.gpx",
+        "referer": "https://www.cyclingstage.com/giro-2026-gpx/",
+    },
+}
+
 STAGES = range(1, 22)
-URL = "https://cdn.cyclingstage.com/images/tour-de-france/2026/stage-{n}-parcours.gpx"
-REFERER = "https://www.cyclingstage.com/tour-de-france-2026-gpx/"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
       "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36")
 
-OUT = Path(__file__).resolve().parent.parent / "data" / "tdf2026-routes.json"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 # RDP tolerance in degrees (~0.0006 deg ≈ 60 m). Larger => fewer points.
 EPSILON = 0.0006
 
-TRKPT = re.compile(r'<trkpt[^>]*\blat="([-\d.]+)"[^>]*\blon="([-\d.]+)"')
 
-
-def fetch(n):
-    req = urllib.request.Request(URL.format(n=n),
-                                 headers={"User-Agent": UA, "Referer": REFERER})
+def fetch(url, referer):
+    req = urllib.request.Request(url,
+                                 headers={"User-Agent": UA, "Referer": referer})
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
             if r.status != 200:
                 return None
             return r.read().decode("utf-8", "replace")
     except Exception as e:  # noqa: BLE001 - report and skip
-        print(f"  stage {n}: fetch failed ({e})", file=sys.stderr)
+        print(f"  fetch failed for {url} ({e})", file=sys.stderr)
         return None
 
 
@@ -97,10 +109,12 @@ def rdp(points, eps):
     return [p for p, k in zip(points, keep) if k]
 
 
-def main():
+def build_race(race):
+    cfg = RACES[race]
+    print(f"== {race} ==")
     stages = {}
     for n in STAGES:
-        gpx = fetch(n)
+        gpx = fetch(cfg["url"].format(n=n), cfg["referer"])
         if not gpx:
             print(f"stage {n:2d}: no data (skipped)")
             continue
@@ -117,10 +131,20 @@ def main():
         "source": "cyclingstage.com GPX (simplified, RDP eps=%.4f deg)" % EPSILON,
         "stages": stages,
     }
-    OUT.write_text(json.dumps(payload, separators=(",", ":")) + "\n")
-    kb = OUT.stat().st_size / 1024
-    print(f"\nwrote {OUT.relative_to(OUT.parent.parent)} "
-          f"({len(stages)}/{len(list(STAGES))} stages, {kb:.1f} KB)")
+    out = DATA_DIR / f"{race}-routes.json"
+    out.write_text(json.dumps(payload, separators=(",", ":")) + "\n")
+    kb = out.stat().st_size / 1024
+    print(f"wrote {out.relative_to(out.parent.parent)} "
+          f"({len(stages)}/{len(list(STAGES))} stages, {kb:.1f} KB)\n")
+
+
+def main():
+    arg = sys.argv[1] if len(sys.argv) > 1 else "tdf2026"
+    races = list(RACES) if arg == "all" else [arg]
+    for race in races:
+        if race not in RACES:
+            sys.exit(f"unknown race '{race}'; choose from: {', '.join(RACES)}, all")
+        build_race(race)
 
 
 if __name__ == "__main__":
