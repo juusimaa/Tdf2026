@@ -105,9 +105,19 @@
   svg.minimap .mm-route{stroke:var(--roja-deep);stroke-width:2.2;stroke-linecap:round;}
   svg.minimap .mm-start{fill:var(--paper);stroke:var(--roja-deep);stroke-width:1.4;}
   svg.minimap .mm-finish{fill:var(--red);}
-  .mm-btn{background:none;border:none;padding:0;cursor:pointer;display:block;}
+  .mm-btn{background:none;border:none;padding:0;cursor:pointer;display:block;position:relative;}
   .mm-btn:hover svg.minimap{border-color:var(--grey);}
   .mm-btn:focus-visible{outline:2px solid var(--roja);outline-offset:2px;border-radius:2px;}
+  /* Corner badge signalling the minimap can be enlarged. */
+  .mm-expand{
+    position:absolute;right:4px;bottom:4px;
+    display:flex;align-items:center;justify-content:center;
+    width:16px;height:16px;
+    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
+    color:var(--ink-soft);pointer-events:none;
+  }
+  .mm-expand svg{width:10px;height:10px;display:block;}
+  .mm-btn:hover .mm-expand{color:var(--ink);border-color:var(--grey);}
   /* Expanded view: a real Leaflet + OpenStreetMap map. Fixed height so the
      panel's layout height is known immediately (before tiles load). */
   .mapbox{position:relative;margin:16px 0 4px;}
@@ -117,11 +127,14 @@
   @media (prefers-color-scheme: dark){
     #stage-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9);}
   }
+  /* Icon-only shrink button (accessible name via aria-label/title). */
   .mm-close{
     position:absolute;top:8px;right:8px;z-index:1;
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;color:var(--ink-soft);padding:4px 9px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    width:26px;height:26px;padding:0;
+    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;color:var(--ink-soft);cursor:pointer;
   }
+  .mm-close svg{width:12px;height:12px;display:block;}
   .mm-close:hover{background:var(--hover);color:var(--ink);}
   .mm-close:focus-visible{outline:2px solid var(--roja);outline-offset:2px;}
   .typepill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;color:#fff;margin-top:8px;}
@@ -225,9 +238,9 @@ const STRINGS = {
     profileAria: n => `Etapin ${n} havainnollistava korkeusprofiili`,
     minimapAria: n => `Etapin ${n} likimääräinen sijainti kartalla`,
     minimapExpand: 'Suurenna kartta',
-    minimapCollapse: '✕ Pienennä kartta',
-    minimapCaption: 'Etapin oikea reitti OpenStreetMap-kartalla. Punainen = lähtö ja maali. Sulje ✕-painikkeesta.',
-    minimapCaptionApprox: 'Reittidataa ei vielä saatavilla — näytetään suora viiva lähdöstä maaliin. Sulje ✕-painikkeesta.',
+    minimapCollapse: 'Pienennä kartta',
+    minimapCaption: 'Etapin oikea reitti OpenStreetMap-kartalla. Punainen = lähtö ja maali. Sulje oikean yläkulman painikkeesta.',
+    minimapCaptionApprox: 'Reittidataa ei vielä saatavilla — näytetään suora viiva lähdöstä maaliin. Sulje oikean yläkulman painikkeesta.',
     summitNote: name => `Maalinousu: ${name}.`,
     typeLabels: {flat:'Tasainen', hilly:'Kumpuileva', mountain:'Vuoristo', itt:'Yksilöaika-ajo'},
     typeDesc: {flat:'Tasainen etappi', hilly:'Kumpuileva etappi', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
@@ -259,9 +272,9 @@ const STRINGS = {
     profileAria: n => `Illustrative elevation profile of stage ${n}`,
     minimapAria: n => `Approximate location of stage ${n} on the map`,
     minimapExpand: 'Enlarge map',
-    minimapCollapse: '✕ Shrink map',
-    minimapCaption: 'Actual stage route on OpenStreetMap. Red = start and finish. Close with the ✕ button.',
-    minimapCaptionApprox: 'Route data not available yet — showing a straight line from start to finish. Close with the ✕ button.',
+    minimapCollapse: 'Shrink map',
+    minimapCaption: 'Actual stage route on OpenStreetMap. Red = start and finish. Close with the button in the top-right corner.',
+    minimapCaptionApprox: 'Route data not available yet — showing a straight line from start to finish. Close with the button in the top-right corner.',
     summitNote: name => `Summit finish at ${name}.`,
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
     typeDesc: {flat:'Flat stage', hilly:'Hilly stage', mountain:'Mountain stage', itt:'Individual time trial'},
@@ -293,9 +306,9 @@ const STRINGS = {
     profileAria: n => `Profil d’altitude illustratif de l’étape ${n}`,
     minimapAria: n => `Situation approximative de l’étape ${n} sur la carte`,
     minimapExpand: 'Agrandir la carte',
-    minimapCollapse: '✕ Réduire la carte',
-    minimapCaption: 'Parcours réel de l’étape sur OpenStreetMap. Rouge = départ et arrivée. Fermer avec le bouton ✕.',
-    minimapCaptionApprox: 'Données du parcours indisponibles — ligne droite du départ à l’arrivée. Fermer avec le bouton ✕.',
+    minimapCollapse: 'Réduire la carte',
+    minimapCaption: 'Parcours réel de l’étape sur OpenStreetMap. Rouge = départ et arrivée. Fermer avec le bouton en haut à droite.',
+    minimapCaptionApprox: 'Données du parcours indisponibles — ligne droite du départ à l’arrivée. Fermer avec le bouton en haut à droite.',
     summitNote: name => `Arrivée au sommet à ${name}.`,
     typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
     typeDesc: {flat:'Étape de plaine', hilly:'Étape vallonnée', mountain:'Étape de montagne', itt:'Contre-la-montre individuel'},
@@ -518,13 +531,13 @@ function renderMinimap(st){
   const g = mmStageGeom(st.n);
   if(!g) return '';
   const svg = mmBase(st,'minimap') + mmRouteMarks(g) + '</svg>';
-  return `<button class="mm-btn" data-mm-toggle aria-expanded="false" title="${esc(t('minimapExpand'))}">${svg}</button>`;
+  return `<button class="mm-btn" data-mm-toggle aria-expanded="false" title="${esc(t('minimapExpand'))}">${svg}<span class="mm-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M21 3l-7 7"/><path d="M9 21H3v-6"/><path d="M3 21l7-7"/></svg></span></button>`;
 }
 function renderMinimapLarge(st){
   if(!STAGE_COORDS[st.n]) return '';
   return `
     <div class="mapbox">
-      <button class="mm-close" data-mm-toggle aria-expanded="true">${esc(t('minimapCollapse'))}</button>
+      <button class="mm-close" data-mm-toggle aria-expanded="true" aria-label="${esc(t('minimapCollapse'))}" title="${esc(t('minimapCollapse'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M3 21l7-7"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/></svg></button>
       <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
       <div class="chart-caption" id="stage-map-caption">${t('minimapCaption')}</div>
     </div>`;
@@ -690,7 +703,7 @@ function renderPanel(st){
       </div>
     </div>`;
 
-  // Minimap ↔ full-width map toggle. The collapsed minimap expands; the ✕
+  // Minimap ↔ full-width map toggle. The collapsed minimap expands; the shrink
   // button collapses. Re-rendering the panel swaps the variants.
   panel.querySelectorAll('[data-mm-toggle]').forEach(el=>{
     el.addEventListener('click', ()=>{
