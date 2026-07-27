@@ -9,15 +9,17 @@ France, Giro d'Italia, Vuelta a España) from one **tour-aware** codebase.
 index.html                            # "Grand Tours" landing page (tour picker)
 tdf2026.html                          # Tour de France — stages + auto-updating results
 giro2026.html                         # Giro d'Italia — stages, profiles & final results (static)
-vuelta2026.html                       # Vuelta a España — placeholder (title only)
+vuelta2026.html                       # Vuelta a España — stages & profiles (preview, race not started)
 data/tdf2026-results.json             # Tour de France results — auto-updated
+data/tdf2026-riders.json              # Tour de France start list: teams, riders, final GC
 data/giro2026-results.json            # Giro d'Italia final results — static
-scripts/fetch_results.py              # fetch script (scrapes letour.fr)
-.github/workflows/update-results.yml  # scheduled GitHub Actions workflow
+scripts/fetch_results.py              # results fetch script (scrapes letour.fr)
+scripts/fetch_riders.py               # start-list fetch script (scrapes letour.fr)
+.github/workflows/update-results.yml  # GitHub Actions build & publish workflow
 ```
 
 `index.html` lets the visitor pick a race; each tour page has a back arrow to
-the landing page. The Vuelta opens a placeholder page for now.
+the landing page. The Vuelta page is a route preview until that race starts.
 
 ### Live vs. static tours
 
@@ -39,9 +41,11 @@ or registry entry needed.
 
 ## How it works
 
-1. GitHub Actions runs the workflow on a schedule (every 30 minutes,
-   14:00–20:00 UTC in July — stages typically finish in that window — plus
-   a light morning run to catch late corrections).
+1. GitHub Actions runs the workflow on every push to `main` and on demand from
+   the Actions tab. While the Tour was being raced it also ran on a schedule
+   (every 30 minutes, 14:00–20:00 UTC in July, plus a light morning run for
+   late corrections); those `schedule:` entries were removed once the 2026
+   race finished and are worth restoring for the next live race.
 2. The workflow runs `fetch_results.py`, which scrapes the official
    **letour.fr** rankings pages for the latest completed stage: general
    classification, points, mountains, youth, and team classifications,
@@ -55,6 +59,25 @@ or registry entry needed.
 
 The page also **auto-selects the stage of the day** when opened (the next
 stage on rest days, the final stage once the race is over).
+
+### Teams & riders tab
+
+`tdf2026.html` has a third tab listing every team and rider of the race, with
+each rider's final general-classification position and gap to the winner (or
+the stage and reason they left the race). Its data comes from
+`data/tdf2026-riders.json`, built by `scripts/fetch_riders.py`, which scrapes
+letour.fr's start list (`/en/riders`) and joins each rider to the general
+classification and the withdrawal list **by rider number** — the displayed
+names differ between those pages, the bib does not.
+
+That script is deliberately **not** part of the workflow: a start list changes
+only when riders drop out, so it is run by hand when the data needs a refresh:
+
+```
+pip install requests selectolax
+python scripts/fetch_riders.py            # every registered tour
+python scripts/fetch_riders.py tdf2026     # just the Tour de France
+```
 
 ## Why letour.fr and not procyclingstats.com
 

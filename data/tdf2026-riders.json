@@ -1,0 +1,2080 @@
+{
+ "afterStage": 21,
+ "teamCount": 23,
+ "riderCount": 184,
+ "finishers": 158,
+ "teams": [
+  {
+   "name": "LIDL-TREK",
+   "code": "LTK",
+   "url": "/en/team/LTK/lidl-trek",
+   "gcPos": 1,
+   "gcVal": "224h 57' 43''",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 31,
+     "name": "Juan AYUSO",
+     "nat": "ESP",
+     "gcPos": 7,
+     "gcVal": "74h 14' 14''",
+     "gcGap": "+ 00h 17' 48''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 32,
+     "name": "Derek JAMES GEE",
+     "nat": "CAN",
+     "gcPos": 25,
+     "gcVal": "76h 09' 25''",
+     "gcGap": "+ 02h 12' 59''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 33,
+     "name": "Mads PEDERSEN",
+     "nat": "DEN",
+     "gcPos": 80,
+     "gcVal": "78h 29' 31''",
+     "gcGap": "+ 04h 33' 05''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 34,
+     "name": "Quinn SIMMONS",
+     "nat": "USA",
+     "gcPos": 18,
+     "gcVal": "75h 31' 54''",
+     "gcGap": "+ 01h 35' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 35,
+     "name": "Mattias SKJELMOSE",
+     "nat": "DEN",
+     "gcPos": 6,
+     "gcVal": "74h 11' 25''",
+     "gcGap": "+ 00h 14' 59''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 36,
+     "name": "Toms SKUJINS",
+     "nat": "LAT",
+     "gcPos": 94,
+     "gcVal": "78h 46' 05''",
+     "gcGap": "+ 04h 49' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 37,
+     "name": "Mathias VACEK",
+     "nat": "CZE",
+     "gcPos": 49,
+     "gcVal": "77h 31' 02''",
+     "gcGap": "+ 03h 34' 36''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 38,
+     "name": "Carlos VERONA",
+     "nat": "ESP",
+     "gcPos": 23,
+     "gcVal": "76h 01' 48''",
+     "gcGap": "+ 02h 05' 22''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "UAE TEAM EMIRATES XRG",
+   "code": "UEX",
+   "url": "/en/team/UEX/uae-team-emirates-xrg",
+   "gcPos": 2,
+   "gcVal": "225h 34' 40''",
+   "gcGap": "+ 00h 36' 57''",
+   "riders": [
+    {
+     "bib": 1,
+     "name": "Tadej POGACAR",
+     "nat": "SLO",
+     "gcPos": 1,
+     "gcVal": "73h 56' 26''",
+     "gcGap": "",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 2,
+     "name": "Isaac DEL TORO ROMERO",
+     "nat": "MEX",
+     "gcPos": 3,
+     "gcVal": "74h 06' 08''",
+     "gcGap": "+ 00h 09' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 3,
+     "name": "Felix GROSSSCHARTNER",
+     "nat": "AUT",
+     "gcPos": 32,
+     "gcVal": "76h 39' 48''",
+     "gcGap": "+ 02h 43' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 4,
+     "name": "Brandon MCNULTY",
+     "nat": "USA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 18
+    },
+    {
+     "bib": 5,
+     "name": "Nils POLITT",
+     "nat": "GER",
+     "gcPos": 72,
+     "gcVal": "78h 19' 56''",
+     "gcGap": "+ 04h 23' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 6,
+     "name": "Florian VERMEERSCH",
+     "nat": "BEL",
+     "gcPos": 116,
+     "gcVal": "79h 23' 15''",
+     "gcGap": "+ 05h 26' 49''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 7,
+     "name": "Tim WELLENS",
+     "nat": "BEL",
+     "gcPos": 74,
+     "gcVal": "78h 21' 54''",
+     "gcGap": "+ 04h 25' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 8,
+     "name": "Adam YATES",
+     "nat": "GBR",
+     "gcPos": 21,
+     "gcVal": "75h 48' 25''",
+     "gcGap": "+ 01h 51' 59''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "RED BULL - BORA - HANSGROHE",
+   "code": "RBH",
+   "url": "/en/team/RBH/red-bull-bora-hansgrohe",
+   "gcPos": 3,
+   "gcVal": "226h 04' 05''",
+   "gcGap": "+ 01h 06' 22''",
+   "riders": [
+    {
+     "bib": 21,
+     "name": "Remco EVENEPOEL",
+     "nat": "BEL",
+     "gcPos": 2,
+     "gcVal": "74h 02' 52''",
+     "gcGap": "+ 00h 06' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 22,
+     "name": "Mattia CATTANEO",
+     "nat": "ITA",
+     "gcPos": 33,
+     "gcVal": "76h 47' 45''",
+     "gcGap": "+ 02h 51' 19''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 23,
+     "name": "Nico DENZ",
+     "nat": "GER",
+     "gcPos": 95,
+     "gcVal": "78h 48' 42''",
+     "gcGap": "+ 04h 52' 16''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 24,
+     "name": "Jai HINDLEY",
+     "nat": "AUS",
+     "gcPos": 15,
+     "gcVal": "75h 19' 54''",
+     "gcGap": "+ 01h 23' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 25,
+     "name": "Florian LIPOWITZ",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 16
+    },
+    {
+     "bib": 26,
+     "name": "Jan TRATNIK",
+     "nat": "SLO",
+     "gcPos": 83,
+     "gcVal": "78h 30' 50''",
+     "gcGap": "+ 04h 34' 24''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 27,
+     "name": "Tim VAN DIJKE",
+     "nat": "NED",
+     "gcPos": 111,
+     "gcVal": "79h 13' 09''",
+     "gcGap": "+ 05h 16' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 28,
+     "name": "Maxim VAN GILS",
+     "nat": "BEL",
+     "gcPos": 27,
+     "gcVal": "76h 20' 35''",
+     "gcGap": "+ 02h 24' 09''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "DECATHLON CMA CGM TEAM",
+   "code": "DCT",
+   "url": "/en/team/DCT/decathlon-cma-cgm-team",
+   "gcPos": 4,
+   "gcVal": "226h 45' 27''",
+   "gcGap": "+ 01h 47' 44''",
+   "riders": [
+    {
+     "bib": 51,
+     "name": "Paul SEIXAS",
+     "nat": "FRA",
+     "gcPos": 4,
+     "gcVal": "74h 08' 22''",
+     "gcGap": "+ 00h 11' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 52,
+     "name": "Tiesj BENOOT",
+     "nat": "BEL",
+     "gcPos": 17,
+     "gcVal": "75h 29' 22''",
+     "gcGap": "+ 01h 32' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 53,
+     "name": "Cees BOL",
+     "nat": "NED",
+     "gcPos": 158,
+     "gcVal": "80h 18' 34''",
+     "gcGap": "+ 06h 22' 08''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 54,
+     "name": "Daan HOOLE",
+     "nat": "NED",
+     "gcPos": 130,
+     "gcVal": "79h 34' 30''",
+     "gcGap": "+ 05h 38' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 55,
+     "name": "Olav KOOIJ",
+     "nat": "NED",
+     "gcPos": 149,
+     "gcVal": "80h 05' 44''",
+     "gcGap": "+ 06h 09' 18''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 56,
+     "name": "Aurélien PARET PEINTRE",
+     "nat": "FRA",
+     "gcPos": 42,
+     "gcVal": "77h 04' 54''",
+     "gcGap": "+ 03h 08' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 57,
+     "name": "Nicolas PRODHOMME",
+     "nat": "FRA",
+     "gcPos": 16,
+     "gcVal": "75h 21' 27''",
+     "gcGap": "+ 01h 25' 01''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 58,
+     "name": "Matthew RICCITELLO",
+     "nat": "USA",
+     "gcPos": 24,
+     "gcVal": "76h 07' 35''",
+     "gcGap": "+ 02h 11' 09''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM VISMA | LEASE A BIKE",
+   "code": "TVL",
+   "url": "/en/team/TVL/team-visma-lease-a-bike",
+   "gcPos": 5,
+   "gcVal": "227h 15' 46''",
+   "gcGap": "+ 02h 18' 03''",
+   "riders": [
+    {
+     "bib": 11,
+     "name": "Jonas VINGEGAARD",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 15
+    },
+    {
+     "bib": 12,
+     "name": "Edoardo AFFINI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 19
+    },
+    {
+     "bib": 13,
+     "name": "Bruno ARMIRAIL",
+     "nat": "FRA",
+     "gcPos": 62,
+     "gcVal": "77h 59' 52''",
+     "gcGap": "+ 04h 03' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 14,
+     "name": "Victor CAMPENAERTS",
+     "nat": "BEL",
+     "gcPos": 82,
+     "gcVal": "78h 30' 43''",
+     "gcGap": "+ 04h 34' 17''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 15,
+     "name": "Per STRAND HAGENES",
+     "nat": "NOR",
+     "gcPos": 103,
+     "gcVal": "79h 04' 11''",
+     "gcGap": "+ 05h 07' 45''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 16,
+     "name": "Matteo JORGENSON",
+     "nat": "USA",
+     "gcPos": 30,
+     "gcVal": "76h 29' 55''",
+     "gcGap": "+ 02h 33' 29''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 17,
+     "name": "Sepp KUSS",
+     "nat": "USA",
+     "gcPos": 13,
+     "gcVal": "74h 58' 49''",
+     "gcGap": "+ 01h 02' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 18,
+     "name": "Davide PIGANZOLI",
+     "nat": "ITA",
+     "gcPos": 14,
+     "gcVal": "75h 00' 09''",
+     "gcGap": "+ 01h 03' 43''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "EF EDUCATION - EASYPOST",
+   "code": "EFE",
+   "url": "/en/team/EFE/ef-education-easypost",
+   "gcPos": 6,
+   "gcVal": "228h 36' 03''",
+   "gcGap": "+ 03h 38' 20''",
+   "riders": [
+    {
+     "bib": 41,
+     "name": "Richard CARAPAZ",
+     "nat": "ECU",
+     "gcPos": 8,
+     "gcVal": "74h 16' 26''",
+     "gcGap": "+ 00h 20' 00''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 42,
+     "name": "Kasper ASGREEN",
+     "nat": "DEN",
+     "gcPos": 84,
+     "gcVal": "78h 32' 03''",
+     "gcGap": "+ 04h 35' 37''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 43,
+     "name": "Alex BAUDIN",
+     "nat": "FRA",
+     "gcPos": 46,
+     "gcVal": "77h 08' 07''",
+     "gcGap": "+ 03h 11' 41''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 44,
+     "name": "Ben HEALY",
+     "nat": "IRL",
+     "gcPos": 59,
+     "gcVal": "77h 47' 29''",
+     "gcGap": "+ 03h 51' 03''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 45,
+     "name": "Sean QUINN",
+     "nat": "USA",
+     "gcPos": 19,
+     "gcVal": "75h 43' 31''",
+     "gcGap": "+ 01h 47' 05''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 46,
+     "name": "Georg STEINHAUSER",
+     "nat": "GER",
+     "gcPos": 113,
+     "gcVal": "79h 16' 05''",
+     "gcGap": "+ 05h 19' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 47,
+     "name": "Michael VALGREN",
+     "nat": "DEN",
+     "gcPos": 53,
+     "gcVal": "77h 35' 35''",
+     "gcGap": "+ 03h 39' 09''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 48,
+     "name": "Max WALKER",
+     "nat": "GBR",
+     "gcPos": 106,
+     "gcVal": "79h 09' 45''",
+     "gcGap": "+ 05h 13' 19''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "NETCOMPANY INEOS CYCLING TEAM",
+   "code": "NCI",
+   "url": "/en/team/NCI/netcompany-ineos-cycling-team",
+   "gcPos": 7,
+   "gcVal": "229h 47' 37''",
+   "gcGap": "+ 04h 49' 54''",
+   "riders": [
+    {
+     "bib": 81,
+     "name": "Egan BERNAL",
+     "nat": "COL",
+     "gcPos": 20,
+     "gcVal": "75h 44' 24''",
+     "gcGap": "+ 01h 47' 58''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 82,
+     "name": "Thymen ARENSMAN",
+     "nat": "NED",
+     "gcPos": 22,
+     "gcVal": "75h 59' 08''",
+     "gcGap": "+ 02h 02' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 83,
+     "name": "Tobias FOSS",
+     "nat": "NOR",
+     "gcPos": 43,
+     "gcVal": "77h 04' 55''",
+     "gcGap": "+ 03h 08' 29''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 84,
+     "name": "Filippo GANNA",
+     "nat": "ITA",
+     "gcPos": 123,
+     "gcVal": "79h 27' 26''",
+     "gcGap": "+ 05h 31' 00''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 85,
+     "name": "Dorian GODON",
+     "nat": "FRA",
+     "gcPos": 136,
+     "gcVal": "79h 43' 20''",
+     "gcGap": "+ 05h 46' 54''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 86,
+     "name": "Michal KWIATKOWSKI",
+     "nat": "POL",
+     "gcPos": 110,
+     "gcVal": "79h 12' 05''",
+     "gcGap": "+ 05h 15' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 87,
+     "name": "Joshua TARLING",
+     "nat": "GBR",
+     "gcPos": 120,
+     "gcVal": "79h 24' 54''",
+     "gcGap": "+ 05h 28' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 88,
+     "name": "Kévin VAUQUELIN",
+     "nat": "FRA",
+     "gcPos": 36,
+     "gcVal": "76h 57' 43''",
+     "gcGap": "+ 03h 01' 17''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "BAHRAIN VICTORIOUS",
+   "code": "TBV",
+   "url": "/en/team/TBV/bahrain-victorious",
+   "gcPos": 8,
+   "gcVal": "230h 36' 03''",
+   "gcGap": "+ 05h 38' 20''",
+   "riders": [
+    {
+     "bib": 71,
+     "name": "Lenny MARTINEZ",
+     "nat": "FRA",
+     "gcPos": 5,
+     "gcVal": "74h 09' 28''",
+     "gcGap": "+ 00h 13' 02''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 72,
+     "name": "Phil BAUHAUS",
+     "nat": "GER",
+     "gcPos": 154,
+     "gcVal": "80h 10' 15''",
+     "gcGap": "+ 06h 13' 49''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 73,
+     "name": "Damiano CARUSO",
+     "nat": "ITA",
+     "gcPos": 55,
+     "gcVal": "77h 43' 09''",
+     "gcGap": "+ 03h 46' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 74,
+     "name": "Kamil GRADEK",
+     "nat": "POL",
+     "gcPos": 155,
+     "gcVal": "80h 12' 38''",
+     "gcGap": "+ 06h 16' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 75,
+     "name": "Matej MOHORIC",
+     "nat": "SLO",
+     "gcPos": 92,
+     "gcVal": "78h 40' 56''",
+     "gcGap": "+ 04h 44' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 76,
+     "name": "Robert STANNARD",
+     "nat": "AUS",
+     "gcPos": 105,
+     "gcVal": "79h 09' 38''",
+     "gcGap": "+ 05h 13' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 77,
+     "name": "Antonio TIBERI",
+     "nat": "ITA",
+     "gcPos": 37,
+     "gcVal": "77h 00' 18''",
+     "gcGap": "+ 03h 03' 52''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 78,
+     "name": "Vlad VAN MECHELEN",
+     "nat": "BEL",
+     "gcPos": 66,
+     "gcVal": "78h 14' 33''",
+     "gcGap": "+ 04h 18' 07''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TOTALENERGIES",
+   "code": "TEN",
+   "url": "/en/team/TEN/totalenergies",
+   "gcPos": 9,
+   "gcVal": "230h 46' 20''",
+   "gcGap": "+ 05h 48' 37''",
+   "riders": [
+    {
+     "bib": 201,
+     "name": "Jordan JEGAT",
+     "nat": "FRA",
+     "gcPos": 10,
+     "gcVal": "74h 29' 47''",
+     "gcGap": "+ 00h 33' 21''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 202,
+     "name": "Nicolas BREUILLARD",
+     "nat": "FRA",
+     "gcPos": 50,
+     "gcVal": "77h 31' 02''",
+     "gcGap": "+ 03h 34' 36''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 203,
+     "name": "Joris DELBOVE",
+     "nat": "FRA",
+     "gcPos": 51,
+     "gcVal": "77h 33' 32''",
+     "gcGap": "+ 03h 37' 06''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 204,
+     "name": "Alexandre DELETTRE",
+     "nat": "FRA",
+     "gcPos": 61,
+     "gcVal": "77h 59' 42''",
+     "gcGap": "+ 04h 03' 16''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 205,
+     "name": "Thibault GUERNALEC",
+     "nat": "FRA",
+     "gcPos": 109,
+     "gcVal": "79h 11' 53''",
+     "gcGap": "+ 05h 15' 27''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 206,
+     "name": "Mathis LE BERRE",
+     "nat": "FRA",
+     "gcPos": 76,
+     "gcVal": "78h 23' 15''",
+     "gcGap": "+ 04h 26' 49''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 207,
+     "name": "Anthony TURGIS",
+     "nat": "FRA",
+     "gcPos": 108,
+     "gcVal": "79h 11' 21''",
+     "gcGap": "+ 05h 14' 55''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 208,
+     "name": "Matteo VERCHER",
+     "nat": "FRA",
+     "gcPos": 86,
+     "gcVal": "78h 35' 10''",
+     "gcGap": "+ 04h 38' 44''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+   "code": "PQT",
+   "url": "/en/team/PQT/pinarello-q36-5-pro-cycling-team",
+   "gcPos": 10,
+   "gcVal": "230h 46' 57''",
+   "gcGap": "+ 05h 49' 14''",
+   "riders": [
+    {
+     "bib": 171,
+     "name": "Tom PIDCOCK",
+     "nat": "GBR",
+     "gcPos": 9,
+     "gcVal": "74h 25' 54''",
+     "gcGap": "+ 00h 29' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 172,
+     "name": "Xabier AZPARREN IRURZUN",
+     "nat": "ESP",
+     "gcPos": 99,
+     "gcVal": "78h 59' 20''",
+     "gcGap": "+ 05h 02' 54''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 173,
+     "name": "Christopher HARPER",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 11
+    },
+    {
+     "bib": 174,
+     "name": "Quinten HERMANS",
+     "nat": "BEL",
+     "gcPos": 39,
+     "gcVal": "77h 01' 49''",
+     "gcGap": "+ 03h 05' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 175,
+     "name": "Damien CRAIG HOWSON",
+     "nat": "AUS",
+     "gcPos": 88,
+     "gcVal": "78h 38' 04''",
+     "gcGap": "+ 04h 41' 38''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 176,
+     "name": "Xandro MEURISSE",
+     "nat": "BEL",
+     "gcPos": 56,
+     "gcVal": "77h 45' 39''",
+     "gcGap": "+ 03h 49' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 177,
+     "name": "Brent VAN MOER",
+     "nat": "BEL",
+     "gcPos": 81,
+     "gcVal": "78h 29' 40''",
+     "gcGap": "+ 04h 33' 14''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 178,
+     "name": "Fred WRIGHT",
+     "nat": "GBR",
+     "gcPos": 127,
+     "gcVal": "79h 32' 47''",
+     "gcGap": "+ 05h 36' 21''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "MOVISTAR TEAM",
+   "code": "MOV",
+   "url": "/en/team/MOV/movistar-team",
+   "gcPos": 11,
+   "gcVal": "230h 57' 50''",
+   "gcGap": "+ 06h 00' 07''",
+   "riders": [
+    {
+     "bib": 141,
+     "name": "Cian UIJTDEBROEKS",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 6
+    },
+    {
+     "bib": 142,
+     "name": "Pablo CASTRILLO",
+     "nat": "ESP",
+     "gcPos": 29,
+     "gcVal": "76h 28' 09''",
+     "gcGap": "+ 02h 31' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 143,
+     "name": "Jefferson CEPEDA",
+     "nat": "ECU",
+     "gcPos": 101,
+     "gcVal": "79h 01' 08''",
+     "gcGap": "+ 05h 04' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 144,
+     "name": "Raul GARCIA",
+     "nat": "ESP",
+     "gcPos": 34,
+     "gcVal": "76h 48' 58''",
+     "gcGap": "+ 02h 52' 32''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 145,
+     "name": "Michel HEßMANN",
+     "nat": "GER",
+     "gcPos": 104,
+     "gcVal": "79h 07' 54''",
+     "gcGap": "+ 05h 11' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 146,
+     "name": "Nelson OLIVEIRA",
+     "nat": "POR",
+     "gcPos": 65,
+     "gcVal": "78h 14' 22''",
+     "gcGap": "+ 04h 17' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 147,
+     "name": "Javier ROMO",
+     "nat": "ESP",
+     "gcPos": 54,
+     "gcVal": "77h 38' 15''",
+     "gcGap": "+ 03h 41' 49''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 148,
+     "name": "Einer RUBIO",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 19
+    }
+   ]
+  },
+  {
+   "name": "TUDOR PRO CYCLING TEAM",
+   "code": "TUD",
+   "url": "/en/team/TUD/tudor-pro-cycling-team",
+   "gcPos": 12,
+   "gcVal": "231h 28' 11''",
+   "gcGap": "+ 06h 30' 28''",
+   "riders": [
+    {
+     "bib": 191,
+     "name": "Julian ALAPHILIPPE",
+     "nat": "FRA",
+     "gcPos": 125,
+     "gcVal": "79h 29' 33''",
+     "gcGap": "+ 05h 33' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 192,
+     "name": "Arvid DE KLEIJN",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 6
+    },
+    {
+     "bib": 193,
+     "name": "Marco HALLER",
+     "nat": "AUT",
+     "gcPos": 147,
+     "gcVal": "79h 58' 46''",
+     "gcGap": "+ 06h 02' 20''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 194,
+     "name": "Marc HIRSCHI",
+     "nat": "SUI",
+     "gcPos": 48,
+     "gcVal": "77h 26' 25''",
+     "gcGap": "+ 03h 29' 59''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 195,
+     "name": "Rick PLUIMERS",
+     "nat": "NED",
+     "gcPos": 73,
+     "gcVal": "78h 20' 57''",
+     "gcGap": "+ 04h 24' 31''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 196,
+     "name": "Michael STORER",
+     "nat": "AUS",
+     "gcPos": 63,
+     "gcVal": "78h 08' 03''",
+     "gcGap": "+ 04h 11' 37''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 197,
+     "name": "Matteo TRENTIN",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 10
+    },
+    {
+     "bib": 198,
+     "name": "Yannis VOISARD",
+     "nat": "SUI",
+     "gcPos": 11,
+     "gcVal": "74h 34' 28''",
+     "gcGap": "+ 00h 38' 02''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "UNO-X MOBILITY",
+   "code": "UXM",
+   "url": "/en/team/UXM/uno-x-mobility",
+   "gcPos": 13,
+   "gcVal": "231h 50' 37''",
+   "gcGap": "+ 06h 52' 54''",
+   "riders": [
+    {
+     "bib": 121,
+     "name": "Tobias JOHANNESSEN",
+     "nat": "NOR",
+     "gcPos": 12,
+     "gcVal": "74h 53' 03''",
+     "gcGap": "+ 00h 56' 37''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 122,
+     "name": "Jonas ABRAHAMSEN",
+     "nat": "NOR",
+     "gcPos": 77,
+     "gcVal": "78h 26' 49''",
+     "gcGap": "+ 04h 30' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 123,
+     "name": "Anthon CHARMIG",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "OTL",
+     "statusStage": 14
+    },
+    {
+     "bib": 124,
+     "name": "Magnus CORT NIELSEN",
+     "nat": "DEN",
+     "gcPos": 97,
+     "gcVal": "78h 54' 23''",
+     "gcGap": "+ 04h 57' 57''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 125,
+     "name": "Anders JOHANNESSEN",
+     "nat": "NOR",
+     "gcPos": 64,
+     "gcVal": "78h 11' 08''",
+     "gcGap": "+ 04h 14' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 126,
+     "name": "Anders SKAARSETH",
+     "nat": "NOR",
+     "gcPos": 60,
+     "gcVal": "77h 59' 33''",
+     "gcGap": "+ 04h 03' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 127,
+     "name": "Torstein TRÆEN",
+     "nat": "NOR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 7
+    },
+    {
+     "bib": 128,
+     "name": "Soren WAERENSKJOLD",
+     "nat": "NOR",
+     "gcPos": 138,
+     "gcVal": "79h 45' 04''",
+     "gcGap": "+ 05h 48' 38''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "GROUPAMA-FDJ UNITED",
+   "code": "GFC",
+   "url": "/en/team/GFC/groupama-fdj-united",
+   "gcPos": 14,
+   "gcVal": "232h 20' 50''",
+   "gcGap": "+ 07h 23' 07''",
+   "riders": [
+    {
+     "bib": 181,
+     "name": "Romain GREGOIRE",
+     "nat": "FRA",
+     "gcPos": 57,
+     "gcVal": "77h 46' 26''",
+     "gcGap": "+ 03h 50' 00''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 182,
+     "name": "Clément BERTHET",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 2
+    },
+    {
+     "bib": 183,
+     "name": "Clément BRAZ AFONSO",
+     "nat": "FRA",
+     "gcPos": 40,
+     "gcVal": "77h 02' 49''",
+     "gcGap": "+ 03h 06' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 184,
+     "name": "Ewen COSTIOU",
+     "nat": "FRA",
+     "gcPos": 79,
+     "gcVal": "78h 28' 49''",
+     "gcGap": "+ 04h 32' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 185,
+     "name": "Lorenzo GERMANI",
+     "nat": "ITA",
+     "gcPos": 93,
+     "gcVal": "78h 44' 44''",
+     "gcGap": "+ 04h 48' 18''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 186,
+     "name": "Guillaume MARTIN GUYONNET",
+     "nat": "FRA",
+     "gcPos": 31,
+     "gcVal": "76h 30' 41''",
+     "gcGap": "+ 02h 34' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 187,
+     "name": "Quentin PACHER",
+     "nat": "FRA",
+     "gcPos": 58,
+     "gcVal": "77h 46' 55''",
+     "gcGap": "+ 03h 50' 29''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 188,
+     "name": "Clément RUSSO",
+     "nat": "FRA",
+     "gcPos": 69,
+     "gcVal": "78h 16' 51''",
+     "gcGap": "+ 04h 20' 25''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "SOUDAL QUICK-STEP",
+   "code": "SOQ",
+   "url": "/en/team/SOQ/soudal-quick-step",
+   "gcPos": 15,
+   "gcVal": "232h 26' 55''",
+   "gcGap": "+ 07h 29' 12''",
+   "riders": [
+    {
+     "bib": 91,
+     "name": "Tim MERLIER",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 15
+    },
+    {
+     "bib": 92,
+     "name": "Pascal EENKHOORN",
+     "nat": "NED",
+     "gcPos": 143,
+     "gcVal": "79h 53' 44''",
+     "gcGap": "+ 05h 57' 18''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 93,
+     "name": "Valentin PARET PEINTRE",
+     "nat": "FRA",
+     "gcPos": 44,
+     "gcVal": "77h 05' 47''",
+     "gcGap": "+ 03h 09' 21''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 94,
+     "name": "Jasper STUYVEN",
+     "nat": "BEL",
+     "gcPos": 71,
+     "gcVal": "78h 19' 15''",
+     "gcGap": "+ 04h 22' 49''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 95,
+     "name": "Dylan VAN BAARLE",
+     "nat": "NED",
+     "gcPos": 131,
+     "gcVal": "79h 35' 19''",
+     "gcGap": "+ 05h 38' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 96,
+     "name": "Bert VAN LERBERGHE",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 6
+    },
+    {
+     "bib": 97,
+     "name": "Ilan VAN WILDER",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 20
+    },
+    {
+     "bib": 98,
+     "name": "Louis VERVAEKE",
+     "nat": "BEL",
+     "gcPos": 67,
+     "gcVal": "78h 15' 04''",
+     "gcGap": "+ 04h 18' 38''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM JAYCO ALULA",
+   "code": "JAY",
+   "url": "/en/team/JAY/team-jayco-alula",
+   "gcPos": 16,
+   "gcVal": "232h 46' 43''",
+   "gcGap": "+ 07h 49' 00''",
+   "riders": [
+    {
+     "bib": 111,
+     "name": "Ben O'CONNOR",
+     "nat": "AUS",
+     "gcPos": 28,
+     "gcVal": "76h 28' 04''",
+     "gcGap": "+ 02h 31' 38''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 112,
+     "name": "Pascal ACKERMANN",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 20
+    },
+    {
+     "bib": 113,
+     "name": "Luke DURBRIDGE",
+     "nat": "AUS",
+     "gcPos": 107,
+     "gcVal": "79h 09' 52''",
+     "gcGap": "+ 05h 13' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 114,
+     "name": "Felix ENGELHARDT",
+     "nat": "GER",
+     "gcPos": 70,
+     "gcVal": "78h 18' 57''",
+     "gcGap": "+ 04h 22' 31''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 115,
+     "name": "Michael MATTHEWS",
+     "nat": "AUS",
+     "gcPos": 52,
+     "gcVal": "77h 34' 01''",
+     "gcGap": "+ 03h 37' 35''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 116,
+     "name": "Kelland O’BRIEN",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "OTL",
+     "statusStage": 4
+    },
+    {
+     "bib": 117,
+     "name": "Luke PLAPP",
+     "nat": "AUS",
+     "gcPos": 91,
+     "gcVal": "78h 40' 56''",
+     "gcGap": "+ 04h 44' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 118,
+     "name": "Mauro SCHMID",
+     "nat": "SUI",
+     "gcPos": 35,
+     "gcVal": "76h 49' 55''",
+     "gcGap": "+ 02h 53' 29''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "XDS ASTANA TEAM",
+   "code": "XAT",
+   "url": "/en/team/XAT/xds-astana-team",
+   "gcPos": 17,
+   "gcVal": "233h 38' 16''",
+   "gcGap": "+ 08h 40' 33''",
+   "riders": [
+    {
+     "bib": 61,
+     "name": "Sergio HIGUITA",
+     "nat": "COL",
+     "gcPos": 38,
+     "gcVal": "77h 01' 01''",
+     "gcGap": "+ 03h 04' 35''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 62,
+     "name": "Davide BALLERINI",
+     "nat": "ITA",
+     "gcPos": 152,
+     "gcVal": "80h 07' 48''",
+     "gcGap": "+ 06h 11' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 63,
+     "name": "Aaron MURRAY GATE",
+     "nat": "NZL",
+     "gcPos": 121,
+     "gcVal": "79h 25' 22''",
+     "gcGap": "+ 05h 28' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 64,
+     "name": "Max KANTER",
+     "nat": "GER",
+     "gcPos": 142,
+     "gcVal": "79h 51' 55''",
+     "gcGap": "+ 05h 55' 29''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 65,
+     "name": "Harold TEJADA",
+     "nat": "COL",
+     "gcPos": 26,
+     "gcVal": "76h 16' 13''",
+     "gcGap": "+ 02h 19' 47''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 66,
+     "name": "Mike TEUNISSEN",
+     "nat": "NED",
+     "gcPos": 124,
+     "gcVal": "79h 28' 24''",
+     "gcGap": "+ 05h 31' 58''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 67,
+     "name": "Simone VELASCO",
+     "nat": "ITA",
+     "gcPos": 100,
+     "gcVal": "79h 00' 41''",
+     "gcGap": "+ 05h 04' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 68,
+     "name": "Nicolya VINOKUROV",
+     "nat": "KAZ",
+     "gcPos": 98,
+     "gcVal": "78h 57' 38''",
+     "gcGap": "+ 05h 01' 12''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "CAJA RURAL-SEGUROS RGA",
+   "code": "CJR",
+   "url": "/en/team/CJR/caja-rural-seguros-rga",
+   "gcPos": 18,
+   "gcVal": "235h 14' 48''",
+   "gcGap": "+ 10h 17' 05''",
+   "riders": [
+    {
+     "bib": 221,
+     "name": "Fernando GAVIRIA",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 13
+    },
+    {
+     "bib": 222,
+     "name": "Abel BALDERSTONE",
+     "nat": "ESP",
+     "gcPos": 47,
+     "gcVal": "77h 20' 52''",
+     "gcGap": "+ 03h 24' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 223,
+     "name": "Sebastian BERWICK",
+     "nat": "AUS",
+     "gcPos": 89,
+     "gcVal": "78h 40' 30''",
+     "gcGap": "+ 04h 44' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 224,
+     "name": "Alex MOLENAAR",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 6
+    },
+    {
+     "bib": 225,
+     "name": "Joel NICOLAU",
+     "nat": "ESP",
+     "gcPos": 129,
+     "gcVal": "79h 33' 33''",
+     "gcGap": "+ 05h 37' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 226,
+     "name": "Stefano OLDANI",
+     "nat": "ITA",
+     "gcPos": 126,
+     "gcVal": "79h 30' 00''",
+     "gcGap": "+ 05h 33' 34''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 227,
+     "name": "Jakub OTRUBA",
+     "nat": "CZE",
+     "gcPos": 112,
+     "gcVal": "79h 13' 49''",
+     "gcGap": "+ 05h 17' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 228,
+     "name": "Jose Felix PARRA",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 18
+    }
+   ]
+  },
+  {
+   "name": "LOTTO INTERMARCHE",
+   "code": "LOI",
+   "url": "/en/team/LOI/lotto-intermarche",
+   "gcPos": 19,
+   "gcVal": "235h 56' 34''",
+   "gcGap": "+ 10h 58' 51''",
+   "riders": [
+    {
+     "bib": 151,
+     "name": "Arnaud DE LIE",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 3
+    },
+    {
+     "bib": 152,
+     "name": "Huub ARTZ",
+     "nat": "NED",
+     "gcPos": 132,
+     "gcVal": "79h 39' 00''",
+     "gcGap": "+ 05h 42' 34''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 153,
+     "name": "Jenno BERCKMOES",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 13
+    },
+    {
+     "bib": 154,
+     "name": "Lars CRAPS",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 16
+    },
+    {
+     "bib": 155,
+     "name": "Liam SLOCK",
+     "nat": "BEL",
+     "gcPos": 128,
+     "gcVal": "79h 33' 06''",
+     "gcGap": "+ 05h 36' 40''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 156,
+     "name": "Lennert VAN EETVELT",
+     "nat": "BEL",
+     "gcPos": 41,
+     "gcVal": "77h 04' 48''",
+     "gcGap": "+ 03h 08' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 157,
+     "name": "Baptiste VEISTROFFER",
+     "nat": "FRA",
+     "gcPos": 146,
+     "gcVal": "79h 58' 40''",
+     "gcGap": "+ 06h 02' 14''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 158,
+     "name": "Georg ZIMMERMANN",
+     "nat": "GER",
+     "gcPos": 90,
+     "gcVal": "78h 40' 47''",
+     "gcGap": "+ 04h 44' 21''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "ALPECIN-PREMIER TECH",
+   "code": "APT",
+   "url": "/en/team/APT/alpecin-premier-tech",
+   "gcPos": 20,
+   "gcVal": "236h 14' 10''",
+   "gcGap": "+ 11h 16' 27''",
+   "riders": [
+    {
+     "bib": 101,
+     "name": "Mathieu VAN DER POEL",
+     "nat": "NED",
+     "gcPos": 75,
+     "gcVal": "78h 22' 54''",
+     "gcGap": "+ 04h 26' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 102,
+     "name": "Ramses DEBRUYNE",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 14
+    },
+    {
+     "bib": 103,
+     "name": "Silvan DILLIER",
+     "nat": "SUI",
+     "gcPos": 137,
+     "gcVal": "79h 45' 02''",
+     "gcGap": "+ 05h 48' 36''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 104,
+     "name": "Tim MARSMAN",
+     "nat": "NED",
+     "gcPos": 133,
+     "gcVal": "79h 39' 37''",
+     "gcGap": "+ 05h 43' 11''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 105,
+     "name": "Jasper PHILIPSEN",
+     "nat": "BEL",
+     "gcPos": 135,
+     "gcVal": "79h 41' 01''",
+     "gcGap": "+ 05h 44' 35''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 106,
+     "name": "Edward PLANCKAERT",
+     "nat": "BEL",
+     "gcPos": 114,
+     "gcVal": "79h 20' 44''",
+     "gcGap": "+ 05h 24' 18''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 107,
+     "name": "Jonas RICKAERT",
+     "nat": "BEL",
+     "gcPos": 115,
+     "gcVal": "79h 21' 05''",
+     "gcGap": "+ 05h 24' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 108,
+     "name": "Emiel VERSTRYNGE",
+     "nat": "BEL",
+     "gcPos": 96,
+     "gcVal": "78h 53' 37''",
+     "gcGap": "+ 04h 57' 11''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "COFIDIS",
+   "code": "COF",
+   "url": "/en/team/COF/cofidis",
+   "gcPos": 21,
+   "gcVal": "236h 50' 13''",
+   "gcGap": "+ 11h 52' 30''",
+   "riders": [
+    {
+     "bib": 161,
+     "name": "Ion IZAGIRRE",
+     "nat": "ESP",
+     "gcPos": 45,
+     "gcVal": "77h 06' 39''",
+     "gcGap": "+ 03h 10' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 162,
+     "name": "Piet ALLEGAERT",
+     "nat": "BEL",
+     "gcPos": 153,
+     "gcVal": "80h 08' 48''",
+     "gcGap": "+ 06h 12' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 163,
+     "name": "Alex ARANBURU",
+     "nat": "ESP",
+     "gcPos": 85,
+     "gcVal": "78h 34' 21''",
+     "gcGap": "+ 04h 37' 55''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 164,
+     "name": "Jenthe BIERMANS",
+     "nat": "BEL",
+     "gcPos": 144,
+     "gcVal": "79h 58' 10''",
+     "gcGap": "+ 06h 01' 44''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 165,
+     "name": "Milan FRETIN",
+     "nat": "BEL",
+     "gcPos": 148,
+     "gcVal": "80h 02' 36''",
+     "gcGap": "+ 06h 06' 10''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 166,
+     "name": "Alex KIRSCH",
+     "nat": "LUX",
+     "gcPos": 122,
+     "gcVal": "79h 26' 31''",
+     "gcGap": "+ 05h 30' 05''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 167,
+     "name": "Hugo PAGE",
+     "nat": "FRA",
+     "gcPos": 119,
+     "gcVal": "79h 24' 22''",
+     "gcGap": "+ 05h 27' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 168,
+     "name": "Benjamin THOMAS",
+     "nat": "FRA",
+     "gcPos": 117,
+     "gcVal": "79h 23' 31''",
+     "gcGap": "+ 05h 27' 05''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "NSN CYCLING TEAM",
+   "code": "NSN",
+   "url": "/en/team/NSN/nsn-cycling-team",
+   "gcPos": 22,
+   "gcVal": "238h 18' 59''",
+   "gcGap": "+ 13h 21' 16''",
+   "riders": [
+    {
+     "bib": 131,
+     "name": "Biniam GIRMAY",
+     "nat": "ERI",
+     "gcPos": 141,
+     "gcVal": "79h 50' 46''",
+     "gcGap": "+ 05h 54' 20''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 132,
+     "name": "Lewis ASKEY",
+     "nat": "GBR",
+     "gcPos": 151,
+     "gcVal": "80h 07' 14''",
+     "gcGap": "+ 06h 10' 48''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 133,
+     "name": "George BENNETT",
+     "nat": "NZL",
+     "gcPos": 68,
+     "gcVal": "78h 15' 08''",
+     "gcGap": "+ 04h 18' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 134,
+     "name": "Marco FRIGO",
+     "nat": "ITA",
+     "gcPos": 78,
+     "gcVal": "78h 28' 30''",
+     "gcGap": "+ 04h 32' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 135,
+     "name": "Matis LOUVEL",
+     "nat": "FRA",
+     "gcPos": 157,
+     "gcVal": "80h 14' 02''",
+     "gcGap": "+ 06h 17' 36''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 136,
+     "name": "Krists NEILANDS",
+     "nat": "LAT",
+     "gcPos": 134,
+     "gcVal": "79h 40' 24''",
+     "gcGap": "+ 05h 43' 58''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 137,
+     "name": "Jake STEWART",
+     "nat": "GBR",
+     "gcPos": 150,
+     "gcVal": "80h 07' 13''",
+     "gcGap": "+ 06h 10' 47''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 138,
+     "name": "Tom VAN ASBROECK",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 15
+    }
+   ]
+  },
+  {
+   "name": "TEAM PICNIC POSTNL",
+   "code": "TPP",
+   "url": "/en/team/TPP/team-picnic-postnl",
+   "gcPos": 23,
+   "gcVal": "238h 49' 18''",
+   "gcGap": "+ 13h 51' 35''",
+   "riders": [
+    {
+     "bib": 211,
+     "name": "Warren BARGUIL",
+     "nat": "FRA",
+     "gcPos": 87,
+     "gcVal": "78h 36' 29''",
+     "gcGap": "+ 04h 40' 03''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 212,
+     "name": "Frits BIESTERBOS",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 13
+    },
+    {
+     "bib": 213,
+     "name": "Pavel BITTNER",
+     "nat": "CZE",
+     "gcPos": 140,
+     "gcVal": "79h 48' 17''",
+     "gcGap": "+ 05h 51' 51''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 214,
+     "name": "John DEGENKOLB",
+     "nat": "GER",
+     "gcPos": 145,
+     "gcVal": "79h 58' 10''",
+     "gcGap": "+ 06h 01' 44''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 215,
+     "name": "Robbe DHONDT",
+     "nat": "BEL",
+     "gcPos": 118,
+     "gcVal": "79h 23' 42''",
+     "gcGap": "+ 05h 27' 16''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 216,
+     "name": "Niklas MÄRKL",
+     "nat": "GER",
+     "gcPos": 139,
+     "gcVal": "79h 47' 57''",
+     "gcGap": "+ 05h 51' 31''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 217,
+     "name": "Julius VAN DEN BERG",
+     "nat": "NED",
+     "gcPos": 156,
+     "gcVal": "80h 13' 52''",
+     "gcGap": "+ 06h 17' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 218,
+     "name": "Frank VAN DEN BROEK",
+     "nat": "NED",
+     "gcPos": 102,
+     "gcVal": "79h 04' 02''",
+     "gcGap": "+ 05h 07' 36''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  }
+ ],
+ "updated": "2026-07-27T07:43:35.792834+03:00",
+ "updatedText": "Päivitetty 27.07.2026 klo 07.43 (Suomen aikaa)"
+}

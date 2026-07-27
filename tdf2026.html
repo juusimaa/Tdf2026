@@ -207,6 +207,34 @@
   .stagewins-card{grid-column:1/-1;}
   .updated-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-left:auto;}
 
+  /* Teams & riders view — reuses .results-grid / .cls-card / table.results,
+     with a rank badge instead of a jersey and two extra columns per rider. */
+  .team-rank{
+    width:34px;height:34px;border-radius:4px;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
+    color:var(--ink);background:var(--hover);border:1px solid var(--line);
+  }
+  .team-rank.first{background:var(--gold);color:#fff;border-color:var(--gold-deep);}
+  .team-link{color:inherit;text-decoration:none;}
+  .team-link:hover{text-decoration:underline;}
+  table.riders td.bib{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--ink-soft);width:32px;
+  }
+  table.riders td.gcpos{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
+    text-align:right;width:46px;white-space:nowrap;
+  }
+  table.riders tr.podium td.gcpos{color:var(--gold-deep);}
+  table.riders tr.out td.rider b{color:var(--ink-soft);font-weight:500;}
+  table.riders tr.out td.val{color:var(--ink-soft);}
+  .out-badge{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;
+    color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;
+    padding:1px 7px;white-space:nowrap;
+  }
+
   /* Stage list
      Height is set in pixels by JS (syncStageListHeight), copied straight
      from the detail panel's rendered height, so the two columns are always
@@ -452,6 +480,8 @@
             aria-controls="view-etapit" aria-selected="true" tabindex="0"></button>
     <button class="tab" data-view="tulokset" role="tab" id="tabResults"
             aria-controls="view-tulokset" aria-selected="false" tabindex="-1"></button>
+    <button class="tab" data-view="joukkueet" role="tab" id="tabTeams"
+            aria-controls="view-joukkueet" aria-selected="false" tabindex="-1"></button>
   </nav>
 
   <section class="view active" id="view-etapit" role="tabpanel" aria-labelledby="tabStages" tabindex="0">
@@ -471,6 +501,10 @@
       <select class="rank-select" id="rankStageSelect"></select>
     </div>
     <div class="results-grid" id="resultsGrid"></div>
+  </section>
+
+  <section class="view" id="view-joukkueet" role="tabpanel" aria-labelledby="tabTeams" tabindex="0">
+    <div class="results-grid" id="teamsGrid"></div>
   </section>
 
   <footer>
@@ -493,6 +527,7 @@
 const TOUR = 'tdf2026';
 const RESULTS_URL = `data/${TOUR}-results.json`;
 const ROUTES_URL = `data/${TOUR}-routes.json`;
+const RIDERS_URL = `data/${TOUR}-riders.json`;
 
 /* ---------- I18N ---------- */
 const LANG_KEY = 'tdf2026-lang';
@@ -504,6 +539,7 @@ const STRINGS = {
     subDesc: 'Interaktiivinen katsaus kaikkiin 21 etappiin: reitit, korkeusprofiilien havainnollistus, tärkeimmät mäkipisteet (KOM) sekä kirisprinttien sijainnit ja pistejärjestelmä. Kilpailu käynnistyy Barcelonasta la 4.7. ja päättyy Pariisiin su 26.7.2026.',
     tabStages: 'Etapit & profiilit',
     tabResults: 'Sijoitukset',
+    tabTeams: 'Joukkueet & ajajat',
     stageListHeader: '21 etappia',
     statDistance: 'Kokonaismatka', statDistanceVal: '3 289 km',
     statGain: 'Nousumetrit yhteensä', statGainVal: '54 450 m',
@@ -559,11 +595,18 @@ const STRINGS = {
     allWithdrawalsFr: n => `${n} ajajaa jäänyt pois kilpailusta`,
     colReason: 'Syy',
     withdrawalReasons: {DNS:'Ei startannut (DNS)', DNF:'Keskeytti (DNF)', OTL:'Aikaraja ylittyi (OTL)'},
+    teamsStatus: (riders, teams, fin, out) => `<b>Lähtijät:</b> ${teams} joukkuetta ja ${riders} ajajaa — ${fin} ajajaa maalissa Pariisissa, ${out} jäi pois kilpailusta.`,
+    teamsEmpty: 'Ajajalistaa ei saatu ladattua. Lista luetaan tiedostosta <code>data/tdf2026-riders.json</code>, jonka <code>scripts/fetch_riders.py</code> kokoaa letour.fr:n lähtölistasta. Jos avasit sivun suoraan levyltä (file://), selain ei voi lukea tiedostoa.',
+    teamClsLine: (pos, val) => `Joukkuekilpailu #${pos} · ${val}`,
+    teamClsNone: 'Ei sijoitusta joukkuekilpailussa',
+    colBib: 'Nro', colGcPos: 'Sija', colGcTime: 'Aika / ero',
+    riderOutOnStage: n => `Etapilla ${n}`,
+    riderOutUnknown: 'Ei maalissa',
     disclaimerLabel: 'Huom korkeusprofiileista:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin, kokonaisnousun ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Kirisprinttien sijainnit ja lukumäärä per etappi perustuvat ASO:n viralliseen roadbookiin (letour.fr); pistejärjestelmä perustuu vahvistettuihin lähteisiin.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon tai Tour de Franceen. Tulokset ovat oikeudenomistajiensa omaisuutta. Tulokset: letour.fr, procyclingstats.com.',
     sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
-    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV-lähetysten alkamisajat (CEST): tntsports.co.uk ja procyclinguk.com heinäkuun 2026 lähetysaikatauluista (HBO Max / TNT Sports / Eurosport) — nämä ovat lähetyksen alkamisaikoja, eivät välttämättä virallista lähtöaikaa, ja voivat vielä muuttua.<br>Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).',
+    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Pistejärjestelmä ja kaksoissprintit: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV-lähetysten alkamisajat (CEST): tntsports.co.uk ja procyclinguk.com heinäkuun 2026 lähetysaikatauluista (HBO Max / TNT Sports / Eurosport) — nämä ovat lähetyksen alkamisaikoja, eivät välttämättä virallista lähtöaikaa, ja voivat vielä muuttua.<br>Tulokset (Tulokset-välilehti): viralliset lähteet letour.fr ja procyclingstats.com — avausetapin lähtöajat vahvistettu cyclingnews.com- ja idlprocycling.com-lähteistä (ensimmäinen joukkue 17.05 CET, viimeinen maalissa n. 19.15 CET 4.7.2026).<br>Joukkueet ja ajajat (Joukkueet &amp; ajajat -välilehti): letour.fr/en/riders — kunkin ajajan kokonaiskilpailun sija ja keskeytystieto on yhdistetty ajajanumeron perusteella letour.fr:n kokonaiskilpailuun ja keskeyttäneiden listaan.',
     typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', ttt:'Joukkueaika-ajo', itt:'Yksilöaika-ajo'},
     catLabels: {HC:'HC', C1:'1. lk', C2:'2. lk', C3:'3. lk', C4:'4. lk'},
     classifications: {
@@ -580,6 +623,7 @@ const STRINGS = {
     subDesc: 'An interactive look at all 21 stages: routes, illustrative elevation profiles, the key climb points (KOM), and the location and points system for the intermediate sprints. The race starts from Barcelona on Sat 4 Jul and finishes in Paris on Sun 26 Jul 2026.',
     tabStages: 'Stages & profiles',
     tabResults: 'Rankings',
+    tabTeams: 'Teams & riders',
     stageListHeader: '21 stages',
     statDistance: 'Total distance', statDistanceVal: '3,289 km',
     statGain: 'Total elevation gain', statGainVal: '54,450 m',
@@ -635,11 +679,18 @@ const STRINGS = {
     allWithdrawalsFr: n => `${n} riders out of the race`,
     colReason: 'Reason',
     withdrawalReasons: {DNS:'Did not start (DNS)', DNF:'Abandoned (DNF)', OTL:'Outside the time limit (OTL)'},
+    teamsStatus: (riders, teams, fin, out) => `<b>Start list:</b> ${teams} teams and ${riders} riders — ${fin} finished in Paris, ${out} left the race.`,
+    teamsEmpty: 'The rider list could not be loaded. It is read from <code>data/tdf2026-riders.json</code>, which <code>scripts/fetch_riders.py</code> builds from the letour.fr start list. If you opened this page straight from disk (file://), the browser cannot read that file.',
+    teamClsLine: (pos, val) => `Team classification #${pos} · ${val}`,
+    teamClsNone: 'Not placed in the team classification',
+    colBib: 'No.', colGcPos: 'GC', colGcTime: 'Time / gap',
+    riderOutOnStage: n => `On stage ${n}`,
+    riderOutUnknown: 'Did not finish',
     disclaimerLabel: 'Note on elevation profiles:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type, total elevation gain, and known climbs (location, length, average gradient) — they are not GPS-measured elevation data. The intermediate sprint locations and the number of sprints per stage are taken from ASO’s official road book (letour.fr); the points system is based on confirmed sources.',
     footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O. or the Tour de France. Results remain the property of their respective owners. Results: letour.fr, procyclingstats.com.',
     sourcesTitle: 'Sources (checked against ≥2 independent sources for key facts):',
-    sourcesBody: 'Route, stages, dates, elevation gain: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Points system and double intermediate sprints: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV coverage start times (CEST): tntsports.co.uk and procyclinguk.com July 2026 broadcast schedules (HBO Max / TNT Sports / Eurosport) — these are broadcast start times, not necessarily the official start of racing, and may still change.<br>Results (Results tab): official sources letour.fr and procyclingstats.com — opening-stage start times confirmed via cyclingnews.com and idlprocycling.com (first team off at 17:05 CET, last expected to finish around 19:15 CET on 4 Jul 2026).',
+    sourcesBody: 'Route, stages, dates, elevation gain: cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Points system and double intermediate sprints: inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>TV coverage start times (CEST): tntsports.co.uk and procyclinguk.com July 2026 broadcast schedules (HBO Max / TNT Sports / Eurosport) — these are broadcast start times, not necessarily the official start of racing, and may still change.<br>Results (Results tab): official sources letour.fr and procyclingstats.com — opening-stage start times confirmed via cyclingnews.com and idlprocycling.com (first team off at 17:05 CET, last expected to finish around 19:15 CET on 4 Jul 2026).<br>Teams and riders (Teams &amp; riders tab): letour.fr/en/riders — each rider’s final GC position and withdrawal are joined to letour.fr’s general classification and withdrawal list by rider number.',
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain stage', ttt:'Team time trial', itt:'Individual time trial'},
     catLabels: {HC:'HC', C1:'Cat 1', C2:'Cat 2', C3:'Cat 3', C4:'Cat 4'},
     classifications: {
@@ -656,6 +707,7 @@ const STRINGS = {
     subDesc: 'Un tour d’horizon interactif des 21 étapes : parcours, profils d’altitude illustratifs, principaux points de côte (KOM) ainsi que l’emplacement et le barème de points des sprints intermédiaires. La course s’élance de Barcelone le samedi 4 juillet et s’achève à Paris le dimanche 26 juillet 2026.',
     tabStages: 'Étapes & profils',
     tabResults: 'Classements',
+    tabTeams: 'Équipes & coureurs',
     stageListHeader: '21 étapes',
     statDistance: 'Distance totale', statDistanceVal: '3 289 km',
     statGain: 'Dénivelé total', statGainVal: '54 450 m',
@@ -711,11 +763,18 @@ const STRINGS = {
     allWithdrawalsFr: n => `${n} coureurs hors course`,
     colReason: 'Motif',
     withdrawalReasons: {DNS:'Non-partant (DNS)', DNF:'Abandon (DNF)', OTL:'Hors délai (OTL)'},
+    teamsStatus: (riders, teams, fin, out) => `<b>Liste des partants :</b> ${teams} équipes et ${riders} coureurs — ${fin} à l’arrivée à Paris, ${out} hors course.`,
+    teamsEmpty: 'La liste des coureurs n’a pas pu être chargée. Elle provient de <code>data/tdf2026-riders.json</code>, généré par <code>scripts/fetch_riders.py</code> à partir de la liste des partants de letour.fr. Si la page a été ouverte directement depuis le disque (file://), le navigateur ne peut pas lire ce fichier.',
+    teamClsLine: (pos, val) => `Classement par équipes #${pos} · ${val}`,
+    teamClsNone: 'Non classée au classement par équipes',
+    colBib: 'Dossard', colGcPos: 'Clt', colGcTime: 'Temps / écart',
+    riderOutOnStage: n => `Étape ${n}`,
+    riderOutUnknown: 'Non-partant / abandon',
     disclaimerLabel: 'Remarque sur les profils d’altitude :',
     disclaimer: 'Les courbes SVG sont des esquisses illustratives construites à partir du type d’étape, du dénivelé total et des ascensions connues (emplacement, longueur, pente moyenne) — ce ne sont pas des données d’altitude mesurées par GPS. L’emplacement des sprints intermédiaires et le nombre de sprints par étape proviennent du road book officiel de l’ASO (letour.fr) ; le barème de points repose sur des sources confirmées.',
     footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec A.S.O. ni le Tour de France. Les résultats restent la propriété de leurs détenteurs. Résultats : letour.fr, procyclingstats.com.',
     sourcesTitle: 'Sources (vérifiées auprès d’au moins 2 sources indépendantes pour les faits clés) :',
-    sourcesBody: 'Parcours, étapes, dates, dénivelé : cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Barème de points et doubles sprints intermédiaires : inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>Heures de début de diffusion TV (CEST) : tntsports.co.uk et procyclinguk.com d’après les grilles de diffusion de juillet 2026 (HBO Max / TNT Sports / Eurosport) — ce sont des heures de début de diffusion, pas nécessairement le départ officiel de la course, et elles peuvent encore changer.<br>Résultats (onglet Classements) : sources officielles letour.fr et procyclingstats.com — horaires de départ de l’étape d’ouverture confirmés via cyclingnews.com et idlprocycling.com (première équipe à 17 h 05 CET, dernière à l’arrivée vers 19 h 15 CET le 4 juillet 2026).',
+    sourcesBody: 'Parcours, étapes, dates, dénivelé : cyclingstage.com/tour-de-france-2026-route, redbull.com/tour-de-france-2026-route-and-stages, en.wikipedia.org/wiki/2026_Tour_de_France, escapecollective.com/2026-tour-de-france-route-guide.<br>Barème de points et doubles sprints intermédiaires : inrng.com (2026/07), domestiquecycling.com, idlprocycling.com, cyclinguptodate.com, tour-magazin.de, en.wikipedia.org/wiki/Points_classification_in_the_Tour_de_France.<br>Heures de début de diffusion TV (CEST) : tntsports.co.uk et procyclinguk.com d’après les grilles de diffusion de juillet 2026 (HBO Max / TNT Sports / Eurosport) — ce sont des heures de début de diffusion, pas nécessairement le départ officiel de la course, et elles peuvent encore changer.<br>Résultats (onglet Classements) : sources officielles letour.fr et procyclingstats.com — horaires de départ de l’étape d’ouverture confirmés via cyclingnews.com et idlprocycling.com (première équipe à 17 h 05 CET, dernière à l’arrivée vers 19 h 15 CET le 4 juillet 2026).<br>Équipes et coureurs (onglet Équipes &amp; coureurs) : letour.fr/en/riders — le classement général final et les abandons de chaque coureur sont associés au classement général et à la liste des abandons de letour.fr par numéro de dossard.',
     typeLabels: {flat:'Plat', hilly:'Vallonné / accidenté', mountain:'Étape de montagne', ttt:'Contre-la-montre par équipes', itt:'Contre-la-montre individuel'},
     catLabels: {HC:'HC', C1:'1re cat.', C2:'2e cat.', C3:'3e cat.', C4:'4e cat.'},
     classifications: {
@@ -1899,6 +1958,73 @@ function bindExpanders(grid){
   });
 }
 
+/* ---------- TEAMS & RIDERS ----------
+   The start list (23 teams x 8 riders) with every rider's final GC placing,
+   from data/<TOUR>-riders.json — see scripts/fetch_riders.py. Teams are
+   already stored in team-classification order, riders in bib order. */
+let RIDERS = null;
+
+/* One rider row: bib, name + nationality, final GC position, time or gap.
+   The winner has no gap, so the total time is shown instead; a rider who
+   left the race gets a DNS/DNF/OTL badge and the stage it happened on. */
+function riderRowHTML(r){
+  const out = !r.gcPos;
+  const posCell = out
+    ? `<span class="out-badge" title="${t('withdrawalReasons')[r.status] || ''}">${r.status || '—'}</span>`
+    : r.gcPos;
+  const valCell = out
+    ? (r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown'))
+    : (r.gcGap || r.gcVal);
+  return `
+    <tr class="${out?'out':(r.gcPos<=3?'podium':'')}">
+      <td class="bib">${r.bib}</td>
+      <td class="rider"><b>${r.name}</b>${r.nat?`<span class="tm">${r.nat}</span>`:''}</td>
+      <td class="gcpos">${posCell}</td>
+      <td class="val">${valCell}</td>
+    </tr>`;
+}
+
+function renderRiders(){
+  const grid = document.getElementById('teamsGrid');
+  if(!RIDERS || !Array.isArray(RIDERS.teams) || !RIDERS.teams.length){
+    grid.innerHTML = `<div class="status-card">${t('teamsEmpty')}</div>`;
+    return;
+  }
+
+  const out = RIDERS.riderCount - RIDERS.finishers;
+  let html = `<div class="status-card">
+    ${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out)}
+    ${RIDERS.updated ? '<br>'+t('resultsStatus')(RIDERS.updated, RIDERS.afterStage) : ''}
+  </div>`;
+
+  RIDERS.teams.forEach(team=>{
+    const name = team.url
+      ? `<a class="team-link" href="https://www.letour.fr${team.url}" target="_blank" rel="noopener">${team.name}</a>`
+      : team.name;
+    const sub = team.gcPos
+      ? t('teamClsLine')(team.gcPos, team.gcGap || team.gcVal)
+      : t('teamClsNone');
+    html += `<div class="cls-card">
+      <div class="cls-head">
+        <span class="team-rank${team.gcPos===1?' first':''}">${team.gcPos || '–'}</span>
+        <h3>${name}<span class="fr">${sub}</span></h3>
+      </div>
+      <div class="cls-body">
+        <table class="results riders">
+          <thead><tr>
+            <th>${t('colBib')}</th><th>${t('colRider')}</th>
+            <th style="text-align:right">${t('colGcPos')}</th>
+            <th style="text-align:right">${t('colGcTime')}</th>
+          </tr></thead>
+          <tbody>${team.riders.map(riderRowHTML).join('')}</tbody>
+        </table>
+      </div>
+    </div>`;
+  });
+
+  grid.innerHTML = html;
+}
+
 /* ---------- STATIC TEXT (header/tabs/footer) ---------- */
 function applyStaticText(){
   document.getElementById('backLinkText').textContent = t('backToTours');
@@ -1906,6 +2032,7 @@ function applyStaticText(){
   document.getElementById('subDesc').textContent = t('subDesc');
   document.getElementById('tabStages').textContent = t('tabStages');
   document.getElementById('tabResults').textContent = t('tabResults');
+  document.getElementById('tabTeams').textContent = t('tabTeams');
   document.getElementById('rankSelectLabel').textContent = t('rankShowLabel');
   document.getElementById('stageListHeader').textContent = t('stageListHeader');
   document.getElementById('disclaimerLabel').textContent = t('disclaimerLabel');
@@ -1939,6 +2066,7 @@ function renderAll(){
   renderStageList();
   renderPanel(stages[activeIdx]);
   renderResults();
+  renderRiders();
   syncStageListHeight();
 }
 
@@ -2012,6 +2140,20 @@ async function loadResults(){
   }
 }
 
+/* Start list for the "Teams & riders" tab. Missing file (e.g. the page was
+   opened over file://) leaves the placeholder note in place. */
+async function loadRiders(){
+  try{
+    const resp = await fetch(RIDERS_URL, {cache:'no-store'});
+    if(!resp.ok) throw new Error('not found');
+    const data = await resp.json();
+    if(data && Array.isArray(data.teams)) RIDERS = data;
+    renderRiders();
+  }catch(e){
+    /* No start list available — the view keeps showing t('teamsEmpty'). */
+  }
+}
+
 /* ---------- AUTOMATIC SELECTION OF TODAY'S STAGE ----------
    Map: date (YYYY-MM-DD, local time) -> stage number. On a rest day the
    next stage is selected; before the race, stage 1; after the race,
@@ -2042,6 +2184,7 @@ document.documentElement.lang = lang;
 activeIdx = todayStageIndex();
 renderAll();
 loadResults();
+loadRiders();
 </script>
 <script data-goatcounter="https://grandtours.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
