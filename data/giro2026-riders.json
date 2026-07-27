@@ -1,0 +1,2103 @@
+{
+ "afterStage": 21,
+ "teamCount": 23,
+ "riderCount": 184,
+ "finishers": 151,
+ "teams": [
+  {
+   "name": "TEAM VISMA | LEASE A BIKE",
+   "code": "",
+   "nat": "NLD",
+   "url": "https://www.giroditalia.it/en/squadre/team-visma-lease-a-bike/",
+   "gcPos": 1,
+   "gcVal": "250h 42' 41''",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Jonas VINGEGAARD",
+     "nat": "DEN",
+     "gcPos": 1,
+     "gcVal": "83h 22' 51''",
+     "gcGap": "",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Victor CAMPENAERTS",
+     "nat": "BEL",
+     "gcPos": 43,
+     "gcVal": "85h 45' 27''",
+     "gcGap": "+ 02h 22' 36''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Wilco KELDERMAN",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Timo KIELICH",
+     "nat": "BEL",
+     "gcPos": 119,
+     "gcVal": "88h 30' 41''",
+     "gcGap": "+ 05h 07' 50''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Sepp KUSS",
+     "nat": "USA",
+     "gcPos": 13,
+     "gcVal": "83h 45' 03''",
+     "gcGap": "+ 00h 22' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Bart LEMMEN",
+     "nat": "NED",
+     "gcPos": 30,
+     "gcVal": "85h 06' 26''",
+     "gcGap": "+ 01h 43' 35''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Davide PIGANZOLI",
+     "nat": "ITA",
+     "gcPos": 8,
+     "gcVal": "83h 33' 43''",
+     "gcGap": "+ 00h 10' 52''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Tim REX",
+     "nat": "BEL",
+     "gcPos": 90,
+     "gcVal": "87h 38' 32''",
+     "gcGap": "+ 04h 15' 41''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "NETCOMPANY INEOS CYCLING TEAM",
+   "code": "",
+   "nat": "GBR",
+   "url": "https://www.giroditalia.it/en/squadre/netcompany-ineos-cycling-team/",
+   "gcPos": 2,
+   "gcVal": "251h 22' 48''",
+   "gcGap": "+ 00h 40' 07''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Egan BERNAL",
+     "nat": "COL",
+     "gcPos": 10,
+     "gcVal": "83h 35' 45''",
+     "gcGap": "+ 00h 12' 54''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Thymen ARENSMAN",
+     "nat": "NED",
+     "gcPos": 4,
+     "gcVal": "83h 29' 53''",
+     "gcGap": "+ 00h 07' 02''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Filippo GANNA",
+     "nat": "ITA",
+     "gcPos": 99,
+     "gcVal": "87h 48' 23''",
+     "gcGap": "+ 04h 25' 32''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jack HAIG",
+     "nat": "AUS",
+     "gcPos": 40,
+     "gcVal": "85h 28' 36''",
+     "gcGap": "+ 02h 05' 45''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Magnus SHEFFIELD",
+     "nat": "USA",
+     "gcPos": 42,
+     "gcVal": "85h 36' 37''",
+     "gcGap": "+ 02h 13' 46''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Embret SVESTAD-BAARDSENG",
+     "nat": "NOR",
+     "gcPos": 24,
+     "gcVal": "84h 36' 30''",
+     "gcGap": "+ 01h 13' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Connor SWIFT",
+     "nat": "GBR",
+     "gcPos": 77,
+     "gcVal": "87h 20' 03''",
+     "gcGap": "+ 03h 57' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Benjamin TURNER",
+     "nat": "GBR",
+     "gcPos": 76,
+     "gcVal": "87h 18' 54''",
+     "gcGap": "+ 03h 56' 03''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "REDBULL - BORA - HANSGROHE",
+   "code": "",
+   "nat": "GER",
+   "url": "https://www.giroditalia.it/en/squadre/redbull-bora-hansgrohe/",
+   "gcPos": 3,
+   "gcVal": "251h 31' 08''",
+   "gcGap": "+ 00h 48' 27''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Jai HINDLEY",
+     "nat": "AUS",
+     "gcPos": 3,
+     "gcVal": "83h 29' 16''",
+     "gcGap": "+ 00h 06' 25''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Giovanni ALEOTTI",
+     "nat": "ITA",
+     "gcPos": 28,
+     "gcVal": "84h 49' 55''",
+     "gcGap": "+ 01h 27' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Nico DENZ",
+     "nat": "GER",
+     "gcPos": 121,
+     "gcVal": "88h 38' 27''",
+     "gcGap": "+ 05h 15' 36''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Gianni MOSCON",
+     "nat": "ITA",
+     "gcPos": 74,
+     "gcVal": "87h 17' 21''",
+     "gcGap": "+ 03h 54' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Giulio PELLIZZARI",
+     "nat": "ITA",
+     "gcPos": 21,
+     "gcVal": "84h 21' 07''",
+     "gcGap": "+ 00h 58' 16''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Mick VAN DIJKE",
+     "nat": "NED",
+     "gcPos": 75,
+     "gcVal": "87h 18' 20''",
+     "gcGap": "+ 03h 55' 29''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Aleksandr VLASOV",
+     "nat": "RUS",
+     "gcPos": 25,
+     "gcVal": "84h 38' 12''",
+     "gcGap": "+ 01h 15' 21''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Ben ZWIEHOFF",
+     "nat": "GER",
+     "gcPos": 31,
+     "gcVal": "85h 10' 27''",
+     "gcGap": "+ 01h 47' 36''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TUDOR PRO CYCLING TEAM",
+   "code": "",
+   "nat": "SUI",
+   "url": "https://www.giroditalia.it/en/squadre/tudor-pro-cycling-team/",
+   "gcPos": 4,
+   "gcVal": "251h 47' 08''",
+   "gcGap": "+ 01h 04' 27''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Michael STORER",
+     "nat": "AUS",
+     "gcPos": 7,
+     "gcVal": "83h 33' 04''",
+     "gcGap": "+ 00h 10' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "William BARTA",
+     "nat": "USA",
+     "gcPos": 36,
+     "gcVal": "85h 22' 19''",
+     "gcGap": "+ 01h 59' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Robin FROIDEVAUX",
+     "nat": "SUI",
+     "gcPos": 147,
+     "gcVal": "89h 19' 18''",
+     "gcGap": "+ 05h 56' 27''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Fabian LIENHARD",
+     "nat": "SUI",
+     "gcPos": 146,
+     "gcVal": "89h 18' 06''",
+     "gcGap": "+ 05h 55' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Luca MOZZATO",
+     "nat": "ITA",
+     "gcPos": 142,
+     "gcVal": "89h 16' 08''",
+     "gcGap": "+ 05h 53' 17''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Mathys RONDEL",
+     "nat": "FRA",
+     "gcPos": 11,
+     "gcVal": "83h 38' 03''",
+     "gcGap": "+ 00h 15' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Florian STORK",
+     "nat": "GER",
+     "gcPos": 39,
+     "gcVal": "85h 28' 22''",
+     "gcGap": "+ 02h 05' 31''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Larry WARBASSE",
+     "nat": "USA",
+     "gcPos": 51,
+     "gcVal": "86h 03' 37''",
+     "gcGap": "+ 02h 40' 46''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "DECATHLON CMA CGM TEAM",
+   "code": "",
+   "nat": "FRA",
+   "url": "https://www.giroditalia.it/en/squadre/decathlon-cma-cgm-team/",
+   "gcPos": 5,
+   "gcVal": "252h 07' 40''",
+   "gcGap": "+ 01h 24' 59''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Felix GALL",
+     "nat": "AUT",
+     "gcPos": 2,
+     "gcVal": "83h 28' 13''",
+     "gcGap": "+ 00h 05' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Tobias LUND ANDRESEN",
+     "nat": "DEN",
+     "gcPos": 122,
+     "gcVal": "88h 39' 59''",
+     "gcGap": "+ 05h 17' 08''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Tord GUDMESTAD",
+     "nat": "NOR",
+     "gcPos": 136,
+     "gcVal": "89h 00' 17''",
+     "gcGap": "+ 05h 37' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Gregor MUHLBERGER",
+     "nat": "AUT",
+     "gcPos": 15,
+     "gcVal": "83h 46' 44''",
+     "gcGap": "+ 00h 23' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Oliver NAESEN",
+     "nat": "BEL",
+     "gcPos": 78,
+     "gcVal": "87h 22' 33''",
+     "gcGap": "+ 03h 59' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Rasmus Søjberg PEDERSEN",
+     "nat": "DEN",
+     "gcPos": 113,
+     "gcVal": "88h 08' 13''",
+     "gcGap": "+ 04h 45' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Callum SCOTSON",
+     "nat": "AUS",
+     "gcPos": 33,
+     "gcVal": "85h 13' 04''",
+     "gcGap": "+ 01h 50' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Johannes STAUNE-MITTET",
+     "nat": "NOR",
+     "gcPos": 34,
+     "gcVal": "85h 17' 12''",
+     "gcGap": "+ 01h 54' 21''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+   "code": "",
+   "nat": "SUI",
+   "url": "https://www.giroditalia.it/en/squadre/pinarello-q36-5-pro-cycling-team/",
+   "gcPos": 6,
+   "gcVal": "252h 38' 59''",
+   "gcGap": "+ 01h 56' 18''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Sjoerd BAX",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Fabio CHRISTEN",
+     "nat": "SUI",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "David DE LA CRUZ",
+     "nat": "ESP",
+     "gcPos": 14,
+     "gcVal": "83h 46' 05''",
+     "gcGap": "+ 00h 23' 14''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Mark DONOVAN",
+     "nat": "GBR",
+     "gcPos": 38,
+     "gcVal": "85h 26' 14''",
+     "gcGap": "+ 02h 03' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "David GONZALEZ LOPEZ",
+     "nat": "ESP",
+     "gcPos": 100,
+     "gcVal": "87h 50' 04''",
+     "gcGap": "+ 04h 27' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Chris HARPER",
+     "nat": "AUS",
+     "gcPos": 17,
+     "gcVal": "83h 53' 34''",
+     "gcGap": "+ 00h 30' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Matteo MOSCHETTI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Nickolas ZUKOWSKY",
+     "nat": "CAN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "BAHRAIN VICTORIOUS",
+   "code": "",
+   "nat": "BHR",
+   "url": "https://www.giroditalia.it/en/squadre/bahrain-victorious/",
+   "gcPos": 7,
+   "gcVal": "252h 56' 13''",
+   "gcGap": "+ 02h 13' 32''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Santiago BUITRAGO",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Damiano CARUSO",
+     "nat": "ITA",
+     "gcPos": 9,
+     "gcVal": "83h 34' 15''",
+     "gcGap": "+ 00h 11' 24''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Fran MIHOLJEVIC",
+     "nat": "CRO",
+     "gcPos": 96,
+     "gcVal": "87h 46' 41''",
+     "gcGap": "+ 04h 23' 50''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Afonso Oliveira EULALIO",
+     "nat": "POR",
+     "gcPos": 6,
+     "gcVal": "83h 32' 30''",
+     "gcGap": "+ 00h 09' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Mathijs PAASSCHENS",
+     "nat": "NED",
+     "gcPos": 87,
+     "gcVal": "87h 35' 19''",
+     "gcGap": "+ 04h 12' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Alec SEGAERT",
+     "nat": "BEL",
+     "gcPos": 72,
+     "gcVal": "87h 11' 30''",
+     "gcGap": "+ 03h 48' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Robert STANNARD",
+     "nat": "AUS",
+     "gcPos": 104,
+     "gcVal": "87h 54' 08''",
+     "gcGap": "+ 04h 31' 17''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Edoardo ZAMBANINI",
+     "nat": "ITA",
+     "gcPos": 45,
+     "gcVal": "85h 53' 50''",
+     "gcGap": "+ 02h 30' 59''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "LIDL-TREK",
+   "code": "",
+   "nat": "GER",
+   "url": "https://www.giroditalia.it/en/squadre/lidl-trek/",
+   "gcPos": 8,
+   "gcVal": "253h 46' 02''",
+   "gcGap": "+ 03h 03' 21''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Giulio CICCONE",
+     "nat": "ITA",
+     "gcPos": 20,
+     "gcVal": "84h 19' 31''",
+     "gcGap": "+ 00h 56' 40''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Simone CONSONNI",
+     "nat": "ITA",
+     "gcPos": 150,
+     "gcVal": "89h 25' 44''",
+     "gcGap": "+ 06h 02' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Derek GEE",
+     "nat": "CAN",
+     "gcPos": 5,
+     "gcVal": "83h 30' 47''",
+     "gcGap": "+ 00h 07' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Amanuel GHEBREIGZABHIER",
+     "nat": "ERI",
+     "gcPos": 89,
+     "gcVal": "87h 38' 31''",
+     "gcGap": "+ 04h 15' 40''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jonathan MILAN",
+     "nat": "ITA",
+     "gcPos": 124,
+     "gcVal": "88h 48' 25''",
+     "gcGap": "+ 05h 25' 34''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Matteo SOBRERO",
+     "nat": "ITA",
+     "gcPos": 54,
+     "gcVal": "86h 27' 34''",
+     "gcGap": "+ 03h 04' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Tim Torn TEUTENBERG",
+     "nat": "GER",
+     "gcPos": 137,
+     "gcVal": "89h 01' 41''",
+     "gcGap": "+ 05h 38' 50''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Maximilian Richard WALSCHEID",
+     "nat": "GER",
+     "gcPos": 141,
+     "gcVal": "89h 12' 41''",
+     "gcGap": "+ 05h 49' 50''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "MOVISTAR TEAM",
+   "code": "",
+   "nat": "ESP",
+   "url": "https://www.giroditalia.it/en/squadre/movistar-team/",
+   "gcPos": 9,
+   "gcVal": "253h 47' 49''",
+   "gcGap": "+ 03h 05' 08''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Enric MAS",
+     "nat": "ESP",
+     "gcPos": 32,
+     "gcVal": "85h 11' 19''",
+     "gcGap": "+ 01h 48' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Orluis Alberto AULAR SANABRIA",
+     "nat": "VEN",
+     "gcPos": 79,
+     "gcVal": "87h 22' 46''",
+     "gcGap": "+ 03h 59' 55''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Ivan GARCIA CORTINA",
+     "nat": "ESP",
+     "gcPos": 114,
+     "gcVal": "88h 08' 31''",
+     "gcGap": "+ 04h 45' 40''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Juan Pedro LOPEZ PEREZ",
+     "nat": "ESP",
+     "gcPos": 41,
+     "gcVal": "85h 29' 21''",
+     "gcGap": "+ 02h 06' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Lorenzo MILESI",
+     "nat": "ITA",
+     "gcPos": 49,
+     "gcVal": "86h 00' 01''",
+     "gcGap": "+ 02h 37' 10''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Nélson OLIVEIRA",
+     "nat": "POR",
+     "gcPos": 66,
+     "gcVal": "87h 01' 22''",
+     "gcGap": "+ 03h 38' 31''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Javier ROMO OLIVER",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Einer RUBIO",
+     "nat": "COL",
+     "gcPos": 23,
+     "gcVal": "84h 27' 17''",
+     "gcGap": "+ 01h 04' 26''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM JAYCO ALULA",
+   "code": "",
+   "nat": "AUS",
+   "url": "https://www.giroditalia.it/en/squadre/team-jayco-alula/",
+   "gcPos": 10,
+   "gcVal": "254h 06' 30''",
+   "gcGap": "+ 03h 23' 49''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Ben O’CONNOR",
+     "nat": "AUS",
+     "gcPos": 16,
+     "gcVal": "83h 47' 03''",
+     "gcGap": "+ 00h 24' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Pascal ACKERMANN",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Koen BOUWMAN",
+     "nat": "NED",
+     "gcPos": 26,
+     "gcVal": "84h 44' 12''",
+     "gcGap": "+ 01h 21' 21''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Robert DONALDSON",
+     "nat": "GBR",
+     "gcPos": 118,
+     "gcVal": "88h 27' 20''",
+     "gcGap": "+ 05h 04' 29''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Felix ENGELHARDT",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Alan HATHERLY",
+     "nat": "RSA",
+     "gcPos": 48,
+     "gcVal": "85h 58' 36''",
+     "gcGap": "+ 02h 35' 45''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Christopher JUUL JENSEN",
+     "nat": "DEN",
+     "gcPos": 86,
+     "gcVal": "87h 32' 08''",
+     "gcGap": "+ 04h 09' 17''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Andrea VENDRAME",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "UNO-X MOBILITY",
+   "code": "",
+   "nat": "NOR",
+   "url": "https://www.giroditalia.it/en/squadre/uno-x-mobility/",
+   "gcPos": 11,
+   "gcVal": "255h 22' 49''",
+   "gcGap": "+ 04h 40' 08''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Erlend Jordbrekk BLIKRA",
+     "nat": "NOR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Markus HOELGAARD",
+     "nat": "NOR",
+     "gcPos": 67,
+     "gcVal": "87h 04' 55''",
+     "gcGap": "+ 03h 42' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Ådne HOLTER",
+     "nat": "NOR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Johannes KULSET",
+     "nat": "NOR",
+     "gcPos": 18,
+     "gcVal": "83h 57' 17''",
+     "gcGap": "+ 00h 34' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Fredrik DVERSNES",
+     "nat": "NOR",
+     "gcPos": 112,
+     "gcVal": "88h 06' 58''",
+     "gcGap": "+ 04h 44' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Andreas LEKNESSUND",
+     "nat": "NOR",
+     "gcPos": 37,
+     "gcVal": "85h 23' 21''",
+     "gcGap": "+ 02h 00' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Sakarias Koller LØLAND",
+     "nat": "NOR",
+     "gcPos": 117,
+     "gcVal": "88h 22' 57''",
+     "gcGap": "+ 05h 00' 06''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Martin TJØTTA",
+     "nat": "NOR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM POLTI VISITMALTA",
+   "code": "",
+   "nat": "ITA",
+   "url": "https://www.giroditalia.it/en/squadre/team-polti-visitmalta/",
+   "gcPos": 12,
+   "gcVal": "255h 44' 44''",
+   "gcGap": "+ 05h 02' 03''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Mattia BAIS",
+     "nat": "ITA",
+     "gcPos": 85,
+     "gcVal": "87h 31' 09''",
+     "gcGap": "+ 04h 08' 18''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Ludovico CRESCIOLI",
+     "nat": "ITA",
+     "gcPos": 27,
+     "gcVal": "84h 45' 48''",
+     "gcGap": "+ 01h 22' 57''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Giovanni LONARDI",
+     "nat": "ITA",
+     "gcPos": 133,
+     "gcVal": "88h 56' 01''",
+     "gcGap": "+ 05h 33' 10''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Mirco MAESTRI",
+     "nat": "ITA",
+     "gcPos": 97,
+     "gcVal": "87h 47' 37''",
+     "gcGap": "+ 04h 24' 46''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Andrea MIFSUD",
+     "nat": "MLT",
+     "gcPos": 69,
+     "gcVal": "87h 07' 38''",
+     "gcGap": "+ 03h 44' 47''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Thomas PESENTI",
+     "nat": "ITA",
+     "gcPos": 71,
+     "gcVal": "87h 09' 33''",
+     "gcGap": "+ 03h 46' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Diego Pablo SEVILLA LOPEZ",
+     "nat": "ESP",
+     "gcPos": 94,
+     "gcVal": "87h 46' 19''",
+     "gcGap": "+ 04h 23' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Alessandro TONELLI",
+     "nat": "ITA",
+     "gcPos": 47,
+     "gcVal": "85h 58' 05''",
+     "gcGap": "+ 02h 35' 14''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "XDS ASTANA TEAM",
+   "code": "",
+   "nat": "KAZ",
+   "url": "https://www.giroditalia.it/en/squadre/xds-astana-team/",
+   "gcPos": 13,
+   "gcVal": "256h 23' 42''",
+   "gcGap": "+ 05h 41' 01''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Davide BALLERINI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Alberto BETTIOL",
+     "nat": "ITA",
+     "gcPos": 63,
+     "gcVal": "86h 56' 55''",
+     "gcGap": "+ 03h 34' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Arjen LIVYNS",
+     "nat": "BEL",
+     "gcPos": 135,
+     "gcVal": "88h 57' 56''",
+     "gcGap": "+ 05h 35' 05''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Harold Martin LOPEZ GRANIZO",
+     "nat": "ECU",
+     "gcPos": 50,
+     "gcVal": "86h 01' 02''",
+     "gcGap": "+ 02h 38' 11''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Matteo MALUCELLI",
+     "nat": "ITA",
+     "gcPos": 151,
+     "gcVal": "89h 36' 36''",
+     "gcGap": "+ 06h 13' 45''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Christian SCARONI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Guillermo Thomas SILVA COUSSAN",
+     "nat": "URU",
+     "gcPos": 65,
+     "gcVal": "86h 58' 01''",
+     "gcGap": "+ 03h 35' 10''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Diego ULISSI",
+     "nat": "ITA",
+     "gcPos": 46,
+     "gcVal": "85h 53' 51''",
+     "gcGap": "+ 02h 31' 00''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "UAE TEAM EMIRATES XRG",
+   "code": "",
+   "nat": "ARE",
+   "url": "https://www.giroditalia.it/en/squadre/uae-team-emirates-xrg/",
+   "gcPos": 14,
+   "gcVal": "256h 38' 44''",
+   "gcGap": "+ 05h 56' 03''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Adam YATES",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Igor ARRIETA LIZARRAGA",
+     "nat": "ESP",
+     "gcPos": 19,
+     "gcVal": "84h 18' 41''",
+     "gcGap": "+ 00h 55' 50''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Mikkel BJERG",
+     "nat": "DEN",
+     "gcPos": 102,
+     "gcVal": "87h 53' 23''",
+     "gcGap": "+ 04h 30' 32''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jan CHRISTEN",
+     "nat": "SUI",
+     "gcPos": 59,
+     "gcVal": "86h 48' 59''",
+     "gcGap": "+ 03h 26' 08''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jhonatan Manuel NARVAEZ PRADO",
+     "nat": "ECU",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Marc SOLER GIMENEZ",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Antonio Tomas MORGADO",
+     "nat": "POR",
+     "gcPos": 125,
+     "gcVal": "88h 48' 47''",
+     "gcGap": "+ 05h 25' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jay VINE",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "EF EDUCATION - EASYPOST",
+   "code": "",
+   "nat": "USA",
+   "url": "https://www.giroditalia.it/en/squadre/ef-education-easypost/",
+   "gcPos": 15,
+   "gcVal": "256h 42' 33''",
+   "gcGap": "+ 05h 59' 52''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Jefferson Alexander CEPEDA",
+     "nat": "ECU",
+     "gcPos": 64,
+     "gcVal": "86h 57' 28''",
+     "gcGap": "+ 03h 34' 37''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Samuele BATTISTELLA",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Markel BELOKI FERNANDEZ",
+     "nat": "ESP",
+     "gcPos": 35,
+     "gcVal": "85h 20' 15''",
+     "gcGap": "+ 01h 57' 24''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Madis MIHKELS",
+     "nat": "EST",
+     "gcPos": 111,
+     "gcVal": "88h 05' 37''",
+     "gcGap": "+ 04h 42' 46''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Darren RAFFERTY",
+     "nat": "IRL",
+     "gcPos": 92,
+     "gcVal": "87h 41' 22''",
+     "gcGap": "+ 04h 18' 31''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "James SHAW",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Michael VALGREN HUNDAHL (ANDERSEN)",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jardi Christiaan VAN DER LEE",
+     "nat": "NED",
+     "gcPos": 73,
+     "gcVal": "87h 14' 12''",
+     "gcGap": "+ 03h 51' 21''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "NSN CYCLING TEAM",
+   "code": "",
+   "nat": "SUI",
+   "url": "https://www.giroditalia.it/en/squadre/nsn-cycling-team/",
+   "gcPos": 16,
+   "gcVal": "256h 52' 49''",
+   "gcGap": "+ 06h 10' 08''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Alessandro PINARELLO",
+     "nat": "ITA",
+     "gcPos": 61,
+     "gcVal": "86h 50' 29''",
+     "gcGap": "+ 03h 27' 38''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jan HIRT",
+     "nat": "CZE",
+     "gcPos": 12,
+     "gcVal": "83h 44' 57''",
+     "gcGap": "+ 00h 22' 06''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Ryan MULLEN",
+     "nat": "IRL",
+     "gcPos": 134,
+     "gcVal": "88h 57' 26''",
+     "gcGap": "+ 05h 34' 35''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Nicholas SCHULTZ",
+     "nat": "AUS",
+     "gcPos": 62,
+     "gcVal": "86h 52' 30''",
+     "gcGap": "+ 03h 29' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Dion SMITH",
+     "nat": "NZL",
+     "gcPos": 123,
+     "gcVal": "88h 46' 31''",
+     "gcGap": "+ 05h 23' 40''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jake STEWART",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Corbin STRONG",
+     "nat": "NZL",
+     "gcPos": 88,
+     "gcVal": "87h 36' 11''",
+     "gcGap": "+ 04h 13' 20''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Ethan VERNON",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "SOUDAL QUICK-STEP",
+   "code": "",
+   "nat": "BEL",
+   "url": "https://www.giroditalia.it/en/squadre/soudal-quick-step/",
+   "gcPos": 17,
+   "gcVal": "256h 54' 19''",
+   "gcGap": "+ 06h 11' 38''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Paul MAGNIER",
+     "nat": "FRA",
+     "gcPos": 115,
+     "gcVal": "88h 15' 24''",
+     "gcGap": "+ 04h 52' 33''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Ayco BASTIAENS",
+     "nat": "BEL",
+     "gcPos": 127,
+     "gcVal": "88h 51' 29''",
+     "gcGap": "+ 05h 28' 38''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Gianmarco GAROFOLI",
+     "nat": "ITA",
+     "gcPos": 29,
+     "gcVal": "85h 01' 54''",
+     "gcGap": "+ 01h 39' 03''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Andrea RACCAGNI NOVIERO",
+     "nat": "ITA",
+     "gcPos": 55,
+     "gcVal": "86h 28' 17''",
+     "gcGap": "+ 03h 05' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jasper STUYVEN",
+     "nat": "BEL",
+     "gcPos": 70,
+     "gcVal": "87h 09' 10''",
+     "gcGap": "+ 03h 46' 19''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Fabio VAN DEN BOSSCHE",
+     "nat": "BEL",
+     "gcPos": 105,
+     "gcVal": "87h 54' 17''",
+     "gcGap": "+ 04h 31' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Dries VAN GESTEL",
+     "nat": "BEL",
+     "gcPos": 131,
+     "gcVal": "88h 55' 34''",
+     "gcGap": "+ 05h 32' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Filippo ZANA",
+     "nat": "ITA",
+     "gcPos": 60,
+     "gcVal": "86h 50' 08''",
+     "gcGap": "+ 03h 27' 17''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "GROUPAMA-FDJ UNITED",
+   "code": "",
+   "nat": "FRA",
+   "url": "https://www.giroditalia.it/en/squadre/groupama-fdj-united/",
+   "gcPos": 18,
+   "gcVal": "256h 55' 38''",
+   "gcGap": "+ 06h 12' 57''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Rémi CAVAGNA",
+     "nat": "FRA",
+     "gcPos": 110,
+     "gcVal": "88h 02' 44''",
+     "gcGap": "+ 04h 39' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Cyril BARTHE",
+     "nat": "FRA",
+     "gcPos": 108,
+     "gcVal": "87h 57' 12''",
+     "gcGap": "+ 04h 34' 21''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Axel HUENS",
+     "nat": "FRA",
+     "gcPos": 83,
+     "gcVal": "87h 25' 42''",
+     "gcGap": "+ 04h 02' 51''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Johan JACOBS",
+     "nat": "SUI",
+     "gcPos": 93,
+     "gcVal": "87h 42' 15''",
+     "gcGap": "+ 04h 19' 24''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Joshua KENCH",
+     "nat": "NZL",
+     "gcPos": 52,
+     "gcVal": "86h 08' 13''",
+     "gcGap": "+ 02h 45' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Paul PENHOET",
+     "nat": "FRA",
+     "gcPos": 128,
+     "gcVal": "88h 52' 23''",
+     "gcGap": "+ 05h 29' 32''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Remy ROCHAS",
+     "nat": "FRA",
+     "gcPos": 53,
+     "gcVal": "86h 14' 32''",
+     "gcGap": "+ 02h 51' 41''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Brieuc ROLLAND",
+     "nat": "FRA",
+     "gcPos": 56,
+     "gcVal": "86h 30' 47''",
+     "gcGap": "+ 03h 07' 56''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "LOTTO INTERMARCHÉ",
+   "code": "",
+   "nat": "BEL",
+   "url": "https://www.giroditalia.it/en/squadre/lotto-intermarche/",
+   "gcPos": 19,
+   "gcVal": "257h 31' 29''",
+   "gcGap": "+ 06h 48' 48''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Arnaud DE LIE",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Toon AERTS",
+     "nat": "BEL",
+     "gcPos": 58,
+     "gcVal": "86h 40' 04''",
+     "gcGap": "+ 03h 17' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Joshua GIDDINGS",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Simone GUALDI",
+     "nat": "ITA",
+     "gcPos": 44,
+     "gcVal": "85h 46' 11''",
+     "gcGap": "+ 02h 23' 20''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Milan MENTEN",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Lorenzo ROTA",
+     "nat": "ITA",
+     "gcPos": 68,
+     "gcVal": "87h 06' 45''",
+     "gcGap": "+ 03h 43' 54''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jonas RUTSCH",
+     "nat": "GER",
+     "gcPos": 106,
+     "gcVal": "87h 55' 21''",
+     "gcGap": "+ 04h 32' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Lennert VAN EETVELT",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM PICNIC POSTNL RAISIN",
+   "code": "",
+   "nat": "NLD",
+   "url": "https://www.giroditalia.it/en/squadre/team-picnic-postnl-raisin/",
+   "gcPos": 20,
+   "gcVal": "260h 51' 06''",
+   "gcGap": "+ 10h 08' 25''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Warren BARGUIL",
+     "nat": "FRA",
+     "gcPos": 57,
+     "gcVal": "86h 35' 23''",
+     "gcGap": "+ 03h 12' 32''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Timo DE JONG",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Sean FLYNN",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Christopher HAMILTON",
+     "nat": "AUS",
+     "gcPos": 84,
+     "gcVal": "87h 27' 30''",
+     "gcGap": "+ 04h 04' 39''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Gijs LEEMREIZE",
+     "nat": "NED",
+     "gcPos": 95,
+     "gcVal": "87h 46' 27''",
+     "gcGap": "+ 04h 23' 36''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Tim NABERMAN",
+     "nat": "NED",
+     "gcPos": 132,
+     "gcVal": "88h 55' 55''",
+     "gcGap": "+ 05h 33' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Frank VAN DEN BROEK",
+     "nat": "NED",
+     "gcPos": 149,
+     "gcVal": "89h 22' 37''",
+     "gcGap": "+ 05h 59' 46''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Casper VAN UDEN",
+     "nat": "NED",
+     "gcPos": 126,
+     "gcVal": "88h 49' 15''",
+     "gcGap": "+ 05h 26' 24''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "BARDIANI CSF 7 SABER",
+   "code": "",
+   "nat": "ITA",
+   "url": "https://www.giroditalia.it/en/squadre/bardiani-csf-7-saber/",
+   "gcPos": 21,
+   "gcVal": "261h 02' 22''",
+   "gcGap": "+ 10h 19' 41''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Filippo MAGLI",
+     "nat": "ITA",
+     "gcPos": 116,
+     "gcVal": "88h 16' 32''",
+     "gcGap": "+ 04h 53' 41''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Martin MARCELLUSI",
+     "nat": "ITA",
+     "gcPos": 120,
+     "gcVal": "88h 35' 35''",
+     "gcGap": "+ 05h 12' 44''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Luca PALETTI",
+     "nat": "ITA",
+     "gcPos": 101,
+     "gcVal": "87h 50' 41''",
+     "gcGap": "+ 04h 27' 50''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Vicente Rodrigo ROJAS NARANJO",
+     "nat": "CHI",
+     "gcPos": 103,
+     "gcVal": "87h 53' 28''",
+     "gcGap": "+ 04h 30' 37''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Manuele TAROZZI",
+     "nat": "ITA",
+     "gcPos": 82,
+     "gcVal": "87h 25' 41''",
+     "gcGap": "+ 04h 02' 50''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Nikita TSVETKOV",
+     "nat": "UZB",
+     "gcPos": 109,
+     "gcVal": "87h 59' 14''",
+     "gcGap": "+ 04h 36' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Filippo TURCONI",
+     "nat": "ITA",
+     "gcPos": 98,
+     "gcVal": "87h 47' 58''",
+     "gcGap": "+ 04h 25' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Enrico ZANONCELLO",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "ALPECIN-PREMIER TECH",
+   "code": "",
+   "nat": "BEL",
+   "url": "https://www.giroditalia.it/en/squadre/alpecin-premier-tech/",
+   "gcPos": 22,
+   "gcVal": "261h 15' 08''",
+   "gcGap": "+ 10h 32' 27''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Kaden GROVES",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Tobias BAYER",
+     "nat": "AUT",
+     "gcPos": 80,
+     "gcVal": "87h 23' 12''",
+     "gcGap": "+ 04h 00' 21''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Francesco BUSATTO",
+     "nat": "ITA",
+     "gcPos": 81,
+     "gcVal": "87h 24' 21''",
+     "gcGap": "+ 04h 01' 30''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jonas GEENS",
+     "nat": "BEL",
+     "gcPos": 107,
+     "gcVal": "87h 55' 25''",
+     "gcGap": "+ 04h 32' 34''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Edward PLANCKAERT",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Jensen PLOWRIGHT",
+     "nat": "AUS",
+     "gcPos": 130,
+     "gcVal": "88h 53' 48''",
+     "gcGap": "+ 05h 30' 57''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Johan PRICE-PEJTERSEN",
+     "nat": "DEN",
+     "gcPos": 140,
+     "gcVal": "89h 10' 46''",
+     "gcGap": "+ 05h 47' 55''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Luca VERGALLITO",
+     "nat": "ITA",
+     "gcPos": 91,
+     "gcVal": "87h 39' 37''",
+     "gcGap": "+ 04h 16' 46''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "UNIBET ROSE ROCKETS",
+   "code": "",
+   "nat": "FRA",
+   "url": "https://www.giroditalia.it/en/squadre/unibet-rose-rockets/",
+   "gcPos": 23,
+   "gcVal": "261h 48' 29''",
+   "gcGap": "+ 11h 05' 48''",
+   "riders": [
+    {
+     "bib": null,
+     "name": "Dylan GROENEWEGEN",
+     "nat": "NED",
+     "gcPos": 148,
+     "gcVal": "89h 20' 08''",
+     "gcGap": "+ 05h 57' 17''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Hartthijs DE VRIES",
+     "nat": "NED",
+     "gcPos": 145,
+     "gcVal": "89h 17' 48''",
+     "gcGap": "+ 05h 54' 57''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Matyas KOPECKY",
+     "nat": "CZE",
+     "gcPos": 139,
+     "gcVal": "89h 09' 37''",
+     "gcGap": "+ 05h 46' 46''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Tomas KOPECKY",
+     "nat": "CZE",
+     "gcPos": 143,
+     "gcVal": "89h 16' 14''",
+     "gcGap": "+ 05h 53' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Lukas KUBIS",
+     "nat": "SVK",
+     "gcPos": 138,
+     "gcVal": "89h 05' 10''",
+     "gcGap": "+ 05h 42' 19''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Niklas LARSEN",
+     "nat": "DEN",
+     "gcPos": 129,
+     "gcVal": "88h 53' 44''",
+     "gcGap": "+ 05h 30' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Wout POELS",
+     "nat": "NED",
+     "gcPos": 22,
+     "gcVal": "84h 25' 01''",
+     "gcGap": "+ 01h 02' 10''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": null,
+     "name": "Elmar REINDERS",
+     "nat": "NED",
+     "gcPos": 144,
+     "gcVal": "89h 17' 48''",
+     "gcGap": "+ 05h 54' 57''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  }
+ ],
+ "updated": "2026-07-27T08:00:24.187257+03:00",
+ "updatedText": "Päivitetty 27.07.2026 klo 08.00 (Suomen aikaa)"
+}

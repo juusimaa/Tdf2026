@@ -7,7 +7,7 @@
   {
    "name": "LIDL-TREK",
    "code": "LTK",
-   "url": "/en/team/LTK/lidl-trek",
+   "url": "https://www.letour.fr/en/team/LTK/lidl-trek",
    "gcPos": 1,
    "gcVal": "224h 57' 43''",
    "gcGap": "",
@@ -97,7 +97,7 @@
   {
    "name": "UAE TEAM EMIRATES XRG",
    "code": "UEX",
-   "url": "/en/team/UEX/uae-team-emirates-xrg",
+   "url": "https://www.letour.fr/en/team/UEX/uae-team-emirates-xrg",
    "gcPos": 2,
    "gcVal": "225h 34' 40''",
    "gcGap": "+ 00h 36' 57''",
@@ -187,7 +187,7 @@
   {
    "name": "RED BULL - BORA - HANSGROHE",
    "code": "RBH",
-   "url": "/en/team/RBH/red-bull-bora-hansgrohe",
+   "url": "https://www.letour.fr/en/team/RBH/red-bull-bora-hansgrohe",
    "gcPos": 3,
    "gcVal": "226h 04' 05''",
    "gcGap": "+ 01h 06' 22''",
@@ -277,7 +277,7 @@
   {
    "name": "DECATHLON CMA CGM TEAM",
    "code": "DCT",
-   "url": "/en/team/DCT/decathlon-cma-cgm-team",
+   "url": "https://www.letour.fr/en/team/DCT/decathlon-cma-cgm-team",
    "gcPos": 4,
    "gcVal": "226h 45' 27''",
    "gcGap": "+ 01h 47' 44''",
@@ -367,7 +367,7 @@
   {
    "name": "TEAM VISMA | LEASE A BIKE",
    "code": "TVL",
-   "url": "/en/team/TVL/team-visma-lease-a-bike",
+   "url": "https://www.letour.fr/en/team/TVL/team-visma-lease-a-bike",
    "gcPos": 5,
    "gcVal": "227h 15' 46''",
    "gcGap": "+ 02h 18' 03''",
@@ -457,7 +457,7 @@
   {
    "name": "EF EDUCATION - EASYPOST",
    "code": "EFE",
-   "url": "/en/team/EFE/ef-education-easypost",
+   "url": "https://www.letour.fr/en/team/EFE/ef-education-easypost",
    "gcPos": 6,
    "gcVal": "228h 36' 03''",
    "gcGap": "+ 03h 38' 20''",
@@ -547,7 +547,7 @@
   {
    "name": "NETCOMPANY INEOS CYCLING TEAM",
    "code": "NCI",
-   "url": "/en/team/NCI/netcompany-ineos-cycling-team",
+   "url": "https://www.letour.fr/en/team/NCI/netcompany-ineos-cycling-team",
    "gcPos": 7,
    "gcVal": "229h 47' 37''",
    "gcGap": "+ 04h 49' 54''",
@@ -637,7 +637,7 @@
   {
    "name": "BAHRAIN VICTORIOUS",
    "code": "TBV",
-   "url": "/en/team/TBV/bahrain-victorious",
+   "url": "https://www.letour.fr/en/team/TBV/bahrain-victorious",
    "gcPos": 8,
    "gcVal": "230h 36' 03''",
    "gcGap": "+ 05h 38' 20''",
@@ -727,7 +727,7 @@
   {
    "name": "TOTALENERGIES",
    "code": "TEN",
-   "url": "/en/team/TEN/totalenergies",
+   "url": "https://www.letour.fr/en/team/TEN/totalenergies",
    "gcPos": 9,
    "gcVal": "230h 46' 20''",
    "gcGap": "+ 05h 48' 37''",
@@ -817,7 +817,7 @@
   {
    "name": "PINARELLO-Q36.5 PRO CYCLING TEAM",
    "code": "PQT",
-   "url": "/en/team/PQT/pinarello-q36-5-pro-cycling-team",
+   "url": "https://www.letour.fr/en/team/PQT/pinarello-q36-5-pro-cycling-team",
    "gcPos": 10,
    "gcVal": "230h 46' 57''",
    "gcGap": "+ 05h 49' 14''",
@@ -907,7 +907,7 @@
   {
    "name": "MOVISTAR TEAM",
    "code": "MOV",
-   "url": "/en/team/MOV/movistar-team",
+   "url": "https://www.letour.fr/en/team/MOV/movistar-team",
    "gcPos": 11,
    "gcVal": "230h 57' 50''",
    "gcGap": "+ 06h 00' 07''",
@@ -997,7 +997,7 @@
   {
    "name": "TUDOR PRO CYCLING TEAM",
    "code": "TUD",
-   "url": "/en/team/TUD/tudor-pro-cycling-team",
+   "url": "https://www.letour.fr/en/team/TUD/tudor-pro-cycling-team",
    "gcPos": 12,
    "gcVal": "231h 28' 11''",
    "gcGap": "+ 06h 30' 28''",
@@ -1087,7 +1087,7 @@
   {
    "name": "UNO-X MOBILITY",
    "code": "UXM",
-   "url": "/en/team/UXM/uno-x-mobility",
+   "url": "https://www.letour.fr/en/team/UXM/uno-x-mobility",
    "gcPos": 13,
    "gcVal": "231h 50' 37''",
    "gcGap": "+ 06h 52' 54''",
@@ -1177,7 +1177,7 @@
   {
    "name": "GROUPAMA-FDJ UNITED",
    "code": "GFC",
-   "url": "/en/team/GFC/groupama-fdj-united",
+   "url": "https://www.letour.fr/en/team/GFC/groupama-fdj-united",
    "gcPos": 14,
    "gcVal": "232h 20' 50''",
    "gcGap": "+ 07h 23' 07''",
@@ -1267,7 +1267,7 @@
   {
    "name": "SOUDAL QUICK-STEP",
    "code": "SOQ",
-   "url": "/en/team/SOQ/soudal-quick-step",
+   "url": "https://www.letour.fr/en/team/SOQ/soudal-quick-step",
    "gcPos": 15,
    "gcVal": "232h 26' 55''",
    "gcGap": "+ 07h 29' 12''",
@@ -1357,7 +1357,7 @@
   {
    "name": "TEAM JAYCO ALULA",
    "code": "JAY",
-   "url": "/en/team/JAY/team-jayco-alula",
+   "url": "https://www.letour.fr/en/team/JAY/team-jayco-alula",
    "gcPos": 16,
    "gcVal": "232h 46' 43''",
    "gcGap": "+ 07h 49' 00''",
@@ -1447,7 +1447,7 @@
   {
    "name": "XDS ASTANA TEAM",
    "code": "XAT",
-   "url": "/en/team/XAT/xds-astana-team",
+   "url": "https://www.letour.fr/en/team/XAT/xds-astana-team",
    "gcPos": 17,
    "gcVal": "233h 38' 16''",
    "gcGap": "+ 08h 40' 33''",
@@ -1537,7 +1537,7 @@
   {
    "name": "CAJA RURAL-SEGUROS RGA",
    "code": "CJR",
-   "url": "/en/team/CJR/caja-rural-seguros-rga",
+   "url": "https://www.letour.fr/en/team/CJR/caja-rural-seguros-rga",
    "gcPos": 18,
    "gcVal": "235h 14' 48''",
    "gcGap": "+ 10h 17' 05''",
@@ -1627,7 +1627,7 @@
   {
    "name": "LOTTO INTERMARCHE",
    "code": "LOI",
-   "url": "/en/team/LOI/lotto-intermarche",
+   "url": "https://www.letour.fr/en/team/LOI/lotto-intermarche",
    "gcPos": 19,
    "gcVal": "235h 56' 34''",
    "gcGap": "+ 10h 58' 51''",
@@ -1717,7 +1717,7 @@
   {
    "name": "ALPECIN-PREMIER TECH",
    "code": "APT",
-   "url": "/en/team/APT/alpecin-premier-tech",
+   "url": "https://www.letour.fr/en/team/APT/alpecin-premier-tech",
    "gcPos": 20,
    "gcVal": "236h 14' 10''",
    "gcGap": "+ 11h 16' 27''",
@@ -1807,7 +1807,7 @@
   {
    "name": "COFIDIS",
    "code": "COF",
-   "url": "/en/team/COF/cofidis",
+   "url": "https://www.letour.fr/en/team/COF/cofidis",
    "gcPos": 21,
    "gcVal": "236h 50' 13''",
    "gcGap": "+ 11h 52' 30''",
@@ -1897,7 +1897,7 @@
   {
    "name": "NSN CYCLING TEAM",
    "code": "NSN",
-   "url": "/en/team/NSN/nsn-cycling-team",
+   "url": "https://www.letour.fr/en/team/NSN/nsn-cycling-team",
    "gcPos": 22,
    "gcVal": "238h 18' 59''",
    "gcGap": "+ 13h 21' 16''",
@@ -1987,7 +1987,7 @@
   {
    "name": "TEAM PICNIC POSTNL",
    "code": "TPP",
-   "url": "/en/team/TPP/team-picnic-postnl",
+   "url": "https://www.letour.fr/en/team/TPP/team-picnic-postnl",
    "gcPos": 23,
    "gcVal": "238h 49' 18''",
    "gcGap": "+ 13h 51' 35''",
@@ -2075,6 +2075,6 @@
    ]
   }
  ],
- "updated": "2026-07-27T07:43:35.792834+03:00",
- "updatedText": "Päivitetty 27.07.2026 klo 07.43 (Suomen aikaa)"
+ "updated": "2026-07-27T07:59:38.129845+03:00",
+ "updatedText": "Päivitetty 27.07.2026 klo 07.59 (Suomen aikaa)"
 }

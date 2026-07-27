@@ -13,8 +13,9 @@ vuelta2026.html                       # Vuelta a España — stages & profiles (
 data/tdf2026-results.json             # Tour de France results — auto-updated
 data/tdf2026-riders.json              # Tour de France start list: teams, riders, final GC
 data/giro2026-results.json            # Giro d'Italia final results — static
+data/giro2026-riders.json             # Giro d'Italia start list: teams, riders, final GC
 scripts/fetch_results.py              # results fetch script (scrapes letour.fr)
-scripts/fetch_riders.py               # start-list fetch script (scrapes letour.fr)
+scripts/fetch_riders.py               # start-list fetch script (letour.fr + giroditalia.it)
 .github/workflows/update-results.yml  # GitHub Actions build & publish workflow
 ```
 
@@ -29,8 +30,10 @@ the landing page. The Vuelta page is a route preview until that race starts.
 - **Giro d'Italia** (`giro2026`) is a *finished* race, so it is **static**:
   its final classifications and stage winners are stored once in
   `data/giro2026-results.json` (same schema as the Tour file) and never
-  refetched. It is deliberately **not** in the `TOURS` registry, so the
-  workflow leaves it untouched. `giro2026.html` reads that JSON for the
+  refetched. It is deliberately **not** in `fetch_results.py`'s `TOURS`
+  registry, so the workflow leaves it untouched. (It *is* registered in
+  `fetch_riders.py`, which is only ever run by hand — see below.)
+  `giro2026.html` reads that JSON for the
   Results tab; its Stages tab (routes, distances, illustrative profiles) is
   built from a small hardcoded `stages` array in the page itself.
 
@@ -62,21 +65,31 @@ stage on rest days, the final stage once the race is over).
 
 ### Teams & riders tab
 
-`tdf2026.html` has a third tab listing every team and rider of the race, with
-each rider's final general-classification position and gap to the winner (or
-the stage and reason they left the race). Its data comes from
-`data/tdf2026-riders.json`, built by `scripts/fetch_riders.py`, which scrapes
-letour.fr's start list (`/en/riders`) and joins each rider to the general
-classification and the withdrawal list **by rider number** — the displayed
-names differ between those pages, the bib does not.
+`tdf2026.html` and `giro2026.html` each have a third tab listing every team and
+rider of that race, with each rider's final general-classification position and
+gap to the winner. Both read `data/<tour>-riders.json`, written by
+`scripts/fetch_riders.py` in one shared schema — but the two organisers'
+sites publish very different things, so the script has one handler per source:
 
-That script is deliberately **not** part of the workflow: a start list changes
-only when riders drop out, so it is run by hand when the data needs a refresh:
+- **letour.fr** (`tdf2026`) — start list at `/en/riders`, joined to the general
+  classification and the per-stage withdrawal list **by bib number**; the
+  displayed rider names differ between those pages, the bib does not. A rider
+  who left the race therefore carries a DNS/DNF/OTL reason and the stage.
+- **giroditalia.it** (`giro2026`) — teams from `/en/squadre/` and their rosters
+  from each team page, joined to the final classifications **by athlete-page
+  slug**. RCS publishes no bib numbers and no withdrawal list, so riders have
+  no bib and a non-finisher is only known as "did not finish". Times are
+  restated from `83:22:51` into the same `83h 22' 51''` form the Tour data uses.
+
+The script is deliberately **not** part of the workflow: a start list changes
+only when riders drop out, so it is run by hand when the data needs a refresh.
+Re-running it rewrites nothing unless the content actually changed, so it never
+produces an empty commit:
 
 ```
 pip install requests selectolax
-python scripts/fetch_riders.py            # every registered tour
-python scripts/fetch_riders.py tdf2026     # just the Tour de France
+python scripts/fetch_riders.py                     # every registered tour
+python scripts/fetch_riders.py tdf2026 giro2026     # specific tours
 ```
 
 ## Why letour.fr and not procyclingstats.com

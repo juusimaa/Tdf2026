@@ -219,6 +219,29 @@
   .team{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:1px;}
   td.num{font-family:'JetBrains Mono',monospace;white-space:nowrap;}
   td.gap{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);white-space:nowrap;}
+  /* Teams & riders view — same cards and tables as the classifications, with
+     a team-rank badge in the card head and a badge for riders who did not
+     make it to Rome. */
+  .teams-status{
+    font-size:13px;color:var(--ink-soft);line-height:1.55;
+    background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--rosa);
+    border-radius:2px;padding:12px 14px;margin:0 0 18px;
+  }
+  .team-rank{
+    width:26px;height:26px;border-radius:4px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;
+    color:var(--ink);background:var(--hover);border:1px solid var(--line);
+  }
+  .team-rank.first{background:var(--rosa);color:#fff;border-color:var(--rosa-deep);}
+  .team-link{color:inherit;text-decoration:none;}
+  .team-link:hover{text-decoration:underline;}
+  .out-badge{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;
+    color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;
+    padding:1px 7px;white-space:nowrap;
+  }
+  table.cls tr.out .rider{font-weight:500;color:var(--ink-soft);}
   table.stages-tbl td.route{color:var(--ink);}
   table.stages-tbl td.win{font-weight:600;}
   table.stages-tbl tr.pink td.win{color:var(--rosa-deep);}
@@ -254,6 +277,7 @@
   <nav class="tabs" role="tablist" aria-label="Näkymät / Views">
     <button class="tab active" data-view="stages" role="tab" id="tabStages" aria-selected="true"></button>
     <button class="tab" data-view="results" role="tab" id="tabResults" aria-selected="false"></button>
+    <button class="tab" data-view="teams" role="tab" id="tabTeams" aria-selected="false"></button>
   </nav>
 
   <!-- STAGES -->
@@ -277,6 +301,13 @@
     </div>
   </section>
 
+  <!-- TEAMS & RIDERS -->
+  <section class="view" id="view-teams" role="tabpanel" aria-labelledby="tabTeams">
+    <h2 class="section" id="teamsHeading"></h2>
+    <div class="teams-status" id="teamsStatus"></div>
+    <div class="grid" id="teamsGrid"></div>
+  </section>
+
   <footer>
     <div class="disclaimer" id="profileDisclaimer"></div>
     <div style="margin-top:12px;"><b id="disclaimerLabel"></b> <span id="disclaimerText"></span></div>
@@ -290,6 +321,7 @@
 const LANG_KEY = 'tdf2026-lang';
 const DATA_URL = 'data/giro2026-results.json';
 const ROUTES_URL = 'data/giro2026-routes.json';
+const RIDERS_URL = 'data/giro2026-riders.json';
 
 const STRINGS = {
   fi: {
@@ -297,7 +329,7 @@ const STRINGS = {
     eyebrow: 'Lopputulokset · 109. Giro d’Italia · 8.–31.5.2026',
     subDesc: 'Jonas Vingegaard voitti uransa ensimmäisen Giron ja täydensi Grand Tour ‑kokoelmansa. Grande Partenza ajettiin Nessebarista Bulgariasta, maali Roomassa — 21 etappia, 3 459 km.',
     finalTag: 'Lopulliset luokitukset · kilpailu päättynyt',
-    tabStages: 'Etapit & profiilit', tabResults: 'Tulokset',
+    tabStages: 'Etapit & profiilit', tabResults: 'Tulokset', tabTeams: 'Joukkueet & ajajat',
     stageListHeader: '21 etappia',
     classHeading: 'Loppuluokitukset',
     stagesHeading: 'Etappivoittajat',
@@ -328,11 +360,17 @@ const STRINGS = {
     youthName: 'Nuorten kilpailu', youthJersey: 'Maglia Bianca',
     teamsName: 'Joukkuekilpailu', teamsJersey: 'Joukkueet',
     colPos: '#', colRider: 'Ajaja', colTime: 'Aika', colGap: 'Ero', colPts: 'Pisteet',
+    teamsHeading: 'Joukkueet & ajajat',
+    teamsStatus: (riders, teams, fin, out) => `Lähtijät: ${teams} joukkuetta ja ${riders} ajajaa — ${fin} ajajaa maalissa Roomassa, ${out} jäi pois kilpailusta. Sija ja ero ovat lopullisesta kokonaiskilpailusta.`,
+    teamsEmpty: 'Ajajalistaa ei saatu ladattua. Lista luetaan tiedostosta data/giro2026-riders.json, jonka scripts/fetch_riders.py kokoaa giroditalia.it:n joukkuesivuista. Jos avasit sivun suoraan levyltä (file://), selain ei voi lukea tiedostoa.',
+    teamClsLine: (pos, val) => `Joukkuekilpailu #${pos} · ${val}`,
+    teamClsNone: 'Ei sijoitusta joukkuekilpailussa',
+    riderOutUnknown: 'Ei maalissa',
     colStage: 'Etappi', colRoute: 'Reitti', colWinner: 'Voittaja',
     profileDisclaimer: 'Korkeusprofiilit ovat havainnollistavia: käyrän muoto on rakennettu nousujen sijainneista, mutta se ei ole GPS-mitattua korkeusdataa. Nousut ja välisprintit on merkitty julkaistuun kilometrikohtaan (osa likimääräisiä). Nousujen luokat (GPM) näytetään vain, kun järjestäjä on ne julkaissut — muutoin "—". Nousujen pituudet ja kaltevuudet: cyclingstage.com. Etappivoittajat: Tulokset-välilehti.',
     disclaimerLabel: 'Ei-virallinen fanisivusto.',
     disclaimerText: 'Tämä on epävirallinen, ei-kaupallinen fanisivusto, joka ei liity RCS Sportiin tai Giro d’Italiaan. Tulokset ovat oikeudenomistajiensa omaisuutta.',
-    sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit, matkat ja tyypit: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Tulokset: cyclinguptodate.com, giroditalia.it (tarkistettu ristiin).',
+    sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit, matkat ja tyypit: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Tulokset: cyclinguptodate.com, giroditalia.it (tarkistettu ristiin). Joukkueet & ajajat: giroditalia.it/en/squadre — kunkin ajajan sija ja ero on yhdistetty giroditalia.it:n lopulliseen kokonaiskilpailuun.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity RCS Sportiin tai Giro d’Italiaan. Tulokset ovat oikeudenomistajiensa omaisuutta.',
   },
   en: {
@@ -340,7 +378,7 @@ const STRINGS = {
     eyebrow: 'Final results · 109th Giro d’Italia · 8–31 May 2026',
     subDesc: 'Jonas Vingegaard won his first Giro d’Italia to complete the Grand Tour set. The Grande Partenza was held in Nessebar, Bulgaria, finishing in Rome — 21 stages, 3,459 km.',
     finalTag: 'Final classifications · race over',
-    tabStages: 'Stages & profiles', tabResults: 'Results',
+    tabStages: 'Stages & profiles', tabResults: 'Results', tabTeams: 'Teams & riders',
     stageListHeader: '21 stages',
     classHeading: 'Final classifications',
     stagesHeading: 'Stage winners',
@@ -371,11 +409,17 @@ const STRINGS = {
     youthName: 'Young rider classification', youthJersey: 'Maglia Bianca',
     teamsName: 'Teams classification', teamsJersey: 'Teams',
     colPos: '#', colRider: 'Rider', colTime: 'Time', colGap: 'Gap', colPts: 'Points',
+    teamsHeading: 'Teams & riders',
+    teamsStatus: (riders, teams, fin, out) => `Start list: ${teams} teams and ${riders} riders — ${fin} finished in Rome, ${out} left the race. Position and gap are from the final general classification.`,
+    teamsEmpty: 'The rider list could not be loaded. It is read from data/giro2026-riders.json, which scripts/fetch_riders.py builds from the giroditalia.it team pages. If you opened this page straight from disk (file://), the browser cannot read that file.',
+    teamClsLine: (pos, val) => `Team classification #${pos} · ${val}`,
+    teamClsNone: 'Not placed in the team classification',
+    riderOutUnknown: 'Did not finish',
     colStage: 'Stage', colRoute: 'Route', colWinner: 'Winner',
     profileDisclaimer: 'The elevation profiles are illustrative: the curve is built from the climb positions and is not GPS-measured data. Climbs and intermediate sprints are marked at their published kilometre point (some approximate). Climb categories (GPM) are shown only where the organiser published them — otherwise "—". Climb lengths and average gradients: cyclingstage.com. Stage winners: the Results tab.',
     disclaimerLabel: 'Unofficial fan project.',
     disclaimerText: 'This is an unofficial, non-commercial fan project, not affiliated with RCS Sport or the Giro d’Italia. Results remain the property of their respective owners.',
-    sourcesLabel: 'Sources:', sourcesText: 'Route, stages, distances and types: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Results: cyclinguptodate.com, giroditalia.it (cross-checked).',
+    sourcesLabel: 'Sources:', sourcesText: 'Route, stages, distances and types: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Results: cyclinguptodate.com, giroditalia.it (cross-checked). Teams & riders: giroditalia.it/en/squadre — each rider’s position and gap are joined to giroditalia.it’s final general classification.',
     footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with RCS Sport or the Giro d’Italia. Results remain the property of their respective owners.',
   },
   fr: {
@@ -383,7 +427,7 @@ const STRINGS = {
     eyebrow: 'Classement final · 109e Giro d’Italia · 8–31 mai 2026',
     subDesc: 'Jonas Vingegaard a remporté son premier Giro d’Italia et complète ainsi la collection des Grands Tours. Grande Partenza à Nessebar (Bulgarie), arrivée à Rome — 21 étapes, 3 459 km.',
     finalTag: 'Classement final · course terminée',
-    tabStages: 'Étapes & profils', tabResults: 'Classements',
+    tabStages: 'Étapes & profils', tabResults: 'Classements', tabTeams: 'Équipes & coureurs',
     stageListHeader: '21 étapes',
     classHeading: 'Classements finals',
     stagesHeading: 'Vainqueurs d’étape',
@@ -414,11 +458,17 @@ const STRINGS = {
     youthName: 'Classement du meilleur jeune', youthJersey: 'Maglia Bianca',
     teamsName: 'Classement par équipes', teamsJersey: 'Équipes',
     colPos: '#', colRider: 'Coureur', colTime: 'Temps', colGap: 'Écart', colPts: 'Points',
+    teamsHeading: 'Équipes & coureurs',
+    teamsStatus: (riders, teams, fin, out) => `Liste des partants : ${teams} équipes et ${riders} coureurs — ${fin} à l’arrivée à Rome, ${out} hors course. La place et l’écart proviennent du classement général final.`,
+    teamsEmpty: 'La liste des coureurs n’a pas pu être chargée. Elle provient de data/giro2026-riders.json, généré par scripts/fetch_riders.py à partir des pages d’équipes de giroditalia.it. Si la page a été ouverte directement depuis le disque (file://), le navigateur ne peut pas lire ce fichier.',
+    teamClsLine: (pos, val) => `Classement par équipes #${pos} · ${val}`,
+    teamClsNone: 'Non classée au classement par équipes',
+    riderOutUnknown: 'Non classé',
     colStage: 'Étape', colRoute: 'Parcours', colWinner: 'Vainqueur',
     profileDisclaimer: 'Les profils sont illustratifs : la courbe est construite à partir de la position des ascensions et n’est pas mesurée au GPS. Ascensions et sprints intermédiaires sont placés à leur kilomètre publié (certains approximatifs). Les catégories (GPM) ne sont indiquées que lorsqu’elles ont été publiées par l’organisateur — sinon « — ». Longueurs et pentes moyennes : cyclingstage.com. Vainqueurs d’étape : onglet Classements.',
     disclaimerLabel: 'Projet de fans non officiel.',
     disclaimerText: 'Projet de fans non officiel et non commercial, sans lien avec RCS Sport ni le Giro d’Italia. Les résultats restent la propriété de leurs ayants droit.',
-    sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes, distances et types : en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Classements : cyclinguptodate.com, giroditalia.it (recoupés).',
+    sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes, distances et types : en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Classements : cyclinguptodate.com, giroditalia.it (recoupés). Équipes & coureurs : giroditalia.it/en/squadre — la place et l’écart de chaque coureur proviennent du classement général final de giroditalia.it.',
     footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec RCS Sport ni le Giro d’Italia. Les résultats restent la propriété de leurs détenteurs.',
   },
 };
@@ -435,6 +485,7 @@ let lang = detectLang();
 function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRINGS.en[key]; }
 
 let RESULTS = null;
+let RIDERS = null;
 
 /* ---------- STAGE DATA ----------
    Distances/types: Wikipedia + cyclingstage.com. Climbs (name, summit km, length,
@@ -1005,6 +1056,48 @@ function renderResults(){
   }).join('');
 }
 
+/* ---------- TEAMS & RIDERS ----------
+   Start list (23 teams x 8 riders) with each rider's final GC place, from
+   data/giro2026-riders.json — see scripts/fetch_riders.py. Teams arrive in
+   team-classification order. giroditalia.it publishes no bib numbers and no
+   withdrawal list, so a rider who is not in the GC is shown simply as not
+   having finished. */
+function riderRow(r){
+  if(!r.gcPos){
+    return `<tr class="out"><td class="pos">—</td><td>${riderCell({rider:r.name, nat:r.nat})}</td>
+      <td class="gap" colspan="2"><span class="out-badge">${esc(t('riderOutUnknown'))}</span></td></tr>`;
+  }
+  return `<tr${r.gcPos===1?' class="leader"':''}><td class="pos">${esc(r.gcPos)}</td><td>${riderCell({rider:r.name, nat:r.nat})}</td>
+    <td class="num">${esc(r.gcVal)}</td><td class="gap">${esc(r.gcGap||'—')}</td></tr>`;
+}
+function teamCard(team){
+  const title = team.url
+    ? `<a class="team-link" href="${esc(team.url)}" target="_blank" rel="noopener">${esc(team.name)}</a>`
+    : esc(team.name);
+  const sub = [
+    team.gcPos ? t('teamClsLine')(team.gcPos, team.gcGap||team.gcVal) : t('teamClsNone'),
+    team.nat || '',
+  ].filter(Boolean).join(' · ');
+  const head = `<tr><th>${t('colPos')}</th><th>${t('colRider')}</th><th>${t('colTime')}</th><th>${t('colGap')}</th></tr>`;
+  return `<div class="card"><div class="card__head">
+      <span class="team-rank${team.gcPos===1?' first':''}">${esc(team.gcPos||'–')}</span>
+      <div><div class="card__title">${title}</div><div class="card__sub">${esc(sub)}</div></div>
+    </div><div class="tablewrap"><table class="cls"><thead>${head}</thead>
+      <tbody>${team.riders.map(riderRow).join('')}</tbody></table></div></div>`;
+}
+function renderTeams(){
+  const status = document.getElementById('teamsStatus');
+  const grid = document.getElementById('teamsGrid');
+  if(!RIDERS || !Array.isArray(RIDERS.teams) || !RIDERS.teams.length){
+    status.textContent = t('teamsEmpty');
+    grid.innerHTML = '';
+    return;
+  }
+  status.textContent = t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount,
+                                        RIDERS.finishers, RIDERS.riderCount-RIDERS.finishers);
+  grid.innerHTML = RIDERS.teams.map(teamCard).join('');
+}
+
 /* ---------- STATIC TEXT + FULL RENDER ---------- */
 function render(){
   document.getElementById('backLinkText').textContent=t('backToTours');
@@ -1013,6 +1106,8 @@ function render(){
   document.getElementById('finalTag').textContent=t('finalTag');
   document.getElementById('tabStages').textContent=t('tabStages');
   document.getElementById('tabResults').textContent=t('tabResults');
+  document.getElementById('tabTeams').textContent=t('tabTeams');
+  document.getElementById('teamsHeading').textContent=t('teamsHeading');
   document.getElementById('stageListHeader').textContent=t('stageListHeader');
   document.getElementById('classHeading').textContent=t('classHeading');
   document.getElementById('stagesHeading').textContent=t('stagesHeading');
@@ -1025,6 +1120,7 @@ function render(){
   renderStageList();
   renderPanel(stages[activeIdx]);
   renderResults();
+  renderTeams();
   document.querySelectorAll('#langSel button').forEach(b=>{
     const active=b.dataset.lang===lang;
     b.classList.toggle('active',active);
@@ -1054,6 +1150,13 @@ async function load(){
     const resp=await fetch(DATA_URL,{cache:'no-store'});
     if(resp.ok) RESULTS=await resp.json();
   }catch(e){ /* file:// or offline — winners/standings simply blank */ }
+  try{
+    const resp=await fetch(RIDERS_URL,{cache:'no-store'});
+    if(resp.ok){
+      const data=await resp.json();
+      if(data && Array.isArray(data.teams)) RIDERS=data;
+    }
+  }catch(e){ /* file:// or offline — the teams view shows its note */ }
   render();
 }
 load();

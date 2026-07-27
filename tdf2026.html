@@ -1999,7 +1999,7 @@ function renderRiders(){
 
   RIDERS.teams.forEach(team=>{
     const name = team.url
-      ? `<a class="team-link" href="https://www.letour.fr${team.url}" target="_blank" rel="noopener">${team.name}</a>`
+      ? `<a class="team-link" href="${team.url}" target="_blank" rel="noopener">${team.name}</a>`
       : team.name;
     const sub = team.gcPos
       ? t('teamClsLine')(team.gcPos, team.gcGap || team.gcVal)

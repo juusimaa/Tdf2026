@@ -2,11 +2,19 @@
 """
 Grand tour start list — teams and riders with their final placing.
 
-Scrapes letour.fr's start list (/en/riders: 23 teams x 8 riders) and joins
-every rider to the general classification and to the withdrawal list, so each
-rider carries either a final GC position + gap to the winner, or the reason and
-stage they left the race. The result is written to data/<tour>-riders.json,
-which the "Teams & riders" tab of the tour page reads.
+Scrapes each race's own site for the full start list (23 teams x 8 riders) and
+joins every rider to the general classification, so each rider carries either a
+final GC position + gap to the winner, or the fact that they did not finish.
+The result is written to data/<tour>-riders.json, which the "Teams & riders"
+tab of the tour page reads. Both handlers emit the same schema.
+
+Two sources, because the organisers' sites are unrelated:
+  * "letour"  — letour.fr (Tour de France). Has bib numbers and a per-stage
+                withdrawal list, so non-finishers get a DNS/DNF/OTL reason and
+                the stage they left.
+  * "giro"    — giroditalia.it (Giro d'Italia, RCS). Publishes neither bib
+                numbers nor a withdrawal list, so riders carry no bib and a
+                non-finisher is only known as "not classified".
 
 Unlike fetch_results.py this is not run on a schedule: the start list only
 changes when riders are added or drop out, and the joined GC data is final once
@@ -14,8 +22,8 @@ the race is over. Run it by hand (or from the Actions tab) when the data needs
 a refresh.
 
 Usage:
-    python scripts/fetch_riders.py               # every registered tour
-    python scripts/fetch_riders.py tdf2026        # specific tour(s)
+    python scripts/fetch_riders.py                    # every registered tour
+    python scripts/fetch_riders.py tdf2026 giro2026    # specific tour(s)
 Dependencies:  pip install requests selectolax
 """
 
@@ -32,14 +40,18 @@ from selectolax.parser import HTMLParser
 # with the results scraper — both read the same site.
 from fetch_results import DATA_DIR, ajax_stacks, fetch, fetch_withdrawals
 
-# Registry mirroring fetch_results.TOURS. letour.fr only covers the Tour de
-# France; the Giro and Vuelta need their own source handler before they can be
-# listed here.
+# Registry mirroring fetch_results.TOURS, but with one entry per organiser
+# site. The Vuelta needs its own source handler before it can be listed here.
 TOURS = {
     "tdf2026": {
         "source": "letour",
         "base": "https://www.letour.fr",
         "out": "tdf2026-riders.json",
+    },
+    "giro2026": {
+        "source": "giro",
+        "base": "https://www.giroditalia.it",
+        "out": "giro2026-riders.json",
     },
 }
 
@@ -202,7 +214,6 @@ def fetch_letour(base: str, out: Path) -> int:
         print(f"  warning: fetching withdrawals failed: {e}")
 
     teams = []
-    finishers = 0
     for team in startlist:
         entry = team_gc.get(normalize_team(team["name"]), {})
         riders = []
@@ -220,25 +231,38 @@ def fetch_letour(base: str, out: Path) -> int:
                 "status": gone["reason"] if gone else ("" if placing else "DNF"),
                 "statusStage": gone["stage"] if gone else None,
             }
-            if placing:
-                finishers += 1
             riders.append(rider)
         teams.append({
             "name": team["name"],
             "code": team["code"],
-            "url": team["url"],
+            "url": base + team["url"] if team["url"].startswith("/") else team["url"],
             "gcPos": entry.get("pos"),
             "gcVal": entry.get("val", ""),
             "gcGap": entry.get("gap", ""),
             "riders": riders,
         })
 
-    # Teams in final team-classification order; any team missing from that
-    # table (or a race with no results yet) keeps its start-list position.
-    order = {t["name"]: i for i, t in enumerate(teams)}
-    teams.sort(key=lambda t: (t["gcPos"] is None, t["gcPos"] or 0, order[t["name"]]))
+    return write_riders(out, teams, after_stage)
+
+
+def normalize_team(name: str) -> str:
+    """Team names are compared across pages — collapse case and whitespace."""
+    return re.sub(r"\s+", " ", name).strip().upper()
+
+
+def write_riders(out: Path, teams: list, after_stage) -> int:
+    """
+    Sorts the teams into final team-classification order, wraps them with the
+    race totals and writes data/<tour>-riders.json. Shared by every source so
+    the pages only ever see one schema.
+    """
+    # A team missing from the team classification (or a race with no results
+    # yet) keeps its start-list position.
+    order = {id(t): i for i, t in enumerate(teams)}
+    teams.sort(key=lambda t: (t["gcPos"] is None, t["gcPos"] or 0, order[id(t)]))
 
     rider_count = sum(len(t["riders"]) for t in teams)
+    finishers = sum(1 for t in teams for r in t["riders"] if r["gcPos"])
     data = {
         "afterStage": after_stage,
         "teamCount": len(teams),
@@ -270,13 +294,172 @@ def fetch_letour(base: str, out: Path) -> int:
     return 0
 
 
-def normalize_team(name: str) -> str:
-    """Team names are compared across pages — collapse case and whitespace."""
-    return re.sub(r"\s+", " ", name).strip().upper()
+# ---------------------------------------------------------------- giroditalia
+# RCS builds its rankings page (/en/classifiche) out of divs, not tables: one
+# wrapper per classification carrying the RCS code in its class name, holding
+# .line-table rows. CLGEN is the general classification and CLSQAGEN the
+# "Super Team" team classification.
+#
+# The site publishes no bib numbers and no withdrawal list, so riders are
+# joined to the GC by their athlete-page slug (/en/atleti/<slug>/, identical on
+# the team pages and in the rankings) and a rider missing from the GC is simply
+# not classified — no reason or stage is available.
+GIRO_GC_CODE = "CLGEN"
+GIRO_TEAM_CODE = "CLSQAGEN"
+
+
+def url_slug(url: str) -> str:
+    """'https://…/en/atleti/vingegaard-jonas/' -> 'vingegaard-jonas'."""
+    return (url or "").rstrip("/").rsplit("/", 1)[-1].lower()
+
+
+def rcs_time(value: str) -> str:
+    """RCS writes times as 83:22:51 — restated in the site's H h M' S'' form."""
+    parts = [p for p in value.strip().split(":") if p.isdigit()]
+    if len(parts) != 3:
+        return value.strip()
+    h, m, s = parts
+    return f"{int(h)}h {int(m):02d}' {int(s):02d}''"
+
+
+def rcs_gap(value: str) -> str:
+    """
+    Gaps come as MM:SS or H:MM:SS, and as 0:00 for the leader (who has none).
+    Returned in the same "+ 00h 05' 22''" form the Tour data uses.
+    """
+    parts = [p for p in value.strip().split(":") if p.isdigit()]
+    if not parts or not any(int(p) for p in parts):
+        return ""
+    if len(parts) == 2:
+        parts = ["0"] + parts
+    if len(parts) != 3:
+        return value.strip()
+    h, m, s = (int(p) for p in parts)
+    return f"+ {h:02d}h {m:02d}' {s:02d}''"
+
+
+def giro_ranking_rows(tree, code: str):
+    """Rows of one /en/classifiche classification, in published order."""
+    wrapper = tree.css_first(f"div.js-tab-classifica-{code}")
+    return wrapper.css(".line-table") if wrapper else []
+
+
+def parse_giro_roster(html: str):
+    """
+    Parses one team page's rider list. Names are split across two lines
+    ("Jonas<br>Vingegaard"), which is exactly the given name / surname split the
+    site's usual "Jonas VINGEGAARD" form needs.
+    """
+    riders = []
+    for item in HTMLParser(html).css(".riders-list .rider-item"):
+        info = item.css_first(".info .h5")
+        if info is None:
+            continue
+        parts = [
+            re.sub(r"<[^>]+>", "", p).strip()
+            for p in re.split(r"<br\s*/?>", info.html or "")
+        ]
+        parts = [p for p in parts if p]
+        if not parts:
+            continue
+        given, surname = " ".join(parts[:-1]), parts[-1]
+        nat = item.css_first(".label-4")
+        link = item.css_first("a")
+        riders.append({
+            "name": f"{given} {surname.upper()}".strip(),
+            "nat": nat.text(strip=True).upper() if nat else "",
+            "slug": url_slug(link.attributes.get("href") if link else ""),
+        })
+    return riders
+
+
+def fetch_giro(base: str, out: Path) -> int:
+    """Scrape giroditalia.it's teams, rosters and final GC into `out`."""
+    try:
+        teams_html = fetch(f"{base}/en/squadre/")
+    except Exception as e:
+        print(f"Failed to fetch the team list: {e}")
+        return 0
+
+    cards = HTMLParser(teams_html).css("a.single-squadra")
+    if not cards:
+        print("The team list has not been published yet.")
+        return 0
+
+    gc, team_gc, after_stage = {}, {}, None
+    try:
+        tree = HTMLParser(fetch(f"{base}/en/classifiche/"))
+        for row in giro_ranking_rows(tree, GIRO_GC_CODE):
+            pos = row.css_first(".position")
+            link = row.css_first(".atleta-info a")
+            time_el, gap_el = row.css_first(".tempo"), row.css_first(".distacco")
+            if pos is None or link is None or not pos.text(strip=True).isdigit():
+                continue
+            gc[url_slug(link.attributes.get("href"))] = {
+                "pos": int(pos.text(strip=True)),
+                "val": rcs_time(time_el.text(strip=True)) if time_el else "",
+                "gap": rcs_gap(gap_el.text(strip=True)) if gap_el else "",
+            }
+        # The team table has no rank column — the rows are already in order.
+        for i, row in enumerate(giro_ranking_rows(tree, GIRO_TEAM_CODE), start=1):
+            link = row.css_first(".team a")
+            time_el, gap_el = row.css_first(".tempo"), row.css_first(".distacco")
+            if link is None:
+                continue
+            team_gc[url_slug(link.attributes.get("href"))] = {
+                "pos": i,
+                "val": rcs_time(time_el.text(strip=True)) if time_el else "",
+                "gap": rcs_gap(gap_el.text(strip=True)) if gap_el else "",
+            }
+        # The rankings page links every raced stage as /classifiche/di-tappa/N.
+        stages = [int(n) for n in re.findall(r"/classifiche/di-tappa/(\d+)", tree.html or "")]
+        after_stage = max(stages) if stages else None
+    except Exception as e:
+        print(f"  warning: fetching the classifications failed: {e}")
+
+    teams = []
+    for card in cards:
+        url = card.attributes.get("href") or ""
+        name_el, nat_el = card.css_first(".h5"), card.css_first(".label-4")
+        name = name_el.text(strip=True) if name_el else ""
+        try:
+            roster = parse_giro_roster(fetch(url))
+        except Exception as e:
+            print(f"  warning: fetching the roster of {name} failed: {e}")
+            roster = []
+
+        riders = []
+        for r in roster:
+            placing = gc.get(r["slug"])
+            riders.append({
+                "bib": None,  # RCS does not publish bib numbers
+                "name": r["name"],
+                "nat": r["nat"],
+                "gcPos": placing["pos"] if placing else None,
+                "gcVal": placing["val"] if placing else "",
+                "gcGap": placing["gap"] if placing else "",
+                "status": "" if placing else "DNF",
+                "statusStage": None,  # no withdrawal list on giroditalia.it
+            })
+
+        entry = team_gc.get(url_slug(url), {})
+        teams.append({
+            "name": name,
+            "code": "",
+            "nat": nat_el.text(strip=True).upper() if nat_el else "",
+            "url": url,
+            "gcPos": entry.get("pos"),
+            "gcVal": entry.get("val", ""),
+            "gcGap": entry.get("gap", ""),
+            "riders": riders,
+        })
+
+    return write_riders(out, teams, after_stage)
 
 
 SOURCES = {
     "letour": fetch_letour,
+    "giro": fetch_giro,
 }
 
 
