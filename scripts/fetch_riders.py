@@ -12,9 +12,10 @@ Two sources, because the organisers' sites are unrelated:
   * "letour"  — letour.fr (Tour de France). Has bib numbers and a per-stage
                 withdrawal list, so non-finishers get a DNS/DNF/OTL reason and
                 the stage they left.
-  * "giro"    — giroditalia.it (Giro d'Italia, RCS). Publishes neither bib
-                numbers nor a withdrawal list, so riders carry no bib and a
-                non-finisher is only known as "not classified".
+  * "giro"    — giroditalia.it (Giro d'Italia, RCS). Publishes no bib numbers,
+                and its withdrawals sit one table per stage page rather than on
+                a single list, so riders carry no bib and every withdrawal is a
+                plain DNF (RCS gives no DNS/OTL reason) on a known stage.
 
 Unlike fetch_results.py this is not run on a schedule: the start list only
 changes when riders are added or drop out, and the joined GC data is final once
@@ -300,10 +301,14 @@ def write_riders(out: Path, teams: list, after_stage) -> int:
 # .line-table rows. CLGEN is the general classification and CLSQAGEN the
 # "Super Team" team classification.
 #
-# The site publishes no bib numbers and no withdrawal list, so riders are
-# joined to the GC by their athlete-page slug (/en/atleti/<slug>/, identical on
-# the team pages and in the rankings) and a rider missing from the GC is simply
-# not classified — no reason or stage is available.
+# The site publishes no bib numbers, so riders are joined to the GC by their
+# athlete-page slug (/en/atleti/<slug>/, identical on the team pages, in the
+# rankings and in the withdrawal tables).
+#
+# Withdrawals are not collected on one page as on letour.fr: each stage page
+# (/en/classifiche/di-tappa/N) carries its own "official withdrawals" table, so
+# they are gathered stage by stage. RCS gives no reason (DNS/DNF/OTL) — every
+# withdrawal is reported as a plain DNF on the stage it happened.
 GIRO_GC_CODE = "CLGEN"
 GIRO_TEAM_CODE = "CLSQAGEN"
 
@@ -342,6 +347,29 @@ def giro_ranking_rows(tree, code: str):
     """Rows of one /en/classifiche classification, in published order."""
     wrapper = tree.css_first(f"div.js-tab-classifica-{code}")
     return wrapper.css(".line-table") if wrapper else []
+
+
+def giro_withdrawals(base: str, last_stage: int):
+    """
+    Walks the stage pages and collects their "official withdrawals" tables.
+    Returns {athlete slug: stage the rider left}; a failing stage page is
+    skipped with a warning rather than losing the whole start list.
+    """
+    out = {}
+    for stage_no in range(1, (last_stage or 0) + 1):
+        try:
+            tree = HTMLParser(fetch(f"{base}/en/classifiche/di-tappa/{stage_no}/"))
+        except Exception as e:
+            print(f"  warning: stage {stage_no} withdrawals: {e}")
+            continue
+        wrapper = tree.css_first("div.js-tab-ritirati-tappa")
+        if wrapper is None:
+            continue
+        for row in wrapper.css(".line-table"):
+            link = row.css_first(".atleta-info a")
+            if link is not None:
+                out.setdefault(url_slug(link.attributes.get("href")), stage_no)
+    return out
 
 
 def parse_giro_roster(html: str):
@@ -417,6 +445,8 @@ def fetch_giro(base: str, out: Path) -> int:
     except Exception as e:
         print(f"  warning: fetching the classifications failed: {e}")
 
+    left = giro_withdrawals(base, after_stage)
+
     teams = []
     for card in cards:
         url = card.attributes.get("href") or ""
@@ -439,7 +469,7 @@ def fetch_giro(base: str, out: Path) -> int:
                 "gcVal": placing["val"] if placing else "",
                 "gcGap": placing["gap"] if placing else "",
                 "status": "" if placing else "DNF",
-                "statusStage": None,  # no withdrawal list on giroditalia.it
+                "statusStage": None if placing else left.get(r["slug"]),
             })
 
         entry = team_gc.get(url_slug(url), {})

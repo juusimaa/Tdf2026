@@ -222,6 +222,12 @@
   /* Teams & riders view — same cards and tables as the classifications, with
      a team-rank badge in the card head and a badge for riders who did not
      make it to Rome. */
+  /* Two fixed columns, like the Tour page's teams view — team cards hold a
+     full eight-rider roster, so letting them auto-fit into three narrow
+     columns on a wide screen made them cramped and uneven. */
+  .grid.teams-grid{grid-template-columns:1fr 1fr;align-items:start;}
+  .grid.teams-grid > *{min-width:0;}
+  @media (max-width:900px){.grid.teams-grid{grid-template-columns:1fr;}}
   .teams-status{
     font-size:13px;color:var(--ink-soft);line-height:1.55;
     background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--rosa);
@@ -305,7 +311,7 @@
   <section class="view" id="view-teams" role="tabpanel" aria-labelledby="tabTeams">
     <h2 class="section" id="teamsHeading"></h2>
     <div class="teams-status" id="teamsStatus"></div>
-    <div class="grid" id="teamsGrid"></div>
+    <div class="grid teams-grid" id="teamsGrid"></div>
   </section>
 
   <footer>
@@ -365,12 +371,15 @@ const STRINGS = {
     teamsEmpty: 'Ajajalistaa ei saatu ladattua. Lista luetaan tiedostosta data/giro2026-riders.json, jonka scripts/fetch_riders.py kokoaa giroditalia.it:n joukkuesivuista. Jos avasit sivun suoraan levyltä (file://), selain ei voi lukea tiedostoa.',
     teamClsLine: (pos, val) => `Joukkuekilpailu #${pos} · ${val}`,
     teamClsNone: 'Ei sijoitusta joukkuekilpailussa',
+    colTimeGap: 'Aika / ero',
+    riderOutOnStage: n => `Etapilla ${n}`,
     riderOutUnknown: 'Ei maalissa',
+    dnfTitle: 'Keskeytti (DNF)',
     colStage: 'Etappi', colRoute: 'Reitti', colWinner: 'Voittaja',
     profileDisclaimer: 'Korkeusprofiilit ovat havainnollistavia: käyrän muoto on rakennettu nousujen sijainneista, mutta se ei ole GPS-mitattua korkeusdataa. Nousut ja välisprintit on merkitty julkaistuun kilometrikohtaan (osa likimääräisiä). Nousujen luokat (GPM) näytetään vain, kun järjestäjä on ne julkaissut — muutoin "—". Nousujen pituudet ja kaltevuudet: cyclingstage.com. Etappivoittajat: Tulokset-välilehti.',
     disclaimerLabel: 'Ei-virallinen fanisivusto.',
     disclaimerText: 'Tämä on epävirallinen, ei-kaupallinen fanisivusto, joka ei liity RCS Sportiin tai Giro d’Italiaan. Tulokset ovat oikeudenomistajiensa omaisuutta.',
-    sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit, matkat ja tyypit: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Tulokset: cyclinguptodate.com, giroditalia.it (tarkistettu ristiin). Joukkueet & ajajat: giroditalia.it/en/squadre — kunkin ajajan sija ja ero on yhdistetty giroditalia.it:n lopulliseen kokonaiskilpailuun.',
+    sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit, matkat ja tyypit: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Tulokset: cyclinguptodate.com, giroditalia.it (tarkistettu ristiin). Joukkueet & ajajat: giroditalia.it/en/squadre — kunkin ajajan sija ja ero on yhdistetty giroditalia.it:n lopulliseen kokonaiskilpailuun, keskeytykset etappikohtaisista tuloksista.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity RCS Sportiin tai Giro d’Italiaan. Tulokset ovat oikeudenomistajiensa omaisuutta.',
   },
   en: {
@@ -414,12 +423,15 @@ const STRINGS = {
     teamsEmpty: 'The rider list could not be loaded. It is read from data/giro2026-riders.json, which scripts/fetch_riders.py builds from the giroditalia.it team pages. If you opened this page straight from disk (file://), the browser cannot read that file.',
     teamClsLine: (pos, val) => `Team classification #${pos} · ${val}`,
     teamClsNone: 'Not placed in the team classification',
+    colTimeGap: 'Time / gap',
+    riderOutOnStage: n => `On stage ${n}`,
     riderOutUnknown: 'Did not finish',
+    dnfTitle: 'Abandoned (DNF)',
     colStage: 'Stage', colRoute: 'Route', colWinner: 'Winner',
     profileDisclaimer: 'The elevation profiles are illustrative: the curve is built from the climb positions and is not GPS-measured data. Climbs and intermediate sprints are marked at their published kilometre point (some approximate). Climb categories (GPM) are shown only where the organiser published them — otherwise "—". Climb lengths and average gradients: cyclingstage.com. Stage winners: the Results tab.',
     disclaimerLabel: 'Unofficial fan project.',
     disclaimerText: 'This is an unofficial, non-commercial fan project, not affiliated with RCS Sport or the Giro d’Italia. Results remain the property of their respective owners.',
-    sourcesLabel: 'Sources:', sourcesText: 'Route, stages, distances and types: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Results: cyclinguptodate.com, giroditalia.it (cross-checked). Teams & riders: giroditalia.it/en/squadre — each rider’s position and gap are joined to giroditalia.it’s final general classification.',
+    sourcesLabel: 'Sources:', sourcesText: 'Route, stages, distances and types: en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Results: cyclinguptodate.com, giroditalia.it (cross-checked). Teams & riders: giroditalia.it/en/squadre — each rider’s position and gap are joined to giroditalia.it’s final general classification, withdrawals to the per-stage results.',
     footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with RCS Sport or the Giro d’Italia. Results remain the property of their respective owners.',
   },
   fr: {
@@ -463,12 +475,15 @@ const STRINGS = {
     teamsEmpty: 'La liste des coureurs n’a pas pu être chargée. Elle provient de data/giro2026-riders.json, généré par scripts/fetch_riders.py à partir des pages d’équipes de giroditalia.it. Si la page a été ouverte directement depuis le disque (file://), le navigateur ne peut pas lire ce fichier.',
     teamClsLine: (pos, val) => `Classement par équipes #${pos} · ${val}`,
     teamClsNone: 'Non classée au classement par équipes',
+    colTimeGap: 'Temps / écart',
+    riderOutOnStage: n => `Étape ${n}`,
     riderOutUnknown: 'Non classé',
+    dnfTitle: 'Abandon (DNF)',
     colStage: 'Étape', colRoute: 'Parcours', colWinner: 'Vainqueur',
     profileDisclaimer: 'Les profils sont illustratifs : la courbe est construite à partir de la position des ascensions et n’est pas mesurée au GPS. Ascensions et sprints intermédiaires sont placés à leur kilomètre publié (certains approximatifs). Les catégories (GPM) ne sont indiquées que lorsqu’elles ont été publiées par l’organisateur — sinon « — ». Longueurs et pentes moyennes : cyclingstage.com. Vainqueurs d’étape : onglet Classements.',
     disclaimerLabel: 'Projet de fans non officiel.',
     disclaimerText: 'Projet de fans non officiel et non commercial, sans lien avec RCS Sport ni le Giro d’Italia. Les résultats restent la propriété de leurs ayants droit.',
-    sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes, distances et types : en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Classements : cyclinguptodate.com, giroditalia.it (recoupés). Équipes & coureurs : giroditalia.it/en/squadre — la place et l’écart de chaque coureur proviennent du classement général final de giroditalia.it.',
+    sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes, distances et types : en.wikipedia.org/wiki/2026_Giro_d’Italia, cyclingstage.com/giro-2026-route. Classements : cyclinguptodate.com, giroditalia.it (recoupés). Équipes & coureurs : giroditalia.it/en/squadre — la place et l’écart de chaque coureur proviennent du classement général final de giroditalia.it, les abandons des résultats par étape.',
     footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec RCS Sport ni le Giro d’Italia. Les résultats restent la propriété de leurs détenteurs.',
   },
 };
@@ -1062,13 +1077,20 @@ function renderResults(){
    team-classification order. giroditalia.it publishes no bib numbers and no
    withdrawal list, so a rider who is not in the GC is shown simply as not
    having finished. */
+/* Same columns as the Tour page: place, rider, and one time column holding the
+   gap to the winner — the winner himself has no gap, so his total time is
+   shown instead. A rider who left the race gets a DNF badge in place of the
+   position and the stage he left it on. */
 function riderRow(r){
+  const who = riderCell({rider:r.name, nat:r.nat});
   if(!r.gcPos){
-    return `<tr class="out"><td class="pos">—</td><td>${riderCell({rider:r.name, nat:r.nat})}</td>
-      <td class="gap" colspan="2"><span class="out-badge">${esc(t('riderOutUnknown'))}</span></td></tr>`;
+    const stage = r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown');
+    return `<tr class="out">
+      <td class="pos"><span class="out-badge" title="${esc(t('dnfTitle'))}">${esc(r.status||'DNF')}</span></td>
+      <td>${who}</td><td class="gap">${esc(stage)}</td></tr>`;
   }
-  return `<tr${r.gcPos===1?' class="leader"':''}><td class="pos">${esc(r.gcPos)}</td><td>${riderCell({rider:r.name, nat:r.nat})}</td>
-    <td class="num">${esc(r.gcVal)}</td><td class="gap">${esc(r.gcGap||'—')}</td></tr>`;
+  return `<tr${r.gcPos===1?' class="leader"':''}><td class="pos">${esc(r.gcPos)}</td><td>${who}</td>
+    <td class="num">${esc(r.gcGap||r.gcVal)}</td></tr>`;
 }
 function teamCard(team){
   const title = team.url
@@ -1078,7 +1100,7 @@ function teamCard(team){
     team.gcPos ? t('teamClsLine')(team.gcPos, team.gcGap||team.gcVal) : t('teamClsNone'),
     team.nat || '',
   ].filter(Boolean).join(' · ');
-  const head = `<tr><th>${t('colPos')}</th><th>${t('colRider')}</th><th>${t('colTime')}</th><th>${t('colGap')}</th></tr>`;
+  const head = `<tr><th>${t('colPos')}</th><th>${t('colRider')}</th><th>${t('colTimeGap')}</th></tr>`;
   return `<div class="card"><div class="card__head">
       <span class="team-rank${team.gcPos===1?' first':''}">${esc(team.gcPos||'–')}</span>
       <div><div class="card__title">${title}</div><div class="card__sub">${esc(sub)}</div></div>

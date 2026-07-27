@@ -41,7 +41,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 4
     },
     {
      "bib": null,
@@ -476,7 +476,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 12
     },
     {
      "bib": null,
@@ -486,7 +486,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 8
     },
     {
      "bib": null,
@@ -536,7 +536,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 2
     },
     {
      "bib": null,
@@ -546,7 +546,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 17
     }
    ]
   },
@@ -567,7 +567,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 2
     },
     {
      "bib": null,
@@ -809,7 +809,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 12
     },
     {
      "bib": null,
@@ -850,7 +850,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 16
     },
     {
      "bib": null,
@@ -880,7 +880,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 6
     },
     {
      "bib": null,
@@ -910,7 +910,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 3
     }
    ]
   },
@@ -931,7 +931,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 11
     },
     {
      "bib": null,
@@ -951,7 +951,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 2
     },
     {
      "bib": null,
@@ -1001,7 +1001,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 11
     }
    ]
   },
@@ -1113,7 +1113,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 11
     },
     {
      "bib": null,
@@ -1163,7 +1163,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 14
     },
     {
      "bib": null,
@@ -1204,7 +1204,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 3
     },
     {
      "bib": null,
@@ -1244,7 +1244,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 19
     },
     {
      "bib": null,
@@ -1254,7 +1254,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 2
     },
     {
      "bib": null,
@@ -1274,7 +1274,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 2
     }
    ]
   },
@@ -1305,7 +1305,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 5
     },
     {
      "bib": null,
@@ -1345,7 +1345,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 19
     },
     {
      "bib": null,
@@ -1355,7 +1355,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 19
     },
     {
      "bib": null,
@@ -1436,7 +1436,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 8
     },
     {
      "bib": null,
@@ -1456,7 +1456,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 19
     }
    ]
   },
@@ -1659,7 +1659,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 4
     },
     {
      "bib": null,
@@ -1679,7 +1679,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 5
     },
     {
      "bib": null,
@@ -1699,7 +1699,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 5
     },
     {
      "bib": null,
@@ -1729,7 +1729,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 12
     }
    ]
   },
@@ -1760,7 +1760,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 5
     },
     {
      "bib": null,
@@ -1770,7 +1770,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 21
     },
     {
      "bib": null,
@@ -1911,7 +1911,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 15
     }
    ]
   },
@@ -1932,7 +1932,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 4
     },
     {
      "bib": null,
@@ -1972,7 +1972,7 @@
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": null
+     "statusStage": 11
     },
     {
      "bib": null,
@@ -2098,6 +2098,6 @@
    ]
   }
  ],
- "updated": "2026-07-27T08:00:24.187257+03:00",
- "updatedText": "Päivitetty 27.07.2026 klo 08.00 (Suomen aikaa)"
+ "updated": "2026-07-27T08:12:36.610897+03:00",
+ "updatedText": "Päivitetty 27.07.2026 klo 08.12 (Suomen aikaa)"
 }
