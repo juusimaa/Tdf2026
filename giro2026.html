@@ -247,7 +247,22 @@
     color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;
     padding:1px 7px;white-space:nowrap;
   }
-  table.cls tr.out .rider{font-weight:500;color:var(--ink-soft);}
+  /* Rider tables: bib, rider with the nationality stacked under the name,
+     final GC place, time/gap — the same columns as the Tour page. */
+  table.cls.riders td.bib{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--ink-soft);width:1%;white-space:nowrap;
+  }
+  table.cls.riders .nat{display:block;margin-left:0;margin-top:2px;}
+  table.cls.riders td.gcpos{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
+    text-align:right;width:1%;white-space:nowrap;
+  }
+  table.cls.riders tr.podium td.gcpos{color:var(--rosa-deep);}
+  table.cls.riders td.num{text-align:right;}
+  table.cls.riders th.is-text-right{text-align:right;}
+  table.cls.riders tr.out .rider{font-weight:500;color:var(--ink-soft);}
+  table.cls.riders tr.out td.num{color:var(--ink-soft);}
   table.stages-tbl td.route{color:var(--ink);}
   table.stages-tbl td.win{font-weight:600;}
   table.stages-tbl tr.pink td.win{color:var(--rosa-deep);}
@@ -371,7 +386,7 @@ const STRINGS = {
     teamsEmpty: 'Ajajalistaa ei saatu ladattua. Lista luetaan tiedostosta data/giro2026-riders.json, jonka scripts/fetch_riders.py kokoaa giroditalia.it:n joukkuesivuista. Jos avasit sivun suoraan levyltä (file://), selain ei voi lukea tiedostoa.',
     teamClsLine: (pos, val) => `Joukkuekilpailu #${pos} · ${val}`,
     teamClsNone: 'Ei sijoitusta joukkuekilpailussa',
-    colTimeGap: 'Aika / ero',
+    colBib: 'Nro', colGcPos: 'Sija', colGcTime: 'Aika / ero',
     riderOutOnStage: n => `Etapilla ${n}`,
     riderOutUnknown: 'Ei maalissa',
     dnfTitle: 'Keskeytti (DNF)',
@@ -423,7 +438,7 @@ const STRINGS = {
     teamsEmpty: 'The rider list could not be loaded. It is read from data/giro2026-riders.json, which scripts/fetch_riders.py builds from the giroditalia.it team pages. If you opened this page straight from disk (file://), the browser cannot read that file.',
     teamClsLine: (pos, val) => `Team classification #${pos} · ${val}`,
     teamClsNone: 'Not placed in the team classification',
-    colTimeGap: 'Time / gap',
+    colBib: 'No.', colGcPos: 'GC', colGcTime: 'Time / gap',
     riderOutOnStage: n => `On stage ${n}`,
     riderOutUnknown: 'Did not finish',
     dnfTitle: 'Abandoned (DNF)',
@@ -475,7 +490,7 @@ const STRINGS = {
     teamsEmpty: 'La liste des coureurs n’a pas pu être chargée. Elle provient de data/giro2026-riders.json, généré par scripts/fetch_riders.py à partir des pages d’équipes de giroditalia.it. Si la page a été ouverte directement depuis le disque (file://), le navigateur ne peut pas lire ce fichier.',
     teamClsLine: (pos, val) => `Classement par équipes #${pos} · ${val}`,
     teamClsNone: 'Non classée au classement par équipes',
-    colTimeGap: 'Temps / écart',
+    colBib: 'Dossard', colGcPos: 'Clt', colGcTime: 'Temps / écart',
     riderOutOnStage: n => `Étape ${n}`,
     riderOutUnknown: 'Non classé',
     dnfTitle: 'Abandon (DNF)',
@@ -1077,20 +1092,25 @@ function renderResults(){
    team-classification order. giroditalia.it publishes no bib numbers and no
    withdrawal list, so a rider who is not in the GC is shown simply as not
    having finished. */
-/* Same columns as the Tour page: place, rider, and one time column holding the
-   gap to the winner — the winner himself has no gap, so his total time is
-   shown instead. A rider who left the race gets a DNF badge in place of the
-   position and the stage he left it on. */
+/* Same four columns as the Tour page: bib, rider (nationality under the name),
+   final GC place, and one time column holding the gap to the winner — the
+   winner himself has no gap, so his total time is shown instead. A rider who
+   left the race gets a DNF badge in place of the place, and the stage he left
+   it on in place of the time. */
 function riderRow(r){
-  const who = riderCell({rider:r.name, nat:r.nat});
-  if(!r.gcPos){
-    const stage = r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown');
-    return `<tr class="out">
-      <td class="pos"><span class="out-badge" title="${esc(t('dnfTitle'))}">${esc(r.status||'DNF')}</span></td>
-      <td>${who}</td><td class="gap">${esc(stage)}</td></tr>`;
-  }
-  return `<tr${r.gcPos===1?' class="leader"':''}><td class="pos">${esc(r.gcPos)}</td><td>${who}</td>
-    <td class="num">${esc(r.gcGap||r.gcVal)}</td></tr>`;
+  const who = `<span class="rider">${esc(r.name)}</span>${r.nat?`<span class="nat">${esc(r.nat)}</span>`:''}`;
+  const out = !r.gcPos;
+  const place = out
+    ? `<span class="out-badge" title="${esc(t('dnfTitle'))}">${esc(r.status||'DNF')}</span>`
+    : esc(r.gcPos);
+  const time = out
+    ? (r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown'))
+    : (r.gcGap || r.gcVal);
+  return `<tr class="${out?'out':(r.gcPos<=3?'podium':'')}">
+    <td class="bib">${esc(r.bib||'')}</td>
+    <td>${who}</td>
+    <td class="gcpos">${place}</td>
+    <td class="num">${esc(time)}</td></tr>`;
 }
 function teamCard(team){
   const title = team.url
@@ -1100,11 +1120,12 @@ function teamCard(team){
     team.gcPos ? t('teamClsLine')(team.gcPos, team.gcGap||team.gcVal) : t('teamClsNone'),
     team.nat || '',
   ].filter(Boolean).join(' · ');
-  const head = `<tr><th>${t('colPos')}</th><th>${t('colRider')}</th><th>${t('colTimeGap')}</th></tr>`;
+  const head = `<tr><th>${t('colBib')}</th><th>${t('colRider')}</th>
+    <th class="is-text-right">${t('colGcPos')}</th><th class="is-text-right">${t('colGcTime')}</th></tr>`;
   return `<div class="card"><div class="card__head">
       <span class="team-rank${team.gcPos===1?' first':''}">${esc(team.gcPos||'–')}</span>
       <div><div class="card__title">${title}</div><div class="card__sub">${esc(sub)}</div></div>
-    </div><div class="tablewrap"><table class="cls"><thead>${head}</thead>
+    </div><div class="tablewrap"><table class="cls riders"><thead>${head}</thead>
       <tbody>${team.riders.map(riderRow).join('')}</tbody></table></div></div>`;
 }
 function renderTeams(){

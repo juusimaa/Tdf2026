@@ -14,7 +14,7 @@
    "gcGap": "",
    "riders": [
     {
-     "bib": null,
+     "bib": 171,
      "name": "Jonas VINGEGAARD",
      "nat": "DEN",
      "gcPos": 1,
@@ -24,7 +24,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 172,
      "name": "Victor CAMPENAERTS",
      "nat": "BEL",
      "gcPos": 43,
@@ -34,7 +34,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 173,
      "name": "Wilco KELDERMAN",
      "nat": "NED",
      "gcPos": null,
@@ -44,7 +44,7 @@
      "statusStage": 4
     },
     {
-     "bib": null,
+     "bib": 174,
      "name": "Timo KIELICH",
      "nat": "BEL",
      "gcPos": 119,
@@ -54,7 +54,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 175,
      "name": "Sepp KUSS",
      "nat": "USA",
      "gcPos": 13,
@@ -64,7 +64,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 176,
      "name": "Bart LEMMEN",
      "nat": "NED",
      "gcPos": 30,
@@ -74,7 +74,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 177,
      "name": "Davide PIGANZOLI",
      "nat": "ITA",
      "gcPos": 8,
@@ -84,7 +84,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 178,
      "name": "Tim REX",
      "nat": "BEL",
      "gcPos": 90,
@@ -105,7 +105,7 @@
    "gcGap": "+ 00h 40' 07''",
    "riders": [
     {
-     "bib": null,
+     "bib": 91,
      "name": "Egan BERNAL",
      "nat": "COL",
      "gcPos": 10,
@@ -115,7 +115,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 92,
      "name": "Thymen ARENSMAN",
      "nat": "NED",
      "gcPos": 4,
@@ -125,7 +125,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 93,
      "name": "Filippo GANNA",
      "nat": "ITA",
      "gcPos": 99,
@@ -135,7 +135,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 94,
      "name": "Jack HAIG",
      "nat": "AUS",
      "gcPos": 40,
@@ -145,7 +145,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 95,
      "name": "Magnus SHEFFIELD",
      "nat": "USA",
      "gcPos": 42,
@@ -155,7 +155,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 96,
      "name": "Embret SVESTAD-BAARDSENG",
      "nat": "NOR",
      "gcPos": 24,
@@ -165,7 +165,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 97,
      "name": "Connor SWIFT",
      "nat": "GBR",
      "gcPos": 77,
@@ -175,7 +175,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 98,
      "name": "Benjamin TURNER",
      "nat": "GBR",
      "gcPos": 76,
@@ -196,7 +196,7 @@
    "gcGap": "+ 00h 48' 27''",
    "riders": [
     {
-     "bib": null,
+     "bib": 121,
      "name": "Jai HINDLEY",
      "nat": "AUS",
      "gcPos": 3,
@@ -206,7 +206,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 122,
      "name": "Giovanni ALEOTTI",
      "nat": "ITA",
      "gcPos": 28,
@@ -216,7 +216,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 123,
      "name": "Nico DENZ",
      "nat": "GER",
      "gcPos": 121,
@@ -226,7 +226,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 124,
      "name": "Gianni MOSCON",
      "nat": "ITA",
      "gcPos": 74,
@@ -236,7 +236,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 125,
      "name": "Giulio PELLIZZARI",
      "nat": "ITA",
      "gcPos": 21,
@@ -246,7 +246,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 126,
      "name": "Mick VAN DIJKE",
      "nat": "NED",
      "gcPos": 75,
@@ -256,7 +256,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 127,
      "name": "Aleksandr VLASOV",
      "nat": "RUS",
      "gcPos": 25,
@@ -266,7 +266,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 128,
      "name": "Ben ZWIEHOFF",
      "nat": "GER",
      "gcPos": 31,
@@ -287,7 +287,7 @@
    "gcGap": "+ 01h 04' 27''",
    "riders": [
     {
-     "bib": null,
+     "bib": 181,
      "name": "Michael STORER",
      "nat": "AUS",
      "gcPos": 7,
@@ -297,7 +297,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 182,
      "name": "William BARTA",
      "nat": "USA",
      "gcPos": 36,
@@ -307,7 +307,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 183,
      "name": "Robin FROIDEVAUX",
      "nat": "SUI",
      "gcPos": 147,
@@ -317,7 +317,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 184,
      "name": "Fabian LIENHARD",
      "nat": "SUI",
      "gcPos": 146,
@@ -327,7 +327,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 185,
      "name": "Luca MOZZATO",
      "nat": "ITA",
      "gcPos": 142,
@@ -337,7 +337,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 186,
      "name": "Mathys RONDEL",
      "nat": "FRA",
      "gcPos": 11,
@@ -347,7 +347,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 187,
      "name": "Florian STORK",
      "nat": "GER",
      "gcPos": 39,
@@ -357,7 +357,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 188,
      "name": "Larry WARBASSE",
      "nat": "USA",
      "gcPos": 51,
@@ -378,7 +378,7 @@
    "gcGap": "+ 01h 24' 59''",
    "riders": [
     {
-     "bib": null,
+     "bib": 31,
      "name": "Felix GALL",
      "nat": "AUT",
      "gcPos": 2,
@@ -388,7 +388,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 32,
      "name": "Tobias LUND ANDRESEN",
      "nat": "DEN",
      "gcPos": 122,
@@ -398,7 +398,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 33,
      "name": "Tord GUDMESTAD",
      "nat": "NOR",
      "gcPos": 136,
@@ -408,7 +408,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 34,
      "name": "Gregor MUHLBERGER",
      "nat": "AUT",
      "gcPos": 15,
@@ -418,7 +418,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 35,
      "name": "Oliver NAESEN",
      "nat": "BEL",
      "gcPos": 78,
@@ -428,7 +428,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 36,
      "name": "Rasmus Søjberg PEDERSEN",
      "nat": "DEN",
      "gcPos": 113,
@@ -438,7 +438,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 37,
      "name": "Callum SCOTSON",
      "nat": "AUS",
      "gcPos": 33,
@@ -448,7 +448,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 38,
      "name": "Johannes STAUNE-MITTET",
      "nat": "NOR",
      "gcPos": 34,
@@ -469,7 +469,7 @@
    "gcGap": "+ 01h 56' 18''",
    "riders": [
     {
-     "bib": null,
+     "bib": 111,
      "name": "Sjoerd BAX",
      "nat": "NED",
      "gcPos": null,
@@ -479,7 +479,7 @@
      "statusStage": 12
     },
     {
-     "bib": null,
+     "bib": 112,
      "name": "Fabio CHRISTEN",
      "nat": "SUI",
      "gcPos": null,
@@ -489,7 +489,7 @@
      "statusStage": 8
     },
     {
-     "bib": null,
+     "bib": 113,
      "name": "David DE LA CRUZ",
      "nat": "ESP",
      "gcPos": 14,
@@ -499,7 +499,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 114,
      "name": "Mark DONOVAN",
      "nat": "GBR",
      "gcPos": 38,
@@ -509,7 +509,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 115,
      "name": "David GONZALEZ LOPEZ",
      "nat": "ESP",
      "gcPos": 100,
@@ -519,7 +519,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 116,
      "name": "Chris HARPER",
      "nat": "AUS",
      "gcPos": 17,
@@ -529,7 +529,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 117,
      "name": "Matteo MOSCHETTI",
      "nat": "ITA",
      "gcPos": null,
@@ -539,7 +539,7 @@
      "statusStage": 2
     },
     {
-     "bib": null,
+     "bib": 118,
      "name": "Nickolas ZUKOWSKY",
      "nat": "CAN",
      "gcPos": null,
@@ -560,7 +560,7 @@
    "gcGap": "+ 02h 13' 32''",
    "riders": [
     {
-     "bib": null,
+     "bib": 11,
      "name": "Santiago BUITRAGO",
      "nat": "COL",
      "gcPos": null,
@@ -570,7 +570,7 @@
      "statusStage": 2
     },
     {
-     "bib": null,
+     "bib": 12,
      "name": "Damiano CARUSO",
      "nat": "ITA",
      "gcPos": 9,
@@ -580,7 +580,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 13,
      "name": "Fran MIHOLJEVIC",
      "nat": "CRO",
      "gcPos": 96,
@@ -590,7 +590,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 14,
      "name": "Afonso Oliveira EULALIO",
      "nat": "POR",
      "gcPos": 6,
@@ -600,7 +600,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 15,
      "name": "Mathijs PAASSCHENS",
      "nat": "NED",
      "gcPos": 87,
@@ -610,7 +610,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 16,
      "name": "Alec SEGAERT",
      "nat": "BEL",
      "gcPos": 72,
@@ -620,7 +620,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 17,
      "name": "Robert STANNARD",
      "nat": "AUS",
      "gcPos": 104,
@@ -630,7 +630,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 18,
      "name": "Edoardo ZAMBANINI",
      "nat": "ITA",
      "gcPos": 45,
@@ -651,7 +651,7 @@
    "gcGap": "+ 03h 03' 21''",
    "riders": [
     {
-     "bib": null,
+     "bib": 61,
      "name": "Giulio CICCONE",
      "nat": "ITA",
      "gcPos": 20,
@@ -661,7 +661,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 62,
      "name": "Simone CONSONNI",
      "nat": "ITA",
      "gcPos": 150,
@@ -671,7 +671,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 63,
      "name": "Derek GEE",
      "nat": "CAN",
      "gcPos": 5,
@@ -681,7 +681,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 64,
      "name": "Amanuel GHEBREIGZABHIER",
      "nat": "ERI",
      "gcPos": 89,
@@ -691,7 +691,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 65,
      "name": "Jonathan MILAN",
      "nat": "ITA",
      "gcPos": 124,
@@ -701,7 +701,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 66,
      "name": "Matteo SOBRERO",
      "nat": "ITA",
      "gcPos": 54,
@@ -711,7 +711,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 67,
      "name": "Tim Torn TEUTENBERG",
      "nat": "GER",
      "gcPos": 137,
@@ -721,7 +721,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 68,
      "name": "Maximilian Richard WALSCHEID",
      "nat": "GER",
      "gcPos": 141,
@@ -742,7 +742,7 @@
    "gcGap": "+ 03h 05' 08''",
    "riders": [
     {
-     "bib": null,
+     "bib": 81,
      "name": "Enric MAS",
      "nat": "ESP",
      "gcPos": 32,
@@ -752,7 +752,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 82,
      "name": "Orluis Alberto AULAR SANABRIA",
      "nat": "VEN",
      "gcPos": 79,
@@ -762,7 +762,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 83,
      "name": "Ivan GARCIA CORTINA",
      "nat": "ESP",
      "gcPos": 114,
@@ -772,7 +772,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 84,
      "name": "Juan Pedro LOPEZ PEREZ",
      "nat": "ESP",
      "gcPos": 41,
@@ -782,7 +782,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 85,
      "name": "Lorenzo MILESI",
      "nat": "ITA",
      "gcPos": 49,
@@ -792,7 +792,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 86,
      "name": "Nélson OLIVEIRA",
      "nat": "POR",
      "gcPos": 66,
@@ -802,7 +802,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 87,
      "name": "Javier ROMO OLIVER",
      "nat": "ESP",
      "gcPos": null,
@@ -812,7 +812,7 @@
      "statusStage": 12
     },
     {
-     "bib": null,
+     "bib": 88,
      "name": "Einer RUBIO",
      "nat": "COL",
      "gcPos": 23,
@@ -833,7 +833,7 @@
    "gcGap": "+ 03h 23' 49''",
    "riders": [
     {
-     "bib": null,
+     "bib": 141,
      "name": "Ben O’CONNOR",
      "nat": "AUS",
      "gcPos": 16,
@@ -843,7 +843,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 142,
      "name": "Pascal ACKERMANN",
      "nat": "GER",
      "gcPos": null,
@@ -853,7 +853,7 @@
      "statusStage": 16
     },
     {
-     "bib": null,
+     "bib": 143,
      "name": "Koen BOUWMAN",
      "nat": "NED",
      "gcPos": 26,
@@ -863,7 +863,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 144,
      "name": "Robert DONALDSON",
      "nat": "GBR",
      "gcPos": 118,
@@ -873,7 +873,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 145,
      "name": "Felix ENGELHARDT",
      "nat": "GER",
      "gcPos": null,
@@ -883,7 +883,7 @@
      "statusStage": 6
     },
     {
-     "bib": null,
+     "bib": 146,
      "name": "Alan HATHERLY",
      "nat": "RSA",
      "gcPos": 48,
@@ -893,7 +893,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 147,
      "name": "Christopher JUUL JENSEN",
      "nat": "DEN",
      "gcPos": 86,
@@ -903,7 +903,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 148,
      "name": "Andrea VENDRAME",
      "nat": "ITA",
      "gcPos": null,
@@ -924,7 +924,7 @@
    "gcGap": "+ 04h 40' 08''",
    "riders": [
     {
-     "bib": null,
+     "bib": 211,
      "name": "Erlend Jordbrekk BLIKRA",
      "nat": "NOR",
      "gcPos": null,
@@ -934,7 +934,7 @@
      "statusStage": 11
     },
     {
-     "bib": null,
+     "bib": 212,
      "name": "Markus HOELGAARD",
      "nat": "NOR",
      "gcPos": 67,
@@ -944,7 +944,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 213,
      "name": "Ådne HOLTER",
      "nat": "NOR",
      "gcPos": null,
@@ -954,7 +954,7 @@
      "statusStage": 2
     },
     {
-     "bib": null,
+     "bib": 214,
      "name": "Johannes KULSET",
      "nat": "NOR",
      "gcPos": 18,
@@ -964,7 +964,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 215,
      "name": "Fredrik DVERSNES",
      "nat": "NOR",
      "gcPos": 112,
@@ -974,7 +974,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 216,
      "name": "Andreas LEKNESSUND",
      "nat": "NOR",
      "gcPos": 37,
@@ -984,7 +984,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 217,
      "name": "Sakarias Koller LØLAND",
      "nat": "NOR",
      "gcPos": 117,
@@ -994,7 +994,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 218,
      "name": "Martin TJØTTA",
      "nat": "NOR",
      "gcPos": null,
@@ -1015,7 +1015,7 @@
    "gcGap": "+ 05h 02' 03''",
    "riders": [
     {
-     "bib": null,
+     "bib": 161,
      "name": "Mattia BAIS",
      "nat": "ITA",
      "gcPos": 85,
@@ -1025,7 +1025,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 162,
      "name": "Ludovico CRESCIOLI",
      "nat": "ITA",
      "gcPos": 27,
@@ -1035,7 +1035,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 163,
      "name": "Giovanni LONARDI",
      "nat": "ITA",
      "gcPos": 133,
@@ -1045,7 +1045,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 164,
      "name": "Mirco MAESTRI",
      "nat": "ITA",
      "gcPos": 97,
@@ -1055,7 +1055,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 165,
      "name": "Andrea MIFSUD",
      "nat": "MLT",
      "gcPos": 69,
@@ -1065,7 +1065,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 166,
      "name": "Thomas PESENTI",
      "nat": "ITA",
      "gcPos": 71,
@@ -1075,7 +1075,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 167,
      "name": "Diego Pablo SEVILLA LOPEZ",
      "nat": "ESP",
      "gcPos": 94,
@@ -1085,7 +1085,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 168,
      "name": "Alessandro TONELLI",
      "nat": "ITA",
      "gcPos": 47,
@@ -1106,7 +1106,7 @@
    "gcGap": "+ 05h 41' 01''",
    "riders": [
     {
-     "bib": null,
+     "bib": 221,
      "name": "Davide BALLERINI",
      "nat": "ITA",
      "gcPos": null,
@@ -1116,7 +1116,7 @@
      "statusStage": 11
     },
     {
-     "bib": null,
+     "bib": 222,
      "name": "Alberto BETTIOL",
      "nat": "ITA",
      "gcPos": 63,
@@ -1126,7 +1126,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 223,
      "name": "Arjen LIVYNS",
      "nat": "BEL",
      "gcPos": 135,
@@ -1136,7 +1136,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 224,
      "name": "Harold Martin LOPEZ GRANIZO",
      "nat": "ECU",
      "gcPos": 50,
@@ -1146,7 +1146,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 225,
      "name": "Matteo MALUCELLI",
      "nat": "ITA",
      "gcPos": 151,
@@ -1156,7 +1156,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 226,
      "name": "Christian SCARONI",
      "nat": "ITA",
      "gcPos": null,
@@ -1166,7 +1166,7 @@
      "statusStage": 14
     },
     {
-     "bib": null,
+     "bib": 227,
      "name": "Guillermo Thomas SILVA COUSSAN",
      "nat": "URU",
      "gcPos": 65,
@@ -1176,7 +1176,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 228,
      "name": "Diego ULISSI",
      "nat": "ITA",
      "gcPos": 46,
@@ -1197,7 +1197,7 @@
    "gcGap": "+ 05h 56' 03''",
    "riders": [
     {
-     "bib": null,
+     "bib": 191,
      "name": "Adam YATES",
      "nat": "GBR",
      "gcPos": null,
@@ -1207,7 +1207,7 @@
      "statusStage": 3
     },
     {
-     "bib": null,
+     "bib": 192,
      "name": "Igor ARRIETA LIZARRAGA",
      "nat": "ESP",
      "gcPos": 19,
@@ -1217,7 +1217,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 193,
      "name": "Mikkel BJERG",
      "nat": "DEN",
      "gcPos": 102,
@@ -1227,7 +1227,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 194,
      "name": "Jan CHRISTEN",
      "nat": "SUI",
      "gcPos": 59,
@@ -1237,7 +1237,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 195,
      "name": "Jhonatan Manuel NARVAEZ PRADO",
      "nat": "ECU",
      "gcPos": null,
@@ -1247,7 +1247,7 @@
      "statusStage": 19
     },
     {
-     "bib": null,
+     "bib": 196,
      "name": "Marc SOLER GIMENEZ",
      "nat": "ESP",
      "gcPos": null,
@@ -1257,7 +1257,7 @@
      "statusStage": 2
     },
     {
-     "bib": null,
+     "bib": 197,
      "name": "Antonio Tomas MORGADO",
      "nat": "POR",
      "gcPos": 125,
@@ -1267,7 +1267,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 198,
      "name": "Jay VINE",
      "nat": "AUS",
      "gcPos": null,
@@ -1288,7 +1288,7 @@
    "gcGap": "+ 05h 59' 52''",
    "riders": [
     {
-     "bib": null,
+     "bib": 41,
      "name": "Jefferson Alexander CEPEDA",
      "nat": "ECU",
      "gcPos": 64,
@@ -1298,7 +1298,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 42,
      "name": "Samuele BATTISTELLA",
      "nat": "ITA",
      "gcPos": null,
@@ -1308,7 +1308,7 @@
      "statusStage": 5
     },
     {
-     "bib": null,
+     "bib": 43,
      "name": "Markel BELOKI FERNANDEZ",
      "nat": "ESP",
      "gcPos": 35,
@@ -1318,7 +1318,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 44,
      "name": "Madis MIHKELS",
      "nat": "EST",
      "gcPos": 111,
@@ -1328,7 +1328,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 45,
      "name": "Darren RAFFERTY",
      "nat": "IRL",
      "gcPos": 92,
@@ -1338,7 +1338,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 46,
      "name": "James SHAW",
      "nat": "GBR",
      "gcPos": null,
@@ -1348,7 +1348,7 @@
      "statusStage": 19
     },
     {
-     "bib": null,
+     "bib": 47,
      "name": "Michael VALGREN HUNDAHL (ANDERSEN)",
      "nat": "DEN",
      "gcPos": null,
@@ -1358,7 +1358,7 @@
      "statusStage": 19
     },
     {
-     "bib": null,
+     "bib": 48,
      "name": "Jardi Christiaan VAN DER LEE",
      "nat": "NED",
      "gcPos": 73,
@@ -1379,7 +1379,7 @@
    "gcGap": "+ 06h 10' 08''",
    "riders": [
     {
-     "bib": null,
+     "bib": 101,
      "name": "Alessandro PINARELLO",
      "nat": "ITA",
      "gcPos": 61,
@@ -1389,7 +1389,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 102,
      "name": "Jan HIRT",
      "nat": "CZE",
      "gcPos": 12,
@@ -1399,7 +1399,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 103,
      "name": "Ryan MULLEN",
      "nat": "IRL",
      "gcPos": 134,
@@ -1409,7 +1409,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 104,
      "name": "Nicholas SCHULTZ",
      "nat": "AUS",
      "gcPos": 62,
@@ -1419,7 +1419,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 105,
      "name": "Dion SMITH",
      "nat": "NZL",
      "gcPos": 123,
@@ -1429,7 +1429,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 106,
      "name": "Jake STEWART",
      "nat": "GBR",
      "gcPos": null,
@@ -1439,7 +1439,7 @@
      "statusStage": 8
     },
     {
-     "bib": null,
+     "bib": 107,
      "name": "Corbin STRONG",
      "nat": "NZL",
      "gcPos": 88,
@@ -1449,7 +1449,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 109,
      "name": "Ethan VERNON",
      "nat": "GBR",
      "gcPos": null,
@@ -1470,7 +1470,7 @@
    "gcGap": "+ 06h 11' 38''",
    "riders": [
     {
-     "bib": null,
+     "bib": 131,
      "name": "Paul MAGNIER",
      "nat": "FRA",
      "gcPos": 115,
@@ -1480,7 +1480,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 132,
      "name": "Ayco BASTIAENS",
      "nat": "BEL",
      "gcPos": 127,
@@ -1490,7 +1490,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 133,
      "name": "Gianmarco GAROFOLI",
      "nat": "ITA",
      "gcPos": 29,
@@ -1500,7 +1500,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 134,
      "name": "Andrea RACCAGNI NOVIERO",
      "nat": "ITA",
      "gcPos": 55,
@@ -1510,7 +1510,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 135,
      "name": "Jasper STUYVEN",
      "nat": "BEL",
      "gcPos": 70,
@@ -1520,7 +1520,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 136,
      "name": "Fabio VAN DEN BOSSCHE",
      "nat": "BEL",
      "gcPos": 105,
@@ -1530,7 +1530,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 137,
      "name": "Dries VAN GESTEL",
      "nat": "BEL",
      "gcPos": 131,
@@ -1540,7 +1540,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 138,
      "name": "Filippo ZANA",
      "nat": "ITA",
      "gcPos": 60,
@@ -1561,7 +1561,7 @@
    "gcGap": "+ 06h 12' 57''",
    "riders": [
     {
-     "bib": null,
+     "bib": 51,
      "name": "Rémi CAVAGNA",
      "nat": "FRA",
      "gcPos": 110,
@@ -1571,7 +1571,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 52,
      "name": "Cyril BARTHE",
      "nat": "FRA",
      "gcPos": 108,
@@ -1581,7 +1581,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 53,
      "name": "Axel HUENS",
      "nat": "FRA",
      "gcPos": 83,
@@ -1591,7 +1591,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 54,
      "name": "Johan JACOBS",
      "nat": "SUI",
      "gcPos": 93,
@@ -1601,7 +1601,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 55,
      "name": "Joshua KENCH",
      "nat": "NZL",
      "gcPos": 52,
@@ -1611,7 +1611,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 56,
      "name": "Paul PENHOET",
      "nat": "FRA",
      "gcPos": 128,
@@ -1621,7 +1621,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 57,
      "name": "Remy ROCHAS",
      "nat": "FRA",
      "gcPos": 53,
@@ -1631,7 +1631,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 58,
      "name": "Brieuc ROLLAND",
      "nat": "FRA",
      "gcPos": 56,
@@ -1652,7 +1652,7 @@
    "gcGap": "+ 06h 48' 48''",
    "riders": [
     {
-     "bib": null,
+     "bib": 71,
      "name": "Arnaud DE LIE",
      "nat": "BEL",
      "gcPos": null,
@@ -1662,7 +1662,7 @@
      "statusStage": 4
     },
     {
-     "bib": null,
+     "bib": 72,
      "name": "Toon AERTS",
      "nat": "BEL",
      "gcPos": 58,
@@ -1672,7 +1672,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 73,
      "name": "Joshua GIDDINGS",
      "nat": "GBR",
      "gcPos": null,
@@ -1682,7 +1682,7 @@
      "statusStage": 5
     },
     {
-     "bib": null,
+     "bib": 74,
      "name": "Simone GUALDI",
      "nat": "ITA",
      "gcPos": 44,
@@ -1692,7 +1692,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 75,
      "name": "Milan MENTEN",
      "nat": "BEL",
      "gcPos": null,
@@ -1702,7 +1702,7 @@
      "statusStage": 5
     },
     {
-     "bib": null,
+     "bib": 76,
      "name": "Lorenzo ROTA",
      "nat": "ITA",
      "gcPos": 68,
@@ -1712,7 +1712,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 77,
      "name": "Jonas RUTSCH",
      "nat": "GER",
      "gcPos": 106,
@@ -1722,7 +1722,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 78,
      "name": "Lennert VAN EETVELT",
      "nat": "BEL",
      "gcPos": null,
@@ -1743,7 +1743,7 @@
    "gcGap": "+ 10h 08' 25''",
    "riders": [
     {
-     "bib": null,
+     "bib": 151,
      "name": "Warren BARGUIL",
      "nat": "FRA",
      "gcPos": 57,
@@ -1753,7 +1753,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 152,
      "name": "Timo DE JONG",
      "nat": "NED",
      "gcPos": null,
@@ -1763,7 +1763,7 @@
      "statusStage": 5
     },
     {
-     "bib": null,
+     "bib": 153,
      "name": "Sean FLYNN",
      "nat": "GBR",
      "gcPos": null,
@@ -1773,7 +1773,7 @@
      "statusStage": 21
     },
     {
-     "bib": null,
+     "bib": 154,
      "name": "Christopher HAMILTON",
      "nat": "AUS",
      "gcPos": 84,
@@ -1783,7 +1783,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 155,
      "name": "Gijs LEEMREIZE",
      "nat": "NED",
      "gcPos": 95,
@@ -1793,7 +1793,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 156,
      "name": "Tim NABERMAN",
      "nat": "NED",
      "gcPos": 132,
@@ -1803,7 +1803,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 157,
      "name": "Frank VAN DEN BROEK",
      "nat": "NED",
      "gcPos": 149,
@@ -1813,7 +1813,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 158,
      "name": "Casper VAN UDEN",
      "nat": "NED",
      "gcPos": 126,
@@ -1834,7 +1834,7 @@
    "gcGap": "+ 10h 19' 41''",
    "riders": [
     {
-     "bib": null,
+     "bib": 21,
      "name": "Filippo MAGLI",
      "nat": "ITA",
      "gcPos": 116,
@@ -1844,7 +1844,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 22,
      "name": "Martin MARCELLUSI",
      "nat": "ITA",
      "gcPos": 120,
@@ -1854,7 +1854,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 23,
      "name": "Luca PALETTI",
      "nat": "ITA",
      "gcPos": 101,
@@ -1864,7 +1864,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 24,
      "name": "Vicente Rodrigo ROJAS NARANJO",
      "nat": "CHI",
      "gcPos": 103,
@@ -1874,7 +1874,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 25,
      "name": "Manuele TAROZZI",
      "nat": "ITA",
      "gcPos": 82,
@@ -1884,7 +1884,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 26,
      "name": "Nikita TSVETKOV",
      "nat": "UZB",
      "gcPos": 109,
@@ -1894,7 +1894,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 27,
      "name": "Filippo TURCONI",
      "nat": "ITA",
      "gcPos": 98,
@@ -1904,7 +1904,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 28,
      "name": "Enrico ZANONCELLO",
      "nat": "ITA",
      "gcPos": null,
@@ -1925,7 +1925,7 @@
    "gcGap": "+ 10h 32' 27''",
    "riders": [
     {
-     "bib": null,
+     "bib": 1,
      "name": "Kaden GROVES",
      "nat": "AUS",
      "gcPos": null,
@@ -1935,7 +1935,7 @@
      "statusStage": 4
     },
     {
-     "bib": null,
+     "bib": 2,
      "name": "Tobias BAYER",
      "nat": "AUT",
      "gcPos": 80,
@@ -1945,7 +1945,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 3,
      "name": "Francesco BUSATTO",
      "nat": "ITA",
      "gcPos": 81,
@@ -1955,7 +1955,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 4,
      "name": "Jonas GEENS",
      "nat": "BEL",
      "gcPos": 107,
@@ -1965,7 +1965,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 5,
      "name": "Edward PLANCKAERT",
      "nat": "BEL",
      "gcPos": null,
@@ -1975,7 +1975,7 @@
      "statusStage": 11
     },
     {
-     "bib": null,
+     "bib": 6,
      "name": "Jensen PLOWRIGHT",
      "nat": "AUS",
      "gcPos": 130,
@@ -1985,7 +1985,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 7,
      "name": "Johan PRICE-PEJTERSEN",
      "nat": "DEN",
      "gcPos": 140,
@@ -1995,7 +1995,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 8,
      "name": "Luca VERGALLITO",
      "nat": "ITA",
      "gcPos": 91,
@@ -2016,7 +2016,7 @@
    "gcGap": "+ 11h 05' 48''",
    "riders": [
     {
-     "bib": null,
+     "bib": 201,
      "name": "Dylan GROENEWEGEN",
      "nat": "NED",
      "gcPos": 148,
@@ -2026,7 +2026,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 202,
      "name": "Hartthijs DE VRIES",
      "nat": "NED",
      "gcPos": 145,
@@ -2036,7 +2036,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 203,
      "name": "Matyas KOPECKY",
      "nat": "CZE",
      "gcPos": 139,
@@ -2046,7 +2046,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 204,
      "name": "Tomas KOPECKY",
      "nat": "CZE",
      "gcPos": 143,
@@ -2056,7 +2056,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 205,
      "name": "Lukas KUBIS",
      "nat": "SVK",
      "gcPos": 138,
@@ -2066,7 +2066,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 206,
      "name": "Niklas LARSEN",
      "nat": "DEN",
      "gcPos": 129,
@@ -2076,7 +2076,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 207,
      "name": "Wout POELS",
      "nat": "NED",
      "gcPos": 22,
@@ -2086,7 +2086,7 @@
      "statusStage": null
     },
     {
-     "bib": null,
+     "bib": 208,
      "name": "Elmar REINDERS",
      "nat": "NED",
      "gcPos": 144,
@@ -2098,6 +2098,6 @@
    ]
   }
  ],
- "updated": "2026-07-27T08:12:36.610897+03:00",
- "updatedText": "Päivitetty 27.07.2026 klo 08.12 (Suomen aikaa)"
+ "updated": "2026-07-27T08:26:47.153185+03:00",
+ "updatedText": "Päivitetty 27.07.2026 klo 08.26 (Suomen aikaa)"
 }

@@ -12,10 +12,11 @@ Two sources, because the organisers' sites are unrelated:
   * "letour"  — letour.fr (Tour de France). Has bib numbers and a per-stage
                 withdrawal list, so non-finishers get a DNS/DNF/OTL reason and
                 the stage they left.
-  * "giro"    — giroditalia.it (Giro d'Italia, RCS). Publishes no bib numbers,
-                and its withdrawals sit one table per stage page rather than on
-                a single list, so riders carry no bib and every withdrawal is a
-                plain DNF (RCS gives no DNS/OTL reason) on a known stage.
+  * "giro"    — giroditalia.it (Giro d'Italia, RCS). Bib numbers are not
+                printed anywhere, but every rider link carries one as
+                data-destination="Rider/<bib>"; withdrawals sit one table per
+                stage page rather than on a single list, and come without a
+                reason, so each is reported as a plain DNF on a known stage.
 
 Unlike fetch_results.py this is not run on a schedule: the start list only
 changes when riders are added or drop out, and the joined GC data is final once
@@ -301,9 +302,13 @@ def write_riders(out: Path, teams: list, after_stage) -> int:
 # .line-table rows. CLGEN is the general classification and CLSQAGEN the
 # "Super Team" team classification.
 #
-# The site publishes no bib numbers, so riders are joined to the GC by their
-# athlete-page slug (/en/atleti/<slug>/, identical on the team pages, in the
-# rankings and in the withdrawal tables).
+# Riders are joined to the GC by their athlete-page slug (/en/atleti/<slug>/,
+# identical on the team pages, in the rankings and in the withdrawal tables).
+#
+# Bib numbers are never displayed, but every rider link carries one in its
+# data-destination="Rider/<n>" attribute: the values run 1-8 for the first
+# team, 11-18 for the second and so on up to 221-228, i.e. exactly the Giro's
+# race numbering, and each decade resolves to a single team.
 #
 # Withdrawals are not collected on one page as on letour.fr: each stage page
 # (/en/classifiche/di-tappa/N) carries its own "official withdrawals" table, so
@@ -349,27 +354,41 @@ def giro_ranking_rows(tree, code: str):
     return wrapper.css(".line-table") if wrapper else []
 
 
-def giro_withdrawals(base: str, last_stage: int):
+def collect_giro_bibs(tree, bibs: dict):
+    """Harvests {athlete slug: bib} from every rider link on an RCS page."""
+    for link in tree.css("a[data-destination]"):
+        href = link.attributes.get("href") or ""
+        m = re.fullmatch(r"Rider/(\d+)", link.attributes.get("data-destination") or "")
+        if m and "/atleti/" in href:
+            bibs.setdefault(url_slug(href), int(m.group(1)))
+
+
+def giro_stage_pages(base: str, last_stage: int):
     """
-    Walks the stage pages and collects their "official withdrawals" tables.
-    Returns {athlete slug: stage the rider left}; a failing stage page is
-    skipped with a warning rather than losing the whole start list.
+    Walks the stage pages for the two things only they carry: the "official
+    withdrawals" tables, and the bibs of riders who left the race (and so are
+    missing from the final rankings).
+
+    Returns ({athlete slug: stage the rider left}, {athlete slug: bib}); a
+    failing stage page is skipped with a warning rather than losing the whole
+    start list.
     """
-    out = {}
+    left, bibs = {}, {}
     for stage_no in range(1, (last_stage or 0) + 1):
         try:
             tree = HTMLParser(fetch(f"{base}/en/classifiche/di-tappa/{stage_no}/"))
         except Exception as e:
-            print(f"  warning: stage {stage_no} withdrawals: {e}")
+            print(f"  warning: stage {stage_no}: {e}")
             continue
+        collect_giro_bibs(tree, bibs)
         wrapper = tree.css_first("div.js-tab-ritirati-tappa")
         if wrapper is None:
             continue
         for row in wrapper.css(".line-table"):
             link = row.css_first(".atleta-info a")
             if link is not None:
-                out.setdefault(url_slug(link.attributes.get("href")), stage_no)
-    return out
+                left.setdefault(url_slug(link.attributes.get("href")), stage_no)
+    return left, bibs
 
 
 def parse_giro_roster(html: str):
@@ -414,9 +433,10 @@ def fetch_giro(base: str, out: Path) -> int:
         print("The team list has not been published yet.")
         return 0
 
-    gc, team_gc, after_stage = {}, {}, None
+    gc, team_gc, bibs, after_stage = {}, {}, {}, None
     try:
         tree = HTMLParser(fetch(f"{base}/en/classifiche/"))
+        collect_giro_bibs(tree, bibs)
         for row in giro_ranking_rows(tree, GIRO_GC_CODE):
             pos = row.css_first(".position")
             link = row.css_first(".atleta-info a")
@@ -445,7 +465,9 @@ def fetch_giro(base: str, out: Path) -> int:
     except Exception as e:
         print(f"  warning: fetching the classifications failed: {e}")
 
-    left = giro_withdrawals(base, after_stage)
+    left, stage_bibs = giro_stage_pages(base, after_stage)
+    for slug, bib in stage_bibs.items():
+        bibs.setdefault(slug, bib)
 
     teams = []
     for card in cards:
@@ -462,7 +484,7 @@ def fetch_giro(base: str, out: Path) -> int:
         for r in roster:
             placing = gc.get(r["slug"])
             riders.append({
-                "bib": None,  # RCS does not publish bib numbers
+                "bib": bibs.get(r["slug"]),
                 "name": r["name"],
                 "nat": r["nat"],
                 "gcPos": placing["pos"] if placing else None,
@@ -471,6 +493,10 @@ def fetch_giro(base: str, out: Path) -> int:
                 "status": "" if placing else "DNF",
                 "statusStage": None if placing else left.get(r["slug"]),
             })
+        # Team pages list the squad in their own order; bib order is the start
+        # list's, and the one the pages show. Riders without a bib (never seen
+        # in a ranking or withdrawal table) keep their team-page position.
+        riders.sort(key=lambda r: (r["bib"] is None, r["bib"] or 0))
 
         entry = team_gc.get(url_slug(url), {})
         teams.append({

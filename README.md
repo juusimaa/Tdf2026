@@ -77,11 +77,14 @@ sites publish very different things, so the script has one handler per source:
   who left the race therefore carries a DNS/DNF/OTL reason and the stage.
 - **giroditalia.it** (`giro2026`) — teams from `/en/squadre/` and their rosters
   from each team page, joined to the final classifications **by athlete-page
-  slug**. RCS publishes no bib numbers, and its withdrawals are one table per
-  stage page instead of a single list, so the script walks the stage pages to
-  find the stage each rider left; without a published reason they are all
-  reported as DNF. Times are restated from `83:22:51` into the same
-  `83h 22' 51''` form the Tour data uses.
+  slug**. RCS never prints bib numbers, but every rider link carries one as
+  `data-destination="Rider/<bib>"` (1–8 for the first team, 11–18 for the
+  second, … 221–228 — the Giro's own numbering), so the riders still get bibs
+  and are listed in start-list order. Withdrawals are one table per stage page
+  instead of a single list, so the script walks the stage pages to find the
+  stage each rider left; without a published reason they are all reported as
+  DNF. Times are restated from `83:22:51` into the same `83h 22' 51''` form the
+  Tour data uses.
 
 The script is deliberately **not** part of the workflow: a start list changes
 only when riders drop out, so it is run by hand when the data needs a refresh.
