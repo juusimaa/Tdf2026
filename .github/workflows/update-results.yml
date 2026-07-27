@@ -1,14 +1,10 @@
 name: Update results and publish
 
 on:
-  schedule:
-    # GitHub Actions ALWAYS uses UTC. Stages typically finish around
-    # 14:00–18:00 UTC. Run every 30 min from 14:00–20:00 UTC in July
-    # = 17:00–23:00 Finnish time (summer time, UTC+3).
-    - cron: '*/30 14-20 * 7 *'
-    # Light safety run in the morning in case of late-recorded corrections.
-    - cron: '15 6 * 7 *'
-  # Also redeploy whenever something is pushed to main (e.g. a hand-edited index.html).
+  # The 2026 Tour de France is over, so there is nothing left to poll on a
+  # schedule — the scheduled runs were removed. Re-add a `schedule:` block
+  # here when the next race that fetch_results.py can scrape starts.
+  # Redeploy whenever something is pushed to main (e.g. a hand-edited index.html).
   push:
     branches: [main]
   # Manual trigger from the Actions tab (for testing).
