@@ -3,200 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9ECE4">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12160F">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f3f2f2">
 <title>Grand Tours 2026</title>
-<meta name="description" content="Grand Tours 2026 — valitse kilpailu: Tour de France, Giro d'Italia ja Vuelta a España. · Pick a Grand Tour: routes, profiles and live results.">
+<meta name="description" content="Grand Tours 2026 — valitse kilpailu: Giro d'Italia, Tour de France, Vuelta a España ja Tour de France Femmes. · Pick a Grand Tour: routes, profiles and live results.">
 <link rel="canonical" href="https://juusimaa.github.io/Tdf2026/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Grand Tours 2026">
 <meta property="og:title" content="Grand Tours 2026">
-<meta property="og:description" content="Pick a Grand Tour: Tour de France, Giro d'Italia and Vuelta a España.">
+<meta property="og:description" content="Pick a Grand Tour: Giro d'Italia, Tour de France, Vuelta a España and Tour de France Femmes.">
 <meta property="og:url" content="https://juusimaa.github.io/Tdf2026/">
 <meta property="og:locale" content="fi_FI">
 <meta property="og:locale:alternate" content="en_GB">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Grand Tours 2026">
-<meta name="twitter:description" content="Pick a Grand Tour: Tour de France, Giro d'Italia and Vuelta a España.">
+<meta name="twitter:description" content="Pick a Grand Tour: Giro d'Italia, Tour de France, Vuelta a España and Tour de France Femmes.">
 
 <!-- Favicon: on-theme emblem (gold elevation profile + red KOM dot). -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Shared colour theme (light + dark palettes, flag-stripe classes). -->
-<link rel="stylesheet" href="theme.css">
+<!-- Modernist design tokens (Grand Tours hub only — see design_handoff_grand_tours_hub/). -->
+<link rel="stylesheet" href="modernist.css">
 <style>
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;
-    min-height:100vh;
-  }
-  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+  html,body{margin:0;padding:0;min-height:100vh;}
 
-  header.top{
-    display:flex;flex-direction:column;gap:6px;
-    padding-bottom:22px;margin-bottom:30px;
-    border-bottom:3px solid var(--ink);
+  .gt-header{
+    display:flex;align-items:stretch;justify-content:space-between;
+    border-bottom:2px solid var(--color-divider);
   }
-  .top-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--ink-soft);
+  .gt-brand{
+    padding:var(--space-4) clamp(20px,4vw,48px);
+    font-family:var(--font-heading);font-weight:700;font-size:15px;
+    letter-spacing:.14em;text-transform:uppercase;
   }
-  .langsel{display:flex;gap:0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;}
-  .langsel button{
-    background:transparent;border:1px solid var(--line);
-    padding:4px 10px;cursor:pointer;color:var(--ink-soft);
+  .gt-langs{display:flex;border-left:2px solid var(--color-divider);}
+  .langbtn{
+    font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.14em;
+    min-width:56px;padding:0 18px;border:0;border-left:2px solid var(--color-divider);
+    cursor:pointer;background:transparent;color:var(--color-neutral-700);
+    transition:background .15s ease;
   }
-  .langsel button:first-child{border-radius:2px 0 0 2px;}
-  .langsel button:last-child{border-radius:0 2px 2px 0;}
-  .langsel button:not(:first-child){border-left:none;}
-  .langsel button.active{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--solid-bg);}
-  .langsel button:hover:not(.active){color:var(--ink);}
-  h1{
-    font-family:'Oswald',sans-serif;
-    font-weight:700;
-    font-size:clamp(30px,6vw,54px);
-    letter-spacing:.01em;
-    text-transform:uppercase;
-    margin:4px 0 4px;
-    line-height:1.02;
+  .gt-langs .langbtn:first-child{border-left:0;}
+  .langbtn:hover{background:var(--color-accent-100);}
+  .langbtn.active{background:var(--color-accent);color:#fff;}
+  .langbtn.active:hover{background:var(--color-accent);}
+
+  .gt-hero{
+    padding:clamp(36px,7vw,88px) clamp(20px,4vw,48px) clamp(28px,5vw,56px);
+    border-bottom:2px solid var(--color-divider);
+    display:flex;flex-direction:column;gap:var(--space-4);
   }
-  .sub{
-    font-size:clamp(14px,2vw,16px);
-    color:var(--ink-soft);
-    max-width:62ch;line-height:1.5;
+  .kicker{
+    font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--color-accent-700);
+  }
+  .gt-hero h1{
+    font-family:var(--font-heading);font-weight:700;
+    font-size:clamp(44px,10vw,116px);line-height:.9;letter-spacing:-.03em;
+    margin:0;text-transform:uppercase;
+  }
+  .lede{
+    max-width:46ch;font-size:clamp(16px,1.6vw,19px);line-height:1.45;
+    color:var(--color-neutral-700);margin:0;text-wrap:pretty;
   }
 
-  .tours{
-    list-style:none;margin:0;padding:0;
-    display:grid;gap:18px;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  .grid{display:grid;grid-template-columns:1fr 1fr;}
+  @media (max-width:860px){ .grid{grid-template-columns:1fr;} }
+
+  .race{
+    display:flex;flex-direction:column;gap:var(--space-4);
+    min-height:clamp(220px,26vw,300px);
+    padding:clamp(22px,3.2vw,40px) clamp(20px,4vw,48px);
+    color:var(--color-text);text-decoration:none;
+    transition:background .15s ease;
   }
-  .tourcard{
-    position:relative;display:flex;flex-direction:column;gap:6px;
-    background:var(--paper-panel);
-    border:1px solid var(--line);border-radius:12px;
-    padding:22px 22px 20px;
-    text-decoration:none;color:inherit;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  .race:nth-child(1),.race:nth-child(3){border-right:2px solid var(--color-divider);}
+  .race:nth-child(1),.race:nth-child(2){border-bottom:2px solid var(--color-divider);}
+  .race:hover{background:var(--color-accent-100);}
+  .race:hover .arrow{transform:translateX(8px);}
+  .race:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
+
+  .race-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);}
+  .race-num{
+    font-family:var(--font-heading);font-size:13px;font-weight:700;
+    letter-spacing:.14em;color:var(--color-neutral-600);
   }
-  .tourcard::before{
-    content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
-    background:var(--accent, var(--gold));
-  }
-  .tourcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--accent,var(--gold));}
-  .tourcard:focus-visible{outline:2px solid var(--accent,var(--gold));outline-offset:3px;}
-  .tour-tld{
-    align-self:flex-start;
-    font-family:'JetBrains Mono',monospace;font-size:10px;
-    letter-spacing:.12em;text-transform:uppercase;
-    color:#fff;background:var(--accent,var(--gold));
-    padding:3px 8px;border-radius:20px;margin-bottom:6px;
-  }
-  .tour-name{
-    font-family:'Oswald',sans-serif;font-weight:600;
-    font-size:26px;line-height:1.05;text-transform:uppercase;letter-spacing:.01em;
-  }
-  /* Flag-striped tour names: colours come from theme.css (.fr-*, .it-*,
-     .es-*, .fs-w). */
-  .tour-dates{
-    font-family:'JetBrains Mono',monospace;font-size:12px;
-    color:var(--ink-soft);letter-spacing:.03em;
-  }
-  .tour-desc{font-size:14px;color:var(--ink-soft);margin-top:8px;line-height:1.45;}
-  .tour-cta{
-    display:inline-flex;align-items:center;gap:6px;margin-top:14px;
-    font-family:'JetBrains Mono',monospace;font-size:11px;
-    letter-spacing:.1em;text-transform:uppercase;
-    color:var(--ink);
-  }
-  .tour-cta svg{width:14px;height:14px;}
-  .tourcard.soon .tour-cta{color:var(--ink-soft);}
-  .badge-soon{
-    position:absolute;top:16px;right:16px;
-    font-family:'JetBrains Mono',monospace;font-size:10px;
-    letter-spacing:.08em;text-transform:uppercase;
-    color:var(--ink-soft);border:1px solid var(--line);
-    padding:2px 8px;border-radius:20px;
+  .race-country{
+    font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--color-neutral-600);
   }
 
-  footer{
-    margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
-    font-size:12px;color:var(--ink-soft);line-height:1.5;
+  .flagstripe{display:flex;height:10px;width:120px;}
+  .flagstripe span{flex:1;}
+
+  .race h2{
+    font-family:var(--font-heading);font-weight:700;
+    font-size:clamp(24px,3.2vw,40px);line-height:1;letter-spacing:-.02em;
+    margin:0;text-transform:uppercase;max-width:14ch;
+  }
+
+  .race-cta{
+    display:flex;align-items:center;gap:10px;
+    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--color-accent-700);margin-top:auto;
+  }
+  .arrow{display:inline-block;transition:transform .18s ease;}
+
+  .gt-footer{
+    display:flex;flex-wrap:wrap;gap:var(--space-4);justify-content:space-between;
+    padding:var(--space-4) clamp(20px,4vw,48px);
+    border-top:2px solid var(--color-divider);
+    font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--color-neutral-600);
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="top-row">
-      <div class="eyebrow" id="eyebrow"></div>
-      <div class="langsel" id="langSel" role="group" aria-label="Kieli / Language">
-        <button data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
-        <button data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
-        <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
-      </div>
+<header class="gt-header">
+  <div class="gt-brand">Grand Tours &rsquo;26</div>
+  <div class="gt-langs" id="langSel" role="group" aria-label="Kieli / Language">
+    <button class="langbtn" data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+    <button class="langbtn" data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
+    <button class="langbtn" data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<section class="gt-hero">
+  <span class="kicker" id="kicker"></span>
+  <h1 id="heroTitle">Grand Tours</h1>
+  <p class="lede" id="lede"></p>
+</section>
+
+<!-- Cells in the order the design specifies: Giro, Tour, Vuelta, Femmes. -->
+<div class="grid">
+  <a class="race" href="giro2026.html">
+    <div class="race-top">
+      <span class="race-num">01</span>
+      <span class="race-country" id="c-giro"></span>
     </div>
-    <h1>Grand Tours</h1>
-    <div class="sub" id="subDesc"></div>
-  </header>
-
-  <!-- Cards in chronological race order: Giro (May), Tour (July), Vuelta (Aug–Sep). -->
-  <ul class="tours" id="tourList" aria-label="Grand Tours 2026">
-    <li>
-      <a class="tourcard" href="giro2026.html" style="--accent:var(--pink)">
-        <span class="tour-tld">ITA</span>
-        <span class="tour-name"><span class="it-g">Giro</span><span class="fs-w"> d'It</span><span class="it-r">alia</span></span>
-        <span class="tour-dates" id="giroDates"></span>
-        <span class="tour-desc" id="giroDesc"></span>
-        <span class="tour-cta"><span id="giroCta"></span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </span>
-      </a>
-    </li>
-    <li>
-      <a class="tourcard" href="tdf2026.html" style="--accent:var(--gold)">
-        <span class="tour-tld">FRA</span>
-        <span class="tour-name"><span class="fr-b">Tour</span><span class="fs-w"> de Fr</span><span class="fr-r">ance</span></span>
-        <span class="tour-dates" id="tdfDates"></span>
-        <span class="tour-desc" id="tdfDesc"></span>
-        <span class="tour-cta"><span id="tdfCta"></span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </span>
-      </a>
-    </li>
-    <li>
-      <a class="tourcard" href="vuelta2026.html" style="--accent:var(--red)">
-        <span class="tour-tld">ESP</span>
-        <span class="tour-name"><span class="es-r">Vue</span><span class="es-y">lta a Esp</span><span class="es-r">aña</span></span>
-        <span class="tour-dates" id="vueltaDates"></span>
-        <span class="tour-desc" id="vueltaDesc"></span>
-        <span class="tour-cta"><span id="vueltaCta"></span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </span>
-      </a>
-    </li>
-  </ul>
-
-  <footer id="footerNote"></footer>
+    <div class="flagstripe"><span style="background:#008c45"></span><span style="background:#ffffff"></span><span style="background:#ce2b37"></span></div>
+    <h2>Giro d&rsquo;Italia</h2>
+    <span class="race-cta"><span id="cta-giro"></span><span class="arrow">→</span></span>
+  </a>
+  <a class="race" href="tdf2026.html">
+    <div class="race-top">
+      <span class="race-num">02</span>
+      <span class="race-country" id="c-tdf"></span>
+    </div>
+    <div class="flagstripe"><span style="background:#0055a4"></span><span style="background:#ffffff"></span><span style="background:#ef4135"></span></div>
+    <h2>Tour de France</h2>
+    <span class="race-cta"><span id="cta-tdf"></span><span class="arrow">→</span></span>
+  </a>
+  <a class="race" href="vuelta2026.html">
+    <div class="race-top">
+      <span class="race-num">03</span>
+      <span class="race-country" id="c-vuelta"></span>
+    </div>
+    <div class="flagstripe"><span style="background:#c60b1e"></span><span style="background:#ffc400"></span><span style="background:#c60b1e"></span></div>
+    <h2>Vuelta a España</h2>
+    <span class="race-cta"><span id="cta-vuelta"></span><span class="arrow">→</span></span>
+  </a>
+  <a class="race" href="femmes2026.html">
+    <div class="race-top">
+      <span class="race-num">04</span>
+      <span class="race-country" id="c-femmes"></span>
+    </div>
+    <div class="flagstripe"><span style="background:#0055a4"></span><span style="background:#ffffff"></span><span style="background:#ef4135"></span></div>
+    <h2>Tour de France Femmes</h2>
+    <span class="race-cta"><span id="cta-femmes"></span><span class="arrow">→</span></span>
+  </a>
 </div>
+
+<footer class="gt-footer">
+  <span id="footerNote"></span>
+  <span>2026</span>
+</footer>
 
 <script>
 /* Language preference is shared with the individual tour pages via the same
@@ -205,43 +192,28 @@ const LANG_KEY = 'tdf2026-lang';
 
 const STRINGS = {
   fi: {
-    eyebrow: 'Kausi 2026 · Grand tourit',
-    subDesc: 'Valitse kilpailu. Kaikki kolme grand touria ovat avoinna — Vuelta a España ennakkona ennen kisan alkua.',
-    tdfDates: '4.–26. heinäkuuta 2026',
-    tdfDesc: 'Kaikki 21 etappia, profiilit ja lopulliset luokitukset — Pogačar voitti.',
-    giroDates: '8.–31. toukokuuta 2026',
-    giroDesc: 'Kaikki 21 etappia, profiilit ja lopulliset luokitukset — Vingegaard voitti.',
-    vueltaDates: '22.8.–13.9.2026',
-    vueltaDesc: 'Kaikki 21 etappia, reitit ja profiilit — ennakko (kisa ei ole vielä alkanut).',
-    open: 'Avaa',
-    soon: 'Tulossa',
-    footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon, RCS Sportiin, Unipublic’iin tai näiden kilpailuihin. Tulokset: letour.fr, procyclingstats.com.',
+    kicker: 'Kausi 2026',
+    title: 'Grand Tours',
+    lede: 'Valitse kilpailu: reitit, profiilit ja tulokset kolmelta suurkierrokselta sekä naisten Tour de Francelta.',
+    view: 'Avaa',
+    footer: 'Reitit · Profiilit · Tulokset',
+    countries: { giro: 'Italia', tdf: 'Ranska', vuelta: 'Espanja', femmes: 'Ranska' },
   },
   en: {
-    eyebrow: '2026 season · Grand Tours',
-    subDesc: 'Pick a race. All three Grand Tours are available — the Vuelta a España as a preview ahead of the race.',
-    tdfDates: '4–26 July 2026',
-    tdfDesc: 'All 21 stages, profiles and final classifications — Pogačar wins.',
-    giroDates: '8–31 May 2026',
-    giroDesc: 'All 21 stages, profiles and final classifications — Vingegaard wins.',
-    vueltaDates: '22 Aug – 13 Sep 2026',
-    vueltaDesc: 'All 21 stages, routes and profiles — preview (race has not started yet).',
-    open: 'Open',
-    soon: 'Coming soon',
-    footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O., RCS Sport, Unipublic, or these races. Results: letour.fr, procyclingstats.com.',
+    kicker: '2026 season',
+    title: 'Grand Tours',
+    lede: 'Pick a race: routes, stage profiles and results from the three grand tours — plus the Tour de France Femmes.',
+    view: 'Open',
+    footer: 'Routes · Profiles · Results',
+    countries: { giro: 'Italy', tdf: 'France', vuelta: 'Spain', femmes: 'France' },
   },
   fr: {
-    eyebrow: 'Saison 2026 · Grands Tours',
-    subDesc: 'Choisissez une course. Les trois Grands Tours sont disponibles — la Vuelta a España en avant-première avant la course.',
-    tdfDates: '4–26 juillet 2026',
-    tdfDesc: 'Les 21 étapes, profils et classements finals — victoire de Pogačar.',
-    giroDates: '8–31 mai 2026',
-    giroDesc: 'Les 21 étapes, profils et classements finals — victoire de Vingegaard.',
-    vueltaDates: '22 août – 13 sept. 2026',
-    vueltaDesc: 'Les 21 étapes, parcours et profils — avant-première (la course n’a pas commencé).',
-    open: 'Ouvrir',
-    soon: 'Bientôt',
-    footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec A.S.O., RCS Sport, Unipublic ou ces courses. Résultats : letour.fr, procyclingstats.com.',
+    kicker: 'Saison 2026',
+    title: 'Grands Tours',
+    lede: 'Choisissez votre course : parcours, profils et résultats des trois grands tours et du Tour de France Femmes.',
+    view: 'Ouvrir',
+    footer: 'Parcours · Profils · Résultats',
+    countries: { giro: 'Italie', tdf: 'France', vuelta: 'Espagne', femmes: 'France' },
   },
 };
 
@@ -260,19 +232,21 @@ function t(key){
 }
 
 function render(){
-  document.getElementById('eyebrow').textContent = t('eyebrow');
-  document.getElementById('subDesc').textContent = t('subDesc');
-  document.getElementById('tdfDates').textContent = t('tdfDates');
-  document.getElementById('tdfDesc').textContent = t('tdfDesc');
-  document.getElementById('tdfCta').textContent = t('open');
-  document.getElementById('giroDates').textContent = t('giroDates');
-  document.getElementById('giroDesc').textContent = t('giroDesc');
-  document.getElementById('giroCta').textContent = t('open');
-  document.getElementById('vueltaDates').textContent = t('vueltaDates');
-  document.getElementById('vueltaDesc').textContent = t('vueltaDesc');
-  document.getElementById('vueltaCta').textContent = t('open');
-  document.getElementById('footerNote').textContent = t('footerNote');
-  document.querySelectorAll('#langSel button').forEach(b=>{
+  document.getElementById('kicker').textContent = t('kicker');
+  document.getElementById('heroTitle').textContent = t('title');
+  document.getElementById('lede').textContent = t('lede');
+  document.getElementById('footerNote').textContent = t('footer');
+  const countries = STRINGS[lang].countries;
+  document.getElementById('c-giro').textContent = countries.giro;
+  document.getElementById('c-tdf').textContent = countries.tdf;
+  document.getElementById('c-vuelta').textContent = countries.vuelta;
+  document.getElementById('c-femmes').textContent = countries.femmes;
+  const view = t('view');
+  document.getElementById('cta-giro').textContent = view;
+  document.getElementById('cta-tdf').textContent = view;
+  document.getElementById('cta-vuelta').textContent = view;
+  document.getElementById('cta-femmes').textContent = view;
+  document.querySelectorAll('#langSel .langbtn').forEach(b=>{
     const active = b.dataset.lang===lang;
     b.classList.toggle('active', active);
     b.setAttribute('aria-pressed', active ? 'true' : 'false');
@@ -280,7 +254,7 @@ function render(){
   document.documentElement.lang = lang;
 }
 
-document.querySelectorAll('#langSel button').forEach(btn=>{
+document.querySelectorAll('#langSel .langbtn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     lang = btn.dataset.lang;
     localStorage.setItem(LANG_KEY, lang);
