@@ -1,8 +1,9 @@
 /* ============================================================================
-   Modernist — design tokens for the Grand Tours hub page (index.html).
-   Ported from design_handoff_grand_tours_hub/design/modernist-styles.css.
-   Scoped to index.html only: the three tour pages keep their own look via
-   theme.css. Font is loaded via a <link> in index.html's <head>, not @import.
+   Modernist — design tokens for the Grand Tours "Modernist" pages
+   (index.html, tdf2026.html). Ported from design_handoff_grand_tours_hub/ and
+   design_handoff_tdf2026/ (design/modernist-styles.css, identical in both).
+   Scoped to these pages only: giro2026.html and vuelta2026.html keep the
+   older look via theme.css until they're ported too.
    ============================================================================ */
 
 :root{
@@ -12,16 +13,35 @@
   --color-accent:#ec3013;
   --color-divider:color-mix(in srgb, #201e1d 40%, transparent);
 
+  --color-neutral-100:#f8f4f4;
+  --color-neutral-200:#eae7e7;
+  --color-neutral-300:#d7d3d3;
+  --color-neutral-400:#bab6b6;
+  --color-neutral-500:#9b9797;
   --color-neutral-600:#7d7979;
   --color-neutral-700:#605d5d;
+  --color-neutral-800:#444141;
+  --color-neutral-900:#2d2b2b;
 
   --color-accent-100:#fff2ef;
+  --color-accent-200:#ffe0d9;
+  --color-accent-300:#ffc4b8;
+  --color-accent-400:#ff9783;
+  --color-accent-500:#ff563c;
+  --color-accent-600:#dd2b0f;
   --color-accent-700:#ae1800;
+  --color-accent-800:#7c1405;
+  --color-accent-900:#4d170e;
 
   --font-heading:"Archivo", system-ui, sans-serif;
   --font-body:"Archivo", system-ui, sans-serif;
 
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
   --space-4:16px;
+  --space-6:24px;
+  --space-8:32px;
 
   --radius-sm:0px;
   --radius-md:0px;

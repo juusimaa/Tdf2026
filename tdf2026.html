@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9ECE4">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12160F">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f3f2f2">
 <title>Tour de France 2026 — reitit, profiilit & tulokset</title>
 <meta name="description" content="Interaktiivinen roadbook Tour de France 2026 -kilpailuun: kaikki 21 etappia, reitit, korkeusprofiilit, mäkipisteet (KOM), kirisprintit sekä päivittyvät tulokset. 4.–26.7.2026. · Interactive roadbook for the 2026 Tour de France.">
 <link rel="canonical" href="https://juusimaa.github.io/Tdf2026/tdf2026.html">
 
-<!-- Social sharing (Open Graph / Twitter). No image for now — the card
-     renders as text. To add an image, add a PNG and an og:image tag. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tour de France 2026">
 <meta property="og:title" content="Tour de France 2026 — reitit, profiilit & tulokset">
@@ -24,420 +21,233 @@
 <meta name="twitter:title" content="Tour de France 2026 — reitit, profiilit & tulokset">
 <meta name="twitter:description" content="Interaktiivinen roadbook: 21 etappia, korkeusprofiilit, mäkipisteet, kirisprintit ja päivittyvät tulokset.">
 
-<!-- Favicon: on-theme emblem (gold elevation profile + red KOM dot)
-     as an SVG data-URI, no separate binary file. -->
+<!-- Favicon: on-theme emblem (gold elevation profile + red KOM dot). -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Leaflet (real map in the expanded stage locator). Loaded from unpkg with
-     Subresource Integrity so a tampered CDN response is rejected. Only used by
-     the expanded map; the collapsed minimap is the self-contained SVG below. -->
+<!-- Leaflet (real interactive route map, restyled to the Modernist chrome).
+     Loaded from unpkg with Subresource Integrity so a tampered CDN response
+     is rejected. -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<!-- Shared colour theme (light + dark palettes, flag-stripe classes). -->
-<link rel="stylesheet" href="theme.css">
+
+<!-- Modernist design tokens (shared with index.html — see design_handoff_tdf2026/). -->
+<link rel="stylesheet" href="modernist.css">
 <style>
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+  html,body{margin:0;padding:0;min-height:100vh;}
+  a{color:var(--color-accent-700);text-decoration:none;}
+  a:hover{color:var(--color-accent-800);}
+  :focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}
 
-  header.top{
-    display:flex;flex-direction:column;gap:6px;
-    padding-bottom:22px;margin-bottom:22px;
-    border-bottom:3px solid var(--ink);
-  }
-  .backlink{
-    display:inline-flex;align-items:center;gap:5px;
-    align-self:flex-start;margin-bottom:6px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--ink-soft);text-decoration:none;
-  }
-  .backlink svg{width:14px;height:14px;}
-  .backlink:hover{color:var(--ink);}
-  .backlink:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px;}
-  .top-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--ink-soft);
-  }
-  .langsel{display:flex;gap:0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;}
-  .langsel button{
-    background:transparent;border:1px solid var(--line);
-    padding:4px 10px;cursor:pointer;color:var(--ink-soft);
-  }
-  .langsel button:first-child{border-radius:2px 0 0 2px;}
-  .langsel button:last-child{border-radius:0 2px 2px 0;}
-  .langsel button:not(:first-child){border-left:none;}
-  .langsel button.active{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--solid-bg);}
-  .langsel button:hover:not(.active){color:var(--ink);}
-  h1{
-    font-family:'Oswald',sans-serif;
-    font-weight:700;
-    font-size:clamp(28px,5vw,46px);
-    letter-spacing:.01em;
-    text-transform:uppercase;
-    margin:2px 0 4px;
-    line-height:1.02;
-  }
-  h1 span{color:var(--gold-deep);}
-  /* Title text striped in the French tricolore — colours come from theme.css
-     (.fr-b, .fs-w, .fr-r). */
-  .sub{
-    color:var(--ink-soft);
-    font-size:14.5px;
-    max-width:760px;
-    line-height:1.5;
-  }
-  .stat-row{
-    display:flex;flex-wrap:wrap;gap:22px;
-    margin-top:14px;
-    font-family:'JetBrains Mono',monospace;
-  }
-  .stat{font-size:12.5px;color:var(--ink-soft);}
-  .stat b{
-    display:block;font-family:'Oswald',sans-serif;
-    font-size:19px;color:var(--ink);font-weight:600;letter-spacing:.01em;
-  }
+  /* ---------- header ---------- */
+  .tdf-header{display:flex;align-items:stretch;justify-content:space-between;border-bottom:2px solid var(--color-divider);}
+  .tdf-header .left{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:var(--space-3) clamp(20px,4vw,48px);}
+  .backlink{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .backlink:hover{color:var(--color-accent-700);}
+  .wordmark{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;}
+  .tdf-langs{display:flex;border-left:2px solid var(--color-divider);}
+  .langbtn{font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.14em;min-width:56px;padding:0 18px;border:0;border-left:2px solid var(--color-divider);cursor:pointer;background:transparent;color:var(--color-neutral-700);transition:background .15s ease;}
+  .tdf-langs .langbtn:first-child{border-left:0;}
+  .langbtn:hover{background:var(--color-accent-100);}
+  .langbtn.active{background:var(--color-accent);color:#fff;}
+  .langbtn.active:hover{background:var(--color-accent);}
+  .langbtn:focus-visible,.tabbtn:focus-visible,.stage-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
 
-  .layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start;}
-  @media (max-width:860px){.layout{grid-template-columns:1fr;}}
+  /* ---------- hero ---------- */
+  .tdf-hero{padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px) clamp(24px,4vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-700);}
+  .tdf-hero h1{font-family:var(--font-heading);font-weight:700;font-size:clamp(38px,8vw,96px);line-height:.9;letter-spacing:-.03em;margin:0;text-transform:uppercase;max-width:20ch;}
+  .stripe{display:flex;height:10px;width:180px;}
+  .stripe span{flex:1;}
+  .lede{max-width:74ch;font-size:clamp(15px,1.5vw,18px);line-height:1.5;color:var(--color-neutral-700);margin:0;text-wrap:pretty;}
 
-  /* Tabs */
-  .tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:2px solid var(--ink);}
-  .tab{
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
-    text-transform:uppercase;letter-spacing:.05em;
-    background:transparent;border:none;cursor:pointer;color:var(--ink-soft);
-    padding:10px 22px 8px;border-bottom:3px solid transparent;margin-bottom:-2px;
-  }
-  .tab:hover{color:var(--ink);}
-  .tab.active{color:var(--ink);border-bottom:3px solid var(--gold-deep);}
+  /* ---------- stat row ---------- */
+  .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-bottom:2px solid var(--color-divider);}
+  .statrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  .statcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
+  .statcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .statcell .value{font-family:var(--font-heading);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:-.01em;}
+
+  /* ---------- tabs ---------- */
+  .tabs{display:flex;border-bottom:2px solid var(--color-divider);flex-wrap:wrap;}
+  .tabbtn{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--color-neutral-600);border:0;border-right:2px solid var(--color-divider);padding:14px clamp(18px,3vw,32px);cursor:pointer;transition:background .15s ease;}
+  .tabbtn:hover{color:var(--color-text);}
+  .tabbtn.active{background:var(--color-text);color:var(--color-bg);}
   .view{display:none;}
   .view.active{display:block;}
 
-  /* Results view */
-  .results-toolbar{
-    display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;
+  /* ---------- stage layout ---------- */
+  .stagelayout{display:grid;grid-template-columns:300px 1fr;}
+  @media (max-width:980px){
+    .stagelayout{grid-template-columns:1fr;}
+    .detailgrid{grid-template-columns:1fr!important;}
+    .clsgrid{grid-template-columns:1fr!important;}
   }
-  .rank-select-label{
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-soft);
-  }
-  .rank-select{
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
-    letter-spacing:.02em;color:var(--ink);
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
-    padding:8px 34px 8px 12px;cursor:pointer;max-width:100%;
-    appearance:none;-webkit-appearance:none;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='%234C5A50' stroke-width='1.6'/></svg>");
-    background-repeat:no-repeat;background-position:right 12px center;
-  }
-  .rank-select:hover{border-color:var(--grey-road);}
-  .rank-select:focus{outline:2px solid var(--gold-deep);outline-offset:1px;}
-  /* Dark mode: swap the baked-in dropdown arrow for a light-stroked one. */
-  @media (prefers-color-scheme: dark){
-    .rank-select{
-      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='%239FA99A' stroke-width='1.6'/></svg>");
-    }
-  }
-  .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
-  .results-grid > *{min-width:0;} /* let the cell shrink -> table scrolls inside the card */
-  @media (max-width:900px){.results-grid{grid-template-columns:1fr;}}
-  .cls-card{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;overflow:hidden;min-width:0;}
-  .cls-head{
-    display:flex;align-items:center;gap:12px;padding:14px 16px;
-    border-bottom:1px solid var(--line);
-  }
-  .jersey{
-    width:34px;height:34px;border-radius:4px;flex:0 0 auto;
-    border:1px solid rgba(0,0,0,0.15);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .jersey svg{width:22px;height:22px;}
-  .cls-head h3{
-    font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;
-    text-transform:uppercase;letter-spacing:.04em;margin:0;
-  }
-  .cls-head .fr{
-    display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
-    color:var(--ink-soft);letter-spacing:.08em;text-transform:none;
-  }
-  .cls-body{padding:6px 16px 14px;overflow-x:auto;}
-  table.results{width:100%;border-collapse:collapse;font-size:13px;}
-  table.results th{
-    text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;
-    text-transform:uppercase;color:var(--ink-soft);letter-spacing:.05em;
-    padding:6px 6px 4px;border-bottom:1px solid var(--line);
-  }
-  table.results td{padding:6px 6px;border-bottom:1px solid var(--line);}
-  table.results td.pos{font-family:'Oswald',sans-serif;font-weight:600;width:28px;color:var(--ink-soft);}
-  table.results tr.podium td.pos{color:var(--gold-deep);}
-  table.results td.val{font-family:'JetBrains Mono',monospace;font-size:12px;text-align:right;white-space:nowrap;}
-  table.results td.rider b{font-weight:600;}
-  table.results td.rider .tm{display:block;font-size:11px;color:var(--ink-soft);}
-  .expander{
-    display:block;width:100%;margin-top:10px;
-    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-    background:transparent;border:1px dashed var(--line);border-radius:2px;
-    color:var(--ink-soft);padding:8px;cursor:pointer;
-  }
-  .expander:hover{background:var(--hover);color:var(--ink);}
-  .status-card{
-    grid-column:1/-1;
-    background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--gold-deep);
-    border-radius:2px;padding:16px 18px;font-size:14px;line-height:1.6;
-  }
-  .status-card b{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;}
-  .empty-cls{padding:18px 4px;color:var(--ink-soft);font-size:13px;font-style:italic;}
-  .sec-label{margin:14px 4px 4px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
-  .sec-label:first-child{margin-top:4px;}
-  .stagewins-card{grid-column:1/-1;}
-  .updated-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-left:auto;}
+  .stagerail{border-right:2px solid var(--color-divider);display:flex;flex-direction:column;position:sticky;top:0;}
+  @media (max-width:980px){.stagerail{position:static;}}
+  .railhead{padding:var(--space-3) var(--space-4);border-bottom:2px solid var(--color-divider);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);flex:0 0 auto;}
+  .stagerail-list{display:flex;flex-direction:column;list-style:none;margin:0;padding:0;flex:1 1 auto;min-height:0;overflow-y:auto;}
+  @media (max-width:980px){.stagerail-list{overflow-y:visible;}}
+  .stage-item{margin:0;}
+  .stage-btn{display:flex;gap:12px;align-items:center;width:100%;padding:11px var(--space-4);border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;font-family:var(--font-body);text-align:left;background:transparent;color:var(--color-text);transition:background .12s ease;}
+  .stage-btn:hover{background:var(--color-accent-100);}
+  .stage-btn.active{background:var(--color-text);color:var(--color-bg);}
+  .stage-btn .num{font-family:var(--font-heading);font-weight:700;font-size:15px;width:26px;flex:0 0 auto;text-align:left;color:var(--color-neutral-600);}
+  .stage-btn.active .num{color:var(--color-bg);}
+  .stage-btn .btn-text{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left;}
+  .stage-btn .btn-route{font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .stage-btn .btn-meta{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .stage-btn.active .btn-meta{color:var(--color-bg);opacity:.75;}
+  .rest-row{display:flex;gap:12px;align-items:center;padding:8px var(--space-4);border-bottom:1px solid var(--color-divider);background:var(--color-neutral-100);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
 
-  /* Teams & riders view — reuses .results-grid / .cls-card / table.results,
-     with a rank badge instead of a jersey and two extra columns per rider. */
-  .team-rank{
-    width:34px;height:34px;border-radius:4px;flex:0 0 auto;
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
-    color:var(--ink);background:var(--hover);border:1px solid var(--line);
-  }
-  .team-rank.first{background:var(--gold);color:#fff;border-color:var(--gold-deep);}
-  .team-link{color:inherit;text-decoration:none;}
-  .team-link:hover{text-decoration:underline;}
-  table.riders td.bib{
-    font-family:'JetBrains Mono',monospace;font-size:11px;
-    color:var(--ink-soft);width:32px;
-  }
-  table.riders td.gcpos{
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
-    text-align:right;width:46px;white-space:nowrap;
-  }
-  table.riders tr.podium td.gcpos{color:var(--gold-deep);}
-  table.riders tr.out td.rider b{color:var(--ink-soft);font-weight:500;}
-  table.riders tr.out td.val{color:var(--ink-soft);}
-  .out-badge{
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;
-    color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;
-    padding:1px 7px;white-space:nowrap;
-  }
+  /* ---------- stage panel ---------- */
+  .panel{display:flex;flex-direction:column;}
+  .panelhead{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--space-4);}
+  .panelhead .kicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);display:block;margin-bottom:8px;}
+  .panelhead h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(26px,3.6vw,44px);line-height:1;letter-spacing:-.02em;margin:0;text-transform:uppercase;}
+  .typechip{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;background:var(--color-accent);color:#fff;white-space:nowrap;}
 
-  /* Stage list
-     Height is set in pixels by JS (syncStageListHeight), copied straight
-     from the detail panel's rendered height, so the two columns are always
-     exactly the same height regardless of viewport size or stage content —
-     CSS alone (grid stretch, flex, vh-based caps) kept producing one-sided
-     mismatches, because whichever column got a size cap fed back into how
-     tall Grid made the row, throwing off the other column. If the list's
-     own content doesn't fit in that height it just scrolls internally
-     (overflow-y:auto below); the panel is never resized, so a short panel
-     never gains a blank area under its content either. */
-  .stagelist{
-    background:var(--paper-panel);
-    border:1px solid var(--line);
-    border-radius:2px;
-    display:flex;flex-direction:column;
-    position:sticky;top:16px;
-  }
-  .stagelist .listhead{
-    font-family:'JetBrains Mono',monospace;
-    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--ink-soft);padding:12px 14px 8px;
-    flex:0 0 auto;
-  }
-  ul.stages{list-style:none;margin:0;padding:0 6px 10px;flex:1 1 auto;min-height:0;overflow-y:auto;}
-  @media (max-width:860px){
-    .stagelist{position:static;}
-    ul.stages{overflow-y:visible;}
-  }
-  li.stage-item{margin:2px 0;}
-  button.stage-btn{
-    width:100%;text-align:left;
-    display:flex;align-items:center;gap:10px;
-    background:transparent;border:none;cursor:pointer;
-    padding:8px 8px;border-radius:2px;
-    font-family:'Inter',sans-serif;color:var(--ink);
-    border-left:3px solid transparent;
-  }
-  button.stage-btn:hover{background:var(--hover);}
-  button.stage-btn.active{
-    background:var(--paper);
-    border-left:3px solid var(--gold-deep);
-  }
-  .num{
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
-    width:26px;flex:0 0 auto;color:var(--ink-soft);
-  }
-  .stage-btn.active .num{color:var(--gold-deep);}
-  .btn-text{flex:1;min-width:0;}
-  .btn-route{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .btn-meta{font-size:10.5px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;}
-  .typedot{width:8px;height:8px;border-radius:50%;flex:0 0 auto;}
+  .factrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:2px solid var(--color-divider);}
+  .factrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  .factcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
+  .factcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .factcell .value{font-family:var(--font-heading);font-weight:700;font-size:18px;}
+  .startnote{padding:10px clamp(20px,3vw,40px) 0;font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
 
-  .rest-row{
-    padding:6px 14px;font-size:10.5px;font-family:'JetBrains Mono',monospace;
-    color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;
-    border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);
-    margin:4px 0;
-  }
+  /* ---------- map + profile ---------- */
+  #bigmapbox{border-bottom:2px solid var(--color-divider);padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;}
+  .maprow{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);width:100%;}
+  .maplabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapctrls{display:flex;align-items:center;}
+  .mapctrl-btn{font-family:var(--font-heading);font-size:14px;font-weight:700;line-height:1;width:32px;height:30px;display:grid;place-items:center;border:0;border-left:2px solid var(--color-divider);background:transparent;color:var(--color-neutral-700);cursor:pointer;}
+  .mapctrl-btn:hover{background:var(--color-accent-100);}
+  .mapctrl-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
+  .mapctrl-close{background:var(--color-text);color:var(--color-bg);}
+  .mapctrl-close:hover{background:var(--color-text);}
+  .mapmeta{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;}
+  .mapzoom{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapcaption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);max-width:80ch;}
+  .mappanhint{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700);}
 
-  /* Main panel */
-  .panel{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;padding:22px 24px 26px;}
-  .stagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:4px;}
-  .stagehead h2{
-    font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);
-    text-transform:uppercase;margin:0;letter-spacing:.01em;
-  }
-  .datebadge{
-    font-family:'JetBrains Mono',monospace;font-size:11.5px;
-    color:var(--solid-fg);background:var(--solid-bg);padding:5px 9px;border-radius:2px;white-space:nowrap;
-  }
-  .stagehead-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-  /* Locator minimap: a rough France outline with a start→finish marker.
-     All strokes/fills use theme variables so it follows light/dark live. */
-  svg.minimap{
-    width:112px;height:auto;display:block;
-    background:var(--paper);border:1px solid var(--line);border-radius:2px;
-    padding:5px;
-  }
-  svg.minimap .mm-land{fill:var(--hover);stroke:var(--grey-road);stroke-width:1;stroke-linejoin:round;}
-  svg.minimap .mm-coast{fill:none;stroke:var(--grey-road);stroke-width:1;stroke-dasharray:2,2;opacity:.55;}
-  svg.minimap .mm-route{stroke:var(--gold-deep);stroke-width:2.2;stroke-linecap:round;}
-  svg.minimap .mm-start{fill:var(--paper);stroke:var(--gold-deep);stroke-width:1.4;}
-  svg.minimap .mm-finish{fill:var(--red);}
-  /* Collapsed minimap doubles as the expand button. A small corner badge
-     with an expand icon signals it can be enlarged (title + aria live on
-     the button itself). */
-  .mm-btn{background:none;border:none;padding:0;cursor:pointer;display:block;position:relative;}
-  .mm-btn:hover svg.minimap{border-color:var(--grey-road);}
-  .mm-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2px;}
-  .mm-expand{
-    position:absolute;right:4px;bottom:4px;
-    display:flex;align-items:center;justify-content:center;
-    width:16px;height:16px;
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
-    color:var(--ink-soft);pointer-events:none;
-  }
-  .mm-expand svg{width:10px;height:10px;display:block;}
-  .mm-btn:hover .mm-expand{color:var(--ink);border-color:var(--grey-road);}
-  /* Expanded map: full panel width. The viewBox is portrait, so the SVG is
-     given a fixed height and letterboxes horizontally (labels may spill
-     into the side margins, which is fine — svg overflow stays visible
-     within the element box). */
-  .mapbox{position:relative;margin:16px 0 4px;}
-  /* Expanded view: a real Leaflet map on Stadia tiles. Fixed height so the
-     panel's layout height is known immediately (before tiles load), which
-     keeps syncStageListHeight correct. */
-  #stage-map{
-    width:100%;height:min(60vh,460px);
-    border:1px solid var(--line);border-radius:2px;
-    background:var(--paper);z-index:0;
-  }
-  .leaflet-container{font-family:'Inter',system-ui,sans-serif;}
+  #stage-map{width:100%;background:var(--color-surface);border:1px solid var(--color-divider);}
+  .mapcell #stage-map{height:220px;}
+  #bigmapbox #stage-map{height:min(60vh,460px);}
+  .leaflet-container{font-family:var(--font-body);background:var(--color-surface);}
   .leaflet-control-attribution{font-size:9px;}
-  /* Icon-only map buttons (accessible names via aria-label/title):
-     shrink (top) and recenter-on-route (below it). */
-  .mm-close,.mm-recenter{
-    position:absolute;top:8px;right:8px;z-index:1;
-    display:flex;align-items:center;justify-content:center;
-    width:26px;height:26px;padding:0;
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
-    color:var(--ink-soft);cursor:pointer;
-  }
-  .mm-recenter{top:40px;}
-  .mm-close svg,.mm-recenter svg{width:12px;height:12px;display:block;}
-  .mm-close:hover,.mm-recenter:hover{background:var(--hover);color:var(--ink);}
-  .mm-close:focus-visible,.mm-recenter:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
-  .typepill{
-    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
-    letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;
-    color:#fff;margin-top:8px;
-  }
-  .factbar{
-    display:flex;flex-wrap:wrap;gap:18px 28px;margin:16px 0 6px;
-    padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  }
-  .fact{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);}
-  .fact b{display:block;font-family:'Oswald',sans-serif;font-size:17px;color:var(--ink);font-weight:600;}
+  .leaflet-control-zoom{display:none;}
 
-  .chartbox{margin:18px 0 6px;}
-  .chart-caption{font-size:11px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-top:6px;}
+  .detailgrid{display:grid;grid-template-columns:280px 1fr;border-bottom:2px solid var(--color-divider);}
+  .detailgrid.big{grid-template-columns:1fr;}
+  .mapcell{border-right:2px solid var(--color-divider);padding:var(--space-4);display:flex;flex-direction:column;gap:10px;align-items:flex-start;}
+  .profilecell{padding:var(--space-4);display:flex;flex-direction:column;gap:10px;min-width:0;}
+  .profilecell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
   svg.profile{width:100%;height:auto;display:block;}
-  /* Gridlines/labels styled via CSS (not baked-in attributes) so they follow
-     the theme live, without re-rendering the SVG. */
-  svg.profile .pf-grid{stroke:var(--line);}
-  svg.profile .pf-tick{fill:var(--ink-soft);}
+  .legend{display:flex;flex-wrap:wrap;gap:var(--space-4);}
+  .legenditem{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .legswatch{width:14px;height:8px;display:inline-block;}
+  .chart-caption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
 
-  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 4px;font-size:11.5px;color:var(--ink-soft);}
-  .legend span{display:inline-flex;align-items:center;gap:6px;}
-  .leg-swatch{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  /* ---------- description / climbs / sprints ---------- */
+  .detailbody{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:var(--space-6);}
+  .detailbody h3{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 var(--space-3);}
+  .prose{max-width:78ch;font-size:15px;line-height:1.6;color:var(--color-neutral-700);}
+  .prose p{margin:0 0 12px;}
+  .prose p:last-child{margin-bottom:0;}
+  table.dtable{width:100%;border-collapse:collapse;}
+  table.dtable.sprints{max-width:640px;}
+  table.dtable th{padding:8px 10px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
+  table.dtable th:first-child{text-align:left;}
+  table.dtable td{padding:10px;border-bottom:1px solid var(--color-divider);font-size:14px;vertical-align:top;}
+  table.dtable td:first-child{font-weight:600;}
+  table.dtable td.num{text-align:right;white-space:nowrap;}
+  table.dtable td.loc{text-align:right;white-space:nowrap;color:var(--color-neutral-700);}
+  table.dtable td.cat{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  .climbname{display:flex;align-items:center;gap:10px;}
+  .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
+  .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
 
-  .twocol{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:18px;}
-  .twocol > *{min-width:0;}
-  @media (max-width:700px){.twocol{grid-template-columns:1fr;}}
-  .block{overflow-x:auto;}
-  .block h3{
-    font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;
-    letter-spacing:.08em;color:var(--ink-soft);margin:0 0 8px;
-  }
-  .narrative{font-size:14.5px;line-height:1.62;}
-  .narrative p{margin:0 0 10px;}
+  /* ---------- results tab ---------- */
+  .toolbar{padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);}
+  .toolbar .rlabel{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  select.rankselect{font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--color-text);background:var(--color-surface);border:2px solid var(--color-divider);border-radius:0;padding:9px 14px;cursor:pointer;max-width:100%;}
+  select.rankselect:focus-visible{outline:2px solid var(--color-accent);outline-offset:1px;}
+  .toolbar .statusline{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
 
-  table.points{width:100%;border-collapse:collapse;font-size:13px;}
-  table.points th{
-    text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;
-    text-transform:uppercase;color:var(--ink-soft);letter-spacing:.05em;
-    padding:4px 6px;border-bottom:1px solid var(--line);
-  }
-  table.points td{padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
-  .catchip{
-    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
-    color:#fff;padding:1px 6px;border-radius:20px;
-  }
-  .flagchip{
-    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
-    color:#fff;background:var(--green);padding:1px 6px;border-radius:20px;
-  }
-  .empty-note{color:var(--ink-soft);font-size:13px;font-style:italic;}
+  .clsgrid{display:grid;grid-template-columns:1fr 1fr;}
+  .cls-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;}
+  .cls-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
+  .cls-head .names{display:flex;flex-direction:column;gap:3px;min-width:0;}
+  .cls-head .name{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;}
+  .cls-head .fr{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-neutral-600);}
+  .swatch{width:20px;height:20px;border:1px solid var(--color-divider);flex:0 0 auto;}
 
-  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);}
-  .sources{font-size:11.5px;color:var(--ink-soft);line-height:1.7;}
-  .sources a{color:var(--blue);}
-  .disclaimer{
-    font-size:12px;color:var(--ink-soft);background:var(--paper-panel);
-    border:1px dashed var(--line);padding:10px 12px;border-radius:2px;margin-top:14px;line-height:1.55;
-  }
+  .cls-body{overflow-x:auto;}
+  table.results{width:100%;border-collapse:collapse;margin-top:var(--space-3);}
+  table.results td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.results td.pos{font-family:var(--font-heading);font-weight:700;font-size:14px;width:34px;color:var(--color-neutral-600);}
+  table.results tr.podium td.pos{color:var(--color-accent);}
+  table.results td.rider .rname{display:block;font-size:14px;font-weight:600;}
+  table.results td.rider .rteam{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.results td.val{text-align:right;white-space:nowrap;font-size:13px;}
 
-  .made-with{
-    display:flex;align-items:center;justify-content:center;gap:7px;
-    margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
-    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;
-    color:var(--ink-soft);
-  }
-  .made-with svg{width:14px;height:14px;flex:0 0 auto;color:var(--gold-deep);}
+  .expander{margin-top:var(--space-3);align-self:flex-start;background:transparent;border:2px solid var(--color-divider);padding:8px 14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);cursor:pointer;}
+  .expander:hover{background:var(--color-accent-100);}
 
-  .noscript-note{
-    max-width:760px;margin:24px auto;padding:16px 18px;
-    background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--red);
-    border-radius:2px;font-size:14px;line-height:1.6;color:var(--ink);
-  }
-  .noscript-note b{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;}
+  .status-card{grid-column:1/-1;padding:clamp(20px,3vw,32px);border-bottom:2px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-neutral-700);}
+  .status-card b{font-family:var(--font-heading);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text);}
+  .empty-cls{padding:var(--space-3) 0 0;margin:0;font-size:14px;color:var(--color-neutral-600);}
+  .sec-label{margin:14px 0 4px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .sec-label:first-child{margin-top:0;}
+
+  .stagewins-block{padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);border-top:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .stagewins-block h3{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;margin:0;}
+  .stagewins-meta{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.winners{width:100%;max-width:820px;border-collapse:collapse;}
+  table.winners td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.winners td.n{font-family:var(--font-heading);font-weight:700;font-size:14px;width:40px;color:var(--color-neutral-600);}
+  table.winners td.route{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);white-space:nowrap;}
+  table.winners td.winner{font-size:14px;font-weight:600;}
+  table.winners td.speed{font-size:12px;color:var(--color-neutral-600);text-align:right;white-space:nowrap;}
+
+  /* ---------- teams tab ---------- */
+  .teamsstatus{grid-column:1/-1;padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .team-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;}
+  .team-head{display:flex;align-items:flex-start;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
+  .team-rank{font-family:var(--font-heading);font-weight:700;font-size:15px;width:34px;height:34px;flex:0 0 auto;display:grid;place-items:center;background:var(--color-neutral-100);color:var(--color-text);border:1px solid var(--color-divider);}
+  .team-rank.first{background:var(--color-accent);color:#fff;}
+  .team-meta{display:flex;flex-direction:column;gap:4px;min-width:0;}
+  .team-link{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text);}
+  .team-link:hover{color:var(--color-accent-700);}
+  .team-clsline{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-neutral-600);}
+
+  table.riders{width:100%;border-collapse:collapse;margin-top:var(--space-3);}
+  table.riders th{padding:8px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
+  table.riders th:nth-child(1),table.riders th:nth-child(2){text-align:left;}
+  table.riders td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:12px;}
+  table.riders td.bib{color:var(--color-neutral-600);width:38px;}
+  table.riders td.rider .rname{display:block;font-size:14px;font-weight:600;}
+  table.riders tr.out td.rider .rname{font-weight:500;color:var(--color-neutral-600);}
+  table.riders td.rider .rsub{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.riders td.gcpos{font-family:var(--font-heading);font-weight:700;font-size:14px;text-align:right;width:46px;white-space:nowrap;color:var(--color-text);}
+  table.riders tr.podium td.gcpos{color:var(--color-accent);}
+  table.riders td.val{text-align:right;white-space:nowrap;font-size:12px;color:var(--color-neutral-700);}
+
+  /* ---------- footer ---------- */
+  .tdf-footer{border-top:2px solid var(--color-divider);padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:100ch;}
+  .disclabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .discbody{margin:0;font-size:12px;line-height:1.6;color:var(--color-neutral-700);}
+  .sourcestitle{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .sourcesbody{margin:6px 0 0;font-size:12px;line-height:1.6;color:var(--color-neutral-600);}
+
+  .noscript-note{max-width:760px;margin:24px auto;padding:16px 18px;background:var(--color-surface);border:1px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-text);}
 
   ::-webkit-scrollbar{width:8px;}
-  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+  ::-webkit-scrollbar-thumb{background:var(--color-divider);}
 </style>
 </head>
 <body>
@@ -446,78 +256,73 @@
     <b>JavaScript pois käytöstä</b><br>
     Tämä sivu rakentaa etapit, profiilit ja tulokset selaimessa JavaScriptillä.
     Ota JavaScript käyttöön nähdäksesi sisällön. Viralliset tulokset: letour.fr, procyclingstats.com.
-    <hr style="border:none;border-top:1px dashed var(--line);margin:10px 0;">
+    <hr style="border:none;border-top:1px solid var(--color-divider);margin:10px 0;">
     <b>JavaScript is disabled</b><br>
     This page builds the stages, profiles and results in your browser with JavaScript.
     Please enable JavaScript to view the content. Official results: letour.fr, procyclingstats.com.
   </div>
 </noscript>
-<div class="wrap">
 
-  <header class="top">
-    <a class="backlink" id="backLink" href="index.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M15 18l-6-6 6-6"/>
-      </svg>
-      <span id="backLinkText"></span>
-    </a>
-    <div class="top-row">
-      <div class="eyebrow" id="eyebrow"></div>
-      <div class="langsel" id="langSel" role="group" aria-label="Kieli / Language">
-        <button data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
-        <button data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
-        <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
-      </div>
-    </div>
-    <h1><span class="fr-b">Tour</span><span class="fs-w"> de Fr</span><span class="fr-r">ance</span> 2026</h1>
-    <div class="sub" id="subDesc"></div>
-    <div class="stat-row" id="topstats"></div>
-  </header>
+<header class="tdf-header">
+  <div class="left">
+    <a class="backlink" id="backLink" href="index.html">← <span id="backLinkText"></span></a>
+    <span class="wordmark">Tour de France 2026</span>
+  </div>
+  <div class="tdf-langs" id="langSel" role="group" aria-label="Kieli / Language">
+    <button class="langbtn" data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+    <button class="langbtn" data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
+    <button class="langbtn" data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
+  </div>
+</header>
 
-  <nav class="tabs" role="tablist" aria-label="Näkymät / Views">
-    <button class="tab active" data-view="etapit" role="tab" id="tabStages"
-            aria-controls="view-etapit" aria-selected="true" tabindex="0"></button>
-    <button class="tab" data-view="tulokset" role="tab" id="tabResults"
-            aria-controls="view-tulokset" aria-selected="false" tabindex="-1"></button>
-    <button class="tab" data-view="joukkueet" role="tab" id="tabTeams"
-            aria-controls="view-joukkueet" aria-selected="false" tabindex="-1"></button>
-  </nav>
+<section class="tdf-hero">
+  <span class="eyebrow" id="eyebrow"></span>
+  <h1>Tour de France 2026</h1>
+  <div class="stripe"><span style="background:#0055a4"></span><span style="background:#ffffff"></span><span style="background:#ef4135"></span></div>
+  <p class="lede" id="subDesc"></p>
+</section>
 
-  <section class="view active" id="view-etapit" role="tabpanel" aria-labelledby="tabStages" tabindex="0">
-  <div class="layout">
-    <nav class="stagelist">
-      <div class="listhead" id="stageListHeader"></div>
-      <ul class="stages" id="stageList"></ul>
+<div class="statrow" id="topstats"></div>
+
+<nav class="tabs" role="tablist" aria-label="Näkymät / Views">
+  <button class="tabbtn active" data-view="etapit" role="tab" id="tabStages"
+          aria-controls="view-etapit" aria-selected="true" tabindex="0"></button>
+  <button class="tabbtn" data-view="tulokset" role="tab" id="tabResults"
+          aria-controls="view-tulokset" aria-selected="false" tabindex="-1"></button>
+  <button class="tabbtn" data-view="joukkueet" role="tab" id="tabTeams"
+          aria-controls="view-joukkueet" aria-selected="false" tabindex="-1"></button>
+</nav>
+
+<section class="view active" id="view-etapit" role="tabpanel" aria-labelledby="tabStages" tabindex="0">
+  <div class="stagelayout">
+    <nav class="stagerail">
+      <div class="railhead" id="stageListHeader"></div>
+      <ul class="stagerail-list" id="stageList"></ul>
     </nav>
-
     <main class="panel" id="panel"></main>
   </div>
-  </section>
+</section>
 
-  <section class="view" id="view-tulokset" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
-    <div class="results-toolbar">
-      <label class="rank-select-label" id="rankSelectLabel" for="rankStageSelect"></label>
-      <select class="rank-select" id="rankStageSelect"></select>
-    </div>
-    <div class="results-grid" id="resultsGrid"></div>
-  </section>
+<section class="view" id="view-tulokset" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
+  <div class="toolbar">
+    <label class="rlabel" id="rankSelectLabel" for="rankStageSelect"></label>
+    <select class="rankselect" id="rankStageSelect"></select>
+    <span class="statusline" id="resultsStatusLine"></span>
+  </div>
+  <div id="resultsGrid"></div>
+</section>
 
-  <section class="view" id="view-joukkueet" role="tabpanel" aria-labelledby="tabTeams" tabindex="0">
-    <div class="results-grid" id="teamsGrid"></div>
-  </section>
+<section class="view" id="view-joukkueet" role="tabpanel" aria-labelledby="tabTeams" tabindex="0">
+  <div id="teamsGrid"></div>
+</section>
 
-  <footer>
-    <div class="disclaimer">
-      <b id="disclaimerLabel"></b> <span id="disclaimerText"></span>
-    </div>
-    <div class="sources" style="margin-top:12px;">
-      <b id="sourcesTitle"></b><br>
-      <span id="sourcesBody"></span>
-    </div>
-    <div class="made-with" id="footerNote"></div>
-  </footer>
-</div>
+<footer class="tdf-footer">
+  <span class="disclabel" id="disclaimerLabel"></span>
+  <p class="discbody" id="disclaimerText"></p>
+  <span class="sourcestitle" id="sourcesTitle"></span>
+  <p class="sourcesbody" id="sourcesBody"></p>
+  <span class="disclabel" id="footerNote"></span>
+</footer>
 
 <script>
 /* ---------- TOUR ----------
@@ -528,10 +333,7 @@ const TOUR = 'tdf2026';
 const RESULTS_URL = `data/${TOUR}-results.json`;
 const ROUTES_URL = `data/${TOUR}-routes.json`;
 const RIDERS_URL = `data/${TOUR}-riders.json`;
-
-/* ---------- I18N ---------- */
 const LANG_KEY = 'tdf2026-lang';
-
 const STRINGS = {
   fi: {
     backToTours: 'Grand Tourit',
@@ -796,23 +598,18 @@ function detectLang(){
   return 'en';
 }
 let lang = detectLang();
-// Fall back to English for any key a language is missing, so nothing renders blank.
 function t(key){
   const v = STRINGS[lang][key];
   return v !== undefined ? v : STRINGS.en[key];
 }
 
-/* ---------- DATA ---------- */
-// climb categories -> color
-/* All values resolve in theme.css; var() strings work in the generated
-   inline-SVG presentation attributes and follow light/dark live. */
-const CAT_COLOR = {HC:'var(--climb-1)', C1:'var(--climb-2)', C2:'var(--climb-3)', C3:'var(--climb-4)', C4:'var(--climb-5)'};
-const TYPE_COLOR = {
-  flat:'var(--blue)', hilly:'var(--olive)', mountain:'var(--red)',
-  ttt:'var(--ink-soft)', itt:'var(--ink-soft)'
-};
-
-// profile keypoints: relative elevation 0-100 (illustrative, not surveyed)
+/* ---------- COLOUR MAPS ----------
+   Climb categories and classification jerseys as flat colour swatches, per
+   the Modernist system (no illustrative icons — see design handoff). */
+const CAT_COLOR = {HC:'var(--color-accent-800)', C1:'var(--color-accent-600)', C2:'var(--color-accent-500)', C3:'var(--color-accent-400)', C4:'var(--color-accent-300)'};
+const JERSEY = {gc:'#f5d33f', points:'#3e9b4f', mountains:'var(--color-accent)', youth:'var(--color-neutral-100)', teams:'var(--color-neutral-700)'};
+const AUX_SWATCH = {winners:'var(--color-neutral-700)', combative:'var(--color-accent)', withdrawals:'var(--color-neutral-400)'};
+const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 const stages = [
 {n:1, dateIso:'2026-07-04', start:'Barcelona', finish:'Barcelona', km:19.6, type:'ttt', gain:200, startCEST:'16:30',
  profile:[[0,18],[10,17],[15,20],[17.9,55],[18.7,75],[19.6,90]],
@@ -1114,12 +911,6 @@ const stages = [
   fr:`<p>L’étape finale a été réduite à 88,7 km après le redéploiement de forces de sécurité pour lutter contre les feux de forêt : les équipes sont toujours présentées à Thoiry, mais les coureurs rejoignent Paris en bus et l’étape s’élance des Champs-Élysées. Outre les traditionnels Champs-Élysées, le parcours emprunte à trois reprises les rues pavées et pentues de Montmartre, susceptibles de perturber un sprint massif propre. Un sprint intermédiaire distribue les derniers points de la bataille du maillot vert.</p>`
  }}
 ];
-
-/* ---------- HELPERS ---------- */
-function typeColor(t){return TYPE_COLOR[t]||'var(--grey)';}
-
-// Intl locale tag for the current language (fi/fr use comma decimals & spaced
-// thousands; en uses en-GB).
 function localeTag(){
   return lang==='fi' ? 'fi-FI' : lang==='fr' ? 'fr-FR' : 'en-GB';
 }
@@ -1185,81 +976,6 @@ function xForKm(km, totalKm, W, padL, padR){
   const plotW = W - padL - padR;
   return padL + (km/totalKm)*plotW;
 }
-
-function renderProfile(stage){
-  const W=900,H=260,padL=34,padR=18,padT=18,padB=34;
-  const totalKm = stage.km;
-  const {d, ys, plotH} = buildPath(stage.profile, totalKm, W,H,padL,padR,padT,padB);
-  const baseY = padT+plotH;
-
-  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${t('profileAria')(stage.n)}">`;
-
-  // grid lines
-  for(let g=0; g<=4; g++){
-    const gy = padT + plotH*g/4;
-    svg += `<line class="pf-grid" x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke-width="1" opacity="0.6"/>`;
-  }
-  // km ticks
-  const step = totalKm > 150 ? 50 : (totalKm > 60 ? 20 : (totalKm>25?5:5));
-  for(let k=0;k<=totalKm+0.01;k+=step){
-    const kx = xForKm(k,totalKm,W,padL,padR);
-    svg += `<line class="pf-grid" x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke-width="1" opacity="0.4"/>`;
-    svg += `<text class="pf-tick" x="${kx}" y="${H-10}" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">${Math.round(k)}</text>`;
-  }
-
-  // area fill
-  const areaColor = typeColor(stage.type);
-  svg += `<path d="${d} L ${xForKm(totalKm,totalKm,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="${areaColor}" opacity="0.16"/>`;
-  svg += `<path d="${d}" fill="none" stroke="${areaColor}" stroke-width="2.4" stroke-linejoin="round"/>`;
-
-  // climbs markers
-  (stage.climbs||[]).forEach(c=>{
-    const topKm = c.km;
-    const startKm = Math.max(0, c.km - c.len);
-    const cx1 = xForKm(startKm,totalKm,W,padL,padR);
-    const cx2 = xForKm(topKm,totalKm,W,padL,padR);
-    const color = CAT_COLOR[c.cat]||'var(--climb-1)';
-    svg += `<rect x="${cx1}" y="${padT}" width="${Math.max(2,cx2-cx1)}" height="${plotH}" fill="${color}" opacity="0.16"/>`;
-    svg += `<line x1="${cx2}" y1="${padT}" x2="${cx2}" y2="${baseY}" stroke="${color}" stroke-width="1.6" stroke-dasharray="2,2"/>`;
-    svg += `<circle cx="${cx2}" cy="${padT-4}" r="4.5" fill="${color}"/>`;
-  });
-
-  // intermediate-sprint markers — a green flag rising from the route to the
-  // sprint's kilometre point, so the location is clearly visible on the graph
-  // (previously just a faint dot in the bottom margin, easy to miss).
-  (stage.sprints||[]).forEach(s=>{
-    const sx = xForKm(s.km,totalKm,W,padL,padR);
-    const flagTop = padT + plotH*0.30;
-    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${baseY}" stroke="var(--green)" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.55"/>`;
-    svg += `<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${flagTop+16}" stroke="var(--green)" stroke-width="1.8"/>`;
-    svg += `<path d="M ${sx} ${flagTop} L ${sx+12} ${flagTop+4.5} L ${sx} ${flagTop+9} Z" fill="var(--green)"/>`;
-    svg += `<circle cx="${sx}" cy="${baseY}" r="3.4" fill="var(--green)" stroke="var(--paper-panel)" stroke-width="1"/>`;
-  });
-
-  svg += `</svg>`;
-  return svg;
-}
-
-/* ---------- LOCATOR MINIMAP ----------
-   Very simplified, hand-traced outline of metropolitan France ([lon,lat]
-   pairs) plus a short dashed stretch of the Catalan coast for the Barcelona
-   Grand Départ. Only meant to give a rough "where in the country is this
-   stage" cue — not cartographically accurate. */
-const MM_FRANCE = [
-  [2.38,51.05],[1.85,50.96],[1.40,50.06],[0.10,49.50],[-1.14,49.40],[-1.62,49.66],
-  [-1.51,48.64],[-2.60,48.60],[-3.60,48.70],[-4.77,48.40],[-4.74,48.03],[-3.37,47.75],
-  [-2.25,47.28],[-1.79,46.50],[-1.15,46.16],[-1.03,45.62],[-1.16,44.66],[-1.56,43.48],
-  [-1.77,43.36],[-0.50,43.00],[0.60,42.75],[1.50,42.55],[2.50,42.40],[3.04,42.43],
-  [3.70,43.40],[4.13,43.53],[4.85,43.35],[5.37,43.29],[5.93,43.10],[6.64,43.27],
-  [7.50,43.79],[7.00,44.25],[6.90,44.85],[7.10,45.30],[6.80,45.80],[6.17,46.28],
-  [6.80,46.43],[7.05,47.00],[7.59,47.56],[7.58,48.12],[8.23,48.97],[7.45,49.17],
-  [6.36,49.46],[5.47,49.50],[4.87,49.79],[4.83,50.17],[4.20,49.95],[3.90,50.35],
-  [3.18,50.52],[2.55,51.09]
-];
-const MM_CATALONIA = [
-  [3.28,42.32],[3.17,42.26],[2.79,41.67],[2.17,41.39],[1.25,41.12],[0.72,40.85]
-];
-// Approximate start/finish coordinates ([lon,lat]) per stage number.
 const STAGE_COORDS = {
   1:[[2.17,41.39],[2.17,41.39]],   2:[[1.25,41.12],[2.17,41.39]],
   3:[[2.29,41.61],[2.07,42.57]],   4:[[2.35,43.21],[1.61,42.96]],
@@ -1274,76 +990,66 @@ const STAGE_COORDS = {
  21:[[1.80,48.87],[2.35,48.86]]
 };
 
-// Equirectangular projection: longitudes squeezed by cos(46°) so France
-// keeps roughly its true proportions at this latitude.
-const MM_BOX = {lonMin:-5.1, lonMax:8.5, latMin:40.7, latMax:51.3};
-const MM_K = Math.cos(46*Math.PI/180);
-function mmXY(p){
-  return [((p[0]-MM_BOX.lonMin)*MM_K*10).toFixed(1),
-          ((MM_BOX.latMax-p[1])*10).toFixed(1)];
-}
-function mmPath(pts, close){
-  return pts.map((p,i)=>(i?'L':'M')+mmXY(p).join(' ')).join(' ')+(close?' Z':'');
-}
-// Whether the locator map is shown expanded (full panel width). Persists
-// across stage switches and language changes; renderPanel re-renders the
-// matching variant.
-let mapExpanded = false;
+/* ---------- ELEVATION PROFILE ----------
+   Illustrative SVG built from stage.profile keypoints — monochrome ink
+   line/fill with accent-shade climb bands and a dashed accent sprint flag,
+   per the Modernist system (climb category colour is the only colour that
+   changes; the stage-type colouring the old theme used is gone). */
+function renderProfile(stage){
+  const W=900, H=250, padL=30, padR=16, padT=22, padB=30;
+  const {d, plotH} = buildPath(stage.profile, stage.km, W,H,padL,padR,padT,padB);
+  const baseY = padT+plotH;
 
-function mmStageGeom(n){
-  const c = STAGE_COORDS[n];
-  if(!c) return null;
-  const [sx,sy] = mmXY(c[0]), [fx,fy] = mmXY(c[1]);
-  // Start & finish (nearly) in the same place: a single dot instead of a line.
-  const same = Math.abs(c[0][0]-c[1][0])<0.05 && Math.abs(c[0][1]-c[1][1])<0.05;
-  return {sx,sy,fx,fy,same};
-}
+  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${t('profileAria')(stage.n)}">`;
 
-function mmBase(stage, cls){
-  const W = ((MM_BOX.lonMax-MM_BOX.lonMin)*MM_K*10).toFixed(1);
-  const H = ((MM_BOX.latMax-MM_BOX.latMin)*10).toFixed(1);
-  let svg = `<svg class="${cls}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${t('minimapAria')(stage.n)}">`;
-  svg += `<path class="mm-land" d="${mmPath(MM_FRANCE,true)}"/>`;
-  svg += `<path class="mm-coast" d="${mmPath(MM_CATALONIA,false)}"/>`;
-  return svg;
-}
-
-function mmRouteMarks(g){
-  let svg = '';
-  if(!g.same){
-    svg += `<line class="mm-route" x1="${g.sx}" y1="${g.sy}" x2="${g.fx}" y2="${g.fy}"/>`;
-    svg += `<circle class="mm-start" cx="${g.sx}" cy="${g.sy}" r="2.4"/>`;
+  for(let g=0; g<=4; g++){
+    const gy = padT + plotH*g/4;
+    svg += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--color-neutral-300)" stroke-width="1"/>`;
   }
-  svg += `<circle class="mm-finish" cx="${g.fx}" cy="${g.fy}" r="${g.same?3.2:2.6}"/>`;
+  const step = stage.km > 150 ? 50 : (stage.km > 60 ? 20 : 5);
+  for(let k=0; k<=stage.km+0.01; k+=step){
+    const kx = xForKm(k, stage.km, W, padL, padR);
+    svg += `<line x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke="var(--color-neutral-200)" stroke-width="1"/>`;
+    svg += `<text x="${kx}" y="${H-10}" font-family="Archivo, sans-serif" font-size="11" font-weight="600" fill="var(--color-neutral-600)" text-anchor="middle">${Math.round(k)}</text>`;
+  }
+
+  (stage.climbs||[]).forEach(c=>{
+    const x1 = xForKm(Math.max(0, c.km-c.len), stage.km, W, padL, padR);
+    const x2 = xForKm(c.km, stage.km, W, padL, padR);
+    const col = CAT_COLOR[c.cat] || CAT_COLOR.C1;
+    svg += `<rect x="${x1}" y="${padT}" width="${Math.max(2,x2-x1)}" height="${plotH}" fill="${col}" opacity="0.18"/>`;
+    svg += `<line x1="${x2}" y1="${padT}" x2="${x2}" y2="${baseY}" stroke="${col}" stroke-width="2"/>`;
+    svg += `<rect x="${x2-4}" y="${padT-12}" width="8" height="8" fill="${col}"/>`;
+  });
+
+  svg += `<path d="${d} L ${xForKm(stage.km,stage.km,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="var(--color-text)" opacity="0.1"/>`;
+  svg += `<path d="${d}" fill="none" stroke="var(--color-text)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+  (stage.sprints||[]).forEach(s=>{
+    const sx = xForKm(s.km, stage.km, W, padL, padR);
+    const top = padT + plotH*0.28;
+    svg += `<line x1="${sx}" y1="${top}" x2="${sx}" y2="${baseY}" stroke="var(--color-accent)" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    svg += `<path d="M ${sx} ${top} L ${sx+14} ${top+5} L ${sx} ${top+10} Z" fill="var(--color-accent)"/>`;
+  });
+
+  svg += `<line x1="${padL}" y1="${baseY}" x2="${W-padR}" y2="${baseY}" stroke="var(--color-text)" stroke-width="2"/>`;
+  svg += `</svg>`;
   return svg;
 }
 
-function renderMinimap(stage){
-  const g = mmStageGeom(stage.n);
-  if(!g) return '';
-  const svg = mmBase(stage,'minimap') + mmRouteMarks(g) + '</svg>';
-  return `<button class="mm-btn" data-mm-toggle aria-expanded="false" title="${t('minimapExpand')}">${svg}<span class="mm-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M21 3l-7 7"/><path d="M9 21H3v-6"/><path d="M3 21l7-7"/></svg></span></button>`;
-}
-
-// Expanded view markup: a container Leaflet mounts into (see initStageMap).
-// Only the shrink button collapses — the map itself stays interactive (pan/zoom),
-// so it is not a collapse target.
-function renderMinimapLarge(stage){
-  if(!STAGE_COORDS[stage.n]) return '';
-  return `
-    <div class="mapbox">
-      <button class="mm-close" data-mm-toggle aria-expanded="true" aria-label="${t('minimapCollapse')}" title="${t('minimapCollapse')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M3 21l7-7"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/></svg></button>
-      <button class="mm-recenter" aria-label="${t('minimapRecenter')}" title="${t('minimapRecenter')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/></svg></button>
-      <div id="stage-map" role="application" aria-label="${t('minimapAria')(stage.n)}"></div>
-      <div class="chart-caption" id="stage-map-caption">${t('minimapCaption')}</div>
-    </div>`;
-}
+function mapLabel(){ return lang==='fi' ? 'Reitti' : lang==='fr' ? 'Parcours' : 'Route'; }
+function profileLabel(){ return lang==='fi' ? 'Korkeusprofiili' : lang==='fr' ? 'Profil' : 'Elevation profile'; }
+function zoomWord(){ return lang==='fi' ? 'zoomaus' : 'zoom'; }
+const ZOOM_LABELS = {fi:{in:'Lähennä',out:'Loitonna'}, fr:{in:'Zoom avant',out:'Zoom arrière'}, en:{in:'Zoom in',out:'Zoom out'}};
 
 /* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
    Per-stage route polylines live in data/<TOUR>-routes.json (built by
-   scripts/fetch_routes.py from cyclingstage.com GPX). Loaded once, lazily, on
-   first expand. Stages missing a route fall back to a straight start→finish
-   line derived from STAGE_COORDS. */
+   scripts/fetch_routes.py from cyclingstage.com GPX). Stages missing a route
+   fall back to a straight start→finish line derived from STAGE_COORDS. The
+   design's flat SVG map was traded for this real interactive tile map (see
+   handoff discussion); the design's control-row chrome (−/+/◎/⤢) is kept,
+   just wired to Leaflet's own zoom/pan instead of a custom viewBox. No dark
+   styling: this page is light-only, unlike the rest of the site. */
 let routesData = null, routesPromise = null;
 function loadRoutes(){
   if(routesData) return Promise.resolve(routesData);
@@ -1356,47 +1062,38 @@ function loadRoutes(){
   return routesPromise;
 }
 
-let stageMap = null; // active Leaflet instance (null when collapsed)
+let stageMap = null, stageMapFitBounds = null;
 function destroyStageMap(){
-  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; }
+  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; stageMapFitBounds = null; }
 }
 
-/* Stadia Maps basemap (domain-authenticated — no API key in code). Dedicated
-   light/dark styles replace the old CSS invert hack on the tile pane. */
-const darkMapMQ = matchMedia('(prefers-color-scheme: dark)');
-const stadiaTileUrl = dark =>
-  `https://tiles.stadiamaps.com/tiles/${dark ? 'alidade_smooth_dark' : 'alidade_smooth'}/{z}/{x}/{y}{r}.png`;
+function updateMapZoomLabel(){
+  const el = document.getElementById('mapZoomLabel');
+  if(el && stageMap) el.textContent = `${zoomWord()} ${stageMap.getZoom()}`;
+}
 
 function initStageMap(stage){
-  if(!mapExpanded) return;
-  // Leaflet is a deferred script; if the user somehow expands before it lands,
-  // retry shortly. In practice expansion is a post-load click, so L is ready.
   if(!window.L){ setTimeout(()=>initStageMap(stage), 120); return; }
   const el = document.getElementById('stage-map');
   if(!el) return;
   destroyStageMap();
 
-  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true});
+  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true, zoomControl:false});
   stageMap = map;
-  const tiles = L.tileLayer(stadiaTileUrl(darkMapMQ.matches), {
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
     maxZoom:17,
     attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
-  // Retile if the OS theme flips while the map is open; unhook on map teardown.
-  const retheme = e => tiles.setUrl(stadiaTileUrl(e.matches));
-  darkMapMQ.addEventListener('change', retheme);
-  map.on('unload', () => darkMapMQ.removeEventListener('change', retheme));
+  map.on('zoomend', updateMapZoomLabel);
 
-  // Route/marker colours pulled from the live theme variables so they track
-  // light/dark. Leaflet SVG overlays can't reference CSS vars directly.
   const css = getComputedStyle(document.documentElement);
-  const GOLD = css.getPropertyValue('--gold-deep').trim() || '#9C7620';
-  const RED  = css.getPropertyValue('--red').trim() || '#B23B32';
+  const INK = css.getPropertyValue('--color-text').trim() || '#201e1d';
+  const ACCENT = css.getPropertyValue('--color-accent').trim() || '#ec3013';
 
   const draw = () => {
-    if(stageMap !== map) return; // a newer render superseded this one
-    const pts = (routesData.stages || {})[stage.n];      // [[lat,lon]…] or undefined
-    const c = STAGE_COORDS[stage.n];                      // [[lon,lat],[lon,lat]]
+    if(stageMap !== map) return;
+    const pts = (routesData.stages || {})[stage.n];
+    const c = STAGE_COORDS[stage.n];
     let line, startLL, finishLL, approx = false;
     if(pts && pts.length){
       line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
@@ -1407,26 +1104,77 @@ function initStageMap(stage){
       line = [startLL, finishLL];
     }
     const poly = L.polyline(line, approx
-      ? {color:GOLD, weight:3, opacity:.9, dashArray:'6,8'}
-      : {color:GOLD, weight:4, opacity:.95}).addTo(map);
+      ? {color:INK, weight:3, opacity:.85, dashArray:'6,8'}
+      : {color:INK, weight:3.5, opacity:.95}).addTo(map);
     const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
     if(!same){
-      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:GOLD, fillOpacity:1}).addTo(map);
+      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:INK, fillOpacity:1}).addTo(map);
     }
-    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:RED, fillOpacity:1}).addTo(map);
-    map.fitBounds(poly.getBounds(), {padding:[26,26]});
+    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:ACCENT, fillOpacity:1}).addTo(map);
+    map.fitBounds(poly.getBounds(), {padding:[24,24]});
     map.invalidateSize();
-    // Recenter button: refit the route after the user has panned/zoomed away.
-    const rc = document.querySelector('.mm-recenter');
-    if(rc) rc.onclick = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[26,26]}); };
+    stageMapFitBounds = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[24,24]}); };
     const cap = document.getElementById('stage-map-caption');
     if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
+    updateMapZoomLabel();
   };
 
   if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
-  // A tick later the container has its final size — re-measure so tiles fill it.
   setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
 }
+
+function mapControlsHTML(big){
+  const zl = ZOOM_LABELS[lang] || ZOOM_LABELS.en;
+  let html =
+    `<button class="mapctrl-btn" data-map-zoomout title="${zl.out}" aria-label="${zl.out}">−</button>` +
+    `<button class="mapctrl-btn" data-map-zoomin title="${zl.in}" aria-label="${zl.in}">+</button>` +
+    `<button class="mapctrl-btn" data-map-recenter title="${t('minimapRecenter')}" aria-label="${t('minimapRecenter')}">◎</button>`;
+  html += big
+    ? `<button class="mapctrl-btn mapctrl-close" data-map-toggle title="${t('minimapCollapse')}" aria-label="${t('minimapCollapse')}">×</button>`
+    : `<button class="mapctrl-btn" data-map-toggle title="${t('minimapExpand')}" aria-label="${t('minimapExpand')}">⤢</button>`;
+  return html;
+}
+
+function mapCellHTML(stage){
+  return `
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(false)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${t('minimapAria')(stage.n)}"></div>
+    <span class="mapzoom" id="mapZoomLabel"></span>`;
+}
+
+function bigMapBoxHTML(stage){
+  return `<div id="bigmapbox">
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(true)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${t('minimapAria')(stage.n)}"></div>
+    <span class="mapmeta">
+      <span class="mapzoom" id="mapZoomLabel"></span>
+      <span class="mapcaption" id="stage-map-caption"></span>
+    </span>
+  </div>`;
+}
+
+function bindMapControls(stage){
+  const zoomOutBtn = document.querySelector('[data-map-zoomout]');
+  const zoomInBtn = document.querySelector('[data-map-zoomin]');
+  const recenterBtn = document.querySelector('[data-map-recenter]');
+  const toggleBtn = document.querySelector('[data-map-toggle]');
+  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomOut(); });
+  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomIn(); });
+  if(recenterBtn) recenterBtn.addEventListener('click', ()=>{ if(stageMapFitBounds) stageMapFitBounds(); });
+  if(toggleBtn) toggleBtn.addEventListener('click', ()=>{
+    mapExpanded = !mapExpanded;
+    renderPanel(stage);
+    syncStageListHeight();
+  });
+}
+
+let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 /* ---------- RENDER STAGE LIST ---------- */
 const listEl = document.getElementById('stageList');
@@ -1453,10 +1201,9 @@ function renderStageList(){
     if(idx===activeIdx) btn.classList.add('active');
     btn.innerHTML = `
       <span class="num">${String(s.n).padStart(2,'0')}</span>
-      <span class="typedot" style="background:${typeColor(s.type)}"></span>
       <span class="btn-text">
-        <div class="btn-route">${s.start} → ${s.finish}</div>
-        <div class="btn-meta">${fmtDate(s.dateIso)} · ${fmtKm(s.km)}</div>
+        <span class="btn-route">${s.start} → ${s.finish}</span>
+        <span class="btn-meta">${fmtDate(s.dateIso)} · ${fmtKm(s.km)} · ${t('typeLabels')[s.type]}</span>
       </span>`;
     btn.addEventListener('click', ()=>selectStage(idx));
     li.appendChild(btn);
@@ -1464,17 +1211,17 @@ function renderStageList(){
   });
 }
 
-/* Keeps the stage-list column exactly as tall as the detail panel next to
-   it (see the .stagelist comment in the stylesheet for why this is done in
-   JS rather than pure CSS). Skipped below the 860px breakpoint, where the
-   layout drops to a single column and .stagelist reverts to position:static
-   — an inline height there would just add dead space under a short list. */
+/* Keeps the stage-rail column exactly as tall as the detail panel next to
+   it, copied straight from the panel's rendered height (see index.html's
+   sibling comment in the previous version of this file for why this is
+   done in JS rather than pure CSS). Skipped below the 980px breakpoint,
+   where the layout drops to a single column. */
 function syncStageListHeight(){
-  const list = document.querySelector('.stagelist');
+  const list = document.querySelector('.stagerail');
   const panel = document.getElementById('panel');
   const stagesView = document.getElementById('view-etapit');
   if(!list || !panel || !stagesView) return;
-  if(window.innerWidth<=860 || !stagesView.classList.contains('active')){
+  if(window.innerWidth<=980 || !stagesView.classList.contains('active')){
     list.style.height = '';
     return;
   }
@@ -1494,20 +1241,18 @@ function selectStage(idx){
 /* ---------- RENDER MAIN PANEL ---------- */
 function renderPanel(stage){
   const panel = document.getElementById('panel');
-  const tc = typeColor(stage.type);
-  // Tear down any live map before its container is replaced by innerHTML, so
-  // Leaflet doesn't leak the old instance's global (resize) listeners.
+  // Tear down any live map before its container is replaced by innerHTML.
   destroyStageMap();
 
   let climbRows = '';
   if(stage.climbs && stage.climbs.length){
     climbRows = stage.climbs.map(c=>`
       <tr>
-        <td>${c.name[lang]||c.name.en}</td>
-        <td><span class="catchip" style="background:${CAT_COLOR[c.cat]||'var(--climb-1)'}">${catLabel(c.cat)}</span></td>
-        <td>${c.len} km</td>
-        <td>${c.grad? c.grad+' %':'—'}</td>
-        <td>~km ${Math.round(c.km)}</td>
+        <td><span class="climbname"><span class="sq" style="background:${CAT_COLOR[c.cat]||CAT_COLOR.C1}"></span>${c.name[lang]||c.name.en}</span></td>
+        <td class="num cat">${catLabel(c.cat)}</td>
+        <td class="num">${fmtKm(c.len)}</td>
+        <td class="num">${c.grad ? c.grad+' %' : '—'}</td>
+        <td class="loc">km ${c.km}</td>
       </tr>`).join('');
   }
 
@@ -1515,98 +1260,85 @@ function renderPanel(stage){
   if(stage.sprints && stage.sprints.length){
     sprintRows = stage.sprints.map((s,i)=>`
       <tr>
-        <td><span class="flagchip">${t('sprintChip')}${stage.sprints.length>1?' '+(i+1):''}</span></td>
-        <td>~km ${Math.round(s.km)}</td>
-        <td>${s.pts} ${t('sprintPtsSuffix')}</td>
+        <td>${t('sprintChip')}${stage.sprints.length>1?' '+(i+1):''}</td>
+        <td class="num">km ${s.km}</td>
+        <td class="num">${s.pts} ${t('sprintPtsSuffix')}</td>
       </tr>`).join('');
   }
 
   const isTT = stage.type==='itt' || stage.type==='ttt';
+  const startLocal = fmtStartLocal(stage);
 
   panel.innerHTML = `
-    <div class="stagehead">
+    <div class="panelhead">
       <div>
-        <h2>${t('stagePrefix')} ${stage.n} — ${stage.start} → ${stage.finish}</h2>
-        <span class="typepill" style="background:${tc}">${t('typeLabels')[stage.type]}</span>
+        <span class="kicker">${t('stagePrefix')} ${stage.n} · ${fmtDate(stage.dateIso)}</span>
+        <h2>${stage.start} → ${stage.finish}</h2>
       </div>
-      <div class="stagehead-side">
-        <span class="datebadge">${fmtDate(stage.dateIso)}</span>
-        ${mapExpanded ? '' : renderMinimap(stage)}
-      </div>
-    </div>
-    ${mapExpanded ? renderMinimapLarge(stage) : ''}
-
-    <div class="factbar">
-      ${fmtStartLocal(stage) ? `<div class="fact">${t('factStart')}<b>${fmtStartLocal(stage)}</b></div>` : ''}
-      <div class="fact">${t('factDistance')}<b>${fmtKm(stage.km)}</b></div>
-      <div class="fact">${t('factGain')}${stage.gain?`<b>${fmtGain(stage.gain)}</b>`:`<b>—</b>`}</div>
-      <div class="fact">${t('factClimbs')}<b>${(stage.climbs||[]).length}</b></div>
-      <div class="fact">${t('factSprints')}<b>${(stage.sprints||[]).length}</b></div>
-    </div>
-    ${fmtStartLocal(stage) ? `<div class="chart-caption" style="margin-top:-2px;">${t('startNote')}</div>` : ''}
-
-    <div class="chartbox">
-      ${renderProfile(stage)}
-      <div class="legend">
-        <span><span class="leg-swatch" style="background:var(--climb-1)"></span> ${t('legendHC')}</span>
-        <span><span class="leg-swatch" style="background:var(--climb-2)"></span> ${t('legendC1')}</span>
-        <span><span class="leg-swatch" style="background:var(--climb-3)"></span> ${t('legendC2')}</span>
-        <span><span class="leg-swatch" style="background:var(--climb-4)"></span> ${t('legendC3')}</span>
-        <span><span class="leg-swatch" style="background:var(--green);border-radius:50%"></span> ${t('legendSprint')}</span>
-      </div>
-      <div class="chart-caption">${t('chartCaption')}</div>
+      <span class="typechip">${t('typeLabels')[stage.type]}</span>
     </div>
 
-    <div class="twocol">
-      <div class="block narrative">
+    <div class="factrow">
+      ${startLocal ? `<div class="factcell"><span class="label">${t('factStart')}</span><span class="value">${startLocal}</span></div>` : ''}
+      <div class="factcell"><span class="label">${t('factDistance')}</span><span class="value">${fmtKm(stage.km)}</span></div>
+      <div class="factcell"><span class="label">${t('factGain')}</span><span class="value">${stage.gain ? fmtGain(stage.gain) : '—'}</span></div>
+      <div class="factcell"><span class="label">${t('factClimbs')}</span><span class="value">${(stage.climbs||[]).length}</span></div>
+      <div class="factcell"><span class="label">${t('factSprints')}</span><span class="value">${(stage.sprints||[]).length}</span></div>
+    </div>
+    ${startLocal ? `<div class="startnote">${t('startNote')}</div>` : ''}
+
+    ${mapExpanded ? bigMapBoxHTML(stage) : ''}
+
+    <div class="detailgrid${mapExpanded ? ' big' : ''}">
+      ${mapExpanded ? '' : `<div class="mapcell">${mapCellHTML(stage)}</div>`}
+      <div class="profilecell">
+        <span class="label">${profileLabel()}</span>
+        ${renderProfile(stage)}
+        <div class="legend">
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.HC}"></span>${t('legendHC')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C1}"></span>${t('legendC1')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C2}"></span>${t('legendC2')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C3}"></span>${t('legendC3')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:var(--color-accent)"></span>${t('legendSprint')}</span>
+        </div>
+        <span class="chart-caption">${t('chartCaption')}</span>
+      </div>
+    </div>
+
+    <div class="detailbody">
+      <div>
         <h3>${t('descHeader')}</h3>
-        ${stage.desc[lang]||stage.desc.en}
+        <div class="prose">${stage.desc[lang]||stage.desc.en}</div>
       </div>
-      <div class="block">
+      <div>
         <h3>${t('climbsHeader')}</h3>
-        ${climbRows ? `<table class="points"><thead><tr><th>${t('climbTableHead')[0]}</th><th>${t('climbTableHead')[1]}</th><th>${t('climbTableHead')[2]}</th><th>${t('climbTableHead')[3]}</th><th>${t('climbTableHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>` : `<p class="empty-note">${t('noClimbs')}</p>`}
-        <h3 style="margin-top:16px;">${t('sprintsHeader')}</h3>
-        ${sprintRows ? `<table class="points"><thead><tr><th>${t('sprintTableHead')[0]}</th><th>${t('sprintTableHead')[1]}</th><th>${t('sprintTableHead')[2]}</th></tr></thead><tbody>${sprintRows}</tbody></table>` : `<p class="empty-note">${isTT?t('noSprintTT'):t('noSprint')}</p>`}
+        ${climbRows
+          ? `<table class="dtable"><thead><tr><th>${t('climbTableHead')[0]}</th><th>${t('climbTableHead')[1]}</th><th>${t('climbTableHead')[2]}</th><th>${t('climbTableHead')[3]}</th><th>${t('climbTableHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
+          : `<p class="empty-note">${t('noClimbs')}</p>`}
+      </div>
+      <div>
+        <h3>${t('sprintsHeader')}</h3>
+        ${sprintRows
+          ? `<table class="dtable sprints"><thead><tr><th>${t('sprintTableHead')[0]}</th><th>${t('sprintTableHead')[1]}</th><th>${t('sprintTableHead')[2]}</th></tr></thead><tbody>${sprintRows}</tbody></table>`
+          : `<p class="empty-note">${isTT ? t('noSprintTT') : t('noSprint')}</p>`}
       </div>
     </div>
   `;
 
-  // Minimap ↔ full-width map toggle. The collapsed minimap expands; the shrink
-  // button collapses. Re-rendering the panel swaps the variants; the list
-  // height is re-synced since the panel height changes.
-  panel.querySelectorAll('[data-mm-toggle]').forEach(el=>{
-    el.addEventListener('click', ()=>{
-      mapExpanded = !mapExpanded;
-      renderPanel(stage);
-      syncStageListHeight();
-    });
-  });
-
-  // Mount the real map once the expanded container is in the DOM.
-  if(mapExpanded) initStageMap(stage);
+  bindMapControls(stage);
+  initStageMap(stage);
 }
 
 /* ---------- TOP STATS ---------- */
 function renderTopStats(){
   document.getElementById('topstats').innerHTML = `
-    <div class="stat">${t('statDistance')}<b>${t('statDistanceVal')}</b></div>
-    <div class="stat">${t('statGain')}<b>${t('statGainVal')}</b></div>
-    <div class="stat">${t('statStages')}<b>${t('statStagesVal')}</b></div>
-    <div class="stat">${t('statRestDays')}<b>${t('statRestDaysVal')}</b></div>
-    <div class="stat">${t('statMountainFinish')}<b>${t('statMountainFinishVal')}</b></div>
+    <div class="statcell"><span class="label">${t('statDistance')}</span><span class="value">${t('statDistanceVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statGain')}</span><span class="value">${t('statGainVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statStages')}</span><span class="value">${t('statStagesVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statRestDays')}</span><span class="value">${t('statRestDaysVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statMountainFinish')}</span><span class="value">${t('statMountainFinishVal')}</span></div>
   `;
 }
-
-/* ==========================================================
-   RESULTS — UPDATABLE DATA
-   ----------------------------------------------------------
-   Fill in after each stage. Format per category:
-     rows: [ {pos:1, rider:'SURNAME Firstname', team:'Team',
-              nat:'SLO', val:'12:34' or '350 pt' , gap:'+0:12'}, ... ]
-   - Top 10 shown by default, the rest via the "Show all" button.
-   - updated: when the data was last updated.
-   - stageWinners: stage winners (winner:'' = not raced yet).
-   ========================================================== */
 const RESULTS = {
   updated: null, // e.g. 'Updated after stage 1, 4 Jul 2026'
   afterStage: 0, // how many stages the standings are after
@@ -1651,37 +1383,6 @@ const RESULTS = {
     {n:21, route:'Thoiry → Paris', winner:''}
   ]
 };
-
-/* Jersey icon (simple maillot silhouette) */
-function jerseySVG(fill, dots){
-  let extra='';
-  if(dots){
-    extra = [[8,9],[14,7],[11,13],[16,12],[7,15],[15,17],[11,18]]
-      .map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="#B23B32"/>`).join('');
-  }
-  return `<svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 3 L9 2 C9.5 3.5 12.5 3.5 13 2 L16 3 L20 7 L17 10 L16 8.5 L16 20 L6 20 L6 8.5 L5 10 L2 7 Z"
-      fill="${fill}" stroke="rgba(0,0,0,0.25)" stroke-width="0.7"/>
-    ${extra}
-  </svg>`;
-}
-
-const CLASS_JERSEY = {
-  gc: jerseySVG('#F5D33F'),
-  points: jerseySVG('#3E9B4F'),
-  mountains: jerseySVG('#FFFFFF', true),
-  youth: jerseySVG('#F4F4F4'),
-  teams: jerseySVG('#C99A2E')
-};
-const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
-
-const expandState = {}; // key -> bool
-let rankView = 'general'; // 'general' or the selected stage number
-
-/* Average stage speed, derived client-side: the roadbook distance (stages[].km)
-   divided by the winner's time from the stage result. The roadbook distance is
-   the planned route length, so this is an estimate — if a stage is shortened
-   on the day, the km value must be corrected by hand. */
 function timeToHours(s){
   const m = /(\d+)h\s*(\d+)'\s*(\d+)/.exec(s||'');
   if(!m) return null;
@@ -1699,12 +1400,18 @@ function fmtSpeed(v){
   return lang==='en' ? s : s.replace('.', ',');
 }
 
-/* HTML for a single result row (shared by classifications and stage results) */
+const expandState = {}; // key -> bool
+let rankView = 'general'; // 'general' or the selected stage number
+const STAGE_STAT_KEYS = ['points','mountains','youth','teams'];
+
+/* HTML for a single result row (shared by classifications and stage results).
+   The design's classification tables have no header row — the card head
+   (name + swatch) carries that context, so only the rows are markup here. */
 function resultRowHTML(r){
   return `
     <tr class="${r.pos<=3?'podium':''}">
       <td class="pos">${r.pos}</td>
-      <td class="rider"><b>${r.rider}</b>${r.team?`<span class="tm">${r.team}${r.nat?' · '+r.nat:''}</span>`:''}</td>
+      <td class="rider"><span class="rname">${r.rider}</span>${r.team?`<span class="rteam">${r.team}${r.nat?' · '+r.nat:''}</span>`:''}</td>
       <td class="val">${r.gap!==undefined && r.pos>1 ? r.gap : r.val}</td>
     </tr>`;
 }
@@ -1717,7 +1424,6 @@ function riddenStages(){
   });
 }
 
-/* Builds the dropdown (general standings + raced stages) and keeps the selection */
 function renderRankSelect(){
   const sel = document.getElementById('rankStageSelect');
   const ridden = riddenStages();
@@ -1734,25 +1440,36 @@ function renderRankSelect(){
 
 function renderResults(){
   renderRankSelect();
+  document.getElementById('resultsStatusLine').textContent = RESULTS.updated ? fmtUpdated(RESULTS.updated) : '';
   if(rankView==='general') renderGeneralRankings();
   else renderStageResult(rankView);
 }
 
-/* General standings: five jerseys + stage winners */
+/* General standings: five jerseys + stage winners + race-wide withdrawals */
+/* Per-card divider borders in a 2-col grid: right rule on the left card of
+   each pair, bottom rule on every row but the last. Matches the design's
+   own cardStyle formula (grid cells carry structure, not the cards
+   themselves — see the Modernist system note on 2px divider rules). */
+function cardBorderStyle(i, n){
+  let s = '';
+  if((i+1)%2!==0 && i!==n-1) s += 'border-right:2px solid var(--color-divider);';
+  if(i < n - (n%2===0?2:1)) s += 'border-bottom:2px solid var(--color-divider);';
+  return s;
+}
+
 function renderGeneralRankings(){
   const grid = document.getElementById('resultsGrid');
   const anyData = CLASS_KEYS.some(k=>RESULTS[k].rows.length>0);
-  let html = '';
+  let statusHTML = '';
 
   if(!anyData){
-    html += `<div class="status-card">
-      ${t('resultsEmpty')}
-    </div>`;
+    statusHTML = `<div class="status-card">${t('resultsEmpty')}</div>`;
   } else if(RESULTS.updated){
-    html += `<div class="status-card">${t('resultsStatus')(RESULTS.updated, RESULTS.afterStage)}</div>`;
+    statusHTML = `<div class="status-card">${t('resultsStatus')(RESULTS.updated, RESULTS.afterStage)}</div>`;
   }
 
-  CLASS_KEYS.forEach(key=>{
+  let cardsHTML = '';
+  CLASS_KEYS.forEach((key,i)=>{
     const c = t('classifications')[key];
     const rows = RESULTS[key].rows;
     const expanded = !!expandState[key];
@@ -1760,105 +1477,78 @@ function renderGeneralRankings(){
 
     let body;
     if(!rows.length){
-      body = `<div class="empty-cls">${t('classEmpty')}</div>`;
+      body = `<p class="empty-cls">${t('classEmpty')}</p>`;
     } else {
-      body = `<table class="results">
-        <thead><tr><th>${t('colHash')}</th><th>${key==='teams'?t('colTeam'):t('colRider')}</th><th style="text-align:right">${c.valHead}</th></tr></thead>
-        <tbody>` +
-        shown.map(resultRowHTML).join('') +
-        `</tbody></table>`;
+      body = `<table class="results"><tbody>${shown.map(resultRowHTML).join('')}</tbody></table>`;
       if(rows.length>10){
-        body += `<button class="expander" data-cls="${key}">
-          ${expanded ? t('expandLess') : t('expandMore')(rows.length)}
-        </button>`;
+        body += `<button class="expander" data-cls="${key}">${expanded ? t('expandLess') : t('expandMore')(rows.length)}</button>`;
       }
     }
 
-    html += `<div class="cls-card">
+    cardsHTML += `<div class="cls-card" style="${cardBorderStyle(i, CLASS_KEYS.length)}">
       <div class="cls-head">
-        <span class="jersey">${CLASS_JERSEY[key]}</span>
-        <h3>${c.name}<span class="fr">${c.fr}</span></h3>
+        <span class="names"><span class="name">${c.name}</span><span class="fr">${c.fr}</span></span>
+        <span class="swatch" style="background:${JERSEY[key]}"></span>
       </div>
       <div class="cls-body">${body}</div>
     </div>`;
   });
 
-  // Stage winners
   const ridden = RESULTS.stageWinners.filter(s=>s.winner);
-  html += `<div class="cls-card stagewins-card">
-    <div class="cls-head">
-      <span class="jersey">${jerseySVG('#3B6485')}</span>
-      <h3>${t('stageWinnersTitle')}<span class="fr">${t('stageWinnersFr')(ridden.length)}</span></h3>
-    </div>
-    <div class="cls-body">
-      <table class="results">
-        <thead><tr><th>${t('colHash')}</th><th>${t('colStage')}</th><th style="text-align:right">${t('colWinner')}</th><th style="text-align:right">${t('colSpeed')}</th></tr></thead>
-        <tbody>` +
-        RESULTS.stageWinners.map(s=>{
-          const spd = stageAvgSpeed(s.n);
-          return `
-          <tr>
-            <td class="pos">${s.n}</td>
-            <td>${s.route}</td>
-            <td class="val">${s.winner || '—'}</td>
-            <td class="val">${spd ? fmtSpeed(spd) : '—'}</td>
-          </tr>`;
-        }).join('') +
-      `</tbody></table>
-    </div>
+  const winnersHTML = `<div class="stagewins-block">
+    <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-3)">
+      <h3>${t('stageWinnersTitle')}</h3>
+      <span class="stagewins-meta">${t('stageWinnersFr')(ridden.length)}</span>
+    </span>
+    <table class="winners"><tbody>${RESULTS.stageWinners.map(s=>{
+      const spd = stageAvgSpeed(s.n);
+      return `<tr>
+        <td class="n">${s.n}</td>
+        <td class="route">${s.route}</td>
+        <td class="winner">${s.winner || '—'}</td>
+        <td class="speed">${spd ? fmtSpeed(spd) : '—'}</td>
+      </tr>`;
+    }).join('')}</tbody></table>
   </div>`;
 
-  // All withdrawals across the race, in stage order
   const allWd = [];
   RESULTS.stageWinners.forEach(s=>{
     const sr = RESULTS.stageResults[s.n];
-    (sr && Array.isArray(sr.withdrawals) ? sr.withdrawals : []).forEach(w=>allWd.push({stage:s.n, ...w}));
+    (sr && Array.isArray(sr.withdrawals) ? sr.withdrawals : []).forEach(w=>allWd.push(Object.assign({stage:s.n}, w)));
   });
   const wdBody = !allWd.length
-    ? `<div class="empty-cls">${t('noWithdrawalsRace')}</div>`
-    : `<table class="results">
-        <thead><tr><th>${t('colStage')}</th><th>${t('colRider')}</th><th style="text-align:right">${t('colReason')}</th></tr></thead>
-        <tbody>` +
-        allWd.map(w=>`
-          <tr>
-            <td class="pos">${w.stage}</td>
-            <td class="rider"><b>${w.rider}</b>${w.team?`<span class="tm">${w.team}</span>`:''}</td>
-            <td class="val">${t('withdrawalReasons')[w.reason] || w.reason}</td>
-          </tr>`).join('') +
-      `</tbody></table>`;
-  html += `<div class="cls-card stagewins-card">
-    <div class="cls-head">
-      <span class="jersey">${jerseySVG('#8C8C8C')}</span>
-      <h3>${t('allWithdrawalsTitle')}<span class="fr">${t('allWithdrawalsFr')(allWd.length)}</span></h3>
-    </div>
-    <div class="cls-body">${wdBody}</div>
+    ? `<p class="empty-cls">${t('noWithdrawalsRace')}</p>`
+    : `<table class="results"><tbody>${allWd.map(w=>`
+        <tr>
+          <td class="pos">${w.stage}</td>
+          <td class="rider"><span class="rname">${w.rider}</span>${w.team?`<span class="rteam">${w.team}</span>`:''}</td>
+          <td class="val">${t('withdrawalReasons')[w.reason] || w.reason}</td>
+        </tr>`).join('')}</tbody></table>`;
+  const withdrawalsHTML = `<div class="stagewins-block">
+    <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-3)">
+      <h3>${t('allWithdrawalsTitle')}</h3>
+      <span class="stagewins-meta">${t('allWithdrawalsFr')(allWd.length)}</span>
+    </span>
+    ${wdBody}
   </div>`;
 
-  grid.innerHTML = html;
+  grid.innerHTML = statusHTML + `<div class="clsgrid">${cardsHTML}</div>` + winnersHTML + withdrawalsHTML;
   bindExpanders(grid);
 }
 
-/* A single stage: finishing order + the stage's other statistics
-   (points and KOM points won, youth and team stage results, combativity) */
-const STAGE_STAT_KEYS = ['points','mountains','youth','teams'];
-
-function stageStatTable(rows, expKey, riderHead, valHead){
-  if(!rows.length) return `<div class="empty-cls">${t('stageStatEmpty')}</div>`;
+function stageStatTable(rows, expKey){
+  if(!rows.length) return `<p class="empty-cls">${t('stageStatEmpty')}</p>`;
   const expanded = !!expandState[expKey];
   const shown = expanded ? rows : rows.slice(0,10);
-  let body = `<table class="results">
-    <thead><tr><th>${t('colHash')}</th><th>${riderHead}</th><th style="text-align:right">${valHead}</th></tr></thead>
-    <tbody>` +
-    shown.map(resultRowHTML).join('') +
-    `</tbody></table>`;
+  let body = `<table class="results"><tbody>${shown.map(resultRowHTML).join('')}</tbody></table>`;
   if(rows.length>10){
-    body += `<button class="expander" data-cls="${expKey}">
-      ${expanded ? t('expandLess') : t('expandMore')(rows.length)}
-    </button>`;
+    body += `<button class="expander" data-cls="${expKey}">${expanded ? t('expandLess') : t('expandMore')(rows.length)}</button>`;
   }
   return body;
 }
 
+/* A single stage: finishing order + the stage's other statistics
+   (points and KOM points won, youth and team stage results, combativity) */
 function renderStageResult(n){
   const grid = document.getElementById('resultsGrid');
   const sr = RESULTS.stageResults[n] || {};
@@ -1866,86 +1556,66 @@ function renderStageResult(n){
   const meta = RESULTS.stageWinners.find(s=>String(s.n)===String(n));
   const route = meta ? meta.route : '';
 
-  let mainBody;
-  if(!rows.length){
-    mainBody = `<div class="empty-cls">${t('stageResultEmpty')}</div>`;
-  } else {
-    mainBody = stageStatTable(rows, '__stage', t('colRider'), t('stageResultValHead'));
-  }
-
+  const mainBody = rows.length ? stageStatTable(rows, '__stage') : `<p class="empty-cls">${t('stageResultEmpty')}</p>`;
   const spd = stageAvgSpeed(n);
   const sub = route + (spd ? ` · ${t('avgSpeed')(fmtSpeed(spd))}` : '');
-  let html = `<div class="cls-card stagewins-card">
+  const mainHTML = `<div class="cls-card" style="border-bottom:2px solid var(--color-divider)">
     <div class="cls-head">
-      <span class="jersey">${jerseySVG('#3B6485')}</span>
-      <h3>${t('stageResultTitle')(n)}<span class="fr">${sub}</span></h3>
+      <span class="names"><span class="name">${t('stageResultTitle')(n)}</span><span class="fr">${sub}</span></span>
+      <span class="swatch" style="background:${AUX_SWATCH.winners}"></span>
     </div>
     <div class="cls-body">${mainBody}</div>
   </div>`;
 
-  // The other per-stage statistics only exist once the stage has results.
+  let cardsHTML = '';
   if(rows.length){
+    const cards = [];
     STAGE_STAT_KEYS.forEach(key=>{
       const c = t('stageStats')[key];
       const data = Array.isArray(sr[key]) ? sr[key] : [];
       let body;
       if(key==='points' || key==='mountains'){
-        // Sectioned: one sub-table per intermediate sprint / finish / climb.
         body = !data.length
-          ? `<div class="empty-cls">${t('stageStatEmpty')}</div>`
+          ? `<p class="empty-cls">${t('stageStatEmpty')}</p>`
           : data.map((sec,i)=>
               (sec.label?`<div class="sec-label">${sec.label}</div>`:'') +
-              stageStatTable(sec.rows||[], `__stage_${key}_${i}`, t('colRider'), c.valHead)
+              stageStatTable(sec.rows||[], `__stage_${key}_${i}`)
             ).join('');
       } else {
-        body = stageStatTable(data, '__stage_'+key, key==='teams'?t('colTeam'):t('colRider'), c.valHead);
+        body = stageStatTable(data, '__stage_'+key);
       }
-      html += `<div class="cls-card">
-        <div class="cls-head">
-          <span class="jersey">${CLASS_JERSEY[key]}</span>
-          <h3>${c.name}<span class="fr">${c.fr}</span></h3>
-        </div>
-        <div class="cls-body">${body}</div>
-      </div>`;
+      cards.push({name:c.name, fr:c.fr, swatch:JERSEY[key], body});
     });
 
     const cc = t('stageStats').combative;
     const comb = sr.combative;
     const combBody = comb && comb.rider
       ? `<table class="results"><tbody>${resultRowHTML({pos:1, rider:comb.rider, team:comb.team, nat:comb.nat, val:''})}</tbody></table>`
-      : `<div class="empty-cls">${t('stageStatEmpty')}</div>`;
-    html += `<div class="cls-card">
-      <div class="cls-head">
-        <span class="jersey">${jerseySVG('#B23B32')}</span>
-        <h3>${cc.name}<span class="fr">${cc.fr}</span></h3>
-      </div>
-      <div class="cls-body">${combBody}</div>
-    </div>`;
+      : `<p class="empty-cls">${t('stageStatEmpty')}</p>`;
+    cards.push({name:cc.name, fr:cc.fr, swatch:AUX_SWATCH.combative, body:combBody});
 
     const wt = t('stageStats').withdrawals;
     const wd = Array.isArray(sr.withdrawals) ? sr.withdrawals : [];
     const wBody = !wd.length
-      ? `<div class="empty-cls">${t('noWithdrawals')}</div>`
-      : `<table class="results">
-          <thead><tr><th>${t('colHash')}</th><th>${t('colRider')}</th><th style="text-align:right">${t('colReason')}</th></tr></thead>
-          <tbody>` +
-          wd.map(w=>`
-            <tr>
-              <td class="pos">${w.bib}</td>
-              <td class="rider"><b>${w.rider}</b>${w.team?`<span class="tm">${w.team}</span>`:''}</td>
-              <td class="val">${t('withdrawalReasons')[w.reason] || w.reason}</td>
-            </tr>`).join('') +
-          `</tbody></table>`;
-    html += `<div class="cls-card">
+      ? `<p class="empty-cls">${t('noWithdrawals')}</p>`
+      : `<table class="results"><tbody>${wd.map(w=>`
+          <tr>
+            <td class="pos">${w.bib}</td>
+            <td class="rider"><span class="rname">${w.rider}</span>${w.team?`<span class="rteam">${w.team}</span>`:''}</td>
+            <td class="val">${t('withdrawalReasons')[w.reason] || w.reason}</td>
+          </tr>`).join('')}</tbody></table>`;
+    cards.push({name:wt.name, fr:wt.fr, swatch:AUX_SWATCH.withdrawals, body:wBody});
+
+    cardsHTML = cards.map((c,i)=>`<div class="cls-card" style="${cardBorderStyle(i, cards.length)}">
       <div class="cls-head">
-        <span class="jersey">${jerseySVG('#8C8C8C')}</span>
-        <h3>${wt.name}<span class="fr">${wt.fr}</span></h3>
+        <span class="names"><span class="name">${c.name}</span><span class="fr">${c.fr}</span></span>
+        <span class="swatch" style="background:${c.swatch}"></span>
       </div>
-      <div class="cls-body">${wBody}</div>
-    </div>`;
+      <div class="cls-body">${c.body}</div>
+    </div>`).join('');
   }
 
-  grid.innerHTML = html;
+  grid.innerHTML = mainHTML + (cardsHTML ? `<div class="clsgrid">${cardsHTML}</div>` : '');
   bindExpanders(grid);
 }
 
@@ -1965,22 +1635,21 @@ function bindExpanders(grid){
 let RIDERS = null;
 
 /* One rider row: bib, name + nationality, final GC position, time or gap.
-   The winner has no gap, so the total time is shown instead; a rider who
-   left the race gets a DNS/DNF/OTL badge and the stage it happened on. */
+   A rider who left the race gets the reason + stage folded into the sub
+   line instead of nationality, per the design (no separate status badge). */
 function riderRowHTML(r){
-  const out = !r.gcPos;
-  const posCell = out
-    ? `<span class="out-badge" title="${t('withdrawalReasons')[r.status] || ''}">${r.status || '—'}</span>`
-    : r.gcPos;
-  const valCell = out
-    ? (r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown'))
-    : (r.gcGap || r.gcVal);
+  const out = !!r.status;
+  const sub = out
+    ? `${t('withdrawalReasons')[r.status] || r.status} · ${r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown')}`
+    : (r.nat || '');
+  const gcPos = out ? '—' : (r.gcPos || '—');
+  const val = out ? '' : (r.gcGap || r.gcVal || '');
   return `
-    <tr class="${out?'out':(r.gcPos<=3?'podium':'')}">
+    <tr class="${out ? 'out' : (r.gcPos && r.gcPos<=3 ? 'podium' : '')}">
       <td class="bib">${r.bib}</td>
-      <td class="rider"><b>${r.name}</b>${r.nat?`<span class="tm">${r.nat}</span>`:''}</td>
-      <td class="gcpos">${posCell}</td>
-      <td class="val">${valCell}</td>
+      <td class="rider"><span class="rname">${r.name}</span>${sub?`<span class="rsub">${sub}</span>`:''}</td>
+      <td class="gcpos">${gcPos}</td>
+      <td class="val">${val}</td>
     </tr>`;
 }
 
@@ -1992,37 +1661,31 @@ function renderRiders(){
   }
 
   const out = RIDERS.riderCount - RIDERS.finishers;
-  let html = `<div class="status-card">
-    ${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out)}
-    ${RIDERS.updated ? '<br>'+t('resultsStatus')(RIDERS.updated, RIDERS.afterStage) : ''}
-  </div>`;
+  const statusHTML = `<div class="teamsstatus">${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out).replace(/<[^>]+>/g,'')}</div>`;
 
-  RIDERS.teams.forEach(team=>{
-    const name = team.url
+  const cardsHTML = RIDERS.teams.map((team,i)=>{
+    const nameHTML = team.url
       ? `<a class="team-link" href="${team.url}" target="_blank" rel="noopener">${team.name}</a>`
-      : team.name;
+      : `<span class="team-link">${team.name}</span>`;
     const sub = team.gcPos
       ? t('teamClsLine')(team.gcPos, team.gcGap || team.gcVal)
       : t('teamClsNone');
-    html += `<div class="cls-card">
-      <div class="cls-head">
+    return `<div class="team-card" style="${cardBorderStyle(i, RIDERS.teams.length)}">
+      <div class="team-head">
         <span class="team-rank${team.gcPos===1?' first':''}">${team.gcPos || '–'}</span>
-        <h3>${name}<span class="fr">${sub}</span></h3>
+        <span class="team-meta">${nameHTML}<span class="team-clsline">${sub}</span></span>
       </div>
-      <div class="cls-body">
-        <table class="results riders">
-          <thead><tr>
-            <th>${t('colBib')}</th><th>${t('colRider')}</th>
-            <th style="text-align:right">${t('colGcPos')}</th>
-            <th style="text-align:right">${t('colGcTime')}</th>
-          </tr></thead>
-          <tbody>${team.riders.map(riderRowHTML).join('')}</tbody>
-        </table>
-      </div>
+      <table class="riders">
+        <thead><tr>
+          <th>${t('colBib')}</th><th>${t('colRider')}</th>
+          <th>${t('colGcPos')}</th><th>${t('colGcTime')}</th>
+        </tr></thead>
+        <tbody>${team.riders.map(riderRowHTML).join('')}</tbody>
+      </table>
     </div>`;
-  });
+  }).join('');
 
-  grid.innerHTML = html;
+  grid.innerHTML = statusHTML + `<div class="clsgrid">${cardsHTML}</div>`;
 }
 
 /* ---------- STATIC TEXT (header/tabs/footer) ---------- */
@@ -2082,7 +1745,7 @@ document.getElementById('rankStageSelect').addEventListener('change', e=>{
 });
 
 /* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
-const tabButtons = Array.from(document.querySelectorAll('.tab'));
+const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
 
 function activateTab(tab, setFocus){
   tabButtons.forEach(x=>{
@@ -2153,11 +1816,6 @@ async function loadRiders(){
     /* No start list available — the view keeps showing t('teamsEmpty'). */
   }
 }
-
-/* ---------- AUTOMATIC SELECTION OF TODAY'S STAGE ----------
-   Map: date (YYYY-MM-DD, local time) -> stage number. On a rest day the
-   next stage is selected; before the race, stage 1; after the race,
-   stage 21. */
 const STAGE_DATES = {
   '2026-07-04':1,'2026-07-05':2,'2026-07-06':3,'2026-07-07':4,'2026-07-08':5,
   '2026-07-09':6,'2026-07-10':7,'2026-07-11':8,'2026-07-12':9,
