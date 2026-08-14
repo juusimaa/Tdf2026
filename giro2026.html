@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9ECE4">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12160F">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f3f2f2">
 <title>Giro d'Italia 2026 — etapit, profiilit & tulokset</title>
 <meta name="description" content="Giro d'Italia 2026 — kaikki 21 etappia, reitit, havainnolliset korkeusprofiilit sekä lopulliset luokitukset ja etappivoittajat. Jonas Vingegaard voitti. · All 21 stages, illustrative profiles and final results of the 2026 Giro d'Italia.">
 <link rel="canonical" href="https://juusimaa.github.io/Tdf2026/giro2026.html">
@@ -20,330 +19,301 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Leaflet (real map in the expanded stage locator). Loaded from unpkg with
-     Subresource Integrity so a tampered CDN response is rejected. Only used by
-     the expanded map; the collapsed minimap is the self-contained SVG below. -->
+<!-- Leaflet (real interactive route map, restyled to the Modernist chrome).
+     Loaded from unpkg with Subresource Integrity so a tampered CDN response
+     is rejected. -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<!-- Shared colour theme (light + dark palettes, flag-stripe classes). -->
-<link rel="stylesheet" href="theme.css">
+
+<!-- Modernist design tokens (shared with index.html / tdf2026.html). -->
+<link rel="stylesheet" href="modernist.css">
 <style>
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
-  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+  html,body{margin:0;padding:0;min-height:100vh;}
+  a{color:var(--color-accent-700);text-decoration:none;}
+  a:hover{color:var(--color-accent-800);}
+  :focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}
 
-  header.top{display:flex;flex-direction:column;gap:6px;padding-bottom:22px;margin-bottom:22px;border-bottom:3px solid var(--ink);}
-  .backlink{
-    display:inline-flex;align-items:center;gap:5px;align-self:flex-start;margin-bottom:6px;
-    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--ink-soft);text-decoration:none;
-  }
-  .backlink svg{width:14px;height:14px;}
-  .backlink:hover{color:var(--ink);}
-  .backlink:focus-visible{outline:2px solid var(--rosa);outline-offset:3px;border-radius:2px;}
-  .top-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
-  .langsel{display:flex;gap:0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;}
-  .langsel button{background:transparent;border:1px solid var(--line);padding:4px 10px;cursor:pointer;color:var(--ink-soft);}
-  .langsel button:first-child{border-radius:2px 0 0 2px;}
-  .langsel button:last-child{border-radius:0 2px 2px 0;}
-  .langsel button:not(:first-child){border-left:none;}
-  .langsel button.active{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--solid-bg);}
-  .langsel button:hover:not(.active){color:var(--ink);}
-  h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(28px,5vw,46px);letter-spacing:.01em;text-transform:uppercase;margin:2px 0 4px;line-height:1.02;}
-  h1 span{color:var(--rosa-deep);}
-  /* Title text striped in the Italian tricolore — colours come from theme.css
-     (.it-g, .fs-w, .it-r). */
-  .sub{font-size:clamp(14px,2vw,16px);color:var(--ink-soft);max-width:70ch;line-height:1.5;}
-  .finaltag{
-    display:inline-flex;align-items:center;gap:6px;margin-top:10px;align-self:flex-start;
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--solid-fg);background:var(--solid-bg);padding:4px 10px;border-radius:20px;
-  }
+  /* ---------- header ---------- */
+  .tdf-header{display:flex;align-items:stretch;justify-content:space-between;border-bottom:2px solid var(--color-divider);}
+  .tdf-header .left{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:var(--space-3) clamp(20px,4vw,48px);}
+  .backlink{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .backlink:hover{color:var(--color-accent-700);}
+  .wordmark{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;}
+  .tdf-langs{display:flex;border-left:2px solid var(--color-divider);}
+  .langbtn{font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.14em;min-width:56px;padding:0 18px;border:0;border-left:2px solid var(--color-divider);cursor:pointer;background:transparent;color:var(--color-neutral-700);transition:background .15s ease;}
+  .tdf-langs .langbtn:first-child{border-left:0;}
+  .langbtn:hover{background:var(--color-accent-100);}
+  .langbtn.active{background:var(--color-accent);color:#fff;}
+  .langbtn.active:hover{background:var(--color-accent);}
+  .langbtn:focus-visible,.tabbtn:focus-visible,.stage-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
 
-  /* Tabs */
-  .tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:2px solid var(--ink);}
-  .tab{
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.05em;
-    background:transparent;border:none;cursor:pointer;color:var(--ink-soft);
-    padding:10px 22px 8px;border-bottom:3px solid transparent;margin-bottom:-2px;
-  }
-  .tab:hover{color:var(--ink);}
-  .tab.active{color:var(--ink);border-bottom:3px solid var(--rosa-deep);}
+  /* ---------- hero ---------- */
+  .tdf-hero{padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px) clamp(24px,4vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-700);}
+  .tdf-hero h1{font-family:var(--font-heading);font-weight:700;font-size:clamp(38px,8vw,96px);line-height:.9;letter-spacing:-.03em;margin:0;text-transform:uppercase;max-width:20ch;}
+  .stripe{display:flex;height:10px;width:180px;}
+  .stripe span{flex:1;}
+  .lede{max-width:74ch;font-size:clamp(15px,1.5vw,18px);line-height:1.5;color:var(--color-neutral-700);margin:0;text-wrap:pretty;}
+  .finaltag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);background:var(--color-neutral-100);border:1px solid var(--color-divider);padding:5px 12px;}
+
+  /* ---------- tabs ---------- */
+  .tabs{display:flex;border-bottom:2px solid var(--color-divider);flex-wrap:wrap;}
+  .tabbtn{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--color-neutral-600);border:0;border-right:2px solid var(--color-divider);padding:14px clamp(18px,3vw,32px);cursor:pointer;transition:background .15s ease;}
+  .tabbtn:hover{color:var(--color-text);}
+  .tabbtn.active{background:var(--color-text);color:var(--color-bg);}
   .view{display:none;}
   .view.active{display:block;}
 
-  /* Stages layout
-     .stagelist's height is set in pixels by JS (syncStageListHeight),
-     copied straight from the detail panel's rendered height, so the two
-     columns are always exactly the same height regardless of viewport size
-     or stage content — CSS alone (grid stretch, flex, vh-based caps) kept
-     producing one-sided mismatches, because whichever column got a size cap
-     fed back into how tall Grid made the row, throwing off the other
-     column. If the list's own content doesn't fit in that height it just
-     scrolls internally (overflow-y:auto below); the panel is never resized,
-     so a short panel never gains a blank area under its content either. */
-  .layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start;}
-  @media (max-width:860px){.layout{grid-template-columns:1fr;}}
-  .stagelist{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;display:flex;flex-direction:column;position:sticky;top:16px;}
-  .stagelist .listhead{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:12px 14px 8px;flex:0 0 auto;}
-  ul.stages{list-style:none;margin:0;padding:0 6px 10px;flex:1 1 auto;min-height:0;overflow-y:auto;}
-  @media (max-width:860px){.stagelist{position:static;}ul.stages{overflow-y:visible;}}
-  li.stage-item{margin:2px 0;}
-  button.stage-btn{
-    width:100%;text-align:left;display:flex;align-items:center;gap:10px;
-    background:transparent;border:none;cursor:pointer;padding:8px 8px;border-radius:2px;
-    font-family:'Inter',sans-serif;color:var(--ink);border-left:3px solid transparent;
+  /* ---------- stage layout ---------- */
+  .stagelayout{display:grid;grid-template-columns:300px 1fr;}
+  @media (max-width:980px){
+    .stagelayout{grid-template-columns:1fr;}
+    .detailgrid{grid-template-columns:1fr!important;}
+    .clsgrid{grid-template-columns:1fr!important;}
   }
-  button.stage-btn:hover{background:var(--hover);}
-  button.stage-btn.active{background:var(--paper);border-left:3px solid var(--rosa-deep);}
-  .num{font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;width:26px;flex:0 0 auto;color:var(--ink-soft);}
-  .stage-btn.active .num{color:var(--rosa-deep);}
-  .btn-text{flex:1;min-width:0;}
-  .btn-route{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .btn-meta{font-size:10.5px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;}
-  .typedot{width:8px;height:8px;border-radius:50%;flex:0 0 auto;}
-  .rest-row{padding:6px 14px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);margin:4px 0;}
+  .stagerail{border-right:2px solid var(--color-divider);display:flex;flex-direction:column;position:sticky;top:0;}
+  @media (max-width:980px){.stagerail{position:static;}}
+  .railhead{padding:var(--space-3) var(--space-4);border-bottom:2px solid var(--color-divider);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);flex:0 0 auto;}
+  .stagerail-list{display:flex;flex-direction:column;list-style:none;margin:0;padding:0;flex:1 1 auto;min-height:0;overflow-y:auto;}
+  @media (max-width:980px){.stagerail-list{overflow-y:visible;}}
+  .stage-item{margin:0;}
+  .stage-btn{display:flex;gap:12px;align-items:center;width:100%;padding:11px var(--space-4);border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;font-family:var(--font-body);text-align:left;background:transparent;color:var(--color-text);transition:background .12s ease;}
+  .stage-btn:hover{background:var(--color-accent-100);}
+  .stage-btn.active{background:var(--color-text);color:var(--color-bg);}
+  .stage-btn .num{font-family:var(--font-heading);font-weight:700;font-size:15px;width:26px;flex:0 0 auto;text-align:left;color:var(--color-neutral-600);}
+  .stage-btn.active .num{color:var(--color-bg);}
+  .stage-btn .btn-text{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left;}
+  .stage-btn .btn-route{font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .stage-btn .btn-meta{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .stage-btn.active .btn-meta{color:var(--color-bg);opacity:.75;}
+  .rest-row{display:flex;gap:12px;align-items:center;padding:8px var(--space-4);border-bottom:1px solid var(--color-divider);background:var(--color-neutral-100);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
 
-  /* Stage panel */
-  .panel{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;padding:22px 24px 26px;}
-  .stagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:4px;}
-  .stagehead h2{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);text-transform:uppercase;margin:0;letter-spacing:.01em;}
-  .datebadge{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--solid-fg);background:var(--solid-bg);padding:5px 9px;border-radius:2px;white-space:nowrap;}
-  .stagehead-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-  /* Locator minimap: a rough Italy outline (with a Bulgaria inset for the
-     Grande Partenza) and a start→finish marker. All strokes/fills use theme
-     variables so it follows light/dark live. */
-  svg.minimap{
-    width:112px;height:auto;display:block;
-    background:var(--paper);border:1px solid var(--line);border-radius:2px;
-    padding:5px;
-  }
-  svg.minimap .mm-land{fill:var(--hover);stroke:var(--grey);stroke-width:1;stroke-linejoin:round;}
-  svg.minimap .mm-inset{fill:none;stroke:var(--line);stroke-width:0.8;stroke-dasharray:2,2;}
-  svg.minimap .mm-route{stroke:var(--rosa-deep);stroke-width:2.2;stroke-linecap:round;}
-  svg.minimap .mm-start{fill:var(--paper);stroke:var(--rosa-deep);stroke-width:1.4;}
-  svg.minimap .mm-finish{fill:var(--red);}
-  /* Collapsed minimap doubles as the expand button. */
-  .mm-btn{background:none;border:none;padding:0;cursor:pointer;display:block;position:relative;}
-  .mm-btn:hover svg.minimap{border-color:var(--grey);}
-  .mm-btn:focus-visible{outline:2px solid var(--rosa);outline-offset:2px;border-radius:2px;}
-  /* Corner badge signalling the minimap can be enlarged. */
-  .mm-expand{
-    position:absolute;right:4px;bottom:4px;
-    display:flex;align-items:center;justify-content:center;
-    width:16px;height:16px;
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
-    color:var(--ink-soft);pointer-events:none;
-  }
-  .mm-expand svg{width:10px;height:10px;display:block;}
-  .mm-btn:hover .mm-expand{color:var(--ink);border-color:var(--grey);}
-  /* Expanded map: full panel width. The viewBox is portrait, so the SVG is
-     given a fixed height and letterboxes horizontally (labels may spill
-     into the side margins, which is fine — svg overflow stays visible
-     within the element box). */
-  .mapbox{position:relative;margin:16px 0 4px;}
-  /* Expanded view: a real Leaflet map on Stadia tiles. Fixed height so the
-     panel's layout height is known immediately (before tiles load), which
-     keeps syncStageListHeight correct. */
-  #stage-map{
-    width:100%;height:min(60vh,460px);
-    border:1px solid var(--line);border-radius:2px;
-    background:var(--paper);z-index:0;
-  }
-  .leaflet-container{font-family:'Inter',system-ui,sans-serif;}
+  /* ---------- stage panel ---------- */
+  .panel{display:flex;flex-direction:column;}
+  .panelhead{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--space-4);}
+  .panelhead .kicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);display:block;margin-bottom:8px;}
+  .panelhead h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(26px,3.6vw,44px);line-height:1;letter-spacing:-.02em;margin:0;text-transform:uppercase;}
+  .typechip{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;background:var(--color-accent);color:#fff;white-space:nowrap;}
+
+  .factrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:2px solid var(--color-divider);}
+  .factrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  .factcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
+  .factcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .factcell .value{font-family:var(--font-heading);font-weight:700;font-size:18px;}
+  .startnote{padding:10px clamp(20px,3vw,40px) 0;font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
+
+  /* ---------- map + profile ---------- */
+  #bigmapbox{border-bottom:2px solid var(--color-divider);padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;}
+  .maprow{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);width:100%;}
+  .maplabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapctrls{display:flex;align-items:center;}
+  .mapctrl-btn{font-family:var(--font-heading);font-size:14px;font-weight:700;line-height:1;width:32px;height:30px;display:grid;place-items:center;border:0;border-left:2px solid var(--color-divider);background:transparent;color:var(--color-neutral-700);cursor:pointer;}
+  .mapctrl-btn:hover{background:var(--color-accent-100);}
+  .mapctrl-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
+  .mapctrl-close{background:var(--color-text);color:var(--color-bg);}
+  .mapctrl-close:hover{background:var(--color-text);}
+  .mapmeta{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;}
+  .mapzoom{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapcaption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);max-width:80ch;}
+  .mappanhint{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700);}
+
+  #stage-map{width:100%;background:var(--color-surface);border:1px solid var(--color-divider);}
+  .mapcell #stage-map{height:220px;}
+  #bigmapbox #stage-map{height:min(60vh,460px);}
+  .leaflet-container{font-family:var(--font-body);background:var(--color-surface);}
   .leaflet-control-attribution{font-size:9px;}
-  /* Icon-only map buttons (accessible names via aria-label/title):
-     shrink (top) and recenter-on-route (below it). */
-  .mm-close,.mm-recenter{
-    position:absolute;top:8px;right:8px;z-index:1;
-    display:flex;align-items:center;justify-content:center;
-    width:26px;height:26px;padding:0;
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
-    color:var(--ink-soft);cursor:pointer;
-  }
-  .mm-recenter{top:40px;}
-  .mm-close svg,.mm-recenter svg{width:12px;height:12px;display:block;}
-  .mm-close:hover,.mm-recenter:hover{background:var(--hover);color:var(--ink);}
-  .mm-close:focus-visible,.mm-recenter:focus-visible{outline:2px solid var(--rosa);outline-offset:2px;}
-  .typepill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;color:#fff;margin-top:8px;}
-  .factbar{display:flex;flex-wrap:wrap;gap:18px 28px;margin:16px 0 6px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .fact{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);}
-  .fact b{display:block;font-family:'Oswald',sans-serif;font-size:17px;color:var(--ink);font-weight:600;}
-  .fact b.win{color:var(--rosa-deep);}
-  .chartbox{margin:18px 0 6px;}
-  .chart-caption{font-size:11px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-top:6px;}
+  .leaflet-control-zoom{display:none;}
+
+  .detailgrid{display:grid;grid-template-columns:280px 1fr;border-bottom:2px solid var(--color-divider);}
+  .detailgrid.big{grid-template-columns:1fr;}
+  .mapcell{border-right:2px solid var(--color-divider);padding:var(--space-4);display:flex;flex-direction:column;gap:10px;align-items:flex-start;}
+  .profilecell{padding:var(--space-4);display:flex;flex-direction:column;gap:10px;min-width:0;}
+  .profilecell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
   svg.profile{width:100%;height:auto;display:block;}
-  svg.profile .pf-grid{stroke:var(--line);}
-  svg.profile .pf-tick{fill:var(--ink-soft);}
-  .twocol{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:18px;}
-  .twocol > *{min-width:0;}
-  @media (max-width:700px){.twocol{grid-template-columns:1fr;}}
-  .block{overflow-x:auto;}
-  .block h3{font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 8px;}
-  .narrative{font-size:14.5px;line-height:1.62;}
-  .narrative p{margin:0 0 10px;}
-  table.points{width:100%;border-collapse:collapse;font-size:13px;}
-  table.points th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;color:var(--ink-soft);letter-spacing:.05em;padding:4px 6px;border-bottom:1px solid var(--line);}
-  table.points td{padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
-  td.atkm{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);white-space:nowrap;}
-  .catchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;min-width:16px;text-align:center;padding:1px 6px;border-radius:20px;}
-  .dash{color:var(--ink-soft);}
-  .flagchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;background:var(--green);padding:1px 6px;border-radius:20px;}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 2px;font-size:11.5px;color:var(--ink-soft);}
-  .legend span{display:inline-flex;align-items:center;gap:5px;}
-  .leg-swatch{width:11px;height:11px;border-radius:3px;display:inline-block;}
-  .empty-note{color:var(--ink-soft);font-size:13px;font-style:italic;}
+  .legend{display:flex;flex-wrap:wrap;gap:var(--space-4);}
+  .legenditem{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .legswatch{width:14px;height:8px;display:inline-block;}
+  .chart-caption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
 
-  /* Results view (classifications + stage winners) */
-  h2.section{font-family:'Oswald',sans-serif;font-weight:600;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:6px 0 14px;}
-  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
-  .card{background:var(--paper-panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;}
-  .card__head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);}
-  .jersey{width:14px;height:20px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,0.15);}
-  .card__title{font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.02em;line-height:1.1;}
-  .card__sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase;}
-  table.cls{width:100%;border-collapse:collapse;font-size:13.5px;}
-  table.cls th,table.cls td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:baseline;}
-  table.cls thead th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;}
-  table.cls tbody tr:last-child td{border-bottom:none;}
-  td.pos{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);width:1%;white-space:nowrap;}
-  tr.leader td.pos{color:var(--rosa-deep);font-weight:600;}
-  .rider{font-weight:600;}
-  .nat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-soft);margin-left:6px;letter-spacing:.04em;}
-  .team{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:1px;}
-  td.num{font-family:'JetBrains Mono',monospace;white-space:nowrap;}
-  td.gap{font-family:'JetBrains Mono',monospace;color:var(--ink-soft);white-space:nowrap;}
-  /* Teams & riders view — same cards and tables as the classifications, with
-     a team-rank badge in the card head and a badge for riders who did not
-     make it to Rome. */
-  /* Two fixed columns, like the Tour page's teams view — team cards hold a
-     full eight-rider roster, so letting them auto-fit into three narrow
-     columns on a wide screen made them cramped and uneven. */
-  .grid.teams-grid{grid-template-columns:1fr 1fr;align-items:start;}
-  .grid.teams-grid > *{min-width:0;}
-  @media (max-width:900px){.grid.teams-grid{grid-template-columns:1fr;}}
-  .teams-status{
-    font-size:13px;color:var(--ink-soft);line-height:1.55;
-    background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--rosa);
-    border-radius:2px;padding:12px 14px;margin:0 0 18px;
-  }
-  .team-rank{
-    width:26px;height:26px;border-radius:4px;flex:none;
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;
-    color:var(--ink);background:var(--hover);border:1px solid var(--line);
-  }
-  .team-rank.first{background:var(--rosa);color:#fff;border-color:var(--rosa-deep);}
-  .team-link{color:inherit;text-decoration:none;}
-  .team-link:hover{text-decoration:underline;}
-  .out-badge{
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;
-    color:var(--ink-soft);border:1px solid var(--line);border-radius:20px;
-    padding:1px 7px;white-space:nowrap;
-  }
-  /* Rider tables: bib, rider with the nationality stacked under the name,
-     final GC place, time/gap — the same columns as the Tour page. */
-  table.cls.riders td.bib{
-    font-family:'JetBrains Mono',monospace;font-size:11px;
-    color:var(--ink-soft);width:1%;white-space:nowrap;
-  }
-  table.cls.riders .nat{display:block;margin-left:0;margin-top:2px;}
-  table.cls.riders td.gcpos{
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
-    text-align:right;width:1%;white-space:nowrap;
-  }
-  table.cls.riders tr.podium td.gcpos{color:var(--rosa-deep);}
-  table.cls.riders td.num{text-align:right;}
-  table.cls.riders th.is-text-right{text-align:right;}
-  table.cls.riders tr.out .rider{font-weight:500;color:var(--ink-soft);}
-  table.cls.riders tr.out td.num{color:var(--ink-soft);}
-  table.stages-tbl td.route{color:var(--ink);}
-  table.stages-tbl td.win{font-weight:600;}
-  table.stages-tbl tr.pink td.win{color:var(--rosa-deep);}
-  .tablewrap{overflow-x:auto;}
+  /* ---------- description / climbs / sprints ---------- */
+  .detailbody{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:var(--space-6);}
+  .detailbody h3{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 var(--space-3);}
+  .prose{max-width:78ch;font-size:15px;line-height:1.6;color:var(--color-neutral-700);}
+  .prose p{margin:0 0 12px;}
+  .prose p:last-child{margin-bottom:0;}
+  table.dtable{width:100%;border-collapse:collapse;}
+  table.dtable.sprints{max-width:640px;}
+  table.dtable th{padding:8px 10px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
+  table.dtable th:first-child{text-align:left;}
+  table.dtable td{padding:10px;border-bottom:1px solid var(--color-divider);font-size:14px;vertical-align:top;}
+  table.dtable td:first-child{font-weight:600;}
+  table.dtable td.num{text-align:right;white-space:nowrap;}
+  table.dtable td.loc{text-align:right;white-space:nowrap;color:var(--color-neutral-700);}
+  table.dtable td.cat{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  .climbname{display:flex;align-items:center;gap:10px;}
+  .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
+  .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
 
-  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft);line-height:1.55;}
-  footer b{color:var(--ink);}
-  .disclaimer{font-size:12px;color:var(--ink-soft);background:var(--paper-panel);border:1px dashed var(--line);padding:10px 12px;border-radius:2px;margin-top:14px;line-height:1.55;}
+  /* ---------- results tab ---------- */
+  .sectionhead{padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;}
+
+  .clsgrid{display:grid;grid-template-columns:1fr 1fr;}
+  .cls-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;}
+  .cls-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
+  .cls-head .names{display:flex;flex-direction:column;gap:3px;min-width:0;}
+  .cls-head .name{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;}
+  .cls-head .fr{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-neutral-600);}
+  .swatch{width:20px;height:20px;border:1px solid var(--color-divider);flex:0 0 auto;}
+
+  .cls-body{overflow-x:auto;}
+  table.results{width:100%;border-collapse:collapse;margin-top:var(--space-3);}
+  table.results td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.results td.pos{font-family:var(--font-heading);font-weight:700;font-size:14px;width:34px;color:var(--color-neutral-600);}
+  table.results tr.podium td.pos{color:var(--color-accent);}
+  table.results td.rider .rname{display:block;font-size:14px;font-weight:600;}
+  table.results td.rider .rteam{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.results td.val{text-align:right;white-space:nowrap;font-size:13px;}
+
+  .expander{margin-top:var(--space-3);align-self:flex-start;background:transparent;border:2px solid var(--color-divider);padding:8px 14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);cursor:pointer;}
+  .expander:hover{background:var(--color-accent-100);}
+
+  .status-card{grid-column:1/-1;padding:clamp(20px,3vw,32px);border-bottom:2px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-neutral-700);}
+  .status-card b{font-family:var(--font-heading);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text);}
+  .empty-cls{padding:var(--space-3) 0 0;margin:0;font-size:14px;color:var(--color-neutral-600);}
+  .sec-label{margin:14px 0 4px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .sec-label:first-child{margin-top:0;}
+
+  .stagewins-block{padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);border-top:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .stagewins-block h3{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;margin:0;}
+  .stagewins-meta{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.winners{width:100%;max-width:820px;border-collapse:collapse;}
+  table.winners td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.winners td.n{font-family:var(--font-heading);font-weight:700;font-size:14px;width:40px;color:var(--color-neutral-600);}
+  table.winners td.route{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);white-space:nowrap;}
+  table.winners td.winner{font-size:14px;font-weight:600;}
+  table.winners tr.pink td.winner{color:var(--color-accent-700);}
+  table.winners td.speed{font-size:12px;color:var(--color-neutral-600);text-align:right;white-space:nowrap;}
+
+  /* ---------- teams tab ---------- */
+  .teamsstatus{grid-column:1/-1;padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .team-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;}
+  .team-head{display:flex;align-items:flex-start;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
+  .team-rank{font-family:var(--font-heading);font-weight:700;font-size:15px;width:34px;height:34px;flex:0 0 auto;display:grid;place-items:center;background:var(--color-neutral-100);color:var(--color-text);border:1px solid var(--color-divider);}
+  .team-rank.first{background:var(--color-accent);color:#fff;}
+  .team-meta{display:flex;flex-direction:column;gap:4px;min-width:0;}
+  .team-link{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text);}
+  .team-link:hover{color:var(--color-accent-700);}
+  .team-clsline{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-neutral-600);}
+
+  table.riders{width:100%;border-collapse:collapse;margin-top:var(--space-3);}
+  table.riders th{padding:8px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
+  table.riders th:nth-child(1),table.riders th:nth-child(2){text-align:left;}
+  table.riders td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:12px;}
+  table.riders td.bib{color:var(--color-neutral-600);width:38px;}
+  table.riders td.rider .rname{display:block;font-size:14px;font-weight:600;}
+  table.riders tr.out td.rider .rname{font-weight:500;color:var(--color-neutral-600);}
+  table.riders td.rider .rsub{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.riders td.gcpos{font-family:var(--font-heading);font-weight:700;font-size:14px;text-align:right;width:46px;white-space:nowrap;color:var(--color-text);}
+  table.riders tr.podium td.gcpos{color:var(--color-accent);}
+  table.riders td.val{text-align:right;white-space:nowrap;font-size:12px;color:var(--color-neutral-700);}
+
+  /* ---------- footer ---------- */
+  .tdf-footer{border-top:2px solid var(--color-divider);padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:100ch;}
+  .disclabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .discbody{margin:0;font-size:12px;line-height:1.6;color:var(--color-neutral-700);}
+  .sourcestitle{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .sourcesbody{margin:6px 0 0;font-size:12px;line-height:1.6;color:var(--color-neutral-600);}
+
+  .noscript-note{max-width:760px;margin:24px auto;padding:16px 18px;background:var(--color-surface);border:1px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-text);}
+
   ::-webkit-scrollbar{width:8px;}
-  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+  ::-webkit-scrollbar-thumb{background:var(--color-divider);}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <a class="backlink" href="index.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-      <span id="backLinkText"></span>
-    </a>
-    <div class="top-row">
-      <div class="eyebrow" id="eyebrow"></div>
-      <div class="langsel" id="langSel" role="group" aria-label="Kieli / Language">
-        <button data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
-        <button data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
-        <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
-      </div>
-    </div>
-    <h1><span class="it-g">Giro</span><span class="fs-w"> d'It</span><span class="it-r">alia</span> <span>2026</span></h1>
-    <div class="sub" id="subDesc"></div>
-    <div class="finaltag" id="finalTag"></div>
-  </header>
+<noscript>
+  <div class="noscript-note">
+    <b>JavaScript pois käytöstä</b><br>
+    Tämä sivu rakentaa etapit, profiilit ja tulokset selaimessa JavaScriptillä.
+    Ota JavaScript käyttöön nähdäksesi sisällön. Viralliset tulokset: giroditalia.it, cyclinguptodate.com.
+    <hr style="border:none;border-top:1px solid var(--color-divider);margin:10px 0;">
+    <b>JavaScript is disabled</b><br>
+    This page builds the stages, profiles and results in your browser with JavaScript.
+    Please enable JavaScript to view the content. Official results: giroditalia.it, cyclinguptodate.com.
+  </div>
+</noscript>
 
-  <nav class="tabs" role="tablist" aria-label="Näkymät / Views">
-    <button class="tab active" data-view="stages" role="tab" id="tabStages" aria-selected="true"></button>
-    <button class="tab" data-view="results" role="tab" id="tabResults" aria-selected="false"></button>
-    <button class="tab" data-view="teams" role="tab" id="tabTeams" aria-selected="false"></button>
-  </nav>
+<header class="tdf-header">
+  <div class="left">
+    <a class="backlink" id="backLink" href="index.html">← <span id="backLinkText"></span></a>
+    <span class="wordmark">Giro d&rsquo;Italia 2026</span>
+  </div>
+  <div class="tdf-langs" id="langSel" role="group" aria-label="Kieli / Language">
+    <button class="langbtn" data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+    <button class="langbtn" data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
+    <button class="langbtn" data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
+  </div>
+</header>
 
-  <!-- STAGES -->
-  <section class="view active" id="view-stages" role="tabpanel" aria-labelledby="tabStages">
-    <div class="layout">
-      <nav class="stagelist">
-        <div class="listhead" id="stageListHeader"></div>
-        <ul class="stages" id="stageList"></ul>
-      </nav>
-      <main class="panel" id="panel"></main>
-    </div>
-  </section>
+<section class="tdf-hero">
+  <span class="eyebrow" id="eyebrow"></span>
+  <h1>Giro d&rsquo;Italia 2026</h1>
+  <div class="stripe"><span style="background:#008c45"></span><span style="background:#ffffff"></span><span style="background:#ce2b37"></span></div>
+  <p class="lede" id="subDesc"></p>
+  <span class="finaltag" id="finalTag"></span>
+</section>
 
-  <!-- RESULTS -->
-  <section class="view" id="view-results" role="tabpanel" aria-labelledby="tabResults">
-    <h2 class="section" id="classHeading"></h2>
-    <div class="grid" id="classGrid"></div>
-    <h2 class="section" id="stagesHeading" style="margin-top:34px;"></h2>
-    <div class="card">
-      <div class="tablewrap"><table class="cls stages-tbl"><thead id="stagesThead"></thead><tbody id="stagesTbody"></tbody></table></div>
-    </div>
-  </section>
+<nav class="tabs" role="tablist" aria-label="Näkymät / Views">
+  <button class="tabbtn active" data-view="stages" role="tab" id="tabStages"
+          aria-controls="view-stages" aria-selected="true" tabindex="0"></button>
+  <button class="tabbtn" data-view="results" role="tab" id="tabResults"
+          aria-controls="view-results" aria-selected="false" tabindex="-1"></button>
+  <button class="tabbtn" data-view="teams" role="tab" id="tabTeams"
+          aria-controls="view-teams" aria-selected="false" tabindex="-1"></button>
+</nav>
 
-  <!-- TEAMS & RIDERS -->
-  <section class="view" id="view-teams" role="tabpanel" aria-labelledby="tabTeams">
-    <h2 class="section" id="teamsHeading"></h2>
-    <div class="teams-status" id="teamsStatus"></div>
-    <div class="grid teams-grid" id="teamsGrid"></div>
-  </section>
+<section class="view active" id="view-stages" role="tabpanel" aria-labelledby="tabStages" tabindex="0">
+  <div class="stagelayout">
+    <nav class="stagerail">
+      <div class="railhead" id="stageListHeader"></div>
+      <ul class="stagerail-list" id="stageList"></ul>
+    </nav>
+    <main class="panel" id="panel"></main>
+  </div>
+</section>
 
-  <footer>
-    <div class="disclaimer" id="profileDisclaimer"></div>
-    <div style="margin-top:12px;"><b id="disclaimerLabel"></b> <span id="disclaimerText"></span></div>
-    <div style="margin-top:10px;"><b id="sourcesLabel"></b> <span id="sourcesText"></span></div>
-    <div style="margin-top:12px;"><span id="footerNote"></span></div>
-  </footer>
-</div>
+<section class="view" id="view-results" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
+  <div class="sectionhead" id="classHeading"></div>
+  <div class="clsgrid" id="classGrid"></div>
+  <div class="stagewins-block">
+    <h3 id="stagesHeading"></h3>
+    <table class="winners"><tbody id="stagesTbody"></tbody></table>
+  </div>
+</section>
+
+<section class="view" id="view-teams" role="tabpanel" aria-labelledby="tabTeams" tabindex="0">
+  <div id="teamsGrid"></div>
+</section>
+
+<footer class="tdf-footer">
+  <span class="disclabel" id="disclaimerLabel"></span>
+  <p class="discbody" id="disclaimerText"></p>
+  <p class="discbody" id="profileDisclaimer"></p>
+  <span class="sourcestitle" id="sourcesLabel"></span>
+  <p class="sourcesbody" id="sourcesText"></p>
+  <span class="disclabel" id="footerNote"></span>
+</footer>
 
 <script>
-/* Language preference is shared with the rest of the site via the same key. */
-const LANG_KEY = 'tdf2026-lang';
+/* ---------- TOUR ---------- */
 const DATA_URL = 'data/giro2026-results.json';
 const ROUTES_URL = 'data/giro2026-routes.json';
 const RIDERS_URL = 'data/giro2026-riders.json';
-
+const LANG_KEY = 'tdf2026-lang';
 const STRINGS = {
   fi: {
     backToTours: 'Grand Tourit',
@@ -517,21 +487,10 @@ function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRING
 let RESULTS = null;
 let RIDERS = null;
 
-/* ---------- STAGE DATA ----------
-   Distances/types: Wikipedia + cyclingstage.com. Climbs (name, summit km, length,
-   gradient) and intermediate-sprint km: the per-stage cyclingstage.com route
-   pages. Climb `cat` (GPM category) is included only where the organiser's
-   category was published; it is left off where no official category was found
-   (shown as "—") rather than guessed. Summit-finish climbs use the finish km.
-   Elevation gain shown only where a source published it. Profiles are
-   illustrative, built from the climb positions — see the disclaimer. */
-/* All values resolve in theme.css; var() strings work in the generated
-   inline-SVG presentation attributes. Giro cat 1 is the hardest -> climb-1. */
-const TYPE_COLOR = {flat:'var(--blue)', hilly:'var(--green)', mountain:'var(--red)', itt:'var(--grey)'};
-const CAT_COLOR = {1:'var(--climb-1)', 2:'var(--climb-2)', 3:'var(--climb-3)', 4:'var(--climb-4)'};
-const SPRINT_COLOR = 'var(--green)';
-function typeColor(tp){ return TYPE_COLOR[tp] || 'var(--grey)'; }
-
+/* Climb category colours: Giro GPM categories are numeric 1 (hardest) to 4,
+   with many climbs left uncategorized (organiser never published a cat). */
+const CAT_COLOR = {1:'var(--color-accent-600)', 2:'var(--color-accent-500)', 3:'var(--color-accent-400)', 4:'var(--color-accent-300)'};
+const UNCAT_COLOR = 'var(--color-neutral-400)';
 const stages = [
   {n:1,  date:'2026-05-08', start:'Nessebar', finish:'Burgas', km:147, type:'flat',
    climbs:[], sprints:[{km:114.7}]},
@@ -588,10 +547,7 @@ const stages = [
   {n:21, date:'2026-05-31', start:'Rome', finish:'Rome', km:131, type:'flat',
    climbs:[], sprints:[{km:77.7}]},
 ];
-// Rest days shown in the list after these stage numbers.
 const REST_AFTER = {3:'2026-05-11', 9:'2026-05-18', 15:'2026-05-25'};
-
-/* ---------- FORMAT HELPERS ---------- */
 function localeTag(){ return lang==='fi' ? 'fi-FI' : lang==='fr' ? 'fr-FR' : 'en-GB'; }
 function fmtKm(k){ const s=(Math.round(k*10)/10).toString(); return (lang==='en'?s:s.replace('.',','))+' km'; }
 function fmtGain(m){ return m.toLocaleString(localeTag())+' m'; }
@@ -601,11 +557,6 @@ function fmtDate(iso){
   return new Intl.DateTimeFormat(localeTag(),opts).format(d);
 }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-
-/* ---------- ILLUSTRATIVE PROFILE ----------
-   Climbs with a known summit km drive the profile shape, so the climb markers
-   line up with the bumps. Stages whose climbs have no published km fall back to
-   a generic shape by type (markers are then omitted for those climbs). */
 function climbsWithKm(st){ return (st.climbs||[]).filter(c=>c.km!=null).sort((a,b)=>a.km-b.km); }
 function genericProfile(st){
   const k=st.km, P=(frac,h)=>[+(k*frac).toFixed(1),h];
@@ -649,75 +600,6 @@ function buildPath(points,totalKm,W,H,padL,padR,padT,padB){
   return {d,plotH};
 }
 function xForKm(km,totalKm,W,padL,padR){ return padL+(km/totalKm)*(W-padL-padR); }
-function renderProfile(st){
-  const W=900,H=240,padL=30,padR=16,padT=16,padB=30, totalKm=st.km;
-  const {d,plotH}=buildPath(genProfile(st),totalKm,W,H,padL,padR,padT,padB);
-  const baseY=padT+plotH;
-  let svg=`<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(t('profileAria')(st.n))}">`;
-  for(let g=0;g<=4;g++){ const gy=padT+plotH*g/4; svg+=`<line class="pf-grid" x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke-width="1" opacity="0.6"/>`; }
-  const step = totalKm>150?50:(totalKm>60?20:10);
-  for(let kk=0;kk<=totalKm+0.01;kk+=step){
-    const kx=xForKm(kk,totalKm,W,padL,padR);
-    svg+=`<line class="pf-grid" x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke-width="1" opacity="0.35"/>`;
-    svg+=`<text class="pf-tick" x="${kx}" y="${H-8}" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">${Math.round(kk)}</text>`;
-  }
-  const col=typeColor(st.type);
-  svg+=`<path d="${d} L ${xForKm(totalKm,totalKm,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="${col}" opacity="0.16"/>`;
-  svg+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="2.4" stroke-linejoin="round"/>`;
-  // climb markers (only for climbs whose summit km is known)
-  climbsWithKm(st).forEach(c=>{
-    const cx=xForKm(c.km,totalKm,W,padL,padR);
-    const foot=xForKm(Math.max(0,c.km-(c.len||4)),totalKm,W,padL,padR);
-    const cc=CAT_COLOR[c.cat]||'var(--climb-none)';
-    svg+=`<rect x="${foot}" y="${padT}" width="${Math.max(2,cx-foot)}" height="${plotH}" fill="${cc}" opacity="0.14"/>`;
-    svg+=`<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${baseY}" stroke="${cc}" stroke-width="1.5" stroke-dasharray="2,2"/>`;
-    svg+=`<circle cx="${cx}" cy="${padT-3}" r="4.5" fill="${cc}"/>`;
-  });
-  // intermediate-sprint markers — a green flag rising from the route to the
-  // sprint's kilometre point, so the location is clearly visible on the graph.
-  (st.sprints||[]).forEach(s=>{
-    const sx=xForKm(s.km,totalKm,W,padL,padR);
-    const flagTop=padT+plotH*0.30;
-    svg+=`<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${baseY}" stroke="${SPRINT_COLOR}" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.55"/>`;
-    svg+=`<line x1="${sx}" y1="${flagTop}" x2="${sx}" y2="${flagTop+16}" stroke="${SPRINT_COLOR}" stroke-width="1.8"/>`;
-    svg+=`<path d="M ${sx} ${flagTop} L ${sx+12} ${flagTop+4.5} L ${sx} ${flagTop+9} Z" fill="${SPRINT_COLOR}"/>`;
-    svg+=`<circle cx="${sx}" cy="${baseY}" r="3.4" fill="${SPRINT_COLOR}" stroke="var(--paper-panel)" stroke-width="1"/>`;
-  });
-  svg+=`</svg>`;
-  return svg;
-}
-
-/* ---------- LOCATOR MINIMAP ----------
-   Very simplified, hand-traced outlines ([lon,lat] pairs): the Italian
-   mainland with Sicily and Sardinia for recognizability, plus Bulgaria in a
-   dashed inset box (drawn over the Adriatic) for the Grande Partenza stages
-   1–3. Only meant to give a rough "where is this stage" cue — not
-   cartographically accurate. */
-const MM_ITALY = [
-  [7.49,43.87],[6.88,44.42],[6.63,45.11],[6.80,45.83],[7.86,45.92],[8.44,46.46],
-  [9.04,45.85],[9.30,46.30],[10.13,46.23],[10.47,46.87],[11.10,46.93],[12.13,47.08],
-  [12.40,46.70],[13.70,46.52],[13.60,45.79],[13.10,45.68],[12.42,45.42],[12.25,45.18],
-  [12.53,44.90],[12.28,44.60],[12.57,44.06],[13.52,43.62],[14.21,42.46],[14.78,42.07],
-  [15.14,41.93],[16.19,41.89],[16.02,41.42],[16.87,41.13],[17.94,40.63],[18.49,40.15],
-  [18.36,39.80],[17.23,40.47],[16.62,39.62],[17.13,39.08],[16.58,38.44],[16.06,37.92],
-  [15.65,38.11],[15.90,38.68],[15.98,39.30],[15.79,39.87],[15.28,40.03],[14.93,40.33],
-  [14.77,40.68],[14.25,40.83],[13.57,41.21],[12.62,41.45],[11.80,42.09],[10.71,42.94],
-  [10.31,43.54],[9.85,44.03],[8.93,44.40],[8.48,44.30],[8.03,43.88]
-];
-const MM_SICILY = [
-  [12.43,37.80],[13.37,38.13],[15.24,38.22],[15.57,38.19],[15.09,37.50],[15.30,37.06],
-  [15.09,36.68],[14.25,37.06],[13.58,37.29]
-];
-const MM_SARDINIA = [
-  [9.19,41.24],[9.55,40.92],[9.73,40.40],[9.11,39.21],[8.43,38.96],[8.40,39.90],[8.31,40.56]
-];
-const MM_BULGARIA = [
-  [22.67,44.21],[23.60,43.80],[25.00,43.70],[26.10,43.95],[27.27,44.12],[28.55,43.74],
-  [28.34,43.43],[27.92,43.20],[27.47,42.49],[27.94,42.10],[26.55,41.90],[26.32,41.71],
-  [25.90,41.31],[24.50,41.44],[23.60,41.37],[22.90,41.34],[22.36,42.32],[22.50,43.00]
-];
-// Approximate start/finish coordinates ([lon,lat]) per stage number.
-// Longitudes > 20 belong to the Bulgarian stages and land in the inset.
 const STAGE_COORDS = {
   1:[[27.73,42.66],[27.47,42.51]],  2:[[27.47,42.51],[25.62,43.08]],
   3:[[24.75,42.14],[23.32,42.70]],  4:[[16.59,38.91],[16.25,39.30]],
@@ -731,172 +613,6 @@ const STAGE_COORDS = {
  19:[[11.91,46.02],[12.02,46.41]], 20:[[13.14,46.28],[12.52,46.11]],
  21:[[12.48,41.89],[12.48,41.89]]
 };
-
-// Equirectangular projection: longitudes squeezed by cos(42.5°) so Italy
-// keeps roughly its true proportions. The Bulgaria inset has its own
-// smaller-scale projection into the top-right corner of the viewBox.
-const MM_BOX = {lonMin:6.5, lonMax:18.7, latMin:36.5, latMax:47.4};
-const MM_K = Math.cos(42.5*Math.PI/180);
-const MM_BG = {x0:62, y0:4, lon0:22.2, lat0:44.35, s:5.2, k:Math.cos(42.7*Math.PI/180)};
-function mmXY(p){
-  if(p[0]>20){
-    return [(MM_BG.x0+(p[0]-MM_BG.lon0)*MM_BG.k*MM_BG.s).toFixed(1),
-            (MM_BG.y0+(MM_BG.lat0-p[1])*MM_BG.s).toFixed(1)];
-  }
-  return [((p[0]-MM_BOX.lonMin)*MM_K*10).toFixed(1),
-          ((MM_BOX.latMax-p[1])*10).toFixed(1)];
-}
-function mmPath(pts, close){
-  return pts.map((p,i)=>(i?'L':'M')+mmXY(p).join(' ')).join(' ')+(close?' Z':'');
-}
-
-// Whether the locator map is shown expanded (full panel width). Persists
-// across stage switches and language changes; renderPanel re-renders the
-// matching variant.
-let mapExpanded = false;
-
-function mmStageGeom(n){
-  const c = STAGE_COORDS[n];
-  if(!c) return null;
-  const [sx,sy] = mmXY(c[0]), [fx,fy] = mmXY(c[1]);
-  // Start & finish (nearly) in the same place: a single dot instead of a line.
-  const same = Math.abs(c[0][0]-c[1][0])<0.05 && Math.abs(c[0][1]-c[1][1])<0.05;
-  return {sx,sy,fx,fy,same};
-}
-
-function mmBase(st, cls){
-  const W = ((MM_BOX.lonMax-MM_BOX.lonMin)*MM_K*10).toFixed(1);
-  const H = ((MM_BOX.latMax-MM_BOX.latMin)*10).toFixed(1);
-  let svg = `<svg class="${cls}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(t('minimapAria')(st.n))}">`;
-  svg += `<path class="mm-land" d="${mmPath(MM_ITALY,true)}"/>`;
-  svg += `<path class="mm-land" d="${mmPath(MM_SICILY,true)}"/>`;
-  svg += `<path class="mm-land" d="${mmPath(MM_SARDINIA,true)}"/>`;
-  svg += `<rect class="mm-inset" x="60" y="1.5" width="28.5" height="20.5"/>`;
-  svg += `<path class="mm-land" d="${mmPath(MM_BULGARIA,true)}"/>`;
-  return svg;
-}
-
-function mmRouteMarks(g){
-  let svg = '';
-  if(!g.same){
-    svg += `<line class="mm-route" x1="${g.sx}" y1="${g.sy}" x2="${g.fx}" y2="${g.fy}"/>`;
-    svg += `<circle class="mm-start" cx="${g.sx}" cy="${g.sy}" r="2.4"/>`;
-  }
-  svg += `<circle class="mm-finish" cx="${g.fx}" cy="${g.fy}" r="${g.same?3.2:2.6}"/>`;
-  return svg;
-}
-
-function renderMinimap(st){
-  const g = mmStageGeom(st.n);
-  if(!g) return '';
-  const svg = mmBase(st,'minimap') + mmRouteMarks(g) + '</svg>';
-  return `<button class="mm-btn" data-mm-toggle aria-expanded="false" title="${esc(t('minimapExpand'))}">${svg}<span class="mm-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M21 3l-7 7"/><path d="M9 21H3v-6"/><path d="M3 21l7-7"/></svg></span></button>`;
-}
-
-// Expanded view markup: a container Leaflet mounts into (see initStageMap).
-// Only the shrink button collapses — the map itself stays interactive (pan/zoom),
-// so it is not a collapse target.
-function renderMinimapLarge(st){
-  if(!STAGE_COORDS[st.n]) return '';
-  return `
-    <div class="mapbox">
-      <button class="mm-close" data-mm-toggle aria-expanded="true" aria-label="${esc(t('minimapCollapse'))}" title="${esc(t('minimapCollapse'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M3 21l7-7"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/></svg></button>
-      <button class="mm-recenter" aria-label="${esc(t('minimapRecenter'))}" title="${esc(t('minimapRecenter'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/></svg></button>
-      <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
-      <div class="chart-caption" id="stage-map-caption">${t('minimapCaption')}</div>
-    </div>`;
-}
-
-/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
-   Per-stage route polylines live in data/giro2026-routes.json (built by
-   scripts/fetch_routes.py from cyclingstage.com GPX). Loaded once, lazily, on
-   first expand. Stages missing a route fall back to a straight start→finish
-   line derived from STAGE_COORDS. */
-let routesData = null, routesPromise = null;
-function loadRoutes(){
-  if(routesData) return Promise.resolve(routesData);
-  if(!routesPromise){
-    routesPromise = fetch(ROUTES_URL, {cache:'force-cache'})
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { routesData = (d && d.stages) ? d : {stages:{}}; return routesData; })
-      .catch(() => { routesData = {stages:{}}; return routesData; });
-  }
-  return routesPromise;
-}
-
-let stageMap = null; // active Leaflet instance (null when collapsed)
-function destroyStageMap(){
-  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; }
-}
-
-/* Stadia Maps basemap (domain-authenticated — no API key in code). Dedicated
-   light/dark styles replace the old CSS invert hack on the tile pane. */
-const darkMapMQ = matchMedia('(prefers-color-scheme: dark)');
-const stadiaTileUrl = dark =>
-  `https://tiles.stadiamaps.com/tiles/${dark ? 'alidade_smooth_dark' : 'alidade_smooth'}/{z}/{x}/{y}{r}.png`;
-
-function initStageMap(st){
-  if(!mapExpanded) return;
-  // Leaflet is a deferred script; if the user somehow expands before it lands,
-  // retry shortly. In practice expansion is a post-load click, so L is ready.
-  if(!window.L){ setTimeout(()=>initStageMap(st), 120); return; }
-  const el = document.getElementById('stage-map');
-  if(!el) return;
-  destroyStageMap();
-
-  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true});
-  stageMap = map;
-  const tiles = L.tileLayer(stadiaTileUrl(darkMapMQ.matches), {
-    maxZoom:17,
-    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
-  // Retile if the OS theme flips while the map is open; unhook on map teardown.
-  const retheme = e => tiles.setUrl(stadiaTileUrl(e.matches));
-  darkMapMQ.addEventListener('change', retheme);
-  map.on('unload', () => darkMapMQ.removeEventListener('change', retheme));
-
-  // Route/marker colours pulled from the live theme variables so they track
-  // light/dark. Leaflet SVG overlays can't reference CSS vars directly.
-  const css = getComputedStyle(document.documentElement);
-  const ROSA = css.getPropertyValue('--rosa-deep').trim() || '#B23368';
-  const RED  = css.getPropertyValue('--red').trim() || '#B23B32';
-
-  const draw = () => {
-    if(stageMap !== map) return; // a newer render superseded this one
-    const pts = (routesData.stages || {})[st.n];         // [[lat,lon]…] or undefined
-    const c = STAGE_COORDS[st.n];                         // [[lon,lat],[lon,lat]]
-    let line, startLL, finishLL, approx = false;
-    if(pts && pts.length){
-      line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
-    }else{
-      approx = true;
-      startLL = [c[0][1], c[0][0]];
-      finishLL = [c[1][1], c[1][0]];
-      line = [startLL, finishLL];
-    }
-    const poly = L.polyline(line, approx
-      ? {color:ROSA, weight:3, opacity:.9, dashArray:'6,8'}
-      : {color:ROSA, weight:4, opacity:.95}).addTo(map);
-    const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
-    if(!same){
-      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:ROSA, fillOpacity:1}).addTo(map);
-    }
-    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:RED, fillOpacity:1}).addTo(map);
-    map.fitBounds(poly.getBounds(), {padding:[26,26]});
-    map.invalidateSize();
-    // Recenter button: refit the route after the user has panned/zoomed away.
-    const rc = document.querySelector('.mm-recenter');
-    if(rc) rc.onclick = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[26,26]}); };
-    const cap = document.getElementById('stage-map-caption');
-    if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
-  };
-
-  if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
-  // A tick later the container has its final size — re-measure so tiles fill it.
-  setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
-}
-
-/* ---------- DESCRIPTION (generated from facts + winner) ---------- */
 function winnerFor(n){
   if(!RESULTS || !Array.isArray(RESULTS.stageWinners)) return '';
   const w=RESULTS.stageWinners.find(x=>x.n===n);
@@ -911,293 +627,540 @@ function genDesc(st){
   return '<p>'+parts.join(' ')+'</p>';
 }
 
+/* ---------- ELEVATION PROFILE ----------
+   Built from genProfile(st) (illustrative shape from climb positions/type —
+   see the profile-generation helpers above), styled per the Modernist
+   system: monochrome ink line/fill, accent-shade climb bands, dashed accent
+   sprint flag. Only climbs with a known summit km get a marker, matching
+   the original site's behaviour (see climbsWithKm). */
+function renderProfile(st){
+  const W=900, H=250, padL=30, padR=16, padT=22, padB=30;
+  const {d, plotH} = buildPath(genProfile(st), st.km, W,H,padL,padR,padT,padB);
+  const baseY = padT+plotH;
+
+  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(t('profileAria')(st.n))}">`;
+
+  for(let g=0; g<=4; g++){
+    const gy = padT + plotH*g/4;
+    svg += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--color-neutral-300)" stroke-width="1"/>`;
+  }
+  const step = st.km > 150 ? 50 : (st.km > 60 ? 20 : 10);
+  for(let k=0; k<=st.km+0.01; k+=step){
+    const kx = xForKm(k, st.km, W, padL, padR);
+    svg += `<line x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke="var(--color-neutral-200)" stroke-width="1"/>`;
+    svg += `<text x="${kx}" y="${H-10}" font-family="Archivo, sans-serif" font-size="11" font-weight="600" fill="var(--color-neutral-600)" text-anchor="middle">${Math.round(k)}</text>`;
+  }
+
+  climbsWithKm(st).forEach(c=>{
+    const cx = xForKm(c.km, st.km, W, padL, padR);
+    const foot = xForKm(Math.max(0, c.km-(c.len||4)), st.km, W, padL, padR);
+    const col = CAT_COLOR[c.cat] || UNCAT_COLOR;
+    svg += `<rect x="${foot}" y="${padT}" width="${Math.max(2,cx-foot)}" height="${plotH}" fill="${col}" opacity="0.18"/>`;
+    svg += `<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${baseY}" stroke="${col}" stroke-width="2"/>`;
+    svg += `<rect x="${cx-4}" y="${padT-12}" width="8" height="8" fill="${col}"/>`;
+  });
+
+  svg += `<path d="${d} L ${xForKm(st.km,st.km,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="var(--color-text)" opacity="0.1"/>`;
+  svg += `<path d="${d}" fill="none" stroke="var(--color-text)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+  (st.sprints||[]).forEach(s=>{
+    const sx = xForKm(s.km, st.km, W, padL, padR);
+    const top = padT + plotH*0.28;
+    svg += `<line x1="${sx}" y1="${top}" x2="${sx}" y2="${baseY}" stroke="var(--color-accent)" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    svg += `<path d="M ${sx} ${top} L ${sx+14} ${top+5} L ${sx} ${top+10} Z" fill="var(--color-accent)"/>`;
+  });
+
+  svg += `<line x1="${padL}" y1="${baseY}" x2="${W-padR}" y2="${baseY}" stroke="var(--color-text)" stroke-width="2"/>`;
+  svg += `</svg>`;
+  return svg;
+}
+
+function mapLabel(){ return lang==='fi' ? 'Reitti' : lang==='fr' ? 'Parcours' : 'Route'; }
+function profileLabel(){ return lang==='fi' ? 'Korkeusprofiili' : lang==='fr' ? 'Profil' : 'Elevation profile'; }
+function zoomWord(){ return lang==='fi' ? 'zoomaus' : 'zoom'; }
+const ZOOM_LABELS = {fi:{in:'Lähennä',out:'Loitonna'}, fr:{in:'Zoom avant',out:'Zoom arrière'}, en:{in:'Zoom in',out:'Zoom out'}};
+
+/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
+   Per-stage route polylines live in data/giro2026-routes.json. Stages
+   missing a route fall back to a straight start→finish line derived from
+   STAGE_COORDS. Same restyled-Leaflet approach as the Tour de France page
+   (see design_handoff_tdf2026/): the design's flat SVG map was traded for
+   this real interactive tile map; the control-row chrome is kept. */
+let routesData = null, routesPromise = null;
+function loadRoutes(){
+  if(routesData) return Promise.resolve(routesData);
+  if(!routesPromise){
+    routesPromise = fetch(ROUTES_URL, {cache:'force-cache'})
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { routesData = (d && d.stages) ? d : {stages:{}}; return routesData; })
+      .catch(() => { routesData = {stages:{}}; return routesData; });
+  }
+  return routesPromise;
+}
+
+let stageMap = null, stageMapFitBounds = null;
+function destroyStageMap(){
+  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; stageMapFitBounds = null; }
+}
+
+function updateMapZoomLabel(){
+  const el = document.getElementById('mapZoomLabel');
+  if(el && stageMap) el.textContent = `${zoomWord()} ${stageMap.getZoom()}`;
+}
+
+function initStageMap(st){
+  if(!window.L){ setTimeout(()=>initStageMap(st), 120); return; }
+  const el = document.getElementById('stage-map');
+  if(!el) return;
+  destroyStageMap();
+
+  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true, zoomControl:false});
+  stageMap = map;
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+    maxZoom:17,
+    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  map.on('zoomend', updateMapZoomLabel);
+
+  const css = getComputedStyle(document.documentElement);
+  const INK = css.getPropertyValue('--color-text').trim() || '#201e1d';
+  const ACCENT = css.getPropertyValue('--color-accent').trim() || '#ec3013';
+
+  const draw = () => {
+    if(stageMap !== map) return;
+    const pts = (routesData.stages || {})[st.n];
+    const c = STAGE_COORDS[st.n];
+    let line, startLL, finishLL, approx = false;
+    if(pts && pts.length){
+      line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
+    }else{
+      approx = true;
+      startLL = [c[0][1], c[0][0]];
+      finishLL = [c[1][1], c[1][0]];
+      line = [startLL, finishLL];
+    }
+    const poly = L.polyline(line, approx
+      ? {color:INK, weight:3, opacity:.85, dashArray:'6,8'}
+      : {color:INK, weight:3.5, opacity:.95}).addTo(map);
+    const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
+    if(!same){
+      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:INK, fillOpacity:1}).addTo(map);
+    }
+    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:ACCENT, fillOpacity:1}).addTo(map);
+    map.fitBounds(poly.getBounds(), {padding:[24,24]});
+    map.invalidateSize();
+    stageMapFitBounds = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[24,24]}); };
+    const cap = document.getElementById('stage-map-caption');
+    if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
+    updateMapZoomLabel();
+  };
+
+  if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
+  setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
+}
+
+function mapControlsHTML(big){
+  const zl = ZOOM_LABELS[lang] || ZOOM_LABELS.en;
+  let html =
+    `<button class="mapctrl-btn" data-map-zoomout title="${zl.out}" aria-label="${zl.out}">−</button>` +
+    `<button class="mapctrl-btn" data-map-zoomin title="${zl.in}" aria-label="${zl.in}">+</button>` +
+    `<button class="mapctrl-btn" data-map-recenter title="${esc(t('minimapRecenter'))}" aria-label="${esc(t('minimapRecenter'))}">◎</button>`;
+  html += big
+    ? `<button class="mapctrl-btn mapctrl-close" data-map-toggle title="${esc(t('minimapCollapse'))}" aria-label="${esc(t('minimapCollapse'))}">×</button>`
+    : `<button class="mapctrl-btn" data-map-toggle title="${esc(t('minimapExpand'))}" aria-label="${esc(t('minimapExpand'))}">⤢</button>`;
+  return html;
+}
+
+function mapCellHTML(st){
+  return `
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(false)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
+    <span class="mapzoom" id="mapZoomLabel"></span>`;
+}
+
+function bigMapBoxHTML(st){
+  return `<div id="bigmapbox">
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(true)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
+    <span class="mapmeta">
+      <span class="mapzoom" id="mapZoomLabel"></span>
+      <span class="mapcaption" id="stage-map-caption"></span>
+    </span>
+  </div>`;
+}
+
+function bindMapControls(st){
+  const zoomOutBtn = document.querySelector('[data-map-zoomout]');
+  const zoomInBtn = document.querySelector('[data-map-zoomin]');
+  const recenterBtn = document.querySelector('[data-map-recenter]');
+  const toggleBtn = document.querySelector('[data-map-toggle]');
+  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomOut(); });
+  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomIn(); });
+  if(recenterBtn) recenterBtn.addEventListener('click', ()=>{ if(stageMapFitBounds) stageMapFitBounds(); });
+  if(toggleBtn) toggleBtn.addEventListener('click', ()=>{
+    mapExpanded = !mapExpanded;
+    renderPanel(st);
+    syncStageListHeight();
+  });
+}
+
+let mapExpanded = false; // persists across stage switches; renderPanel reflects it
+
 /* ---------- STAGE LIST ---------- */
 let activeIdx = 0;
 function renderStageList(){
-  const listEl=document.getElementById('stageList');
-  listEl.innerHTML='';
-  stages.forEach((s,idx)=>{
-    const li=document.createElement('li'); li.className='stage-item';
-    const btn=document.createElement('button');
-    btn.className='stage-btn'+(idx===activeIdx?' active':'');
-    btn.dataset.idx=idx;
-    btn.innerHTML=`<span class="num">${String(s.n).padStart(2,'0')}</span>
-      <span class="typedot" style="background:${typeColor(s.type)}"></span>
-      <span class="btn-text"><div class="btn-route">${esc(s.start)} → ${esc(s.finish)}</div>
-      <div class="btn-meta">${fmtDate(s.date)} · ${fmtKm(s.km)}</div></span>`;
-    btn.addEventListener('click',()=>selectStage(idx));
-    li.appendChild(btn); listEl.appendChild(li);
+  const listEl = document.getElementById('stageList');
+  listEl.innerHTML = '';
+  stages.forEach((s, idx)=>{
+    const li = document.createElement('li');
+    li.className = 'stage-item';
+    const btn = document.createElement('button');
+    btn.className = 'stage-btn' + (idx===activeIdx ? ' active' : '');
+    btn.dataset.idx = idx;
+    btn.innerHTML = `
+      <span class="num">${String(s.n).padStart(2,'0')}</span>
+      <span class="btn-text">
+        <span class="btn-route">${esc(s.start)} → ${esc(s.finish)}</span>
+        <span class="btn-meta">${fmtDate(s.date)} · ${fmtKm(s.km)} · ${t('typeLabels')[s.type]}</span>
+      </span>`;
+    btn.addEventListener('click', ()=>selectStage(idx));
+    li.appendChild(btn);
+    listEl.appendChild(li);
     if(REST_AFTER[s.n]){
-      const rli=document.createElement('li'); rli.className='stage-item';
-      const div=document.createElement('div'); div.className='rest-row';
-      div.textContent=`${fmtDate(REST_AFTER[s.n])} · ${t('restDay')}`;
-      rli.appendChild(div); listEl.appendChild(rli);
+      const rli = document.createElement('li');
+      rli.className = 'stage-item';
+      const div = document.createElement('div');
+      div.className = 'rest-row';
+      div.textContent = `${fmtDate(REST_AFTER[s.n])} · ${t('restDay')}`;
+      rli.appendChild(div);
+      listEl.appendChild(rli);
     }
   });
 }
-/* Keeps the stage-list column exactly as tall as the detail panel next to
-   it (see the .stagelist comment in the stylesheet for why this is done in
-   JS rather than pure CSS). Skipped below the 860px breakpoint, where the
-   layout drops to a single column and .stagelist reverts to position:static
-   — an inline height there would just add dead space under a short list. */
+
+/* Keeps the stage-rail column exactly as tall as the detail panel next to
+   it — see the equivalent comment in tdf2026.html. Skipped below 980px. */
 function syncStageListHeight(){
-  const list=document.querySelector('.stagelist');
-  const panel=document.getElementById('panel');
-  const stagesView=document.getElementById('view-stages');
-  if(!list||!panel||!stagesView) return;
-  if(window.innerWidth<=860 || !stagesView.classList.contains('active')){
-    list.style.height='';
+  const list = document.querySelector('.stagerail');
+  const panel = document.getElementById('panel');
+  const stagesView = document.getElementById('view-stages');
+  if(!list || !panel || !stagesView) return;
+  if(window.innerWidth<=980 || !stagesView.classList.contains('active')){
+    list.style.height = '';
     return;
   }
-  list.style.height=panel.offsetHeight+'px';
+  list.style.height = panel.offsetHeight + 'px';
 }
 window.addEventListener('resize', syncStageListHeight);
 
 function selectStage(idx){
-  activeIdx=idx;
-  document.querySelectorAll('.stage-btn').forEach(b=>b.classList.toggle('active',+b.dataset.idx===idx));
-  const b=document.querySelector(`.stage-btn[data-idx="${idx}"]`); if(b) b.scrollIntoView({block:'nearest'});
+  activeIdx = idx;
+  document.querySelectorAll('.stage-btn').forEach(b=>b.classList.toggle('active', +b.dataset.idx===idx));
+  const b = document.querySelector(`.stage-btn[data-idx="${idx}"]`);
+  if(b) b.scrollIntoView({block:'nearest'});
   renderPanel(stages[idx]);
   syncStageListHeight();
 }
-function catChip(cat){
-  if(!cat) return '<span class="dash">—</span>';
-  return `<span class="catchip" style="background:${CAT_COLOR[cat]||'var(--climb-none)'}">${cat}</span>`;
-}
+
+function catChip(cat){ return cat ? esc(String(cat)) : '—'; }
+
+/* ---------- RENDER MAIN PANEL ---------- */
 function renderPanel(st){
-  const panel=document.getElementById('panel');
-  const tc=typeColor(st.type);
-  // Tear down any live map before its container is replaced by innerHTML, so
-  // Leaflet doesn't leak the old instance's global (resize) listeners.
+  const panel = document.getElementById('panel');
   destroyStageMap();
-  const climbs=st.climbs||[];
-  let climbRows='';
+
+  const climbs = st.climbs || [];
+  let climbRows = '';
   if(climbs.length){
-    climbRows=climbs.map(c=>`<tr>
-      <td>${esc(c.name)}</td>
-      <td>${catChip(c.cat)}</td>
-      <td>${c.len?fmtKm(c.len):'—'}</td>
-      <td>${c.grad?esc(c.grad)+' %':'—'}</td>
-      <td class="atkm">${c.km!=null?'~ '+t('atKm')+' '+Math.round(c.km):'—'}</td></tr>`).join('');
+    climbRows = climbs.map(c=>`
+      <tr>
+        <td><span class="climbname"><span class="sq" style="background:${CAT_COLOR[c.cat]||UNCAT_COLOR}"></span>${esc(c.name)}</span></td>
+        <td class="num cat">${catChip(c.cat)}</td>
+        <td class="num">${c.len ? fmtKm(c.len) : '—'}</td>
+        <td class="num">${c.grad ? esc(c.grad)+' %' : '—'}</td>
+        <td class="loc">${c.km!=null ? '~ '+t('atKm')+' '+Math.round(c.km) : '—'}</td>
+      </tr>`).join('');
   }
-  const sprints=st.sprints||[];
-  let sprintRows='';
+
+  const sprints = st.sprints || [];
+  let sprintRows = '';
   if(sprints.length){
-    sprintRows=sprints.map((s,i)=>`<tr>
-      <td><span class="flagchip">${t('sprintChip')}${sprints.length>1?' '+(i+1):''}</span></td>
-      <td class="atkm">~ ${t('atKm')} ${Math.round(s.km)}</td></tr>`).join('');
+    sprintRows = sprints.map((s,i)=>`
+      <tr>
+        <td>${t('sprintChip')}${sprints.length>1?' '+(i+1):''}</td>
+        <td class="num">~ ${t('atKm')} ${Math.round(s.km)}</td>
+      </tr>`).join('');
   }
-  const w=winnerFor(st.n);
-  panel.innerHTML=`
-    <div class="stagehead">
+
+  const w = winnerFor(st.n);
+
+  panel.innerHTML = `
+    <div class="panelhead">
       <div>
-        <h2>${t('stagePrefix')} ${st.n} — ${esc(st.start)} → ${esc(st.finish)}</h2>
-        <span class="typepill" style="background:${tc}">${t('typeLabels')[st.type]}</span>
+        <span class="kicker">${t('stagePrefix')} ${st.n} · ${fmtDate(st.date)}</span>
+        <h2>${esc(st.start)} → ${esc(st.finish)}</h2>
       </div>
-      <div class="stagehead-side">
-        <span class="datebadge">${fmtDate(st.date)}</span>
-        ${mapExpanded ? '' : renderMinimap(st)}
+      <span class="typechip">${t('typeLabels')[st.type]}</span>
+    </div>
+
+    <div class="factrow">
+      <div class="factcell"><span class="label">${t('factDistance')}</span><span class="value">${fmtKm(st.km)}</span></div>
+      <div class="factcell"><span class="label">${t('factType')}</span><span class="value">${t('typeLabels')[st.type]}</span></div>
+      <div class="factcell"><span class="label">${t('factGain')}</span><span class="value">${st.gain ? fmtGain(st.gain) : '—'}</span></div>
+      <div class="factcell"><span class="label">${t('factWinner')}</span><span class="value" style="color:var(--color-accent-700)">${w ? esc(w) : '—'}</span></div>
+    </div>
+
+    ${mapExpanded ? bigMapBoxHTML(st) : ''}
+
+    <div class="detailgrid${mapExpanded ? ' big' : ''}">
+      ${mapExpanded ? '' : `<div class="mapcell">${mapCellHTML(st)}</div>`}
+      <div class="profilecell">
+        <span class="label">${profileLabel()}</span>
+        ${renderProfile(st)}
+        <div class="legend">
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[1]}"></span>${t('legCat')} 1</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[2]}"></span>2</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[3]}"></span>3</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[4]}"></span>4</span>
+          <span class="legenditem"><span class="legswatch" style="background:${UNCAT_COLOR}"></span>${t('legUncat')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:var(--color-accent)"></span>${t('legSprint')}</span>
+        </div>
+        <span class="chart-caption">${t('chartCaption')}</span>
       </div>
     </div>
-    ${mapExpanded ? renderMinimapLarge(st) : ''}
-    <div class="factbar">
-      <div class="fact">${t('factDistance')}<b>${fmtKm(st.km)}</b></div>
-      <div class="fact">${t('factType')}<b>${t('typeLabels')[st.type]}</b></div>
-      <div class="fact">${t('factGain')}<b>${st.gain?fmtGain(st.gain):'—'}</b></div>
-      <div class="fact">${t('factWinner')}<b class="win">${w?esc(w):'—'}</b></div>
-    </div>
-    <div class="chartbox">
-      ${renderProfile(st)}
-      <div class="legend">
-        <span><span class="leg-swatch" style="background:${CAT_COLOR[1]}"></span> ${t('legCat')} 1</span>
-        <span><span class="leg-swatch" style="background:${CAT_COLOR[2]}"></span> 2</span>
-        <span><span class="leg-swatch" style="background:${CAT_COLOR[3]}"></span> 3</span>
-        <span><span class="leg-swatch" style="background:${CAT_COLOR[4]}"></span> 4</span>
-        <span><span class="leg-swatch" style="background:var(--climb-none)"></span> ${t('legUncat')}</span>
-        <span><span class="leg-swatch" style="background:${SPRINT_COLOR};border-radius:50%"></span> ${t('legSprint')}</span>
+
+    <div class="detailbody">
+      <div>
+        <h3>${t('descHeader')}</h3>
+        <div class="prose">${genDesc(st)}</div>
       </div>
-      <div class="chart-caption">${t('chartCaption')}</div>
-    </div>
-    <div class="twocol">
-      <div class="block narrative"><h3>${t('descHeader')}</h3>${genDesc(st)}</div>
-      <div class="block">
+      <div>
         <h3>${t('climbsHeader')}</h3>
-        ${climbRows ? `<table class="points"><thead><tr><th>${t('climbHead')[0]}</th><th>${t('climbHead')[1]}</th><th>${t('climbHead')[2]}</th><th>${t('climbHead')[3]}</th><th>${t('climbHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
-                    : `<p class="empty-note">${t('noClimbs')}</p>`}
-        <h3 style="margin-top:16px;">${t('sprintsHeader')}</h3>
-        ${sprintRows ? `<table class="points"><thead><tr><th>${t('sprintHead')[0]}</th><th>${t('sprintHead')[1]}</th></tr></thead><tbody>${sprintRows}</tbody></table>`
-                     : `<p class="empty-note">${t('noSprints')}</p>`}
+        ${climbRows
+          ? `<table class="dtable"><thead><tr><th>${t('climbHead')[0]}</th><th>${t('climbHead')[1]}</th><th>${t('climbHead')[2]}</th><th>${t('climbHead')[3]}</th><th>${t('climbHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
+          : `<p class="empty-note">${t('noClimbs')}</p>`}
       </div>
-    </div>`;
+      <div>
+        <h3>${t('sprintsHeader')}</h3>
+        ${sprintRows
+          ? `<table class="dtable sprints"><thead><tr><th>${t('sprintHead')[0]}</th><th>${t('sprintHead')[1]}</th></tr></thead><tbody>${sprintRows}</tbody></table>`
+          : `<p class="empty-note">${t('noSprints')}</p>`}
+      </div>
+    </div>
+  `;
 
-  // Minimap ↔ full-width map toggle. The collapsed minimap expands; the shrink
-  // button collapses. Re-rendering the panel swaps the variants; the list
-  // height is re-synced since the panel height changes.
-  panel.querySelectorAll('[data-mm-toggle]').forEach(el=>{
-    el.addEventListener('click', ()=>{
-      mapExpanded = !mapExpanded;
-      renderPanel(st);
-      syncStageListHeight();
-    });
-  });
-
-  // Mount the real map once the expanded container is in the DOM.
-  if(mapExpanded) initStageMap(st);
+  bindMapControls(st);
+  initStageMap(st);
 }
-
-/* ---------- RESULTS (classifications + stage winners) ---------- */
+/* Jersey swatch colours: the site's own established maglia hexes (theme.css
+   --rosa/--ciclamino/--azzurra/--bianca), not Modernist tokens — the system
+   has one accent, so real jersey colours are content, same treatment as the
+   hub's flag stripes. Teams uses a neutral token instead of --grey (which
+   equals --bianca in theme.css) so it reads as a distinct swatch. */
 const CLASSES = [
-  {key:'gc',        nameKey:'gcName',     jerseyKey:'gcJersey',     colour:'var(--rosa)',      cols:'time'},
-  {key:'points',    nameKey:'pointsName', jerseyKey:'pointsJersey', colour:'var(--ciclamino)', cols:'pts'},
-  {key:'mountains', nameKey:'momName',    jerseyKey:'momJersey',    colour:'var(--azzurra)',   cols:'pts'},
-  {key:'youth',     nameKey:'youthName',  jerseyKey:'youthJersey',  colour:'var(--bianca)',    cols:'time'},
-  {key:'teams',     nameKey:'teamsName',  jerseyKey:'teamsJersey',  colour:'var(--grey)',      cols:'time', team:true},
+  {key:'gc',        nameKey:'gcName',     jerseyKey:'gcJersey',     colour:'#D6497F',                cols:'time'},
+  {key:'points',    nameKey:'pointsName', jerseyKey:'pointsJersey', colour:'#8E4BB0',                cols:'pts'},
+  {key:'mountains', nameKey:'momName',    jerseyKey:'momJersey',    colour:'#2E7CBF',                cols:'pts'},
+  {key:'youth',     nameKey:'youthName',  jerseyKey:'youthJersey',  colour:'#8B8F84',                cols:'time'},
+  {key:'teams',     nameKey:'teamsName',  jerseyKey:'teamsJersey',  colour:'var(--color-neutral-700)', cols:'time', team:true},
 ];
-function riderCell(row,teamOnly){
-  if(teamOnly) return `<span class="rider">${esc(row.rider)}</span>`;
-  const nat=row.nat?`<span class="nat">${esc(row.nat)}</span>`:'';
-  const team=row.team?`<span class="team">${esc(row.team)}</span>`:'';
-  return `<span class="rider">${esc(row.rider)}</span>${nat}${team}`;
+
+/* Per-card divider borders in a 2-col grid: right rule on the left card of
+   each pair, bottom rule on every row but the last (same formula as the
+   design's own cardStyle — see tdf2026.html). */
+function cardBorderStyle(i, n){
+  let s = '';
+  if((i+1)%2!==0 && i!==n-1) s += 'border-right:2px solid var(--color-divider);';
+  if(i < n - (n%2===0?2:1)) s += 'border-bottom:2px solid var(--color-divider);';
+  return s;
 }
-function classCard(cfg){
-  const rows=(RESULTS && RESULTS[cfg.key] && RESULTS[cfg.key].rows)||[];
-  const isPts=cfg.cols==='pts';
-  let head=`<tr><th>${t('colPos')}</th><th>${t('colRider')}</th>`;
-  head+= isPts?`<th>${t('colPts')}</th></tr>`:`<th>${t('colTime')}</th><th>${t('colGap')}</th></tr>`;
-  let body='';
-  rows.forEach(r=>{
-    const leader=r.pos===1?' class="leader"':'';
-    const tail= isPts?`<td class="num">${esc(r.val)}</td>`:`<td class="num">${esc(r.val)}</td><td class="gap">${esc(r.gap||(r.pos===1?'—':''))}</td>`;
-    body+=`<tr${leader}><td class="pos">${esc(r.pos)}</td><td>${riderCell(r,cfg.team)}</td>${tail}</tr>`;
-  });
-  return `<div class="card"><div class="card__head">
-      <span class="jersey" style="background:${cfg.colour}"></span>
-      <div><div class="card__title">${esc(t(cfg.nameKey))}</div><div class="card__sub">${esc(t(cfg.jerseyKey))}</div></div>
-    </div><div class="tablewrap"><table class="cls"><thead>${head}</thead><tbody>${body}</tbody></table></div></div>`;
+
+function riderCell(row, teamOnly){
+  if(teamOnly) return `<span class="rname">${esc(row.rider)}</span>`;
+  return `<span class="rname">${esc(row.rider)}</span>${row.team?`<span class="rteam">${esc(row.team)}${row.nat?' · '+esc(row.nat):''}</span>`:''}`;
 }
+
+/* Leader's row shows the absolute time/points value; every other row shows
+   the gap to the leader where one exists (points classifications have no
+   gap field, so this naturally falls back to the points value for them). */
+function classRowHTML(r, teamOnly){
+  const val = r.gap!==undefined && r.pos>1 ? r.gap : r.val;
+  return `<tr class="${r.pos<=3?'podium':''}">
+    <td class="pos">${esc(r.pos)}</td>
+    <td class="rider">${riderCell(r, teamOnly)}</td>
+    <td class="val">${esc(val)}</td>
+  </tr>`;
+}
+
+function classCard(cfg, i, n){
+  const rows = (RESULTS && RESULTS[cfg.key] && RESULTS[cfg.key].rows) || [];
+  const body = `<table class="results"><tbody>${rows.map(r=>classRowHTML(r, cfg.team)).join('')}</tbody></table>`;
+  return `<div class="cls-card" style="${cardBorderStyle(i, n)}">
+    <div class="cls-head">
+      <span class="names"><span class="name">${esc(t(cfg.nameKey))}</span><span class="fr">${esc(t(cfg.jerseyKey))}</span></span>
+      <span class="swatch" style="background:${cfg.colour}"></span>
+    </div>
+    <div class="cls-body">${body}</div>
+  </div>`;
+}
+
 function renderResults(){
-  document.getElementById('classGrid').innerHTML=CLASSES.map(classCard).join('');
-  const winners=(RESULTS && RESULTS.stageWinners)||[];
-  const gcWinner=(RESULTS && RESULTS.gc && RESULTS.gc.rows[0] && RESULTS.gc.rows[0].rider)||'';
-  document.getElementById('stagesThead').innerHTML=`<tr><th>${t('colStage')}</th><th>${t('colRoute')}</th><th>${t('colWinner')}</th></tr>`;
-  document.getElementById('stagesTbody').innerHTML=winners.map(w=>{
-    const pink=w.winner && w.winner===gcWinner?' class="pink"':'';
-    return `<tr${pink}><td class="pos">${esc(w.n)}</td><td class="route">${esc(w.route||'')}</td><td class="win">${esc(w.winner||'')}</td></tr>`;
+  document.getElementById('classHeading').textContent = t('classHeading');
+  document.getElementById('classGrid').innerHTML = CLASSES.map((cfg,i)=>classCard(cfg, i, CLASSES.length)).join('');
+
+  document.getElementById('stagesHeading').textContent = t('stagesHeading');
+  const winners = (RESULTS && RESULTS.stageWinners) || [];
+  const gcWinner = (RESULTS && RESULTS.gc && RESULTS.gc.rows[0] && RESULTS.gc.rows[0].rider) || '';
+  document.getElementById('stagesTbody').innerHTML = winners.map(w=>{
+    const pink = w.winner && w.winner===gcWinner;
+    return `<tr class="${pink?'pink':''}">
+      <td class="n">${esc(w.n)}</td>
+      <td class="route">${esc(w.route||'')}</td>
+      <td class="winner">${esc(w.winner||'')}</td>
+    </tr>`;
   }).join('');
 }
 
 /* ---------- TEAMS & RIDERS ----------
    Start list (23 teams x 8 riders) with each rider's final GC place, from
-   data/giro2026-riders.json — see scripts/fetch_riders.py. Teams arrive in
-   team-classification order. giroditalia.it publishes no bib numbers and no
-   withdrawal list, so a rider who is not in the GC is shown simply as not
-   having finished. */
-/* Same four columns as the Tour page: bib, rider (nationality under the name),
-   final GC place, and one time column holding the gap to the winner — the
-   winner himself has no gap, so his total time is shown instead. A rider who
-   left the race gets a DNF badge in place of the place, and the stage he left
-   it on in place of the time. */
-function riderRow(r){
-  const who = `<span class="rider">${esc(r.name)}</span>${r.nat?`<span class="nat">${esc(r.nat)}</span>`:''}`;
+   data/giro2026-riders.json. giroditalia.it publishes no reason codes beyond
+   DNF, so the sub line always reads "Abandoned (DNF)" for a rider who left —
+   folded under the name rather than a separate badge, matching tdf2026.html. */
+function riderRowHTML(r){
   const out = !r.gcPos;
-  const place = out
-    ? `<span class="out-badge" title="${esc(t('dnfTitle'))}">${esc(r.status||'DNF')}</span>`
-    : esc(r.gcPos);
-  const time = out
-    ? (r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown'))
-    : (r.gcGap || r.gcVal);
-  return `<tr class="${out?'out':(r.gcPos<=3?'podium':'')}">
-    <td class="bib">${esc(r.bib||'')}</td>
-    <td>${who}</td>
-    <td class="gcpos">${place}</td>
-    <td class="num">${esc(time)}</td></tr>`;
+  const sub = out
+    ? `${t('dnfTitle')} · ${r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown')}`
+    : (r.nat || '');
+  const gcPos = out ? '—' : esc(r.gcPos);
+  const val = out ? '' : esc(r.gcGap || r.gcVal || '');
+  return `
+    <tr class="${out ? 'out' : (r.gcPos<=3 ? 'podium' : '')}">
+      <td class="bib">${esc(r.bib||'')}</td>
+      <td class="rider"><span class="rname">${esc(r.name)}</span>${sub?`<span class="rsub">${esc(sub)}</span>`:''}</td>
+      <td class="gcpos">${gcPos}</td>
+      <td class="val">${val}</td>
+    </tr>`;
 }
-function teamCard(team){
-  const title = team.url
+
+function teamCard(team, i, n){
+  const nameHTML = team.url
     ? `<a class="team-link" href="${esc(team.url)}" target="_blank" rel="noopener">${esc(team.name)}</a>`
-    : esc(team.name);
-  const sub = [
+    : `<span class="team-link">${esc(team.name)}</span>`;
+  const subParts = [
     team.gcPos ? t('teamClsLine')(team.gcPos, team.gcGap||team.gcVal) : t('teamClsNone'),
-    team.nat || '',
-  ].filter(Boolean).join(' · ');
-  const head = `<tr><th>${t('colBib')}</th><th>${t('colRider')}</th>
-    <th class="is-text-right">${t('colGcPos')}</th><th class="is-text-right">${t('colGcTime')}</th></tr>`;
-  return `<div class="card"><div class="card__head">
+    team.nat || ''
+  ].filter(Boolean);
+  return `<div class="team-card" style="${cardBorderStyle(i, n)}">
+    <div class="team-head">
       <span class="team-rank${team.gcPos===1?' first':''}">${esc(team.gcPos||'–')}</span>
-      <div><div class="card__title">${title}</div><div class="card__sub">${esc(sub)}</div></div>
-    </div><div class="tablewrap"><table class="cls riders"><thead>${head}</thead>
-      <tbody>${team.riders.map(riderRow).join('')}</tbody></table></div></div>`;
+      <span class="team-meta">${nameHTML}<span class="team-clsline">${esc(subParts.join(' · '))}</span></span>
+    </div>
+    <table class="riders">
+      <thead><tr>
+        <th>${t('colBib')}</th><th>${t('colRider')}</th>
+        <th>${t('colGcPos')}</th><th>${t('colGcTime')}</th>
+      </tr></thead>
+      <tbody>${team.riders.map(riderRowHTML).join('')}</tbody>
+    </table>
+  </div>`;
 }
+
 function renderTeams(){
-  const status = document.getElementById('teamsStatus');
   const grid = document.getElementById('teamsGrid');
   if(!RIDERS || !Array.isArray(RIDERS.teams) || !RIDERS.teams.length){
-    status.textContent = t('teamsEmpty');
-    grid.innerHTML = '';
+    grid.innerHTML = `<div class="status-card">${esc(t('teamsEmpty'))}</div>`;
     return;
   }
-  status.textContent = t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount,
-                                        RIDERS.finishers, RIDERS.riderCount-RIDERS.finishers);
-  grid.innerHTML = RIDERS.teams.map(teamCard).join('');
+  const out = RIDERS.riderCount - RIDERS.finishers;
+  const statusHTML = `<div class="teamsstatus">${esc(t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out))}</div>`;
+  const cardsHTML = RIDERS.teams.map((team,i)=>teamCard(team, i, RIDERS.teams.length)).join('');
+  grid.innerHTML = statusHTML + `<div class="clsgrid">${cardsHTML}</div>`;
 }
 
 /* ---------- STATIC TEXT + FULL RENDER ---------- */
 function render(){
-  document.getElementById('backLinkText').textContent=t('backToTours');
-  document.getElementById('eyebrow').textContent=t('eyebrow');
-  document.getElementById('subDesc').textContent=t('subDesc');
-  document.getElementById('finalTag').textContent=t('finalTag');
-  document.getElementById('tabStages').textContent=t('tabStages');
-  document.getElementById('tabResults').textContent=t('tabResults');
-  document.getElementById('tabTeams').textContent=t('tabTeams');
-  document.getElementById('teamsHeading').textContent=t('teamsHeading');
-  document.getElementById('stageListHeader').textContent=t('stageListHeader');
-  document.getElementById('classHeading').textContent=t('classHeading');
-  document.getElementById('stagesHeading').textContent=t('stagesHeading');
-  document.getElementById('profileDisclaimer').textContent=t('profileDisclaimer');
-  document.getElementById('disclaimerLabel').textContent=t('disclaimerLabel');
-  document.getElementById('disclaimerText').textContent=t('disclaimerText');
-  document.getElementById('sourcesLabel').textContent=t('sourcesLabel');
-  document.getElementById('sourcesText').textContent=t('sourcesText');
-  document.getElementById('footerNote').textContent=t('footerNote');
+  document.getElementById('backLinkText').textContent = t('backToTours');
+  document.getElementById('eyebrow').textContent = t('eyebrow');
+  document.getElementById('subDesc').textContent = t('subDesc');
+  document.getElementById('finalTag').textContent = t('finalTag');
+  document.getElementById('tabStages').textContent = t('tabStages');
+  document.getElementById('tabResults').textContent = t('tabResults');
+  document.getElementById('tabTeams').textContent = t('tabTeams');
+  document.getElementById('stageListHeader').textContent = t('stageListHeader');
+  document.getElementById('disclaimerLabel').textContent = t('disclaimerLabel');
+  document.getElementById('disclaimerText').textContent = t('disclaimerText');
+  document.getElementById('profileDisclaimer').textContent = t('profileDisclaimer');
+  document.getElementById('sourcesLabel').textContent = t('sourcesLabel');
+  document.getElementById('sourcesText').textContent = t('sourcesText');
+  document.getElementById('footerNote').textContent = t('footerNote');
+
   renderStageList();
   renderPanel(stages[activeIdx]);
   renderResults();
   renderTeams();
+
   document.querySelectorAll('#langSel button').forEach(b=>{
-    const active=b.dataset.lang===lang;
-    b.classList.toggle('active',active);
-    b.setAttribute('aria-pressed',active?'true':'false');
+    const active = b.dataset.lang===lang;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', active ? 'true' : 'false');
   });
-  document.documentElement.lang=lang;
+  document.documentElement.lang = lang;
   syncStageListHeight();
 }
 
-/* ---------- TABS ---------- */
-document.querySelectorAll('.tab').forEach(tab=>{
-  tab.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(x=>{ x.classList.toggle('active',x===tab); x.setAttribute('aria-selected',x===tab?'true':'false'); });
-    const v=tab.dataset.view;
-    document.querySelectorAll('.view').forEach(sec=>sec.classList.toggle('active', sec.id==='view-'+v));
-    syncStageListHeight();
+document.querySelectorAll('#langSel button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    lang = btn.dataset.lang;
+    localStorage.setItem(LANG_KEY, lang);
+    render();
   });
 });
 
-/* ---------- LANGUAGE ---------- */
-document.querySelectorAll('#langSel button').forEach(btn=>{
-  btn.addEventListener('click',()=>{ lang=btn.dataset.lang; localStorage.setItem(LANG_KEY,lang); render(); });
+/* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
+const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
+
+function activateTab(tab, setFocus){
+  tabButtons.forEach(x=>{
+    const selected = x===tab;
+    x.classList.toggle('active', selected);
+    x.setAttribute('aria-selected', selected ? 'true' : 'false');
+    x.tabIndex = selected ? 0 : -1; // roving tabindex
+  });
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+tab.dataset.view).classList.add('active');
+  syncStageListHeight();
+  if(setFocus) tab.focus();
+}
+
+tabButtons.forEach((tab, i)=>{
+  tab.addEventListener('click', ()=>activateTab(tab, false));
+  tab.addEventListener('keydown', e=>{
+    let idx = null;
+    if(e.key==='ArrowRight' || e.key==='ArrowDown') idx = (i+1) % tabButtons.length;
+    else if(e.key==='ArrowLeft' || e.key==='ArrowUp') idx = (i-1+tabButtons.length) % tabButtons.length;
+    else if(e.key==='Home') idx = 0;
+    else if(e.key==='End') idx = tabButtons.length-1;
+    if(idx!==null){ e.preventDefault(); activateTab(tabButtons[idx], true); }
+  });
 });
 
+/* ---------- DATA LOADING ---------- */
 async function load(){
   try{
-    const resp=await fetch(DATA_URL,{cache:'no-store'});
-    if(resp.ok) RESULTS=await resp.json();
+    const resp = await fetch(DATA_URL, {cache:'no-store'});
+    if(resp.ok) RESULTS = await resp.json();
   }catch(e){ /* file:// or offline — winners/standings simply blank */ }
   try{
-    const resp=await fetch(RIDERS_URL,{cache:'no-store'});
+    const resp = await fetch(RIDERS_URL, {cache:'no-store'});
     if(resp.ok){
-      const data=await resp.json();
-      if(data && Array.isArray(data.teams)) RIDERS=data;
+      const data = await resp.json();
+      if(data && Array.isArray(data.teams)) RIDERS = data;
     }
   }catch(e){ /* file:// or offline — the teams view shows its note */ }
   render();
