@@ -359,9 +359,16 @@ const STRINGS = {
       mountains:{name:'Mäkikilpailu', fr:'Maillot à pois — pallopaita', valHead:'Pisteet'},
       youth:{name:'Nuorten kilpailu', fr:'Maillot blanc — valkoinen paita (alle 26 v)', valHead:'Aika/ero'},
     },
+    stageStats: {
+      points:{name:'Etapilla jaetut pisteet', fr:'Vihreän paidan pisteet tältä etapilta', valHead:'Pisteet'},
+      mountains:{name:'Etapilla jaetut mäkipisteet', fr:'Pallopaidan pisteet tältä etapilta', valHead:'Pisteet'},
+      youth:{name:'Nuorten etappitulos', fr:'Alle 26-vuotiaiden ajat tällä etapilla', valHead:'Aika / ero'},
+    },
+    stageStatEmpty: 'Ei jaettu tällä etapilla.',
     colRider: 'Ajaja', colTeam: 'Joukkue',
     rankShowLabel: 'Näytä', rankGeneral: 'Kokonaistilanne — kaikki paidat',
     rankStageOpt: (n,route) => `Etappi ${n} · ${route}`,
+    stageResultTitle: n => `Etapin ${n} tulos`,
     stageResultValHead: 'Aika / ero',
     stageWinnersTitle: 'Etappivoittajat', colStage: 'Etappi', colWinner: 'Voittaja', colWTeam: 'Joukkue',
     disclaimerLabel: 'Huom korkeusprofiileista ja reiteistä:',
@@ -413,9 +420,16 @@ const STRINGS = {
       mountains:{name:'Mountains classification', fr:'Maillot à pois — polka dot jersey', valHead:'Points'},
       youth:{name:'Youth classification', fr:'Maillot blanc — white jersey (U26)', valHead:'Time/Gap'},
     },
+    stageStats: {
+      points:{name:'Points awarded on this stage', fr:'Green jersey points from this stage', valHead:'Points'},
+      mountains:{name:'Mountain points awarded on this stage', fr:'Polka dot jersey points from this stage', valHead:'Points'},
+      youth:{name:'Youth stage result', fr:'Under-26 times on this stage', valHead:'Time / gap'},
+    },
+    stageStatEmpty: 'Not awarded on this stage.',
     colRider: 'Rider', colTeam: 'Team',
     rankShowLabel: 'Show', rankGeneral: 'General classification — all jerseys',
     rankStageOpt: (n,route) => `Stage ${n} · ${route}`,
+    stageResultTitle: n => `Stage ${n} result`,
     stageResultValHead: 'Time / gap',
     stageWinnersTitle: 'Stage winners', colStage: 'Stage', colWinner: 'Winner', colWTeam: 'Team',
     disclaimerLabel: 'A note on elevation profiles and routes:',
@@ -467,9 +481,16 @@ const STRINGS = {
       mountains:{name:'Classement de la montagne', fr:'Maillot à pois', valHead:'Points'},
       youth:{name:'Classement du meilleur jeune', fr:'Maillot blanc (moins de 26 ans)', valHead:'Temps/écart'},
     },
+    stageStats: {
+      points:{name:'Points marqués sur cette étape', fr:'Points du maillot vert sur cette étape', valHead:'Points'},
+      mountains:{name:'Points de la montagne marqués sur cette étape', fr:'Points du maillot à pois sur cette étape', valHead:'Points'},
+      youth:{name:'Résultat des jeunes sur cette étape', fr:'Temps des moins de 26 ans sur cette étape', valHead:'Temps / écart'},
+    },
+    stageStatEmpty: 'Aucun point attribué sur cette étape.',
     colRider: 'Coureuse', colTeam: 'Équipe',
     rankShowLabel: 'Afficher', rankGeneral: 'Classement général — tous les maillots',
     rankStageOpt: (n,route) => `Étape ${n} · ${route}`,
+    stageResultTitle: n => `Résultat de l’étape ${n}`,
     stageResultValHead: 'Temps / écart',
     stageWinnersTitle: 'Victoires d’étape', colStage: 'Étape', colWinner: 'Victoire', colWTeam: 'Équipe',
     disclaimerLabel: 'À propos des profils d’altitude et des parcours :',
@@ -694,6 +715,210 @@ const RESULTS = {
       {pos:9, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+1:57'},
       {pos:10, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+1:57'},
     ],
+  },
+  /* Per-stage sub-classifications (points/mountains/youth), same letourfemmes.fr
+     ajax source. "points" and "mountains" are that stage's own points-table
+     tabs (ipe/ime); mountains is summed across every categorized climb that
+     day (the site shows one mini-table per climb), ranked by total. */
+  stageStats: {
+    1: {
+      points: [
+        {pos:1, name:'Idoia Eraso Lasa', team:'Laboral Kutxa–Fundación Euskadi', val:'25'},
+        {pos:2, name:'Maud Rijnbeek', team:'VolkerWessels Cycling Team', val:'20'},
+        {pos:3, name:'Océane Mahé', team:'Ma Petite Entreprise', val:'17'},
+        {pos:4, name:'Nikola Nosková', team:'Cofidis', val:'15'},
+        {pos:5, name:'Charlotte Kool', team:'Fenix–Premier Tech', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Océane Mahé', team:'Ma Petite Entreprise', val:'8'},
+        {pos:2, name:'Idoia Eraso Lasa', team:'Laboral Kutxa–Fundación Euskadi', val:'4'},
+        {pos:3, name:'Nikola Nosková', team:'Cofidis', val:'3'},
+        {pos:4, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'2'},
+      ],
+      youth: [
+        {pos:1, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'3:29:19'},
+        {pos:2, name:'Isabella Holmgren', team:'Lidl–Trek', val:'s.t.'},
+        {pos:3, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'s.t.'},
+        {pos:4, name:'Malwina Mul', team:'Cofidis', val:'+0:11'},
+        {pos:5, name:'Célia Gery', team:'FDJ United–Suez', val:'+0:14'},
+      ],
+    },
+    2: {
+      points: [
+        {pos:1, name:'Yuliia Biriukova', team:'Laboral Kutxa–Fundación Euskadi', val:'25'},
+        {pos:2, name:'Eline Jansen', team:'VolkerWessels Cycling Team', val:'20'},
+        {pos:3, name:'Carlotta Cipressi', team:'Human Powered Health', val:'17'},
+        {pos:4, name:'Ema Comte', team:'Cofidis', val:'15'},
+        {pos:5, name:'Anouska Koster', team:'Uno-X Mobility', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Ema Comte', team:'Cofidis', val:'6'},
+        {pos:2, name:'Anouska Koster', team:'Uno-X Mobility', val:'6'},
+        {pos:3, name:'Nina Berton', team:'EF Education–Oatly', val:'3'},
+        {pos:4, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'2'},
+        {pos:5, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'2'},
+      ],
+      youth: [
+        {pos:1, name:'Zoe Jane Backstedt', team:'Canyon//SRAM', val:'3:42:08'},
+        {pos:2, name:'Malwina Mul', team:'Cofidis', val:'s.t.'},
+        {pos:3, name:'Linda Riedmann', team:'Lotto Intermarché Ladies', val:'s.t.'},
+        {pos:4, name:'Célia Gery', team:'FDJ United–Suez', val:'s.t.'},
+        {pos:5, name:'Millie Couzens', team:'Fenix–Premier Tech', val:'s.t.'},
+      ],
+    },
+    3: {
+      points: [
+        {pos:1, name:'Sigrid Haugset', team:'Uno-X Mobility', val:'25'},
+        {pos:2, name:'Lotte Kopecky', team:'Team SD Worx–Protime', val:'20'},
+        {pos:3, name:'Liane Lippert', team:'Movistar Team', val:'17'},
+        {pos:4, name:'Loes Adegeest', team:'Lidl–Trek', val:'15'},
+        {pos:5, name:'Amber Kraak', team:'FDJ United–Suez', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'16'},
+        {pos:2, name:'Sigrid Haugset', team:'Uno-X Mobility', val:'11'},
+        {pos:3, name:'Nikola Nosková', team:'Cofidis', val:'10'},
+        {pos:4, name:'Liane Lippert', team:'Movistar Team', val:'6'},
+        {pos:5, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'2'},
+      ],
+      youth: [
+        {pos:1, name:'Célia Gery', team:'FDJ United–Suez', val:'4:08:47'},
+        {pos:2, name:'Malwina Mul', team:'Cofidis', val:'s.t.'},
+        {pos:3, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'s.t.'},
+        {pos:4, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'s.t.'},
+        {pos:5, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'s.t.'},
+      ],
+    },
+    4: {
+      points: [
+        {pos:1, name:'Marlen Reusser', team:'Movistar Team', val:'20'},
+        {pos:2, name:'Lieke Nooijen', team:'Team Visma | Lease a Bike', val:'17'},
+        {pos:3, name:'Demi Vollering', team:'FDJ United–Suez', val:'15'},
+        {pos:4, name:'Zoe Jane Backstedt', team:'Canyon//SRAM', val:'13'},
+        {pos:5, name:'Mischa Bredewold', team:'Team SD Worx–Protime', val:'11'},
+      ],
+      mountains: [],
+      youth: [
+        {pos:1, name:'Zoe Jane Backstedt', team:'Canyon//SRAM', val:'27:50'},
+        {pos:2, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+0:44'},
+        {pos:3, name:'Millie Couzens', team:'Fenix–Premier Tech', val:'+0:48'},
+        {pos:4, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+1:05'},
+        {pos:5, name:'Carlotta Cipressi', team:'Human Powered Health', val:'+1:15'},
+      ],
+    },
+    5: {
+      points: [
+        {pos:1, name:'Carlotta Cipressi', team:'Human Powered Health', val:'25'},
+        {pos:2, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'20'},
+        {pos:3, name:'Lotte Kopecky', team:'Team SD Worx–Protime', val:'17'},
+        {pos:4, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'15'},
+        {pos:5, name:'Magdeleine Vallieres Mill', team:'EF Education–Oatly', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'17'},
+        {pos:2, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'5'},
+        {pos:3, name:'Franziska Koch', team:'FDJ United–Suez', val:'3'},
+        {pos:4, name:'Magdeleine Vallieres Mill', team:'EF Education–Oatly', val:'2'},
+        {pos:5, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'2'},
+      ],
+      youth: [
+        {pos:1, name:'Isabella Holmgren', team:'Lidl–Trek', val:'3:54:39'},
+        {pos:2, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'s.t.'},
+        {pos:3, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+0:27'},
+        {pos:4, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+1:42'},
+        {pos:5, name:'Titia Ryo', team:'Human Powered Health', val:'+5:30'},
+      ],
+    },
+    6: {
+      points: [
+        {pos:1, name:'Katrine Aalerud', team:'Uno-X Mobility', val:'25'},
+        {pos:2, name:'Loes Adegeest', team:'Lidl–Trek', val:'20'},
+        {pos:3, name:'Nikola Nosková', team:'Cofidis', val:'17'},
+        {pos:4, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'15'},
+        {pos:5, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'10'},
+        {pos:2, name:'Nikola Nosková', team:'Cofidis', val:'7'},
+        {pos:3, name:'Sara Casasola', team:'Fenix–Premier Tech', val:'3'},
+        {pos:4, name:'Loes Adegeest', team:'Lidl–Trek', val:'2'},
+        {pos:5, name:'Demi Vollering', team:'FDJ United–Suez', val:'2'},
+      ],
+      youth: [
+        {pos:1, name:'Célia Gery', team:'FDJ United–Suez', val:'4:01:48'},
+        {pos:2, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+0:28'},
+        {pos:3, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'+0:28'},
+        {pos:4, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+0:28'},
+        {pos:5, name:'Paula Ostiz', team:'Movistar Team', val:'+0:28'},
+      ],
+    },
+    7: {
+      points: [
+        {pos:1, name:'Amalie Dideriksen', team:'Cofidis', val:'25'},
+        {pos:2, name:'Romina Hinojosa Cruz', team:'Lotto Intermarché Ladies', val:'20'},
+        {pos:3, name:'Marte Berg Edseth', team:'Uno-X Mobility', val:'17'},
+        {pos:4, name:'Marit Raaijmakers', team:'Human Powered Health', val:'15'},
+        {pos:5, name:'Clémence Latimier', team:'Ma Petite Entreprise', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'15'},
+        {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'12'},
+        {pos:3, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'10'},
+        {pos:4, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'8'},
+        {pos:5, name:'Marlen Reusser', team:'Movistar Team', val:'8'},
+      ],
+      youth: [
+        {pos:1, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'4:24:41'},
+        {pos:2, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'s.t.'},
+        {pos:3, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+2:23'},
+        {pos:4, name:'Marion Bunel', team:'Team Visma | Lease a Bike', val:'+3:50'},
+        {pos:5, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+9:24'},
+      ],
+    },
+    8: {
+      points: [
+        {pos:1, name:'Loes Adegeest', team:'Lidl–Trek', val:'25'},
+        {pos:2, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'20'},
+        {pos:3, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'17'},
+        {pos:4, name:'Mischa Bredewold', team:'Team SD Worx–Protime', val:'15'},
+        {pos:5, name:'Lotte Kopecky', team:'Team SD Worx–Protime', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'4'},
+        {pos:2, name:'Loes Adegeest', team:'Lidl–Trek', val:'2'},
+        {pos:3, name:'Célia Gery', team:'FDJ United–Suez', val:'2'},
+      ],
+      youth: [
+        {pos:1, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'4:03:17'},
+        {pos:2, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'s.t.'},
+        {pos:3, name:'Clémence Latimier', team:'Ma Petite Entreprise', val:'+1:12'},
+        {pos:4, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+1:12'},
+        {pos:5, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+1:12'},
+      ],
+    },
+    9: {
+      points: [
+        {pos:1, name:'Malwina Mul', team:'Cofidis', val:'25'},
+        {pos:2, name:'Paula Ostiz', team:'Movistar Team', val:'20'},
+        {pos:3, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'17'},
+        {pos:4, name:'Soraya Paladin', team:'Canyon//SRAM', val:'15'},
+        {pos:5, name:'Zoe Jane Backstedt', team:'Canyon//SRAM', val:'13'},
+      ],
+      mountains: [
+        {pos:1, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'10'},
+        {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'10'},
+        {pos:3, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'8'},
+        {pos:4, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'5'},
+        {pos:5, name:'Juliette Berthet', team:'FDJ United–Suez', val:'5'},
+      ],
+      youth: [
+        {pos:1, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'2:45:47'},
+        {pos:2, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'+0:02'},
+        {pos:3, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+0:04'},
+        {pos:4, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+5:58'},
+        {pos:5, name:'Malwina Mul', team:'Cofidis', val:'+10:24'},
+      ],
+    },
   },
 };
 
@@ -1260,6 +1485,24 @@ function renderRankSelect(){
   sel.value=String(rankView);
 }
 
+function stageStatCardHTML(key, rows){
+  const info=t('stageStats')[key];
+  const body = rows.length
+    ? `<table class="results"><thead><tr><th></th><th style="text-align:left">${t('colRider')}</th><th style="text-align:right">${esc(info.valHead)}</th></tr></thead><tbody>${rows.map(resultRowHTML).join('')}</tbody></table>`
+    : `<p class="cls-note">${t('stageStatEmpty')}</p>`;
+  return `
+    <div class="cls-card">
+      <div class="cls-head">
+        <span class="swatch" style="background:${JERSEY[key]}"></span>
+        <span class="names">
+          <span class="name">${esc(info.name)}</span>
+          <span class="fr">${esc(info.fr)}</span>
+        </span>
+      </div>
+      <div class="cls-body">${body}</div>
+    </div>`;
+}
+
 function renderResults(){
   const grid=document.getElementById('resultsGrid');
   const winsBlock=document.getElementById('stageWinsBlock');
@@ -1270,9 +1513,14 @@ function renderResults(){
   }else{
     const n=Number(rankView);
     const rows=(RESULTS.stageResults && RESULTS.stageResults[n]) || [];
+    const stats=(RESULTS.stageStats && RESULTS.stageStats[n]) || {points:[],mountains:[],youth:[]};
     const st=stages.find(s=>s.n===n);
     const label=st ? `${t('stagePrefix')} ${n} · ${st.start} → ${st.finish}` : `${t('stagePrefix')} ${n}`;
-    grid.innerHTML = `<div class="cls-card wide"><div class="cls-head"><span class="names"><span class="name">${esc(label)}</span></span></div><div class="cls-body"><table class="results"><thead><tr><th></th><th style="text-align:left">${t('colRider')}</th><th style="text-align:right">${t('stageResultValHead')}</th></tr></thead><tbody>${rows.map(resultRowHTML).join('')}</tbody></table></div></div>`;
+    const mainCard=`<div class="cls-card wide"><div class="cls-head"><span class="names"><span class="name">${esc(label)}</span></span></div><div class="cls-body"><table class="results"><thead><tr><th></th><th style="text-align:left">${t('colRider')}</th><th style="text-align:right">${t('stageResultValHead')}</th></tr></thead><tbody>${rows.map(resultRowHTML).join('')}</tbody></table></div></div>`;
+    grid.innerHTML = mainCard
+      + stageStatCardHTML('points', stats.points||[])
+      + stageStatCardHTML('mountains', stats.mountains||[])
+      + stageStatCardHTML('youth', stats.youth||[]);
     winsBlock.style.display='none';
   }
 
