@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9ECE4">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12160F">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f3f2f2">
 <title>Vuelta a España 2026 — stages & profiles</title>
 <meta name="description" content="Interactive roadbook for the 2026 Vuelta a España: all 21 stages, routes, illustrative elevation profiles and known climbs. Monaco → Granada, 22 Aug – 13 Sep 2026.">
 <link rel="canonical" href="https://juusimaa.github.io/Tdf2026/vuelta2026.html">
@@ -19,201 +18,206 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Leaflet (real map in the expanded stage locator). Loaded from unpkg with
-     Subresource Integrity so a tampered CDN response is rejected. Only used by
-     the expanded map; the collapsed minimap is the self-contained SVG below. -->
+<!-- Leaflet (real interactive route map, restyled to the Modernist chrome).
+     Loaded from unpkg with Subresource Integrity so a tampered CDN response
+     is rejected. -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<!-- Shared colour theme (light + dark palettes, flag-stripe classes). -->
-<link rel="stylesheet" href="theme.css">
+
+<!-- Modernist design tokens (shared with index.html / tdf2026.html / giro2026.html). -->
+<link rel="stylesheet" href="modernist.css">
 <style>
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
-  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+  html,body{margin:0;padding:0;min-height:100vh;}
+  a{color:var(--color-accent-700);text-decoration:none;}
+  a:hover{color:var(--color-accent-800);}
+  :focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}
 
-  header.top{display:flex;flex-direction:column;gap:6px;padding-bottom:22px;margin-bottom:22px;border-bottom:3px solid var(--ink);}
-  .backlink{
-    display:inline-flex;align-items:center;gap:5px;align-self:flex-start;margin-bottom:6px;
-    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--ink-soft);text-decoration:none;
-  }
-  .backlink svg{width:14px;height:14px;}
-  .backlink:hover{color:var(--ink);}
-  .backlink:focus-visible{outline:2px solid var(--roja);outline-offset:3px;border-radius:2px;}
-  .top-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
-  .langsel{display:flex;gap:0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;}
-  .langsel button{background:transparent;border:1px solid var(--line);padding:4px 10px;cursor:pointer;color:var(--ink-soft);}
-  .langsel button:first-child{border-radius:2px 0 0 2px;}
-  .langsel button:last-child{border-radius:0 2px 2px 0;}
-  .langsel button:not(:first-child){border-left:none;}
-  .langsel button.active{background:var(--solid-bg);color:var(--solid-fg);border-color:var(--solid-bg);}
-  .langsel button:hover:not(.active){color:var(--ink);}
-  h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(28px,5vw,46px);letter-spacing:.01em;text-transform:uppercase;margin:2px 0 4px;line-height:1.02;}
-  /* Title striped in the Spanish rojigualda — colours come from theme.css
-     (.es-r, .es-y). */
-  .sub{font-size:clamp(14px,2vw,16px);color:var(--ink-soft);max-width:70ch;line-height:1.5;}
-  .previewtag{
-    display:inline-flex;align-items:center;gap:6px;margin-top:10px;align-self:flex-start;
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-    color:#fff;background:var(--roja-deep);padding:4px 10px;border-radius:20px;
-  }
-  .stat-row{display:flex;flex-wrap:wrap;gap:22px;margin-top:14px;font-family:'JetBrains Mono',monospace;}
-  .stat{font-size:12.5px;color:var(--ink-soft);}
-  .stat b{display:block;font-family:'Oswald',sans-serif;font-size:19px;color:var(--ink);font-weight:600;letter-spacing:.01em;}
+  /* ---------- header ---------- */
+  .tdf-header{display:flex;align-items:stretch;justify-content:space-between;border-bottom:2px solid var(--color-divider);}
+  .tdf-header .left{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:var(--space-3) clamp(20px,4vw,48px);}
+  .backlink{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .backlink:hover{color:var(--color-accent-700);}
+  .wordmark{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;}
+  .tdf-langs{display:flex;border-left:2px solid var(--color-divider);}
+  .langbtn{font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.14em;min-width:56px;padding:0 18px;border:0;border-left:2px solid var(--color-divider);cursor:pointer;background:transparent;color:var(--color-neutral-700);transition:background .15s ease;}
+  .tdf-langs .langbtn:first-child{border-left:0;}
+  .langbtn:hover{background:var(--color-accent-100);}
+  .langbtn.active{background:var(--color-accent);color:#fff;}
+  .langbtn.active:hover{background:var(--color-accent);}
+  .langbtn:focus-visible,.stage-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
 
-  /* Stages layout — see the .stagelist height comment (JS-driven) as on the
-     other roadbook pages. */
-  .layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start;}
-  @media (max-width:860px){.layout{grid-template-columns:1fr;}}
-  .stagelist{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;display:flex;flex-direction:column;position:sticky;top:16px;}
-  .stagelist .listhead{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:12px 14px 8px;flex:0 0 auto;}
-  ul.stages{list-style:none;margin:0;padding:0 6px 10px;flex:1 1 auto;min-height:0;overflow-y:auto;}
-  @media (max-width:860px){.stagelist{position:static;}ul.stages{overflow-y:visible;}}
-  li.stage-item{margin:2px 0;}
-  button.stage-btn{
-    width:100%;text-align:left;display:flex;align-items:center;gap:10px;
-    background:transparent;border:none;cursor:pointer;padding:8px 8px;border-radius:2px;
-    font-family:'Inter',sans-serif;color:var(--ink);border-left:3px solid transparent;
-  }
-  button.stage-btn:hover{background:var(--hover);}
-  button.stage-btn.active{background:var(--paper);border-left:3px solid var(--roja-deep);}
-  .num{font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;width:26px;flex:0 0 auto;color:var(--ink-soft);}
-  .stage-btn.active .num{color:var(--roja-deep);}
-  .btn-text{flex:1;min-width:0;}
-  .btn-route{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .btn-meta{font-size:10.5px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;}
-  .typedot{width:8px;height:8px;border-radius:50%;flex:0 0 auto;}
-  .rest-row{padding:6px 14px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);margin:4px 0;}
+  /* ---------- hero ---------- */
+  .tdf-hero{padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px) clamp(24px,4vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-700);}
+  .tdf-hero h1{font-family:var(--font-heading);font-weight:700;font-size:clamp(38px,8vw,96px);line-height:.9;letter-spacing:-.03em;margin:0;text-transform:uppercase;max-width:20ch;}
+  .stripe{display:flex;height:10px;width:180px;}
+  .stripe span{flex:1;}
+  .lede{max-width:74ch;font-size:clamp(15px,1.5vw,18px);line-height:1.5;color:var(--color-neutral-700);margin:0;text-wrap:pretty;}
+  .previewtag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);background:var(--color-neutral-100);border:1px solid var(--color-divider);padding:5px 12px;}
 
-  /* Stage panel */
-  .panel{background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;padding:22px 24px 26px;}
-  .stagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:4px;}
-  .stagehead h2{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);text-transform:uppercase;margin:0;letter-spacing:.01em;}
-  .datebadge{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--solid-fg);background:var(--solid-bg);padding:5px 9px;border-radius:2px;white-space:nowrap;}
-  .stagehead-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-  /* Collapsed locator minimap: a rough Iberia + southern-France outline with a
-     start→finish marker. All strokes/fills use theme variables so it follows
-     light/dark live. */
-  svg.minimap{width:118px;height:auto;display:block;background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:5px;}
-  svg.minimap .mm-land{fill:var(--hover);stroke:var(--grey);stroke-width:1;stroke-linejoin:round;}
-  svg.minimap .mm-route{stroke:var(--roja-deep);stroke-width:2.2;stroke-linecap:round;}
-  svg.minimap .mm-start{fill:var(--paper);stroke:var(--roja-deep);stroke-width:1.4;}
-  svg.minimap .mm-finish{fill:var(--red);}
-  .mm-btn{background:none;border:none;padding:0;cursor:pointer;display:block;position:relative;}
-  .mm-btn:hover svg.minimap{border-color:var(--grey);}
-  .mm-btn:focus-visible{outline:2px solid var(--roja);outline-offset:2px;border-radius:2px;}
-  /* Corner badge signalling the minimap can be enlarged. */
-  .mm-expand{
-    position:absolute;right:4px;bottom:4px;
-    display:flex;align-items:center;justify-content:center;
-    width:16px;height:16px;
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;
-    color:var(--ink-soft);pointer-events:none;
+  /* ---------- stat row ---------- */
+  .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-bottom:2px solid var(--color-divider);}
+  .statrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  .statcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
+  .statcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .statcell .value{font-family:var(--font-heading);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:-.01em;}
+
+  /* ---------- stage layout ---------- */
+  .stagelayout{display:grid;grid-template-columns:300px 1fr;}
+  @media (max-width:980px){
+    .stagelayout{grid-template-columns:1fr;}
+    .detailgrid{grid-template-columns:1fr!important;}
   }
-  .mm-expand svg{width:10px;height:10px;display:block;}
-  .mm-btn:hover .mm-expand{color:var(--ink);border-color:var(--grey);}
-  /* Expanded view: a real Leaflet map on Stadia tiles. Fixed height so the
-     panel's layout height is known immediately (before tiles load). */
-  .mapbox{position:relative;margin:16px 0 4px;}
-  #stage-map{width:100%;height:min(60vh,460px);border:1px solid var(--line);border-radius:2px;background:var(--paper);z-index:0;}
-  .leaflet-container{font-family:'Inter',system-ui,sans-serif;}
+  .stagerail{border-right:2px solid var(--color-divider);display:flex;flex-direction:column;position:sticky;top:0;}
+  @media (max-width:980px){.stagerail{position:static;}}
+  .railhead{padding:var(--space-3) var(--space-4);border-bottom:2px solid var(--color-divider);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);flex:0 0 auto;}
+  .stagerail-list{display:flex;flex-direction:column;list-style:none;margin:0;padding:0;flex:1 1 auto;min-height:0;overflow-y:auto;}
+  @media (max-width:980px){.stagerail-list{overflow-y:visible;}}
+  .stage-item{margin:0;}
+  .stage-btn{display:flex;gap:12px;align-items:center;width:100%;padding:11px var(--space-4);border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;font-family:var(--font-body);text-align:left;background:transparent;color:var(--color-text);transition:background .12s ease;}
+  .stage-btn:hover{background:var(--color-accent-100);}
+  .stage-btn.active{background:var(--color-text);color:var(--color-bg);}
+  .stage-btn .num{font-family:var(--font-heading);font-weight:700;font-size:15px;width:26px;flex:0 0 auto;text-align:left;color:var(--color-neutral-600);}
+  .stage-btn.active .num{color:var(--color-bg);}
+  .stage-btn .btn-text{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left;}
+  .stage-btn .btn-route{font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .stage-btn .btn-meta{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .stage-btn.active .btn-meta{color:var(--color-bg);opacity:.75;}
+  .rest-row{display:flex;gap:12px;align-items:center;padding:8px var(--space-4);border-bottom:1px solid var(--color-divider);background:var(--color-neutral-100);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+
+  /* ---------- stage panel ---------- */
+  .panel{display:flex;flex-direction:column;}
+  .panelhead{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--space-4);}
+  .panelhead .kicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);display:block;margin-bottom:8px;}
+  .panelhead h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(26px,3.6vw,44px);line-height:1;letter-spacing:-.02em;margin:0;text-transform:uppercase;}
+  .typechip{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;background:var(--color-accent);color:#fff;white-space:nowrap;}
+
+  .factrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:2px solid var(--color-divider);}
+  .factrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  .factcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
+  .factcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .factcell .value{font-family:var(--font-heading);font-weight:700;font-size:18px;}
+
+  /* ---------- map + profile ---------- */
+  #bigmapbox{border-bottom:2px solid var(--color-divider);padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;}
+  .maprow{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);width:100%;}
+  .maplabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapctrls{display:flex;align-items:center;}
+  .mapctrl-btn{font-family:var(--font-heading);font-size:14px;font-weight:700;line-height:1;width:32px;height:30px;display:grid;place-items:center;border:0;border-left:2px solid var(--color-divider);background:transparent;color:var(--color-neutral-700);cursor:pointer;}
+  .mapctrl-btn:hover{background:var(--color-accent-100);}
+  .mapctrl-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
+  .mapctrl-close{background:var(--color-text);color:var(--color-bg);}
+  .mapctrl-close:hover{background:var(--color-text);}
+  .mapmeta{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;}
+  .mapzoom{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapcaption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);max-width:80ch;}
+
+  #stage-map{width:100%;background:var(--color-surface);border:1px solid var(--color-divider);}
+  .mapcell #stage-map{height:220px;}
+  #bigmapbox #stage-map{height:min(60vh,460px);}
+  .leaflet-container{font-family:var(--font-body);background:var(--color-surface);}
   .leaflet-control-attribution{font-size:9px;}
-  /* Icon-only map buttons (accessible names via aria-label/title):
-     shrink (top) and recenter-on-route (below it). */
-  .mm-close,.mm-recenter{
-    position:absolute;top:8px;right:8px;z-index:1;
-    display:flex;align-items:center;justify-content:center;
-    width:26px;height:26px;padding:0;
-    background:var(--paper-panel);border:1px solid var(--line);border-radius:2px;color:var(--ink-soft);cursor:pointer;
-  }
-  .mm-recenter{top:40px;}
-  .mm-close svg,.mm-recenter svg{width:12px;height:12px;display:block;}
-  .mm-close:hover,.mm-recenter:hover{background:var(--hover);color:var(--ink);}
-  .mm-close:focus-visible,.mm-recenter:focus-visible{outline:2px solid var(--roja);outline-offset:2px;}
-  .typepill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;color:#fff;margin-top:8px;}
-  .factbar{display:flex;flex-wrap:wrap;gap:18px 28px;margin:16px 0 6px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .fact{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);}
-  .fact b{display:block;font-family:'Oswald',sans-serif;font-size:17px;color:var(--ink);font-weight:600;}
-  .chartbox{margin:18px 0 6px;}
-  .chart-caption{font-size:11px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-top:6px;}
-  svg.profile{width:100%;height:auto;display:block;}
-  svg.profile .pf-grid{stroke:var(--line);}
-  svg.profile .pf-tick{fill:var(--ink-soft);}
-  .twocol{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:18px;}
-  .twocol > *{min-width:0;}
-  @media (max-width:700px){.twocol{grid-template-columns:1fr;}}
-  .block{overflow-x:auto;}
-  .block h3{font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 8px;}
-  .narrative{font-size:14.5px;line-height:1.62;}
-  .narrative p{margin:0 0 10px;}
-  table.points{width:100%;border-collapse:collapse;font-size:13px;}
-  table.points th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;color:var(--ink-soft);letter-spacing:.05em;padding:4px 6px;border-bottom:1px solid var(--line);}
-  table.points td{padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
-  td.atkm{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);white-space:nowrap;}
-  .catchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;min-width:16px;text-align:center;padding:1px 6px;border-radius:20px;}
-  .dash{color:var(--ink-soft);}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 2px;font-size:11.5px;color:var(--ink-soft);}
-  .legend span{display:inline-flex;align-items:center;gap:5px;}
-  .leg-swatch{width:11px;height:11px;border-radius:3px;display:inline-block;}
-  .empty-note{color:var(--ink-soft);font-size:13px;font-style:italic;}
+  .leaflet-control-zoom{display:none;}
 
-  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft);line-height:1.55;}
-  footer b{color:var(--ink);}
-  .disclaimer{font-size:12px;color:var(--ink-soft);background:var(--paper-panel);border:1px dashed var(--line);padding:10px 12px;border-radius:2px;margin-top:14px;line-height:1.55;}
-  .noscript-note{max-width:760px;margin:24px auto;padding:16px 18px;background:var(--paper-panel);border:1px solid var(--line);border-left:4px solid var(--roja);border-radius:2px;font-size:14px;line-height:1.6;}
+  .detailgrid{display:grid;grid-template-columns:280px 1fr;border-bottom:2px solid var(--color-divider);}
+  .detailgrid.big{grid-template-columns:1fr;}
+  .mapcell{border-right:2px solid var(--color-divider);padding:var(--space-4);display:flex;flex-direction:column;gap:10px;align-items:flex-start;}
+  .profilecell{padding:var(--space-4);display:flex;flex-direction:column;gap:10px;min-width:0;}
+  .profilecell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  svg.profile{width:100%;height:auto;display:block;}
+  .legend{display:flex;flex-wrap:wrap;gap:var(--space-4);}
+  .legenditem{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .legswatch{width:14px;height:8px;display:inline-block;}
+  .chart-caption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
+
+  /* ---------- description / climbs ---------- */
+  .detailbody{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:var(--space-6);}
+  .detailbody h3{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 var(--space-3);}
+  .prose{max-width:78ch;font-size:15px;line-height:1.6;color:var(--color-neutral-700);}
+  .prose p{margin:0 0 12px;}
+  .prose p:last-child{margin-bottom:0;}
+  table.dtable{width:100%;border-collapse:collapse;}
+  table.dtable th{padding:8px 10px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
+  table.dtable th:first-child{text-align:left;}
+  table.dtable td{padding:10px;border-bottom:1px solid var(--color-divider);font-size:14px;vertical-align:top;}
+  table.dtable td:first-child{font-weight:600;}
+  table.dtable td.num{text-align:right;white-space:nowrap;}
+  table.dtable td.loc{text-align:right;white-space:nowrap;color:var(--color-neutral-700);}
+  table.dtable td.cat{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  .climbname{display:flex;align-items:center;gap:10px;}
+  .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
+  .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
+
+  /* ---------- footer ---------- */
+  .tdf-footer{border-top:2px solid var(--color-divider);padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:100ch;}
+  .disclabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .discbody{margin:0;font-size:12px;line-height:1.6;color:var(--color-neutral-700);}
+  .sourcestitle{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .sourcesbody{margin:6px 0 0;font-size:12px;line-height:1.6;color:var(--color-neutral-600);}
+
+  .noscript-note{max-width:760px;margin:24px auto;padding:16px 18px;background:var(--color-surface);border:1px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-text);}
+
   ::-webkit-scrollbar{width:8px;}
-  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+  ::-webkit-scrollbar-thumb{background:var(--color-divider);}
 </style>
 </head>
 <body>
 <noscript>
   <div class="noscript-note">
-    This page builds the stages and profiles in your browser with JavaScript. Please enable JavaScript to view the content. Route source: cyclingstage.com; official: lavuelta.es.
+    <b>JavaScript pois käytöstä</b><br>
+    Tämä sivu rakentaa etapit ja profiilit selaimessa JavaScriptillä.
+    Ota JavaScript käyttöön nähdäksesi sisällön. Reittilähde: cyclingstage.com; virallinen: lavuelta.es.
+    <hr style="border:none;border-top:1px solid var(--color-divider);margin:10px 0;">
+    <b>JavaScript is disabled</b><br>
+    This page builds the stages and profiles in your browser with JavaScript.
+    Please enable JavaScript to view the content. Route source: cyclingstage.com; official: lavuelta.es.
   </div>
 </noscript>
-<div class="wrap">
-  <header class="top">
-    <a class="backlink" href="index.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-      <span id="backLinkText"></span>
-    </a>
-    <div class="top-row">
-      <div class="eyebrow" id="eyebrow"></div>
-      <div class="langsel" id="langSel" role="group" aria-label="Kieli / Language">
-        <button data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
-        <button data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
-        <button data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
-      </div>
-    </div>
-    <h1><span class="es-r">Vue</span><span class="es-y">lta a Esp</span><span class="es-r">aña</span> 2026</h1>
-    <div class="sub" id="subDesc"></div>
-    <div class="previewtag" id="previewTag"></div>
-    <div class="stat-row" id="topstats"></div>
-  </header>
 
-  <section id="view-stages">
-    <div class="layout">
-      <nav class="stagelist">
-        <div class="listhead" id="stageListHeader"></div>
-        <ul class="stages" id="stageList"></ul>
-      </nav>
-      <main class="panel" id="panel"></main>
-    </div>
-  </section>
+<header class="tdf-header">
+  <div class="left">
+    <a class="backlink" id="backLink" href="index.html">← <span id="backLinkText"></span></a>
+    <span class="wordmark">Vuelta a España 2026</span>
+  </div>
+  <div class="tdf-langs" id="langSel" role="group" aria-label="Kieli / Language">
+    <button class="langbtn" data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+    <button class="langbtn" data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
+    <button class="langbtn" data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
+  </div>
+</header>
 
-  <footer>
-    <div class="disclaimer" id="profileDisclaimer"></div>
-    <div style="margin-top:12px;"><b id="disclaimerLabel"></b> <span id="disclaimerText"></span></div>
-    <div style="margin-top:10px;"><b id="sourcesLabel"></b> <span id="sourcesText"></span></div>
-    <div style="margin-top:12px;"><span id="footerNote"></span></div>
-  </footer>
-</div>
+<section class="tdf-hero">
+  <span class="eyebrow" id="eyebrow"></span>
+  <h1>Vuelta a España 2026</h1>
+  <div class="stripe"><span style="background:#AA151B;flex:1"></span><span style="background:#F1BF00;flex:2"></span><span style="background:#AA151B;flex:1"></span></div>
+  <p class="lede" id="subDesc"></p>
+  <span class="previewtag" id="previewTag"></span>
+</section>
+
+<div class="statrow" id="topstats"></div>
+
+<section id="view-stages">
+  <div class="stagelayout">
+    <nav class="stagerail">
+      <div class="railhead" id="stageListHeader"></div>
+      <ul class="stagerail-list" id="stageList"></ul>
+    </nav>
+    <main class="panel" id="panel"></main>
+  </div>
+</section>
+
+<footer class="tdf-footer">
+  <span class="disclabel" id="disclaimerLabel"></span>
+  <p class="discbody" id="disclaimerText"></p>
+  <p class="discbody" id="profileDisclaimer"></p>
+  <span class="sourcestitle" id="sourcesLabel"></span>
+  <p class="sourcesbody" id="sourcesText"></p>
+  <span class="disclabel" id="footerNote"></span>
+</footer>
 
 <script>
 /* Language preference is shared with the rest of the site via the same key. */
@@ -244,7 +248,7 @@ const STRINGS = {
     summitNote: name => `Maalinousu: ${name}.`,
     typeLabels: {flat:'Tasainen', hilly:'Kumpuileva', mountain:'Vuoristo', itt:'Yksilöaika-ajo'},
     typeDesc: {flat:'Tasainen etappi', hilly:'Kumpuileva etappi', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
-    legCat: 'Lk.', legUncat: 'Luokittelematon',
+    legCat: 'Lk.', legUncat: 'Luokittelematon', atKm: 'km',
     statDistance: 'Kokonaismatka', statDistanceVal: '≈ 3 302 km',
     statGain: 'Nousumetrit yhteensä', statGainVal: '≈ 58 000 m',
     statStages: 'Etappeja', statStagesVal: '21',
@@ -279,7 +283,7 @@ const STRINGS = {
     summitNote: name => `Summit finish at ${name}.`,
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
     typeDesc: {flat:'Flat stage', hilly:'Hilly stage', mountain:'Mountain stage', itt:'Individual time trial'},
-    legCat: 'Cat', legUncat: 'Uncategorized',
+    legCat: 'Cat', legUncat: 'Uncategorized', atKm: 'km',
     statDistance: 'Total distance', statDistanceVal: '≈ 3,302 km',
     statGain: 'Total elevation gain', statGainVal: '≈ 58,000 m',
     statStages: 'Stages', statStagesVal: '21',
@@ -314,7 +318,7 @@ const STRINGS = {
     summitNote: name => `Arrivée au sommet à ${name}.`,
     typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
     typeDesc: {flat:'Étape de plaine', hilly:'Étape vallonnée', mountain:'Étape de montagne', itt:'Contre-la-montre individuel'},
-    legCat: 'Cat.', legUncat: 'Non catégorisée',
+    legCat: 'Cat.', legUncat: 'Non catégorisée', atKm: 'km',
     statDistance: 'Distance totale', statDistanceVal: '≈ 3 302 km',
     statGain: 'Dénivelé total', statGainVal: '≈ 58 000 m',
     statStages: 'Étapes', statStagesVal: '21',
@@ -346,11 +350,10 @@ function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRING
    published them pre-race, so `cat` is left off (shown as "—") rather than
    guessed. Summit-finish climbs use the finish km. Elevation gain shown only
    where a source published it. Profiles are illustrative — see the disclaimer. */
-/* All values resolve in theme.css; var() strings work in the generated
-   inline-SVG presentation attributes. Cat 1 is the hardest -> climb-1. */
-const TYPE_COLOR = {flat:'var(--blue)', hilly:'var(--green)', mountain:'var(--red)', itt:'var(--grey)'};
-const CAT_COLOR = {1:'var(--climb-1)', 2:'var(--climb-2)', 3:'var(--climb-3)', 4:'var(--climb-4)'};
-function typeColor(tp){ return TYPE_COLOR[tp] || 'var(--grey)'; }
+/* Climb category colours follow the Modernist single-accent system (shared
+   with tdf2026.html / giro2026.html): numbered by severity, hardest first. */
+const CAT_COLOR = {1:'var(--color-accent-600)', 2:'var(--color-accent-500)', 3:'var(--color-accent-400)', 4:'var(--color-accent-300)'};
+const UNCAT_COLOR = 'var(--color-neutral-400)';
 
 const stages = [
   {n:1,  date:'2026-08-22', start:'Monaco', finish:'Monaco', km:9.6, type:'itt', gain:170, climbs:[]},
@@ -445,108 +448,67 @@ function buildPath(points,totalKm,W,H,padL,padR,padT,padB){
   return {d,plotH};
 }
 function xForKm(km,totalKm,W,padL,padR){ return padL+(km/totalKm)*(W-padL-padR); }
+const STAGE_COORDS = {
+  1:[[7.428,43.739],[7.421,43.735]],2:[[7.387,43.734],[5.779,43.841]],3:[[3.063,43.126],[2.036,42.521]],4:[[1.553,42.514],[1.526,42.507]],5:[[0.82,41.144],[0.502,40.822]],6:[[0.248,40.25],[-0.038,39.977]],7:[[-0.011,40.133],[-0.632,40.378]],8:[[-0.31,39.616],[-0.219,39.033]],9:[[-0.214,38.537],[-0.267,38.65]],10:[[-2.537,38.664],[-2.049,38.451]],11:[[-0.951,37.609],[-1.696,37.675]],12:[[-1.892,37.258],[-2.547,37.222]],13:[[-3.609,36.746],[-4.142,37.163]],14:[[-3.743,37.778],[-3.775,37.631]],15:[[-5.28,37.698],[-4.775,37.88]],16:[[-6.822,37.912],[-6.921,37.208]],17:[[-5.925,37.242],[-5.991,37.375]],18:[[-6.231,36.592],[-6.135,36.691]],19:[[-4.138,36.724],[-5.2,36.484]],20:[[-3.088,37.179],[-3.369,37.175]],21:[[-3.61,37.155],[-3.586,37.174]]
+};
+
+function genDesc(st){
+  const sep = lang==='fr' ? ' : ' : ': ';
+  const parts=[`${t('typeDesc')[st.type]}${sep}${esc(st.start)} → ${esc(st.finish)}, ${fmtKm(st.km)}.`];
+  if(st.summit) parts.push(esc(t('summitNote')(st.summit)));
+  return '<p>'+parts.join(' ')+'</p>';
+}
+
+/* ---------- ELEVATION PROFILE ----------
+   Styled per the Modernist system (shared with tdf2026.html / giro2026.html):
+   monochrome ink line/fill, accent-shade climb bands. Only climbs with a
+   known summit km get a marker, matching climbsWithKm above. */
 function renderProfile(st){
-  const W=900,H=240,padL=30,padR=16,padT=16,padB=30, totalKm=st.km;
-  const {d,plotH}=buildPath(genProfile(st),totalKm,W,H,padL,padR,padT,padB);
-  const baseY=padT+plotH;
-  let svg=`<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(t('profileAria')(st.n))}">`;
-  for(let g=0;g<=4;g++){ const gy=padT+plotH*g/4; svg+=`<line class="pf-grid" x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke-width="1" opacity="0.6"/>`; }
-  const step = totalKm>150?50:(totalKm>60?20:10);
-  for(let kk=0;kk<=totalKm+0.01;kk+=step){
-    const kx=xForKm(kk,totalKm,W,padL,padR);
-    svg+=`<line class="pf-grid" x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke-width="1" opacity="0.35"/>`;
-    svg+=`<text class="pf-tick" x="${kx}" y="${H-8}" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">${Math.round(kk)}</text>`;
+  const W=900, H=250, padL=30, padR=16, padT=22, padB=30;
+  const {d, plotH} = buildPath(genProfile(st), st.km, W,H,padL,padR,padT,padB);
+  const baseY = padT+plotH;
+
+  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(t('profileAria')(st.n))}">`;
+
+  for(let g=0; g<=4; g++){
+    const gy = padT + plotH*g/4;
+    svg += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--color-neutral-300)" stroke-width="1"/>`;
   }
-  const col=typeColor(st.type);
-  svg+=`<path d="${d} L ${xForKm(totalKm,totalKm,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="${col}" opacity="0.16"/>`;
-  svg+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="2.4" stroke-linejoin="round"/>`;
+  const step = st.km > 150 ? 50 : (st.km > 60 ? 20 : 10);
+  for(let k=0; k<=st.km+0.01; k+=step){
+    const kx = xForKm(k, st.km, W, padL, padR);
+    svg += `<line x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke="var(--color-neutral-200)" stroke-width="1"/>`;
+    svg += `<text x="${kx}" y="${H-10}" font-family="Archivo, sans-serif" font-size="11" font-weight="600" fill="var(--color-neutral-600)" text-anchor="middle">${Math.round(k)}</text>`;
+  }
+
   climbsWithKm(st).forEach(c=>{
-    const cx=xForKm(c.km,totalKm,W,padL,padR);
-    const foot=xForKm(Math.max(0,c.km-(c.len||4)),totalKm,W,padL,padR);
-    const cc=CAT_COLOR[c.cat]||'var(--climb-none)';
-    svg+=`<rect x="${foot}" y="${padT}" width="${Math.max(2,cx-foot)}" height="${plotH}" fill="${cc}" opacity="0.14"/>`;
-    svg+=`<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${baseY}" stroke="${cc}" stroke-width="1.5" stroke-dasharray="2,2"/>`;
-    svg+=`<circle cx="${cx}" cy="${padT-3}" r="4.5" fill="${cc}"/>`;
+    const cx = xForKm(c.km, st.km, W, padL, padR);
+    const foot = xForKm(Math.max(0, c.km-(c.len||4)), st.km, W, padL, padR);
+    const col = CAT_COLOR[c.cat] || UNCAT_COLOR;
+    svg += `<rect x="${foot}" y="${padT}" width="${Math.max(2,cx-foot)}" height="${plotH}" fill="${col}" opacity="0.18"/>`;
+    svg += `<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${baseY}" stroke="${col}" stroke-width="2"/>`;
+    svg += `<rect x="${cx-4}" y="${padT-12}" width="8" height="8" fill="${col}"/>`;
   });
-  svg+=`</svg>`;
+
+  svg += `<path d="${d} L ${xForKm(st.km,st.km,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="var(--color-text)" opacity="0.1"/>`;
+  svg += `<path d="${d}" fill="none" stroke="var(--color-text)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+  svg += `<line x1="${padL}" y1="${baseY}" x2="${W-padR}" y2="${baseY}" stroke="var(--color-text)" stroke-width="2"/>`;
+  svg += `</svg>`;
   return svg;
 }
 
-/* ---------- LOCATOR MINIMAP (collapsed SVG) ----------
-   Simplified hand-traced outlines ([lon,lat]): the Iberian peninsula plus a
-   southern-France coastal strip (Roussillon → Provence → Monaco) for the
-   Grande Salida stages. Rough "where is this stage" cue — not accurate.
-   Start/finish coordinates are derived from the GPX endpoints, embedded here
-   as STAGE_COORDS (see scripts/fetch_routes.py, which prints this literal). */
-const MM_IBERIA = [
-  [-8.9,43.7],[-9.3,42.6],[-8.8,41.0],[-9.5,38.7],[-8.9,37.9],[-8.9,37.0],[-7.4,37.2],
-  [-6.9,37.1],[-6.3,36.8],[-6.2,36.3],[-5.6,36.0],[-4.4,36.7],[-3.5,36.7],[-2.6,36.7],
-  [-1.9,36.9],[-0.7,37.6],[-0.3,38.4],[0.0,38.9],[-0.2,39.6],[0.3,40.2],[1.0,41.0],
-  [2.2,41.3],[3.2,42.0],[3.0,42.47],[1.7,42.5],[0.7,42.7],[-0.7,43.0],[-1.8,43.35],
-  [-3.0,43.5],[-4.5,43.4],[-6.0,43.55],[-7.6,43.7]
-];
-const MM_SFRANCE = [
-  [3.0,42.5],[4.0,43.35],[4.8,43.35],[5.4,43.2],[6.1,43.06],[6.7,43.12],[7.1,43.5],
-  [7.45,43.78],[6.6,44.2],[5.2,44.35],[4.0,44.1],[3.0,43.5]
-];
-const STAGE_COORDS = {1:[[7.428,43.739],[7.421,43.735]],2:[[7.387,43.734],[5.779,43.841]],3:[[3.063,43.126],[2.036,42.521]],4:[[1.553,42.514],[1.526,42.507]],5:[[0.82,41.144],[0.502,40.822]],6:[[0.248,40.25],[-0.038,39.977]],7:[[-0.011,40.133],[-0.632,40.378]],8:[[-0.31,39.616],[-0.219,39.033]],9:[[-0.214,38.537],[-0.267,38.65]],10:[[-2.537,38.664],[-2.049,38.451]],11:[[-0.951,37.609],[-1.696,37.675]],12:[[-1.892,37.258],[-2.547,37.222]],13:[[-3.609,36.746],[-4.142,37.163]],14:[[-3.743,37.778],[-3.775,37.631]],15:[[-5.28,37.698],[-4.775,37.88]],16:[[-6.822,37.912],[-6.921,37.208]],17:[[-5.925,37.242],[-5.991,37.375]],18:[[-6.231,36.592],[-6.135,36.691]],19:[[-4.138,36.724],[-5.2,36.484]],20:[[-3.088,37.179],[-3.369,37.175]],21:[[-3.61,37.155],[-3.586,37.174]]};
+function mapLabel(){ return lang==='fi' ? 'Reitti' : lang==='fr' ? 'Parcours' : 'Route'; }
+function profileLabel(){ return lang==='fi' ? 'Korkeusprofiili' : lang==='fr' ? 'Profil' : 'Elevation profile'; }
+function zoomWord(){ return lang==='fi' ? 'zoomaus' : 'zoom'; }
+const ZOOM_LABELS = {fi:{in:'Lähennä',out:'Loitonna'}, fr:{in:'Zoom avant',out:'Zoom arrière'}, en:{in:'Zoom in',out:'Zoom out'}};
 
-// Equirectangular projection: longitudes squeezed by cos(40°) so Iberia keeps
-// roughly its true proportions.
-const MM_BOX = {lonMin:-9.6, lonMax:7.6, latMin:35.8, latMax:44.5};
-const MM_K = Math.cos(40*Math.PI/180);
-function mmXY(p){
-  return [((p[0]-MM_BOX.lonMin)*MM_K*10).toFixed(1),
-          ((MM_BOX.latMax-p[1])*10).toFixed(1)];
-}
-function mmPath(pts, close){
-  return pts.map((p,i)=>(i?'L':'M')+mmXY(p).join(' ')).join(' ')+(close?' Z':'');
-}
-
-let mapExpanded = false;
-
-function mmStageGeom(n){
-  const c = STAGE_COORDS[n];
-  if(!c) return null;
-  const [sx,sy] = mmXY(c[0]), [fx,fy] = mmXY(c[1]);
-  const same = Math.abs(c[0][0]-c[1][0])<0.05 && Math.abs(c[0][1]-c[1][1])<0.05;
-  return {sx,sy,fx,fy,same};
-}
-function mmBase(st, cls){
-  const W = ((MM_BOX.lonMax-MM_BOX.lonMin)*MM_K*10).toFixed(1);
-  const H = ((MM_BOX.latMax-MM_BOX.latMin)*10).toFixed(1);
-  let svg = `<svg class="${cls}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(t('minimapAria')(st.n))}">`;
-  svg += `<path class="mm-land" d="${mmPath(MM_IBERIA,true)}"/>`;
-  svg += `<path class="mm-land" d="${mmPath(MM_SFRANCE,true)}"/>`;
-  return svg;
-}
-function mmRouteMarks(g){
-  let svg = '';
-  if(!g.same){
-    svg += `<line class="mm-route" x1="${g.sx}" y1="${g.sy}" x2="${g.fx}" y2="${g.fy}"/>`;
-    svg += `<circle class="mm-start" cx="${g.sx}" cy="${g.sy}" r="2.4"/>`;
-  }
-  svg += `<circle class="mm-finish" cx="${g.fx}" cy="${g.fy}" r="${g.same?3.2:2.6}"/>`;
-  return svg;
-}
-function renderMinimap(st){
-  const g = mmStageGeom(st.n);
-  if(!g) return '';
-  const svg = mmBase(st,'minimap') + mmRouteMarks(g) + '</svg>';
-  return `<button class="mm-btn" data-mm-toggle aria-expanded="false" title="${esc(t('minimapExpand'))}">${svg}<span class="mm-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M21 3l-7 7"/><path d="M9 21H3v-6"/><path d="M3 21l7-7"/></svg></span></button>`;
-}
-function renderMinimapLarge(st){
-  if(!STAGE_COORDS[st.n]) return '';
-  return `
-    <div class="mapbox">
-      <button class="mm-close" data-mm-toggle aria-expanded="true" aria-label="${esc(t('minimapCollapse'))}" title="${esc(t('minimapCollapse'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M3 21l7-7"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/></svg></button>
-      <button class="mm-recenter" aria-label="${esc(t('minimapRecenter'))}" title="${esc(t('minimapRecenter'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/></svg></button>
-      <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
-      <div class="chart-caption" id="stage-map-caption">${t('minimapCaption')}</div>
-    </div>`;
-}
-
-/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ---------- */
+/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
+   Per-stage route polylines live in data/vuelta2026-routes.json. Stages
+   missing a route fall back to a straight start→finish line derived from
+   STAGE_COORDS. Same restyled-Leaflet approach as the Tour de France / Giro
+   pages: the map is a real interactive tile map, shown small inline in the
+   detail grid or expanded full-width, with a control-row chrome. */
 let routesData = null, routesPromise = null;
 function loadRoutes(){
   if(routesData) return Promise.resolve(routesData);
@@ -558,34 +520,35 @@ function loadRoutes(){
   }
   return routesPromise;
 }
-let stageMap = null;
+
+let stageMap = null, stageMapFitBounds = null;
 function destroyStageMap(){
-  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; }
+  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; stageMapFitBounds = null; }
 }
-/* Stadia Maps basemap (domain-authenticated — no API key in code). Dedicated
-   light/dark styles replace the old CSS invert hack on the tile pane. */
-const darkMapMQ = matchMedia('(prefers-color-scheme: dark)');
-const stadiaTileUrl = dark =>
-  `https://tiles.stadiamaps.com/tiles/${dark ? 'alidade_smooth_dark' : 'alidade_smooth'}/{z}/{x}/{y}{r}.png`;
+
+function updateMapZoomLabel(){
+  const el = document.getElementById('mapZoomLabel');
+  if(el && stageMap) el.textContent = `${zoomWord()} ${stageMap.getZoom()}`;
+}
+
 function initStageMap(st){
-  if(!mapExpanded) return;
   if(!window.L){ setTimeout(()=>initStageMap(st), 120); return; }
   const el = document.getElementById('stage-map');
   if(!el) return;
   destroyStageMap();
-  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true});
+
+  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true, zoomControl:false});
   stageMap = map;
-  const tiles = L.tileLayer(stadiaTileUrl(darkMapMQ.matches), {
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
     maxZoom:17,
     attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
-  // Retile if the OS theme flips while the map is open; unhook on map teardown.
-  const retheme = e => tiles.setUrl(stadiaTileUrl(e.matches));
-  darkMapMQ.addEventListener('change', retheme);
-  map.on('unload', () => darkMapMQ.removeEventListener('change', retheme));
+  map.on('zoomend', updateMapZoomLabel);
+
   const css = getComputedStyle(document.documentElement);
-  const ACC = css.getPropertyValue('--roja-deep').trim() || '#9E241E';
-  const RED = css.getPropertyValue('--red').trim() || '#B23B32';
+  const INK = css.getPropertyValue('--color-text').trim() || '#201e1d';
+  const ACCENT = css.getPropertyValue('--color-accent').trim() || '#ec3013';
+
   const draw = () => {
     if(stageMap !== map) return;
     const pts = (routesData.stages || {})[st.n];
@@ -600,32 +563,77 @@ function initStageMap(st){
       line = [startLL, finishLL];
     }
     const poly = L.polyline(line, approx
-      ? {color:ACC, weight:3, opacity:.9, dashArray:'6,8'}
-      : {color:ACC, weight:4, opacity:.95}).addTo(map);
+      ? {color:INK, weight:3, opacity:.85, dashArray:'6,8'}
+      : {color:INK, weight:3.5, opacity:.95}).addTo(map);
     const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
     if(!same){
-      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:ACC, fillOpacity:1}).addTo(map);
+      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:INK, fillOpacity:1}).addTo(map);
     }
-    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:RED, fillOpacity:1}).addTo(map);
-    map.fitBounds(poly.getBounds(), {padding:[26,26]});
+    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:ACCENT, fillOpacity:1}).addTo(map);
+    map.fitBounds(poly.getBounds(), {padding:[24,24]});
     map.invalidateSize();
-    // Recenter button: refit the route after the user has panned/zoomed away.
-    const rc = document.querySelector('.mm-recenter');
-    if(rc) rc.onclick = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[26,26]}); };
+    stageMapFitBounds = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[24,24]}); };
     const cap = document.getElementById('stage-map-caption');
     if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
+    updateMapZoomLabel();
   };
+
   if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
   setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
 }
 
-/* ---------- DESCRIPTION (generated from facts) ---------- */
-function genDesc(st){
-  const sep = lang==='fr' ? ' : ' : ': ';
-  const parts=[`${t('typeDesc')[st.type]}${sep}${esc(st.start)} → ${esc(st.finish)}, ${fmtKm(st.km)}.`];
-  if(st.summit) parts.push(esc(t('summitNote')(st.summit)));
-  return '<p>'+parts.join(' ')+'</p>';
+function mapControlsHTML(big){
+  const zl = ZOOM_LABELS[lang] || ZOOM_LABELS.en;
+  let html =
+    `<button class="mapctrl-btn" data-map-zoomout title="${zl.out}" aria-label="${zl.out}">−</button>` +
+    `<button class="mapctrl-btn" data-map-zoomin title="${zl.in}" aria-label="${zl.in}">+</button>` +
+    `<button class="mapctrl-btn" data-map-recenter title="${esc(t('minimapRecenter'))}" aria-label="${esc(t('minimapRecenter'))}">◎</button>`;
+  html += big
+    ? `<button class="mapctrl-btn mapctrl-close" data-map-toggle title="${esc(t('minimapCollapse'))}" aria-label="${esc(t('minimapCollapse'))}">×</button>`
+    : `<button class="mapctrl-btn" data-map-toggle title="${esc(t('minimapExpand'))}" aria-label="${esc(t('minimapExpand'))}">⤢</button>`;
+  return html;
 }
+
+function mapCellHTML(st){
+  return `
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(false)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
+    <span class="mapzoom" id="mapZoomLabel"></span>`;
+}
+
+function bigMapBoxHTML(st){
+  return `<div id="bigmapbox">
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(true)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
+    <span class="mapmeta">
+      <span class="mapzoom" id="mapZoomLabel"></span>
+      <span class="mapcaption" id="stage-map-caption"></span>
+    </span>
+  </div>`;
+}
+
+function bindMapControls(st){
+  const zoomOutBtn = document.querySelector('[data-map-zoomout]');
+  const zoomInBtn = document.querySelector('[data-map-zoomin]');
+  const recenterBtn = document.querySelector('[data-map-recenter]');
+  const toggleBtn = document.querySelector('[data-map-toggle]');
+  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomOut(); });
+  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomIn(); });
+  if(recenterBtn) recenterBtn.addEventListener('click', ()=>{ if(stageMapFitBounds) stageMapFitBounds(); });
+  if(toggleBtn) toggleBtn.addEventListener('click', ()=>{
+    mapExpanded = !mapExpanded;
+    renderPanel(st);
+    syncStageListHeight();
+  });
+}
+
+let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 /* ---------- STAGE LIST ---------- */
 let activeIdx = 0;
@@ -642,19 +650,24 @@ function renderStageList(){
     const btn=document.createElement('button');
     btn.className='stage-btn'+(idx===activeIdx?' active':'');
     btn.dataset.idx=idx;
-    btn.innerHTML=`<span class="num">${String(s.n).padStart(2,'0')}</span>
-      <span class="typedot" style="background:${typeColor(s.type)}"></span>
-      <span class="btn-text"><div class="btn-route">${esc(s.start)} → ${esc(s.finish)}</div>
-      <div class="btn-meta">${fmtDate(s.date)} · ${fmtKm(s.km)}</div></span>`;
+    btn.innerHTML=`
+      <span class="num">${String(s.n).padStart(2,'0')}</span>
+      <span class="btn-text">
+        <span class="btn-route">${esc(s.start)} → ${esc(s.finish)}</span>
+        <span class="btn-meta">${fmtDate(s.date)} · ${fmtKm(s.km)} · ${t('typeLabels')[s.type]}</span>
+      </span>`;
     btn.addEventListener('click',()=>selectStage(idx));
     li.appendChild(btn); listEl.appendChild(li);
   });
 }
+
+/* Keeps the stage-rail column exactly as tall as the detail panel next to
+   it — see the equivalent comment in tdf2026.html. Skipped below 980px. */
 function syncStageListHeight(){
-  const list=document.querySelector('.stagelist');
+  const list=document.querySelector('.stagerail');
   const panel=document.getElementById('panel');
   if(!list||!panel) return;
-  if(window.innerWidth<=860){ list.style.height=''; return; }
+  if(window.innerWidth<=980){ list.style.height=''; return; }
   list.style.height=panel.offsetHeight+'px';
 }
 window.addEventListener('resize', syncStageListHeight);
@@ -666,78 +679,87 @@ function selectStage(idx){
   renderPanel(stages[idx]);
   syncStageListHeight();
 }
-function catChip(cat){
-  if(!cat) return '<span class="dash">—</span>';
-  return `<span class="catchip" style="background:${CAT_COLOR[cat]||'var(--climb-none)'}">${cat}</span>`;
-}
+
+function catChip(cat){ return cat ? esc(String(cat)) : '—'; }
+
+/* ---------- RENDER MAIN PANEL ---------- */
 function renderPanel(st){
   const panel=document.getElementById('panel');
-  const tc=typeColor(st.type);
   destroyStageMap();
+
   const climbs=st.climbs||[];
   let climbRows='';
   if(climbs.length){
-    climbRows=climbs.map(c=>`<tr>
-      <td>${esc(c.name)}</td>
-      <td>${catChip(c.cat)}</td>
-      <td>${c.len?fmtKm(c.len):'—'}</td>
-      <td>${c.grad?esc(c.grad)+' %':'—'}</td>
-      <td class="atkm">${c.km!=null?'~ km '+Math.round(c.km):'—'}</td></tr>`).join('');
+    climbRows=climbs.map(c=>`
+      <tr>
+        <td><span class="climbname"><span class="sq" style="background:${CAT_COLOR[c.cat]||UNCAT_COLOR}"></span>${esc(c.name)}</span></td>
+        <td class="num cat">${catChip(c.cat)}</td>
+        <td class="num">${c.len?fmtKm(c.len):'—'}</td>
+        <td class="num">${c.grad?esc(c.grad)+' %':'—'}</td>
+        <td class="loc">${c.km!=null?'~ '+t('atKm')+' '+Math.round(c.km):'—'}</td>
+      </tr>`).join('');
   }
-  panel.innerHTML=`
-    <div class="stagehead">
-      <div>
-        <h2>${t('stagePrefix')} ${st.n} — ${esc(st.start)} → ${esc(st.finish)}</h2>
-        <span class="typepill" style="background:${tc}">${t('typeLabels')[st.type]}</span>
-      </div>
-      <div class="stagehead-side">
-        <span class="datebadge">${fmtDate(st.date)}</span>
-        ${mapExpanded ? '' : renderMinimap(st)}
-      </div>
-    </div>
-    ${mapExpanded ? renderMinimapLarge(st) : ''}
-    <div class="factbar">
-      <div class="fact">${t('factDistance')}<b>${fmtKm(st.km)}</b></div>
-      <div class="fact">${t('factType')}<b>${t('typeLabels')[st.type]}</b></div>
-      <div class="fact">${t('factGain')}<b>${st.gain?fmtGain(st.gain):'—'}</b></div>
-      <div class="fact">${t('factClimbs')}<b>${climbs.length}</b></div>
-    </div>
-    <div class="chartbox">
-      ${renderProfile(st)}
-      <div class="legend">
-        <span><span class="leg-swatch" style="background:var(--climb-none)"></span> ${t('legUncat')}</span>
-      </div>
-      <div class="chart-caption">${t('chartCaption')}</div>
-    </div>
-    <div class="twocol">
-      <div class="block narrative"><h3>${t('descHeader')}</h3>${genDesc(st)}</div>
-      <div class="block">
-        <h3>${t('climbsHeader')}</h3>
-        ${climbRows ? `<table class="points"><thead><tr><th>${t('climbHead')[0]}</th><th>${t('climbHead')[1]}</th><th>${t('climbHead')[2]}</th><th>${t('climbHead')[3]}</th><th>${t('climbHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
-                    : `<p class="empty-note">${t('noClimbs')}</p>`}
-      </div>
-    </div>`;
 
-  // Minimap ↔ full-width map toggle. The collapsed minimap expands; the shrink
-  // button collapses. Re-rendering the panel swaps the variants.
-  panel.querySelectorAll('[data-mm-toggle]').forEach(el=>{
-    el.addEventListener('click', ()=>{
-      mapExpanded = !mapExpanded;
-      renderPanel(st);
-      syncStageListHeight();
-    });
-  });
-  if(mapExpanded) initStageMap(st);
+  panel.innerHTML = `
+    <div class="panelhead">
+      <div>
+        <span class="kicker">${t('stagePrefix')} ${st.n} · ${fmtDate(st.date)}</span>
+        <h2>${esc(st.start)} → ${esc(st.finish)}</h2>
+      </div>
+      <span class="typechip">${t('typeLabels')[st.type]}</span>
+    </div>
+
+    <div class="factrow">
+      <div class="factcell"><span class="label">${t('factDistance')}</span><span class="value">${fmtKm(st.km)}</span></div>
+      <div class="factcell"><span class="label">${t('factType')}</span><span class="value">${t('typeLabels')[st.type]}</span></div>
+      <div class="factcell"><span class="label">${t('factGain')}</span><span class="value">${st.gain?fmtGain(st.gain):'—'}</span></div>
+      <div class="factcell"><span class="label">${t('factClimbs')}</span><span class="value">${climbs.length}</span></div>
+    </div>
+
+    ${mapExpanded ? bigMapBoxHTML(st) : ''}
+
+    <div class="detailgrid${mapExpanded ? ' big' : ''}">
+      ${mapExpanded ? '' : `<div class="mapcell">${mapCellHTML(st)}</div>`}
+      <div class="profilecell">
+        <span class="label">${profileLabel()}</span>
+        ${renderProfile(st)}
+        <div class="legend">
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[1]}"></span>${t('legCat')} 1</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[2]}"></span>2</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[3]}"></span>3</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[4]}"></span>4</span>
+          <span class="legenditem"><span class="legswatch" style="background:${UNCAT_COLOR}"></span>${t('legUncat')}</span>
+        </div>
+        <span class="chart-caption">${t('chartCaption')}</span>
+      </div>
+    </div>
+
+    <div class="detailbody">
+      <div>
+        <h3>${t('descHeader')}</h3>
+        <div class="prose">${genDesc(st)}</div>
+      </div>
+      <div>
+        <h3>${t('climbsHeader')}</h3>
+        ${climbRows
+          ? `<table class="dtable"><thead><tr><th>${t('climbHead')[0]}</th><th>${t('climbHead')[1]}</th><th>${t('climbHead')[2]}</th><th>${t('climbHead')[3]}</th><th>${t('climbHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
+          : `<p class="empty-note">${t('noClimbs')}</p>`}
+      </div>
+    </div>
+  `;
+
+  bindMapControls(st);
+  initStageMap(st);
 }
 
 /* ---------- STATIC TEXT + INIT ---------- */
 function renderTopStats(){
   document.getElementById('topstats').innerHTML = `
-    <div class="stat">${t('statDistance')}<b>${t('statDistanceVal')}</b></div>
-    <div class="stat">${t('statGain')}<b>${t('statGainVal')}</b></div>
-    <div class="stat">${t('statStages')}<b>${t('statStagesVal')}</b></div>
-    <div class="stat">${t('statRest')}<b>${t('statRestVal')}</b></div>
-    <div class="stat">${t('statSummit')}<b>${t('statSummitVal')}</b></div>`;
+    <div class="statcell"><span class="label">${t('statDistance')}</span><span class="value">${t('statDistanceVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statGain')}</span><span class="value">${t('statGainVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statStages')}</span><span class="value">${t('statStagesVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statRest')}</span><span class="value">${t('statRestVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statSummit')}</span><span class="value">${t('statSummitVal')}</span></div>`;
 }
 function applyStaticText(){
   document.getElementById('backLinkText').textContent=t('backToTours');
@@ -777,7 +799,7 @@ document.querySelectorAll('#langSel button').forEach(btn=>{
   btn.addEventListener('click',()=>setLang(btn.dataset.lang));
 });
 
-/* init — default to the first road stage (index 0 is stage 1, the Monaco ITT). */
+/* init — default to the first stage (index 0 is stage 1, the Monaco ITT). */
 renderAll();
 </script>
 <script data-goatcounter="https://grandtours.goatcounter.com/count"
