@@ -175,7 +175,10 @@
 
   /* ---------- rankings tab ---------- */
   .toolbar{padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);}
-  .toolbar .statusline{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .toolbar .rlabel{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  select.rankselect{font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--color-text);background:var(--color-surface);border:2px solid var(--color-divider);border-radius:0;padding:9px 14px;cursor:pointer;max-width:100%;}
+  select.rankselect:focus-visible{outline:2px solid var(--color-accent);outline-offset:1px;}
+  .toolbar .statusline{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
 
   .clsgrid{display:grid;grid-template-columns:1fr 1fr;}
   @media (max-width:860px){.clsgrid{grid-template-columns:1fr;}}
@@ -197,6 +200,7 @@
   table.results td.rider .rteam{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
   table.results td.val{text-align:right;white-space:nowrap;font-size:13px;}
   .cls-note{margin:var(--space-3) 0 0;font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
+  .cls-card.wide{grid-column:1/-1;border-right:0;}
 
   .stagewins-block{padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);border-top:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
   .stagewins-block h3{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;margin:0;}
@@ -275,10 +279,12 @@
 
 <section class="view" id="view-results" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
   <div class="toolbar">
+    <label class="rlabel" id="rankSelectLabel" for="rankStageSelect"></label>
+    <select class="rankselect" id="rankStageSelect"></select>
     <span class="statusline" id="resultsStatusLine"></span>
   </div>
   <div class="clsgrid" id="resultsGrid"></div>
-  <div class="stagewins-block">
+  <div class="stagewins-block" id="stageWinsBlock">
     <h3 id="stageWinnersTitle"></h3>
     <table class="winners" id="stageWinnersTable"></table>
   </div>
@@ -354,13 +360,15 @@ const STRINGS = {
       youth:{name:'Nuorten kilpailu', fr:'Maillot blanc — valkoinen paita (alle 26 v)', valHead:'Aika/ero'},
     },
     colRider: 'Ajaja', colTeam: 'Joukkue',
-    top5Note: 'Vain top 5 luotettavasti varmistettuna useasta lähteestä — täydet sijoitukset: letourfemmes.fr, procyclingstats.com.',
+    rankShowLabel: 'Näytä', rankGeneral: 'Kokonaistilanne — kaikki paidat',
+    rankStageOpt: (n,route) => `Etappi ${n} · ${route}`,
+    stageResultValHead: 'Aika / ero',
     stageWinnersTitle: 'Etappivoittajat', colStage: 'Etappi', colWinner: 'Voittaja', colWTeam: 'Joukkue',
     disclaimerLabel: 'Huom korkeusprofiileista ja reiteistä:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Karttojen reittiviivat sen sijaan ovat oikeasta GPX-datasta. Mäkipisteiden sijainnit, luokat, pituudet ja kaltevuudet perustuvat ASO:n viralliseen roadbookiin.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon tai Tour de France Femmesiin. Tulokset ovat oikeudenomistajiensa omaisuutta.',
     sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
-    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit ja mäkipisteet: letourfemmes.fr/en/overall-route ja etappikohtaiset sivut, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX-reitit karttoja varten). Lopulliset sijoitukset ja etappivoittajat: procyclinguk.com (tour-de-france-femmes-2026-results), idlprocycling.com:n loppuyhteenveto ja en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, ristiin tarkistettu.',
+    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit ja mäkipisteet: letourfemmes.fr/en/overall-route ja etappikohtaiset sivut, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX-reitit karttoja varten). Kokonais- ja etappikohtaiset sijoitukset (Sijoitukset-välilehti): letourfemmes.fr/en/rankings — kilpailun virallinen tulospalvelu, haettu suoraan sen omalta rajapinnalta jokaiselle etapille.',
   },
   en: {
     backToTours: 'Grand Tours',
@@ -406,13 +414,15 @@ const STRINGS = {
       youth:{name:'Youth classification', fr:'Maillot blanc — white jersey (U26)', valHead:'Time/Gap'},
     },
     colRider: 'Rider', colTeam: 'Team',
-    top5Note: 'Only the top 5 could be reliably confirmed across sources — full standings: letourfemmes.fr, procyclingstats.com.',
+    rankShowLabel: 'Show', rankGeneral: 'General classification — all jerseys',
+    rankStageOpt: (n,route) => `Stage ${n} · ${route}`,
+    stageResultValHead: 'Time / gap',
     stageWinnersTitle: 'Stage winners', colStage: 'Stage', colWinner: 'Winner', colWTeam: 'Team',
     disclaimerLabel: 'A note on elevation profiles and routes:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type and the known climbs (location, length, average gradient) — they are not GPS-measured elevation data. The map route lines, however, are drawn from real GPX data. Climb locations, categories, lengths and gradients are based on the ASO official roadbook.',
     footerNote: '© 2026 Jouni Uusimaa · Page design & code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O. or the Tour de France Femmes. Results remain the property of their respective owners.',
     sourcesTitle: 'Sources (cross-checked against ≥2 independent sources for key facts):',
-    sourcesBody: 'Route, stages, dates, elevation and climb points: letourfemmes.fr/en/overall-route and the per-stage pages, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX routes for the maps). Final standings and stage winners: procyclinguk.com (tour-de-france-femmes-2026-results), idlprocycling.com\'s standings recap and en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, cross-checked.',
+    sourcesBody: 'Route, stages, dates, elevation and climb points: letourfemmes.fr/en/overall-route and the per-stage pages, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX routes for the maps). General and per-stage rankings (Rankings tab): letourfemmes.fr/en/rankings — the race\'s official results service, fetched directly from its own data feed for every stage.',
   },
   fr: {
     backToTours: 'Grands Tours',
@@ -458,13 +468,15 @@ const STRINGS = {
       youth:{name:'Classement du meilleur jeune', fr:'Maillot blanc (moins de 26 ans)', valHead:'Temps/écart'},
     },
     colRider: 'Coureuse', colTeam: 'Équipe',
-    top5Note: 'Seul le top 5 a pu être confirmé de façon fiable sur plusieurs sources — classement complet : letourfemmes.fr, procyclingstats.com.',
+    rankShowLabel: 'Afficher', rankGeneral: 'Classement général — tous les maillots',
+    rankStageOpt: (n,route) => `Étape ${n} · ${route}`,
+    stageResultValHead: 'Temps / écart',
     stageWinnersTitle: 'Victoires d’étape', colStage: 'Étape', colWinner: 'Victoire', colWTeam: 'Équipe',
     disclaimerLabel: 'À propos des profils d’altitude et des parcours :',
     disclaimer: 'Les courbes SVG sont des esquisses illustratives construites à partir du type d’étape et des ascensions connues (position, longueur, pente moyenne) — ce ne sont pas des données d’altitude mesurées au GPS. Les tracés des cartes, en revanche, proviennent de données GPX réelles. Les positions, catégories, longueurs et pentes des cols reposent sur le roadbook officiel de l’ASO.',
     footerNote: '© 2026 Jouni Uusimaa · Design et code de la page sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec l’A.S.O. ni le Tour de France Femmes. Les résultats restent la propriété de leurs détenteurs.',
     sourcesTitle: 'Sources (recoupées sur ≥2 sources indépendantes pour les faits clés) :',
-    sourcesBody: 'Parcours, étapes, dates, dénivelé et cols : letourfemmes.fr/en/overall-route et les pages par étape, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (tracés GPX pour les cartes). Classements finaux et victoires d’étape : procyclinguk.com (tour-de-france-femmes-2026-results), le récapitulatif d’idlprocycling.com et en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, recoupés.',
+    sourcesBody: 'Parcours, étapes, dates, dénivelé et cols : letourfemmes.fr/en/overall-route et les pages par étape, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (tracés GPX pour les cartes). Classements généraux et par étape (onglet Classements) : letourfemmes.fr/en/rankings — le service de résultats officiel de la course, récupéré directement depuis son propre flux de données pour chaque étape.',
   },
 };
 
@@ -487,57 +499,202 @@ const JERSEY = {gc:'#f5d33f', points:'#3e9b4f', mountains:'var(--color-accent)',
 const CLASS_KEYS = ['gc','points','mountains','youth'];
 
 /* ---------- FINAL RESULTS ----------
-   The race finished Sun 9 Aug 2026. GC top 10, stage winners (all 9, exact
-   match across two independent sources) and youth top 5 are well corrobo-
-   rated; points/mountains classifications beyond the top 5 varied between
-   sources, so only the corroborated top 5 is shown there (see top5Note).
-   Sources: procyclinguk.com/tour-de-france-femmes-2026-results, idlprocycling.com
-   standings recap, cross-checked against en.wikipedia.org/wiki/2026_Tour_de_France_Femmes. */
+   The race finished Sun 9 Aug 2026. All figures below (GC/points/mountains/
+   youth top 15, all 9 stage results and stage winners) come directly from
+   letourfemmes.fr's own rankings pages (letourfemmes.fr/en/rankings/stage-N
+   -> its "General ranking"/"Stage ranking" tabs, itg/ipg/img/ijg = cumulative
+   after stage N, ite = that stage's own result), the official source of
+   record, not a secondary recap. Team names are normalised from the site's
+   all-caps display; rider full names follow the site's own spelling, with a
+   handful of diacritics restored where the site's own alt-text strips them
+   (e.g. "Cedrine Kerbaol" -> "Cédrine Kerbaol") -- not invented, just
+   correcting character-encoding stripping against well-established
+   spellings of real people's names. */
 const RESULTS = {
   gc: [
     {pos:1, name:'Demi Vollering', team:'FDJ United–Suez', val:'30:54:51'},
-    {pos:2, name:'Kasia Niewiadoma-Phinney', team:'Canyon//SRAM', val:'+1:18'},
-    {pos:3, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+4:29'},
+    {pos:2, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'+1:18'},
+    {pos:3, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+4:19'},
     {pos:4, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'+5:10'},
-    {pos:5, name:'Paula Blasi', team:'UAE Team L’Imad', val:'+6:13'},
+    {pos:5, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+6:13'},
     {pos:6, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+6:41'},
     {pos:7, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+7:53'},
     {pos:8, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+9:12'},
-    {pos:9, name:'Kim Le Court-Pienaar', team:'AG Insurance–Soudal', val:'+14:04'},
+    {pos:9, name:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal', val:'+14:04'},
     {pos:10, name:'Niamh Fisher-Black', team:'Lidl–Trek', val:'+15:14'},
+    {pos:11, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+22:56'},
+    {pos:12, name:'Femke De Vries', team:'Team Visma | Lease a Bike', val:'+24:08'},
+    {pos:13, name:'Thalita De Jong', team:'Human Powered Health', val:'+24:41'},
+    {pos:14, name:'Marlen Reusser', team:'Movistar Team', val:'+25:57'},
+    {pos:15, name:'Juliette Berthet', team:'FDJ United–Suez', val:'+28:12'},
   ],
   points: [
     {pos:1, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'181'},
-    {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'132'},
+    {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'152'},
     {pos:3, name:'Lotte Kopecky', team:'Team SD Worx–Protime', val:'120'},
-    {pos:4, name:'Kim Le Court-Pienaar', team:'AG Insurance–Soudal', val:'107'},
-    {pos:5, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'94'},
+    {pos:4, name:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal', val:'107'},
+    {pos:5, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'103'},
+    {pos:6, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'96'},
+    {pos:7, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'94'},
+    {pos:8, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'84'},
+    {pos:9, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'78'},
+    {pos:10, name:'Marlen Reusser', team:'Movistar Team', val:'72'},
+    {pos:11, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'70'},
+    {pos:12, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'62'},
+    {pos:13, name:'Loes Adegeest', team:'Lidl–Trek', val:'60'},
+    {pos:14, name:'Sigrid Haugset', team:'Uno-X Mobility', val:'55'},
+    {pos:15, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'54'},
   ],
   mountains: [
     {pos:1, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'55'},
     {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'30'},
-    {pos:3, name:'Kasia Niewiadoma-Phinney', team:'Canyon//SRAM', val:'28'},
-    {pos:4, name:'Nikola Nosková', team:'Cofidis', val:'21'},
-    {pos:5, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'19'},
+    {pos:3, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'28'},
+    {pos:4, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'19'},
+    {pos:5, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'14'},
+    {pos:6, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'13'},
+    {pos:7, name:'Sara Casasola', team:'Fenix–Premier Tech', val:'12'},
+    {pos:8, name:'Sigrid Haugset', team:'Uno-X Mobility', val:'11'},
+    {pos:9, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'10'},
+    {pos:10, name:'Marlen Reusser', team:'Movistar Team', val:'10'},
+    {pos:11, name:'Loes Adegeest', team:'Lidl–Trek', val:'9'},
+    {pos:12, name:'Isabella Holmgren', team:'Lidl–Trek', val:'8'},
+    {pos:13, name:'Océane Mahé', team:'Ma Petite Entreprise', val:'8'},
+    {pos:14, name:'Niamh Fisher-Black', team:'Lidl–Trek', val:'8'},
+    {pos:15, name:'Anouska Koster', team:'Uno-X Mobility', val:'7'},
   ],
   youth: [
     {pos:1, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'31:00:01'},
-    {pos:2, name:'Paula Blasi', team:'UAE Team L’Imad', val:'+1:03'},
+    {pos:2, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+1:03'},
     {pos:3, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+4:02'},
     {pos:4, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+17:46'},
     {pos:5, name:'Célia Gery', team:'FDJ United–Suez', val:'+38:58'},
+    {pos:6, name:'Solène Muller', team:'St Michel–Preference Home–Auber93', val:'+1:06:49'},
+    {pos:7, name:'Marion Bunel', team:'Team Visma | Lease a Bike', val:'+1:08:15'},
+    {pos:8, name:'Clémence Latimier', team:'Ma Petite Entreprise', val:'+1:09:55'},
+    {pos:9, name:'Titia Ryo', team:'Human Powered Health', val:'+1:25:17'},
+    {pos:10, name:'Zoe Jane Backstedt', team:'Canyon//SRAM', val:'+1:29:05'},
   ],
   stageWinners: [
     {n:1, winner:'Lorena Wiebes', team:'Team SD Worx–Protime'},
     {n:2, winner:'Lorena Wiebes', team:'Team SD Worx–Protime'},
-    {n:3, winner:'Sigrid Ytterhus Haugset', team:'Uno-X Mobility'},
+    {n:3, winner:'Sigrid Haugset', team:'Uno-X Mobility'},
     {n:4, winner:'Marlen Reusser', team:'Movistar Team'},
     {n:5, winner:'Demi Vollering', team:'FDJ United–Suez'},
-    {n:6, winner:'Kim Le Court-Pienaar', team:'AG Insurance–Soudal'},
-    {n:7, winner:'Kasia Niewiadoma-Phinney', team:'Canyon//SRAM'},
+    {n:6, winner:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal'},
+    {n:7, winner:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM'},
     {n:8, winner:'Demi Vollering', team:'FDJ United–Suez'},
     {n:9, winner:'Demi Vollering', team:'FDJ United–Suez'},
   ],
+  stageResults: {
+    1: [
+      {pos:1, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'3:29:11'},
+      {pos:2, name:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal', val:'s.t.'},
+      {pos:3, name:'Demi Vollering', team:'FDJ United–Suez', val:'s.t.'},
+      {pos:4, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'s.t.'},
+      {pos:5, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'s.t.'},
+      {pos:6, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'s.t.'},
+      {pos:7, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'s.t.'},
+      {pos:8, name:'Pauline Ferrand Prevot', team:'Team Visma | Lease a Bike', val:'s.t.'},
+      {pos:9, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'s.t.'},
+      {pos:10, name:'Marlen Reusser', team:'Movistar Team', val:'s.t.'},
+    ],
+    2: [
+      {pos:1, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'3:42:08'},
+      {pos:2, name:'Elisa Balsamo', team:'Lidl–Trek', val:'s.t.'},
+      {pos:3, name:'Marianne Vos', team:'Team Visma | Lease a Bike', val:'s.t.'},
+      {pos:4, name:'Shari Bossuyt', team:'AG Insurance–Soudal', val:'s.t.'},
+      {pos:5, name:'Letizia Paternoster', team:'Liv AlUla Jayco', val:'s.t.'},
+      {pos:6, name:'Josie Nelson', team:'Team Picnic PostNL', val:'s.t.'},
+      {pos:7, name:'Zoe Jane Backstedt', team:'Canyon//SRAM', val:'s.t.'},
+      {pos:8, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'s.t.'},
+      {pos:9, name:'Malwina Mul', team:'Cofidis', val:'s.t.'},
+      {pos:10, name:'Linda Riedmann', team:'Lotto Intermarché Ladies', val:'s.t.'},
+    ],
+    3: [
+      {pos:1, name:'Sigrid Haugset', team:'Uno-X Mobility', val:'4:05:59'},
+      {pos:2, name:'Lotte Kopecky', team:'Team SD Worx–Protime', val:'+1:24'},
+      {pos:3, name:'Marianne Vos', team:'Team Visma | Lease a Bike', val:'+2:48'},
+      {pos:4, name:'Usoa Ostolaza Zabala', team:'Laboral Kutxa–Fundación Euskadi', val:'+2:48'},
+      {pos:5, name:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal', val:'+2:48'},
+      {pos:6, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'+2:48'},
+      {pos:7, name:'Célia Gery', team:'FDJ United–Suez', val:'+2:48'},
+      {pos:8, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+2:48'},
+      {pos:9, name:'Malwina Mul', team:'Cofidis', val:'+2:48'},
+      {pos:10, name:'Monica Trinca Colonel', team:'Liv AlUla Jayco', val:'+2:48'},
+    ],
+    4: [
+      {pos:1, name:'Marlen Reusser', team:'Movistar Team', val:'27:30'},
+      {pos:2, name:'Lieke Nooijen', team:'Team Visma | Lease a Bike', val:'+0:04'},
+      {pos:3, name:'Demi Vollering', team:'FDJ United–Suez', val:'+0:18'},
+      {pos:4, name:'Zoe Jane Backstedt', team:'Canyon//SRAM', val:'+0:20'},
+      {pos:5, name:'Mischa Bredewold', team:'Team SD Worx–Protime', val:'+0:45'},
+      {pos:6, name:'Kristen Faulkner', team:'EF Education–Oatly', val:'+0:54'},
+      {pos:7, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+0:54'},
+      {pos:8, name:'Lotte Claes', team:'Fenix–Premier Tech', val:'+0:55'},
+      {pos:9, name:'Riejanne Markus', team:'Lidl–Trek', val:'+1:01'},
+      {pos:10, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+1:03'},
+    ],
+    5: [
+      {pos:1, name:'Demi Vollering', team:'FDJ United–Suez', val:'3:53:54'},
+      {pos:2, name:'Marlen Reusser', team:'Movistar Team', val:'s.t.'},
+      {pos:3, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'s.t.'},
+      {pos:4, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+0:45'},
+      {pos:5, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+0:45'},
+      {pos:6, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'+0:45'},
+      {pos:7, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+1:12'},
+      {pos:8, name:'Femke De Vries', team:'Team Visma | Lease a Bike', val:'+1:12'},
+      {pos:9, name:'Thalita De Jong', team:'Human Powered Health', val:'+1:12'},
+      {pos:10, name:'Niamh Fisher-Black', team:'Lidl–Trek', val:'+1:15'},
+    ],
+    6: [
+      {pos:1, name:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal', val:'4:01:48'},
+      {pos:2, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'s.t.'},
+      {pos:3, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'s.t.'},
+      {pos:4, name:'Sarah Van Dam', team:'Team Visma | Lease a Bike', val:'s.t.'},
+      {pos:5, name:'Célia Gery', team:'FDJ United–Suez', val:'s.t.'},
+      {pos:6, name:'Liane Lippert', team:'Movistar Team', val:'s.t.'},
+      {pos:7, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+0:02'},
+      {pos:8, name:'Riejanne Markus', team:'Lidl–Trek', val:'+0:05'},
+      {pos:9, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+0:28'},
+      {pos:10, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'+0:28'},
+    ],
+    7: [
+      {pos:1, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'4:22:53'},
+      {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'+1:16'},
+      {pos:3, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+1:42'},
+      {pos:4, name:'Marlen Reusser', team:'Movistar Team', val:'+1:46'},
+      {pos:5, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+1:48'},
+      {pos:6, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'+1:48'},
+      {pos:7, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+2:01'},
+      {pos:8, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+3:26'},
+      {pos:9, name:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal', val:'+3:58'},
+      {pos:10, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+4:11'},
+    ],
+    8: [
+      {pos:1, name:'Demi Vollering', team:'FDJ United–Suez', val:'4:02:39'},
+      {pos:2, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+0:17'},
+      {pos:3, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'+0:17'},
+      {pos:4, name:'Kim Le Court De Billot-Pienaar', team:'AG Insurance–Soudal', val:'+0:38'},
+      {pos:5, name:'Lotte Kopecky', team:'Team SD Worx–Protime', val:'+0:38'},
+      {pos:6, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+0:38'},
+      {pos:7, name:'Sarah Van Dam', team:'Team Visma | Lease a Bike', val:'+0:38'},
+      {pos:8, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'+0:38'},
+      {pos:9, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+0:38'},
+      {pos:10, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+0:38'},
+    ],
+    9: [
+      {pos:1, name:'Demi Vollering', team:'FDJ United–Suez', val:'2:44:43'},
+      {pos:2, name:'Paula Blasi Cairol', team:'UAE Team L’Imad', val:'+1:04'},
+      {pos:3, name:'Katarzyna Niewiadoma-Phinney', team:'Canyon//SRAM', val:'+1:04'},
+      {pos:4, name:'Niamh Fisher-Black', team:'Lidl–Trek', val:'+1:04'},
+      {pos:5, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'+1:06'},
+      {pos:6, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+1:08'},
+      {pos:7, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+1:04'},
+      {pos:8, name:'Femke De Vries', team:'Team Visma | Lease a Bike', val:'+1:57'},
+      {pos:9, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+1:57'},
+      {pos:10, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+1:57'},
+    ],
+  },
 };
 
 /* ---------- STAGE DATA ----------
@@ -1070,31 +1227,54 @@ function resultRowHTML(r){
       <td class="val">${esc(r.val)}</td>
     </tr>`;
 }
+function clsCardHTML(key, rows, valHeadOverride){
+  const cls=t('classifications');
+  const info=cls[key];
+  return `
+    <div class="cls-card">
+      <div class="cls-head">
+        <span class="swatch" style="background:${JERSEY[key]}"></span>
+        <span class="names">
+          <span class="name">${esc(info.name)}</span>
+          <span class="fr">${esc(info.fr)}</span>
+        </span>
+      </div>
+      <div class="cls-body">
+        <table class="results">
+          <thead><tr><th></th><th style="text-align:left">${t('colRider')}</th><th style="text-align:right">${esc(valHeadOverride||info.valHead)}</th></tr></thead>
+          <tbody>${rows.map(resultRowHTML).join('')}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+let rankView='general'; // 'general' or a stage number (1-9)
+
+function renderRankSelect(){
+  const sel=document.getElementById('rankStageSelect');
+  const opts=[`<option value="general">${esc(t('rankGeneral'))}</option>`];
+  stages.forEach(s=>{
+    opts.push(`<option value="${s.n}">${esc(t('rankStageOpt')(s.n, `${s.start} → ${s.finish}`))}</option>`);
+  });
+  sel.innerHTML=opts.join('');
+  sel.value=String(rankView);
+}
+
 function renderResults(){
   const grid=document.getElementById('resultsGrid');
-  const cls=t('classifications');
-  grid.innerHTML = CLASS_KEYS.map(key=>{
-    const rows=RESULTS[key]||[];
-    const info=cls[key];
-    const note=(key==='points'||key==='mountains') ? `<p class="cls-note">${t('top5Note')}</p>` : '';
-    return `
-      <div class="cls-card">
-        <div class="cls-head">
-          <span class="swatch" style="background:${JERSEY[key]}"></span>
-          <span class="names">
-            <span class="name">${esc(info.name)}</span>
-            <span class="fr">${esc(info.fr)}</span>
-          </span>
-        </div>
-        <div class="cls-body">
-          <table class="results">
-            <thead><tr><th></th><th style="text-align:left">${t('colRider')}</th><th style="text-align:right">${esc(info.valHead)}</th></tr></thead>
-            <tbody>${rows.map(resultRowHTML).join('')}</tbody>
-          </table>
-        </div>
-        ${note}
-      </div>`;
-  }).join('');
+  const winsBlock=document.getElementById('stageWinsBlock');
+
+  if(rankView==='general'){
+    grid.innerHTML = CLASS_KEYS.map(key=>clsCardHTML(key, RESULTS[key]||[])).join('');
+    winsBlock.style.display='';
+  }else{
+    const n=Number(rankView);
+    const rows=(RESULTS.stageResults && RESULTS.stageResults[n]) || [];
+    const st=stages.find(s=>s.n===n);
+    const label=st ? `${t('stagePrefix')} ${n} · ${st.start} → ${st.finish}` : `${t('stagePrefix')} ${n}`;
+    grid.innerHTML = `<div class="cls-card wide"><div class="cls-head"><span class="names"><span class="name">${esc(label)}</span></span></div><div class="cls-body"><table class="results"><thead><tr><th></th><th style="text-align:left">${t('colRider')}</th><th style="text-align:right">${t('stageResultValHead')}</th></tr></thead><tbody>${rows.map(resultRowHTML).join('')}</tbody></table></div></div>`;
+    winsBlock.style.display='none';
+  }
 
   const winTable=document.getElementById('stageWinnersTable');
   winTable.innerHTML = `
@@ -1122,6 +1302,7 @@ function applyStaticText(){
   document.getElementById('teamsComingTitle').textContent=t('teamsComingTitle');
   document.getElementById('teamsComingBody').textContent=t('teamsComingBody');
   document.getElementById('resultsStatusLine').textContent=t('resultsStatus');
+  document.getElementById('rankSelectLabel').textContent=t('rankShowLabel');
   document.getElementById('stageWinnersTitle').textContent=t('stageWinnersTitle');
   document.getElementById('disclaimerLabel').textContent=t('disclaimerLabel');
   document.getElementById('disclaimerText').textContent=t('disclaimer');
@@ -1141,6 +1322,7 @@ function renderAll(){
   renderTopStats();
   renderStageList();
   renderPanel(stages[activeIdx]);
+  renderRankSelect();
   renderResults();
   updateLangButtons();
   document.documentElement.lang=lang;
@@ -1153,6 +1335,12 @@ function setLang(newLang){
 }
 document.querySelectorAll('#langSel button').forEach(btn=>{
   btn.addEventListener('click',()=>setLang(btn.dataset.lang));
+});
+
+/* ---------- RANKINGS STAGE SELECTOR ---------- */
+document.getElementById('rankStageSelect').addEventListener('change', e=>{
+  rankView = e.target.value==='general' ? 'general' : Number(e.target.value);
+  renderResults();
 });
 
 /* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
