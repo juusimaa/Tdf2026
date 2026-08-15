@@ -316,6 +316,7 @@
    a placeholder — no reliable start-list data source found yet. */
 const LANG_KEY = 'tdf2026-lang';
 const ROUTES_URL = 'data/femmes2026-routes.json';
+const RESULTS_URL = 'data/femmes2026-results.json';
 
 const STRINGS = {
   fi: {
@@ -525,8 +526,7 @@ const JERSEY = {gc:'#f5d33f', points:'#3e9b4f', mountains:'var(--color-accent)',
 const CLASS_KEYS = ['gc','points','mountains','youth'];
 
 /* ---------- FINAL RESULTS ----------
-   The race finished Sun 9 Aug 2026. All figures below (GC/points/mountains/
-   youth top 15, all 9 stage results and stage winners) come directly from
+   The race finished Sun 9 Aug 2026. All figures below come directly from
    letourfemmes.fr's own rankings pages (letourfemmes.fr/en/rankings/stage-N
    -> its "General ranking"/"Stage ranking" tabs, itg/ipg/img/ijg = cumulative
    after stage N, ite = that stage's own result), the official source of
@@ -535,7 +535,13 @@ const CLASS_KEYS = ['gc','points','mountains','youth'];
    handful of diacritics restored where the site's own alt-text strips them
    (e.g. "Cedrine Kerbaol" -> "Cédrine Kerbaol") -- not invented, just
    correcting character-encoding stripping against well-established
-   spellings of real people's names. */
+   spellings of real people's names.
+
+   This object holds only the top ~15 per table as a same-page fallback
+   (so the page still shows something if data/femmes2026-results.json can't
+   be fetched, e.g. opened via file://). The real, full field (up to 145
+   riders per table) lives in that JSON file and overwrites these arrays at
+   load time via loadResults() below -- see RESULTS_URL. */
 const RESULTS = {
   gc: [
     {pos:1, name:'Demi Vollering', team:'FDJ United–Suez', val:'30:54:51'},
@@ -1881,9 +1887,32 @@ tabButtons.forEach((tab, i)=>{
   });
 });
 
+/* ---------- FULL RESULTS DATA ----------
+   The page renders immediately with the built-in top-~15 fallback above,
+   then tries to fetch the full field (up to 145 riders per table) from
+   data/femmes2026-results.json and re-render. If the fetch fails (e.g. the
+   page was opened directly from disk via file://), the fallback stays. */
+async function loadResults(){
+  try{
+    const resp = await fetch(RESULTS_URL, {cache:'no-store'});
+    if(!resp.ok) throw new Error('not found');
+    const data = await resp.json();
+    ['gc','points','mountains','youth'].forEach(k=>{
+      if(Array.isArray(data[k])) RESULTS[k] = data[k];
+    });
+    if(data.stageResults && typeof data.stageResults==='object') RESULTS.stageResults = data.stageResults;
+    if(data.stageStats && typeof data.stageStats==='object') RESULTS.stageStats = data.stageStats;
+    if(Array.isArray(data.stageWinners) && data.stageWinners.length) RESULTS.stageWinners = data.stageWinners;
+    renderResults();
+  }catch(e){
+    /* No fetched data available — the built-in fallback stays in place. */
+  }
+}
+
 /* init — default to the first stage (Lausanne opener). */
 document.documentElement.lang = lang;
 renderAll();
+loadResults();
 </script>
 <script data-goatcounter="https://grandtours.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
