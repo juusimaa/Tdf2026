@@ -155,6 +155,7 @@
   .prose p{margin:0 0 12px;}
   .prose p:last-child{margin-bottom:0;}
   table.dtable{width:100%;border-collapse:collapse;}
+  table.dtable.sprints{max-width:640px;}
   table.dtable th{padding:8px 10px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
   table.dtable th:first-child{text-align:left;}
   table.dtable td{padding:10px;border-bottom:1px solid var(--color-divider);font-size:14px;vertical-align:top;}
@@ -294,12 +295,16 @@ const STRINGS = {
     minimapRecenter: 'Keskitä kartta reittiin',
     minimapCaption: 'Etapin oikea reitti OpenStreetMap-kartalla. Kulta = lähtö, punainen = maali. Sulje oikean yläkulman painikkeesta.',
     minimapCaptionApprox: 'Reittidataa ei saatavilla — näytetään suora viiva lähdöstä maaliin. Sulje oikean yläkulman painikkeesta.',
-    factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä',
-    descHeader: 'Etapin kuvaus', climbsHeader: 'Mäkipisteet (KOM)',
+    factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä',
+    descHeader: 'Etapin kuvaus', climbsHeader: 'Mäkipisteet (KOM)', sprintsHeader: 'Kirisprintit',
     climbTableHead: ['Nousu','Lk','Pituus','Kalt.','Sijainti'],
+    sprintTableHead: ['Sprintti','Sijainti','Pisteet'],
     noClimbs: 'Ei luokiteltuja nousuja tällä etapilla.',
+    noSprintTT: 'Aika-ajoetapeilla ei ajeta kirisprinttiä.',
+    noSprint: 'Ei kirisprinttiä tällä etapilla.',
+    sprintChip: 'Kirisprintti', sprintPtsSuffix: 'pistettä',
     chartCaption: 'Havainnollistava profiili — rakennettu nousujen sijainneista, ei GPS-mitattua korkeusdataa.',
-    legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendC4: '4. luokka',
+    legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendC4: '4. luokka', legendSprint: 'Kirisprintti',
     catLabels: {HC:'HC', C1:'1. lk', C2:'2. lk', C3:'3. lk', C4:'4. lk'},
     typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
     comingSoonTag: 'Tulossa',
@@ -334,12 +339,16 @@ const STRINGS = {
     minimapRecenter: 'Center map on route',
     minimapCaption: 'Actual stage route on OpenStreetMap. Gold = start, red = finish. Close with the button in the top-right corner.',
     minimapCaptionApprox: 'Route data not available — showing a straight line from start to finish. Close with the button in the top-right corner.',
-    factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points',
-    descHeader: 'Stage description', climbsHeader: 'Climb points (KOM)',
+    factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints',
+    descHeader: 'Stage description', climbsHeader: 'Climb points (KOM)', sprintsHeader: 'Intermediate sprints',
     climbTableHead: ['Climb','Cat.','Length','Grad.','Location'],
+    sprintTableHead: ['Sprint','Location','Points'],
     noClimbs: 'No categorized climbs on this stage.',
+    noSprintTT: 'No intermediate sprints on time-trial stages.',
+    noSprint: 'No intermediate sprint on this stage.',
+    sprintChip: 'Intermediate sprint', sprintPtsSuffix: 'points',
     chartCaption: 'Illustrative profile — built from climb positions, not GPS-measured elevation data.',
-    legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendC4: 'Category 4',
+    legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendC4: 'Category 4', legendSprint: 'Intermediate sprint',
     catLabels: {HC:'HC', C1:'Cat 1', C2:'Cat 2', C3:'Cat 3', C4:'Cat 4'},
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
     comingSoonTag: 'Coming soon',
@@ -374,12 +383,16 @@ const STRINGS = {
     minimapRecenter: 'Centrer la carte sur le parcours',
     minimapCaption: 'Parcours réel de l’étape sur OpenStreetMap. Or = départ, rouge = arrivée. Fermer avec le bouton en haut à droite.',
     minimapCaptionApprox: 'Données du parcours indisponibles — ligne droite du départ à l’arrivée. Fermer avec le bouton en haut à droite.',
-    factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Cols classés',
-    descHeader: 'Description de l’étape', climbsHeader: 'Cols classés (KOM)',
+    factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Cols classés', factSprints: 'Sprints intermédiaires',
+    descHeader: 'Description de l’étape', climbsHeader: 'Cols classés (KOM)', sprintsHeader: 'Sprints intermédiaires',
     climbTableHead: ['Ascension','Cat.','Longueur','Pente','Lieu'],
+    sprintTableHead: ['Sprint','Lieu','Points'],
     noClimbs: 'Aucune ascension classée sur cette étape.',
+    noSprintTT: 'Pas de sprint intermédiaire sur les étapes contre-la-montre.',
+    noSprint: 'Aucun sprint intermédiaire sur cette étape.',
+    sprintChip: 'Sprint intermédiaire', sprintPtsSuffix: 'points',
     chartCaption: 'Profil illustratif — construit à partir de la position des cols, pas une mesure GPS.',
-    legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendC4: '4e catégorie',
+    legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendC4: '4e catégorie', legendSprint: 'Sprint intermédiaire',
     catLabels: {HC:'HC', C1:'1re cat.', C2:'2e cat.', C3:'3e cat.', C4:'4e cat.'},
     typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
     comingSoonTag: 'À venir',
@@ -424,6 +437,7 @@ const stages = [
      {name:'Côte de Vulliens', km:97.1, len:3, grad:5.3, cat:'C3'},
      {name:'Côte Saint-François (maali)', km:138, len:2.5, grad:4.6, cat:'C4'},
    ],
+   sprints:[{name:'Villeneuve (Surpierre)', km:73.1, pts:'25-20-16…'}],
    desc:{
     fi:`<p>Tour de France Femmes vierailee ensimmäistä kertaa Sveitsissä, ja avausetappi päättyy silmukkamaisesti Lausanneen. Kolme lyhyttä kolmannen luokan nousua rikkoo alkukilometrejä, ennen kuin loppukierros nousee Côte Saint-Françoisin (2,5 km / 4,6 %) huipulle suoraan maaliin — etappi sopii paremmin puncheureille kuin puhtaalle joukkuespurtille.</p>`,
     en:`<p>The Tour de France Femmes makes its first visit to Switzerland, with a loop opening stage that finishes back in Lausanne. Three short third-category climbs break up the early kilometres, before the closing circuit rises over the Côte Saint-François (2.5 km at 4.6%) right into the finish — a launchpad for puncheurs rather than a pure bunch sprint.</p>`,
@@ -438,6 +452,7 @@ const stages = [
      {name:'Côte de Bougy-Villars', km:94.7, len:0.9, grad:10.4, cat:'C3'},
      {name:'Côte de Mont-sur-Rolle', km:100.5, len:2.3, grad:6.5, cat:'C3'},
    ],
+   sprints:[{name:'Lavigny', km:88.9, pts:'25-20-16…'}],
    desc:{
     fi:`<p>Kumpuileva siirtymäetappi Geneve-järven pohjoisrantaa pitkin Aiglesta Geneven kaupunkiin. Viisi luokiteltua kohoumaa pitää peloton valppaana, mukaan lukien lyhyt ja jyrkkä Côte de Bougy-Villars (0,9 km / 10,4 %), mutta todennäköisin lopputulos on supistunut joukkuespurtti.</p>`,
     en:`<p>A rolling transfer stage along the northern shore of Lake Geneva, from Aigle to the city of Geneva. Five categorized bumps keep the peloton honest, including the short, sharp Côte de Bougy-Villars (0.9 km at 10.4%), but a reduced bunch sprint is the most likely outcome.</p>`,
@@ -451,6 +466,7 @@ const stages = [
      {name:'Col de la Savine', km:73.1, len:5.6, grad:5.1, cat:'C2'},
      {name:'Côte de Chaux-Champagny', km:131.8, len:1.8, grad:6.4, cat:'C4'},
    ],
+   sprints:[{name:'Chilly-sur-Salins', km:132.4, pts:'25-20-16…'}],
    desc:{
     fi:`<p>Kilpailu jättää Sveitsin ja ylittää Juravuoret Ranskan puolelle. Ensimmäisen luokan Col de la Faucille (11,4 km / 6,3 %) huipentuu jo alkumatkasta, minkä jälkeen ajetaan vielä kolme luokiteltua nousua kohti Polignya — etappi sopii vahvalle irtiotolle tai kokonaiskilpailun puncheureille.</p>`,
     en:`<p>The race leaves Switzerland and crosses the Jura mountains into France. The first-category Col de la Faucille (11.4 km at 6.3%) tops out early, followed by three more classified climbs on the way to Poligny — a stage shaped for a strong breakaway or the puncheurs of the general classification.</p>`,
@@ -459,6 +475,7 @@ const stages = [
 
   {n:4, dateIso:'2026-08-04', start:'Gevrey-Chambertin', finish:'Dijon', km:21, type:'itt', gain:255,
    climbs:[],
+   sprints:[],
    desc:{
     fi:`<p>21 kilometrin yksilöaika-ajo Bourgognen viinitarhojen halki Gevrey-Chambertinistä Dijoniin — kilpailun ainoa varsinainen aika-ajo ja ratkaiseva päivä kokonaiskilpailulle ennen tasangon etappien jatkumista.</p>`,
     en:`<p>A 21 km individual time trial through Burgundy's vineyards from Gevrey-Chambertin to Dijon — the race's only true test against the clock, and a pivotal day for the general classification before the road stages resume.</p>`,
@@ -476,6 +493,7 @@ const stages = [
      {name:'Col de Durbize', km:109.7, len:3.6, grad:5.8, cat:'C3'},
      {name:'Mont Brouilly', km:129.4, len:3, grad:7.7, cat:'C2'},
    ],
+   sprints:[{name:'Monsols (Deux-Grosnes)', km:39.5, pts:'25-20-16…'}],
    desc:{
     fi:`<p>Armoton päivä Beaujolais’n kukkuloilla sisältää kahdeksan luokiteltua nousua 140 kilometrillä, ja huipentuu Mont Brouillyyn (3 km / 7,7 %) juuri ennen maalia Belleville-en-Beaujolais’ssa — etappi on rakennettu hyökkääjille, ei joukkuespurtille.</p>`,
     en:`<p>A relentless day in the Beaujolais hills packs eight categorized climbs into 140 km, cresting Mont Brouilly (3 km at 7.7%) just before the finish in Belleville-en-Beaujolais — a stage built for attackers rather than a bunch sprint.</p>`,
@@ -491,6 +509,7 @@ const stages = [
      {name:'Col de Lalouvesc', km:105.6, len:8.6, grad:5, cat:'C2'},
      {name:'Côte de Boucieu-le-Roi', km:137.5, len:3.8, grad:5.7, cat:'C3'},
    ],
+   sprints:[{name:'Saint-Barthélemy-le-Plaine', km:144.2, pts:'25-20-16…'}],
    desc:{
     fi:`<p>Reitti nousee Massif Centralista kuuden luokitellun nousun kautta, joista vaativin on toisen luokan Col de Lalouvesc (8,6 km / 5 %), ennen nopeaa laskua kohti Rhônen laaksoa ja maalia Tournon-sur-Rhônessa.</p>`,
     en:`<p>The route climbs out of the Massif Central with six classified ascents, the second-category Col de Lalouvesc (8.6 km at 5%) the toughest, before a fast descent toward the Rhône valley and the finish in Tournon-sur-Rhône.</p>`,
@@ -504,6 +523,7 @@ const stages = [
      {name:'Col de Suzette', km:105.3, len:3.9, grad:6.4, cat:'C2'},
      {name:'Mont Ventoux (maali)', km:146.8, len:15.7, grad:8.8, cat:'HC'},
    ],
+   sprints:[{name:'Beaumes-de-Venise', km:96.8, pts:'25-20-16…'}],
    desc:{
     fi:`<p>Kuninkuusetappi — ja ensimmäinen kerta, kun Tour de France Femmes nousee Mont Ventoux’lle. Kolme pienempää nousua pehmentää jalkoja, ennen kuin edessä on Provencen jättiläisen HC-luokan nousu (15,7 km / 8,8 %), joka päättyy 1 910 metrin huipulle.</p>`,
     en:`<p>The queen stage — and the first time the Tour de France Femmes has climbed Mont Ventoux. Three lesser passes soften the legs before the hors-catégorie ascent of the Giant of Provence itself (15.7 km at 8.8%), finishing at the 1,910 m summit.</p>`,
@@ -517,6 +537,7 @@ const stages = [
      {name:'Côte de Colomars', km:154.7, len:1.4, grad:5.4, cat:'C4'},
      {name:'Côte de la Ginestière', km:164.2, len:2.5, grad:4.4, cat:'C4'},
    ],
+   sprints:[{name:'Puget-Théniers', km:109.5, pts:'25-20-16…'}],
    desc:{
     fi:`<p>Kilpailun pisin etappi laskee peloton Alpes-de-Haute-Provencesta Välimeren rannalle Niceen. Neljä neljännen luokan nousua rytmittää reittiä, ja viimeinen niistä, Côte de la Ginestière, huipentuu vain 8 km ennen maalia.</p>`,
     en:`<p>The longest stage of the race brings the peloton down from the Alpes-de-Haute-Provence to the Mediterranean coast at Nice. Four fourth-category climbs punctuate the route, with the Côte de la Ginestière cresting just 8 km from the finish.</p>`,
@@ -530,6 +551,7 @@ const stages = [
      {name:"Col d'Èze (3.)", km:59.6, len:7.7, grad:5.9, cat:'C2'},
      {name:"Col d'Èze (4., jyrkempi puoli)", km:83.8, len:6, grad:7.6, cat:'C1'},
    ],
+   sprints:[],
    desc:{
     fi:`<p>Päätösetappi on Paris–Nice-henkinen kierros Nicen ympäri, jolla Col d’Èze nousetaan neljä kertaa. Kolme ensimmäistä nousua (7,7 km / 5,9 %) ajetaan helpommalta puolelta; ratkaiseva neljäs nousu tulee jyrkemmältä kyljeltä (6 km / 7,6 %), minkä jälkeen edessä on 15 km:n lasku maaliin Promenade des Anglais’lle.</p>`,
     en:`<p>The finale is a Paris–Nice-style circuit around Nice, tackling the Col d'Èze four times. The first three ascents (7.7 km at 5.9%) climb the easier side; the decisive fourth comes from the steeper flank (6 km at 7.6%), before a 15 km descent to the finish on the Promenade des Anglais.</p>`,
@@ -633,6 +655,13 @@ function renderProfile(st){
 
   svg += `<path d="${d} L ${xForKm(st.km,st.km,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="var(--color-text)" opacity="0.1"/>`;
   svg += `<path d="${d}" fill="none" stroke="var(--color-text)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+  (st.sprints||[]).forEach(s=>{
+    const sx = xForKm(s.km, st.km, W, padL, padR);
+    const top = padT + plotH*0.28;
+    svg += `<line x1="${sx}" y1="${top}" x2="${sx}" y2="${baseY}" stroke="var(--color-accent)" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    svg += `<path d="M ${sx} ${top} L ${sx+14} ${top+5} L ${sx} ${top+10} Z" fill="var(--color-accent)"/>`;
+  });
 
   svg += `<line x1="${padL}" y1="${baseY}" x2="${W-padR}" y2="${baseY}" stroke="var(--color-text)" stroke-width="2"/>`;
   svg += `</svg>`;
@@ -835,6 +864,18 @@ function renderPanel(st){
       </tr>`).join('');
   }
 
+  const sprints=st.sprints||[];
+  let sprintRows='';
+  if(sprints.length){
+    sprintRows=sprints.map(s=>`
+      <tr>
+        <td>${esc(s.name)}</td>
+        <td class="num">km ${s.km}</td>
+        <td class="num">${s.pts} ${t('sprintPtsSuffix')}</td>
+      </tr>`).join('');
+  }
+  const isTT = st.type==='itt';
+
   panel.innerHTML = `
     <div class="panelhead">
       <div>
@@ -848,6 +889,7 @@ function renderPanel(st){
       <div class="factcell"><span class="label">${t('factDistance')}</span><span class="value">${fmtKm(st.km)}</span></div>
       <div class="factcell"><span class="label">${t('factGain')}</span><span class="value">${st.gain?fmtGain(st.gain):'—'}</span></div>
       <div class="factcell"><span class="label">${t('factClimbs')}</span><span class="value">${climbs.length}</span></div>
+      <div class="factcell"><span class="label">${t('factSprints')}</span><span class="value">${sprints.length}</span></div>
     </div>
 
     ${mapExpanded ? bigMapBoxHTML(st) : ''}
@@ -863,6 +905,7 @@ function renderPanel(st){
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C2}"></span>${t('legendC2')}</span>
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C3}"></span>${t('legendC3')}</span>
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C4}"></span>${t('legendC4')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:var(--color-accent)"></span>${t('legendSprint')}</span>
         </div>
         <span class="chart-caption">${t('chartCaption')}</span>
       </div>
@@ -878,6 +921,12 @@ function renderPanel(st){
         ${climbRows
           ? `<table class="dtable"><thead><tr><th>${t('climbTableHead')[0]}</th><th>${t('climbTableHead')[1]}</th><th>${t('climbTableHead')[2]}</th><th>${t('climbTableHead')[3]}</th><th>${t('climbTableHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
           : `<p class="empty-note">${t('noClimbs')}</p>`}
+      </div>
+      <div>
+        <h3>${t('sprintsHeader')}</h3>
+        ${sprintRows
+          ? `<table class="dtable sprints"><thead><tr><th>${t('sprintTableHead')[0]}</th><th>${t('sprintTableHead')[1]}</th><th>${t('sprintTableHead')[2]}</th></tr></thead><tbody>${sprintRows}</tbody></table>`
+          : `<p class="empty-note">${isTT ? t('noSprintTT') : t('noSprint')}</p>`}
       </div>
     </div>
   `;
