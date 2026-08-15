@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f3f2f2">
+<title>Tour de France Femmes 2026 — reitit, profiilit & tulokset</title>
+<meta name="description" content="Interaktiivinen roadbook Tour de France Femmes 2026 -kilpailuun: kaikki 9 etappia, reitit, korkeusprofiilit ja mäkipisteet (KOM). Lausanne–Nice, 1.–9.8.2026. · Interactive roadbook for the 2026 Tour de France Femmes.">
+<link rel="canonical" href="https://juusimaa.github.io/Tdf2026/femmes2026.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tour de France Femmes 2026">
+<meta property="og:title" content="Tour de France Femmes 2026 — reitit, profiilit & tulokset">
+<meta property="og:description" content="Interaktiivinen roadbook: 9 etappia, korkeusprofiilit ja mäkipisteet. Lausanne–Nice, 1.–9.8.2026.">
+<meta property="og:url" content="https://juusimaa.github.io/Tdf2026/femmes2026.html">
+<meta property="og:locale" content="fi_FI">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tour de France Femmes 2026 — reitit, profiilit & tulokset">
+<meta name="twitter:description" content="Interaktiivinen roadbook: 9 etappia, korkeusprofiilit ja mäkipisteet.">
+
+<!-- Favicon: on-theme emblem (gold elevation profile + red KOM dot). -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Leaflet (real interactive route map, restyled to the Modernist chrome).
+     Loaded from unpkg with Subresource Integrity so a tampered CDN response
+     is rejected. -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<!-- Modernist design tokens (shared with index.html / tdf2026.html / giro2026.html / vuelta2026.html). -->
+<link rel="stylesheet" href="modernist.css">
+<style>
+  html,body{margin:0;padding:0;min-height:100vh;}
+  a{color:var(--color-accent-700);text-decoration:none;}
+  a:hover{color:var(--color-accent-800);}
+  :focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}
+
+  /* ---------- header ---------- */
+  .tdf-header{display:flex;align-items:stretch;justify-content:space-between;border-bottom:2px solid var(--color-divider);}
+  .tdf-header .left{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:var(--space-3) clamp(20px,4vw,48px);}
+  .backlink{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .backlink:hover{color:var(--color-accent-700);}
+  .wordmark{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;}
+  .tdf-langs{display:flex;border-left:2px solid var(--color-divider);}
+  .langbtn{font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.14em;min-width:56px;padding:0 18px;border:0;border-left:2px solid var(--color-divider);cursor:pointer;background:transparent;color:var(--color-neutral-700);transition:background .15s ease;}
+  .tdf-langs .langbtn:first-child{border-left:0;}
+  .langbtn:hover{background:var(--color-accent-100);}
+  .langbtn.active{background:var(--color-accent);color:#fff;}
+  .langbtn.active:hover{background:var(--color-accent);}
+  .langbtn:focus-visible,.tabbtn:focus-visible,.stage-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
+
+  /* ---------- hero ---------- */
+  .tdf-hero{padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px) clamp(24px,4vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-700);}
+  .tdf-hero h1{font-family:var(--font-heading);font-weight:700;font-size:clamp(38px,8vw,96px);line-height:.9;letter-spacing:-.03em;margin:0;text-transform:uppercase;max-width:20ch;}
+  .stripe{display:flex;height:10px;width:180px;}
+  .stripe span{flex:1;}
+  .lede{max-width:74ch;font-size:clamp(15px,1.5vw,18px);line-height:1.5;color:var(--color-neutral-700);margin:0;text-wrap:pretty;}
+
+  /* ---------- stat row ---------- */
+  .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-bottom:2px solid var(--color-divider);}
+  .statrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  .statcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
+  .statcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .statcell .value{font-family:var(--font-heading);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:-.01em;}
+
+  /* ---------- tabs ---------- */
+  .tabs{display:flex;border-bottom:2px solid var(--color-divider);flex-wrap:wrap;}
+  .tabbtn{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--color-neutral-600);border:0;border-right:2px solid var(--color-divider);padding:14px clamp(18px,3vw,32px);cursor:pointer;transition:background .15s ease;}
+  .tabbtn:hover{color:var(--color-text);}
+  .tabbtn.active{background:var(--color-text);color:var(--color-bg);}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  /* ---------- stage layout ---------- */
+  .stagelayout{display:grid;grid-template-columns:300px 1fr;}
+  @media (max-width:980px){
+    .stagelayout{grid-template-columns:1fr;}
+    .detailgrid{grid-template-columns:1fr!important;}
+  }
+  .stagerail{border-right:2px solid var(--color-divider);display:flex;flex-direction:column;position:sticky;top:0;}
+  @media (max-width:980px){.stagerail{position:static;}}
+  .railhead{padding:var(--space-3) var(--space-4);border-bottom:2px solid var(--color-divider);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);flex:0 0 auto;}
+  .stagerail-list{display:flex;flex-direction:column;list-style:none;margin:0;padding:0;flex:1 1 auto;min-height:0;overflow-y:auto;}
+  @media (max-width:980px){.stagerail-list{overflow-y:visible;}}
+  .stage-item{margin:0;}
+  .stage-btn{display:flex;gap:12px;align-items:center;width:100%;padding:11px var(--space-4);border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;font-family:var(--font-body);text-align:left;background:transparent;color:var(--color-text);transition:background .12s ease;}
+  .stage-btn:hover{background:var(--color-accent-100);}
+  .stage-btn.active{background:var(--color-text);color:var(--color-bg);}
+  .stage-btn .num{font-family:var(--font-heading);font-weight:700;font-size:15px;width:26px;flex:0 0 auto;text-align:left;color:var(--color-neutral-600);}
+  .stage-btn.active .num{color:var(--color-bg);}
+  .stage-btn .btn-text{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left;}
+  .stage-btn .btn-route{font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .stage-btn .btn-meta{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .stage-btn.active .btn-meta{color:var(--color-bg);opacity:.75;}
+
+  /* ---------- stage panel ---------- */
+  .panel{display:flex;flex-direction:column;}
+  .panelhead{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--space-4);}
+  .panelhead .kicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);display:block;margin-bottom:8px;}
+  .panelhead h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(26px,3.6vw,44px);line-height:1;letter-spacing:-.02em;margin:0;text-transform:uppercase;}
+  .typechip{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;background:var(--color-accent);color:#fff;white-space:nowrap;}
+
+  .factrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:2px solid var(--color-divider);}
+  .factrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  .factcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
+  .factcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .factcell .value{font-family:var(--font-heading);font-weight:700;font-size:18px;}
+
+  /* ---------- map + profile ---------- */
+  #bigmapbox{border-bottom:2px solid var(--color-divider);padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;}
+  .maprow{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);width:100%;}
+  .maplabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapctrls{display:flex;align-items:center;}
+  .mapctrl-btn{font-family:var(--font-heading);font-size:14px;font-weight:700;line-height:1;width:32px;height:30px;display:grid;place-items:center;border:0;border-left:2px solid var(--color-divider);background:transparent;color:var(--color-neutral-700);cursor:pointer;}
+  .mapctrl-btn:hover{background:var(--color-accent-100);}
+  .mapctrl-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
+  .mapctrl-close{background:var(--color-text);color:var(--color-bg);}
+  .mapctrl-close:hover{background:var(--color-text);}
+  .mapmeta{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;}
+  .mapzoom{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .mapcaption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);max-width:80ch;}
+
+  #stage-map{width:100%;background:var(--color-surface);border:1px solid var(--color-divider);}
+  .mapcell #stage-map{height:220px;}
+  #bigmapbox #stage-map{height:min(60vh,460px);}
+  .leaflet-container{font-family:var(--font-body);background:var(--color-surface);}
+  .leaflet-control-attribution{font-size:9px;}
+  .leaflet-control-zoom{display:none;}
+
+  .detailgrid{display:grid;grid-template-columns:280px 1fr;border-bottom:2px solid var(--color-divider);}
+  .detailgrid.big{grid-template-columns:1fr;}
+  .mapcell{border-right:2px solid var(--color-divider);padding:var(--space-4);display:flex;flex-direction:column;gap:10px;align-items:flex-start;}
+  .profilecell{padding:var(--space-4);display:flex;flex-direction:column;gap:10px;min-width:0;}
+  .profilecell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  svg.profile{width:100%;height:auto;display:block;}
+  .legend{display:flex;flex-wrap:wrap;gap:var(--space-4);}
+  .legenditem{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .legswatch{width:14px;height:8px;display:inline-block;}
+  .chart-caption{font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
+
+  /* ---------- description / climbs ---------- */
+  .detailbody{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:var(--space-6);}
+  .detailbody h3{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 var(--space-3);}
+  .prose{max-width:78ch;font-size:15px;line-height:1.6;color:var(--color-neutral-700);}
+  .prose p{margin:0 0 12px;}
+  .prose p:last-child{margin-bottom:0;}
+  table.dtable{width:100%;border-collapse:collapse;}
+  table.dtable th{padding:8px 10px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
+  table.dtable th:first-child{text-align:left;}
+  table.dtable td{padding:10px;border-bottom:1px solid var(--color-divider);font-size:14px;vertical-align:top;}
+  table.dtable td:first-child{font-weight:600;}
+  table.dtable td.num{text-align:right;white-space:nowrap;}
+  table.dtable td.loc{text-align:right;white-space:nowrap;color:var(--color-neutral-700);}
+  table.dtable td.cat{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  .climbname{display:flex;align-items:center;gap:10px;}
+  .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
+  .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
+
+  /* ---------- placeholder tabs (results / teams) ---------- */
+  .comingsoon{padding:clamp(40px,8vw,96px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:70ch;}
+  .comingsoon .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);background:var(--color-neutral-100);border:1px solid var(--color-divider);padding:5px 12px;}
+  .comingsoon h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(22px,3vw,32px);line-height:1.05;letter-spacing:-.02em;margin:6px 0 0;text-transform:uppercase;}
+  .comingsoon p{margin:0;font-size:14px;line-height:1.6;color:var(--color-neutral-700);}
+
+  /* ---------- footer ---------- */
+  .tdf-footer{border-top:2px solid var(--color-divider);padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:100ch;}
+  .disclabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .discbody{margin:0;font-size:12px;line-height:1.6;color:var(--color-neutral-700);}
+  .sourcestitle{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .sourcesbody{margin:6px 0 0;font-size:12px;line-height:1.6;color:var(--color-neutral-600);}
+
+  .noscript-note{max-width:760px;margin:24px auto;padding:16px 18px;background:var(--color-surface);border:1px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-text);}
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--color-divider);}
+</style>
+</head>
+<body>
+<noscript>
+  <div class="noscript-note">
+    <b>JavaScript pois käytöstä</b><br>
+    Tämä sivu rakentaa etapit ja profiilit selaimessa JavaScriptillä.
+    Ota JavaScript käyttöön nähdäksesi sisällön. Viralliset tulokset: letourfemmes.fr, procyclingstats.com.
+    <hr style="border:none;border-top:1px solid var(--color-divider);margin:10px 0;">
+    <b>JavaScript is disabled</b><br>
+    This page builds the stages and profiles in your browser with JavaScript.
+    Please enable JavaScript to view the content. Official results: letourfemmes.fr, procyclingstats.com.
+  </div>
+</noscript>
+
+<header class="tdf-header">
+  <div class="left">
+    <a class="backlink" id="backLink" href="index.html">← <span id="backLinkText"></span></a>
+    <span class="wordmark">Tour de France Femmes 2026</span>
+  </div>
+  <div class="tdf-langs" id="langSel" role="group" aria-label="Kieli / Language">
+    <button class="langbtn" data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
+    <button class="langbtn" data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
+    <button class="langbtn" data-lang="en" aria-label="In English" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<section class="tdf-hero">
+  <span class="eyebrow" id="eyebrow"></span>
+  <h1>Tour de France Femmes 2026</h1>
+  <div class="stripe"><span style="background:#0055a4"></span><span style="background:#ffffff"></span><span style="background:#ef4135"></span></div>
+  <p class="lede" id="subDesc"></p>
+</section>
+
+<div class="statrow" id="topstats"></div>
+
+<nav class="tabs" role="tablist" aria-label="Näkymät / Views">
+  <button class="tabbtn active" data-view="stages" role="tab" id="tabStages"
+          aria-controls="view-stages" aria-selected="true" tabindex="0"></button>
+  <button class="tabbtn" data-view="results" role="tab" id="tabResults"
+          aria-controls="view-results" aria-selected="false" tabindex="-1"></button>
+  <button class="tabbtn" data-view="teams" role="tab" id="tabTeams"
+          aria-controls="view-teams" aria-selected="false" tabindex="-1"></button>
+</nav>
+
+<section class="view active" id="view-stages" role="tabpanel" aria-labelledby="tabStages" tabindex="0">
+  <div class="stagelayout">
+    <nav class="stagerail">
+      <div class="railhead" id="stageListHeader"></div>
+      <ul class="stagerail-list" id="stageList"></ul>
+    </nav>
+    <main class="panel" id="panel"></main>
+  </div>
+</section>
+
+<section class="view" id="view-results" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
+  <div class="comingsoon">
+    <span class="tag" id="comingSoonTag"></span>
+    <h2 id="resultsComingTitle"></h2>
+    <p id="resultsComingBody"></p>
+  </div>
+</section>
+
+<section class="view" id="view-teams" role="tabpanel" aria-labelledby="tabTeams" tabindex="0">
+  <div class="comingsoon">
+    <span class="tag" id="comingSoonTag2"></span>
+    <h2 id="teamsComingTitle"></h2>
+    <p id="teamsComingBody"></p>
+  </div>
+</section>
+
+<footer class="tdf-footer">
+  <span class="disclabel" id="disclaimerLabel"></span>
+  <p class="discbody" id="disclaimerText"></p>
+  <span class="sourcestitle" id="sourcesTitle"></span>
+  <p class="sourcesbody" id="sourcesBody"></p>
+  <span class="disclabel" id="footerNote"></span>
+</footer>
+
+<script>
+/* ---------- TOUR ----------
+   Tour de France Femmes 2026: Lausanne -> Nice, 9 stages, 1-9 Aug 2026.
+   Route/profile data below; results and start list are not wired up yet —
+   the "Rankings" and "Teams & riders" tabs show a placeholder for now (see
+   tdf2026.html for the pattern this page will grow into once results are
+   available). */
+const LANG_KEY = 'tdf2026-lang';
+const ROUTES_URL = 'data/femmes2026-routes.json';
+
+const STRINGS = {
+  fi: {
+    backToTours: 'Grand Tourit',
+    eyebrow: 'Roadbook · 5. Tour de France Femmes · 1.–9.8.2026',
+    subDesc: 'Interaktiivinen katsaus kaikkiin 9 etappiin: reitit, korkeusprofiilien havainnollistus sekä tärkeimmät mäkipisteet (KOM). Kilpailu käynnistyy Sveitsistä, Lausannesta la 1.8. — ensimmäistä kertaa historiassa — ja päättyy Niceen su 9.8.2026 Mont Ventoux’n kuninkuusetapin (etappi 7) jälkeen.',
+    tabStages: 'Etapit & profiilit',
+    tabResults: 'Sijoitukset',
+    tabTeams: 'Joukkueet & ajajat',
+    stageListHeader: '9 etappia',
+    statDistance: 'Kokonaismatka', statDistanceVal: '1 174,7 km',
+    statGain: 'Nousumetrit yhteensä', statGainVal: '≈ 18 800 m',
+    statStages: 'Etappeja', statStagesVal: '9',
+    statRestDays: 'Lepopäiviä', statRestDaysVal: '0',
+    statMountainFinish: 'Vuoristomaali', statMountainFinishVal: 'Mont Ventoux (1 910 m)',
+    stagePrefix: 'Etappi',
+    profileAria: n => `Etapin ${n} havainnollistava korkeusprofiili`,
+    minimapAria: n => `Etapin ${n} reitti kartalla`,
+    minimapExpand: 'Suurenna kartta',
+    minimapCollapse: 'Pienennä kartta',
+    minimapRecenter: 'Keskitä kartta reittiin',
+    minimapCaption: 'Etapin oikea reitti OpenStreetMap-kartalla. Kulta = lähtö, punainen = maali. Sulje oikean yläkulman painikkeesta.',
+    minimapCaptionApprox: 'Reittidataa ei saatavilla — näytetään suora viiva lähdöstä maaliin. Sulje oikean yläkulman painikkeesta.',
+    factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä',
+    descHeader: 'Etapin kuvaus', climbsHeader: 'Mäkipisteet (KOM)',
+    climbTableHead: ['Nousu','Lk','Pituus','Kalt.','Sijainti'],
+    noClimbs: 'Ei luokiteltuja nousuja tällä etapilla.',
+    chartCaption: 'Havainnollistava profiili — rakennettu nousujen sijainneista, ei GPS-mitattua korkeusdataa.',
+    legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendC4: '4. luokka',
+    catLabels: {HC:'HC', C1:'1. lk', C2:'2. lk', C3:'3. lk', C4:'4. lk'},
+    typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
+    comingSoonTag: 'Tulossa',
+    resultsComingTitle: 'Sijoitukset lisätään myöhemmin',
+    resultsComingBody: 'Tämä välilehti rakennetaan seuraavaksi — kokonaiskilpailun, pistekilpailun, mäkikilpailun ja nuorten sarjan tulokset lisätään tähän etappikohtaisesti, samaan tapaan kuin Tour de Francen (miehet) sivulla.',
+    teamsComingTitle: 'Joukkueet ja ajajat lisätään myöhemmin',
+    teamsComingBody: 'Lähtölista ja joukkuekohtaiset ajajanäkymät lisätään tähän välilehteen myöhemmin.',
+    disclaimerLabel: 'Huom korkeusprofiileista ja reiteistä:',
+    disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Karttojen reittiviivat sen sijaan ovat oikeasta GPX-datasta. Mäkipisteiden sijainnit, luokat, pituudet ja kaltevuudet perustuvat ASO:n viralliseen roadbookiin.',
+    footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon tai Tour de France Femmesiin. Tulokset ovat oikeudenomistajiensa omaisuutta.',
+    sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
+    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit ja mäkipisteet: letourfemmes.fr/en/overall-route ja etappikohtaiset sivut, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX-reitit karttoja varten).',
+  },
+  en: {
+    backToTours: 'Grand Tours',
+    eyebrow: 'Roadbook · 5th Tour de France Femmes · 1–9 Aug 2026',
+    subDesc: 'An interactive look at all 9 stages: routes, illustrative elevation profiles and the key climb points (KOM). The race starts from Lausanne, Switzerland on Sat 1 Aug — the first Grand Départ held outside France — and finishes in Nice on Sun 9 Aug 2026, after the queen stage up Mont Ventoux (stage 7).',
+    tabStages: 'Stages & profiles',
+    tabResults: 'Rankings',
+    tabTeams: 'Teams & riders',
+    stageListHeader: '9 stages',
+    statDistance: 'Total distance', statDistanceVal: '1,174.7 km',
+    statGain: 'Total elevation gain', statGainVal: '≈ 18,800 m',
+    statStages: 'Stages', statStagesVal: '9',
+    statRestDays: 'Rest days', statRestDaysVal: '0',
+    statMountainFinish: 'Summit finish', statMountainFinishVal: 'Mont Ventoux (1,910 m)',
+    stagePrefix: 'Stage',
+    profileAria: n => `Stage ${n} illustrative elevation profile`,
+    minimapAria: n => `Stage ${n} route on the map`,
+    minimapExpand: 'Enlarge map',
+    minimapCollapse: 'Shrink map',
+    minimapRecenter: 'Center map on route',
+    minimapCaption: 'Actual stage route on OpenStreetMap. Gold = start, red = finish. Close with the button in the top-right corner.',
+    minimapCaptionApprox: 'Route data not available — showing a straight line from start to finish. Close with the button in the top-right corner.',
+    factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points',
+    descHeader: 'Stage description', climbsHeader: 'Climb points (KOM)',
+    climbTableHead: ['Climb','Cat.','Length','Grad.','Location'],
+    noClimbs: 'No categorized climbs on this stage.',
+    chartCaption: 'Illustrative profile — built from climb positions, not GPS-measured elevation data.',
+    legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendC4: 'Category 4',
+    catLabels: {HC:'HC', C1:'Cat 1', C2:'Cat 2', C3:'Cat 3', C4:'Cat 4'},
+    typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
+    comingSoonTag: 'Coming soon',
+    resultsComingTitle: 'Rankings will be added later',
+    resultsComingBody: 'This tab is next up for construction — general classification, points, mountains and youth classification results will be added here stage by stage, the same way they work on the Tour de France (men) page.',
+    teamsComingTitle: 'Teams & riders will be added later',
+    teamsComingBody: 'The start list and per-team rider view will be added to this tab later.',
+    disclaimerLabel: 'A note on elevation profiles and routes:',
+    disclaimer: 'The SVG curves are illustrative sketches built from the stage type and the known climbs (location, length, average gradient) — they are not GPS-measured elevation data. The map route lines, however, are drawn from real GPX data. Climb locations, categories, lengths and gradients are based on the ASO official roadbook.',
+    footerNote: '© 2026 Jouni Uusimaa · Page design & code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O. or the Tour de France Femmes. Results remain the property of their respective owners.',
+    sourcesTitle: 'Sources (cross-checked against ≥2 independent sources for key facts):',
+    sourcesBody: 'Route, stages, dates, elevation and climb points: letourfemmes.fr/en/overall-route and the per-stage pages, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX routes for the maps).',
+  },
+  fr: {
+    backToTours: 'Grands Tours',
+    eyebrow: 'Roadbook · 5e Tour de France Femmes · 1er–9 août 2026',
+    subDesc: 'Un aperçu interactif des 9 étapes : parcours, profils d’altitude illustratifs et principaux mäkipisteet — pardon, cols classés (KOM). La course s’élance de Lausanne, en Suisse, le sam. 1er août — le premier Grand Départ organisé hors de France — et s’achève à Nice le dim. 9 août 2026, après l’étape reine au Mont Ventoux (étape 7).',
+    tabStages: 'Étapes & profils',
+    tabResults: 'Classements',
+    tabTeams: 'Équipes & coureuses',
+    stageListHeader: '9 étapes',
+    statDistance: 'Distance totale', statDistanceVal: '1 174,7 km',
+    statGain: 'Dénivelé total', statGainVal: '≈ 18 800 m',
+    statStages: 'Étapes', statStagesVal: '9',
+    statRestDays: 'Jours de repos', statRestDaysVal: '0',
+    statMountainFinish: 'Arrivée au sommet', statMountainFinishVal: 'Mont Ventoux (1 910 m)',
+    stagePrefix: 'Étape',
+    profileAria: n => `Profil d’altitude illustratif de l’étape ${n}`,
+    minimapAria: n => `Parcours de l’étape ${n} sur la carte`,
+    minimapExpand: 'Agrandir la carte',
+    minimapCollapse: 'Réduire la carte',
+    minimapRecenter: 'Centrer la carte sur le parcours',
+    minimapCaption: 'Parcours réel de l’étape sur OpenStreetMap. Or = départ, rouge = arrivée. Fermer avec le bouton en haut à droite.',
+    minimapCaptionApprox: 'Données du parcours indisponibles — ligne droite du départ à l’arrivée. Fermer avec le bouton en haut à droite.',
+    factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Cols classés',
+    descHeader: 'Description de l’étape', climbsHeader: 'Cols classés (KOM)',
+    climbTableHead: ['Ascension','Cat.','Longueur','Pente','Lieu'],
+    noClimbs: 'Aucune ascension classée sur cette étape.',
+    chartCaption: 'Profil illustratif — construit à partir de la position des cols, pas une mesure GPS.',
+    legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendC4: '4e catégorie',
+    catLabels: {HC:'HC', C1:'1re cat.', C2:'2e cat.', C3:'3e cat.', C4:'4e cat.'},
+    typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
+    comingSoonTag: 'À venir',
+    resultsComingTitle: 'Les classements seront ajoutés plus tard',
+    resultsComingBody: 'Cet onglet est la prochaine étape du chantier — classement général, par points, de la montagne et des jeunes seront ajoutés ici étape par étape, comme sur la page du Tour de France (hommes).',
+    teamsComingTitle: 'Équipes et coureuses seront ajoutées plus tard',
+    teamsComingBody: 'La liste des engagées et la vue par équipe seront ajoutées à cet onglet plus tard.',
+    disclaimerLabel: 'À propos des profils d’altitude et des parcours :',
+    disclaimer: 'Les courbes SVG sont des esquisses illustratives construites à partir du type d’étape et des ascensions connues (position, longueur, pente moyenne) — ce ne sont pas des données d’altitude mesurées au GPS. Les tracés des cartes, en revanche, proviennent de données GPX réelles. Les positions, catégories, longueurs et pentes des cols reposent sur le roadbook officiel de l’ASO.',
+    footerNote: '© 2026 Jouni Uusimaa · Design et code de la page sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec l’A.S.O. ni le Tour de France Femmes. Les résultats restent la propriété de leurs détenteurs.',
+    sourcesTitle: 'Sources (recoupées sur ≥2 sources indépendantes pour les faits clés) :',
+    sourcesBody: 'Parcours, étapes, dates, dénivelé et cols : letourfemmes.fr/en/overall-route et les pages par étape, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (tracés GPX pour les cartes).',
+  },
+};
+
+function detectLang(){
+  const saved = localStorage.getItem(LANG_KEY);
+  if(saved==='fi' || saved==='en' || saved==='fr') return saved;
+  const nav = (navigator.language||'en').toLowerCase();
+  if(nav.startsWith('fi')) return 'fi';
+  if(nav.startsWith('fr')) return 'fr';
+  return 'en';
+}
+let lang = detectLang();
+function t(key){ const v = STRINGS[lang][key]; return v !== undefined ? v : STRINGS.en[key]; }
+
+/* ---------- COLOUR MAP ----------
+   Climb categories as flat colour swatches, per the Modernist system shared
+   with tdf2026.html / giro2026.html. */
+const CAT_COLOR = {HC:'var(--color-accent-800)', C1:'var(--color-accent-600)', C2:'var(--color-accent-500)', C3:'var(--color-accent-400)', C4:'var(--color-accent-300)'};
+
+/* ---------- STAGE DATA ----------
+   Start/finish/distance/type/dates: letourfemmes.fr official stage pages,
+   cross-checked against Wikipedia and Olympics.com. Climbs (name, category,
+   length, gradient, km point): letourfemmes.fr per-stage pages. Elevation
+   gain is the officially published per-stage figure where available. */
+const stages = [
+  {n:1, dateIso:'2026-08-01', start:'Lausanne', finish:'Lausanne', km:138, type:'flat', gain:1500,
+   climbs:[
+     {name:'Côte de Châbles', km:49.1, len:1.6, grad:7.7, cat:'C3'},
+     {name:'Côte de Villars-le-Comte', km:83.5, len:4, grad:5.8, cat:'C3'},
+     {name:'Côte de Vulliens', km:97.1, len:3, grad:5.3, cat:'C3'},
+     {name:'Côte Saint-François (maali)', km:138, len:2.5, grad:4.6, cat:'C4'},
+   ],
+   desc:{
+    fi:`<p>Tour de France Femmes vierailee ensimmäistä kertaa Sveitsissä, ja avausetappi päättyy silmukkamaisesti Lausanneen. Kolme lyhyttä kolmannen luokan nousua rikkoo alkukilometrejä, ennen kuin loppukierros nousee Côte Saint-Françoisin (2,5 km / 4,6 %) huipulle suoraan maaliin — etappi sopii paremmin puncheureille kuin puhtaalle joukkuespurtille.</p>`,
+    en:`<p>The Tour de France Femmes makes its first visit to Switzerland, with a loop opening stage that finishes back in Lausanne. Three short third-category climbs break up the early kilometres, before the closing circuit rises over the Côte Saint-François (2.5 km at 4.6%) right into the finish — a launchpad for puncheurs rather than a pure bunch sprint.</p>`,
+    fr:`<p>Le Tour de France Femmes visite la Suisse pour la première fois, avec une étape d’ouverture en boucle qui se termine à Lausanne. Trois courtes ascensions de 3e catégorie animent le début de l’étape, avant que le circuit final ne grimpe la Côte Saint-François (2,5 km à 4,6 %) juste avant l’arrivée — un profil pour puncheuses plutôt qu’un sprint massif.</p>`,
+   }},
+
+  {n:2, dateIso:'2026-08-02', start:'Aigle', finish:'Genève', km:147.9, type:'flat', gain:1800,
+   climbs:[
+     {name:'Côte de Chexbres', km:31.7, len:3.2, grad:5.6, cat:'C3'},
+     {name:'Côte de Savigny', km:43.3, len:2.5, grad:5, cat:'C4'},
+     {name:'Côte de Cossonay', km:73.3, len:2, grad:6, cat:'C4'},
+     {name:'Côte de Bougy-Villars', km:94.7, len:0.9, grad:10.4, cat:'C3'},
+     {name:'Côte de Mont-sur-Rolle', km:100.5, len:2.3, grad:6.5, cat:'C3'},
+   ],
+   desc:{
+    fi:`<p>Kumpuileva siirtymäetappi Geneve-järven pohjoisrantaa pitkin Aiglesta Geneven kaupunkiin. Viisi luokiteltua kohoumaa pitää peloton valppaana, mukaan lukien lyhyt ja jyrkkä Côte de Bougy-Villars (0,9 km / 10,4 %), mutta todennäköisin lopputulos on supistunut joukkuespurtti.</p>`,
+    en:`<p>A rolling transfer stage along the northern shore of Lake Geneva, from Aigle to the city of Geneva. Five categorized bumps keep the peloton honest, including the short, sharp Côte de Bougy-Villars (0.9 km at 10.4%), but a reduced bunch sprint is the most likely outcome.</p>`,
+    fr:`<p>Étape de transition vallonnée le long de la rive nord du lac Léman, d’Aigle jusqu’à la ville de Genève. Cinq bosses classées maintiennent le peloton sous tension, dont la courte et raide Côte de Bougy-Villars (0,9 km à 10,4 %), mais un sprint massif réduit reste l’issue la plus probable.</p>`,
+   }},
+
+  {n:3, dateIso:'2026-08-03', start:'Genève', finish:'Poligny', km:156.5, type:'hilly', gain:2500,
+   climbs:[
+     {name:'Col de la Faucille', km:23.9, len:11.4, grad:6.3, cat:'C1'},
+     {name:'Côte de Lajoux', km:36, len:3.6, grad:5.6, cat:'C3'},
+     {name:'Col de la Savine', km:73.1, len:5.6, grad:5.1, cat:'C2'},
+     {name:'Côte de Chaux-Champagny', km:131.8, len:1.8, grad:6.4, cat:'C4'},
+   ],
+   desc:{
+    fi:`<p>Kilpailu jättää Sveitsin ja ylittää Juravuoret Ranskan puolelle. Ensimmäisen luokan Col de la Faucille (11,4 km / 6,3 %) huipentuu jo alkumatkasta, minkä jälkeen ajetaan vielä kolme luokiteltua nousua kohti Polignya — etappi sopii vahvalle irtiotolle tai kokonaiskilpailun puncheureille.</p>`,
+    en:`<p>The race leaves Switzerland and crosses the Jura mountains into France. The first-category Col de la Faucille (11.4 km at 6.3%) tops out early, followed by three more classified climbs on the way to Poligny — a stage shaped for a strong breakaway or the puncheurs of the general classification.</p>`,
+    fr:`<p>La course quitte la Suisse et franchit le massif du Jura pour entrer en France. Le Col de la Faucille, en 1re catégorie (11,4 km à 6,3 %), culmine dès le début de l’étape, suivi de trois autres ascensions classées vers Poligny — un profil taillé pour une échappée solide ou les puncheuses du classement général.</p>`,
+   }},
+
+  {n:4, dateIso:'2026-08-04', start:'Gevrey-Chambertin', finish:'Dijon', km:21, type:'itt', gain:255,
+   climbs:[],
+   desc:{
+    fi:`<p>21 kilometrin yksilöaika-ajo Bourgognen viinitarhojen halki Gevrey-Chambertinistä Dijoniin — kilpailun ainoa varsinainen aika-ajo ja ratkaiseva päivä kokonaiskilpailulle ennen tasangon etappien jatkumista.</p>`,
+    en:`<p>A 21 km individual time trial through Burgundy's vineyards from Gevrey-Chambertin to Dijon — the race's only true test against the clock, and a pivotal day for the general classification before the road stages resume.</p>`,
+    fr:`<p>Un contre-la-montre individuel de 21 km à travers les vignobles de Bourgogne, de Gevrey-Chambertin à Dijon — le seul vrai test contre le chrono de la course, et une journée charnière pour le classement général avant la reprise des étapes en ligne.</p>`,
+   }},
+
+  {n:5, dateIso:'2026-08-05', start:'Mâcon', finish:'Belleville-en-Beaujolais', km:140, type:'hilly', gain:2900,
+   climbs:[
+     {name:'Côte de Cenves', km:12.6, len:9.6, grad:4.4, cat:'C2'},
+     {name:"Col de la Croix de l'Orme", km:28.4, len:2.1, grad:5.5, cat:'C4'},
+     {name:'Côte de Saint-Christophe', km:33.7, len:2.7, grad:4.5, cat:'C4'},
+     {name:'Col de Fontmartin', km:54.1, len:3.6, grad:5.7, cat:'C3'},
+     {name:'Col de Gerbet', km:68.7, len:4.6, grad:6.5, cat:'C2'},
+     {name:'Côte de Pruzilly', km:75.3, len:1.6, grad:6.6, cat:'C4'},
+     {name:'Col de Durbize', km:109.7, len:3.6, grad:5.8, cat:'C3'},
+     {name:'Mont Brouilly', km:129.4, len:3, grad:7.7, cat:'C2'},
+   ],
+   desc:{
+    fi:`<p>Armoton päivä Beaujolais’n kukkuloilla sisältää kahdeksan luokiteltua nousua 140 kilometrillä, ja huipentuu Mont Brouillyyn (3 km / 7,7 %) juuri ennen maalia Belleville-en-Beaujolais’ssa — etappi on rakennettu hyökkääjille, ei joukkuespurtille.</p>`,
+    en:`<p>A relentless day in the Beaujolais hills packs eight categorized climbs into 140 km, cresting Mont Brouilly (3 km at 7.7%) just before the finish in Belleville-en-Beaujolais — a stage built for attackers rather than a bunch sprint.</p>`,
+    fr:`<p>Une journée sans répit dans les monts du Beaujolais, avec huit ascensions classées sur 140 km, dont le Mont Brouilly (3 km à 7,7 %) juste avant l’arrivée à Belleville-en-Beaujolais — une étape pensée pour les attaquantes plutôt que pour un sprint massif.</p>`,
+   }},
+
+  {n:6, dateIso:'2026-08-06', start:'Montbrison', finish:'Tournon-sur-Rhône', km:153.4, type:'hilly', gain:2600,
+   climbs:[
+     {name:'Côte de Périgneux', km:20.2, len:0.6, grad:6.2, cat:'C4'},
+     {name:'Côte de la Prunerie', km:26.6, len:2.9, grad:4.9, cat:'C4'},
+     {name:"Côte d'Aurec", km:46.3, len:3.3, grad:6.1, cat:'C3'},
+     {name:'Côte de Praneuf', km:68, len:1.2, grad:6.5, cat:'C4'},
+     {name:'Col de Lalouvesc', km:105.6, len:8.6, grad:5, cat:'C2'},
+     {name:'Côte de Boucieu-le-Roi', km:137.5, len:3.8, grad:5.7, cat:'C3'},
+   ],
+   desc:{
+    fi:`<p>Reitti nousee Massif Centralista kuuden luokitellun nousun kautta, joista vaativin on toisen luokan Col de Lalouvesc (8,6 km / 5 %), ennen nopeaa laskua kohti Rhônen laaksoa ja maalia Tournon-sur-Rhônessa.</p>`,
+    en:`<p>The route climbs out of the Massif Central with six classified ascents, the second-category Col de Lalouvesc (8.6 km at 5%) the toughest, before a fast descent toward the Rhône valley and the finish in Tournon-sur-Rhône.</p>`,
+    fr:`<p>Le parcours grimpe hors du Massif central avec six ascensions classées, la plus dure étant le Col de Lalouvesc en 2e catégorie (8,6 km à 5 %), avant une descente rapide vers la vallée du Rhône et l’arrivée à Tournon-sur-Rhône.</p>`,
+   }},
+
+  {n:7, dateIso:'2026-08-07', start:'La Voulte-sur-Rhône', finish:'Mont Ventoux', km:146.8, type:'mountain', gain:3500, summit:'Mont Ventoux',
+   climbs:[
+     {name:'Col de la Grande Limite', km:13.6, len:6.6, grad:5, cat:'C2'},
+     {name:'Col du Colombier', km:41.1, len:3.2, grad:6.4, cat:'C3'},
+     {name:'Col de Suzette', km:105.3, len:3.9, grad:6.4, cat:'C2'},
+     {name:'Mont Ventoux (maali)', km:146.8, len:15.7, grad:8.8, cat:'HC'},
+   ],
+   desc:{
+    fi:`<p>Kuninkuusetappi — ja ensimmäinen kerta, kun Tour de France Femmes nousee Mont Ventoux’lle. Kolme pienempää nousua pehmentää jalkoja, ennen kuin edessä on Provencen jättiläisen HC-luokan nousu (15,7 km / 8,8 %), joka päättyy 1 910 metrin huipulle.</p>`,
+    en:`<p>The queen stage — and the first time the Tour de France Femmes has climbed Mont Ventoux. Three lesser passes soften the legs before the hors-catégorie ascent of the Giant of Provence itself (15.7 km at 8.8%), finishing at the 1,910 m summit.</p>`,
+    fr:`<p>L’étape reine — et la première fois que le Tour de France Femmes gravit le Mont Ventoux. Trois cols plus modestes préparent le terrain avant l’ascension hors catégorie du Géant de Provence (15,7 km à 8,8 %), qui s’achève au sommet, à 1 910 m.</p>`,
+   }},
+
+  {n:8, dateIso:'2026-08-08', start:'Sisteron', finish:'Nice', km:171.9, type:'flat', gain:1420,
+   climbs:[
+     {name:'Col des Robines', km:61, len:2.6, grad:4.6, cat:'C4'},
+     {name:'Col de Toutes Aures', km:76.5, len:6.4, grad:3.1, cat:'C4'},
+     {name:'Côte de Colomars', km:154.7, len:1.4, grad:5.4, cat:'C4'},
+     {name:'Côte de la Ginestière', km:164.2, len:2.5, grad:4.4, cat:'C4'},
+   ],
+   desc:{
+    fi:`<p>Kilpailun pisin etappi laskee peloton Alpes-de-Haute-Provencesta Välimeren rannalle Niceen. Neljä neljännen luokan nousua rytmittää reittiä, ja viimeinen niistä, Côte de la Ginestière, huipentuu vain 8 km ennen maalia.</p>`,
+    en:`<p>The longest stage of the race brings the peloton down from the Alpes-de-Haute-Provence to the Mediterranean coast at Nice. Four fourth-category climbs punctuate the route, with the Côte de la Ginestière cresting just 8 km from the finish.</p>`,
+    fr:`<p>L’étape la plus longue de la course fait descendre le peloton des Alpes-de-Haute-Provence jusqu’à la Méditerranée, à Nice. Quatre ascensions de 4e catégorie rythment le parcours, la Côte de la Ginestière culminant à seulement 8 km de l’arrivée.</p>`,
+   }},
+
+  {n:9, dateIso:'2026-08-09', start:'Nice', finish:'Nice', km:99.2, type:'mountain', gain:2100,
+   climbs:[
+     {name:"Col d'Èze (1.)", km:7.7, len:7.7, grad:5.9, cat:'C2'},
+     {name:"Col d'Èze (2.)", km:33.6, len:7.7, grad:5.9, cat:'C2'},
+     {name:"Col d'Èze (3.)", km:59.6, len:7.7, grad:5.9, cat:'C2'},
+     {name:"Col d'Èze (4., jyrkempi puoli)", km:83.8, len:6, grad:7.6, cat:'C1'},
+   ],
+   desc:{
+    fi:`<p>Päätösetappi on Paris–Nice-henkinen kierros Nicen ympäri, jolla Col d’Èze nousetaan neljä kertaa. Kolme ensimmäistä nousua (7,7 km / 5,9 %) ajetaan helpommalta puolelta; ratkaiseva neljäs nousu tulee jyrkemmältä kyljeltä (6 km / 7,6 %), minkä jälkeen edessä on 15 km:n lasku maaliin Promenade des Anglais’lle.</p>`,
+    en:`<p>The finale is a Paris–Nice-style circuit around Nice, tackling the Col d'Èze four times. The first three ascents (7.7 km at 5.9%) climb the easier side; the decisive fourth comes from the steeper flank (6 km at 7.6%), before a 15 km descent to the finish on the Promenade des Anglais.</p>`,
+    fr:`<p>L’étape finale reprend un circuit à la Paris–Nice autour de Nice, avec quatre passages au Col d’Èze. Les trois premières ascensions (7,7 km à 5,9 %) empruntent le versant facile ; la quatrième et décisive vient du versant plus raide (6 km à 7,6 %), avant 15 km de descente jusqu’à l’arrivée sur la Promenade des Anglais.</p>`,
+   }},
+];
+
+/* ---------- FORMAT HELPERS ---------- */
+function localeTag(){ return lang==='fi' ? 'fi-FI' : lang==='fr' ? 'fr-FR' : 'en-GB'; }
+function fmtKm(k){ const s=(Math.round(k*10)/10).toString(); return (lang==='en'?s:s.replace('.',','))+' km'; }
+function fmtGain(m){ return m.toLocaleString(localeTag())+' m'; }
+function fmtDate(iso){
+  const d=new Date(iso+'T12:00:00');
+  const opts = lang==='fi' ? {weekday:'short',day:'numeric',month:'numeric'} : {weekday:'short',day:'numeric',month:'short'};
+  return new Intl.DateTimeFormat(localeTag(),opts).format(d);
+}
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function catLabel(c){ return t('catLabels')[c] || c; }
+
+/* ---------- ILLUSTRATIVE PROFILE (built from climb positions) ---------- */
+function climbsWithKm(st){ return (st.climbs||[]).filter(c=>c.km!=null).sort((a,b)=>a.km-b.km); }
+function genericProfile(st){
+  const k=st.km, P=(frac,h)=>[+(k*frac).toFixed(1),h];
+  if(st.type==='itt') return [P(0,20),P(.5,26),P(1,22)];
+  if(st.type==='flat') return [P(0,20),P(.3,25),P(.5,19),P(.7,27),P(1,18)];
+  if(st.type==='hilly') return [P(0,24),P(.2,46),P(.4,32),P(.6,55),P(.8,38),P(1,st.summit?88:44)];
+  if(st.summit) return [P(0,24),P(.28,50),P(.48,34),P(.68,60),P(.82,46),P(1,94)];
+  return [P(0,30),P(.25,62),P(.45,40),P(.65,74),P(.85,46),P(1,56)];
+}
+function climbHeight(c){
+  if(c.cat==='HC') return 96;
+  const gain=(c.len||4)*(c.grad||5);
+  return Math.max(40, Math.min(95, 36 + gain*0.4));
+}
+function genProfile(st){
+  const cs=climbsWithKm(st);
+  if(st.type==='itt' || !cs.length) return genericProfile(st);
+  const total=st.km, pts=[[0,18]];
+  let last=0;
+  cs.forEach(c=>{
+    const foot=Math.max(last+1, Math.max(1, c.km-(c.len||4)));
+    if(foot>last+1) pts.push([+foot.toFixed(1),22]);
+    pts.push([c.km, climbHeight(c)]);
+    if(c.km < total-4) pts.push([+Math.min(total, c.km+Math.max(3,(c.len||4)*0.5)).toFixed(1),28]);
+    last=c.km;
+  });
+  const lastPt=pts[pts.length-1];
+  if(lastPt[0] < total-0.5) pts.push([total, st.summit?90:18]);
+  else if(st.summit) lastPt[1]=Math.max(lastPt[1],90);
+  const out=[];
+  pts.forEach(p=>{ const x=Math.max(0,Math.min(total,p[0])); if(!out.length || x>out[out.length-1][0]) out.push([+x.toFixed(1),p[1]]); });
+  return out;
+}
+function buildPath(points,totalKm,W,H,padL,padR,padT,padB){
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const xs=points.map(p=>padL+(p[0]/totalKm)*plotW);
+  const ys=points.map(p=>padT+plotH-(p[1]/100)*plotH);
+  let d=`M ${xs[0]},${ys[0]}`;
+  for(let i=1;i<xs.length;i++){ const mx=(xs[i-1]+xs[i])/2; d+=` Q ${xs[i-1]},${ys[i-1]} ${mx},${(ys[i-1]+ys[i])/2}`; }
+  d+=` L ${xs[xs.length-1]},${ys[ys.length-1]}`;
+  return {d,plotH};
+}
+function xForKm(km,totalKm,W,padL,padR){ return padL+(km/totalKm)*(W-padL-padR); }
+const STAGE_COORDS = {
+  1:[[6.619,46.546],[6.63,46.52]], 2:[[6.932,46.32],[6.151,46.21]],
+  3:[[6.13,46.251],[5.698,46.848]], 4:[[4.976,47.228],[5.045,47.311]],
+  5:[[4.778,46.299],[4.736,46.116]], 6:[[4.094,45.588],[4.838,45.066]],
+  7:[[4.808,44.736],[5.278,44.173]], 8:[[5.962,44.164],[7.268,43.695]],
+  9:[[7.292,43.706],[7.267,43.695]],
+};
+
+/* ---------- ELEVATION PROFILE ----------
+   Styled per the Modernist system (shared with tdf2026.html / giro2026.html
+   / vuelta2026.html): monochrome ink line/fill, accent-shade climb bands. */
+function renderProfile(st){
+  const W=900, H=250, padL=30, padR=16, padT=22, padB=30;
+  const {d, plotH} = buildPath(genProfile(st), st.km, W,H,padL,padR,padT,padB);
+  const baseY = padT+plotH;
+
+  let svg = `<svg class="profile" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(t('profileAria')(st.n))}">`;
+
+  for(let g=0; g<=4; g++){
+    const gy = padT + plotH*g/4;
+    svg += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--color-neutral-300)" stroke-width="1"/>`;
+  }
+  const step = st.km > 150 ? 50 : (st.km > 60 ? 20 : 5);
+  for(let k=0; k<=st.km+0.01; k+=step){
+    const kx = xForKm(k, st.km, W, padL, padR);
+    svg += `<line x1="${kx}" y1="${padT}" x2="${kx}" y2="${baseY}" stroke="var(--color-neutral-200)" stroke-width="1"/>`;
+    svg += `<text x="${kx}" y="${H-10}" font-family="Archivo, sans-serif" font-size="11" font-weight="600" fill="var(--color-neutral-600)" text-anchor="middle">${Math.round(k)}</text>`;
+  }
+
+  climbsWithKm(st).forEach(c=>{
+    const cx = xForKm(c.km, st.km, W, padL, padR);
+    const foot = xForKm(Math.max(0, c.km-(c.len||4)), st.km, W, padL, padR);
+    const col = CAT_COLOR[c.cat] || CAT_COLOR.C4;
+    svg += `<rect x="${foot}" y="${padT}" width="${Math.max(2,cx-foot)}" height="${plotH}" fill="${col}" opacity="0.18"/>`;
+    svg += `<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${baseY}" stroke="${col}" stroke-width="2"/>`;
+    svg += `<rect x="${cx-4}" y="${padT-12}" width="8" height="8" fill="${col}"/>`;
+  });
+
+  svg += `<path d="${d} L ${xForKm(st.km,st.km,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="var(--color-text)" opacity="0.1"/>`;
+  svg += `<path d="${d}" fill="none" stroke="var(--color-text)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+  svg += `<line x1="${padL}" y1="${baseY}" x2="${W-padR}" y2="${baseY}" stroke="var(--color-text)" stroke-width="2"/>`;
+  svg += `</svg>`;
+  return svg;
+}
+
+function mapLabel(){ return lang==='fi' ? 'Reitti' : lang==='fr' ? 'Parcours' : 'Route'; }
+function profileLabel(){ return lang==='fi' ? 'Korkeusprofiili' : lang==='fr' ? 'Profil' : 'Elevation profile'; }
+function zoomWord(){ return lang==='fi' ? 'zoomaus' : 'zoom'; }
+const ZOOM_LABELS = {fi:{in:'Lähennä',out:'Loitonna'}, fr:{in:'Zoom avant',out:'Zoom arrière'}, en:{in:'Zoom in',out:'Zoom out'}};
+
+/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
+   Per-stage route polylines live in data/femmes2026-routes.json (fetched
+   from cyclingstage.com GPX by scripts/fetch_routes.py). Stages missing a
+   route fall back to a straight start->finish line from STAGE_COORDS. Same
+   restyled-Leaflet approach as the other three race pages. */
+let routesData = null, routesPromise = null;
+function loadRoutes(){
+  if(routesData) return Promise.resolve(routesData);
+  if(!routesPromise){
+    routesPromise = fetch(ROUTES_URL, {cache:'force-cache'})
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { routesData = (d && d.stages) ? d : {stages:{}}; return routesData; })
+      .catch(() => { routesData = {stages:{}}; return routesData; });
+  }
+  return routesPromise;
+}
+
+let stageMap = null, stageMapFitBounds = null;
+function destroyStageMap(){
+  if(stageMap){ try{ stageMap.remove(); }catch(e){} stageMap = null; stageMapFitBounds = null; }
+}
+
+function updateMapZoomLabel(){
+  const el = document.getElementById('mapZoomLabel');
+  if(el && stageMap) el.textContent = `${zoomWord()} ${stageMap.getZoom()}`;
+}
+
+function initStageMap(st){
+  if(!window.L){ setTimeout(()=>initStageMap(st), 120); return; }
+  const el = document.getElementById('stage-map');
+  if(!el) return;
+  destroyStageMap();
+
+  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true, zoomControl:false});
+  stageMap = map;
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+    maxZoom:17,
+    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  map.on('zoomend', updateMapZoomLabel);
+
+  const css = getComputedStyle(document.documentElement);
+  const INK = css.getPropertyValue('--color-text').trim() || '#201e1d';
+  const ACCENT = css.getPropertyValue('--color-accent').trim() || '#ec3013';
+
+  const draw = () => {
+    if(stageMap !== map) return;
+    const pts = (routesData.stages || {})[st.n];
+    const c = STAGE_COORDS[st.n];
+    let line, startLL, finishLL, approx = false;
+    if(pts && pts.length){
+      line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
+    }else{
+      approx = true;
+      startLL = [c[0][1], c[0][0]];
+      finishLL = [c[1][1], c[1][0]];
+      line = [startLL, finishLL];
+    }
+    const poly = L.polyline(line, approx
+      ? {color:INK, weight:3, opacity:.85, dashArray:'6,8'}
+      : {color:INK, weight:3.5, opacity:.95}).addTo(map);
+    const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
+    if(!same){
+      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:INK, fillOpacity:1}).addTo(map);
+    }
+    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:ACCENT, fillOpacity:1}).addTo(map);
+    map.fitBounds(poly.getBounds(), {padding:[24,24]});
+    map.invalidateSize();
+    stageMapFitBounds = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[24,24]}); };
+    const cap = document.getElementById('stage-map-caption');
+    if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
+    updateMapZoomLabel();
+  };
+
+  if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
+  setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
+}
+
+function mapControlsHTML(big){
+  const zl = ZOOM_LABELS[lang] || ZOOM_LABELS.en;
+  let html =
+    `<button class="mapctrl-btn" data-map-zoomout title="${zl.out}" aria-label="${zl.out}">−</button>` +
+    `<button class="mapctrl-btn" data-map-zoomin title="${zl.in}" aria-label="${zl.in}">+</button>` +
+    `<button class="mapctrl-btn" data-map-recenter title="${esc(t('minimapRecenter'))}" aria-label="${esc(t('minimapRecenter'))}">◎</button>`;
+  html += big
+    ? `<button class="mapctrl-btn mapctrl-close" data-map-toggle title="${esc(t('minimapCollapse'))}" aria-label="${esc(t('minimapCollapse'))}">×</button>`
+    : `<button class="mapctrl-btn" data-map-toggle title="${esc(t('minimapExpand'))}" aria-label="${esc(t('minimapExpand'))}">⤢</button>`;
+  return html;
+}
+
+function mapCellHTML(st){
+  return `
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(false)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
+    <span class="mapzoom" id="mapZoomLabel"></span>`;
+}
+
+function bigMapBoxHTML(st){
+  return `<div id="bigmapbox">
+    <span class="maprow">
+      <span class="maplabel">${mapLabel()}</span>
+      <span class="mapctrls">${mapControlsHTML(true)}</span>
+    </span>
+    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
+    <span class="mapmeta">
+      <span class="mapzoom" id="mapZoomLabel"></span>
+      <span class="mapcaption" id="stage-map-caption"></span>
+    </span>
+  </div>`;
+}
+
+function bindMapControls(st){
+  const zoomOutBtn = document.querySelector('[data-map-zoomout]');
+  const zoomInBtn = document.querySelector('[data-map-zoomin]');
+  const recenterBtn = document.querySelector('[data-map-recenter]');
+  const toggleBtn = document.querySelector('[data-map-toggle]');
+  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomOut(); });
+  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomIn(); });
+  if(recenterBtn) recenterBtn.addEventListener('click', ()=>{ if(stageMapFitBounds) stageMapFitBounds(); });
+  if(toggleBtn) toggleBtn.addEventListener('click', ()=>{
+    mapExpanded = !mapExpanded;
+    renderPanel(st);
+    syncStageListHeight();
+  });
+}
+
+let mapExpanded = false; // persists across stage switches; renderPanel reflects it
+
+/* ---------- STAGE LIST ---------- */
+let activeIdx = 0;
+function renderStageList(){
+  const listEl=document.getElementById('stageList');
+  listEl.innerHTML='';
+  stages.forEach((s,idx)=>{
+    const li=document.createElement('li'); li.className='stage-item';
+    const btn=document.createElement('button');
+    btn.className='stage-btn'+(idx===activeIdx?' active':'');
+    btn.dataset.idx=idx;
+    btn.innerHTML=`
+      <span class="num">${String(s.n).padStart(2,'0')}</span>
+      <span class="btn-text">
+        <span class="btn-route">${esc(s.start)} → ${esc(s.finish)}</span>
+        <span class="btn-meta">${fmtDate(s.dateIso)} · ${fmtKm(s.km)} · ${t('typeLabels')[s.type]}</span>
+      </span>`;
+    btn.addEventListener('click',()=>selectStage(idx));
+    li.appendChild(btn); listEl.appendChild(li);
+  });
+}
+
+/* Keeps the stage-rail column exactly as tall as the detail panel next to
+   it — see the equivalent comment in tdf2026.html. Skipped below 980px or
+   when the Stages tab is not the active view. */
+function syncStageListHeight(){
+  const list=document.querySelector('.stagerail');
+  const panel=document.getElementById('panel');
+  const stagesView=document.getElementById('view-stages');
+  if(!list||!panel||!stagesView) return;
+  if(window.innerWidth<=980 || !stagesView.classList.contains('active')){ list.style.height=''; return; }
+  list.style.height=panel.offsetHeight+'px';
+}
+window.addEventListener('resize', syncStageListHeight);
+
+function selectStage(idx){
+  activeIdx=idx;
+  document.querySelectorAll('.stage-btn').forEach(b=>b.classList.toggle('active',+b.dataset.idx===idx));
+  const b=document.querySelector(`.stage-btn[data-idx="${idx}"]`); if(b) b.scrollIntoView({block:'nearest'});
+  renderPanel(stages[idx]);
+  syncStageListHeight();
+}
+
+/* ---------- RENDER MAIN PANEL ---------- */
+function renderPanel(st){
+  const panel=document.getElementById('panel');
+  destroyStageMap();
+
+  const climbs=st.climbs||[];
+  let climbRows='';
+  if(climbs.length){
+    climbRows=climbs.map(c=>`
+      <tr>
+        <td><span class="climbname"><span class="sq" style="background:${CAT_COLOR[c.cat]||CAT_COLOR.C4}"></span>${esc(c.name)}</span></td>
+        <td class="num cat">${catLabel(c.cat)}</td>
+        <td class="num">${fmtKm(c.len)}</td>
+        <td class="num">${c.grad?esc(c.grad)+' %':'—'}</td>
+        <td class="loc">km ${c.km}</td>
+      </tr>`).join('');
+  }
+
+  panel.innerHTML = `
+    <div class="panelhead">
+      <div>
+        <span class="kicker">${t('stagePrefix')} ${st.n} · ${fmtDate(st.dateIso)}</span>
+        <h2>${esc(st.start)} → ${esc(st.finish)}</h2>
+      </div>
+      <span class="typechip">${t('typeLabels')[st.type]}</span>
+    </div>
+
+    <div class="factrow">
+      <div class="factcell"><span class="label">${t('factDistance')}</span><span class="value">${fmtKm(st.km)}</span></div>
+      <div class="factcell"><span class="label">${t('factGain')}</span><span class="value">${st.gain?fmtGain(st.gain):'—'}</span></div>
+      <div class="factcell"><span class="label">${t('factClimbs')}</span><span class="value">${climbs.length}</span></div>
+    </div>
+
+    ${mapExpanded ? bigMapBoxHTML(st) : ''}
+
+    <div class="detailgrid${mapExpanded ? ' big' : ''}">
+      ${mapExpanded ? '' : `<div class="mapcell">${mapCellHTML(st)}</div>`}
+      <div class="profilecell">
+        <span class="label">${profileLabel()}</span>
+        ${renderProfile(st)}
+        <div class="legend">
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.HC}"></span>${t('legendHC')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C1}"></span>${t('legendC1')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C2}"></span>${t('legendC2')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C3}"></span>${t('legendC3')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.C4}"></span>${t('legendC4')}</span>
+        </div>
+        <span class="chart-caption">${t('chartCaption')}</span>
+      </div>
+    </div>
+
+    <div class="detailbody">
+      <div>
+        <h3>${t('descHeader')}</h3>
+        <div class="prose">${st.desc[lang]||st.desc.en}</div>
+      </div>
+      <div>
+        <h3>${t('climbsHeader')}</h3>
+        ${climbRows
+          ? `<table class="dtable"><thead><tr><th>${t('climbTableHead')[0]}</th><th>${t('climbTableHead')[1]}</th><th>${t('climbTableHead')[2]}</th><th>${t('climbTableHead')[3]}</th><th>${t('climbTableHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
+          : `<p class="empty-note">${t('noClimbs')}</p>`}
+      </div>
+    </div>
+  `;
+
+  bindMapControls(st);
+  initStageMap(st);
+}
+
+/* ---------- STATIC TEXT + INIT ---------- */
+function renderTopStats(){
+  document.getElementById('topstats').innerHTML = `
+    <div class="statcell"><span class="label">${t('statDistance')}</span><span class="value">${t('statDistanceVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statGain')}</span><span class="value">${t('statGainVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statStages')}</span><span class="value">${t('statStagesVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statRestDays')}</span><span class="value">${t('statRestDaysVal')}</span></div>
+    <div class="statcell"><span class="label">${t('statMountainFinish')}</span><span class="value">${t('statMountainFinishVal')}</span></div>`;
+}
+function applyStaticText(){
+  document.getElementById('backLinkText').textContent=t('backToTours');
+  document.getElementById('eyebrow').textContent=t('eyebrow');
+  document.getElementById('subDesc').textContent=t('subDesc');
+  document.getElementById('tabStages').textContent=t('tabStages');
+  document.getElementById('tabResults').textContent=t('tabResults');
+  document.getElementById('tabTeams').textContent=t('tabTeams');
+  document.getElementById('stageListHeader').textContent=t('stageListHeader');
+  document.getElementById('comingSoonTag').textContent=t('comingSoonTag');
+  document.getElementById('comingSoonTag2').textContent=t('comingSoonTag');
+  document.getElementById('resultsComingTitle').textContent=t('resultsComingTitle');
+  document.getElementById('resultsComingBody').textContent=t('resultsComingBody');
+  document.getElementById('teamsComingTitle').textContent=t('teamsComingTitle');
+  document.getElementById('teamsComingBody').textContent=t('teamsComingBody');
+  document.getElementById('disclaimerLabel').textContent=t('disclaimerLabel');
+  document.getElementById('disclaimerText').textContent=t('disclaimer');
+  document.getElementById('sourcesTitle').textContent=t('sourcesTitle');
+  document.getElementById('sourcesBody').textContent=t('sourcesBody');
+  document.getElementById('footerNote').textContent=t('footerNote');
+}
+function updateLangButtons(){
+  document.querySelectorAll('#langSel button').forEach(b=>{
+    const active=b.dataset.lang===lang;
+    b.classList.toggle('active',active);
+    b.setAttribute('aria-pressed',active?'true':'false');
+  });
+}
+function renderAll(){
+  applyStaticText();
+  renderTopStats();
+  renderStageList();
+  renderPanel(stages[activeIdx]);
+  updateLangButtons();
+  document.documentElement.lang=lang;
+  syncStageListHeight();
+}
+function setLang(newLang){
+  lang=newLang;
+  localStorage.setItem(LANG_KEY, lang);
+  renderAll();
+}
+document.querySelectorAll('#langSel button').forEach(btn=>{
+  btn.addEventListener('click',()=>setLang(btn.dataset.lang));
+});
+
+/* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
+const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
+function activateTab(tab, setFocus){
+  tabButtons.forEach(x=>{
+    const selected = x===tab;
+    x.classList.toggle('active', selected);
+    x.setAttribute('aria-selected', selected ? 'true' : 'false');
+    x.tabIndex = selected ? 0 : -1;
+  });
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+tab.dataset.view).classList.add('active');
+  syncStageListHeight();
+  if(setFocus) tab.focus();
+}
+tabButtons.forEach((tab, i)=>{
+  tab.addEventListener('click', ()=>activateTab(tab, false));
+  tab.addEventListener('keydown', e=>{
+    let idx = null;
+    if(e.key==='ArrowRight' || e.key==='ArrowDown') idx = (i+1) % tabButtons.length;
+    else if(e.key==='ArrowLeft' || e.key==='ArrowUp') idx = (i-1+tabButtons.length) % tabButtons.length;
+    else if(e.key==='Home') idx = 0;
+    else if(e.key==='End') idx = tabButtons.length-1;
+    if(idx!==null){ e.preventDefault(); activateTab(tabButtons[idx], true); }
+  });
+});
+
+/* init — default to the first stage (Lausanne opener). */
+document.documentElement.lang = lang;
+renderAll();
+</script>
+<script data-goatcounter="https://grandtours.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -42,6 +42,11 @@ RACES = {
         "url": "https://cdn.cyclingstage.com/images/vuelta-spain/2026/stage-{n}-route.gpx",
         "referer": "https://www.cyclingstage.com/vuelta-2026-gpx/",
     },
+    "femmes2026": {
+        "url": "https://cdn.cyclingstage.com/images/tour-de-france-femmes/2026/stage-{n}-route.gpx",
+        "referer": "https://www.cyclingstage.com/tour-de-france-femmes-2026-gpx/",
+        "stages": 9,
+    },
 }
 
 STAGES = range(1, 22)
@@ -118,7 +123,8 @@ def build_race(race):
     print(f"== {race} ==")
     stages = {}
     ends = {}
-    for n in STAGES:
+    stage_range = range(1, cfg.get("stages", 21) + 1)
+    for n in stage_range:
         gpx = fetch(cfg["url"].format(n=n), cfg["referer"])
         if not gpx:
             print(f"stage {n:2d}: no data (skipped)")
@@ -143,7 +149,7 @@ def build_race(race):
     out.write_text(json.dumps(payload, separators=(",", ":")) + "\n")
     kb = out.stat().st_size / 1024
     print(f"wrote {out.relative_to(out.parent.parent)} "
-          f"({len(stages)}/{len(list(STAGES))} stages, {kb:.1f} KB)")
+          f"({len(stages)}/{len(list(stage_range))} stages, {kb:.1f} KB)")
     # Convenience dump: STAGE_COORDS literal for the page's collapsed minimap
     # (derived from the GPX endpoints so no town coords are hand-entered).
     literal = ", ".join(f"{n}:{v}" for n, v in ends.items()).replace(" ", "")
