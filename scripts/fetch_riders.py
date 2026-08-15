@@ -55,6 +55,11 @@ TOURS = {
         "base": "https://www.giroditalia.it",
         "out": "giro2026-riders.json",
     },
+    "femmes2026": {
+        "source": "letour",
+        "base": "https://www.letourfemmes.fr",
+        "out": "femmes2026-riders.json",
+    },
 }
 
 
@@ -110,9 +115,16 @@ def parse_startlist(html: str):
 def parse_gc_by_bib(html: str):
     """
     Parses the general-classification fragment into {bib: {pos, val, gap}}.
-    The GC table's columns are rank / rider / rider no. / team / time / gap, and
-    the bib is what lets a GC row be matched to a start-list rider reliably —
-    the displayed rider names differ between letour.fr's own pages.
+    The bib is what lets a GC row be matched to a start-list rider reliably —
+    the displayed rider names differ between the organiser site's own pages.
+
+    Cells are picked by class rather than fixed td[i] position: letour.fr's
+    table has 8 columns (rank/rider/bib/team/time/gap/bonus/-) but
+    letourfemmes.fr inserts an extra mobile-only duplicate rank column
+    between rider and bib, shifting every later index by one. The rank cell
+    and bib cell both carry a stable, distinctive class on every letour(femmes)
+    page regardless of that extra column, and css_first() picks the first
+    (real, not the hidden--md/lg mobile duplicate) match in document order.
 
     The rider name (an "alt" attribute on the jersey image) is kept as a
     surname hint for display_name(); it is sometimes abbreviated
@@ -120,18 +132,20 @@ def parse_gc_by_bib(html: str):
     """
     out = {}
     for tr in HTMLParser(html).css("tbody tr.rankingTables__row"):
-        tds = tr.css("td")
-        if len(tds) < 5:
+        pos_el = tr.css_first("td.rankingTables__row__position.is-alignCenter")
+        bib_el = tr.css_first("td.is-alignCenter.hidden")
+        time_cells = tr.css("td.is-alignCenter.time")
+        if pos_el is None or bib_el is None or not time_cells:
             continue
-        pos_text = tds[0].text(strip=True)
-        bib_text = tds[2].text(strip=True)
+        pos_text = pos_el.text(strip=True)
+        bib_text = bib_el.text(strip=True)
         if not pos_text.isdigit() or not bib_text.isdigit():
             continue
         img = tr.css_first(".rankingTables__row__profile.runner img")
-        gap = tds[5].text(strip=True) if len(tds) > 5 else ""
+        gap = time_cells[1].text(strip=True) if len(time_cells) > 1 else ""
         out[int(bib_text)] = {
             "pos": int(pos_text),
-            "val": tds[4].text(strip=True),
+            "val": time_cells[0].text(strip=True),
             "gap": gap if gap and gap != "-" else "",
             "name": (img.attributes.get("alt") or "").strip() if img else "",
         }

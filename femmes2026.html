@@ -167,11 +167,29 @@
   .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
   .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
 
-  /* ---------- placeholder tabs (teams) ---------- */
-  .comingsoon{padding:clamp(40px,8vw,96px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:70ch;}
-  .comingsoon .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);background:var(--color-neutral-100);border:1px solid var(--color-divider);padding:5px 12px;}
-  .comingsoon h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(22px,3vw,32px);line-height:1.05;letter-spacing:-.02em;margin:6px 0 0;text-transform:uppercase;}
-  .comingsoon p{margin:0;font-size:14px;line-height:1.6;color:var(--color-neutral-700);}
+  /* ---------- teams tab ---------- */
+  .teamsstatus{grid-column:1/-1;padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .status-card{grid-column:1/-1;padding:clamp(20px,3vw,32px);border-bottom:2px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-neutral-700);}
+  .status-card b{font-family:var(--font-heading);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text);}
+  .team-head{display:flex;align-items:flex-start;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
+  .team-rank{font-family:var(--font-heading);font-weight:700;font-size:15px;width:34px;height:34px;flex:0 0 auto;display:grid;place-items:center;background:var(--color-neutral-100);color:var(--color-text);border:1px solid var(--color-divider);}
+  .team-rank.first{background:var(--color-accent);color:#fff;}
+  .team-meta{display:flex;flex-direction:column;gap:4px;min-width:0;}
+  .team-link{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text);}
+  .team-link:hover{color:var(--color-accent-700);}
+  .team-clsline{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-neutral-600);}
+
+  table.riders{width:100%;border-collapse:collapse;margin-top:var(--space-3);}
+  table.riders th{padding:8px;border-bottom:2px solid var(--color-text);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);text-align:right;white-space:nowrap;}
+  table.riders th:nth-child(1),table.riders th:nth-child(2){text-align:left;}
+  table.riders td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:12px;}
+  table.riders td.bib{color:var(--color-neutral-600);width:38px;}
+  table.riders td.rider .rname{display:block;font-size:14px;font-weight:600;}
+  table.riders tr.out td.rider .rname{font-weight:500;color:var(--color-neutral-600);}
+  table.riders td.rider .rsub{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.riders td.gcpos{font-family:var(--font-heading);font-weight:700;font-size:14px;text-align:right;width:46px;white-space:nowrap;color:var(--color-text);}
+  table.riders tr.podium td.gcpos{color:var(--color-accent);}
+  table.riders td.val{text-align:right;white-space:nowrap;font-size:12px;color:var(--color-neutral-700);}
 
   /* ---------- rankings tab ---------- */
   .toolbar{padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);}
@@ -293,11 +311,7 @@
 </section>
 
 <section class="view" id="view-teams" role="tabpanel" aria-labelledby="tabTeams" tabindex="0">
-  <div class="comingsoon">
-    <span class="tag" id="comingSoonTag2"></span>
-    <h2 id="teamsComingTitle"></h2>
-    <p id="teamsComingBody"></p>
-  </div>
+  <div id="teamsGrid"></div>
 </section>
 
 <footer class="tdf-footer">
@@ -312,11 +326,13 @@
 /* ---------- TOUR ----------
    Tour de France Femmes 2026: Lausanne -> Nice, 9 stages, 1-9 Aug 2026.
    The race finished 9 Aug 2026, so the Rankings tab below shows final
-   standings (RESULTS, further down). The "Teams & riders" tab still shows
-   a placeholder — no reliable start-list data source found yet. */
+   standings (RESULTS, further down) and the "Teams & riders" tab shows the
+   final start list with each rider's final GC placing (RIDERS, further
+   down) -- see scripts/fetch_riders.py. */
 const LANG_KEY = 'tdf2026-lang';
 const ROUTES_URL = 'data/femmes2026-routes.json';
 const RESULTS_URL = 'data/femmes2026-results.json';
+const RIDERS_URL = 'data/femmes2026-riders.json';
 
 const STRINGS = {
   fi: {
@@ -352,9 +368,6 @@ const STRINGS = {
     legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendC4: '4. luokka', legendSprint: 'Kirisprintti',
     catLabels: {HC:'HC', C1:'1. lk', C2:'2. lk', C3:'3. lk', C4:'4. lk'},
     typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
-    comingSoonTag: 'Tulossa',
-    teamsComingTitle: 'Joukkueet ja ajajat lisätään myöhemmin',
-    teamsComingBody: 'Lähtölista ja joukkuekohtaiset ajajanäkymät lisätään tähän välilehteen myöhemmin.',
     resultsStatus: 'Lopulliset sijoitukset — kilpailu päättyi su 9.8.2026.',
     classifications: {
       gc:{name:'Kokonaiskilpailu', fr:'Maillot jaune — keltainen paita', valHead:'Aika/ero'},
@@ -369,6 +382,14 @@ const STRINGS = {
     },
     stageStatEmpty: 'Ei jaettu tällä etapilla.',
     colRider: 'Ajaja', colTeam: 'Joukkue',
+    withdrawalReasons: {DNS:'Ei startannut (DNS)', DNF:'Keskeytti (DNF)', OTL:'Aikaraja ylittyi (OTL)'},
+    teamsStatus: (riders, teams, fin, out) => `<b>Lähtijät:</b> ${teams} joukkuetta ja ${riders} ajajaa — ${fin} ajajaa maalissa Nizzassa, ${out} jäi pois kilpailusta.`,
+    teamsEmpty: 'Ajajalistaa ei saatu ladattua. Lista luetaan tiedostosta <code>data/femmes2026-riders.json</code>, jonka <code>scripts/fetch_riders.py</code> kokoaa letourfemmes.fr:n lähtölistasta. Jos avasit sivun suoraan levyltä (file://), selain ei voi lukea tiedostoa.',
+    teamClsLine: (pos, val) => `Joukkuekilpailu #${pos} · ${val}`,
+    teamClsNone: 'Ei sijoitusta joukkuekilpailussa',
+    colBib: 'Nro', colGcPos: 'Sija', colGcTime: 'Aika / ero',
+    riderOutOnStage: n => `Etapilla ${n}`,
+    riderOutUnknown: 'Ei maalissa',
     rankShowLabel: 'Näytä', rankGeneral: 'Kokonaistilanne — kaikki paidat',
     rankStageOpt: (n,route) => `Etappi ${n} · ${route}`,
     stageResultTitle: n => `Etapin ${n} tulos`,
@@ -414,9 +435,6 @@ const STRINGS = {
     legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendC4: 'Category 4', legendSprint: 'Intermediate sprint',
     catLabels: {HC:'HC', C1:'Cat 1', C2:'Cat 2', C3:'Cat 3', C4:'Cat 4'},
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
-    comingSoonTag: 'Coming soon',
-    teamsComingTitle: 'Teams & riders will be added later',
-    teamsComingBody: 'The start list and per-team rider view will be added to this tab later.',
     resultsStatus: 'Final standings — the race finished on Sun 9 Aug 2026.',
     classifications: {
       gc:{name:'General classification', fr:'Maillot jaune — yellow jersey', valHead:'Time/Gap'},
@@ -431,6 +449,14 @@ const STRINGS = {
     },
     stageStatEmpty: 'Not awarded on this stage.',
     colRider: 'Rider', colTeam: 'Team',
+    withdrawalReasons: {DNS:'Did not start (DNS)', DNF:'Abandoned (DNF)', OTL:'Outside the time limit (OTL)'},
+    teamsStatus: (riders, teams, fin, out) => `<b>Start list:</b> ${teams} teams and ${riders} riders — ${fin} finished in Nice, ${out} left the race.`,
+    teamsEmpty: 'The rider list could not be loaded. It is read from <code>data/femmes2026-riders.json</code>, which <code>scripts/fetch_riders.py</code> builds from the letourfemmes.fr start list. If you opened this page straight from disk (file://), the browser cannot read that file.',
+    teamClsLine: (pos, val) => `Team classification #${pos} · ${val}`,
+    teamClsNone: 'Not placed in the team classification',
+    colBib: 'No.', colGcPos: 'GC', colGcTime: 'Time / gap',
+    riderOutOnStage: n => `On stage ${n}`,
+    riderOutUnknown: 'Did not finish',
     rankShowLabel: 'Show', rankGeneral: 'General rankings — all jerseys',
     rankStageOpt: (n,route) => `Stage ${n} · ${route}`,
     stageResultTitle: n => `Stage ${n} result`,
@@ -476,9 +502,6 @@ const STRINGS = {
     legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendC4: '4e catégorie', legendSprint: 'Sprint intermédiaire',
     catLabels: {HC:'HC', C1:'1re cat.', C2:'2e cat.', C3:'3e cat.', C4:'4e cat.'},
     typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
-    comingSoonTag: 'À venir',
-    teamsComingTitle: 'Équipes et coureuses seront ajoutées plus tard',
-    teamsComingBody: 'La liste des engagées et la vue par équipe seront ajoutées à cet onglet plus tard.',
     resultsStatus: 'Classements définitifs — la course s’est achevée le dim. 9 août 2026.',
     classifications: {
       gc:{name:'Classement général', fr:'Maillot jaune', valHead:'Temps/écart'},
@@ -493,6 +516,14 @@ const STRINGS = {
     },
     stageStatEmpty: 'Aucun point attribué sur cette étape.',
     colRider: 'Coureuse', colTeam: 'Équipe',
+    withdrawalReasons: {DNS:'Non-partante (DNS)', DNF:'Abandon (DNF)', OTL:'Hors délai (OTL)'},
+    teamsStatus: (riders, teams, fin, out) => `<b>Liste des partantes :</b> ${teams} équipes et ${riders} coureuses — ${fin} à l’arrivée à Nice, ${out} hors course.`,
+    teamsEmpty: 'La liste des coureuses n’a pas pu être chargée. Elle provient de <code>data/femmes2026-riders.json</code>, généré par <code>scripts/fetch_riders.py</code> à partir de la liste des partantes de letourfemmes.fr. Si la page a été ouverte directement depuis le disque (file://), le navigateur ne peut pas lire ce fichier.',
+    teamClsLine: (pos, val) => `Classement par équipes #${pos} · ${val}`,
+    teamClsNone: 'Non classée au classement par équipes',
+    colBib: 'Dossard', colGcPos: 'Clt', colGcTime: 'Temps / écart',
+    riderOutOnStage: n => `Étape ${n}`,
+    riderOutUnknown: 'Non-partante / abandon',
     rankShowLabel: 'Afficher', rankGeneral: 'Classement général — tous les maillots',
     rankStageOpt: (n,route) => `Étape ${n} · ${route}`,
     stageResultTitle: n => `Résultat de l’étape ${n}`,
@@ -1807,6 +1838,66 @@ function renderResults(){
         <td class="wteam">${esc(w.team)}</td>
       </tr>`).join('')}</tbody>`;
 }
+/* ---------- TEAMS & RIDERS ----------
+   The final start list (21 teams x 7 riders) with every rider's final GC
+   placing, from data/femmes2026-riders.json -- see scripts/fetch_riders.py.
+   Teams are stored in team-classification order, riders in bib order. */
+let RIDERS = null;
+
+/* One rider row: bib, name + nationality, final GC position, time or gap.
+   A rider who left the race gets the reason + stage folded into the sub
+   line instead of nationality, per the design (no separate status badge). */
+function riderRowHTML(r){
+  const out = !!r.status;
+  const sub = out
+    ? `${t('withdrawalReasons')[r.status] || r.status} · ${r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown')}`
+    : (r.nat || '');
+  const gcPos = out ? '—' : (r.gcPos || '—');
+  const val = out ? '' : (r.gcGap || r.gcVal || '');
+  return `
+    <tr class="${out ? 'out' : (r.gcPos && r.gcPos<=3 ? 'podium' : '')}">
+      <td class="bib">${r.bib ?? ''}</td>
+      <td class="rider"><span class="rname">${esc(r.name)}</span>${sub?`<span class="rsub">${esc(sub)}</span>`:''}</td>
+      <td class="gcpos">${gcPos}</td>
+      <td class="val">${esc(val)}</td>
+    </tr>`;
+}
+
+function renderRiders(){
+  const grid = document.getElementById('teamsGrid');
+  if(!RIDERS || !Array.isArray(RIDERS.teams) || !RIDERS.teams.length){
+    grid.innerHTML = `<div class="status-card">${t('teamsEmpty')}</div>`;
+    return;
+  }
+
+  const out = RIDERS.riderCount - RIDERS.finishers;
+  const statusHTML = `<div class="teamsstatus">${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out).replace(/<[^>]+>/g,'')}</div>`;
+
+  const cardsHTML = RIDERS.teams.map(team=>{
+    const nameHTML = team.url
+      ? `<a class="team-link" href="${team.url}" target="_blank" rel="noopener">${esc(team.name)}</a>`
+      : `<span class="team-link">${esc(team.name)}</span>`;
+    const sub = team.gcPos
+      ? t('teamClsLine')(team.gcPos, team.gcGap || team.gcVal)
+      : t('teamClsNone');
+    return `<div class="cls-card">
+      <div class="team-head">
+        <span class="team-rank${team.gcPos===1?' first':''}">${team.gcPos || '–'}</span>
+        <span class="team-meta">${nameHTML}<span class="team-clsline">${esc(sub)}</span></span>
+      </div>
+      <table class="riders">
+        <thead><tr>
+          <th>${t('colBib')}</th><th>${t('colRider')}</th>
+          <th>${t('colGcPos')}</th><th>${t('colGcTime')}</th>
+        </tr></thead>
+        <tbody>${team.riders.map(riderRowHTML).join('')}</tbody>
+      </table>
+    </div>`;
+  }).join('');
+
+  grid.innerHTML = statusHTML + `<div class="clsgrid">${cardsHTML}</div>`;
+}
+
 function applyStaticText(){
   document.getElementById('backLinkText').textContent=t('backToTours');
   document.getElementById('eyebrow').textContent=t('eyebrow');
@@ -1815,9 +1906,6 @@ function applyStaticText(){
   document.getElementById('tabResults').textContent=t('tabResults');
   document.getElementById('tabTeams').textContent=t('tabTeams');
   document.getElementById('stageListHeader').textContent=t('stageListHeader');
-  document.getElementById('comingSoonTag2').textContent=t('comingSoonTag');
-  document.getElementById('teamsComingTitle').textContent=t('teamsComingTitle');
-  document.getElementById('teamsComingBody').textContent=t('teamsComingBody');
   document.getElementById('resultsStatusLine').textContent=t('resultsStatus');
   document.getElementById('rankSelectLabel').textContent=t('rankShowLabel');
   document.getElementById('stageWinnersTitle').textContent=t('stageWinnersTitle');
@@ -1841,6 +1929,7 @@ function renderAll(){
   renderPanel(stages[activeIdx]);
   renderRankSelect();
   renderResults();
+  renderRiders();
   updateLangButtons();
   document.documentElement.lang=lang;
   syncStageListHeight();
@@ -1909,10 +1998,25 @@ async function loadResults(){
   }
 }
 
+/* Start list for the "Teams & riders" tab. Missing file (e.g. the page was
+   opened over file://) leaves the status-card empty state in place. */
+async function loadRiders(){
+  try{
+    const resp = await fetch(RIDERS_URL, {cache:'no-store'});
+    if(!resp.ok) throw new Error('not found');
+    const data = await resp.json();
+    if(data && Array.isArray(data.teams)) RIDERS = data;
+    renderRiders();
+  }catch(e){
+    /* No start list available — the view keeps showing t('teamsEmpty'). */
+  }
+}
+
 /* init — default to the first stage (Lausanne opener). */
 document.documentElement.lang = lang;
 renderAll();
 loadResults();
+loadRiders();
 </script>
 <script data-goatcounter="https://grandtours.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

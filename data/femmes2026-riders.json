@@ -1,0 +1,1690 @@
+{
+ "afterStage": 9,
+ "teamCount": 21,
+ "riderCount": 147,
+ "finishers": 115,
+ "teams": [
+  {
+   "name": "UAE Team L’IMAD",
+   "code": "UAD",
+   "url": "https://www.letourfemmes.fr/en/team/UAD/uae-team-l-imad",
+   "gcPos": 1,
+   "gcVal": "93h 02' 51''",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 31,
+     "name": "Dominika WLODARCZYK",
+     "nat": "POL",
+     "gcPos": 7,
+     "gcVal": "31h 02' 44''",
+     "gcGap": "+ 00h 07' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 32,
+     "name": "Paula BLASI CAIROL",
+     "nat": "ESP",
+     "gcPos": 5,
+     "gcVal": "31h 01' 04''",
+     "gcGap": "+ 00h 06' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 33,
+     "name": "Brodie CHAPMAN",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 2
+    },
+    {
+     "bib": 34,
+     "name": "Mavi GARCIA",
+     "nat": "ESP",
+     "gcPos": 20,
+     "gcVal": "31h 36' 41''",
+     "gcGap": "+ 00h 41' 50''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 35,
+     "name": "Elisa LONGO BORGHINI",
+     "nat": "ITA",
+     "gcPos": 3,
+     "gcVal": "30h 59' 10''",
+     "gcGap": "+ 00h 04' 19''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 36,
+     "name": "Silvia PERSICO",
+     "nat": "ITA",
+     "gcPos": 56,
+     "gcVal": "32h 37' 55''",
+     "gcGap": "+ 01h 43' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 37,
+     "name": "Maeva SQUIBAN",
+     "nat": "FRA",
+     "gcPos": 22,
+     "gcVal": "31h 40' 36''",
+     "gcGap": "+ 00h 45' 45''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "LIDL - TREK",
+   "code": "LTK",
+   "url": "https://www.letourfemmes.fr/en/team/LTK/lidl-trek",
+   "gcPos": 2,
+   "gcVal": "93h 51' 02''",
+   "gcGap": "+ 00h 48' 11''",
+   "riders": [
+    {
+     "bib": 61,
+     "name": "Elisa BALSAMO",
+     "nat": "ITA",
+     "gcPos": 57,
+     "gcVal": "32h 38' 01''",
+     "gcGap": "+ 01h 43' 10''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 62,
+     "name": "Loes ADEGEEST",
+     "nat": "NED",
+     "gcPos": 60,
+     "gcVal": "32h 40' 06''",
+     "gcGap": "+ 01h 45' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 63,
+     "name": "Lucinda BRAND",
+     "nat": "NED",
+     "gcPos": 36,
+     "gcVal": "32h 08' 25''",
+     "gcGap": "+ 01h 13' 34''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 64,
+     "name": "Niamh FISHER-BLACK",
+     "nat": "NZL",
+     "gcPos": 10,
+     "gcVal": "31h 10' 05''",
+     "gcGap": "+ 00h 15' 14''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 65,
+     "name": "Isabella HOLMGREN",
+     "nat": "CAN",
+     "gcPos": 8,
+     "gcVal": "31h 04' 03''",
+     "gcGap": "+ 00h 09' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 66,
+     "name": "Riejanne MARKUS",
+     "nat": "NED",
+     "gcPos": 27,
+     "gcVal": "31h 49' 07''",
+     "gcGap": "+ 00h 54' 16''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 67,
+     "name": "Amanda SPRATT",
+     "nat": "AUS",
+     "gcPos": 30,
+     "gcVal": "31h 52' 35''",
+     "gcGap": "+ 00h 57' 44''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "FDJ UNITED-SUEZ",
+   "code": "TFS",
+   "url": "https://www.letourfemmes.fr/en/team/TFS/fdj-united-suez",
+   "gcPos": 3,
+   "gcVal": "93h 51' 17''",
+   "gcGap": "+ 00h 48' 26''",
+   "riders": [
+    {
+     "bib": 11,
+     "name": "Demi VOLLERING",
+     "nat": "NED",
+     "gcPos": 1,
+     "gcVal": "30h 54' 51''",
+     "gcGap": "",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 12,
+     "name": "Juliette BERTHET",
+     "nat": "FRA",
+     "gcPos": 15,
+     "gcVal": "31h 23' 03''",
+     "gcGap": "+ 00h 28' 12''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 13,
+     "name": "Célia GERY",
+     "nat": "FRA",
+     "gcPos": 21,
+     "gcVal": "31h 38' 59''",
+     "gcGap": "+ 00h 44' 08''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 14,
+     "name": "Franziska KOCH",
+     "nat": "GER",
+     "gcPos": 41,
+     "gcVal": "32h 18' 04''",
+     "gcGap": "+ 01h 23' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 15,
+     "name": "Amber KRAAK",
+     "nat": "NED",
+     "gcPos": 73,
+     "gcVal": "32h 56' 47''",
+     "gcGap": "+ 02h 01' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 16,
+     "name": "Marie LE NET",
+     "nat": "FRA",
+     "gcPos": 96,
+     "gcVal": "33h 21' 14''",
+     "gcGap": "+ 02h 26' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 17,
+     "name": "Evita MUZIC",
+     "nat": "FRA",
+     "gcPos": 52,
+     "gcVal": "32h 35' 01''",
+     "gcGap": "+ 01h 40' 10''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "EF EDUCATION - OATLY",
+   "code": "EFO",
+   "url": "https://www.letourfemmes.fr/en/team/EFO/ef-education-oatly",
+   "gcPos": 4,
+   "gcVal": "93h 57' 15''",
+   "gcGap": "+ 00h 54' 24''",
+   "riders": [
+    {
+     "bib": 81,
+     "name": "Magdeleine VALLIERES MILL",
+     "nat": "CAN",
+     "gcPos": 18,
+     "gcVal": "31h 31' 09''",
+     "gcGap": "+ 00h 36' 18''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 82,
+     "name": "Nina BERTON",
+     "nat": "LUX",
+     "gcPos": 68,
+     "gcVal": "32h 48' 19''",
+     "gcGap": "+ 01h 53' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 83,
+     "name": "Henrietta CHRISTIE",
+     "nat": "NZL",
+     "gcPos": 82,
+     "gcVal": "33h 03' 58''",
+     "gcGap": "+ 02h 09' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 84,
+     "name": "Kristen FAULKNER",
+     "nat": "USA",
+     "gcPos": 26,
+     "gcVal": "31h 48' 53''",
+     "gcGap": "+ 00h 54' 02''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 85,
+     "name": "Cedrine KERBAOL",
+     "nat": "FRA",
+     "gcPos": 6,
+     "gcVal": "31h 01' 32''",
+     "gcGap": "+ 00h 06' 41''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 86,
+     "name": "Noemi RUEGG",
+     "nat": "SUI",
+     "gcPos": 17,
+     "gcVal": "31h 28' 11''",
+     "gcGap": "+ 00h 33' 20''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 87,
+     "name": "Alice TOWERS",
+     "nat": "GBR",
+     "gcPos": 61,
+     "gcVal": "32h 41' 03''",
+     "gcGap": "+ 01h 46' 12''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "CANYON//SRAM",
+   "code": "CSR",
+   "url": "https://www.letourfemmes.fr/en/team/CSR/canyon-sram",
+   "gcPos": 5,
+   "gcVal": "94h 09' 26''",
+   "gcGap": "+ 01h 06' 35''",
+   "riders": [
+    {
+     "bib": 21,
+     "name": "Katarzyna NIEWIADOMA-PHINNEY",
+     "nat": "POL",
+     "gcPos": 2,
+     "gcVal": "30h 56' 09''",
+     "gcGap": "+ 00h 01' 18''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 22,
+     "name": "Zoe JANE BACKSTEDT",
+     "nat": "GBR",
+     "gcPos": 50,
+     "gcVal": "32h 29' 06''",
+     "gcGap": "+ 01h 34' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 23,
+     "name": "Chiara CONSONNI",
+     "nat": "ITA",
+     "gcPos": 101,
+     "gcVal": "33h 31' 36''",
+     "gcGap": "+ 02h 36' 45''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 24,
+     "name": "Maria ROSA KLÖSER",
+     "nat": "GER",
+     "gcPos": 43,
+     "gcVal": "32h 21' 12''",
+     "gcGap": "+ 01h 26' 21''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 25,
+     "name": "Antonia NIEDERMAIER",
+     "nat": "GER",
+     "gcPos": 4,
+     "gcVal": "31h 00' 01''",
+     "gcGap": "+ 00h 05' 10''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 26,
+     "name": "Soraya PALADIN",
+     "nat": "ITA",
+     "gcPos": 74,
+     "gcVal": "32h 56' 58''",
+     "gcGap": "+ 02h 02' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 27,
+     "name": "Agnieszka SKALNIAK-SOJKA",
+     "nat": "POL",
+     "gcPos": 55,
+     "gcVal": "32h 37' 47''",
+     "gcGap": "+ 01h 42' 56''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM VISMA | LEASE A BIKE",
+   "code": "TVL",
+   "url": "https://www.letourfemmes.fr/en/team/TVL/team-visma-lease-a-bike",
+   "gcPos": 6,
+   "gcVal": "94h 10' 02''",
+   "gcGap": "+ 01h 07' 11''",
+   "riders": [
+    {
+     "bib": 1,
+     "name": "Pauline FERRAND PREVOT",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 8
+    },
+    {
+     "bib": 2,
+     "name": "Marion BUNEL",
+     "nat": "FRA",
+     "gcPos": 35,
+     "gcVal": "32h 08' 16''",
+     "gcGap": "+ 01h 13' 25''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 3,
+     "name": "Femke DE VRIES",
+     "nat": "NED",
+     "gcPos": 12,
+     "gcVal": "31h 18' 59''",
+     "gcGap": "+ 00h 24' 08''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 4,
+     "name": "Daniek HENGEVELD",
+     "nat": "NED",
+     "gcPos": 78,
+     "gcVal": "33h 02' 11''",
+     "gcGap": "+ 02h 07' 20''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 5,
+     "name": "Lieke NOOIJEN",
+     "nat": "NED",
+     "gcPos": 53,
+     "gcVal": "32h 35' 52''",
+     "gcGap": "+ 01h 41' 01''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 6,
+     "name": "Sarah VAN DAM",
+     "nat": "CAN",
+     "gcPos": 24,
+     "gcVal": "31h 47' 58''",
+     "gcGap": "+ 00h 53' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 7,
+     "name": "Marianne VOS",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 9
+    }
+   ]
+  },
+  {
+   "name": "AG INSURANCE - SOUDAL TEAM",
+   "code": "AGS",
+   "url": "https://www.letourfemmes.fr/en/team/AGS/ag-insurance-soudal-team",
+   "gcPos": 7,
+   "gcVal": "94h 47' 16''",
+   "gcGap": "+ 01h 44' 25''",
+   "riders": [
+    {
+     "bib": 71,
+     "name": "Kim LE COURT PIENAAR",
+     "nat": "MRI",
+     "gcPos": 9,
+     "gcVal": "31h 08' 55''",
+     "gcGap": "+ 00h 14' 04''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 72,
+     "name": "Mireia BENITO PELLICER",
+     "nat": "ESP",
+     "gcPos": 42,
+     "gcVal": "32h 19' 42''",
+     "gcGap": "+ 01h 24' 51''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 73,
+     "name": "Letizia BORGHESI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 9
+    },
+    {
+     "bib": 74,
+     "name": "Shari BOSSUYT",
+     "nat": "BEL",
+     "gcPos": 86,
+     "gcVal": "33h 09' 50''",
+     "gcGap": "+ 02h 14' 59''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 75,
+     "name": "Lore DE SCHEPPER",
+     "nat": "BEL",
+     "gcPos": 62,
+     "gcVal": "32h 41' 05''",
+     "gcGap": "+ 01h 46' 14''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 76,
+     "name": "Justine GHEKIERE",
+     "nat": "BEL",
+     "gcPos": 25,
+     "gcVal": "31h 48' 06''",
+     "gcGap": "+ 00h 53' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 77,
+     "name": "Urška ŽIGART",
+     "nat": "SLO",
+     "gcPos": 48,
+     "gcVal": "32h 26' 10''",
+     "gcGap": "+ 01h 31' 19''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "HUMAN POWERED HEALTH",
+   "code": "HPH",
+   "url": "https://www.letourfemmes.fr/en/team/HPH/human-powered-health",
+   "gcPos": 8,
+   "gcVal": "94h 55' 50''",
+   "gcGap": "+ 01h 52' 59''",
+   "riders": [
+    {
+     "bib": 101,
+     "name": "Titia RYO",
+     "nat": "FRA",
+     "gcPos": 47,
+     "gcVal": "32h 25' 18''",
+     "gcGap": "+ 01h 30' 27''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 102,
+     "name": "Nina BUIJSMAN",
+     "nat": "NED",
+     "gcPos": 16,
+     "gcVal": "31h 23' 13''",
+     "gcGap": "+ 00h 28' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 103,
+     "name": "Carlotta CIPRESSI",
+     "nat": "ITA",
+     "gcPos": 80,
+     "gcVal": "33h 03' 23''",
+     "gcGap": "+ 02h 08' 32''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 104,
+     "name": "Thalita DE JONG",
+     "nat": "NED",
+     "gcPos": 13,
+     "gcVal": "31h 19' 32''",
+     "gcGap": "+ 00h 24' 41''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 105,
+     "name": "Barbara MALCOTTI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 6
+    },
+    {
+     "bib": 106,
+     "name": "Marit RAAIJMAKERS",
+     "nat": "NED",
+     "gcPos": 89,
+     "gcVal": "33h 12' 58''",
+     "gcGap": "+ 02h 18' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 107,
+     "name": "Lily WILLIAMS",
+     "nat": "USA",
+     "gcPos": 69,
+     "gcVal": "32h 49' 59''",
+     "gcGap": "+ 01h 55' 08''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM SD WORX - PROTIME",
+   "code": "SDW",
+   "url": "https://www.letourfemmes.fr/en/team/SDW/team-sd-worx-protime",
+   "gcPos": 9,
+   "gcVal": "95h 09' 02''",
+   "gcGap": "+ 02h 06' 11''",
+   "riders": [
+    {
+     "bib": 41,
+     "name": "Anna VAN DER BREGGEN",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 7
+    },
+    {
+     "bib": 42,
+     "name": "Mischa BREDEWOLD",
+     "nat": "NED",
+     "gcPos": 46,
+     "gcVal": "32h 25' 18''",
+     "gcGap": "+ 01h 30' 27''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 43,
+     "name": "Valentina CAVALLAR",
+     "nat": "AUT",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 9
+    },
+    {
+     "bib": 44,
+     "name": "Elena CECCHINI",
+     "nat": "ITA",
+     "gcPos": 104,
+     "gcVal": "33h 33' 13''",
+     "gcGap": "+ 02h 38' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 45,
+     "name": "Lotte KOPECKY",
+     "nat": "BEL",
+     "gcPos": 40,
+     "gcVal": "32h 15' 06''",
+     "gcGap": "+ 01h 20' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 46,
+     "name": "Nienke VINKE",
+     "nat": "NED",
+     "gcPos": 11,
+     "gcVal": "31h 17' 47''",
+     "gcGap": "+ 00h 22' 56''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 47,
+     "name": "Lorena WIEBES",
+     "nat": "NED",
+     "gcPos": 65,
+     "gcVal": "32h 43' 48''",
+     "gcGap": "+ 01h 48' 57''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "MA PETITE ENTREPRISE",
+   "code": "MPE",
+   "url": "https://www.letourfemmes.fr/en/team/MPE/ma-petite-entreprise",
+   "gcPos": 10,
+   "gcVal": "95h 44' 09''",
+   "gcGap": "+ 02h 41' 18''",
+   "riders": [
+    {
+     "bib": 191,
+     "name": "Clémence LATIMIER",
+     "nat": "FRA",
+     "gcPos": 37,
+     "gcVal": "32h 09' 56''",
+     "gcGap": "+ 01h 15' 05''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 192,
+     "name": "Noémie ABGRALL",
+     "nat": "FRA",
+     "gcPos": 100,
+     "gcVal": "33h 30' 02''",
+     "gcGap": "+ 02h 35' 11''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 193,
+     "name": "Laura ASENCIO",
+     "nat": "FRA",
+     "gcPos": 32,
+     "gcVal": "31h 57' 49''",
+     "gcGap": "+ 01h 02' 58''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 194,
+     "name": "Alison AVOINE",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "OTL",
+     "statusStage": 1
+    },
+    {
+     "bib": 195,
+     "name": "Morgane COSTON",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 9
+    },
+    {
+     "bib": 196,
+     "name": "Célia LE MOUËL",
+     "nat": "FRA",
+     "gcPos": 49,
+     "gcVal": "32h 27' 58''",
+     "gcGap": "+ 01h 33' 07''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 197,
+     "name": "Océane MAHE",
+     "nat": "FRA",
+     "gcPos": 45,
+     "gcVal": "32h 23' 12''",
+     "gcGap": "+ 01h 28' 21''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "MOVISTAR TEAM",
+   "code": "MOV",
+   "url": "https://www.letourfemmes.fr/en/team/MOV/movistar-team",
+   "gcPos": 11,
+   "gcVal": "95h 51' 00''",
+   "gcGap": "+ 02h 48' 09''",
+   "riders": [
+    {
+     "bib": 51,
+     "name": "Marlen REUSSER",
+     "nat": "SUI",
+     "gcPos": 14,
+     "gcVal": "31h 20' 48''",
+     "gcGap": "+ 00h 25' 57''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 52,
+     "name": "Francesca BARALE",
+     "nat": "ITA",
+     "gcPos": 85,
+     "gcVal": "33h 05' 48''",
+     "gcGap": "+ 02h 10' 57''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 53,
+     "name": "Ana VITORIA MAGALHAES",
+     "nat": "BRA",
+     "gcPos": 75,
+     "gcVal": "32h 58' 28''",
+     "gcGap": "+ 02h 03' 37''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 54,
+     "name": "Liane LIPPERT",
+     "nat": "GER",
+     "gcPos": 44,
+     "gcVal": "32h 22' 13''",
+     "gcGap": "+ 01h 27' 22''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 55,
+     "name": "Sara MARTIN MARTIN",
+     "nat": "ESP",
+     "gcPos": 84,
+     "gcVal": "33h 05' 35''",
+     "gcGap": "+ 02h 10' 44''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 56,
+     "name": "Paula OSTIZ",
+     "nat": "ESP",
+     "gcPos": 51,
+     "gcVal": "32h 30' 59''",
+     "gcGap": "+ 01h 36' 08''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 57,
+     "name": "Arlenis SIERRA CANADILLA",
+     "nat": "CUB",
+     "gcPos": 99,
+     "gcVal": "33h 28' 37''",
+     "gcGap": "+ 02h 33' 46''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "FENIX-PREMIER TECH",
+   "code": "FPC",
+   "url": "https://www.letourfemmes.fr/en/team/FPC/fenix-premier-tech",
+   "gcPos": 12,
+   "gcVal": "95h 52' 45''",
+   "gcGap": "+ 02h 49' 54''",
+   "riders": [
+    {
+     "bib": 91,
+     "name": "Puck PIETERSE",
+     "nat": "NED",
+     "gcPos": 23,
+     "gcVal": "31h 46' 34''",
+     "gcGap": "+ 00h 51' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 92,
+     "name": "Sara CASASOLA",
+     "nat": "ITA",
+     "gcPos": 33,
+     "gcVal": "32h 02' 50''",
+     "gcGap": "+ 01h 07' 59''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 93,
+     "name": "Lotte CLAES",
+     "nat": "BEL",
+     "gcPos": 63,
+     "gcVal": "32h 42' 40''",
+     "gcGap": "+ 01h 47' 49''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 94,
+     "name": "Millie COUZENS",
+     "nat": "GBR",
+     "gcPos": 77,
+     "gcVal": "33h 01' 25''",
+     "gcGap": "+ 02h 06' 34''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 95,
+     "name": "Yara KASTELIJN",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 6
+    },
+    {
+     "bib": 96,
+     "name": "Charlotte KOOL",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "OTL",
+     "statusStage": 7
+    },
+    {
+     "bib": 97,
+     "name": "Christina SCHWEINBERGER",
+     "nat": "AUT",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 2
+    }
+   ]
+  },
+  {
+   "name": "UNO-X MOBILITY",
+   "code": "UXM",
+   "url": "https://www.letourfemmes.fr/en/team/UXM/uno-x-mobility",
+   "gcPos": 13,
+   "gcVal": "96h 26' 21''",
+   "gcGap": "+ 03h 23' 30''",
+   "riders": [
+    {
+     "bib": 171,
+     "name": "Katrine AALERUD",
+     "nat": "NOR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 7
+    },
+    {
+     "bib": 172,
+     "name": "Teuntje BEEKHUIS",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 5
+    },
+    {
+     "bib": 173,
+     "name": "Marte BERG EDSETH",
+     "nat": "NOR",
+     "gcPos": 67,
+     "gcVal": "32h 45' 34''",
+     "gcGap": "+ 01h 50' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 174,
+     "name": "Sigrid HAUGSET",
+     "nat": "NOR",
+     "gcPos": 28,
+     "gcVal": "31h 49' 17''",
+     "gcGap": "+ 00h 54' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 175,
+     "name": "Anouska KOSTER",
+     "nat": "NED",
+     "gcPos": 72,
+     "gcVal": "32h 53' 02''",
+     "gcGap": "+ 01h 58' 11''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 176,
+     "name": "Laura TOMASI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 1
+    },
+    {
+     "bib": 177,
+     "name": "Alessia VIGILIA",
+     "nat": "ITA",
+     "gcPos": 105,
+     "gcVal": "33h 33' 13''",
+     "gcGap": "+ 02h 38' 22''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "LIV-ALULA-JAYCO",
+   "code": "LIV",
+   "url": "https://www.letourfemmes.fr/en/team/LIV/liv-alula-jayco",
+   "gcPos": 14,
+   "gcVal": "96h 35' 19''",
+   "gcGap": "+ 03h 32' 28''",
+   "riders": [
+    {
+     "bib": 111,
+     "name": "Monica TRINCA COLONEL",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 6
+    },
+    {
+     "bib": 112,
+     "name": "Mackenzie COUPLAND",
+     "nat": "AUS",
+     "gcPos": 88,
+     "gcVal": "33h 12' 44''",
+     "gcGap": "+ 02h 17' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 113,
+     "name": "Nadia GONTOVA",
+     "nat": "CAN",
+     "gcPos": 31,
+     "gcVal": "31h 54' 25''",
+     "gcGap": "+ 00h 59' 34''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 114,
+     "name": "Jeanne KOREVAAR",
+     "nat": "NED",
+     "gcPos": 59,
+     "gcVal": "32h 38' 35''",
+     "gcGap": "+ 01h 43' 44''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 115,
+     "name": "Letizia PATERNOSTER",
+     "nat": "ITA",
+     "gcPos": 76,
+     "gcVal": "33h 01' 02''",
+     "gcGap": "+ 02h 06' 11''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 116,
+     "name": "Ruby ROSEMAN-GANNON",
+     "nat": "AUS",
+     "gcPos": 87,
+     "gcVal": "33h 11' 37''",
+     "gcGap": "+ 02h 16' 46''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 117,
+     "name": "Silke SMULDERS",
+     "nat": "NED",
+     "gcPos": 64,
+     "gcVal": "32h 43' 37''",
+     "gcGap": "+ 01h 48' 46''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "LABORAL KUTXA - FUNDACION EUSKADI",
+   "code": "LKF",
+   "url": "https://www.letourfemmes.fr/en/team/LKF/laboral-kutxa-fundacion-euskadi",
+   "gcPos": 15,
+   "gcVal": "97h 01' 03''",
+   "gcGap": "+ 03h 58' 12''",
+   "riders": [
+    {
+     "bib": 151,
+     "name": "Usoa OSTOLAZA ZABALA",
+     "nat": "ESP",
+     "gcPos": 70,
+     "gcVal": "32h 50' 02''",
+     "gcGap": "+ 01h 55' 11''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 152,
+     "name": "Naia AMONDARAIN GAZTAÑAGA",
+     "nat": "ESP",
+     "gcPos": 109,
+     "gcVal": "33h 36' 24''",
+     "gcGap": "+ 02h 41' 33''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 153,
+     "name": "Yuliia BIRIUKOVA",
+     "nat": "UKR",
+     "gcPos": 92,
+     "gcVal": "33h 17' 43''",
+     "gcGap": "+ 02h 22' 52''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 154,
+     "name": "Idoia ERASO LASA",
+     "nat": "ESP",
+     "gcPos": 106,
+     "gcVal": "33h 34' 00''",
+     "gcGap": "+ 02h 39' 09''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 155,
+     "name": "Arianna FIDANZA",
+     "nat": "ITA",
+     "gcPos": 102,
+     "gcVal": "33h 31' 44''",
+     "gcGap": "+ 02h 36' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 156,
+     "name": "Paula PATIÑO BEDOYA",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 9
+    },
+    {
+     "bib": 157,
+     "name": "Debora SILVESTRI",
+     "nat": "ITA",
+     "gcPos": 29,
+     "gcVal": "31h 49' 43''",
+     "gcGap": "+ 00h 54' 52''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "ST MICHEL - PREFERENCE HOME - AUBER93",
+   "code": "AUB",
+   "url": "https://www.letourfemmes.fr/en/team/AUB/st-michel-preference-home-auber93",
+   "gcPos": 16,
+   "gcVal": "97h 04' 28''",
+   "gcGap": "+ 04h 01' 37''",
+   "riders": [
+    {
+     "bib": 131,
+     "name": "Emilie MORIER",
+     "nat": "FRA",
+     "gcPos": 19,
+     "gcVal": "31h 33' 57''",
+     "gcGap": "+ 00h 39' 06''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 132,
+     "name": "Heidi FRANZ",
+     "nat": "USA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 9
+    },
+    {
+     "bib": 133,
+     "name": "Alicia GONZALEZ BLANCO",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 9
+    },
+    {
+     "bib": 134,
+     "name": "India GRANGIER",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 5
+    },
+    {
+     "bib": 135,
+     "name": "Alison JACKSON",
+     "nat": "CAN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 9
+    },
+    {
+     "bib": 136,
+     "name": "Solène MULLER",
+     "nat": "FRA",
+     "gcPos": 34,
+     "gcVal": "32h 06' 50''",
+     "gcGap": "+ 01h 11' 59''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 137,
+     "name": "Caroline WRESZIN",
+     "nat": "USA",
+     "gcPos": 111,
+     "gcVal": "33h 44' 59''",
+     "gcGap": "+ 02h 50' 08''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "COFIDIS WOMEN TEAM",
+   "code": "CWT",
+   "url": "https://www.letourfemmes.fr/en/team/CWT/cofidis-women-team",
+   "gcPos": 17,
+   "gcVal": "97h 35' 15''",
+   "gcGap": "+ 04h 32' 24''",
+   "riders": [
+    {
+     "bib": 141,
+     "name": "Malwina MUL",
+     "nat": "POL",
+     "gcPos": 54,
+     "gcVal": "32h 37' 28''",
+     "gcGap": "+ 01h 42' 37''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 142,
+     "name": "Julie BEGO",
+     "nat": "FRA",
+     "gcPos": 83,
+     "gcVal": "33h 04' 17''",
+     "gcGap": "+ 02h 09' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 143,
+     "name": "Ema COMTE",
+     "nat": "FRA",
+     "gcPos": 58,
+     "gcVal": "32h 38' 04''",
+     "gcGap": "+ 01h 43' 13''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 144,
+     "name": "Amalie DIDERIKSEN",
+     "nat": "DEN",
+     "gcPos": 93,
+     "gcVal": "33h 19' 32''",
+     "gcGap": "+ 02h 24' 41''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 145,
+     "name": "Victorie GUILMAN",
+     "nat": "FRA",
+     "gcPos": 108,
+     "gcVal": "33h 35' 32''",
+     "gcGap": "+ 02h 40' 41''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 146,
+     "name": "Hannah LUDWIG",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 5
+    },
+    {
+     "bib": 147,
+     "name": "Nikola NOSKOVÁ",
+     "nat": "CZE",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 9
+    }
+   ]
+  },
+  {
+   "name": "Team Picnic PostNL",
+   "code": "TPP",
+   "url": "https://www.letourfemmes.fr/en/team/TPP/team-picnic-postnl",
+   "gcPos": 18,
+   "gcVal": "98h 01' 36''",
+   "gcGap": "+ 04h 58' 45''",
+   "riders": [
+    {
+     "bib": 121,
+     "name": "Eleonora CIABOCCO",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 6
+    },
+    {
+     "bib": 122,
+     "name": "Lene ROBYN CLAY",
+     "nat": "GBR",
+     "gcPos": 114,
+     "gcVal": "33h 50' 10''",
+     "gcGap": "+ 02h 55' 19''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 123,
+     "name": "Lucie FITYUS",
+     "nat": "AUS",
+     "gcPos": 112,
+     "gcVal": "33h 45' 23''",
+     "gcGap": "+ 02h 50' 32''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 124,
+     "name": "Pfeiffer GEORGI",
+     "nat": "GBR",
+     "gcPos": 71,
+     "gcVal": "32h 52' 11''",
+     "gcGap": "+ 01h 57' 20''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 125,
+     "name": "Mia GRIFFIN",
+     "nat": "IRL",
+     "gcPos": 115,
+     "gcVal": "33h 54' 44''",
+     "gcGap": "+ 02h 59' 53''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 126,
+     "name": "Gaia MASETTI",
+     "nat": "ITA",
+     "gcPos": 38,
+     "gcVal": "32h 10' 26''",
+     "gcGap": "+ 01h 15' 35''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 127,
+     "name": "Josie NELSON",
+     "nat": "GBR",
+     "gcPos": 81,
+     "gcVal": "33h 03' 54''",
+     "gcGap": "+ 02h 09' 03''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "MAYENNE MONBANA MY PIE",
+   "code": "MMM",
+   "url": "https://www.letourfemmes.fr/en/team/MMM/mayenne-monbana-my-pie",
+   "gcPos": 19,
+   "gcVal": "98h 08' 46''",
+   "gcGap": "+ 05h 05' 55''",
+   "riders": [
+    {
+     "bib": 201,
+     "name": "Karolina PEREKITKO",
+     "nat": "POL",
+     "gcPos": 39,
+     "gcVal": "32h 13' 14''",
+     "gcGap": "+ 01h 18' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 202,
+     "name": "Marine ALLIONE",
+     "nat": "FRA",
+     "gcPos": 95,
+     "gcVal": "33h 20' 53''",
+     "gcGap": "+ 02h 26' 02''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 203,
+     "name": "Alice COUTINHO",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 9
+    },
+    {
+     "bib": 204,
+     "name": "Kiara LYLYK",
+     "nat": "CAN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 7
+    },
+    {
+     "bib": 205,
+     "name": "Fiona MANGAN",
+     "nat": "IRL",
+     "gcPos": 91,
+     "gcVal": "33h 16' 39''",
+     "gcGap": "+ 02h 21' 48''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 206,
+     "name": "Natalie QUINN",
+     "nat": "USA",
+     "gcPos": 98,
+     "gcVal": "33h 27' 54''",
+     "gcGap": "+ 02h 33' 03''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 207,
+     "name": "Constance VALENTIN",
+     "nat": "FRA",
+     "gcPos": 107,
+     "gcVal": "33h 34' 35''",
+     "gcGap": "+ 02h 39' 44''",
+     "status": "",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "VOLKERWESSELS CYCLING TEAM",
+   "code": "VWT",
+   "url": "https://www.letourfemmes.fr/en/team/VWT/volkerwessels-cycling-team",
+   "gcPos": 20,
+   "gcVal": "98h 57' 04''",
+   "gcGap": "+ 05h 54' 13''",
+   "riders": [
+    {
+     "bib": 161,
+     "name": "Quinty SCHOENS",
+     "nat": "NED",
+     "gcPos": 66,
+     "gcVal": "32h 45' 19''",
+     "gcGap": "+ 01h 50' 28''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 162,
+     "name": "Anneke DIJKSTRA",
+     "nat": "NED",
+     "gcPos": 110,
+     "gcVal": "33h 42' 17''",
+     "gcGap": "+ 02h 47' 26''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 163,
+     "name": "Malou EISEN",
+     "nat": "NED",
+     "gcPos": 97,
+     "gcVal": "33h 24' 29''",
+     "gcGap": "+ 02h 29' 38''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 164,
+     "name": "Eline JANSEN",
+     "nat": "NED",
+     "gcPos": 94,
+     "gcVal": "33h 20' 06''",
+     "gcGap": "+ 02h 25' 15''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 165,
+     "name": "Laura MOLENAAR",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 2
+    },
+    {
+     "bib": 166,
+     "name": "Maud RIJNBEEK",
+     "nat": "NED",
+     "gcPos": 103,
+     "gcVal": "33h 32' 34''",
+     "gcGap": "+ 02h 37' 43''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 167,
+     "name": "Sophie VON BERSWORDT",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 9
+    }
+   ]
+  },
+  {
+   "name": "LOTTO INTERMARCHE LADIES",
+   "code": "LIL",
+   "url": "https://www.letourfemmes.fr/en/team/LIL/lotto-intermarche-ladies",
+   "gcPos": 21,
+   "gcVal": "100h 04' 33''",
+   "gcGap": "+ 07h 01' 42''",
+   "riders": [
+    {
+     "bib": 181,
+     "name": "Sandrine TAS",
+     "nat": "BEL",
+     "gcPos": 90,
+     "gcVal": "33h 13' 14''",
+     "gcGap": "+ 02h 18' 23''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 182,
+     "name": "Dina BOELS",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 3
+    },
+    {
+     "bib": 183,
+     "name": "Elisabeth EBRAS",
+     "nat": "EST",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 2
+    },
+    {
+     "bib": 184,
+     "name": "Romina HINOJOSA CRUZ",
+     "nat": "MEX",
+     "gcPos": 113,
+     "gcVal": "33h 48' 33''",
+     "gcGap": "+ 02h 53' 42''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 185,
+     "name": "Marieke MEERT",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 2
+    },
+    {
+     "bib": 186,
+     "name": "Linda RIEDMANN",
+     "nat": "GER",
+     "gcPos": 79,
+     "gcVal": "33h 02' 46''",
+     "gcGap": "+ 02h 07' 55''",
+     "status": "",
+     "statusStage": null
+    },
+    {
+     "bib": 187,
+     "name": "Sterre VERVLOET",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 2
+    }
+   ]
+  }
+ ],
+ "updated": "2026-08-15T10:25:53.445617+03:00",
+ "updatedText": "Päivitetty 15.08.2026 klo 10.25 (Suomen aikaa)"
+}
