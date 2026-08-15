@@ -167,11 +167,45 @@
   .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
   .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
 
-  /* ---------- placeholder tabs (results / teams) ---------- */
+  /* ---------- placeholder tabs (teams) ---------- */
   .comingsoon{padding:clamp(40px,8vw,96px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:70ch;}
   .comingsoon .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);background:var(--color-neutral-100);border:1px solid var(--color-divider);padding:5px 12px;}
   .comingsoon h2{font-family:var(--font-heading);font-weight:700;font-size:clamp(22px,3vw,32px);line-height:1.05;letter-spacing:-.02em;margin:6px 0 0;text-transform:uppercase;}
   .comingsoon p{margin:0;font-size:14px;line-height:1.6;color:var(--color-neutral-700);}
+
+  /* ---------- rankings tab ---------- */
+  .toolbar{padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);}
+  .toolbar .statusline{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+
+  .clsgrid{display:grid;grid-template-columns:1fr 1fr;}
+  @media (max-width:860px){.clsgrid{grid-template-columns:1fr;}}
+  .cls-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;border-bottom:2px solid var(--color-divider);}
+  .cls-card:nth-child(odd){border-right:2px solid var(--color-divider);}
+  @media (max-width:860px){.cls-card:nth-child(odd){border-right:0;}}
+  .cls-head{display:flex;align-items:center;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
+  .cls-head .names{display:flex;flex-direction:column;gap:3px;min-width:0;}
+  .cls-head .name{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;}
+  .cls-head .fr{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-neutral-600);}
+  .swatch{width:20px;height:20px;border:1px solid var(--color-divider);flex:0 0 auto;}
+
+  .cls-body{overflow-x:auto;}
+  table.results{width:100%;border-collapse:collapse;margin-top:var(--space-3);}
+  table.results td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.results td.pos{font-family:var(--font-heading);font-weight:700;font-size:14px;width:34px;color:var(--color-neutral-600);}
+  table.results tr.podium td.pos{color:var(--color-accent);}
+  table.results td.rider .rname{display:block;font-size:14px;font-weight:600;}
+  table.results td.rider .rteam{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.results td.val{text-align:right;white-space:nowrap;font-size:13px;}
+  .cls-note{margin:var(--space-3) 0 0;font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
+
+  .stagewins-block{padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);border-top:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .stagewins-block h3{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;margin:0;}
+  table.winners{width:100%;max-width:820px;border-collapse:collapse;}
+  table.winners td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.winners td.n{font-family:var(--font-heading);font-weight:700;font-size:14px;width:40px;color:var(--color-neutral-600);}
+  table.winners td.route{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);white-space:nowrap;}
+  table.winners td.winner{font-size:14px;font-weight:600;}
+  table.winners td.wteam{font-size:12px;color:var(--color-neutral-600);text-align:right;white-space:nowrap;}
 
   /* ---------- footer ---------- */
   .tdf-footer{border-top:2px solid var(--color-divider);padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:var(--space-3);max-width:100ch;}
@@ -240,10 +274,13 @@
 </section>
 
 <section class="view" id="view-results" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
-  <div class="comingsoon">
-    <span class="tag" id="comingSoonTag"></span>
-    <h2 id="resultsComingTitle"></h2>
-    <p id="resultsComingBody"></p>
+  <div class="toolbar">
+    <span class="statusline" id="resultsStatusLine"></span>
+  </div>
+  <div class="clsgrid" id="resultsGrid"></div>
+  <div class="stagewins-block">
+    <h3 id="stageWinnersTitle"></h3>
+    <table class="winners" id="stageWinnersTable"></table>
   </div>
 </section>
 
@@ -266,10 +303,9 @@
 <script>
 /* ---------- TOUR ----------
    Tour de France Femmes 2026: Lausanne -> Nice, 9 stages, 1-9 Aug 2026.
-   Route/profile data below; results and start list are not wired up yet —
-   the "Rankings" and "Teams & riders" tabs show a placeholder for now (see
-   tdf2026.html for the pattern this page will grow into once results are
-   available). */
+   The race finished 9 Aug 2026, so the Rankings tab below shows final
+   standings (RESULTS, further down). The "Teams & riders" tab still shows
+   a placeholder — no reliable start-list data source found yet. */
 const LANG_KEY = 'tdf2026-lang';
 const ROUTES_URL = 'data/femmes2026-routes.json';
 
@@ -308,15 +344,23 @@ const STRINGS = {
     catLabels: {HC:'HC', C1:'1. lk', C2:'2. lk', C3:'3. lk', C4:'4. lk'},
     typeLabels: {flat:'Tasainen', hilly:'Kukkulainen / mäkinen', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
     comingSoonTag: 'Tulossa',
-    resultsComingTitle: 'Sijoitukset lisätään myöhemmin',
-    resultsComingBody: 'Tämä välilehti rakennetaan seuraavaksi — kokonaiskilpailun, pistekilpailun, mäkikilpailun ja nuorten sarjan tulokset lisätään tähän etappikohtaisesti, samaan tapaan kuin Tour de Francen (miehet) sivulla.',
     teamsComingTitle: 'Joukkueet ja ajajat lisätään myöhemmin',
     teamsComingBody: 'Lähtölista ja joukkuekohtaiset ajajanäkymät lisätään tähän välilehteen myöhemmin.',
+    resultsStatus: 'Lopulliset sijoitukset — kilpailu päättyi su 9.8.2026.',
+    classifications: {
+      gc:{name:'Kokonaiskilpailu', fr:'Maillot jaune — keltainen paita', valHead:'Aika/ero'},
+      points:{name:'Pistekilpailu', fr:'Maillot vert — vihreä paita', valHead:'Pisteet'},
+      mountains:{name:'Mäkikilpailu', fr:'Maillot à pois — pallopaita', valHead:'Pisteet'},
+      youth:{name:'Nuorten kilpailu', fr:'Maillot blanc — valkoinen paita (alle 26 v)', valHead:'Aika/ero'},
+    },
+    colRider: 'Ajaja', colTeam: 'Joukkue',
+    top5Note: 'Vain top 5 luotettavasti varmistettuna useasta lähteestä — täydet sijoitukset: letourfemmes.fr, procyclingstats.com.',
+    stageWinnersTitle: 'Etappivoittajat', colStage: 'Etappi', colWinner: 'Voittaja', colWTeam: 'Joukkue',
     disclaimerLabel: 'Huom korkeusprofiileista ja reiteistä:',
     disclaimer: 'SVG-käyrät ovat havainnollistavia hahmotelmia, jotka on rakennettu etapin tyypin ja tunnettujen nousujen (sijainti, pituus, keskikaltevuus) perusteella — ne eivät ole GPS-mitattua korkeusdataa. Karttojen reittiviivat sen sijaan ovat oikeasta GPX-datasta. Mäkipisteiden sijainnit, luokat, pituudet ja kaltevuudet perustuvat ASO:n viralliseen roadbookiin.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity A.S.O.:hon tai Tour de France Femmesiin. Tulokset ovat oikeudenomistajiensa omaisuutta.',
     sourcesTitle: 'Lähteet (tarkistettu ≥2 riippumattomasta lähteestä keskeisille faktoille):',
-    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit ja mäkipisteet: letourfemmes.fr/en/overall-route ja etappikohtaiset sivut, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX-reitit karttoja varten).',
+    sourcesBody: 'Reitti, etapit, päivämäärät, korkeusmetrit ja mäkipisteet: letourfemmes.fr/en/overall-route ja etappikohtaiset sivut, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX-reitit karttoja varten). Lopulliset sijoitukset ja etappivoittajat: procyclinguk.com (tour-de-france-femmes-2026-results), idlprocycling.com:n loppuyhteenveto ja en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, ristiin tarkistettu.',
   },
   en: {
     backToTours: 'Grand Tours',
@@ -352,15 +396,23 @@ const STRINGS = {
     catLabels: {HC:'HC', C1:'Cat 1', C2:'Cat 2', C3:'Cat 3', C4:'Cat 4'},
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
     comingSoonTag: 'Coming soon',
-    resultsComingTitle: 'Rankings will be added later',
-    resultsComingBody: 'This tab is next up for construction — general classification, points, mountains and youth classification results will be added here stage by stage, the same way they work on the Tour de France (men) page.',
     teamsComingTitle: 'Teams & riders will be added later',
     teamsComingBody: 'The start list and per-team rider view will be added to this tab later.',
+    resultsStatus: 'Final standings — the race finished on Sun 9 Aug 2026.',
+    classifications: {
+      gc:{name:'General classification', fr:'Maillot jaune — yellow jersey', valHead:'Time/Gap'},
+      points:{name:'Points classification', fr:'Maillot vert — green jersey', valHead:'Points'},
+      mountains:{name:'Mountains classification', fr:'Maillot à pois — polka dot jersey', valHead:'Points'},
+      youth:{name:'Youth classification', fr:'Maillot blanc — white jersey (U26)', valHead:'Time/Gap'},
+    },
+    colRider: 'Rider', colTeam: 'Team',
+    top5Note: 'Only the top 5 could be reliably confirmed across sources — full standings: letourfemmes.fr, procyclingstats.com.',
+    stageWinnersTitle: 'Stage winners', colStage: 'Stage', colWinner: 'Winner', colWTeam: 'Team',
     disclaimerLabel: 'A note on elevation profiles and routes:',
     disclaimer: 'The SVG curves are illustrative sketches built from the stage type and the known climbs (location, length, average gradient) — they are not GPS-measured elevation data. The map route lines, however, are drawn from real GPX data. Climb locations, categories, lengths and gradients are based on the ASO official roadbook.',
     footerNote: '© 2026 Jouni Uusimaa · Page design & code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with A.S.O. or the Tour de France Femmes. Results remain the property of their respective owners.',
     sourcesTitle: 'Sources (cross-checked against ≥2 independent sources for key facts):',
-    sourcesBody: 'Route, stages, dates, elevation and climb points: letourfemmes.fr/en/overall-route and the per-stage pages, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX routes for the maps).',
+    sourcesBody: 'Route, stages, dates, elevation and climb points: letourfemmes.fr/en/overall-route and the per-stage pages, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (GPX routes for the maps). Final standings and stage winners: procyclinguk.com (tour-de-france-femmes-2026-results), idlprocycling.com\'s standings recap and en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, cross-checked.',
   },
   fr: {
     backToTours: 'Grands Tours',
@@ -396,15 +448,23 @@ const STRINGS = {
     catLabels: {HC:'HC', C1:'1re cat.', C2:'2e cat.', C3:'3e cat.', C4:'4e cat.'},
     typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
     comingSoonTag: 'À venir',
-    resultsComingTitle: 'Les classements seront ajoutés plus tard',
-    resultsComingBody: 'Cet onglet est la prochaine étape du chantier — classement général, par points, de la montagne et des jeunes seront ajoutés ici étape par étape, comme sur la page du Tour de France (hommes).',
     teamsComingTitle: 'Équipes et coureuses seront ajoutées plus tard',
     teamsComingBody: 'La liste des engagées et la vue par équipe seront ajoutées à cet onglet plus tard.',
+    resultsStatus: 'Classements définitifs — la course s’est achevée le dim. 9 août 2026.',
+    classifications: {
+      gc:{name:'Classement général', fr:'Maillot jaune', valHead:'Temps/écart'},
+      points:{name:'Classement par points', fr:'Maillot vert', valHead:'Points'},
+      mountains:{name:'Classement de la montagne', fr:'Maillot à pois', valHead:'Points'},
+      youth:{name:'Classement du meilleur jeune', fr:'Maillot blanc (moins de 26 ans)', valHead:'Temps/écart'},
+    },
+    colRider: 'Coureuse', colTeam: 'Équipe',
+    top5Note: 'Seul le top 5 a pu être confirmé de façon fiable sur plusieurs sources — classement complet : letourfemmes.fr, procyclingstats.com.',
+    stageWinnersTitle: 'Victoires d’étape', colStage: 'Étape', colWinner: 'Victoire', colWTeam: 'Équipe',
     disclaimerLabel: 'À propos des profils d’altitude et des parcours :',
     disclaimer: 'Les courbes SVG sont des esquisses illustratives construites à partir du type d’étape et des ascensions connues (position, longueur, pente moyenne) — ce ne sont pas des données d’altitude mesurées au GPS. Les tracés des cartes, en revanche, proviennent de données GPX réelles. Les positions, catégories, longueurs et pentes des cols reposent sur le roadbook officiel de l’ASO.',
     footerNote: '© 2026 Jouni Uusimaa · Design et code de la page sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec l’A.S.O. ni le Tour de France Femmes. Les résultats restent la propriété de leurs détenteurs.',
     sourcesTitle: 'Sources (recoupées sur ≥2 sources indépendantes pour les faits clés) :',
-    sourcesBody: 'Parcours, étapes, dates, dénivelé et cols : letourfemmes.fr/en/overall-route et les pages par étape, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (tracés GPX pour les cartes).',
+    sourcesBody: 'Parcours, étapes, dates, dénivelé et cols : letourfemmes.fr/en/overall-route et les pages par étape, en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, olympics.com (parcours en détails), cyclingstage.com/tour-de-france-femmes-2026-gpx (tracés GPX pour les cartes). Classements finaux et victoires d’étape : procyclinguk.com (tour-de-france-femmes-2026-results), le récapitulatif d’idlprocycling.com et en.wikipedia.org/wiki/2026_Tour_de_France_Femmes, recoupés.',
   },
 };
 
@@ -423,6 +483,62 @@ function t(key){ const v = STRINGS[lang][key]; return v !== undefined ? v : STRI
    Climb categories as flat colour swatches, per the Modernist system shared
    with tdf2026.html / giro2026.html. */
 const CAT_COLOR = {HC:'var(--color-accent-800)', C1:'var(--color-accent-600)', C2:'var(--color-accent-500)', C3:'var(--color-accent-400)', C4:'var(--color-accent-300)'};
+const JERSEY = {gc:'#f5d33f', points:'#3e9b4f', mountains:'var(--color-accent)', youth:'var(--color-neutral-100)'};
+const CLASS_KEYS = ['gc','points','mountains','youth'];
+
+/* ---------- FINAL RESULTS ----------
+   The race finished Sun 9 Aug 2026. GC top 10, stage winners (all 9, exact
+   match across two independent sources) and youth top 5 are well corrobo-
+   rated; points/mountains classifications beyond the top 5 varied between
+   sources, so only the corroborated top 5 is shown there (see top5Note).
+   Sources: procyclinguk.com/tour-de-france-femmes-2026-results, idlprocycling.com
+   standings recap, cross-checked against en.wikipedia.org/wiki/2026_Tour_de_France_Femmes. */
+const RESULTS = {
+  gc: [
+    {pos:1, name:'Demi Vollering', team:'FDJ United–Suez', val:'30:54:51'},
+    {pos:2, name:'Kasia Niewiadoma-Phinney', team:'Canyon//SRAM', val:'+1:18'},
+    {pos:3, name:'Elisa Longo Borghini', team:'UAE Team L’Imad', val:'+4:29'},
+    {pos:4, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'+5:10'},
+    {pos:5, name:'Paula Blasi', team:'UAE Team L’Imad', val:'+6:13'},
+    {pos:6, name:'Cédrine Kerbaol', team:'EF Education–Oatly', val:'+6:41'},
+    {pos:7, name:'Dominika Włodarczyk', team:'UAE Team L’Imad', val:'+7:53'},
+    {pos:8, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+9:12'},
+    {pos:9, name:'Kim Le Court-Pienaar', team:'AG Insurance–Soudal', val:'+14:04'},
+    {pos:10, name:'Niamh Fisher-Black', team:'Lidl–Trek', val:'+15:14'},
+  ],
+  points: [
+    {pos:1, name:'Lorena Wiebes', team:'Team SD Worx–Protime', val:'181'},
+    {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'132'},
+    {pos:3, name:'Lotte Kopecky', team:'Team SD Worx–Protime', val:'120'},
+    {pos:4, name:'Kim Le Court-Pienaar', team:'AG Insurance–Soudal', val:'107'},
+    {pos:5, name:'Noemi Rüegg', team:'EF Education–Oatly', val:'94'},
+  ],
+  mountains: [
+    {pos:1, name:'Puck Pieterse', team:'Fenix–Premier Tech', val:'55'},
+    {pos:2, name:'Demi Vollering', team:'FDJ United–Suez', val:'30'},
+    {pos:3, name:'Kasia Niewiadoma-Phinney', team:'Canyon//SRAM', val:'28'},
+    {pos:4, name:'Nikola Nosková', team:'Cofidis', val:'21'},
+    {pos:5, name:'Maëva Squiban', team:'UAE Team L’Imad', val:'19'},
+  ],
+  youth: [
+    {pos:1, name:'Antonia Niedermaier', team:'Canyon//SRAM', val:'31:00:01'},
+    {pos:2, name:'Paula Blasi', team:'UAE Team L’Imad', val:'+1:03'},
+    {pos:3, name:'Isabella Holmgren', team:'Lidl–Trek', val:'+4:02'},
+    {pos:4, name:'Nienke Vinke', team:'Team SD Worx–Protime', val:'+17:46'},
+    {pos:5, name:'Célia Gery', team:'FDJ United–Suez', val:'+38:58'},
+  ],
+  stageWinners: [
+    {n:1, winner:'Lorena Wiebes', team:'Team SD Worx–Protime'},
+    {n:2, winner:'Lorena Wiebes', team:'Team SD Worx–Protime'},
+    {n:3, winner:'Sigrid Ytterhus Haugset', team:'Uno-X Mobility'},
+    {n:4, winner:'Marlen Reusser', team:'Movistar Team'},
+    {n:5, winner:'Demi Vollering', team:'FDJ United–Suez'},
+    {n:6, winner:'Kim Le Court-Pienaar', team:'AG Insurance–Soudal'},
+    {n:7, winner:'Kasia Niewiadoma-Phinney', team:'Canyon//SRAM'},
+    {n:8, winner:'Demi Vollering', team:'FDJ United–Suez'},
+    {n:9, winner:'Demi Vollering', team:'FDJ United–Suez'},
+  ],
+};
 
 /* ---------- STAGE DATA ----------
    Start/finish/distance/type/dates: letourfemmes.fr official stage pages,
@@ -944,6 +1060,56 @@ function renderTopStats(){
     <div class="statcell"><span class="label">${t('statRestDays')}</span><span class="value">${t('statRestDaysVal')}</span></div>
     <div class="statcell"><span class="label">${t('statMountainFinish')}</span><span class="value">${t('statMountainFinishVal')}</span></div>`;
 }
+
+/* ---------- RANKINGS TAB ---------- */
+function resultRowHTML(r){
+  return `
+    <tr class="${r.pos<=3?'podium':''}">
+      <td class="pos">${r.pos}</td>
+      <td class="rider"><span class="rname">${esc(r.name)}</span><span class="rteam">${esc(r.team)}</span></td>
+      <td class="val">${esc(r.val)}</td>
+    </tr>`;
+}
+function renderResults(){
+  const grid=document.getElementById('resultsGrid');
+  const cls=t('classifications');
+  grid.innerHTML = CLASS_KEYS.map(key=>{
+    const rows=RESULTS[key]||[];
+    const info=cls[key];
+    const note=(key==='points'||key==='mountains') ? `<p class="cls-note">${t('top5Note')}</p>` : '';
+    return `
+      <div class="cls-card">
+        <div class="cls-head">
+          <span class="swatch" style="background:${JERSEY[key]}"></span>
+          <span class="names">
+            <span class="name">${esc(info.name)}</span>
+            <span class="fr">${esc(info.fr)}</span>
+          </span>
+        </div>
+        <div class="cls-body">
+          <table class="results">
+            <thead><tr><th></th><th style="text-align:left">${t('colRider')}</th><th style="text-align:right">${esc(info.valHead)}</th></tr></thead>
+            <tbody>${rows.map(resultRowHTML).join('')}</tbody>
+          </table>
+        </div>
+        ${note}
+      </div>`;
+  }).join('');
+
+  const winTable=document.getElementById('stageWinnersTable');
+  winTable.innerHTML = `
+    <thead><tr>
+      <td class="n">${t('colStage')}</td>
+      <td class="winner">${t('colWinner')}</td>
+      <td class="wteam">${t('colWTeam')}</td>
+    </tr></thead>
+    <tbody>${RESULTS.stageWinners.map(w=>`
+      <tr>
+        <td class="n">${w.n}</td>
+        <td class="winner">${esc(w.winner)}</td>
+        <td class="wteam">${esc(w.team)}</td>
+      </tr>`).join('')}</tbody>`;
+}
 function applyStaticText(){
   document.getElementById('backLinkText').textContent=t('backToTours');
   document.getElementById('eyebrow').textContent=t('eyebrow');
@@ -952,12 +1118,11 @@ function applyStaticText(){
   document.getElementById('tabResults').textContent=t('tabResults');
   document.getElementById('tabTeams').textContent=t('tabTeams');
   document.getElementById('stageListHeader').textContent=t('stageListHeader');
-  document.getElementById('comingSoonTag').textContent=t('comingSoonTag');
   document.getElementById('comingSoonTag2').textContent=t('comingSoonTag');
-  document.getElementById('resultsComingTitle').textContent=t('resultsComingTitle');
-  document.getElementById('resultsComingBody').textContent=t('resultsComingBody');
   document.getElementById('teamsComingTitle').textContent=t('teamsComingTitle');
   document.getElementById('teamsComingBody').textContent=t('teamsComingBody');
+  document.getElementById('resultsStatusLine').textContent=t('resultsStatus');
+  document.getElementById('stageWinnersTitle').textContent=t('stageWinnersTitle');
   document.getElementById('disclaimerLabel').textContent=t('disclaimerLabel');
   document.getElementById('disclaimerText').textContent=t('disclaimer');
   document.getElementById('sourcesTitle').textContent=t('sourcesTitle');
@@ -976,6 +1141,7 @@ function renderAll(){
   renderTopStats();
   renderStageList();
   renderPanel(stages[activeIdx]);
+  renderResults();
   updateLangButtons();
   document.documentElement.lang=lang;
   syncStageListHeight();
