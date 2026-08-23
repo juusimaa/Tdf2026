@@ -392,9 +392,9 @@ const STRINGS = {
     startNote: 'TV-lähetyksen arvioitu alkamisaika (HBO Max / TNT Sports / Eurosport), muunnettu omaan aikavyöhykkeeseesi — perustuu CEST-aikatauluun, joka voi vielä muuttua kisan lähestyessä.',
     legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendSprint: 'Kirisprintti',
     wxHeader: 'Sää etapilla', wxAtStart: 'Lähdössä', wxAtFinish: 'Maalissa',
-    wxTemp: 'Lämpötila', wxFeels: 'Tuntuu kuin', wxWind: 'Tuuli', wxPrecip: 'Sateen mahdollisuus', wxRain: 'Sademäärä', wxHumidity: 'Ilmankosteus', wxAlt: 'Korkeus merenpinnasta',
+    wxTemp: 'Lämpötila', wxFeels: 'Tuntuu kuin', wxLow: 'Alin', wxWind: 'Tuuli', wxRain: 'Sademäärä', wxHumidity: 'Ilmankosteus', wxAlt: 'Korkeus merenpinnasta',
     wxDelta: 'Muutos lähdöstä maaliin',
-    wxNote: 'Havainnollistava kilpailupäivän sää lähtöajan ja maaliintuloajan hetkellä (paikallista aikaa). Korvaa arvot sääarkiston datalla ennen julkaisua.',
+    wxNote: 'Etapin lähtö- ja maalipaikkakunnan toteutunut sää kilpailupäivänä (Open-Meteon sääarkisto).',
     wxNoData: 'Säätietoja ei saatavilla tälle etapille.',
     wxConds: {clear:'Selkeää', sunny:'Aurinkoista', partly:'Puolipilvistä', cloudy:'Pilvistä', overcast:'Täysin pilvistä', showers:'Sadekuuroja', rain:'Vesisadetta', storm:'Ukkoskuuroja', mist:'Sumua'},
     wxDirs: {N:'pohjoisesta', NE:'koillisesta', E:'idästä', SE:'kaakosta', S:'etelästä', SW:'lounaasta', W:'lännestä', NW:'luoteesta'},
@@ -483,9 +483,9 @@ const STRINGS = {
     startNote: 'Estimated TV coverage start time (HBO Max / TNT Sports / Eurosport), converted to your own time zone — based on the published CEST schedule, which may still shift closer to the stage.',
     legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendSprint: 'Intermediate sprint',
     wxHeader: 'Race-day weather', wxAtStart: 'At the start', wxAtFinish: 'At the finish',
-    wxTemp: 'Temperature', wxFeels: 'Feels like', wxWind: 'Wind', wxPrecip: 'Chance of rain', wxRain: 'Rainfall', wxHumidity: 'Humidity', wxAlt: 'Altitude',
+    wxTemp: 'Temperature', wxFeels: 'Feels like', wxLow: 'Low', wxWind: 'Wind', wxRain: 'Rainfall', wxHumidity: 'Humidity', wxAlt: 'Altitude',
     wxDelta: 'Change, start to finish',
-    wxNote: 'Illustrative race-day weather at the start time and at the finish time (local time). Replace the values with archive weather data before publishing.',
+    wxNote: 'Actual weather recorded at the stage’s start and finish location on race day (Open-Meteo historical archive).',
     wxNoData: 'No weather data for this stage.',
     wxConds: {clear:'Clear', sunny:'Sunny', partly:'Partly cloudy', cloudy:'Cloudy', overcast:'Overcast', showers:'Showers', rain:'Rain', storm:'Thunderstorms', mist:'Mist'},
     wxDirs: {N:'from the north', NE:'from the north-east', E:'from the east', SE:'from the south-east', S:'from the south', SW:'from the south-west', W:'from the west', NW:'from the north-west'},
@@ -574,9 +574,9 @@ const STRINGS = {
     startNote: 'Heure estimée de début de la diffusion TV (HBO Max / TNT Sports / Eurosport), convertie dans votre propre fuseau horaire — d’après la grille CEST, susceptible d’évoluer à l’approche de l’étape.',
     legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendSprint: 'Sprint intermédiaire',
     wxHeader: 'Météo du jour', wxAtStart: 'Au départ', wxAtFinish: 'À l’arrivée',
-    wxTemp: 'Température', wxFeels: 'Ressenti', wxWind: 'Vent', wxPrecip: 'Risque de pluie', wxRain: 'Précipitations', wxHumidity: 'Humidité', wxAlt: 'Altitude',
+    wxTemp: 'Température', wxFeels: 'Ressenti', wxLow: 'Min', wxWind: 'Vent', wxRain: 'Précipitations', wxHumidity: 'Humidité', wxAlt: 'Altitude',
     wxDelta: 'Écart départ / arrivée',
-    wxNote: 'Météo illustrative du jour de course à l’heure du départ et à l’heure de l’arrivée (heure locale). Remplacez les valeurs par des données d’archives météo avant publication.',
+    wxNote: 'Météo réelle relevée aux lieux de départ et d’arrivée de l’étape le jour de la course (archives historiques Open-Meteo).',
     wxNoData: 'Aucune donnée météo pour cette étape.',
     wxConds: {clear:'Ciel dégagé', sunny:'Ensoleillé', partly:'Partiellement nuageux', cloudy:'Nuageux', overcast:'Couvert', showers:'Averses', rain:'Pluie', storm:'Orages', mist:'Brume'},
     wxDirs: {N:'de nord', NE:'de nord-est', E:'d’est', SE:'de sud-est', S:'de sud', SW:'de sud-ouest', W:'d’ouest', NW:'de nord-ouest'},
@@ -1294,10 +1294,11 @@ function selectStage(idx){
 }
 
 /* ---------- WEATHER ----------
-   Illustrative race-day weather loaded from data/<TOUR>-weather.json (see
-   design_handoff_tdf2026 — the values are placeholders and should be
-   replaced with archive weather data keyed on stage town + timestamp
-   before publishing). Missing file/stage leaves the "no data" note. */
+   Actual race-day weather loaded from data/tdf2026-weather.json, fetched by
+   scripts/fetch_weather.py (Open-Meteo's historical archive): the stage's
+   start/finish-town daily high/low, not a specific-time reading, since that
+   is what a historical archive actually gives you. Missing file/stage
+   leaves the "no data" note. */
 let WEATHER = null;
 
 function wxFor(n){
@@ -1307,9 +1308,9 @@ function wxFor(n){
 function wxCellHTML(d, kicker){
   const conds = t('wxConds'), dirs = t('wxDirs');
   const rows = [
+    {label: t('wxLow'), value: `${d.low}°`},
     {label: t('wxWind'), value: `${d.wind} km/h ${dirs[d.dir] || d.dir}`},
-    {label: t('wxPrecip'), value: `${d.precip} %`},
-    {label: t('wxRain'), value: d.rain ? `${d.rain.toLocaleString(localeTag())} mm` : '—'},
+    {label: t('wxRain'), value: d.precip ? `${d.precip.toLocaleString(localeTag())} mm` : '—'},
     {label: t('wxHumidity'), value: `${d.humidity} %`}
   ];
   if(d.alt) rows.push({label: t('wxAlt'), value: fmtGain(d.alt)});
@@ -1317,7 +1318,7 @@ function wxCellHTML(d, kicker){
     <div class="wxcell">
       <div class="wxhead">
         <span class="wxkicker">${kicker}</span>
-        <span class="wxplace">${d.town} · ${d.time}</span>
+        <span class="wxplace">${d.town}</span>
       </div>
       <div class="wxtempline">
         <span class="wxtemp">${d.temp}°</span>

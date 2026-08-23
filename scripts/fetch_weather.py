@@ -69,7 +69,54 @@ VUELTA_STAGES = [
     {"n": 21, "date": "2026-09-13", "start": "Granada",                 "finish": "Granada"},
 ]
 
+# Mirrored from the `stages` array in tdf2026.html (rest days, n:'lepo', are
+# left out — they carry no start/finish weather). "summit" marks the same
+# mountain-top finishes the illustrative placeholder data used to give a
+# finish altitude (Les Angles, Gavarnie-Gèdre, Le Lioran, Le Markstein,
+# Plateau de Solaison, Orcières-Merlette, both Alpe d'Huez finishes).
+TDF_STAGES = [
+    {"n": 1,  "date": "2026-07-04", "start": "Barcelona",      "finish": "Barcelona"},
+    {"n": 2,  "date": "2026-07-05", "start": "Tarragona",      "finish": "Barcelona"},
+    {"n": 3,  "date": "2026-07-06", "start": "Granollers",     "finish": "Les Angles",           "summit": True},
+    {"n": 4,  "date": "2026-07-07", "start": "Carcassonne",    "finish": "Foix"},
+    {"n": 5,  "date": "2026-07-08", "start": "Lannemezan",     "finish": "Pau"},
+    {"n": 6,  "date": "2026-07-09", "start": "Pau",            "finish": "Gavarnie-Gèdre",        "summit": True},
+    {"n": 7,  "date": "2026-07-10", "start": "Hagetmau",       "finish": "Bordeaux"},
+    {"n": 8,  "date": "2026-07-11", "start": "Périgueux",      "finish": "Bergerac"},
+    {"n": 9,  "date": "2026-07-12", "start": "Malemort",       "finish": "Ussel"},
+    {"n": 10, "date": "2026-07-14", "start": "Aurillac",       "finish": "Le Lioran",             "summit": True},
+    {"n": 11, "date": "2026-07-15", "start": "Vichy",          "finish": "Nevers"},
+    {"n": 12, "date": "2026-07-16", "start": "Magny-Cours",    "finish": "Chalon-sur-Saône"},
+    {"n": 13, "date": "2026-07-17", "start": "Dole",           "finish": "Belfort"},
+    {"n": 14, "date": "2026-07-18", "start": "Mulhouse",       "finish": "Le Markstein",          "summit": True},
+    {"n": 15, "date": "2026-07-19", "start": "Champagnole",    "finish": "Plateau de Solaison",   "summit": True},
+    {"n": 16, "date": "2026-07-21", "start": "Evian-les-Bains","finish": "Thonon-les-Bains"},
+    {"n": 17, "date": "2026-07-22", "start": "Chambéry",       "finish": "Voiron"},
+    {"n": 18, "date": "2026-07-23", "start": "Voiron",         "finish": "Orcières-Merlette",     "summit": True},
+    {"n": 19, "date": "2026-07-24", "start": "Gap",            "finish": "Alpe d’Huez",           "summit": True},
+    {"n": 20, "date": "2026-07-25", "start": "Bourg d’Oisans", "finish": "Alpe d’Huez",           "summit": True},
+    {"n": 21, "date": "2026-07-26", "start": "Thoiry",         "finish": "Paris"},
+]
+
+# data/tdf2026-routes.json has no GPX-derived points for stages 3, 4 and 5
+# (route data wasn't available for those when the file was built — see
+# tdf2026.html's own STAGE_COORDS, which exists for exactly the same reason,
+# as a straight-line fallback for its route map). Mirrored here, in
+# [lon, lat] as in that table, and converted to [lat, lon] in point_for.
+TDF_COORDS_FALLBACK = {
+    3: [[2.29, 41.61], [2.07, 42.57]],
+    4: [[2.35, 43.21], [1.61, 42.96]],
+    5: [[0.38, 43.13], [-0.37, 43.30]],
+}
+
 TOURS = {
+    "tdf2026": {
+        "stages": TDF_STAGES,
+        "routes": "tdf2026-routes.json",
+        "out": "tdf2026-weather.json",
+        "tz": "Europe/Paris",
+        "coords_fallback": TDF_COORDS_FALLBACK,
+    },
     "vuelta2026": {
         "stages": VUELTA_STAGES,
         "routes": "vuelta2026-routes.json",
@@ -113,7 +160,7 @@ def load_routes(tour):
     return data.get("stages", {})
 
 
-def fetch_daily(lat, lon, date):
+def fetch_daily(lat, lon, date, tz):
     resp = requests.get(
         ARCHIVE_URL,
         params={
@@ -122,7 +169,7 @@ def fetch_daily(lat, lon, date):
             "start_date": date,
             "end_date": date,
             "daily": DAILY_FIELDS,
-            "timezone": "Europe/Madrid",
+            "timezone": tz,
         },
         headers=HEADERS,
         timeout=20,
@@ -146,12 +193,15 @@ def fetch_daily(lat, lon, date):
     }
 
 
-def point_for(place, routes, n):
+def point_for(place, routes, n, coords_fallback=None):
     """[lat, lon] for a stage's start (first route point) or finish (last)."""
     pts = routes.get(str(n))
-    if not pts:
-        return None
-    return pts[0] if place == "start" else pts[-1]
+    if pts:
+        return pts[0] if place == "start" else pts[-1]
+    if coords_fallback and n in coords_fallback:
+        lon, lat = coords_fallback[n][0 if place == "start" else 1]
+        return [lat, lon]
+    return None
 
 
 def fetch_tour(tour):
@@ -178,12 +228,12 @@ def fetch_tour(tour):
 
         entry = {}
         for place, town in (("start", st["start"]), ("finish", st["finish"])):
-            pt = point_for(place, routes, st["n"])
+            pt = point_for(place, routes, st["n"], cfg.get("coords_fallback"))
             if not pt:
                 print(f"  stage {st['n']} {place}: no route point, skipping")
                 continue
             try:
-                vals = fetch_daily(pt[0], pt[1], st["date"])
+                vals = fetch_daily(pt[0], pt[1], st["date"], cfg["tz"])
             except requests.RequestException as e:
                 print(f"  stage {st['n']} {place}: fetch failed ({e})")
                 continue

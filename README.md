@@ -14,6 +14,7 @@ data/tdf2026-results.json             # Tour de France results — auto-updated
 data/tdf2026-riders.json              # Tour de France start list: teams, riders, final GC
 data/giro2026-results.json            # Giro d'Italia final results — static
 data/giro2026-riders.json             # Giro d'Italia start list: teams, riders, final GC
+data/tdf2026-weather.json             # Tour de France actual race-day weather (all 21 stages, race is over)
 data/vuelta2026-weather.json          # Vuelta actual race-day weather, raced stages only — auto-updated
 scripts/fetch_results.py              # results fetch script (scrapes letour.fr / lavuelta.es)
 scripts/fetch_riders.py               # start-list fetch script (letour.fr + giroditalia.it)
@@ -101,25 +102,28 @@ python scripts/fetch_riders.py tdf2026 giro2026     # specific tours
 
 ### Weather
 
-`vuelta2026.html` shows a "Race-day weather" block per stage — actual
-recorded conditions (not a forecast) at the stage's start and finish
-location, sourced from Open-Meteo's free historical archive
-(`archive-api.open-meteo.com`, no API key). It only ever shows a stage once
-that stage's race day has fully passed, both in what gets fetched and in
-what the page renders — a stage still being raced never shows a same-day,
-not-yet-final reading.
+`tdf2026.html` and `vuelta2026.html` each show a "Race-day weather" block per
+stage — actual recorded conditions (not a forecast), a daily high/low/feels
+at the stage's start and finish location, sourced from Open-Meteo's free
+historical archive (`archive-api.open-meteo.com`, no API key). A stage only
+ever shows once its race day has fully passed, both in what gets fetched and
+in what the page renders — a stage still being raced never shows a same-day,
+not-yet-final reading. The Tour de France is over, so `tdf2026.html` always
+shows all 21 stages; `vuelta2026.html` fills in day by day as the race is run.
 
 `scripts/fetch_weather.py` is part of the same scheduled workflow as
 `fetch_results.py` (see "How it works" above): every run, it checks each
 registered tour's stage schedule against today's date (in the race's own
 time zone), fetches any newly-finished stage's weather at its start/finish
-coordinates (the first/last point of `data/<tour>-routes.json`), and writes
-`data/<tour>-weather.json`. A stage already in that file is never
-re-fetched — a past day's weather doesn't change — so most runs do nothing
-and the workflow commits `data/*-weather.json` alongside results only when
-something new was actually fetched. Only `vuelta2026` is registered today;
-add a tour to the `TOURS` dict in `fetch_weather.py`, with its stage
-schedule and time zone, to cover another race.
+coordinates (the first/last point of `data/<tour>-routes.json`, or a small
+hardcoded `coords_fallback` for the handful of Tour stages that routes file
+has no GPX points for), and writes `data/<tour>-weather.json`. A stage
+already in that file is never re-fetched — a past day's weather doesn't
+change — so most runs do nothing, and the workflow commits
+`data/*-weather.json` alongside results only when something new was
+actually fetched. Both `tdf2026` and `vuelta2026` are registered; add
+another tour to the `TOURS` dict in `fetch_weather.py`, with its stage
+schedule and time zone, to cover it too.
 
 ## Why letour.fr and not procyclingstats.com
 
