@@ -110,6 +110,37 @@
   .factcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
   .factcell .value{font-family:var(--font-heading);font-weight:700;font-size:18px;}
 
+  /* ---------- weather ---------- */
+  .wxrow{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--space-4);padding:var(--space-3) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);}
+  .wxrow .label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxdelta{display:flex;align-items:baseline;gap:10px;}
+  .wxdelta .value{font-family:var(--font-heading);font-weight:700;font-size:16px;color:var(--color-accent-700);}
+  .wxdelta .unit{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxgrid{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--color-divider);}
+  .wxgrid > *:first-child{border-right:2px solid var(--color-divider);}
+  @media (max-width:760px){
+    .wxgrid{grid-template-columns:1fr;}
+    .wxgrid > *:first-child{border-right:0;border-bottom:2px solid var(--color-divider);}
+  }
+  .wxcell{padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;min-width:0;}
+  .wxhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;}
+  .wxkicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);}
+  .wxplace{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxtempline{display:flex;align-items:flex-end;gap:var(--space-4);flex-wrap:wrap;}
+  .wxtemp{font-family:var(--font-heading);font-weight:700;font-size:clamp(52px,7vw,84px);line-height:.82;letter-spacing:-.04em;}
+  .wxcondwrap{display:flex;flex-direction:column;gap:4px;padding-bottom:6px;}
+  .wxcond{font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;}
+  .wxfeels{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--color-neutral-600);}
+  .wxrows{display:flex;flex-direction:column;margin-top:4px;}
+  .wxrowitem{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-4);padding:7px 0;border-bottom:1px solid var(--color-divider);}
+  .wxrowitem .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxrowitem .value{font-size:14px;font-weight:600;text-align:right;}
+  .wxnote{margin:0;padding:var(--space-3) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);font-size:11px;line-height:1.6;color:var(--color-neutral-600);}
+  .wxnote span{display:block;max-width:100ch;}
+  .wxnodata{margin:0;padding:var(--space-4) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);font-size:14px;color:var(--color-neutral-600);}
+  .btn-wx{margin-left:auto;flex:0 0 auto;font-family:var(--font-heading);font-weight:700;font-size:12px;letter-spacing:.04em;white-space:nowrap;color:var(--color-neutral-600);}
+  .stage-btn.active .btn-wx{color:var(--color-bg);}
+
   /* ---------- map + profile ---------- */
   #bigmapbox{border-bottom:2px solid var(--color-divider);padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;}
   .maprow{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);width:100%;}
@@ -320,6 +351,7 @@ const LANG_KEY = 'tdf2026-lang';
 const ROUTES_URL = 'data/vuelta2026-routes.json';
 const RIDERS_URL = 'data/vuelta2026-riders.json';
 const RESULTS_URL = 'data/vuelta2026-results.json';
+const WEATHER_URL = 'data/vuelta2026-weather.json';
 
 const STRINGS = {
   fi: {
@@ -333,6 +365,13 @@ const STRINGS = {
     restDay: 'Lepopäivä',
     stagePrefix: 'Etappi',
     factDistance: 'Matka', factType: 'Tyyppi', factGain: 'Nousumetrit', factClimbs: 'Nousuja',
+    wxHeader: 'Sää etapilla', wxAtStart: 'Lähdössä', wxAtFinish: 'Maalissa',
+    wxFeels: 'Tuntuu kuin', wxLow: 'Alin', wxWind: 'Tuuli', wxRain: 'Sademäärä', wxHumidity: 'Ilmankosteus', wxAlt: 'Korkeus merenpinnasta',
+    wxDelta: 'Muutos lähdöstä maaliin',
+    wxNote: 'Etapin lähtö- ja maalipaikkakunnan toteutunut sää kilpailupäivänä (Open-Meteon sääarkisto). Näytetään sen jälkeen, kun etappi on ajettu.',
+    wxNoData: 'Etapin säätietoja ei ole vielä saatavilla.',
+    wxConds: {clear:'Selkeää', sunny:'Aurinkoista', partly:'Puolipilvistä', cloudy:'Pilvistä', overcast:'Täysin pilvistä', showers:'Sadekuuroja', rain:'Vesisadetta', storm:'Ukkoskuuroja', mist:'Sumua', snow:'Lumisadetta'},
+    wxDirs: {N:'pohjoisesta', NE:'koillisesta', E:'idästä', SE:'kaakosta', S:'etelästä', SW:'lounaasta', W:'lännestä', NW:'luoteesta'},
     descHeader: 'Etapin kuvaus', climbsHeader: 'Nousut (GPM)',
     climbHead: ['Nousu', 'Lk.', 'Pituus', 'Kaltevuus', 'Kohta'],
     noClimbs: 'Ei tunnettuja luokiteltuja nousuja.',
@@ -410,6 +449,13 @@ const STRINGS = {
     restDay: 'Rest day',
     stagePrefix: 'Stage',
     factDistance: 'Distance', factType: 'Type', factGain: 'Elevation gain', factClimbs: 'Climbs',
+    wxHeader: 'Race-day weather', wxAtStart: 'At the start', wxAtFinish: 'At the finish',
+    wxFeels: 'Feels like', wxLow: 'Low', wxWind: 'Wind', wxRain: 'Rainfall', wxHumidity: 'Humidity', wxAlt: 'Altitude',
+    wxDelta: 'Change, start to finish',
+    wxNote: 'Actual weather recorded at the stage’s start and finish location on race day (Open-Meteo historical archive). Shown once a stage has been raced.',
+    wxNoData: 'No weather data for this stage yet.',
+    wxConds: {clear:'Clear', sunny:'Sunny', partly:'Partly cloudy', cloudy:'Cloudy', overcast:'Overcast', showers:'Showers', rain:'Rain', storm:'Thunderstorms', mist:'Mist', snow:'Snow'},
+    wxDirs: {N:'from the north', NE:'from the north-east', E:'from the east', SE:'from the south-east', S:'from the south', SW:'from the south-west', W:'from the west', NW:'from the north-west'},
     descHeader: 'Stage description', climbsHeader: 'Climbs (KOM)',
     climbHead: ['Climb', 'Cat', 'Length', 'Gradient', 'At'],
     noClimbs: 'No known categorized climbs.',
@@ -487,6 +533,13 @@ const STRINGS = {
     restDay: 'Jour de repos',
     stagePrefix: 'Étape',
     factDistance: 'Distance', factType: 'Type', factGain: 'Dénivelé', factClimbs: 'Ascensions',
+    wxHeader: 'Météo du jour', wxAtStart: 'Au départ', wxAtFinish: 'À l’arrivée',
+    wxFeels: 'Ressenti', wxLow: 'Min', wxWind: 'Vent', wxRain: 'Précipitations', wxHumidity: 'Humidité', wxAlt: 'Altitude',
+    wxDelta: 'Écart départ / arrivée',
+    wxNote: 'Météo réelle relevée aux lieux de départ et d’arrivée de l’étape le jour de la course (archives historiques Open-Meteo). Affichée une fois l’étape courue.',
+    wxNoData: 'Aucune donnée météo pour cette étape pour le moment.',
+    wxConds: {clear:'Ciel dégagé', sunny:'Ensoleillé', partly:'Partiellement nuageux', cloudy:'Nuageux', overcast:'Couvert', showers:'Averses', rain:'Pluie', storm:'Orages', mist:'Brume', snow:'Neige'},
+    wxDirs: {N:'de nord', NE:'de nord-est', E:'d’est', SE:'de sud-est', S:'de sud', SW:'de sud-ouest', W:'d’ouest', NW:'de nord-ouest'},
     descHeader: 'Description de l’étape', climbsHeader: 'Ascensions (GPM)',
     climbHead: ['Ascension', 'Cat.', 'Longueur', 'Pente', 'Au'],
     noClimbs: 'Aucune ascension classée connue.',
@@ -627,6 +680,12 @@ const stages = [
 ];
 
 /* ---------- FORMAT HELPERS ---------- */
+/* YYYY-MM-DD for the visitor's local date, comparable against stage.date
+   strings. Shared by todayStageIndex() and the weather gate (stageHasEnded). */
+function todayKey(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
 function localeTag(){ return lang==='fi' ? 'fi-FI' : lang==='fr' ? 'fr-FR' : 'en-GB'; }
 function fmtKm(k){ const s=(Math.round(k*10)/10).toString(); return (lang==='en'?s:s.replace('.',','))+' km'; }
 function fmtGain(m){ return m.toLocaleString(localeTag())+' m'; }
@@ -892,12 +951,14 @@ function renderStageList(){
     const btn=document.createElement('button');
     btn.className='stage-btn'+(idx===activeIdx?' active':'');
     btn.dataset.idx=idx;
+    const listWx = stageHasEnded(s) ? wxFor(s.n) : null;
     btn.innerHTML=`
       <span class="num">${String(s.n).padStart(2,'0')}</span>
       <span class="btn-text">
         <span class="btn-route">${esc(s.start)} → ${esc(s.finish)}</span>
         <span class="btn-meta">${fmtDate(s.date)} · ${fmtKm(s.km)} · ${t('typeLabels')[s.type]}</span>
-      </span>`;
+      </span>
+      <span class="btn-wx">${listWx ? `${listWx.start.temp}° → ${listWx.finish.temp}°` : ''}</span>`;
     btn.addEventListener('click',()=>selectStage(idx));
     li.appendChild(btn); listEl.appendChild(li);
   });
@@ -923,6 +984,75 @@ function selectStage(idx){
 }
 
 function catChip(cat){ return cat ? esc(String(cat)) : '—'; }
+
+/* ---------- WEATHER ----------
+   Actual race-day weather loaded from data/vuelta2026-weather.json, fetched
+   by scripts/fetch_weather.py (Open-Meteo's historical archive) on the same
+   schedule as results. Only stages whose race day has already passed are
+   ever written there, but the page re-checks the date itself too, so a
+   stage in progress never shows a partial/estimated reading. */
+let WEATHER = null;
+
+function stageHasEnded(st){
+  return st.n !== 'rest' && st.date < todayKey();
+}
+
+function wxFor(n){
+  return (WEATHER && WEATHER.stages && WEATHER.stages[String(n)]) || null;
+}
+
+function wxCellHTML(d, kicker){
+  const conds = t('wxConds'), dirs = t('wxDirs');
+  const rows = [
+    {label: t('wxLow'), value: `${d.low}°`},
+    {label: t('wxWind'), value: `${d.wind} km/h ${dirs[d.dir] || d.dir}`},
+    {label: t('wxRain'), value: d.precip ? `${d.precip.toLocaleString(localeTag())} mm` : '—'},
+    {label: t('wxHumidity'), value: `${d.humidity} %`}
+  ];
+  if(d.alt) rows.push({label: t('wxAlt'), value: fmtGain(d.alt)});
+  return `
+    <div class="wxcell">
+      <div class="wxhead">
+        <span class="wxkicker">${kicker}</span>
+        <span class="wxplace">${esc(d.town)}</span>
+      </div>
+      <div class="wxtempline">
+        <span class="wxtemp">${d.temp}°</span>
+        <div class="wxcondwrap">
+          <span class="wxcond">${conds[d.cond] || d.cond}</span>
+          <span class="wxfeels">${t('wxFeels')} ${d.feels}°</span>
+        </div>
+      </div>
+      <div class="wxrows">
+        ${rows.map(r=>`<div class="wxrowitem"><span class="label">${r.label}</span><span class="value">${r.value}</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function wxSectionHTML(st){
+  if(!stageHasEnded(st)) return '';
+  const w = wxFor(st.n);
+  let deltaHTML = '';
+  if(w){
+    const diff = w.finish.temp - w.start.temp;
+    const sign = diff > 0 ? '+' : diff < 0 ? '−' : '±';
+    deltaHTML = `
+      <span class="wxdelta">
+        <span class="value">${sign}${Math.abs(diff)} °C</span>
+        <span class="unit">${t('wxDelta')}</span>
+      </span>`;
+  }
+  return `
+    <div class="wxrow">
+      <span class="label">${t('wxHeader')}</span>
+      ${deltaHTML}
+    </div>
+    ${w
+      ? `<div class="wxgrid">${wxCellHTML(w.start, t('wxAtStart'))}${wxCellHTML(w.finish, t('wxAtFinish'))}</div>
+         <p class="wxnote"><span>${t('wxNote')}</span></p>`
+      : `<p class="wxnodata">${t('wxNoData')}</p>`}
+  `;
+}
 
 /* ---------- RENDER MAIN PANEL ---------- */
 function renderPanel(st){
@@ -957,6 +1087,8 @@ function renderPanel(st){
       <div class="factcell"><span class="label">${t('factGain')}</span><span class="value">${st.gain?fmtGain(st.gain):'—'}</span></div>
       <div class="factcell"><span class="label">${t('factClimbs')}</span><span class="value">${climbs.length}</span></div>
     </div>
+
+    ${wxSectionHTML(st)}
 
     ${mapExpanded ? bigMapBoxHTML(st) : ''}
 
@@ -1356,6 +1488,22 @@ async function loadRiders(){
   }
 }
 
+/* Actual race-day weather (see the WEATHER block above). Missing
+   file/stage leaves the panel showing nothing (future stage) or
+   t('wxNoData') (ended stage not yet fetched). */
+async function loadWeather(){
+  try{
+    const resp = await fetch(WEATHER_URL, {cache:'no-store'});
+    if(!resp.ok) throw new Error('not found');
+    const data = await resp.json();
+    if(data && data.stages) WEATHER = data;
+    renderStageList();
+    renderPanel(stages[activeIdx]);
+  }catch(e){
+    /* No weather data available yet. */
+  }
+}
+
 /* ---------- STATIC TEXT + INIT ---------- */
 function renderTopStats(){
   document.getElementById('topstats').innerHTML = `
@@ -1446,8 +1594,7 @@ tabButtons.forEach((tab, i)=>{
    1. Rest days keep showing the last raced stage; before/after the race
    this resolves to the first/last stage. */
 function todayStageIndex(){
-  const d = new Date();
-  const key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const key = todayKey();
   let idx = 0;
   for(let i=0;i<stages.length;i++){
     if(stages[i].n==='rest') continue;
@@ -1462,6 +1609,7 @@ activeIdx = todayStageIndex();
 renderAll();
 loadResults();
 loadRiders();
+loadWeather();
 </script>
 <script data-goatcounter="https://grandtours.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

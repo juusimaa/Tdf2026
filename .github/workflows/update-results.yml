@@ -61,7 +61,8 @@ jobs:
         # letour.fr's result pages are scraped directly with requests +
         # selectolax (procyclingstats.com blocked GitHub Actions with
         # Cloudflare bot detection; letour.fr is not behind the same
-        # protection).
+        # protection). fetch_weather.py only needs requests (Open-Meteo is
+        # plain JSON, no HTML to parse).
         run: pip install requests selectolax
 
       # If the fetch crashes (e.g. the site structure changes), publishing
@@ -72,21 +73,30 @@ jobs:
         run: python scripts/fetch_results.py
         continue-on-error: true
 
-      # Persist results into the repo (persistence + history). A commit made
-      # by GITHUB_TOKEN does NOT trigger the workflow again -> no loop.
+      # Fetches actual race-day weather for any newly-finished stage
+      # (data/<tour>-weather.json). Only stages whose race day has fully
+      # passed are fetched — see the script's own docstring — and an
+      # already-fetched stage is never re-fetched, so most runs do nothing.
+      - name: Fetch weather
+        run: python scripts/fetch_weather.py
+        continue-on-error: true
+
+      # Persist results and weather into the repo (persistence + history).
+      # A commit made by GITHUB_TOKEN does NOT trigger the workflow again ->
+      # no loop.
       - name: Commit if changed
         run: |
           git config user.name "tdf-bot"
           git config user.email "actions@users.noreply.github.com"
-          if ! ls data/*-results.json >/dev/null 2>&1; then
-            echo "No results available yet, nothing to commit."
+          if ! ls data/*-results.json data/*-weather.json >/dev/null 2>&1; then
+            echo "No results or weather available yet, nothing to commit."
             exit 0
           fi
-          git add data/*-results.json
+          git add data/*-results.json data/*-weather.json
           if git diff --cached --quiet; then
             echo "No changes."
           else
-            git commit -m "Results updated $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "Results & weather updated $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
 

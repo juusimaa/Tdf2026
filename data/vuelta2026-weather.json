@@ -1,0 +1,37 @@
+{
+ "note": "Actual weather recorded at the stage's start and finish location on race day, from Open-Meteo's historical archive. Only stages that have already been raced are included.",
+ "source": "archive-api.open-meteo.com",
+ "units": {
+  "temp": "°C",
+  "wind": "km/h",
+  "rain": "mm",
+  "humidity": "%"
+ },
+ "updated": "2026-08-23T16:38:41+03:00",
+ "stages": {
+  "1": {
+   "start": {
+    "temp": 28,
+    "low": 18,
+    "feels": 30,
+    "cond": "showers",
+    "wind": 13,
+    "dir": "NE",
+    "precip": 0.3,
+    "humidity": 64,
+    "town": "Monaco"
+   },
+   "finish": {
+    "temp": 28,
+    "low": 18,
+    "feels": 31,
+    "cond": "showers",
+    "wind": 13,
+    "dir": "NE",
+    "precip": 0.3,
+    "humidity": 64,
+    "town": "Monaco"
+   }
+  }
+ }
+}
