@@ -389,7 +389,7 @@ const STRINGS = {
     summitNote: name => `Maalinousu: ${name}.`,
     typeLabels: {flat:'Tasainen', hilly:'Kumpuileva', mountain:'Vuoristo', itt:'Yksilöaika-ajo'},
     typeDesc: {flat:'Tasainen etappi', hilly:'Kumpuileva etappi', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
-    legCat: 'Lk.', legUncat: 'Luokittelematon', legSprint: 'Välisprintti', atKm: 'km',
+    legHC: 'HC-nousu', legCat: 'Lk.', legUncat: 'Luokittelematon', legSprint: 'Välisprintti', atKm: 'km',
     statDistance: 'Kokonaismatka', statDistanceVal: '≈ 3 302 km',
     statGain: 'Nousumetrit yhteensä', statGainVal: '≈ 58 000 m',
     statStages: 'Etappeja', statStagesVal: '21',
@@ -475,7 +475,7 @@ const STRINGS = {
     summitNote: name => `Summit finish at ${name}.`,
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
     typeDesc: {flat:'Flat stage', hilly:'Hilly stage', mountain:'Mountain stage', itt:'Individual time trial'},
-    legCat: 'Cat', legUncat: 'Uncategorized', legSprint: 'Intermediate sprint', atKm: 'km',
+    legHC: 'HC climb', legCat: 'Cat', legUncat: 'Uncategorized', legSprint: 'Intermediate sprint', atKm: 'km',
     statDistance: 'Total distance', statDistanceVal: '≈ 3,302 km',
     statGain: 'Total elevation gain', statGainVal: '≈ 58,000 m',
     statStages: 'Stages', statStagesVal: '21',
@@ -561,7 +561,7 @@ const STRINGS = {
     summitNote: name => `Arrivée au sommet à ${name}.`,
     typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
     typeDesc: {flat:'Étape de plaine', hilly:'Étape vallonnée', mountain:'Étape de montagne', itt:'Contre-la-montre individuel'},
-    legCat: 'Cat.', legUncat: 'Non catégorisée', legSprint: 'Sprint intermédiaire', atKm: 'km',
+    legHC: 'Côte HC', legCat: 'Cat.', legUncat: 'Non catégorisée', legSprint: 'Sprint intermédiaire', atKm: 'km',
     statDistance: 'Distance totale', statDistanceVal: '≈ 3 302 km',
     statGain: 'Dénivelé total', statGainVal: '≈ 58 000 m',
     statStages: 'Étapes', statStagesVal: '21',
@@ -635,7 +635,7 @@ function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRING
    where a source published it. Profiles are illustrative — see the disclaimer. */
 /* Climb category colours follow the Modernist single-accent system (shared
    with tdf2026.html / giro2026.html): numbered by severity, hardest first. */
-const CAT_COLOR = {1:'var(--color-accent-600)', 2:'var(--color-accent-500)', 3:'var(--color-accent-400)', 4:'var(--color-accent-300)'};
+const CAT_COLOR = {HC:'var(--color-accent-900)', 1:'var(--color-accent-600)', 2:'var(--color-accent-500)', 3:'var(--color-accent-400)', 4:'var(--color-accent-300)'};
 const UNCAT_COLOR = 'var(--color-neutral-400)';
 /* Sprint markers use the points-classification green (JERSEY.points below)
    rather than the accent-red climb colours, so the two marker kinds stay
@@ -651,43 +651,43 @@ const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 const stages = [
   {n:1,  date:'2026-08-22', start:'Monaco', finish:'Monaco', km:9.6, type:'itt', gain:170, climbs:[], sprints:[]},
   {n:2,  date:'2026-08-23', start:'Monaco', finish:'Manosque', km:215.2, type:'hilly', gain:3000,
-   climbs:[{name:'Alto Châteauneuf-Grasse',km:60,len:11.5,grad:3.0},{name:'Col de Saint-Andrieu',km:130,len:4.3,grad:5.2}], sprints:[]},
-  {n:3,  date:'2026-08-24', start:'Gruissan', finish:'Font-Romeu', km:166.7, type:'mountain', gain:2600, summit:'Font-Romeu',
-   climbs:[{name:'Col de Mont-Louis',km:131,len:19.1,grad:5.0},{name:'Font-Romeu',km:166.7,len:9.8,grad:4.9}], sprints:[]},
+   climbs:[{name:'Alto Châteauneuf-Grasse',km:60,len:11.5,grad:3.0,cat:3},{name:'Col de Saint-Andrieu',km:130,len:4.3,grad:5.2,cat:3}], sprints:[{name:'Gréoux-les-Bains',km:167.1}]},
+  {n:3,  date:'2026-08-24', start:'Gruissan', finish:'Font-Romeu', km:174, type:'mountain', gain:2600, summit:'Font-Romeu',
+   climbs:[{name:'Col de Mont-Louis',km:157.8,len:19.1,grad:5.0,cat:1},{name:'Font-Romeu',km:174,len:9.8,grad:4.9,cat:2}], sprints:[{name:'Villefranche-de-Conflent',km:129}]},
   {n:4,  date:'2026-08-25', start:'Andorra la Vella', finish:'Andorra la Vella', km:104.9, type:'mountain',
-   climbs:[{name:"Port d'Envalira",km:25,len:25,grad:5.0},{name:'Collada de Beixalís',km:51,len:6.7,grad:8.5},{name:"Col d'Ordino",km:75,len:9.8,grad:7.1},{name:'Alto de la Comella',km:100,len:4.2,grad:8.1}], sprints:[]},
+   climbs:[{name:"Port d'Envalira",km:25,len:25,grad:5.0,cat:1},{name:'Collada de Beixalís',km:51,len:6.7,grad:8.5,cat:1},{name:"Col d'Ordino",km:75,len:9.8,grad:7.1,cat:1},{name:'Alto de la Comella',km:100,len:4.2,grad:8.1,cat:3}], sprints:[{name:'Ordino',km:68.5}]},
   {n:5,  date:'2026-08-26', start:'Falset', finish:'Roquetes', km:171.1, type:'flat', gain:1700,
-   climbs:[{name:'Alto de Pauls',km:147,len:3.5,grad:7.2}], sprints:[]},
+   climbs:[{name:'Alto de Pauls',km:147,len:3.5,grad:7.2,cat:3}], sprints:[{name:'Tivenys',km:112.4}]},
   {n:6,  date:'2026-08-27', start:'Alcossebre', finish:'Castellón', km:176.8, type:'hilly', gain:3000,
-   climbs:[{name:'Puerto de la Serratella',km:40,len:16.6,grad:4.4},{name:'Col de la Bandereta',km:80,len:4.5,grad:6.9},{name:'Alto del Desierto de las Palmas',km:120,len:7.2,grad:5.2},{name:'Puerto de Bartolo',km:146,len:9.1,grad:7.2}], sprints:[]},
+   climbs:[{name:'Puerto de la Serratella',km:40,len:16.6,grad:4.4,cat:2},{name:'Col de la Bandereta',km:80,len:4.5,grad:6.9,cat:3},{name:'Alto del Desierto de las Palmas',km:120,len:7.2,grad:5.2,cat:2},{name:'Puerto de Bartolo',km:146,len:9.1,grad:7.2,cat:1}], sprints:[{km:119.5}]},
   {n:7,  date:'2026-08-28', start:"Vall d'Alba", finish:'Aramón Valdelinares', km:149.9, type:'mountain', gain:3500, summit:'Aramón Valdelinares',
-   climbs:[{name:'Puerto de Remolcador',km:80,len:12,grad:4.4},{name:'Alto de Zucaina',km:95,len:5.3,grad:4.8},{name:'Alto Fuente de Rubielos',km:110,len:6.1,grad:6.1},{name:'Puerto de San Rafael',km:140,len:9.5,grad:4.4},{name:'Aramón Valdelinares',km:149.9,len:8.3,grad:6.5}], sprints:[]},
-  {n:8,  date:'2026-08-29', start:'Puçol', finish:'Xeraco', km:167.4, type:'flat', gain:1300,
-   climbs:[{name:'Puerto de Barx',km:154,len:4.2,grad:3.8}], sprints:[]},
+   climbs:[{name:'Puerto de Remolcador',km:80,len:12,grad:4.4,cat:2},{name:'Alto de Zucaina',km:95,len:5.3,grad:4.8,cat:3},{name:'Alto Fuente de Rubielos',km:110,len:6.1,grad:6.1,cat:3},{name:'Puerto de San Rafael',km:140,len:9.5,grad:4.4,cat:2},{name:'Aramón Valdelinares',km:149.9,len:8.3,grad:6.5,cat:1}], sprints:[{km:123.4}]},
+  {n:8,  date:'2026-08-29', start:'Puçol', finish:'Xeraco', km:171, type:'flat', gain:1300,
+   climbs:[{name:'Puerto de Barx',km:143.6,len:4.2,grad:3.8,cat:3}], sprints:[{name:'Simat de la Valldigna',km:137.4}]},
   {n:9,  date:'2026-08-30', start:'La Vila Joiosa', finish:'Alto de Aitana', km:187.5, type:'mountain', gain:5000, summit:'Alto de Aitana',
-   climbs:[{name:'Puerto de Tàrbena',km:56,len:6.7,grad:5.4},{name:'Coll de Rates',km:62,len:1.5,grad:6.2},{name:'Puerto El Miserat',km:82,len:5.1,grad:10.1},{name:'Port de Tollos',km:95,len:4,grad:5.7},{name:'Port de Tudons',km:126,len:11.7,grad:4.0},{name:'Port de Benifallim',km:141,len:4.8,grad:5.9},{name:'Alto de Aitana',km:187.5,len:21.2,grad:5.9}], sprints:[]},
+   climbs:[{name:'Puerto de Tàrbena',km:56,len:6.7,grad:5.4,cat:2},{name:'Coll de Rates',km:62,len:1.5,grad:6.2},{name:'Puerto El Miserat',km:82,len:5.1,grad:10.1,cat:1},{name:'Port de Tollos',km:95,len:4,grad:5.7,cat:3},{name:'Port de Tudons',km:126,len:11.7,grad:4.0,cat:2},{name:'Port de Benifallim',km:141,len:4.8,grad:5.9,cat:2},{name:'Alto de Aitana',km:187.5,len:21.2,grad:5.9,cat:1}], sprints:[{name:'Benifallim',km:134.7}]},
   {n:'rest', date:'2026-08-31'},
   {n:10, date:'2026-09-01', start:'Alcaraz', finish:'Elche de la Sierra', km:184.5, type:'hilly',
-   climbs:[{name:'Puerto de las Cruces',km:15,len:3.2,grad:5.0},{name:'Puerto de Peralejo',km:35,len:4.9,grad:4.5},{name:'Puerto de Socovos',km:165,len:9.8,grad:3.5}], sprints:[]},
-  {n:11, date:'2026-09-02', start:'Cartagena', finish:'Lorca', km:156.1, type:'flat', gain:1400,
-   climbs:[{name:'Alto de Morrón de Totana',km:113,len:8.8,grad:4.3}], sprints:[]},
+   climbs:[{name:'Puerto de las Cruces',km:15,len:3.2,grad:5.0},{name:'Puerto de Peralejo',km:47.6,len:4.9,grad:4.5,cat:3},{name:'Puerto de Aýna',km:86.3,cat:3},{name:'Puerto de Socovos',km:163.3,len:9.8,grad:3.5,cat:3}], sprints:[{name:'Hellín',km:124.8}]},
+  {n:11, date:'2026-09-02', start:'Cartagena', finish:'Lorca', km:151.3, type:'flat', gain:1400,
+   climbs:[{name:'Alto de Aledo',km:121.8,len:8.8,grad:4.3,cat:3}], sprints:[{name:'Totana',km:111.9}]},
   {n:12, date:'2026-09-03', start:'Vera', finish:'Calar Alto', km:166.5, type:'mountain', summit:'Calar Alto',
-   climbs:[{name:'Puerto Los Barrancos'},{name:'Alto Cóbdar'},{name:'Collado García'},{name:'Alto de Velefique',km:122,len:13.2,grad:7.3},{name:'Calar Alto',km:166.5,len:15.5,grad:6.0}], sprints:[]},
+   climbs:[{name:'Alto del Cabecico',km:16,cat:3},{name:'Alto de Cóbdar',km:57.5,cat:3},{name:'Collado García',km:86.4,cat:2},{name:'Alto de Velefique',km:135.4,len:13.2,grad:7.3,cat:1},{name:'Calar Alto',km:166.5,len:15.5,grad:6.0,cat:1}], sprints:[{name:'Vélefique',km:123.7}]},
   {n:13, date:'2026-09-04', start:'Almuñécar', finish:'Loja', km:193.2, type:'hilly',
-   climbs:[{name:'Puerto Los Guájares',km:28,len:14.5,grad:5.3},{name:'Puerto Las Albuñuelas',km:40,len:2.4,grad:9.2},{name:'Alto del Legionario',km:84},{name:'Puerto de Granada',km:156,len:11.7,grad:4.2}], sprints:[]},
+   climbs:[{name:'Alto de la Venta de la Cebada',km:31.2,cat:1},{name:'Alto del Legionario',km:83.4,cat:2},{name:'Puerto de Granada',km:155.4,len:11.7,grad:4.2,cat:2}], sprints:[{name:'Tocón',km:145.4}]},
   {n:14, date:'2026-09-05', start:'Jaén', finish:'Sierra de la Pandera', km:152.7, type:'mountain', summit:'Sierra de la Pandera',
-   climbs:[{name:'Puerto de los Villares',km:80,len:10.4,grad:5.5},{name:'Puerto de Locubín',km:112,len:8.8,grad:5.0},{name:'Sierra de la Pandera',km:152.7,len:8.4,grad:7.8}], sprints:[]},
-  {n:15, date:'2026-09-06', start:'Palma del Río', finish:'Córdoba', km:181.2, type:'hilly', gain:2800,
-   climbs:[{name:'Puerto de Mojón Blanco',km:35},{name:'Alto de Villaviciosa de Córdoba',km:121},{name:'Puerto del Artafi',km:151,len:5.9,grad:5.7}], sprints:[]},
+   climbs:[{name:'Puerto de los Villares',km:92.8,len:10.4,grad:5.5,cat:2},{name:'Puerto de Locubín',km:133.2,len:8.8,grad:5.0,cat:2},{name:'Sierra de la Pandera',km:152.7,len:8.4,grad:7.8,cat:1}], sprints:[{name:'Castillo de Locubín',km:123.6}]},
+  {n:15, date:'2026-09-06', start:'Palma del Río', finish:'Córdoba', km:189.7, type:'hilly', gain:2800,
+   climbs:[{name:'Puerto de la Forestal',km:34.5,cat:3},{name:'Alto de Villaviciosa de Córdoba',km:121.5,cat:3},{name:'Puerto del Artafi',km:153.1,len:5.9,grad:5.7,cat:3}], sprints:[{km:158.4}]},
   {n:'rest', date:'2026-09-07'},
-  {n:16, date:'2026-09-08', start:'Cortegana', finish:'La Rábida', km:186.0, type:'flat', climbs:[], sprints:[]},
-  {n:17, date:'2026-09-09', start:'Dos Hermanas', finish:'Sevilla', km:189.2, type:'flat', gain:900, climbs:[], sprints:[]},
+  {n:16, date:'2026-09-08', start:'Cortegana', finish:'La Rábida', km:181.1, type:'flat', climbs:[], sprints:[{name:'Villarrasa',km:114.5}]},
+  {n:17, date:'2026-09-09', start:'Dos Hermanas', finish:'Sevilla', km:185, type:'flat', gain:900, climbs:[], sprints:[{name:'San José de la Rinconada',km:165}]},
   {n:18, date:'2026-09-10', start:'El Puerto de Santa María', finish:'Jerez de la Frontera', km:32.5, type:'itt', gain:169, climbs:[], sprints:[]},
   {n:19, date:'2026-09-11', start:'Vélez-Málaga', finish:'Peñas Blancas', km:205.1, type:'mountain', summit:'Peñas Blancas',
-   climbs:[{name:'Puerto de Las Abejas',km:75,len:14.4,grad:4.3},{name:'Puerto de los Empedrados',km:89,len:7.1,grad:5.8},{name:'Puerto Cerro Mojón',km:120,len:15},{name:'Peñas Blancas',km:205.1,len:19,grad:6.7}], sprints:[]},
-  {n:20, date:'2026-09-12', start:'La Calahorra', finish:'Collada de Alguacil', km:206.7, type:'mountain', gain:5000, summit:'Collada de Alguacil',
-   climbs:[{name:'Puerto de Blancares',km:43,len:9.3,grad:3.4},{name:'Alto de Hazallanas',km:95,len:7.1,grad:9.5},{name:'Alto de El Purche',km:130,len:8.9,grad:7.5},{name:'Alto de Hazallanas',km:160,len:7.1,grad:9.5},{name:'Collada de Alguacil',km:206.7,len:16.7,grad:6.7}], sprints:[]},
-  {n:21, date:'2026-09-13', start:'Granada', finish:'Granada', km:99.4, type:'hilly', climbs:[], sprints:[]},
+   climbs:[{name:'Puerto de Las Abejas',km:91,len:14.4,grad:4.3,cat:2},{name:'Puerto del Viento',km:111.3,cat:2},{name:'Peñas Blancas',km:205.1,len:19,grad:6.7,cat:1}], sprints:[{name:'Estepona',km:181.2}]},
+  {n:20, date:'2026-09-12', start:'La Calahorra', finish:'Collado del Alguacil', km:186.8, type:'mountain', gain:5000, summit:'Collado del Alguacil',
+   climbs:[{name:'Puerto de Los Blancares',km:50.7,len:9.3,grad:3.4,cat:3},{name:'Puerto de El Purche',km:94.3,cat:1},{name:'Puerto de El Purche',km:125.5,len:8.9,grad:7.5,cat:1},{name:'Puerto de El Duque',km:155.4,cat:1},{name:'Collado del Alguacil',km:186.8,len:16.7,grad:6.7,cat:'HC'}], sprints:[{name:'Güéjar Sierra',km:144}]},
+  {n:21, date:'2026-09-13', start:'Granada', finish:'Granada', km:112, type:'hilly', climbs:[], sprints:[{name:'Paseo del Salón',km:92.4}]},
 ];
 
 /* ---------- FORMAT HELPERS ---------- */
@@ -1098,8 +1098,8 @@ function renderPanel(st){
   if(sprints.length){
     sprintRows=sprints.map((s,i)=>`
       <tr>
-        <td>${t('sprintChip')}${sprints.length>1?' '+(i+1):''}</td>
-        <td class="num">~ ${t('atKm')} ${Math.round(s.km)}</td>
+        <td>${s.name?esc(s.name):t('sprintChip')+(sprints.length>1?' '+(i+1):'')}</td>
+        <td class="num">${t('atKm')} ${Math.round(s.km)}</td>
       </tr>`).join('');
   }
 
@@ -1130,6 +1130,7 @@ function renderPanel(st){
         <span class="label">${profileLabel()}</span>
         ${renderProfile(st)}
         <div class="legend">
+          <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR.HC}"></span>${t('legHC')}</span>
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[1]}"></span>${t('legCat')} 1</span>
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[2]}"></span>2</span>
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[3]}"></span>3</span>
