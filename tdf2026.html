@@ -119,6 +119,37 @@
   .factcell .value{font-family:var(--font-heading);font-weight:700;font-size:18px;}
   .startnote{padding:10px clamp(20px,3vw,40px) 0;font-size:11px;line-height:1.5;color:var(--color-neutral-600);}
 
+  /* ---------- weather ---------- */
+  .wxrow{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--space-4);padding:var(--space-3) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);}
+  .wxrow .label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxdelta{display:flex;align-items:baseline;gap:10px;}
+  .wxdelta .value{font-family:var(--font-heading);font-weight:700;font-size:16px;color:var(--color-accent-700);}
+  .wxdelta .unit{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxgrid{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--color-divider);}
+  .wxgrid > *:first-child{border-right:2px solid var(--color-divider);}
+  @media (max-width:760px){
+    .wxgrid{grid-template-columns:1fr;}
+    .wxgrid > *:first-child{border-right:0;border-bottom:2px solid var(--color-divider);}
+  }
+  .wxcell{padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;min-width:0;}
+  .wxhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;}
+  .wxkicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);}
+  .wxplace{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxtempline{display:flex;align-items:flex-end;gap:var(--space-4);flex-wrap:wrap;}
+  .wxtemp{font-family:var(--font-heading);font-weight:700;font-size:clamp(52px,7vw,84px);line-height:.82;letter-spacing:-.04em;}
+  .wxcondwrap{display:flex;flex-direction:column;gap:4px;padding-bottom:6px;}
+  .wxcond{font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;}
+  .wxfeels{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--color-neutral-600);}
+  .wxrows{display:flex;flex-direction:column;margin-top:4px;}
+  .wxrowitem{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-4);padding:7px 0;border-bottom:1px solid var(--color-divider);}
+  .wxrowitem .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .wxrowitem .value{font-size:14px;font-weight:600;text-align:right;}
+  .wxnote{margin:0;padding:var(--space-3) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);font-size:11px;line-height:1.6;color:var(--color-neutral-600);}
+  .wxnote span{display:block;max-width:100ch;}
+  .wxnodata{margin:0;padding:var(--space-4) clamp(20px,3vw,40px);border-bottom:2px solid var(--color-divider);font-size:14px;color:var(--color-neutral-600);}
+  .btn-wx{margin-left:auto;flex:0 0 auto;font-family:var(--font-heading);font-weight:700;font-size:12px;letter-spacing:.04em;white-space:nowrap;color:var(--color-neutral-600);}
+  .stage-btn.active .btn-wx{color:var(--color-bg);}
+
   /* ---------- map + profile ---------- */
   #bigmapbox{border-bottom:2px solid var(--color-divider);padding:var(--space-4) clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:12px;}
   .maprow{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);width:100%;}
@@ -333,6 +364,7 @@ const TOUR = 'tdf2026';
 const RESULTS_URL = `data/${TOUR}-results.json`;
 const ROUTES_URL = `data/${TOUR}-routes.json`;
 const RIDERS_URL = `data/${TOUR}-riders.json`;
+const WEATHER_URL = `data/${TOUR}-weather.json`;
 const LANG_KEY = 'tdf2026-lang';
 const STRINGS = {
   fi: {
@@ -359,6 +391,13 @@ const STRINGS = {
     factDistance: 'Matka', factGain: 'Nousumetrit', factClimbs: 'Mäkipisteitä', factSprints: 'Kirisprinttejä', factStart: 'Lähetys alkaa',
     startNote: 'TV-lähetyksen arvioitu alkamisaika (HBO Max / TNT Sports / Eurosport), muunnettu omaan aikavyöhykkeeseesi — perustuu CEST-aikatauluun, joka voi vielä muuttua kisan lähestyessä.',
     legendHC: 'HC-nousu', legendC1: '1. luokka', legendC2: '2. luokka', legendC3: '3. luokka', legendSprint: 'Kirisprintti',
+    wxHeader: 'Sää etapilla', wxAtStart: 'Lähdössä', wxAtFinish: 'Maalissa',
+    wxTemp: 'Lämpötila', wxFeels: 'Tuntuu kuin', wxWind: 'Tuuli', wxPrecip: 'Sateen mahdollisuus', wxRain: 'Sademäärä', wxHumidity: 'Ilmankosteus', wxAlt: 'Korkeus merenpinnasta',
+    wxDelta: 'Muutos lähdöstä maaliin',
+    wxNote: 'Havainnollistava kilpailupäivän sää lähtöajan ja maaliintuloajan hetkellä (paikallista aikaa). Korvaa arvot sääarkiston datalla ennen julkaisua.',
+    wxNoData: 'Säätietoja ei saatavilla tälle etapille.',
+    wxConds: {clear:'Selkeää', sunny:'Aurinkoista', partly:'Puolipilvistä', cloudy:'Pilvistä', overcast:'Täysin pilvistä', showers:'Sadekuuroja', rain:'Vesisadetta', storm:'Ukkoskuuroja', mist:'Sumua'},
+    wxDirs: {N:'pohjoisesta', NE:'koillisesta', E:'idästä', SE:'kaakosta', S:'etelästä', SW:'lounaasta', W:'lännestä', NW:'luoteesta'},
     chartCaption: 'Havainnollistava profiili — ei GPS-mitattua korkeusdataa. X-akseli km, Y-akseli suhteellinen korkeus.',
     descHeader: 'Etapin kuvaus', climbsHeader: 'Mäkipisteet (KOM)', sprintsHeader: 'Kirisprintit',
     climbTableHead: ['Nousu','Lk','Pituus','Kalt.','Sijainti'],
@@ -443,6 +482,13 @@ const STRINGS = {
     factDistance: 'Distance', factGain: 'Elevation gain', factClimbs: 'Climb points', factSprints: 'Intermediate sprints', factStart: 'Coverage starts',
     startNote: 'Estimated TV coverage start time (HBO Max / TNT Sports / Eurosport), converted to your own time zone — based on the published CEST schedule, which may still shift closer to the stage.',
     legendHC: 'HC climb', legendC1: 'Category 1', legendC2: 'Category 2', legendC3: 'Category 3', legendSprint: 'Intermediate sprint',
+    wxHeader: 'Race-day weather', wxAtStart: 'At the start', wxAtFinish: 'At the finish',
+    wxTemp: 'Temperature', wxFeels: 'Feels like', wxWind: 'Wind', wxPrecip: 'Chance of rain', wxRain: 'Rainfall', wxHumidity: 'Humidity', wxAlt: 'Altitude',
+    wxDelta: 'Change, start to finish',
+    wxNote: 'Illustrative race-day weather at the start time and at the finish time (local time). Replace the values with archive weather data before publishing.',
+    wxNoData: 'No weather data for this stage.',
+    wxConds: {clear:'Clear', sunny:'Sunny', partly:'Partly cloudy', cloudy:'Cloudy', overcast:'Overcast', showers:'Showers', rain:'Rain', storm:'Thunderstorms', mist:'Mist'},
+    wxDirs: {N:'from the north', NE:'from the north-east', E:'from the east', SE:'from the south-east', S:'from the south', SW:'from the south-west', W:'from the west', NW:'from the north-west'},
     chartCaption: 'Illustrative profile — not GPS-measured elevation data. X-axis: km, Y-axis: relative elevation.',
     descHeader: 'Stage description', climbsHeader: 'Climb points (KOM)', sprintsHeader: 'Intermediate sprints',
     climbTableHead: ['Climb','Cat.','Length','Grad.','Location'],
@@ -527,6 +573,13 @@ const STRINGS = {
     factDistance: 'Distance', factGain: 'Dénivelé', factClimbs: 'Points de côte', factSprints: 'Sprints intermédiaires', factStart: 'Début de diffusion',
     startNote: 'Heure estimée de début de la diffusion TV (HBO Max / TNT Sports / Eurosport), convertie dans votre propre fuseau horaire — d’après la grille CEST, susceptible d’évoluer à l’approche de l’étape.',
     legendHC: 'Côte HC', legendC1: '1re catégorie', legendC2: '2e catégorie', legendC3: '3e catégorie', legendSprint: 'Sprint intermédiaire',
+    wxHeader: 'Météo du jour', wxAtStart: 'Au départ', wxAtFinish: 'À l’arrivée',
+    wxTemp: 'Température', wxFeels: 'Ressenti', wxWind: 'Vent', wxPrecip: 'Risque de pluie', wxRain: 'Précipitations', wxHumidity: 'Humidité', wxAlt: 'Altitude',
+    wxDelta: 'Écart départ / arrivée',
+    wxNote: 'Météo illustrative du jour de course à l’heure du départ et à l’heure de l’arrivée (heure locale). Remplacez les valeurs par des données d’archives météo avant publication.',
+    wxNoData: 'Aucune donnée météo pour cette étape.',
+    wxConds: {clear:'Ciel dégagé', sunny:'Ensoleillé', partly:'Partiellement nuageux', cloudy:'Nuageux', overcast:'Couvert', showers:'Averses', rain:'Pluie', storm:'Orages', mist:'Brume'},
+    wxDirs: {N:'de nord', NE:'de nord-est', E:'d’est', SE:'de sud-est', S:'de sud', SW:'de sud-ouest', W:'d’ouest', NW:'de nord-ouest'},
     chartCaption: 'Profil illustratif — pas de données d’altitude mesurées par GPS. Axe X : km, axe Y : altitude relative.',
     descHeader: 'Description de l’étape', climbsHeader: 'Points de côte (KOM)', sprintsHeader: 'Sprints intermédiaires',
     climbTableHead: ['Côte','Cat.','Longueur','Pente','Emplacement'],
@@ -1199,12 +1252,14 @@ function renderStageList(){
     btn.className='stage-btn';
     btn.dataset.idx = idx;
     if(idx===activeIdx) btn.classList.add('active');
+    const listWx = wxFor(s.n);
     btn.innerHTML = `
       <span class="num">${String(s.n).padStart(2,'0')}</span>
       <span class="btn-text">
         <span class="btn-route">${s.start} → ${s.finish}</span>
         <span class="btn-meta">${fmtDate(s.dateIso)} · ${fmtKm(s.km)} · ${t('typeLabels')[s.type]}</span>
-      </span>`;
+      </span>
+      <span class="btn-wx">${listWx ? `${listWx.start.temp}° → ${listWx.finish.temp}°` : ''}</span>`;
     btn.addEventListener('click', ()=>selectStage(idx));
     li.appendChild(btn);
     listEl.appendChild(li);
@@ -1236,6 +1291,69 @@ function selectStage(idx){
   if(activeBtn) activeBtn.scrollIntoView({block:'nearest'});
   renderPanel(stages[idx]);
   syncStageListHeight();
+}
+
+/* ---------- WEATHER ----------
+   Illustrative race-day weather loaded from data/<TOUR>-weather.json (see
+   design_handoff_tdf2026 — the values are placeholders and should be
+   replaced with archive weather data keyed on stage town + timestamp
+   before publishing). Missing file/stage leaves the "no data" note. */
+let WEATHER = null;
+
+function wxFor(n){
+  return (WEATHER && WEATHER.stages && WEATHER.stages[String(n)]) || null;
+}
+
+function wxCellHTML(d, kicker){
+  const conds = t('wxConds'), dirs = t('wxDirs');
+  const rows = [
+    {label: t('wxWind'), value: `${d.wind} km/h ${dirs[d.dir] || d.dir}`},
+    {label: t('wxPrecip'), value: `${d.precip} %`},
+    {label: t('wxRain'), value: d.rain ? `${d.rain.toLocaleString(localeTag())} mm` : '—'},
+    {label: t('wxHumidity'), value: `${d.humidity} %`}
+  ];
+  if(d.alt) rows.push({label: t('wxAlt'), value: fmtGain(d.alt)});
+  return `
+    <div class="wxcell">
+      <div class="wxhead">
+        <span class="wxkicker">${kicker}</span>
+        <span class="wxplace">${d.town} · ${d.time}</span>
+      </div>
+      <div class="wxtempline">
+        <span class="wxtemp">${d.temp}°</span>
+        <div class="wxcondwrap">
+          <span class="wxcond">${conds[d.cond] || d.cond}</span>
+          <span class="wxfeels">${t('wxFeels')} ${d.feels}°</span>
+        </div>
+      </div>
+      <div class="wxrows">
+        ${rows.map(r=>`<div class="wxrowitem"><span class="label">${r.label}</span><span class="value">${r.value}</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function wxSectionHTML(stage){
+  const w = wxFor(stage.n);
+  let deltaHTML = '';
+  if(w){
+    const diff = w.finish.temp - w.start.temp;
+    const sign = diff > 0 ? '+' : diff < 0 ? '−' : '±';
+    deltaHTML = `
+      <span class="wxdelta">
+        <span class="value">${sign}${Math.abs(diff)} °C</span>
+        <span class="unit">${t('wxDelta')}</span>
+      </span>`;
+  }
+  return `
+    <div class="wxrow">
+      <span class="label">${t('wxHeader')}</span>
+      ${deltaHTML}
+    </div>
+    ${w
+      ? `<div class="wxgrid">${wxCellHTML(w.start, t('wxAtStart'))}${wxCellHTML(w.finish, t('wxAtFinish'))}</div>
+         <p class="wxnote"><span>${t('wxNote')}</span></p>`
+      : `<p class="wxnodata">${t('wxNoData')}</p>`}
+  `;
 }
 
 /* ---------- RENDER MAIN PANEL ---------- */
@@ -1286,6 +1404,8 @@ function renderPanel(stage){
       <div class="factcell"><span class="label">${t('factSprints')}</span><span class="value">${(stage.sprints||[]).length}</span></div>
     </div>
     ${startLocal ? `<div class="startnote">${t('startNote')}</div>` : ''}
+
+    ${wxSectionHTML(stage)}
 
     ${mapExpanded ? bigMapBoxHTML(stage) : ''}
 
@@ -1816,6 +1936,21 @@ async function loadRiders(){
     /* No start list available — the view keeps showing t('teamsEmpty'). */
   }
 }
+
+/* Illustrative race-day weather (see the WEATHER block above). Missing
+   file/stage leaves the "no data" note in the panel. */
+async function loadWeather(){
+  try{
+    const resp = await fetch(WEATHER_URL, {cache:'no-store'});
+    if(!resp.ok) throw new Error('not found');
+    const data = await resp.json();
+    if(data && data.stages) WEATHER = data;
+    renderStageList();
+    renderPanel(stages[activeIdx]);
+  }catch(e){
+    /* No weather data available — the panel keeps showing t('wxNoData'). */
+  }
+}
 const STAGE_DATES = {
   '2026-07-04':1,'2026-07-05':2,'2026-07-06':3,'2026-07-07':4,'2026-07-08':5,
   '2026-07-09':6,'2026-07-10':7,'2026-07-11':8,'2026-07-12':9,
@@ -1843,6 +1978,7 @@ activeIdx = todayStageIndex();
 renderAll();
 loadResults();
 loadRiders();
+loadWeather();
 </script>
 <script data-goatcounter="https://grandtours.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

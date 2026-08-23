@@ -1,0 +1,578 @@
+{
+ "note": "Illustrative race-day weather at the départ (start time) and at the arrivée (finish time). Replace values with an archive weather API keyed on stage town + timestamp.",
+ "units": {
+  "temp": "°C",
+  "wind": "km/h",
+  "rain": "mm",
+  "precip": "% chance"
+ },
+ "stages": {
+  "1": {
+   "start": {
+    "town": "Barcelona",
+    "time": "16:30",
+    "temp": 30,
+    "feels": 33,
+    "cond": "sunny",
+    "wind": 12,
+    "dir": "SE",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 55
+   },
+   "finish": {
+    "town": "Barcelona",
+    "time": "18:40",
+    "temp": 27,
+    "feels": 28,
+    "cond": "clear",
+    "wind": 15,
+    "dir": "S",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 62,
+    "alt": null
+   }
+  },
+  "2": {
+   "start": {
+    "town": "Tarragona",
+    "time": "13:30",
+    "temp": 31,
+    "feels": 34,
+    "cond": "sunny",
+    "wind": 18,
+    "dir": "SW",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 52
+   },
+   "finish": {
+    "town": "Barcelona",
+    "time": "17:35",
+    "temp": 28,
+    "feels": 30,
+    "cond": "partly",
+    "wind": 22,
+    "dir": "SW",
+    "precip": 10,
+    "rain": 0,
+    "humidity": 64,
+    "alt": null
+   }
+  },
+  "3": {
+   "start": {
+    "town": "Granollers",
+    "time": "11:45",
+    "temp": 28,
+    "feels": 30,
+    "cond": "sunny",
+    "wind": 10,
+    "dir": "S",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 58
+   },
+   "finish": {
+    "town": "Les Angles",
+    "time": "17:20",
+    "temp": 17,
+    "feels": 16,
+    "cond": "showers",
+    "wind": 26,
+    "dir": "W",
+    "precip": 65,
+    "rain": 3.2,
+    "humidity": 84,
+    "alt": 1650
+   }
+  },
+  "4": {
+   "start": {
+    "town": "Carcassonne",
+    "time": "13:00",
+    "temp": 32,
+    "feels": 35,
+    "cond": "sunny",
+    "wind": 14,
+    "dir": "NW",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 44
+   },
+   "finish": {
+    "town": "Foix",
+    "time": "17:25",
+    "temp": 29,
+    "feels": 31,
+    "cond": "partly",
+    "wind": 19,
+    "dir": "NW",
+    "precip": 15,
+    "rain": 0,
+    "humidity": 52,
+    "alt": null
+   }
+  },
+  "5": {
+   "start": {
+    "town": "Lannemezan",
+    "time": "13:30",
+    "temp": 27,
+    "feels": 28,
+    "cond": "partly",
+    "wind": 20,
+    "dir": "W",
+    "precip": 25,
+    "rain": 0,
+    "humidity": 68
+   },
+   "finish": {
+    "town": "Pau",
+    "time": "17:30",
+    "temp": 25,
+    "feels": 26,
+    "cond": "showers",
+    "wind": 24,
+    "dir": "W",
+    "precip": 60,
+    "rain": 2.1,
+    "humidity": 78,
+    "alt": null
+   }
+  },
+  "6": {
+   "start": {
+    "town": "Pau",
+    "time": "12:00",
+    "temp": 24,
+    "feels": 25,
+    "cond": "cloudy",
+    "wind": 16,
+    "dir": "NW",
+    "precip": 40,
+    "rain": 0.4,
+    "humidity": 76
+   },
+   "finish": {
+    "town": "Gavarnie-Gèdre",
+    "time": "17:15",
+    "temp": 16,
+    "feels": 14,
+    "cond": "rain",
+    "wind": 28,
+    "dir": "NW",
+    "precip": 85,
+    "rain": 7.6,
+    "humidity": 92,
+    "alt": 1010
+   }
+  },
+  "7": {
+   "start": {
+    "town": "Hagetmau",
+    "time": "13:00",
+    "temp": 26,
+    "feels": 27,
+    "cond": "partly",
+    "wind": 12,
+    "dir": "N",
+    "precip": 10,
+    "rain": 0,
+    "humidity": 66
+   },
+   "finish": {
+    "town": "Bordeaux",
+    "time": "17:10",
+    "temp": 29,
+    "feels": 31,
+    "cond": "sunny",
+    "wind": 16,
+    "dir": "NE",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 58,
+    "alt": null
+   }
+  },
+  "8": {
+   "start": {
+    "town": "Périgueux",
+    "time": "13:00",
+    "temp": 30,
+    "feels": 33,
+    "cond": "sunny",
+    "wind": 9,
+    "dir": "NE",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 54
+   },
+   "finish": {
+    "town": "Bergerac",
+    "time": "17:20",
+    "temp": 32,
+    "feels": 35,
+    "cond": "sunny",
+    "wind": 13,
+    "dir": "E",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 49,
+    "alt": null
+   }
+  },
+  "9": {
+   "start": {
+    "town": "Malemort",
+    "time": "13:00",
+    "temp": 28,
+    "feels": 31,
+    "cond": "partly",
+    "wind": 15,
+    "dir": "S",
+    "precip": 20,
+    "rain": 0,
+    "humidity": 64
+   },
+   "finish": {
+    "town": "Ussel",
+    "time": "17:30",
+    "temp": 23,
+    "feels": 24,
+    "cond": "storm",
+    "wind": 30,
+    "dir": "SW",
+    "precip": 75,
+    "rain": 9.4,
+    "humidity": 88,
+    "alt": null
+   }
+  },
+  "10": {
+   "start": {
+    "town": "Aurillac",
+    "time": "13:00",
+    "temp": 24,
+    "feels": 25,
+    "cond": "cloudy",
+    "wind": 18,
+    "dir": "W",
+    "precip": 35,
+    "rain": 0.8,
+    "humidity": 79
+   },
+   "finish": {
+    "town": "Le Lioran",
+    "time": "17:05",
+    "temp": 18,
+    "feels": 16,
+    "cond": "mist",
+    "wind": 22,
+    "dir": "W",
+    "precip": 50,
+    "rain": 1.4,
+    "humidity": 94,
+    "alt": 1240
+   }
+  },
+  "11": {
+   "start": {
+    "town": "Vichy",
+    "time": "13:30",
+    "temp": 27,
+    "feels": 28,
+    "cond": "sunny",
+    "wind": 13,
+    "dir": "NE",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 57
+   },
+   "finish": {
+    "town": "Nevers",
+    "time": "17:25",
+    "temp": 28,
+    "feels": 30,
+    "cond": "partly",
+    "wind": 17,
+    "dir": "NE",
+    "precip": 10,
+    "rain": 0,
+    "humidity": 55,
+    "alt": null
+   }
+  },
+  "12": {
+   "start": {
+    "town": "Magny-Cours",
+    "time": "13:00",
+    "temp": 29,
+    "feels": 31,
+    "cond": "sunny",
+    "wind": 11,
+    "dir": "E",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 51
+   },
+   "finish": {
+    "town": "Chalon-sur-Saône",
+    "time": "17:15",
+    "temp": 31,
+    "feels": 34,
+    "cond": "sunny",
+    "wind": 15,
+    "dir": "SE",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 47,
+    "alt": null
+   }
+  },
+  "13": {
+   "start": {
+    "town": "Dole",
+    "time": "12:45",
+    "temp": 30,
+    "feels": 33,
+    "cond": "partly",
+    "wind": 17,
+    "dir": "SW",
+    "precip": 20,
+    "rain": 0,
+    "humidity": 59
+   },
+   "finish": {
+    "town": "Belfort",
+    "time": "17:40",
+    "temp": 26,
+    "feels": 27,
+    "cond": "showers",
+    "wind": 25,
+    "dir": "W",
+    "precip": 55,
+    "rain": 3.8,
+    "humidity": 74,
+    "alt": null
+   }
+  },
+  "14": {
+   "start": {
+    "town": "Mulhouse",
+    "time": "12:45",
+    "temp": 27,
+    "feels": 29,
+    "cond": "cloudy",
+    "wind": 19,
+    "dir": "W",
+    "precip": 45,
+    "rain": 1.2,
+    "humidity": 72
+   },
+   "finish": {
+    "town": "Le Markstein",
+    "time": "17:10",
+    "temp": 19,
+    "feels": 17,
+    "cond": "rain",
+    "wind": 31,
+    "dir": "NW",
+    "precip": 80,
+    "rain": 6.1,
+    "humidity": 90,
+    "alt": 1180
+   }
+  },
+  "15": {
+   "start": {
+    "town": "Champagnole",
+    "time": "12:45",
+    "temp": 25,
+    "feels": 26,
+    "cond": "partly",
+    "wind": 21,
+    "dir": "SW",
+    "precip": 30,
+    "rain": 0.3,
+    "humidity": 70
+   },
+   "finish": {
+    "town": "Plateau de Solaison",
+    "time": "17:35",
+    "temp": 15,
+    "feels": 12,
+    "cond": "storm",
+    "wind": 34,
+    "dir": "SW",
+    "precip": 85,
+    "rain": 11.2,
+    "humidity": 93,
+    "alt": 1500
+   }
+  },
+  "16": {
+   "start": {
+    "town": "Evian-les-Bains",
+    "time": "12:30",
+    "temp": 26,
+    "feels": 27,
+    "cond": "sunny",
+    "wind": 10,
+    "dir": "NE",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 61
+   },
+   "finish": {
+    "town": "Thonon-les-Bains",
+    "time": "16:50",
+    "temp": 28,
+    "feels": 29,
+    "cond": "sunny",
+    "wind": 12,
+    "dir": "N",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 58,
+    "alt": null
+   }
+  },
+  "17": {
+   "start": {
+    "town": "Chambéry",
+    "time": "13:00",
+    "temp": 30,
+    "feels": 32,
+    "cond": "sunny",
+    "wind": 12,
+    "dir": "S",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 50
+   },
+   "finish": {
+    "town": "Voiron",
+    "time": "17:05",
+    "temp": 32,
+    "feels": 35,
+    "cond": "sunny",
+    "wind": 14,
+    "dir": "S",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 45,
+    "alt": null
+   }
+  },
+  "18": {
+   "start": {
+    "town": "Voiron",
+    "time": "12:15",
+    "temp": 31,
+    "feels": 34,
+    "cond": "sunny",
+    "wind": 13,
+    "dir": "S",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 46
+   },
+   "finish": {
+    "town": "Orcières-Merlette",
+    "time": "17:25",
+    "temp": 20,
+    "feels": 19,
+    "cond": "partly",
+    "wind": 23,
+    "dir": "SW",
+    "precip": 20,
+    "rain": 0,
+    "humidity": 63,
+    "alt": 1825
+   }
+  },
+  "19": {
+   "start": {
+    "town": "Gap",
+    "time": "13:30",
+    "temp": 33,
+    "feels": 36,
+    "cond": "sunny",
+    "wind": 15,
+    "dir": "S",
+    "precip": 0,
+    "rain": 0,
+    "humidity": 41
+   },
+   "finish": {
+    "town": "Alpe d’Huez",
+    "time": "17:20",
+    "temp": 22,
+    "feels": 21,
+    "cond": "partly",
+    "wind": 20,
+    "dir": "W",
+    "precip": 25,
+    "rain": 0,
+    "humidity": 60,
+    "alt": 1850
+   }
+  },
+  "20": {
+   "start": {
+    "town": "Bourg d’Oisans",
+    "time": "11:00",
+    "temp": 28,
+    "feels": 30,
+    "cond": "sunny",
+    "wind": 12,
+    "dir": "W",
+    "precip": 10,
+    "rain": 0,
+    "humidity": 56
+   },
+   "finish": {
+    "town": "Alpe d’Huez",
+    "time": "17:00",
+    "temp": 16,
+    "feels": 13,
+    "cond": "showers",
+    "wind": 29,
+    "dir": "NW",
+    "precip": 70,
+    "rain": 4.5,
+    "humidity": 87,
+    "alt": 1850
+   }
+  },
+  "21": {
+   "start": {
+    "town": "Thoiry",
+    "time": "17:50",
+    "temp": 27,
+    "feels": 28,
+    "cond": "partly",
+    "wind": 14,
+    "dir": "NW",
+    "precip": 15,
+    "rain": 0,
+    "humidity": 60
+   },
+   "finish": {
+    "town": "Paris",
+    "time": "21:05",
+    "temp": 22,
+    "feels": 22,
+    "cond": "clear",
+    "wind": 11,
+    "dir": "N",
+    "precip": 5,
+    "rain": 0,
+    "humidity": 68,
+    "alt": null
+   }
+  }
+ }
+}
