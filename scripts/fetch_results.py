@@ -37,12 +37,19 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 # Registry of grand tours the site covers. Each entry names the scraper
 # ("source") to use, the site base URL, and the output file under data/.
-# Add giro2026 / vuelta2026 here once their source handler exists.
+# Add giro2026 here once its source handler exists.
 TOURS = {
     "tdf2026": {
         "source": "letour",
         "base": "https://www.letour.fr",
         "out": "tdf2026-results.json",
+    },
+    # lavuelta.es (Unipublic/ASO) is built on the same site template as
+    # letour.fr -- see fetch_riders.py's TOURS entry for the same tour.
+    "vuelta2026": {
+        "source": "letour",
+        "base": "https://www.lavuelta.es",
+        "out": "vuelta2026-results.json",
     },
 }
 
@@ -103,8 +110,29 @@ def ajax_stacks(html: str):
     return stacks
 
 
+def value_tds(tr):
+    """
+    The rider-value (time/points) and gap cells of one rankingTables row,
+    identified by class rather than fixed position: letour.fr's individual
+    rows have 8 columns (rank/rider/bib/team/value/gap/bonus/-), but
+    letourfemmes.fr and lavuelta.es insert an extra mobile-only duplicate
+    rank column between rider and bib, shifting every later index by one
+    (see parse_gc_by_bib in fetch_riders.py for the same quirk). Every value
+    cell carries "is-alignCenter", while the rank and bib cells additionally
+    carry "rankingTables__row__position" or "hidden" -- filtering those out
+    leaves just the value/gap cells, in document order, regardless of how
+    many columns come before them.
+    """
+    out = []
+    for td in tr.css("td"):
+        cls = td.attributes.get("class") or ""
+        if "is-alignCenter" in cls and "rankingTables__row__position" not in cls and "hidden" not in cls:
+            out.append(td)
+    return out
+
+
 def parse_table(html: str, team_only: bool, kind: str):
-    """Converts a letour.fr rankingTables HTML fragment into front-end row form."""
+    """Converts a letour.fr-template rankingTables HTML fragment into front-end row form."""
     tree = HTMLParser(html)
     rows = []
     for tr in tree.css("tbody tr.rankingTables__row"):
@@ -117,22 +145,22 @@ def parse_table(html: str, team_only: bool, kind: str):
         if team_only:
             rider = tds[1].text(strip=True)
             team, nat = "", ""
-            val_idx = 2
         else:
             img = tr.css_first(".rankingTables__row__profile.runner img")
             rider = (img.attributes.get("alt") or "").strip() if img else tds[1].text(strip=True)
-            team = tds[3].text(strip=True) if len(tds) > 3 else ""
+            team_td = tr.css_first("td.team")
+            team = team_td.text(strip=True) if team_td else ""
             flag = tr.css_first("[data-class]")
             nat = (flag.attributes.get("data-class") or "").replace("flag--", "").upper() if flag else ""
-            val_idx = 4
 
-        if len(tds) <= val_idx:
+        values = value_tds(tr)
+        if not values:
             continue
 
-        row = {"pos": pos, "rider": rider, "team": team, "nat": nat, "val": tds[val_idx].text(strip=True)}
+        row = {"pos": pos, "rider": rider, "team": team, "nat": nat, "val": values[0].text(strip=True)}
 
-        if kind == "time" and pos and pos > 1 and len(tds) > val_idx + 1:
-            gap = tds[val_idx + 1].text(strip=True)
+        if kind == "time" and pos and pos > 1 and len(values) > 1:
+            gap = values[1].text(strip=True)
             if gap and gap != "-":
                 row["gap"] = gap
 

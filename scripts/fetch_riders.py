@@ -60,12 +60,11 @@ TOURS = {
         "base": "https://www.letourfemmes.fr",
         "out": "femmes2026-riders.json",
     },
-    # lavuelta.es (Unipublic/ASO) shares letour.fr's start-list markup, but
-    # its rankings/withdrawal endpoints do not yet reflect this year's bib
-    # assignments -- see fetch_vuelta_startlist for details. Uses its own
-    # source so it publishes the roster only, without a bogus GC join.
+    # lavuelta.es is run by Unipublic/ASO on the same site template as
+    # letour.fr (identical list--competitors / rankingTables markup and
+    # ajax-stack ranking codes), so the "letour" handler works unmodified.
     "vuelta2026": {
-        "source": "vuelta",
+        "source": "letour",
         "base": "https://www.lavuelta.es",
         "out": "vuelta2026-riders.json",
     },
@@ -268,61 +267,6 @@ def fetch_letour(base: str, out: Path) -> int:
         })
 
     return write_riders(out, teams, after_stage)
-
-
-def fetch_vuelta_startlist(base: str, out: Path) -> int:
-    """
-    Scrape lavuelta.es's start list only, with no GC join.
-
-    lavuelta.es (Unipublic/ASO) serves the exact same /en/riders markup as
-    letour.fr, so parse_startlist() works unmodified. Its /en/rankings and
-    /en/withdrawal ajax endpoints, however, currently return a general
-    classification and withdrawal list that do not match this year's bib
-    assignments at all (checked by hand: bib 11, this year's UAE Team
-    Emirates XRG slot, resolves through the GC join to a rider surname from
-    a completely different team) -- almost certainly stale content the site
-    has not cut over from a previous edition yet. Joining that would print
-    made-up placings and DNS/DNF statuses for a race that has barely
-    started, so this intentionally skips fetch_letour's GC/team-GC/
-    withdrawal fetch and just publishes the plain roster (no gcPos/status).
-    Once lavuelta.es's rankings are confirmed to reflect the current race,
-    this tour can be switched to the "letour" source like the others.
-    """
-    try:
-        startlist = parse_startlist(fetch(f"{base}/en/riders"))
-    except Exception as e:
-        print(f"Failed to fetch the start list: {e}")
-        return 0
-    if not startlist:
-        print("The start list has not been published yet.")
-        return 0
-
-    teams = []
-    for team in startlist:
-        riders = [
-            {
-                "bib": r["bib"],
-                "name": display_name(r["listName"], ""),
-                "nat": r["nat"],
-                "gcPos": None,
-                "gcVal": "",
-                "gcGap": "",
-                "status": "",
-                "statusStage": None,
-            }
-            for r in team["riders"]
-        ]
-        teams.append({
-            "name": team["name"],
-            "code": team["code"],
-            "url": base + team["url"] if team["url"].startswith("/") else team["url"],
-            "gcPos": None,
-            "gcVal": "",
-            "gcGap": "",
-            "riders": riders,
-        })
-
-    return write_riders(out, teams, None)
 
 
 def normalize_team(name: str) -> str:
@@ -594,7 +538,6 @@ def fetch_giro(base: str, out: Path) -> int:
 SOURCES = {
     "letour": fetch_letour,
     "giro": fetch_giro,
-    "vuelta": fetch_vuelta_startlist,
 }
 
 

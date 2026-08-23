@@ -57,7 +57,6 @@
   .stripe{display:flex;height:10px;width:180px;}
   .stripe span{flex:1;}
   .lede{max-width:74ch;font-size:clamp(15px,1.5vw,18px);line-height:1.5;color:var(--color-neutral-700);margin:0;text-wrap:pretty;}
-  .previewtag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);background:var(--color-neutral-100);border:1px solid var(--color-divider);padding:5px 12px;}
 
   /* ---------- stat row ---------- */
   .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-bottom:2px solid var(--color-divider);}
@@ -79,6 +78,7 @@
   @media (max-width:980px){
     .stagelayout{grid-template-columns:1fr;}
     .detailgrid{grid-template-columns:1fr!important;}
+    .clsgrid{grid-template-columns:1fr!important;}
   }
   .stagerail{border-right:2px solid var(--color-divider);display:flex;flex-direction:column;position:sticky;top:0;}
   @media (max-width:980px){.stagerail{position:static;}}
@@ -160,15 +160,52 @@
   .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
   .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
 
-  /* ---------- teams tab ---------- */
-  .teamsstatus{grid-column:1/-1;padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);}
+  /* ---------- results tab ---------- */
+  .toolbar{padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);}
+  .toolbar .rlabel{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-neutral-600);}
+  select.rankselect{font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--color-text);background:var(--color-surface);border:2px solid var(--color-divider);border-radius:0;padding:9px 14px;cursor:pointer;max-width:100%;}
+  select.rankselect:focus-visible{outline:2px solid var(--color-accent);outline-offset:1px;}
+  .toolbar .statusline{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+
+  .clsgrid{display:grid;grid-template-columns:1fr 1fr;}
+  .cls-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;}
+  .cls-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
+  .cls-head .names{display:flex;flex-direction:column;gap:3px;min-width:0;}
+  .cls-head .name{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;}
+  .cls-head .fr{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-neutral-600);}
+  .swatch{width:20px;height:20px;border:1px solid var(--color-divider);flex:0 0 auto;}
+
+  .cls-body{overflow-x:auto;}
+  table.results{width:100%;border-collapse:collapse;margin-top:var(--space-3);}
+  table.results td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.results td.pos{font-family:var(--font-heading);font-weight:700;font-size:14px;width:34px;color:var(--color-neutral-600);}
+  table.results tr.podium td.pos{color:var(--color-accent);}
+  table.results td.rider .rname{display:block;font-size:14px;font-weight:600;}
+  table.results td.rider .rteam{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.results td.val{text-align:right;white-space:nowrap;font-size:13px;}
+
+  .expander{margin-top:var(--space-3);align-self:flex-start;background:transparent;border:2px solid var(--color-divider);padding:8px 14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);cursor:pointer;}
+  .expander:hover{background:var(--color-accent-100);}
+
   .status-card{grid-column:1/-1;padding:clamp(20px,3vw,32px);border-bottom:2px solid var(--color-divider);font-size:14px;line-height:1.6;color:var(--color-neutral-700);}
   .status-card b{font-family:var(--font-heading);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text);}
-  .clsgrid{display:grid;grid-template-columns:1fr 1fr;}
-  @media (max-width:860px){.clsgrid{grid-template-columns:1fr;}}
-  .cls-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;border-bottom:2px solid var(--color-divider);}
-  .cls-card:nth-child(odd){border-right:2px solid var(--color-divider);}
-  @media (max-width:860px){.cls-card:nth-child(odd){border-right:0;}}
+  .empty-cls{padding:var(--space-3) 0 0;margin:0;font-size:14px;color:var(--color-neutral-600);}
+  .sec-label{margin:14px 0 4px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);}
+  .sec-label:first-child{margin-top:0;}
+
+  .stagewins-block{padding:clamp(22px,3vw,36px) clamp(20px,4vw,48px);border-top:2px solid var(--color-divider);display:flex;flex-direction:column;gap:var(--space-4);}
+  .stagewins-block h3{font-family:var(--font-heading);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;margin:0;}
+  .stagewins-meta{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600);}
+  table.winners{width:100%;max-width:820px;border-collapse:collapse;}
+  table.winners td{padding:8px;border-bottom:1px solid var(--color-divider);font-size:14px;}
+  table.winners td.n{font-family:var(--font-heading);font-weight:700;font-size:14px;width:40px;color:var(--color-neutral-600);}
+  table.winners td.route{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);white-space:nowrap;}
+  table.winners td.winner{font-size:14px;font-weight:600;}
+  table.winners td.speed{font-size:12px;color:var(--color-neutral-600);text-align:right;white-space:nowrap;}
+
+  /* ---------- teams tab ---------- */
+  .teamsstatus{grid-column:1/-1;padding:var(--space-4) clamp(20px,4vw,48px);border-bottom:2px solid var(--color-divider);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);}
+  .team-card{display:flex;flex-direction:column;padding:clamp(20px,3vw,32px);min-width:0;}
   .team-head{display:flex;align-items:flex-start;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:2px solid var(--color-divider);}
   .team-rank{font-family:var(--font-heading);font-weight:700;font-size:15px;width:34px;height:34px;flex:0 0 auto;display:grid;place-items:center;background:var(--color-neutral-100);color:var(--color-text);border:1px solid var(--color-divider);}
   .team-rank.first{background:var(--color-accent);color:#fff;}
@@ -232,7 +269,6 @@
   <h1>Vuelta a España 2026</h1>
   <div class="stripe"><span style="background:#AA151B;flex:1"></span><span style="background:#F1BF00;flex:2"></span><span style="background:#AA151B;flex:1"></span></div>
   <p class="lede" id="subDesc"></p>
-  <span class="previewtag" id="previewTag"></span>
 </section>
 
 <div class="statrow" id="topstats"></div>
@@ -240,6 +276,8 @@
 <nav class="tabs" role="tablist" aria-label="Näkymät / Views">
   <button class="tabbtn active" data-view="stages" role="tab" id="tabStages"
           aria-controls="view-stages" aria-selected="true" tabindex="0"></button>
+  <button class="tabbtn" data-view="results" role="tab" id="tabResults"
+          aria-controls="view-results" aria-selected="false" tabindex="-1"></button>
   <button class="tabbtn" data-view="teams" role="tab" id="tabTeams"
           aria-controls="view-teams" aria-selected="false" tabindex="-1"></button>
 </nav>
@@ -252,6 +290,15 @@
     </nav>
     <main class="panel" id="panel"></main>
   </div>
+</section>
+
+<section class="view" id="view-results" role="tabpanel" aria-labelledby="tabResults" tabindex="0">
+  <div class="toolbar">
+    <label class="rlabel" id="rankSelectLabel" for="rankStageSelect"></label>
+    <select class="rankselect" id="rankStageSelect"></select>
+    <span class="statusline" id="resultsStatusLine"></span>
+  </div>
+  <div id="resultsGrid"></div>
 </section>
 
 <section class="view" id="view-teams" role="tabpanel" aria-labelledby="tabTeams" tabindex="0">
@@ -272,14 +319,15 @@
 const LANG_KEY = 'tdf2026-lang';
 const ROUTES_URL = 'data/vuelta2026-routes.json';
 const RIDERS_URL = 'data/vuelta2026-riders.json';
+const RESULTS_URL = 'data/vuelta2026-results.json';
 
 const STRINGS = {
   fi: {
     backToTours: 'Grand Tourit',
     eyebrow: 'Reittiopas · 81. Vuelta a España · 22.8.–13.9.2026',
     subDesc: 'Ennakkokatsaus kaikkiin 21 etappiin: reitit, havainnollistavat korkeusprofiilit ja tunnetut nousut. Grande Salida ajetaan Monacosta, minkä jälkeen kilpailu kulkee Etelä-Ranskan ja Andorran kautta Espanjaan ja päättyy Granadan Alhambralle.',
-    previewTag: 'Ennakko · kilpailu ei ole vielä alkanut',
     tabStages: 'Etapit & profiilit',
+    tabResults: 'Sijoitukset',
     tabTeams: 'Joukkueet & ajajat',
     stageListHeader: '21 etappia',
     restDay: 'Lepopäivä',
@@ -310,21 +358,53 @@ const STRINGS = {
     withdrawalReasons: {DNS:'Ei startannut (DNS)', DNF:'Keskeytti (DNF)', OTL:'Aikaraja ylittyi (OTL)'},
     riderOutOnStage: n => `Etapilla ${n}`,
     riderOutUnknown: 'Ei maalissa',
-    teamsStatus: (riders, teams) => `<b>Lähtijät:</b> ${teams} joukkuetta ja ${riders} ajajaa.`,
+    teamsStatus: (riders, teams, fin, out) => `<b>Lähtijät:</b> ${teams} joukkuetta ja ${riders} ajajaa — ${fin} ajajaa maalissa Granadassa, ${out} jäi pois kilpailusta.`,
     teamsEmpty: 'Ajajalistaa ei saatu ladattua. Lista luetaan tiedostosta <code>data/vuelta2026-riders.json</code>, jonka <code>scripts/fetch_riders.py</code> kokoaa lavuelta.es:n lähtölistasta. Jos avasit sivun suoraan levyltä (file://), selain ei voi lukea tiedostoa.',
     teamClsLine: (pos, val) => `Joukkuekilpailu #${pos} · ${val}`,
     teamClsNone: 'Ei vielä sijoitusta joukkuekilpailussa',
+    resultsEmpty: 'Kilpailu ei ole vielä alkanut — tuloksia ei ole saatavilla.',
+    resultsStatus: (updatedIso, after) => `<b>Tilanne:</b> ${fmtUpdated(updatedIso)} (etapin ${after}/21 jälkeen).`,
+    classEmpty: 'Ei tuloksia vielä.',
+    expandLess: '▲ Näytä vain top 10', expandMore: n => `▼ Näytä kaikki (${n})`,
+    stageWinnersTitle: 'Etappivoittajat', stageWinnersFr: n => `${n}/21 etappia ajettu`,
+    avgSpeed: v => `keskinopeus ${v} km/h`,
+    rankShowLabel: 'Näytä',
+    rankGeneral: 'Kokonaistilanne — kaikki paidat',
+    rankStageOpt: (n,route) => `Etappi ${n} · ${route}`,
+    stageResultTitle: n => `Etapin ${n} tulos`,
+    stageResultValHead: 'Aika / ero',
+    stageResultEmpty: 'Tämän etapin tuloksia ei ole vielä saatavilla.',
+    stageStatEmpty: 'Ei jaettu tällä etapilla.',
+    stageStats: {
+      points:{name:'Etapilla jaetut pisteet', fr:'Pistekilpailun pisteet tältä etapilta', valHead:'Pisteet'},
+      mountains:{name:'Etapilla jaetut nousupisteet', fr:'Nousukilpailun pisteet tältä etapilta', valHead:'Pisteet'},
+      youth:{name:'Nuorten etappitulos', fr:'Alle 26-vuotiaiden ajat tällä etapilla', valHead:'Aika / ero'},
+      teams:{name:'Joukkueiden etappitulos', fr:'Joukkueiden ajat tällä etapilla', valHead:'Aika / ero'},
+      combative:{name:'Taistelevin ajaja', fr:'Etapin aktiivisin ajaja'},
+      withdrawals:{name:'Keskeyttäneet', fr:'Kilpailusta poisjääneet tällä etapilla'}
+    },
+    noWithdrawals: 'Ei keskeyttäneitä tällä etapilla.',
+    noWithdrawalsRace: 'Ei keskeyttäneitä toistaiseksi.',
+    allWithdrawalsTitle: 'Keskeyttäneet',
+    allWithdrawalsFr: n => `${n} ajajaa jäänyt pois kilpailusta`,
+    classifications: {
+      gc:{name:'Kokonaiskilpailu', fr:'Maillot rojo — punainen paita', valHead:'Aika/ero'},
+      points:{name:'Pistekilpailu', fr:'Puntos — vihreä paita', valHead:'Pisteet'},
+      mountains:{name:'Nousukilpailu', fr:'Montaña — pistepaita', valHead:'Pisteet'},
+      youth:{name:'Nuorten kilpailu', fr:'Maillot blanco — valkoinen paita (alle 26 v)', valHead:'Aika/ero'},
+      teams:{name:'Joukkuekilpailu', fr:'Clasificación por equipos', valHead:'Aika/ero'}
+    },
     disclaimerLabel: 'Ei-virallinen fanisivusto.',
     disclaimerText: 'Tämä on epävirallinen, ei-kaupallinen fanisivusto, joka ei liity Unipubliciin tai Vuelta a Españaan. Reittitiedot voivat vielä muuttua ennen kisan alkua.',
-    sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit ja profiilit: cyclingstage.com/vuelta-2026-route, lavuelta.es, en.wikipedia.org/wiki/2026_Vuelta_a_España (tarkistettu ristiin).',
+    sourcesLabel: 'Lähteet:', sourcesText: 'Reitti, etapit ja profiilit: cyclingstage.com/vuelta-2026-route, lavuelta.es, en.wikipedia.org/wiki/2026_Vuelta_a_España (tarkistettu ristiin). Sijoitukset ja joukkueet/ajajat: lavuelta.es virallinen tulospalvelu.',
     footerNote: '© 2026 Jouni Uusimaa · Sivun ulkoasu ja koodi (MIT-lisenssi). Epävirallinen, ei-kaupallinen fanisivusto. Ei liity Unipubliciin tai Vuelta a Españaan. Reittitiedot ovat oikeudenomistajiensa omaisuutta.',
   },
   en: {
     backToTours: 'Grand Tours',
     eyebrow: 'Roadbook · 81st Vuelta a España · 22 Aug – 13 Sep 2026',
     subDesc: 'A preview of all 21 stages: routes, illustrative elevation profiles and the known climbs. The Grande Salida is held in Monaco; the race then crosses southern France and Andorra into Spain and finishes at the Alhambra in Granada.',
-    previewTag: 'Preview · race has not started yet',
     tabStages: 'Stages & profiles',
+    tabResults: 'Rankings',
     tabTeams: 'Teams & riders',
     stageListHeader: '21 stages',
     restDay: 'Rest day',
@@ -355,21 +435,53 @@ const STRINGS = {
     withdrawalReasons: {DNS:'Did not start (DNS)', DNF:'Abandoned (DNF)', OTL:'Outside the time limit (OTL)'},
     riderOutOnStage: n => `On stage ${n}`,
     riderOutUnknown: 'Did not finish',
-    teamsStatus: (riders, teams) => `<b>Start list:</b> ${teams} teams and ${riders} riders.`,
+    teamsStatus: (riders, teams, fin, out) => `<b>Start list:</b> ${teams} teams and ${riders} riders — ${fin} finished in Granada, ${out} left the race.`,
     teamsEmpty: 'The rider list could not be loaded. It is read from <code>data/vuelta2026-riders.json</code>, which <code>scripts/fetch_riders.py</code> builds from the lavuelta.es start list. If you opened this page straight from disk (file://), the browser cannot read that file.',
     teamClsLine: (pos, val) => `Team classification #${pos} · ${val}`,
     teamClsNone: 'Not yet placed in the team classification',
+    resultsEmpty: 'The race has not started yet — no results are available.',
+    resultsStatus: (updatedIso, after) => `<b>Status:</b> ${fmtUpdated(updatedIso)} (after stage ${after}/21).`,
+    classEmpty: 'No results yet.',
+    expandLess: '▲ Show top 10 only', expandMore: n => `▼ Show all (${n})`,
+    stageWinnersTitle: 'Stage winners', stageWinnersFr: n => `${n}/21 stages raced`,
+    avgSpeed: v => `avg speed ${v} km/h`,
+    rankShowLabel: 'Show',
+    rankGeneral: 'General rankings — all jerseys',
+    rankStageOpt: (n,route) => `Stage ${n} · ${route}`,
+    stageResultTitle: n => `Stage ${n} result`,
+    stageResultValHead: 'Time / gap',
+    stageResultEmpty: 'Results for this stage are not available yet.',
+    stageStatEmpty: 'Not awarded on this stage.',
+    stageStats: {
+      points:{name:'Points won on the stage', fr:'Points classification points from this stage', valHead:'Points'},
+      mountains:{name:'Mountains points won on the stage', fr:'Mountains classification points from this stage', valHead:'Points'},
+      youth:{name:'Young riders’ stage result', fr:'Under-26 times on this stage', valHead:'Time / gap'},
+      teams:{name:'Teams’ stage result', fr:'Team times on this stage', valHead:'Time / gap'},
+      combative:{name:'Combativity award', fr:'Most aggressive rider of the stage'},
+      withdrawals:{name:'Withdrawals', fr:'Riders who left the race on this stage'}
+    },
+    noWithdrawals: 'No withdrawals on this stage.',
+    noWithdrawalsRace: 'No withdrawals so far.',
+    allWithdrawalsTitle: 'Withdrawals',
+    allWithdrawalsFr: n => `${n} riders out of the race`,
+    classifications: {
+      gc:{name:'General classification', fr:'Maillot rojo — red jersey', valHead:'Time/Gap'},
+      points:{name:'Points classification', fr:'Puntos — green jersey', valHead:'Points'},
+      mountains:{name:'Mountains classification', fr:'Montaña — mountains jersey', valHead:'Points'},
+      youth:{name:'Young rider classification', fr:'Maillot blanco — white jersey (under 26)', valHead:'Time/Gap'},
+      teams:{name:'Team classification', fr:'Clasificación por equipos', valHead:'Time/Gap'}
+    },
     disclaimerLabel: 'Unofficial fan project.',
     disclaimerText: 'This is an unofficial, non-commercial fan project, not affiliated with Unipublic or the Vuelta a España. Route details may still change before the race.',
-    sourcesLabel: 'Sources:', sourcesText: 'Route, stages and profiles: cyclingstage.com/vuelta-2026-route, lavuelta.es, en.wikipedia.org/wiki/2026_Vuelta_a_España (cross-checked).',
+    sourcesLabel: 'Sources:', sourcesText: 'Route, stages and profiles: cyclingstage.com/vuelta-2026-route, lavuelta.es, en.wikipedia.org/wiki/2026_Vuelta_a_España (cross-checked). Rankings and teams/riders: lavuelta.es official results service.',
     footerNote: '© 2026 Jouni Uusimaa · Page & design; code under the MIT licence. An unofficial, non-commercial fan project. Not affiliated with Unipublic or the Vuelta a España. Route information remains the property of its respective owners.',
   },
   fr: {
     backToTours: 'Grands Tours',
     eyebrow: 'Roadbook · 81e Vuelta a España · 22 août – 13 sept. 2026',
     subDesc: 'Un aperçu des 21 étapes : parcours, profils d’altitude illustratifs et ascensions connues. La Grande Salida a lieu à Monaco ; la course traverse ensuite le sud de la France et l’Andorre pour entrer en Espagne et s’achève à l’Alhambra de Grenade.',
-    previewTag: 'Aperçu · la course n’a pas encore commencé',
     tabStages: 'Étapes & profils',
+    tabResults: 'Classements',
     tabTeams: 'Équipes & coureurs',
     stageListHeader: '21 étapes',
     restDay: 'Jour de repos',
@@ -400,13 +512,45 @@ const STRINGS = {
     withdrawalReasons: {DNS:'Non-partant (DNS)', DNF:'Abandon (DNF)', OTL:'Hors délai (OTL)'},
     riderOutOnStage: n => `Étape ${n}`,
     riderOutUnknown: 'Non-partant / abandon',
-    teamsStatus: (riders, teams) => `<b>Liste des partants :</b> ${teams} équipes et ${riders} coureurs.`,
+    teamsStatus: (riders, teams, fin, out) => `<b>Liste des partants :</b> ${teams} équipes et ${riders} coureurs — ${fin} à l’arrivée à Grenade, ${out} hors course.`,
     teamsEmpty: 'La liste des coureurs n’a pas pu être chargée. Elle provient de <code>data/vuelta2026-riders.json</code>, généré par <code>scripts/fetch_riders.py</code> à partir de la liste des partants de lavuelta.es. Si la page a été ouverte directement depuis le disque (file://), le navigateur ne peut pas lire ce fichier.',
     teamClsLine: (pos, val) => `Classement par équipes #${pos} · ${val}`,
     teamClsNone: 'Pas encore classée au classement par équipes',
+    resultsEmpty: 'La course n’a pas encore commencé — aucun résultat disponible.',
+    resultsStatus: (updatedIso, after) => `<b>Situation :</b> ${fmtUpdated(updatedIso)} (après l’étape ${after}/21).`,
+    classEmpty: 'Pas encore de résultats.',
+    expandLess: '▲ Afficher seulement le top 10', expandMore: n => `▼ Tout afficher (${n})`,
+    stageWinnersTitle: 'Vainqueurs d’étape', stageWinnersFr: n => `${n}/21 étapes courues`,
+    avgSpeed: v => `vitesse moyenne ${v} km/h`,
+    rankShowLabel: 'Afficher',
+    rankGeneral: 'Classement général — tous les maillots',
+    rankStageOpt: (n,route) => `Étape ${n} · ${route}`,
+    stageResultTitle: n => `Résultat de l’étape ${n}`,
+    stageResultValHead: 'Temps / écart',
+    stageResultEmpty: 'Les résultats de cette étape ne sont pas encore disponibles.',
+    stageStatEmpty: 'Non attribué sur cette étape.',
+    stageStats: {
+      points:{name:'Points gagnés sur l’étape', fr:'Points du classement par points sur cette étape', valHead:'Points'},
+      mountains:{name:'Points de la montagne sur l’étape', fr:'Points du classement de la montagne sur cette étape', valHead:'Points'},
+      youth:{name:'Résultat d’étape des jeunes', fr:'Temps des moins de 26 ans sur cette étape', valHead:'Temps / écart'},
+      teams:{name:'Résultat d’étape par équipes', fr:'Temps des équipes sur cette étape', valHead:'Temps / écart'},
+      combative:{name:'Prix de la combativité', fr:'Coureur le plus combatif de l’étape'},
+      withdrawals:{name:'Abandons', fr:'Coureurs ayant quitté la course sur cette étape'}
+    },
+    noWithdrawals: 'Aucun abandon sur cette étape.',
+    noWithdrawalsRace: 'Aucun abandon pour l’instant.',
+    allWithdrawalsTitle: 'Abandons',
+    allWithdrawalsFr: n => `${n} coureurs hors course`,
+    classifications: {
+      gc:{name:'Classement général', fr:'Maillot rojo — maillot rouge', valHead:'Temps/écart'},
+      points:{name:'Classement par points', fr:'Puntos — maillot vert', valHead:'Points'},
+      mountains:{name:'Classement de la montagne', fr:'Montaña — maillot de la montagne', valHead:'Points'},
+      youth:{name:'Classement du meilleur jeune', fr:'Maillot blanco (moins de 26 ans)', valHead:'Temps/écart'},
+      teams:{name:'Classement par équipes', fr:'Clasificación por equipos', valHead:'Temps/écart'}
+    },
     disclaimerLabel: 'Projet de fans non officiel.',
     disclaimerText: 'Projet de fans non officiel et non commercial, sans lien avec Unipublic ni la Vuelta a España. Les détails du parcours peuvent encore changer avant la course.',
-    sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes et profils : cyclingstage.com/vuelta-2026-route, lavuelta.es, en.wikipedia.org/wiki/2026_Vuelta_a_España (recoupés).',
+    sourcesLabel: 'Sources :', sourcesText: 'Parcours, étapes et profils : cyclingstage.com/vuelta-2026-route, lavuelta.es, en.wikipedia.org/wiki/2026_Vuelta_a_España (recoupés). Classements et équipes/coureurs : service de résultats officiel de lavuelta.es.',
     footerNote: '© 2026 Jouni Uusimaa · Page et design ; code sous licence MIT. Projet de fans non officiel et non commercial. Sans lien avec Unipublic ni la Vuelta a España. Les informations de parcours restent la propriété de leurs détenteurs.',
   },
 };
@@ -433,6 +577,12 @@ function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRING
    with tdf2026.html / giro2026.html): numbered by severity, hardest first. */
 const CAT_COLOR = {1:'var(--color-accent-600)', 2:'var(--color-accent-500)', 3:'var(--color-accent-400)', 4:'var(--color-accent-300)'};
 const UNCAT_COLOR = 'var(--color-neutral-400)';
+
+/* Classification jerseys as flat colour swatches, per the Modernist system
+   shared with tdf2026.html / giro2026.html (no illustrative icons). */
+const JERSEY = {gc:'#c8102e', points:'#3e9b4f', mountains:'#1e5fa8', youth:'var(--color-neutral-100)', teams:'var(--color-neutral-700)'};
+const AUX_SWATCH = {winners:'var(--color-neutral-700)', combative:'var(--color-accent)', withdrawals:'var(--color-neutral-400)'};
+const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 
 const stages = [
   {n:1,  date:'2026-08-22', start:'Monaco', finish:'Monaco', km:9.6, type:'itt', gain:170, climbs:[]},
@@ -486,6 +636,19 @@ function fmtDate(iso){
   return new Intl.DateTimeFormat(localeTag(),opts).format(d);
 }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function fmtUpdated(iso){
+  // The "updated" field in the results JSON is an ISO timestamp; it is
+  // always formatted in Finnish time (the race's official time zone), but
+  // with language-appropriate text, since the file itself is not bilingual.
+  const d = new Date(iso);
+  const formatted = new Intl.DateTimeFormat(localeTag(), {
+    day:'numeric', month:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit',
+    timeZone:'Europe/Helsinki'
+  }).format(d);
+  if(lang==='fi') return `Päivitetty ${formatted} (Suomen aikaa)`;
+  if(lang==='fr') return `Mis à jour ${formatted} (heure d’Helsinki)`;
+  return `Updated ${formatted} (Helsinki time)`;
+}
 
 /* ---------- ILLUSTRATIVE PROFILE (built from climb positions) ---------- */
 function climbsWithKm(st){ return (st.climbs||[]).filter(c=>c.km!=null).sort((a,b)=>a.km-b.km); }
@@ -831,12 +994,273 @@ function renderPanel(st){
   initStageMap(st);
 }
 
+/* ---------- RANKINGS ----------
+   Live standings from data/vuelta2026-results.json -- see
+   scripts/fetch_results.py, which scrapes lavuelta.es and is refreshed on a
+   schedule (see .github/workflows/update-results.yml). RESULTS starts empty
+   and is populated by loadResults() below; classifications/stage results
+   that have not been raced yet simply render their empty state. */
+const RESULTS = {
+  updated: null,
+  afterStage: 0,
+  gc:       {rows: []}, // Red jersey — general classification (time)
+  points:   {rows: []}, // Points classification
+  mountains:{rows: []}, // Mountains classification
+  youth:    {rows: []}, // White jersey — young rider classification (time)
+  teams:    {rows: []}, // Team classification (time)
+  stageResults: {},
+  stageWinners: stages.filter(s=>s.n!=='rest').map(s=>({n:s.n, route:`${s.start} → ${s.finish}`, winner:''})),
+};
+
+function timeToHours(s){
+  const m = /(\d+)h\s*(\d+)'\s*(\d+)/.exec(s||'');
+  if(!m) return null;
+  return (+m[1]) + (+m[2])/60 + (+m[3])/3600;
+}
+function stageAvgSpeed(n){
+  const sr = RESULTS.stageResults[n];
+  const st = stages.find(s=>s.n===Number(n));
+  if(!sr || !st || !Array.isArray(sr.rows) || !sr.rows.length) return null;
+  const h = timeToHours(sr.rows[0].val);
+  return h ? st.km / h : null;
+}
+function fmtSpeed(v){
+  const s = v.toFixed(1);
+  return lang==='en' ? s : s.replace('.', ',');
+}
+
+const expandState = {};
+let rankView = 'general'; // 'general' or the selected stage number
+const STAGE_STAT_KEYS = ['points','mountains','youth','teams'];
+
+/* Per-card divider borders in a 2-col grid: right rule on the left card of
+   each pair, bottom rule on every row but the last. Shared by the results
+   classification cards and the team cards on the Teams tab. */
+function cardBorderStyle(i, n){
+  let s = '';
+  if((i+1)%2!==0 && i!==n-1) s += 'border-right:2px solid var(--color-divider);';
+  if(i < n - (n%2===0?2:1)) s += 'border-bottom:2px solid var(--color-divider);';
+  return s;
+}
+
+/* HTML for a single result row (shared by classifications and stage results).
+   The card head (name + swatch) carries the classification's context, so
+   only the rows are markup here — no header row. */
+function resultRowHTML(r){
+  return `
+    <tr class="${r.pos<=3?'podium':''}">
+      <td class="pos">${r.pos}</td>
+      <td class="rider"><span class="rname">${esc(r.rider)}</span>${r.team?`<span class="rteam">${esc(r.team)}${r.nat?' · '+esc(r.nat):''}</span>`:''}</td>
+      <td class="val">${r.gap!==undefined && r.pos>1 ? esc(r.gap) : esc(r.val)}</td>
+    </tr>`;
+}
+
+/* Stages selectable in the dropdown: those with result rows or a known winner. */
+function riddenStages(){
+  return RESULTS.stageWinners.filter(s=>{
+    const sr = RESULTS.stageResults[s.n];
+    return (sr && Array.isArray(sr.rows) && sr.rows.length) || s.winner;
+  });
+}
+
+function renderRankSelect(){
+  const sel = document.getElementById('rankStageSelect');
+  const ridden = riddenStages();
+  const valid = rankView==='general' || ridden.some(s=>String(s.n)===String(rankView));
+  if(!valid) rankView = 'general';
+
+  let opts = `<option value="general">${esc(t('rankGeneral'))}</option>`;
+  ridden.forEach(s=>{
+    opts += `<option value="${s.n}">${esc(t('rankStageOpt')(s.n, s.route))}</option>`;
+  });
+  sel.innerHTML = opts;
+  sel.value = String(rankView);
+}
+
+function renderResults(){
+  renderRankSelect();
+  document.getElementById('resultsStatusLine').textContent = RESULTS.updated ? fmtUpdated(RESULTS.updated) : '';
+  if(rankView==='general') renderGeneralRankings();
+  else renderStageResult(rankView);
+}
+
+function renderGeneralRankings(){
+  const grid = document.getElementById('resultsGrid');
+  const anyData = CLASS_KEYS.some(k=>RESULTS[k].rows.length>0);
+  let statusHTML = '';
+
+  if(!anyData){
+    statusHTML = `<div class="status-card">${t('resultsEmpty')}</div>`;
+  } else if(RESULTS.updated){
+    statusHTML = `<div class="status-card">${t('resultsStatus')(RESULTS.updated, RESULTS.afterStage)}</div>`;
+  }
+
+  let cardsHTML = '';
+  CLASS_KEYS.forEach((key,i)=>{
+    const c = t('classifications')[key];
+    const rows = RESULTS[key].rows;
+    const expanded = !!expandState[key];
+    const shown = expanded ? rows : rows.slice(0,10);
+
+    let body;
+    if(!rows.length){
+      body = `<p class="empty-cls">${t('classEmpty')}</p>`;
+    } else {
+      body = `<table class="results"><tbody>${shown.map(resultRowHTML).join('')}</tbody></table>`;
+      if(rows.length>10){
+        body += `<button class="expander" data-cls="${key}">${expanded ? t('expandLess') : t('expandMore')(rows.length)}</button>`;
+      }
+    }
+
+    cardsHTML += `<div class="cls-card" style="${cardBorderStyle(i, CLASS_KEYS.length)}">
+      <div class="cls-head">
+        <span class="names"><span class="name">${esc(c.name)}</span><span class="fr">${esc(c.fr)}</span></span>
+        <span class="swatch" style="background:${JERSEY[key]}"></span>
+      </div>
+      <div class="cls-body">${body}</div>
+    </div>`;
+  });
+
+  const ridden = RESULTS.stageWinners.filter(s=>s.winner);
+  const winnersHTML = `<div class="stagewins-block">
+    <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-3)">
+      <h3>${t('stageWinnersTitle')}</h3>
+      <span class="stagewins-meta">${t('stageWinnersFr')(ridden.length)}</span>
+    </span>
+    <table class="winners"><tbody>${RESULTS.stageWinners.map(s=>{
+      const spd = stageAvgSpeed(s.n);
+      return `<tr>
+        <td class="n">${s.n}</td>
+        <td class="route">${esc(s.route)}</td>
+        <td class="winner">${esc(s.winner) || '—'}</td>
+        <td class="speed">${spd ? fmtSpeed(spd) : '—'}</td>
+      </tr>`;
+    }).join('')}</tbody></table>
+  </div>`;
+
+  const allWd = [];
+  RESULTS.stageWinners.forEach(s=>{
+    const sr = RESULTS.stageResults[s.n];
+    (sr && Array.isArray(sr.withdrawals) ? sr.withdrawals : []).forEach(w=>allWd.push(Object.assign({stage:s.n}, w)));
+  });
+  const wdBody = !allWd.length
+    ? `<p class="empty-cls">${t('noWithdrawalsRace')}</p>`
+    : `<table class="results"><tbody>${allWd.map(w=>`
+        <tr>
+          <td class="pos">${w.stage}</td>
+          <td class="rider"><span class="rname">${esc(w.rider)}</span>${w.team?`<span class="rteam">${esc(w.team)}</span>`:''}</td>
+          <td class="val">${esc(t('withdrawalReasons')[w.reason] || w.reason)}</td>
+        </tr>`).join('')}</tbody></table>`;
+  const withdrawalsHTML = `<div class="stagewins-block">
+    <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-3)">
+      <h3>${t('allWithdrawalsTitle')}</h3>
+      <span class="stagewins-meta">${t('allWithdrawalsFr')(allWd.length)}</span>
+    </span>
+    ${wdBody}
+  </div>`;
+
+  grid.innerHTML = statusHTML + `<div class="clsgrid">${cardsHTML}</div>` + winnersHTML + withdrawalsHTML;
+  bindExpanders(grid);
+}
+
+function stageStatTable(rows, expKey){
+  if(!rows.length) return `<p class="empty-cls">${t('stageStatEmpty')}</p>`;
+  const expanded = !!expandState[expKey];
+  const shown = expanded ? rows : rows.slice(0,10);
+  let body = `<table class="results"><tbody>${shown.map(resultRowHTML).join('')}</tbody></table>`;
+  if(rows.length>10){
+    body += `<button class="expander" data-cls="${expKey}">${expanded ? t('expandLess') : t('expandMore')(rows.length)}</button>`;
+  }
+  return body;
+}
+
+/* A single stage: finishing order + the stage's other statistics (points and
+   mountains points won, youth and team stage results, combativity, withdrawals). */
+function renderStageResult(n){
+  const grid = document.getElementById('resultsGrid');
+  const sr = RESULTS.stageResults[n] || {};
+  const rows = Array.isArray(sr.rows) ? sr.rows : [];
+  const meta = RESULTS.stageWinners.find(s=>String(s.n)===String(n));
+  const route = meta ? meta.route : '';
+
+  const mainBody = rows.length ? stageStatTable(rows, '__stage') : `<p class="empty-cls">${t('stageResultEmpty')}</p>`;
+  const spd = stageAvgSpeed(n);
+  const sub = route + (spd ? ` · ${t('avgSpeed')(fmtSpeed(spd))}` : '');
+  const mainHTML = `<div class="cls-card" style="border-bottom:2px solid var(--color-divider)">
+    <div class="cls-head">
+      <span class="names"><span class="name">${esc(t('stageResultTitle')(n))}</span><span class="fr">${esc(sub)}</span></span>
+      <span class="swatch" style="background:${AUX_SWATCH.winners}"></span>
+    </div>
+    <div class="cls-body">${mainBody}</div>
+  </div>`;
+
+  let cardsHTML = '';
+  if(rows.length){
+    const cards = [];
+    STAGE_STAT_KEYS.forEach(key=>{
+      const c = t('stageStats')[key];
+      const data = Array.isArray(sr[key]) ? sr[key] : [];
+      let body;
+      if(key==='points' || key==='mountains'){
+        // Sectioned: one sub-table per intermediate sprint / categorized
+        // climb, each with its own optional caption (sec.label).
+        body = !data.length
+          ? `<p class="empty-cls">${t('stageStatEmpty')}</p>`
+          : data.map((sec,i)=>
+              (sec.label?`<div class="sec-label">${esc(sec.label)}</div>`:'') +
+              stageStatTable(sec.rows||[], `__stage_${key}_${i}`)
+            ).join('');
+      } else {
+        body = stageStatTable(data, '__stage_'+key);
+      }
+      cards.push({name:c.name, fr:c.fr, swatch:JERSEY[key], body});
+    });
+
+    const cc = t('stageStats').combative;
+    const comb = sr.combative;
+    const combBody = comb && comb.rider
+      ? `<table class="results"><tbody>${resultRowHTML({pos:1, rider:comb.rider, team:comb.team, nat:comb.nat, val:''})}</tbody></table>`
+      : `<p class="empty-cls">${t('stageStatEmpty')}</p>`;
+    cards.push({name:cc.name, fr:cc.fr, swatch:AUX_SWATCH.combative, body:combBody});
+
+    const wt = t('stageStats').withdrawals;
+    const wd = Array.isArray(sr.withdrawals) ? sr.withdrawals : [];
+    const wBody = !wd.length
+      ? `<p class="empty-cls">${t('noWithdrawals')}</p>`
+      : `<table class="results"><tbody>${wd.map(w=>`
+          <tr>
+            <td class="pos">${w.bib}</td>
+            <td class="rider"><span class="rname">${esc(w.rider)}</span>${w.team?`<span class="rteam">${esc(w.team)}</span>`:''}</td>
+            <td class="val">${esc(t('withdrawalReasons')[w.reason] || w.reason)}</td>
+          </tr>`).join('')}</tbody></table>`;
+    cards.push({name:wt.name, fr:wt.fr, swatch:AUX_SWATCH.withdrawals, body:wBody});
+
+    cardsHTML = cards.map((c,i)=>`<div class="cls-card" style="${cardBorderStyle(i, cards.length)}">
+      <div class="cls-head">
+        <span class="names"><span class="name">${esc(c.name)}</span><span class="fr">${esc(c.fr)}</span></span>
+        <span class="swatch" style="background:${c.swatch}"></span>
+      </div>
+      <div class="cls-body">${c.body}</div>
+    </div>`).join('');
+  }
+
+  grid.innerHTML = mainHTML + (cardsHTML ? `<div class="clsgrid">${cardsHTML}</div>` : '');
+  bindExpanders(grid);
+}
+
+function bindExpanders(grid){
+  grid.querySelectorAll('.expander').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      expandState[btn.dataset.cls] = !expandState[btn.dataset.cls];
+      renderResults();
+    });
+  });
+}
+
 /* ---------- TEAMS & RIDERS ----------
    The start list (23 teams x 8 riders) from data/vuelta2026-riders.json --
-   see scripts/fetch_riders.py. The race has not produced a general
-   classification yet, so every rider is shown without a GC placing; the
-   schema still carries gcPos/status per rider so the page will pick up real
-   standings with no code change once the scraper is upgraded to join them. */
+   see scripts/fetch_riders.py. Teams are stored in team-classification
+   order (once the classification exists), riders in bib order. */
 let RIDERS = null;
 
 function riderRowHTML(r){
@@ -862,16 +1286,17 @@ function renderRiders(){
     return;
   }
 
-  const statusHTML = `<div class="teamsstatus">${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount).replace(/<[^>]+>/g,'')}</div>`;
+  const out = RIDERS.riderCount - RIDERS.finishers;
+  const statusHTML = `<div class="teamsstatus">${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out).replace(/<[^>]+>/g,'')}</div>`;
 
-  const cardsHTML = RIDERS.teams.map(team=>{
+  const cardsHTML = RIDERS.teams.map((team,i)=>{
     const nameHTML = team.url
       ? `<a class="team-link" href="${team.url}" target="_blank" rel="noopener">${esc(team.name)}</a>`
       : `<span class="team-link">${esc(team.name)}</span>`;
     const sub = team.gcPos
       ? t('teamClsLine')(team.gcPos, team.gcGap || team.gcVal)
       : t('teamClsNone');
-    return `<div class="cls-card">
+    return `<div class="team-card" style="${cardBorderStyle(i, RIDERS.teams.length)}">
       <div class="team-head">
         <span class="team-rank${team.gcPos===1?' first':''}">${team.gcPos || '–'}</span>
         <span class="team-meta">${nameHTML}<span class="team-clsline">${esc(sub)}</span></span>
@@ -887,6 +1312,34 @@ function renderRiders(){
   }).join('');
 
   grid.innerHTML = statusHTML + `<div class="clsgrid">${cardsHTML}</div>`;
+}
+
+/* Live standings for the "Rankings" tab. Missing file (e.g. the page was
+   opened over file://, or fetched before the race has any results) leaves
+   the built-in empty RESULTS state in place. */
+async function loadResults(){
+  try{
+    const resp = await fetch(RESULTS_URL, {cache:'no-store'});
+    if(!resp.ok) throw new Error('not found');
+    const data = await resp.json();
+    ['gc','points','mountains','youth','teams'].forEach(k=>{
+      if(data[k] && Array.isArray(data[k].rows)) RESULTS[k].rows = data[k].rows;
+    });
+    if(data.stageResults && typeof data.stageResults==='object'){
+      RESULTS.stageResults = data.stageResults;
+    }
+    if(Array.isArray(data.stageWinners)){
+      data.stageWinners.forEach(w=>{
+        const row = RESULTS.stageWinners.find(s=>s.n===w.n);
+        if(row && w.winner) row.winner = w.winner;
+      });
+    }
+    if(data.updated) RESULTS.updated = data.updated;
+    if(data.afterStage) RESULTS.afterStage = data.afterStage;
+    renderResults();
+  }catch(e){
+    /* No automatic data available — show the built-in empty state. */
+  }
 }
 
 /* Start list for the "Teams & riders" tab. Missing file (e.g. the page was
@@ -916,9 +1369,10 @@ function applyStaticText(){
   document.getElementById('backLinkText').textContent=t('backToTours');
   document.getElementById('eyebrow').textContent=t('eyebrow');
   document.getElementById('subDesc').textContent=t('subDesc');
-  document.getElementById('previewTag').textContent=t('previewTag');
   document.getElementById('tabStages').textContent=t('tabStages');
+  document.getElementById('tabResults').textContent=t('tabResults');
   document.getElementById('tabTeams').textContent=t('tabTeams');
+  document.getElementById('rankSelectLabel').textContent=t('rankShowLabel');
   document.getElementById('stageListHeader').textContent=t('stageListHeader');
   document.getElementById('profileDisclaimer').textContent=t('profileDisclaimer');
   document.getElementById('disclaimerLabel').textContent=t('disclaimerLabel');
@@ -939,6 +1393,7 @@ function renderAll(){
   renderTopStats();
   renderStageList();
   renderPanel(stages[activeIdx]);
+  renderResults();
   renderRiders();
   updateLangButtons();
   document.documentElement.lang=lang;
@@ -951,6 +1406,13 @@ function setLang(newLang){
 }
 document.querySelectorAll('#langSel button').forEach(btn=>{
   btn.addEventListener('click',()=>setLang(btn.dataset.lang));
+});
+
+/* ---------- RANKINGS STAGE SELECTOR ---------- */
+document.getElementById('rankStageSelect').addEventListener('change', e=>{
+  rankView = e.target.value==='general' ? 'general' : Number(e.target.value);
+  Object.keys(expandState).forEach(k=>{ if(k.startsWith('__stage')) delete expandState[k]; });
+  renderResults();
 });
 
 /* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
@@ -979,8 +1441,26 @@ tabButtons.forEach((tab, i)=>{
   });
 });
 
-/* init — default to the first stage (index 0 is stage 1, the Monaco ITT). */
+/* Defaults the Stages tab to whichever stage matches today's date, so a
+   visitor lands on the stage actually being raced rather than always stage
+   1. Rest days keep showing the last raced stage; before/after the race
+   this resolves to the first/last stage. */
+function todayStageIndex(){
+  const d = new Date();
+  const key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  let idx = 0;
+  for(let i=0;i<stages.length;i++){
+    if(stages[i].n==='rest') continue;
+    if(stages[i].date<=key) idx=i; else break;
+  }
+  return idx;
+}
+
+/* init */
+document.documentElement.lang = lang;
+activeIdx = todayStageIndex();
 renderAll();
+loadResults();
 loadRiders();
 </script>
 <script data-goatcounter="https://grandtours.goatcounter.com/count"

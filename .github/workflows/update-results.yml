@@ -1,9 +1,20 @@
 name: Update results and publish
 
 on:
-  # The 2026 Tour de France is over, so there is nothing left to poll on a
-  # schedule — the scheduled runs were removed. Re-add a `schedule:` block
-  # here when the next race that fetch_results.py can scrape starts.
+  schedule:
+    # GitHub Actions ALWAYS uses UTC. The 2026 Vuelta a España runs 22 Aug –
+    # 13 Sep 2026; its stages typically finish around 17:00-18:30 CEST
+    # (15:00-16:30 UTC). Run every 30 min from 14:00-19:00 UTC on race days
+    # = 17:00-22:00 Finnish time (summer time, UTC+3). Split into an August
+    # and a September cron since a single expression can't span both.
+    - cron: '*/30 14-19 22-31 8 *'
+    - cron: '*/30 14-19 1-13 9 *'
+    # Light safety run in the morning in case of late-recorded corrections.
+    - cron: '15 6 22-31 8 *'
+    - cron: '15 6 1-13 9 *'
+    # Remove this schedule block once the 2026 Vuelta a España is over (13
+    # Sep 2026) — the way it was removed after the Tour de France — so the
+    # workflow doesn't keep polling a site with nothing left to fetch.
   # Redeploy whenever something is pushed to main (e.g. a hand-edited index.html).
   push:
     branches: [main]
