@@ -187,6 +187,7 @@
   table.dtable td.num{text-align:right;white-space:nowrap;}
   table.dtable td.loc{text-align:right;white-space:nowrap;color:var(--color-neutral-700);}
   table.dtable td.cat{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  table.dtable.sprints{max-width:640px;}
   .climbname{display:flex;align-items:center;gap:10px;}
   .climbname .sq{width:10px;height:10px;flex:0 0 auto;}
   .empty-note{margin:0;font-size:14px;color:var(--color-neutral-600);}
@@ -364,7 +365,7 @@ const STRINGS = {
     stageListHeader: '21 etappia',
     restDay: 'Lepopäivä',
     stagePrefix: 'Etappi',
-    factDistance: 'Matka', factType: 'Tyyppi', factGain: 'Nousumetrit', factClimbs: 'Nousuja',
+    factDistance: 'Matka', factType: 'Tyyppi', factGain: 'Nousumetrit', factClimbs: 'Nousuja', factSprints: 'Välisprinttejä',
     wxHeader: 'Sää etapilla', wxAtStart: 'Lähdössä', wxAtFinish: 'Maalissa',
     wxFeels: 'Tuntuu kuin', wxLow: 'Alin', wxWind: 'Tuuli', wxRain: 'Sademäärä', wxHumidity: 'Ilmankosteus', wxAlt: 'Korkeus merenpinnasta',
     wxDelta: 'Muutos lähdöstä maaliin',
@@ -375,7 +376,9 @@ const STRINGS = {
     descHeader: 'Etapin kuvaus', climbsHeader: 'Nousut (GPM)',
     climbHead: ['Nousu', 'Lk.', 'Pituus', 'Kaltevuus', 'Kohta'],
     noClimbs: 'Ei tunnettuja luokiteltuja nousuja.',
-    chartCaption: 'Havainnollistava profiili — nousut on merkitty likimääräiseen kilometrikohtaan; korkeuskäyrä ei ole GPS-mitattua dataa.',
+    sprintsHeader: 'Välisprintit', sprintHead: ['Sprintti', 'Kohta'],
+    sprintChip: 'Välisprintti', noSprints: 'Ei tunnettuja välisprinttejä.',
+    chartCaption: 'Havainnollistava profiili — nousut ja välisprintit on merkitty likimääräiseen kilometrikohtaan; korkeuskäyrä ei ole GPS-mitattua dataa.',
     profileAria: n => `Etapin ${n} havainnollistava korkeusprofiili`,
     minimapAria: n => `Etapin ${n} likimääräinen sijainti kartalla`,
     minimapExpand: 'Suurenna kartta',
@@ -386,7 +389,7 @@ const STRINGS = {
     summitNote: name => `Maalinousu: ${name}.`,
     typeLabels: {flat:'Tasainen', hilly:'Kumpuileva', mountain:'Vuoristo', itt:'Yksilöaika-ajo'},
     typeDesc: {flat:'Tasainen etappi', hilly:'Kumpuileva etappi', mountain:'Vuoristoetappi', itt:'Yksilöaika-ajo'},
-    legCat: 'Lk.', legUncat: 'Luokittelematon', atKm: 'km',
+    legCat: 'Lk.', legUncat: 'Luokittelematon', legSprint: 'Välisprintti', atKm: 'km',
     statDistance: 'Kokonaismatka', statDistanceVal: '≈ 3 302 km',
     statGain: 'Nousumetrit yhteensä', statGainVal: '≈ 58 000 m',
     statStages: 'Etappeja', statStagesVal: '21',
@@ -448,7 +451,7 @@ const STRINGS = {
     stageListHeader: '21 stages',
     restDay: 'Rest day',
     stagePrefix: 'Stage',
-    factDistance: 'Distance', factType: 'Type', factGain: 'Elevation gain', factClimbs: 'Climbs',
+    factDistance: 'Distance', factType: 'Type', factGain: 'Elevation gain', factClimbs: 'Climbs', factSprints: 'Intermediate sprints',
     wxHeader: 'Race-day weather', wxAtStart: 'At the start', wxAtFinish: 'At the finish',
     wxFeels: 'Feels like', wxLow: 'Low', wxWind: 'Wind', wxRain: 'Rainfall', wxHumidity: 'Humidity', wxAlt: 'Altitude',
     wxDelta: 'Change, start to finish',
@@ -459,7 +462,9 @@ const STRINGS = {
     descHeader: 'Stage description', climbsHeader: 'Climbs (KOM)',
     climbHead: ['Climb', 'Cat', 'Length', 'Gradient', 'At'],
     noClimbs: 'No known categorized climbs.',
-    chartCaption: 'Illustrative profile — climbs are marked at their approximate kilometre point; the elevation curve is not GPS-measured data.',
+    sprintsHeader: 'Intermediate sprints', sprintHead: ['Sprint', 'At'],
+    sprintChip: 'Intermediate sprint', noSprints: 'No known intermediate sprints.',
+    chartCaption: 'Illustrative profile — climbs and intermediate sprints are marked at their approximate kilometre point; the elevation curve is not GPS-measured data.',
     profileAria: n => `Illustrative elevation profile of stage ${n}`,
     minimapAria: n => `Approximate location of stage ${n} on the map`,
     minimapExpand: 'Enlarge map',
@@ -470,7 +475,7 @@ const STRINGS = {
     summitNote: name => `Summit finish at ${name}.`,
     typeLabels: {flat:'Flat', hilly:'Hilly', mountain:'Mountain', itt:'Individual time trial'},
     typeDesc: {flat:'Flat stage', hilly:'Hilly stage', mountain:'Mountain stage', itt:'Individual time trial'},
-    legCat: 'Cat', legUncat: 'Uncategorized', atKm: 'km',
+    legCat: 'Cat', legUncat: 'Uncategorized', legSprint: 'Intermediate sprint', atKm: 'km',
     statDistance: 'Total distance', statDistanceVal: '≈ 3,302 km',
     statGain: 'Total elevation gain', statGainVal: '≈ 58,000 m',
     statStages: 'Stages', statStagesVal: '21',
@@ -532,7 +537,7 @@ const STRINGS = {
     stageListHeader: '21 étapes',
     restDay: 'Jour de repos',
     stagePrefix: 'Étape',
-    factDistance: 'Distance', factType: 'Type', factGain: 'Dénivelé', factClimbs: 'Ascensions',
+    factDistance: 'Distance', factType: 'Type', factGain: 'Dénivelé', factClimbs: 'Ascensions', factSprints: 'Sprints intermédiaires',
     wxHeader: 'Météo du jour', wxAtStart: 'Au départ', wxAtFinish: 'À l’arrivée',
     wxFeels: 'Ressenti', wxLow: 'Min', wxWind: 'Vent', wxRain: 'Précipitations', wxHumidity: 'Humidité', wxAlt: 'Altitude',
     wxDelta: 'Écart départ / arrivée',
@@ -543,7 +548,9 @@ const STRINGS = {
     descHeader: 'Description de l’étape', climbsHeader: 'Ascensions (GPM)',
     climbHead: ['Ascension', 'Cat.', 'Longueur', 'Pente', 'Au'],
     noClimbs: 'Aucune ascension classée connue.',
-    chartCaption: 'Profil illustratif — les ascensions sont placées à leur kilomètre approximatif ; la courbe d’altitude n’est pas mesurée au GPS.',
+    sprintsHeader: 'Sprints intermédiaires', sprintHead: ['Sprint', 'Au'],
+    sprintChip: 'Sprint intermédiaire', noSprints: 'Aucun sprint intermédiaire connu.',
+    chartCaption: 'Profil illustratif — les ascensions et les sprints intermédiaires sont placés à leur kilomètre approximatif ; la courbe d’altitude n’est pas mesurée au GPS.',
     profileAria: n => `Profil d’altitude illustratif de l’étape ${n}`,
     minimapAria: n => `Situation approximative de l’étape ${n} sur la carte`,
     minimapExpand: 'Agrandir la carte',
@@ -554,7 +561,7 @@ const STRINGS = {
     summitNote: name => `Arrivée au sommet à ${name}.`,
     typeLabels: {flat:'Plat', hilly:'Vallonné', mountain:'Montagne', itt:'Contre-la-montre individuel'},
     typeDesc: {flat:'Étape de plaine', hilly:'Étape vallonnée', mountain:'Étape de montagne', itt:'Contre-la-montre individuel'},
-    legCat: 'Cat.', legUncat: 'Non catégorisée', atKm: 'km',
+    legCat: 'Cat.', legUncat: 'Non catégorisée', legSprint: 'Sprint intermédiaire', atKm: 'km',
     statDistance: 'Distance totale', statDistanceVal: '≈ 3 302 km',
     statGain: 'Dénivelé total', statGainVal: '≈ 58 000 m',
     statStages: 'Étapes', statStagesVal: '21',
@@ -630,6 +637,10 @@ function t(key){ const v = STRINGS[lang][key]; return v!==undefined ? v : STRING
    with tdf2026.html / giro2026.html): numbered by severity, hardest first. */
 const CAT_COLOR = {1:'var(--color-accent-600)', 2:'var(--color-accent-500)', 3:'var(--color-accent-400)', 4:'var(--color-accent-300)'};
 const UNCAT_COLOR = 'var(--color-neutral-400)';
+/* Sprint markers use the points-classification green (JERSEY.points below)
+   rather than the accent-red climb colours, so the two marker kinds stay
+   visually distinct on the profile chart. */
+const SPRINT_COLOR = '#3e9b4f';
 
 /* Classification jerseys as flat colour swatches, per the Modernist system
    shared with tdf2026.html / giro2026.html (no illustrative icons). */
@@ -638,45 +649,45 @@ const AUX_SWATCH = {winners:'var(--color-neutral-700)', combative:'var(--color-a
 const CLASS_KEYS = ['gc','points','mountains','youth','teams'];
 
 const stages = [
-  {n:1,  date:'2026-08-22', start:'Monaco', finish:'Monaco', km:9.6, type:'itt', gain:170, climbs:[]},
+  {n:1,  date:'2026-08-22', start:'Monaco', finish:'Monaco', km:9.6, type:'itt', gain:170, climbs:[], sprints:[]},
   {n:2,  date:'2026-08-23', start:'Monaco', finish:'Manosque', km:215.2, type:'hilly', gain:3000,
-   climbs:[{name:'Alto Châteauneuf-Grasse',km:60,len:11.5,grad:3.0},{name:'Col de Saint-Andrieu',km:130,len:4.3,grad:5.2}]},
+   climbs:[{name:'Alto Châteauneuf-Grasse',km:60,len:11.5,grad:3.0},{name:'Col de Saint-Andrieu',km:130,len:4.3,grad:5.2}], sprints:[]},
   {n:3,  date:'2026-08-24', start:'Gruissan', finish:'Font-Romeu', km:166.7, type:'mountain', gain:2600, summit:'Font-Romeu',
-   climbs:[{name:'Col de Mont-Louis',km:131,len:19.1,grad:5.0},{name:'Font-Romeu',km:166.7,len:9.8,grad:4.9}]},
+   climbs:[{name:'Col de Mont-Louis',km:131,len:19.1,grad:5.0},{name:'Font-Romeu',km:166.7,len:9.8,grad:4.9}], sprints:[]},
   {n:4,  date:'2026-08-25', start:'Andorra la Vella', finish:'Andorra la Vella', km:104.9, type:'mountain',
-   climbs:[{name:"Port d'Envalira",km:25,len:25,grad:5.0},{name:'Collada de Beixalís',km:51,len:6.7,grad:8.5},{name:"Col d'Ordino",km:75,len:9.8,grad:7.1},{name:'Alto de la Comella',km:100,len:4.2,grad:8.1}]},
+   climbs:[{name:"Port d'Envalira",km:25,len:25,grad:5.0},{name:'Collada de Beixalís',km:51,len:6.7,grad:8.5},{name:"Col d'Ordino",km:75,len:9.8,grad:7.1},{name:'Alto de la Comella',km:100,len:4.2,grad:8.1}], sprints:[]},
   {n:5,  date:'2026-08-26', start:'Falset', finish:'Roquetes', km:171.1, type:'flat', gain:1700,
-   climbs:[{name:'Alto de Pauls',km:147,len:3.5,grad:7.2}]},
+   climbs:[{name:'Alto de Pauls',km:147,len:3.5,grad:7.2}], sprints:[]},
   {n:6,  date:'2026-08-27', start:'Alcossebre', finish:'Castellón', km:176.8, type:'hilly', gain:3000,
-   climbs:[{name:'Puerto de la Serratella',km:40,len:16.6,grad:4.4},{name:'Col de la Bandereta',km:80,len:4.5,grad:6.9},{name:'Alto del Desierto de las Palmas',km:120,len:7.2,grad:5.2},{name:'Puerto de Bartolo',km:146,len:9.1,grad:7.2}]},
+   climbs:[{name:'Puerto de la Serratella',km:40,len:16.6,grad:4.4},{name:'Col de la Bandereta',km:80,len:4.5,grad:6.9},{name:'Alto del Desierto de las Palmas',km:120,len:7.2,grad:5.2},{name:'Puerto de Bartolo',km:146,len:9.1,grad:7.2}], sprints:[]},
   {n:7,  date:'2026-08-28', start:"Vall d'Alba", finish:'Aramón Valdelinares', km:149.9, type:'mountain', gain:3500, summit:'Aramón Valdelinares',
-   climbs:[{name:'Puerto de Remolcador',km:80,len:12,grad:4.4},{name:'Alto de Zucaina',km:95,len:5.3,grad:4.8},{name:'Alto Fuente de Rubielos',km:110,len:6.1,grad:6.1},{name:'Puerto de San Rafael',km:140,len:9.5,grad:4.4},{name:'Aramón Valdelinares',km:149.9,len:8.3,grad:6.5}]},
+   climbs:[{name:'Puerto de Remolcador',km:80,len:12,grad:4.4},{name:'Alto de Zucaina',km:95,len:5.3,grad:4.8},{name:'Alto Fuente de Rubielos',km:110,len:6.1,grad:6.1},{name:'Puerto de San Rafael',km:140,len:9.5,grad:4.4},{name:'Aramón Valdelinares',km:149.9,len:8.3,grad:6.5}], sprints:[]},
   {n:8,  date:'2026-08-29', start:'Puçol', finish:'Xeraco', km:167.4, type:'flat', gain:1300,
-   climbs:[{name:'Puerto de Barx',km:154,len:4.2,grad:3.8}]},
+   climbs:[{name:'Puerto de Barx',km:154,len:4.2,grad:3.8}], sprints:[]},
   {n:9,  date:'2026-08-30', start:'La Vila Joiosa', finish:'Alto de Aitana', km:187.5, type:'mountain', gain:5000, summit:'Alto de Aitana',
-   climbs:[{name:'Puerto de Tàrbena',km:56,len:6.7,grad:5.4},{name:'Coll de Rates',km:62,len:1.5,grad:6.2},{name:'Puerto El Miserat',km:82,len:5.1,grad:10.1},{name:'Port de Tollos',km:95,len:4,grad:5.7},{name:'Port de Tudons',km:126,len:11.7,grad:4.0},{name:'Port de Benifallim',km:141,len:4.8,grad:5.9},{name:'Alto de Aitana',km:187.5,len:21.2,grad:5.9}]},
+   climbs:[{name:'Puerto de Tàrbena',km:56,len:6.7,grad:5.4},{name:'Coll de Rates',km:62,len:1.5,grad:6.2},{name:'Puerto El Miserat',km:82,len:5.1,grad:10.1},{name:'Port de Tollos',km:95,len:4,grad:5.7},{name:'Port de Tudons',km:126,len:11.7,grad:4.0},{name:'Port de Benifallim',km:141,len:4.8,grad:5.9},{name:'Alto de Aitana',km:187.5,len:21.2,grad:5.9}], sprints:[]},
   {n:'rest', date:'2026-08-31'},
   {n:10, date:'2026-09-01', start:'Alcaraz', finish:'Elche de la Sierra', km:184.5, type:'hilly',
-   climbs:[{name:'Puerto de las Cruces',km:15,len:3.2,grad:5.0},{name:'Puerto de Peralejo',km:35,len:4.9,grad:4.5},{name:'Puerto de Socovos',km:165,len:9.8,grad:3.5}]},
+   climbs:[{name:'Puerto de las Cruces',km:15,len:3.2,grad:5.0},{name:'Puerto de Peralejo',km:35,len:4.9,grad:4.5},{name:'Puerto de Socovos',km:165,len:9.8,grad:3.5}], sprints:[]},
   {n:11, date:'2026-09-02', start:'Cartagena', finish:'Lorca', km:156.1, type:'flat', gain:1400,
-   climbs:[{name:'Alto de Morrón de Totana',km:113,len:8.8,grad:4.3}]},
+   climbs:[{name:'Alto de Morrón de Totana',km:113,len:8.8,grad:4.3}], sprints:[]},
   {n:12, date:'2026-09-03', start:'Vera', finish:'Calar Alto', km:166.5, type:'mountain', summit:'Calar Alto',
-   climbs:[{name:'Puerto Los Barrancos'},{name:'Alto Cóbdar'},{name:'Collado García'},{name:'Alto de Velefique',km:122,len:13.2,grad:7.3},{name:'Calar Alto',km:166.5,len:15.5,grad:6.0}]},
+   climbs:[{name:'Puerto Los Barrancos'},{name:'Alto Cóbdar'},{name:'Collado García'},{name:'Alto de Velefique',km:122,len:13.2,grad:7.3},{name:'Calar Alto',km:166.5,len:15.5,grad:6.0}], sprints:[]},
   {n:13, date:'2026-09-04', start:'Almuñécar', finish:'Loja', km:193.2, type:'hilly',
-   climbs:[{name:'Puerto Los Guájares',km:28,len:14.5,grad:5.3},{name:'Puerto Las Albuñuelas',km:40,len:2.4,grad:9.2},{name:'Alto del Legionario',km:84},{name:'Puerto de Granada',km:156,len:11.7,grad:4.2}]},
+   climbs:[{name:'Puerto Los Guájares',km:28,len:14.5,grad:5.3},{name:'Puerto Las Albuñuelas',km:40,len:2.4,grad:9.2},{name:'Alto del Legionario',km:84},{name:'Puerto de Granada',km:156,len:11.7,grad:4.2}], sprints:[]},
   {n:14, date:'2026-09-05', start:'Jaén', finish:'Sierra de la Pandera', km:152.7, type:'mountain', summit:'Sierra de la Pandera',
-   climbs:[{name:'Puerto de los Villares',km:80,len:10.4,grad:5.5},{name:'Puerto de Locubín',km:112,len:8.8,grad:5.0},{name:'Sierra de la Pandera',km:152.7,len:8.4,grad:7.8}]},
+   climbs:[{name:'Puerto de los Villares',km:80,len:10.4,grad:5.5},{name:'Puerto de Locubín',km:112,len:8.8,grad:5.0},{name:'Sierra de la Pandera',km:152.7,len:8.4,grad:7.8}], sprints:[]},
   {n:15, date:'2026-09-06', start:'Palma del Río', finish:'Córdoba', km:181.2, type:'hilly', gain:2800,
-   climbs:[{name:'Puerto de Mojón Blanco',km:35},{name:'Alto de Villaviciosa de Córdoba',km:121},{name:'Puerto del Artafi',km:151,len:5.9,grad:5.7}]},
+   climbs:[{name:'Puerto de Mojón Blanco',km:35},{name:'Alto de Villaviciosa de Córdoba',km:121},{name:'Puerto del Artafi',km:151,len:5.9,grad:5.7}], sprints:[]},
   {n:'rest', date:'2026-09-07'},
-  {n:16, date:'2026-09-08', start:'Cortegana', finish:'La Rábida', km:186.0, type:'flat', climbs:[]},
-  {n:17, date:'2026-09-09', start:'Dos Hermanas', finish:'Sevilla', km:189.2, type:'flat', gain:900, climbs:[]},
-  {n:18, date:'2026-09-10', start:'El Puerto de Santa María', finish:'Jerez de la Frontera', km:32.5, type:'itt', gain:169, climbs:[]},
+  {n:16, date:'2026-09-08', start:'Cortegana', finish:'La Rábida', km:186.0, type:'flat', climbs:[], sprints:[]},
+  {n:17, date:'2026-09-09', start:'Dos Hermanas', finish:'Sevilla', km:189.2, type:'flat', gain:900, climbs:[], sprints:[]},
+  {n:18, date:'2026-09-10', start:'El Puerto de Santa María', finish:'Jerez de la Frontera', km:32.5, type:'itt', gain:169, climbs:[], sprints:[]},
   {n:19, date:'2026-09-11', start:'Vélez-Málaga', finish:'Peñas Blancas', km:205.1, type:'mountain', summit:'Peñas Blancas',
-   climbs:[{name:'Puerto de Las Abejas',km:75,len:14.4,grad:4.3},{name:'Puerto de los Empedrados',km:89,len:7.1,grad:5.8},{name:'Puerto Cerro Mojón',km:120,len:15},{name:'Peñas Blancas',km:205.1,len:19,grad:6.7}]},
+   climbs:[{name:'Puerto de Las Abejas',km:75,len:14.4,grad:4.3},{name:'Puerto de los Empedrados',km:89,len:7.1,grad:5.8},{name:'Puerto Cerro Mojón',km:120,len:15},{name:'Peñas Blancas',km:205.1,len:19,grad:6.7}], sprints:[]},
   {n:20, date:'2026-09-12', start:'La Calahorra', finish:'Collada de Alguacil', km:206.7, type:'mountain', gain:5000, summit:'Collada de Alguacil',
-   climbs:[{name:'Puerto de Blancares',km:43,len:9.3,grad:3.4},{name:'Alto de Hazallanas',km:95,len:7.1,grad:9.5},{name:'Alto de El Purche',km:130,len:8.9,grad:7.5},{name:'Alto de Hazallanas',km:160,len:7.1,grad:9.5},{name:'Collada de Alguacil',km:206.7,len:16.7,grad:6.7}]},
-  {n:21, date:'2026-09-13', start:'Granada', finish:'Granada', km:99.4, type:'hilly', climbs:[]},
+   climbs:[{name:'Puerto de Blancares',km:43,len:9.3,grad:3.4},{name:'Alto de Hazallanas',km:95,len:7.1,grad:9.5},{name:'Alto de El Purche',km:130,len:8.9,grad:7.5},{name:'Alto de Hazallanas',km:160,len:7.1,grad:9.5},{name:'Collada de Alguacil',km:206.7,len:16.7,grad:6.7}], sprints:[]},
+  {n:21, date:'2026-09-13', start:'Granada', finish:'Granada', km:99.4, type:'hilly', climbs:[], sprints:[]},
 ];
 
 /* ---------- FORMAT HELPERS ---------- */
@@ -763,7 +774,10 @@ function genDesc(st){
 /* ---------- ELEVATION PROFILE ----------
    Styled per the Modernist system (shared with tdf2026.html / giro2026.html):
    monochrome ink line/fill, accent-shade climb bands. Only climbs with a
-   known summit km get a marker, matching climbsWithKm above. */
+   known summit km get a marker, matching climbsWithKm above. Intermediate
+   sprints (st.sprints) get a dashed green marker with a small flag, same
+   shape as the climb/KOM marker but in SPRINT_COLOR so the two stay visually
+   distinct. */
 function renderProfile(st){
   const W=900, H=250, padL=30, padR=16, padT=22, padB=30;
   const {d, plotH} = buildPath(genProfile(st), st.km, W,H,padL,padR,padT,padB);
@@ -793,6 +807,13 @@ function renderProfile(st){
 
   svg += `<path d="${d} L ${xForKm(st.km,st.km,W,padL,padR)},${baseY} L ${padL},${baseY} Z" fill="var(--color-text)" opacity="0.1"/>`;
   svg += `<path d="${d}" fill="none" stroke="var(--color-text)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+  (st.sprints||[]).forEach(s=>{
+    const sx = xForKm(s.km, st.km, W, padL, padR);
+    const top = padT + plotH*0.28;
+    svg += `<line x1="${sx}" y1="${top}" x2="${sx}" y2="${baseY}" stroke="${SPRINT_COLOR}" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    svg += `<path d="M ${sx} ${top} L ${sx+14} ${top+5} L ${sx} ${top+10} Z" fill="${SPRINT_COLOR}"/>`;
+  });
 
   svg += `<line x1="${padL}" y1="${baseY}" x2="${W-padR}" y2="${baseY}" stroke="var(--color-text)" stroke-width="2"/>`;
   svg += `</svg>`;
@@ -1072,6 +1093,16 @@ function renderPanel(st){
       </tr>`).join('');
   }
 
+  const sprints=st.sprints||[];
+  let sprintRows='';
+  if(sprints.length){
+    sprintRows=sprints.map((s,i)=>`
+      <tr>
+        <td>${t('sprintChip')}${sprints.length>1?' '+(i+1):''}</td>
+        <td class="num">~ ${t('atKm')} ${Math.round(s.km)}</td>
+      </tr>`).join('');
+  }
+
   panel.innerHTML = `
     <div class="panelhead">
       <div>
@@ -1086,6 +1117,7 @@ function renderPanel(st){
       <div class="factcell"><span class="label">${t('factType')}</span><span class="value">${t('typeLabels')[st.type]}</span></div>
       <div class="factcell"><span class="label">${t('factGain')}</span><span class="value">${st.gain?fmtGain(st.gain):'—'}</span></div>
       <div class="factcell"><span class="label">${t('factClimbs')}</span><span class="value">${climbs.length}</span></div>
+      <div class="factcell"><span class="label">${t('factSprints')}</span><span class="value">${sprints.length}</span></div>
     </div>
 
     ${wxSectionHTML(st)}
@@ -1103,6 +1135,7 @@ function renderPanel(st){
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[3]}"></span>3</span>
           <span class="legenditem"><span class="legswatch" style="background:${CAT_COLOR[4]}"></span>4</span>
           <span class="legenditem"><span class="legswatch" style="background:${UNCAT_COLOR}"></span>${t('legUncat')}</span>
+          <span class="legenditem"><span class="legswatch" style="background:${SPRINT_COLOR}"></span>${t('legSprint')}</span>
         </div>
         <span class="chart-caption">${t('chartCaption')}</span>
       </div>
@@ -1118,6 +1151,12 @@ function renderPanel(st){
         ${climbRows
           ? `<table class="dtable"><thead><tr><th>${t('climbHead')[0]}</th><th>${t('climbHead')[1]}</th><th>${t('climbHead')[2]}</th><th>${t('climbHead')[3]}</th><th>${t('climbHead')[4]}</th></tr></thead><tbody>${climbRows}</tbody></table>`
           : `<p class="empty-note">${t('noClimbs')}</p>`}
+      </div>
+      <div>
+        <h3>${t('sprintsHeader')}</h3>
+        ${sprintRows
+          ? `<table class="dtable sprints"><thead><tr><th>${t('sprintHead')[0]}</th><th>${t('sprintHead')[1]}</th></tr></thead><tbody>${sprintRows}</tbody></table>`
+          : `<p class="empty-note">${t('noSprints')}</p>`}
       </div>
     </div>
   `;
