@@ -73,6 +73,18 @@ jobs:
         run: python scripts/fetch_results.py
         continue-on-error: true
 
+      # Refreshes the "Teams & riders" GC column (each rider's/team's live
+      # position, time and gap) so it tracks the results just fetched above,
+      # instead of staying pinned to whatever stage it was last hand-run at.
+      # Scoped to the same tours as fetch_results.py (not fetch_riders.py's
+      # full default list) — tdf2026/vuelta2026 are the only ones with a
+      # GC still moving; giro2026/femmes2026 are over and its "giro" handler
+      # is far pricier (a request per stage plus one per team), so leaving
+      # them out avoids pointless load on an already-final classification.
+      - name: Fetch riders
+        run: python scripts/fetch_riders.py tdf2026 vuelta2026
+        continue-on-error: true
+
       # Fetches actual race-day weather for any newly-finished stage
       # (data/<tour>-weather.json). Only stages whose race day has fully
       # passed are fetched — see the script's own docstring — and an
@@ -81,22 +93,22 @@ jobs:
         run: python scripts/fetch_weather.py
         continue-on-error: true
 
-      # Persist results and weather into the repo (persistence + history).
-      # A commit made by GITHUB_TOKEN does NOT trigger the workflow again ->
-      # no loop.
+      # Persist results, riders and weather into the repo (persistence +
+      # history). A commit made by GITHUB_TOKEN does NOT trigger the workflow
+      # again -> no loop.
       - name: Commit if changed
         run: |
           git config user.name "tdf-bot"
           git config user.email "actions@users.noreply.github.com"
-          if ! ls data/*-results.json data/*-weather.json >/dev/null 2>&1; then
-            echo "No results or weather available yet, nothing to commit."
+          if ! ls data/*-results.json data/*-riders.json data/*-weather.json >/dev/null 2>&1; then
+            echo "No results, riders or weather available yet, nothing to commit."
             exit 0
           fi
-          git add data/*-results.json data/*-weather.json
+          git add data/*-results.json data/*-riders.json data/*-weather.json
           if git diff --cached --quiet; then
             echo "No changes."
           else
-            git commit -m "Results & weather updated $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "Results, riders & weather updated $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
 
