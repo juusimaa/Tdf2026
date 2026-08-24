@@ -61,6 +61,14 @@
   /* ---------- stat row ---------- */
   .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-bottom:2px solid var(--color-divider);}
   .statrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  @media (max-width:980px){
+    .statrow{grid-template-columns:1fr 1fr;}
+    .statrow > *{border-right:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);}
+    .statrow > *:nth-child(2n){border-right:0;}
+    .statrow > *:nth-child(2n+1):nth-last-child(-n+2),
+    .statrow > *:nth-child(2n+1):nth-last-child(-n+2) ~ *{border-bottom:0;}
+    .statrow > *:nth-child(2n+1):nth-last-child(1){border-right:0;grid-column:1/-1;}
+  }
   .statcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
   .statcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
   .statcell .value{font-family:var(--font-heading);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:-.01em;}
@@ -70,6 +78,9 @@
   .tabbtn{font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--color-neutral-600);border:0;border-right:2px solid var(--color-divider);padding:14px clamp(18px,3vw,32px);cursor:pointer;transition:background .15s ease;}
   .tabbtn:hover{color:var(--color-text);}
   .tabbtn.active{background:var(--color-text);color:var(--color-bg);}
+  @media (max-width:760px){
+    .tabbtn{flex:1 1 0;padding:12px 6px;font-size:11px;letter-spacing:.03em;text-align:center;}
+  }
   .view{display:none;}
   .view.active{display:block;}
 
@@ -106,6 +117,14 @@
 
   .factrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:2px solid var(--color-divider);}
   .factrow > *:not(:last-child){border-right:2px solid var(--color-divider);}
+  @media (max-width:980px){
+    .factrow{grid-template-columns:1fr 1fr;}
+    .factrow > *{border-right:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);}
+    .factrow > *:nth-child(2n){border-right:0;}
+    .factrow > *:nth-child(2n+1):nth-last-child(-n+2),
+    .factrow > *:nth-child(2n+1):nth-last-child(-n+2) ~ *{border-bottom:0;}
+    .factrow > *:nth-child(2n+1):nth-last-child(1){border-right:0;grid-column:1/-1;}
+  }
   .factcell{display:flex;flex-direction:column;gap:6px;padding:var(--space-4) clamp(20px,3vw,32px);}
   .factcell .label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600);}
   .factcell .value{font-family:var(--font-heading);font-weight:700;font-size:18px;}
