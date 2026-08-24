@@ -97,6 +97,7 @@
   .stagerail-list{display:flex;flex-direction:column;list-style:none;margin:0;padding:0;flex:1 1 auto;min-height:0;overflow-y:auto;}
   @media (max-width:980px){.stagerail-list{overflow-y:visible;}}
   .stage-item{margin:0;}
+  .stage-detail-row{list-style:none;margin:0;border-bottom:2px solid var(--color-divider);}
   .stage-btn{display:flex;gap:12px;align-items:center;width:100%;padding:11px var(--space-4);border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;font-family:var(--font-body);text-align:left;background:transparent;color:var(--color-text);transition:background .12s ease;}
   .stage-btn:hover{background:var(--color-accent-100);}
   .stage-btn.active{background:var(--color-text);color:var(--color-bg);}
@@ -980,6 +981,9 @@ let mapExpanded = false; // persists across stage switches; renderPanel reflects
 let activeIdx = 0;
 function renderStageList(){
   const listEl=document.getElementById('stageList');
+  const stagelayout = document.querySelector('.stagelayout');
+  const panel = document.getElementById('panel');
+  if(panel && stagelayout && listEl.contains(panel)) stagelayout.appendChild(panel);
   listEl.innerHTML='';
   stages.forEach((s,idx)=>{
     const li=document.createElement('li'); li.className='stage-item';
@@ -1002,6 +1006,7 @@ function renderStageList(){
     btn.addEventListener('click',()=>selectStage(idx));
     li.appendChild(btn); listEl.appendChild(li);
   });
+  positionPanel();
 }
 
 /* Keeps the stage-rail column exactly as tall as the detail panel next to
@@ -1013,13 +1018,38 @@ function syncStageListHeight(){
   if(window.innerWidth<=980){ list.style.height=''; return; }
   list.style.height=panel.offsetHeight+'px';
 }
-window.addEventListener('resize', syncStageListHeight);
+window.addEventListener('resize', ()=>{ syncStageListHeight(); positionPanel(); });
+
+/* Below the 980px breakpoint the detail panel has no side column to live in,
+   so it's moved into the stage list right after the selected stage's row —
+   otherwise it renders below the entire list, far from the row that opened
+   it. Above the breakpoint it moves back into its own grid column. */
+function positionPanel(){
+  const panel = document.getElementById('panel');
+  const stagelayout = document.querySelector('.stagelayout');
+  const list = document.getElementById('stageList');
+  if(!panel || !stagelayout || !list) return;
+  list.querySelectorAll('.stage-detail-row').forEach(row=>row.remove());
+  if(window.innerWidth<=980){
+    const activeBtn = list.querySelector('.stage-btn.active');
+    const activeLi = activeBtn ? activeBtn.closest('.stage-item') : null;
+    if(activeLi){
+      const row = document.createElement('li');
+      row.className = 'stage-detail-row';
+      row.appendChild(panel);
+      activeLi.insertAdjacentElement('afterend', row);
+      return;
+    }
+  }
+  stagelayout.appendChild(panel);
+}
 
 function selectStage(idx){
   activeIdx=idx;
   document.querySelectorAll('.stage-btn').forEach(b=>b.classList.toggle('active',+b.dataset.idx===idx));
   const b=document.querySelector(`.stage-btn[data-idx="${idx}"]`); if(b) b.scrollIntoView({block:'nearest'});
   renderPanel(stages[idx]);
+  positionPanel();
   syncStageListHeight();
 }
 
