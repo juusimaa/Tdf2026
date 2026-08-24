@@ -767,7 +767,11 @@ function genProfile(st){
   if(lastPt[0] < total-0.5) pts.push([total, st.summit?90:18]);
   else if(st.summit) lastPt[1]=Math.max(lastPt[1],90);
   const out=[];
-  pts.forEach(p=>{ const x=Math.max(0,Math.min(total,p[0])); if(!out.length || x>out[out.length-1][0]) out.push([+x.toFixed(1),p[1]]); });
+  pts.forEach(p=>{
+    const x=+Math.max(0,Math.min(total,p[0])).toFixed(1);
+    if(out.length && x===out[out.length-1][0]) out[out.length-1][1]=Math.max(out[out.length-1][1],p[1]);
+    else if(!out.length || x>out[out.length-1][0]) out.push([x,p[1]]);
+  });
   return out;
 }
 function buildPath(points,totalKm,W,H,padL,padR,padT,padB){
