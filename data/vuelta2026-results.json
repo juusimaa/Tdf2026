@@ -1,5 +1,5 @@
 {
- "afterStage": 2,
+ "afterStage": 3,
  "stageWinners": [
   {
    "n": 1,
@@ -8,6 +8,10 @@
   {
    "n": 2,
    "winner": "James Matthew BRENNAN"
+  },
+  {
+   "n": 3,
+   "winner": ""
   }
  ],
  "gc": {
@@ -1461,14 +1465,6 @@
    },
    {
     "pos": 182,
-    "rider": "A. KIRSCH",
-    "team": "COFIDIS",
-    "nat": "LUX",
-    "val": "05h 15' 25''",
-    "gap": "+ 00h 16' 45''"
-   },
-   {
-    "pos": 183,
     "rider": "S. SENTJENS",
     "team": "ALPECIN-PREMIER TECH",
     "nat": "BEL",
@@ -7037,6 +7033,6 @@
    ]
   }
  },
- "updated": "2026-08-23T19:18:55.911371+03:00",
- "updatedText": "Päivitetty 23.08.2026 klo 19.18 (Suomen aikaa)"
+ "updated": "2026-08-24T21:40:57.587746+03:00",
+ "updatedText": "Päivitetty 24.08.2026 klo 21.40 (Suomen aikaa)"
 }
