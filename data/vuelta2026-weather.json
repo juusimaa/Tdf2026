@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-23T16:38:41+03:00",
+ "updated": "2026-08-24T06:52:48+03:00",
  "stages": {
   "1": {
    "start": {
@@ -31,6 +31,30 @@
     "precip": 0.3,
     "humidity": 64,
     "town": "Monaco"
+   }
+  },
+  "2": {
+   "start": {
+    "temp": 28,
+    "low": 19,
+    "feels": 32,
+    "cond": "showers",
+    "wind": 13,
+    "dir": "E",
+    "precip": 0.2,
+    "humidity": 64,
+    "town": "Monaco"
+   },
+   "finish": {
+    "temp": 31,
+    "low": 14,
+    "feels": 31,
+    "cond": "sunny",
+    "wind": 10,
+    "dir": "W",
+    "precip": 0.0,
+    "humidity": 53,
+    "town": "Manosque"
    }
   }
  }
