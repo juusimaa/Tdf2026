@@ -65,7 +65,14 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 # RDP tolerance in degrees (~0.0006 deg ≈ 60 m). Larger => fewer points.
+# A flat 60 m tolerance is fine for the 3-6k-point transitional stages, but it
+# flattens the hairpins on short/tight tracks (a Monaco circuit prologue, an
+# ITT loop) that only have a few hundred raw points to begin with -- and
+# keeping those dense costs almost nothing in file size. So short tracks get
+# a much finer tolerance instead.
 EPSILON = 0.0006
+FINE_EPSILON = 0.00008
+FINE_POINT_THRESHOLD = 1000
 
 
 def fetch(url, referer):
@@ -184,7 +191,8 @@ def _write_payload(race, stages, ends, total, source_text):
 
 
 def _add_stage(stages, ends, n, pts):
-    simp = rdp(pts, EPSILON)
+    eps = FINE_EPSILON if len(pts) < FINE_POINT_THRESHOLD else EPSILON
+    simp = rdp(pts, eps)
     stages[str(n)] = [[round(la, 5), round(lo, 5)] for la, lo in simp]
     # Start/finish as [lon, lat] (the page's minimap convention), 3 dp.
     ends[str(n)] = [[round(pts[0][1], 3), round(pts[0][0], 3)],
