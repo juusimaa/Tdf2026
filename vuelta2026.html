@@ -854,7 +854,7 @@ let routesData = null, routesPromise = null;
 function loadRoutes(){
   if(routesData) return Promise.resolve(routesData);
   if(!routesPromise){
-    routesPromise = fetch(ROUTES_URL, {cache:'force-cache'})
+    routesPromise = fetch(ROUTES_URL, {cache:'no-cache'})
       .then(r => r.ok ? r.json() : null)
       .then(d => { routesData = (d && d.stages) ? d : {stages:{}}; return routesData; })
       .catch(() => { routesData = {stages:{}}; return routesData; });
