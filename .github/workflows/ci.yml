@@ -1,0 +1,35 @@
+name: CI
+
+# Fast feedback on pull requests: typecheck/build + unit tests only — no
+# scraping, no Pages deploy. That heavier pipeline lives in
+# update-results.yml and runs on push to main / schedule.
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Compiles src/race-page.ts -> dist/race-page.js; fails the job on any
+      # type error.
+      - name: Build TypeScript
+        run: npm run build
+
+      # Unit tests for the pure formatting/parsing helpers in
+      # src/race-page.ts (see test/race-page.test.ts).
+      - name: Run tests
+        run: npm test

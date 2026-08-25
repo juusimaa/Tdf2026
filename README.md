@@ -17,6 +17,7 @@ vuelta2026.html                       # Vuelta a España — stages, profiles, m
 src/race-page.ts                      # helper functions shared by all four race pages (i18n, formatting, rendering) — compiles to dist/race-page.js
 src/globals.d.ts                      # ambient types for the globals each page's own inline <script> defines
 dist/race-page.js                     # build output (gitignored) — what the HTML pages actually load, via `npm run build`
+test/race-page.test.ts                # Vitest unit tests for the pure helpers in src/race-page.ts, via `npm test`
 race-page.css                         # shared component styles for all four race pages, layered on modernist.css
 modernist.css                         # shared design tokens (colour, type, spacing) used by every page
 theme.css                             # earlier colour theme — no longer linked from any page, kept for reference
@@ -31,7 +32,8 @@ scripts/fetch_results.py              # results fetch script (scrapes letour.fr 
 scripts/fetch_riders.py               # start-list fetch script (letour.fr, letourfemmes.fr, lavuelta.es, giroditalia.it)
 scripts/fetch_routes.py               # route fetch script (cyclingstage.com GPX, or komoot for the Vuelta) — run by hand
 scripts/fetch_weather.py              # race-day weather fetch script (Open-Meteo historical archive)
-.github/workflows/update-results.yml  # GitHub Actions build & publish workflow
+.github/workflows/update-results.yml  # GitHub Actions build, test & publish workflow (push to main / schedule)
+.github/workflows/ci.yml              # GitHub Actions build & test workflow (pull requests)
 ```
 
 `index.html` lets the visitor pick a race; each tour page has a back arrow to
@@ -47,12 +49,18 @@ Browsers can't run `.ts` directly, so it needs a build step:
 npm install       # once
 npm run build     # compiles src/race-page.ts -> dist/race-page.js
 npm run watch     # or: rebuild on every save, while editing
+npm test          # runs the Vitest suite in test/ against dist/race-page.js (build first)
 ```
 
 `dist/` is gitignored (build output, not source) — run `npm run build` after
 a fresh clone before opening any page locally, or nothing will render. CI
-does this automatically (see the workflow) before every deploy, so
+does this automatically (see the workflows) before every deploy, so
 `dist/race-page.js` is always rebuilt fresh from `src/race-page.ts`.
+
+Pull requests run `.github/workflows/ci.yml` (build + `npm test`); pushes to
+`main` additionally run `.github/workflows/update-results.yml`, which fetches
+results/riders/weather and deploys to Pages — its build job runs the same
+tests, and the deploy job (`needs: build`) only runs if they pass.
 
 ### Live vs. static tours
 

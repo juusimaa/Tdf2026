@@ -143,10 +143,15 @@ jobs:
       # produced here, before packaging, on every run. node_modules is
       # removed straight after: upload-pages-artifact packages the whole
       # working directory (path: .), and it has no business in the deploy.
-      - name: Build TypeScript
+      #
+      # No continue-on-error here: a failing test fails this step, which
+      # fails the build job, which the deploy job (needs: build) then never
+      # runs — so a broken helper never reaches Pages.
+      - name: Build TypeScript and run tests
         run: |
           npm ci
           npm run build
+          npm test
           rm -rf node_modules
 
       - uses: actions/configure-pages@v6
