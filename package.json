@@ -4,9 +4,13 @@
   "description": "Grand tour tracker (TdF, Giro, Vuelta, Tour de France Femmes) — static site, published via GitHub Pages",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "test": "vitest run"
   },
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "@types/node": "^26.3.0",
+    "jsdom": "^30.0.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   }
 }

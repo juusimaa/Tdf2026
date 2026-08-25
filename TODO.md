@@ -7,7 +7,6 @@
 * Fix stage-profile marker colors to match the official convention (climbs red, sprints green). Right now climbs and intermediate sprints render in the *same* color family — climbs use `CAT_COLOR` (accent-derived shades) and sprints use `var(--color-accent)`, and the site accent is already a red/orange, so on the chart they're barely distinguishable. Marker code is duplicated per page in each `renderProfile()`: `tdf2026.html`, `giro2026.html`, `femmes2026.html` (all three already draw sprint markers), and `vuelta2026.html` (climbs only for now — sprint locations aren't published yet). Note that color are different for each race.
 
 ## Tooling / educational
-* Unit tests (Vitest) for the pure formatting/parsing helpers in `src/race-page.ts` (`fmtDate`, `fmtKm`, `timeToHours`, etc.) — catches regressions when the scraped JSON shape changes.
 * ESLint + Prettier, wired into CI so style/correctness issues can't merge.
 * CI-driven build+deploy for `dist/race-page.js` (currently built locally and hand-committed) — a GitHub Actions step, similar in spirit to `.github/workflows/update-results.yml`, that runs `tsc` and deploys on push.
 * PWA support (service worker + manifest) so the race tracker is installable and usable offline/with a flaky connection at the roadside.
