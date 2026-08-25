@@ -7038,9 +7038,16 @@
    "rows": [],
    "cancelled": true,
    "cancelledReason": "weather",
-   "withdrawals": []
+   "withdrawals": [
+    {
+     "bib": 143,
+     "rider": "KIRSCH Alex",
+     "team": "COFIDIS",
+     "reason": "DNF"
+    }
+   ]
   }
  },
- "updated": "2026-08-25T06:04:14.602465+03:00",
- "updatedText": "Päivitetty 25.08.2026 klo 06.04 (Suomen aikaa)"
+ "updated": "2026-08-25T06:21:00.400813+03:00",
+ "updatedText": "Päivitetty 25.08.2026 klo 06.21 (Suomen aikaa)"
 }
