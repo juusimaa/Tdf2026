@@ -18,47 +18,47 @@
      - the favicon SVG data-URI (--solid-bg / --gold / --red)
    ============================================================================ */
 
-:root{
-  color-scheme:light dark;
+:root {
+  color-scheme: light dark;
 
   /* --- Base surfaces & text ------------------------------------------------ */
-  --paper:#E9ECE4;          /* page background */
-  --paper-panel:#F4F6EF;    /* cards / panels */
-  --ink:#1E2A22;            /* primary text */
-  --ink-soft:#4C5A50;       /* secondary text */
-  --line:#C6CCBC;           /* borders / rules */
-  --hover:rgba(0,0,0,0.04); /* subtle hover film — flips to a light film in dark mode */
-  --shadow:0 2px 10px rgba(30,42,34,0.08);
-  --shadow-lift:0 8px 26px rgba(30,42,34,0.14);
+  --paper: #e9ece4; /* page background */
+  --paper-panel: #f4f6ef; /* cards / panels */
+  --ink: #1e2a22; /* primary text */
+  --ink-soft: #4c5a50; /* secondary text */
+  --line: #c6ccbc; /* borders / rules */
+  --hover: rgba(0, 0, 0, 0.04); /* subtle hover film — flips to a light film in dark mode */
+  --shadow: 0 2px 10px rgba(30, 42, 34, 0.08);
+  --shadow-lift: 0 8px 26px rgba(30, 42, 34, 0.14);
   /* Solid "chip" (datebadge, active language button): dark bg + light text
      in light mode, inverted in dark mode. */
-  --solid-bg:#1E2A22;
-  --solid-fg:#ffffff;
+  --solid-bg: #1e2a22;
+  --solid-fg: #ffffff;
 
   /* --- Accent hues --------------------------------------------------------- */
-  --gold:#C99A2E;
-  --gold-deep:#9C7620;
-  --red:#B23B32;
-  --green:#3E7A57;          /* kept identical in dark mode so the white-text
+  --gold: #c99a2e;
+  --gold-deep: #9c7620;
+  --red: #b23b32;
+  --green: #3e7a57; /* kept identical in dark mode so the white-text
                                sprint chip stays AA-legible */
-  --blue:#3B6485;
-  --olive:#7E8A46;          /* hilly-stage colour; same in both themes */
-  --pink:#D14E7C;           /* Giro card accent on the index page */
-  --grey:#8B8F84;           /* same in both themes */
-  --grey-road:var(--grey);  /* alias used by the TdF page */
+  --blue: #3b6485;
+  --olive: #7e8a46; /* hilly-stage colour; same in both themes */
+  --pink: #d14e7c; /* Giro card accent on the index page */
+  --grey: #8b8f84; /* same in both themes */
+  --grey-road: var(--grey); /* alias used by the TdF page */
 
   /* --- Giro (maglia colours) ----------------------------------------------- */
-  --rosa:#D6497F;
-  --rosa-deep:#B23368;
-  --ciclamino:#8E4BB0;
-  --azzurra:#2E7CBF;
-  --bianca:#8B8F84;
+  --rosa: #d6497f;
+  --rosa-deep: #b23368;
+  --ciclamino: #8e4bb0;
+  --azzurra: #2e7cbf;
+  --bianca: #8b8f84;
 
   /* --- Vuelta (La Roja) ---------------------------------------------------- */
   /* Named --roja (not --accent): index.html uses --accent as a per-card
      custom property, so a global --accent would shadow its fallback. */
-  --roja:#C6362F;
-  --roja-deep:#9E241E;
+  --roja: #c6362f;
+  --roja-deep: #9e241e;
 
   /* --- Climb-category chart colours ---------------------------------------- */
   /* Numbered by severity, hardest first, so each race maps its own category
@@ -66,43 +66,43 @@
      climb-1..4. Deliberately identical in light and dark mode: these are
      fixed categorical chart colours used at low opacity over theme-coloured
      profiles, and the legends must match the markers exactly. */
-  --climb-1:#B23B32;
-  --climb-2:#C9622E;
-  --climb-3:#C99A2E;
-  --climb-4:#7E8A46;
-  --climb-5:#8B9C7A;
-  --climb-none:var(--grey); /* uncategorised climbs */
+  --climb-1: #b23b32;
+  --climb-2: #c9622e;
+  --climb-3: #c99a2e;
+  --climb-4: #7e8a46;
+  --climb-5: #8b9c7a;
+  --climb-none: var(--grey); /* uncategorised climbs */
 }
 
 /* Dark theme: follows the OS / browser. Only the palette is overridden; the
    pages' layout and components reuse these same custom properties. */
-@media (prefers-color-scheme: dark){
-  :root{
-    --paper:#12160F;
-    --paper-panel:#1B211A;
-    --ink:#E7ECDF;
-    --ink-soft:#9FA99A;
-    --line:#333B31;
-    --hover:rgba(255,255,255,0.06);
-    --shadow:0 2px 14px rgba(0,0,0,0.45);
-    --shadow-lift:0 10px 30px rgba(0,0,0,0.55);
-    --solid-bg:#E7ECDF;
-    --solid-fg:#12160F;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #12160f;
+    --paper-panel: #1b211a;
+    --ink: #e7ecdf;
+    --ink-soft: #9fa99a;
+    --line: #333b31;
+    --hover: rgba(255, 255, 255, 0.06);
+    --shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+    --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.55);
+    --solid-bg: #e7ecdf;
+    --solid-fg: #12160f;
 
-    --gold:#D8AC44;
-    --gold-deep:#E3BE63;
-    --red:#D3574C;
-    --blue:#77ABD2;
-    --pink:#E06A93;
+    --gold: #d8ac44;
+    --gold-deep: #e3be63;
+    --red: #d3574c;
+    --blue: #77abd2;
+    --pink: #e06a93;
 
-    --rosa:#EE6E9F;
-    --rosa-deep:#EE6E9F;
-    --ciclamino:#B173D0;
-    --azzurra:#5CA0DA;
-    --bianca:#AEB4A6;
+    --rosa: #ee6e9f;
+    --rosa-deep: #ee6e9f;
+    --ciclamino: #b173d0;
+    --azzurra: #5ca0da;
+    --bianca: #aeb4a6;
 
-    --roja:#E15A50;
-    --roja-deep:#E15A50;
+    --roja: #e15a50;
+    --roja-deep: #e15a50;
   }
 }
 
@@ -112,18 +112,51 @@
    all flags) and the Spanish yellow get a thin ink stroke so they stay
    legible on light paper; in dark mode they already read, so the stroke
    fades. */
-.fr-b{color:#0055A4;}
-.fr-r{color:#EF4135;}
-.it-g{color:#009246;}
-.it-r{color:#CE2B37;}
-.es-r{color:#AA151B;}
-.es-y{color:#F1BF00;-webkit-text-stroke:.02em rgba(30,42,34,.5);text-shadow:0 1px 2px rgba(30,42,34,.16);}
-.fs-w{color:#fff;-webkit-text-stroke:.022em rgba(30,42,34,.55);text-shadow:0 1px 2px rgba(30,42,34,.18);}
-@media (prefers-color-scheme: dark){
-  .fr-b{color:#5B93DE;}
-  .it-g{color:#2FB56A;}
-  .it-r{color:#E04A55;}
-  .es-r{color:#D8474D;}
-  .es-y{color:#F1C33B;-webkit-text-stroke:.012em rgba(0,0,0,.3);text-shadow:none;}
-  .fs-w{-webkit-text-stroke:.014em rgba(0,0,0,.35);text-shadow:none;}
+.fr-b {
+  color: #0055a4;
+}
+.fr-r {
+  color: #ef4135;
+}
+.it-g {
+  color: #009246;
+}
+.it-r {
+  color: #ce2b37;
+}
+.es-r {
+  color: #aa151b;
+}
+.es-y {
+  color: #f1bf00;
+  -webkit-text-stroke: 0.02em rgba(30, 42, 34, 0.5);
+  text-shadow: 0 1px 2px rgba(30, 42, 34, 0.16);
+}
+.fs-w {
+  color: #fff;
+  -webkit-text-stroke: 0.022em rgba(30, 42, 34, 0.55);
+  text-shadow: 0 1px 2px rgba(30, 42, 34, 0.18);
+}
+@media (prefers-color-scheme: dark) {
+  .fr-b {
+    color: #5b93de;
+  }
+  .it-g {
+    color: #2fb56a;
+  }
+  .it-r {
+    color: #e04a55;
+  }
+  .es-r {
+    color: #d8474d;
+  }
+  .es-y {
+    color: #f1c33b;
+    -webkit-text-stroke: 0.012em rgba(0, 0, 0, 0.3);
+    text-shadow: none;
+  }
+  .fs-w {
+    -webkit-text-stroke: 0.014em rgba(0, 0, 0, 0.35);
+    text-shadow: none;
+  }
 }

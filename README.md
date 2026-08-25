@@ -64,20 +64,20 @@ tests, and the deploy job (`needs: build`) only runs if they pass.
 
 ### Live vs. static tours
 
-- **Vuelta a España** (`vuelta2026`) is the only *live* tour right now: it is
+- **Vuelta a España** (`vuelta2026`) is the only _live_ tour right now: it is
   registered in the `TOURS` dict in `scripts/fetch_results.py` (scraping
   lavuelta.es) and in `scripts/fetch_weather.py`, so the scheduled workflow
   keeps `data/vuelta2026-results.json` and `data/vuelta2026-weather.json`
   current as stages are raced.
-- **Tour de France** (`tdf2026`) is a *finished* race but stays registered in
+- **Tour de France** (`tdf2026`) is a _finished_ race but stays registered in
   `fetch_results.py`'s `TOURS`: the workflow still polls letour.fr for it on
   every run, but the final data never changes, so it just re-confirms the
   same result and never produces an empty commit (see "How it works" below).
 - **Giro d'Italia** (`giro2026`) and **Tour de France Femmes** (`femmes2026`)
-  are *finished* and **static**: their classifications and stage winners are
+  are _finished_ and **static**: their classifications and stage winners are
   stored once in `data/<tour>-results.json` (same schema as the others) and
   never refetched, because they are **not** in `fetch_results.py`'s `TOURS`
-  registry at all. (They *are* registered in `fetch_riders.py`, which is only
+  registry at all. (They _are_ registered in `fetch_riders.py`, which is only
   ever run by hand — see below.) Their Stages tabs (routes, distances,
   illustrative profiles) are built from a small hardcoded `stages` array in
   each page itself.
@@ -226,7 +226,7 @@ stage schedule and time zone, to cover it too.
 
 The site originally scraped procyclingstats.com via the `procyclingstats`
 Python package. That site sits behind Cloudflare bot protection, which
-blocks plain scraper traffic — and blocks it *harder* from GitHub Actions'
+blocks plain scraper traffic — and blocks it _harder_ from GitHub Actions'
 datacenter IPs than from a home network, to the point where even
 `cloudscraper` (a Cloudflare-bypass library) couldn't reliably get through.
 letour.fr, the official Tour de France site, serves its rankings as plain
