@@ -148,7 +148,7 @@ function wxFor(n){
 function riddenStages(){
   return RESULTS.stageWinners.filter(s=>{
     const sr = RESULTS.stageResults[s.n];
-    return (sr && Array.isArray(sr.rows) && sr.rows.length) || s.winner;
+    return (sr && Array.isArray(sr.rows) && sr.rows.length) || s.winner || s.cancelled;
   });
 }
 function stageAvgSpeed(n){

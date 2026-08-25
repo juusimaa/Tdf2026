@@ -178,6 +178,9 @@ const STRINGS = {
     stageResultTitle: n => `Etapin ${n} tulos`,
     stageResultValHead: 'Aika / ero',
     stageResultEmpty: 'Tämän etapin tuloksia ei ole vielä saatavilla.',
+    stageCancelledLabel: 'Etappi peruttu',
+    stageCancelledDetail: reason => `Tämä etappi peruttiin${reason ? ' ' + reason : ''}.`,
+    cancelledReasons: {weather: 'huonon sään vuoksi'},
     stageStatEmpty: 'Ei jaettu tällä etapilla.',
     stageStats: {
       points:{name:'Etapilla jaetut pisteet', fr:'Pistekilpailun pisteet tältä etapilta', valHead:'Pisteet'},
@@ -264,6 +267,9 @@ const STRINGS = {
     stageResultTitle: n => `Stage ${n} result`,
     stageResultValHead: 'Time / gap',
     stageResultEmpty: 'Results for this stage are not available yet.',
+    stageCancelledLabel: 'Stage cancelled',
+    stageCancelledDetail: reason => `This stage was cancelled${reason ? ' ' + reason : ''}.`,
+    cancelledReasons: {weather: 'due to bad weather'},
     stageStatEmpty: 'Not awarded on this stage.',
     stageStats: {
       points:{name:'Points won on the stage', fr:'Points classification points from this stage', valHead:'Points'},
@@ -350,6 +356,9 @@ const STRINGS = {
     stageResultTitle: n => `Résultat de l’étape ${n}`,
     stageResultValHead: 'Temps / écart',
     stageResultEmpty: 'Les résultats de cette étape ne sont pas encore disponibles.',
+    stageCancelledLabel: 'Étape annulée',
+    stageCancelledDetail: reason => `Cette étape a été annulée${reason ? ' ' + reason : ''}.`,
+    cancelledReasons: {weather: 'en raison de mauvaises conditions météo'},
     stageStatEmpty: 'Non attribué sur cette étape.',
     stageStats: {
       points:{name:'Points gagnés sur l’étape', fr:'Points du classement par points sur cette étape', valHead:'Points'},
@@ -984,7 +993,7 @@ function renderGeneralRankings(){
       return `<tr>
         <td class="n">${s.n}</td>
         <td class="route">${esc(s.route)}</td>
-        <td class="winner">${esc(s.winner) || '—'}</td>
+        <td class="winner">${s.cancelled ? esc(t('stageCancelledLabel')) : (esc(s.winner) || '—')}</td>
         <td class="speed">${spd ? fmtSpeed(spd) : '—'}</td>
       </tr>`;
     }).join('')}</tbody></table>
@@ -1024,7 +1033,9 @@ function renderStageResult(n){
   const meta = RESULTS.stageWinners.find(s=>String(s.n)===String(n));
   const route = meta ? meta.route : '';
 
-  const mainBody = rows.length ? stageStatTable(rows, '__stage') : `<p class="empty-cls">${t('stageResultEmpty')}</p>`;
+  const mainBody = sr.cancelled
+    ? `<div class="status-card">${esc(t('stageCancelledDetail')(t('cancelledReasons')[sr.cancelledReason] || ''))}</div>`
+    : (rows.length ? stageStatTable(rows, '__stage') : `<p class="empty-cls">${t('stageResultEmpty')}</p>`);
   const spd = stageAvgSpeed(n);
   const sub = route + (spd ? ` · ${t('avgSpeed')(fmtSpeed(spd))}` : '');
   const mainHTML = `<div class="cls-card" style="border-bottom:2px solid var(--color-divider)">
@@ -1163,7 +1174,9 @@ async function loadResults(){
     if(Array.isArray(data.stageWinners)){
       data.stageWinners.forEach(w=>{
         const row = RESULTS.stageWinners.find(s=>s.n===w.n);
-        if(row && w.winner) row.winner = w.winner;
+        if(!row) return;
+        if(w.winner) row.winner = w.winner;
+        if(w.cancelled){ row.cancelled = true; row.cancelledReason = w.cancelledReason; }
       });
     }
     if(data.updated) RESULTS.updated = data.updated;
