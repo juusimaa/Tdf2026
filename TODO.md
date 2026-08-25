@@ -10,6 +10,5 @@
 
 ## Tooling / educational
 
-- CI-driven build+deploy for `dist/race-page.js` (currently built locally and hand-committed) — a GitHub Actions step, similar in spirit to `.github/workflows/update-results.yml`, that runs `tsc` and deploys on push.
 - PWA support (service worker + manifest) so the race tracker is installable and usable offline/with a flaky connection at the roadside.
 - Consider React (+ Vite) for the per-page rendering logic, which today is direct DOM manipulation in each page's inline `<script>`. Worth trying on a single page first (e.g. `tdf2026.html`) as a proof of concept before deciding whether to carry it to the rest — real tooling step up (adds a bundler/JSX) for what's currently a plain `tsc` compile.
