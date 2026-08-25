@@ -2,7 +2,7 @@
  "afterStage": 4,
  "teamCount": 23,
  "riderCount": 184,
- "finishers": 0,
+ "finishers": 6,
  "teams": [
   {
    "name": "RED BULL - BORA - HANSGROHE",
@@ -16,10 +16,10 @@
      "bib": 1,
      "name": "Primoz ROGLIC",
      "nat": "SLO",
-     "gcPos": null,
-     "gcVal": "",
-     "gcGap": "",
-     "status": "DNF",
+     "gcPos": 2,
+     "gcVal": "07h 42' 20''",
+     "gcGap": "+ 00h 03' 21''",
+     "status": "",
      "statusStage": null
     },
     {
@@ -106,10 +106,10 @@
      "bib": 11,
      "name": "Tadej POGACAR",
      "nat": "SLO",
-     "gcPos": null,
-     "gcVal": "",
+     "gcPos": 1,
+     "gcVal": "07h 38' 59''",
      "gcGap": "",
-     "status": "DNF",
+     "status": "",
      "statusStage": null
     },
     {
@@ -194,12 +194,12 @@
    "riders": [
     {
      "bib": 21,
-     "name": "Enric MAS",
+     "name": "Enric MAS NICOLAU",
      "nat": "ESP",
-     "gcPos": null,
-     "gcVal": "",
-     "gcGap": "",
-     "status": "DNF",
+     "gcPos": 3,
+     "gcVal": "07h 42' 31''",
+     "gcGap": "+ 00h 03' 32''",
+     "status": "",
      "statusStage": null
     },
     {
@@ -326,10 +326,10 @@
      "bib": 35,
      "name": "Sepp KUSS",
      "nat": "USA",
-     "gcPos": null,
-     "gcVal": "",
-     "gcGap": "",
-     "status": "DNF",
+     "gcPos": 4,
+     "gcVal": "07h 42' 43''",
+     "gcGap": "+ 00h 03' 44''",
+     "status": "",
      "statusStage": null
     },
     {
@@ -556,10 +556,10 @@
      "bib": 61,
      "name": "Oscar ONLEY",
      "nat": "GBR",
-     "gcPos": null,
-     "gcVal": "",
-     "gcGap": "",
-     "status": "DNF",
+     "gcPos": 5,
+     "gcVal": "07h 42' 44''",
+     "gcGap": "+ 00h 03' 45''",
+     "status": "",
      "statusStage": null
     },
     {
@@ -1456,10 +1456,10 @@
      "bib": 161,
      "name": "Richard CARAPAZ",
      "nat": "ECU",
-     "gcPos": null,
-     "gcVal": "",
-     "gcGap": "",
-     "status": "DNF",
+     "gcPos": 6,
+     "gcVal": "07h 42' 49''",
+     "gcGap": "+ 00h 03' 50''",
+     "status": "",
      "statusStage": null
     },
     {
@@ -2075,6 +2075,6 @@
    ]
   }
  ],
- "updated": "2026-08-25T17:39:51.305829+03:00",
- "updatedText": "Päivitetty 25.08.2026 klo 17.39 (Suomen aikaa)"
+ "updated": "2026-08-25T18:37:40.012361+03:00",
+ "updatedText": "Päivitetty 25.08.2026 klo 18.37 (Suomen aikaa)"
 }
