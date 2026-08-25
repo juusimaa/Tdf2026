@@ -53,6 +53,17 @@ TOURS = {
     },
 }
 
+# Stages that were called off and will never have letour/lavuelta result data
+# -- e.g. a stage cancelled for bad weather. Keyed by (tour_id, stage number),
+# value is the reason code the front-end's `cancelledReasons` translation
+# table knows how to render (see <tour>.html's STRINGS). Maintained by hand:
+# add an entry here when a stage is cancelled. Applied unconditionally on
+# every run (see fetch_letour), so it survives -- and self-heals after -- the
+# scraper finding no rows for that stage.
+CANCELLED_STAGES = {
+    ("vuelta2026", 3): "weather",
+}
+
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -303,6 +314,8 @@ STAGE_KEYS = ("rows", "points", "mountains", "youth", "teams", "combative")
 
 
 def stage_entry_complete(entry) -> bool:
+    if entry.get("cancelled"):
+        return True
     if not entry.get("rows") or any(k not in entry for k in STAGE_KEYS):
         return False
     for key, cfg in STAGE_CLASS_CONFIG.items():
@@ -313,7 +326,7 @@ def stage_entry_complete(entry) -> bool:
     return True
 
 
-def fetch_letour(base: str, out: Path) -> int:
+def fetch_letour(tour_id: str, base: str, out: Path) -> int:
     """Scrape one letour.fr-hosted tour into `out`. Returns 0 always."""
     try:
         main_html = fetch(f"{base}/en/rankings")
@@ -374,17 +387,30 @@ def fetch_letour(base: str, out: Path) -> int:
     for n in range(1, stage_no + 1):
         key = str(n)
         winner = previous_winners.get(n, "")
-        entry = prev_stage_results.get(key) or {}
-        if n == stage_no or not stage_entry_complete(entry):
-            try:
-                entry = fetch_stage_data(base, n) or entry
-            except Exception as e:
-                print(f"  stage {n} results: {e}")
+        cancel_reason = CANCELLED_STAGES.get((tour_id, n))
+        if cancel_reason:
+            # Never fetch -- a cancelled stage has no result pages, and
+            # letour/lavuelta may still list it as "upcoming" or omit it
+            # entirely. The override alone decides its fate on every run.
+            entry = {"rows": [], "cancelled": True, "cancelledReason": cancel_reason}
+        else:
+            entry = prev_stage_results.get(key) or {}
+            if n == stage_no or not stage_entry_complete(entry):
+                try:
+                    entry = fetch_stage_data(base, n) or entry
+                except Exception as e:
+                    print(f"  stage {n} results: {e}")
         if entry.get("rows"):
             data["stageResults"][key] = entry
             if not winner:
                 winner = entry["rows"][0].get("rider", "")
-        data["stageWinners"].append({"n": n, "winner": winner})
+        elif entry.get("cancelled"):
+            data["stageResults"][key] = entry
+        winner_entry = {"n": n, "winner": winner}
+        if cancel_reason:
+            winner_entry["cancelled"] = True
+            winner_entry["cancelledReason"] = cancel_reason
+        data["stageWinners"].append(winner_entry)
 
     # Withdrawals come from one page covering every stage, so they are cheap
     # to refresh on every run (unlike the cached per-stage tables — and a DNS
@@ -431,7 +457,7 @@ def fetch_tour(tour_id: str, cfg: dict) -> int:
         print(f"[{tour_id}] no handler for source '{cfg['source']}' — skipping.")
         return 0
     print(f"=== {tour_id} ===")
-    return handler(cfg["base"], DATA_DIR / cfg["out"])
+    return handler(tour_id, cfg["base"], DATA_DIR / cfg["out"])
 
 
 def main() -> int:

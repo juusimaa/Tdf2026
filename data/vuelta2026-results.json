@@ -11,7 +11,9 @@
   },
   {
    "n": 3,
-   "winner": ""
+   "winner": "",
+   "cancelled": true,
+   "cancelledReason": "weather"
   }
  ],
  "gc": {
@@ -7031,6 +7033,12 @@
      "reason": "DNF"
     }
    ]
+  },
+  "3": {
+   "rows": [],
+   "cancelled": true,
+   "cancelledReason": "weather",
+   "withdrawals": []
   }
  },
  "updated": "2026-08-25T06:04:14.602465+03:00",
