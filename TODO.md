@@ -1,13 +1,16 @@
 # TODO
 
 ## Epic
-* New landing page: pick a year, then a race. `index.html` already does the race picker (Giro/TdF/Vuelta/Femmes grid) — this adds a year selector in front of it, defaulting to the current year. One page is fine; needs a `<year>/<race>` or `?year=` scheme once a second season's pages exist (today everything is hardcoded to `*2026.html`).
+
+- New landing page: pick a year, then a race. `index.html` already does the race picker (Giro/TdF/Vuelta/Femmes grid) — this adds a year selector in front of it, defaulting to the current year. One page is fine; needs a `<year>/<race>` or `?year=` scheme once a second season's pages exist (today everything is hardcoded to `*2026.html`).
 
 #### Minor
-* Fix stage-profile marker colors to match the official convention (climbs red, sprints green). Right now climbs and intermediate sprints render in the *same* color family — climbs use `CAT_COLOR` (accent-derived shades) and sprints use `var(--color-accent)`, and the site accent is already a red/orange, so on the chart they're barely distinguishable. Marker code is duplicated per page in each `renderProfile()`: `tdf2026.html`, `giro2026.html`, `femmes2026.html` (all three already draw sprint markers), and `vuelta2026.html` (climbs only for now — sprint locations aren't published yet). Note that color are different for each race.
+
+- Fix stage-profile marker colors to match the official convention (climbs red, sprints green). Right now climbs and intermediate sprints render in the _same_ color family — climbs use `CAT_COLOR` (accent-derived shades) and sprints use `var(--color-accent)`, and the site accent is already a red/orange, so on the chart they're barely distinguishable. Marker code is duplicated per page in each `renderProfile()`: `tdf2026.html`, `giro2026.html`, `femmes2026.html` (all three already draw sprint markers), and `vuelta2026.html` (climbs only for now — sprint locations aren't published yet). Note that color are different for each race.
 
 ## Tooling / educational
-* ESLint + Prettier, wired into CI so style/correctness issues can't merge.
-* CI-driven build+deploy for `dist/race-page.js` (currently built locally and hand-committed) — a GitHub Actions step, similar in spirit to `.github/workflows/update-results.yml`, that runs `tsc` and deploys on push.
-* PWA support (service worker + manifest) so the race tracker is installable and usable offline/with a flaky connection at the roadside.
-* Consider React (+ Vite) for the per-page rendering logic, which today is direct DOM manipulation in each page's inline `<script>`. Worth trying on a single page first (e.g. `tdf2026.html`) as a proof of concept before deciding whether to carry it to the rest — real tooling step up (adds a bundler/JSX) for what's currently a plain `tsc` compile.
+
+- Extend ESLint/Prettier coverage to the inline `<script>` blocks in `tdf2026.html`/`giro2026.html`/`vuelta2026.html`/`femmes2026.html` (currently out of scope — they're plain JS embedded in HTML, not picked up by the `src/**/*.ts`-focused config added in `eslint.config.mjs`).
+- CI-driven build+deploy for `dist/race-page.js` (currently built locally and hand-committed) — a GitHub Actions step, similar in spirit to `.github/workflows/update-results.yml`, that runs `tsc` and deploys on push.
+- PWA support (service worker + manifest) so the race tracker is installable and usable offline/with a flaky connection at the roadside.
+- Consider React (+ Vite) for the per-page rendering logic, which today is direct DOM manipulation in each page's inline `<script>`. Worth trying on a single page first (e.g. `tdf2026.html`) as a proof of concept before deciding whether to carry it to the rest — real tooling step up (adds a bundler/JSX) for what's currently a plain `tsc` compile.
