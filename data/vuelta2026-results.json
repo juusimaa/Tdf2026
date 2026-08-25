@@ -11,9 +11,7 @@
   },
   {
    "n": 3,
-   "winner": "",
-   "cancelled": true,
-   "cancelledReason": "weather"
+   "winner": ""
   }
  ],
  "gc": {
@@ -7033,13 +7031,8 @@
      "reason": "DNF"
     }
    ]
-  },
-  "3": {
-   "cancelled": true,
-   "cancelledReason": "weather",
-   "rows": []
   }
  },
- "updated": "2026-08-25T12:00:00+03:00",
- "updatedText": "Päivitetty 25.08.2026 klo 12.00 (Suomen aikaa)"
+ "updated": "2026-08-25T06:04:14.602465+03:00",
+ "updatedText": "Päivitetty 25.08.2026 klo 06.04 (Suomen aikaa)"
 }

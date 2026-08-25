@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-24T06:52:48+03:00",
+ "updated": "2026-08-25T06:04:17+03:00",
  "stages": {
   "1": {
    "start": {
@@ -55,6 +55,31 @@
     "precip": 0.0,
     "humidity": 53,
     "town": "Manosque"
+   }
+  },
+  "3": {
+   "start": {
+    "temp": 28,
+    "low": 24,
+    "feels": 29,
+    "cond": "overcast",
+    "wind": 35,
+    "dir": "SE",
+    "precip": 0.0,
+    "humidity": 76,
+    "town": "Gruissan"
+   },
+   "finish": {
+    "temp": 19,
+    "low": 9,
+    "feels": 16,
+    "cond": "showers",
+    "wind": 20,
+    "dir": "SW",
+    "precip": 5.4,
+    "humidity": 89,
+    "alt": 1937,
+    "town": "Font-Romeu"
    }
   }
  }
