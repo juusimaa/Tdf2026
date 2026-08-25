@@ -134,6 +134,21 @@ jobs:
             echo "No results files yet; verification will be skipped."
           fi
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Compiles src/race-page.ts -> dist/race-page.js (see tsconfig.json).
+      # dist/ is gitignored — a build artifact, not committed — so it must be
+      # produced here, before packaging, on every run. node_modules is
+      # removed straight after: upload-pages-artifact packages the whole
+      # working directory (path: .), and it has no business in the deploy.
+      - name: Build TypeScript
+        run: |
+          npm ci
+          npm run build
+          rm -rf node_modules
+
       - uses: actions/configure-pages@v6
 
       # Package the whole site (index.html + data/) as a Pages artifact.

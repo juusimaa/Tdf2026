@@ -1,0 +1,12 @@
+{
+  "name": "tdf2026-auto",
+  "private": true,
+  "description": "Grand tour tracker (TdF, Giro, Vuelta, Tour de France Femmes) — static site, published via GitHub Pages",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

@@ -14,7 +14,9 @@ tdf2026.html                          # Tour de France — stages, profiles, map
 giro2026.html                         # Giro d'Italia — stages, profiles, map & final results (static)
 femmes2026.html                       # Tour de France Femmes — stages, profiles, map & final results (static)
 vuelta2026.html                       # Vuelta a España — stages, profiles, map & auto-updating results (live)
-race-page.js                          # helper functions shared by all four race pages (i18n, formatting, rendering)
+src/race-page.ts                      # helper functions shared by all four race pages (i18n, formatting, rendering) — compiles to dist/race-page.js
+src/globals.d.ts                      # ambient types for the globals each page's own inline <script> defines
+dist/race-page.js                     # build output (gitignored) — what the HTML pages actually load, via `npm run build`
 race-page.css                         # shared component styles for all four race pages, layered on modernist.css
 modernist.css                         # shared design tokens (colour, type, spacing) used by every page
 theme.css                             # earlier colour theme — no longer linked from any page, kept for reference
@@ -34,6 +36,23 @@ scripts/fetch_weather.py              # race-day weather fetch script (Open-Mete
 
 `index.html` lets the visitor pick a race; each tour page has a back arrow to
 the landing page.
+
+### Local development
+
+The four race pages' own per-page logic is still plain JS, inline in each
+HTML file — only the shared helpers in `src/race-page.ts` are TypeScript.
+Browsers can't run `.ts` directly, so it needs a build step:
+
+```
+npm install       # once
+npm run build     # compiles src/race-page.ts -> dist/race-page.js
+npm run watch     # or: rebuild on every save, while editing
+```
+
+`dist/` is gitignored (build output, not source) — run `npm run build` after
+a fresh clone before opening any page locally, or nothing will render. CI
+does this automatically (see the workflow) before every deploy, so
+`dist/race-page.js` is always rebuilt fresh from `src/race-page.ts`.
 
 ### Live vs. static tours
 
