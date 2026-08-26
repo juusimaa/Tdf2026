@@ -10,6 +10,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import vm, { runInThisContext } from 'node:vm';
+import { JSDOM } from 'jsdom';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 const distPath = resolve(process.cwd(), 'dist/race-page.js');
@@ -228,16 +229,16 @@ describe('HTML page scripts initialization', () => {
   pages.forEach((page) => {
     it(`executes ${page} without syntax or runtime initialization errors`, () => {
       const html = readFileSync(resolve(__dirname, '..', page), 'utf8');
-      const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
-      let match;
+      const dom = new JSDOM(html);
       const scripts: string[] = [];
-      while ((match = scriptRegex.exec(html)) !== null) {
-        if (match[0].includes('src="dist/race-page.js"')) {
+      dom.window.document.querySelectorAll('script').forEach((scriptEl) => {
+        const src = scriptEl.getAttribute('src');
+        if (src === 'dist/race-page.js') {
           scripts.push(distCode);
-        } else if (!match[0].includes('src=')) {
-          scripts.push(match[1]);
+        } else if (!src) {
+          scripts.push(scriptEl.textContent ?? '');
         }
-      }
+      });
 
       const elements: Record<string, any> = {};
       const makeMock = (name: string) => ({
