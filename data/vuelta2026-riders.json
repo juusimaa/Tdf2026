@@ -1,725 +1,185 @@
 {
- "afterStage": 4,
+ "afterStage": 5,
  "teamCount": 23,
  "riderCount": 184,
- "finishers": 182,
+ "finishers": 0,
  "teams": [
+  {
+   "name": "RED BULL - BORA - HANSGROHE",
+   "code": "RBH",
+   "url": "https://www.lavuelta.es/en/team/RBH/red-bull-bora-hansgrohe",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 1,
+     "name": "Primoz ROGLIC",
+     "nat": "SLO",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 2,
+     "name": "Finn FISHER - BLACK",
+     "nat": "NZL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 3,
+     "name": "Jordi MEEUS",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 4,
+     "name": "Gianni MOSCON",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 5,
+     "name": "Callum THORNLEY",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 6,
+     "name": "Luke TUCKWELL",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 7,
+     "name": "Gianni VERMEERSCH",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 8,
+     "name": "Frederik WANDAHL",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
   {
    "name": "UAE TEAM EMIRATES XRG",
    "code": "UEX",
    "url": "https://www.lavuelta.es/en/team/UEX/uae-team-emirates-xrg",
-   "gcPos": 1,
-   "gcVal": "23h 06' 42''",
+   "gcPos": null,
+   "gcVal": "",
    "gcGap": "",
    "riders": [
     {
      "bib": 11,
      "name": "Tadej POGACAR",
      "nat": "SLO",
-     "gcPos": 1,
-     "gcVal": "07h 38' 59''",
+     "gcPos": null,
+     "gcVal": "",
      "gcGap": "",
-     "status": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 12,
      "name": "Joao ALMEIDA",
      "nat": "POR",
-     "gcPos": 59,
-     "gcVal": "08h 02' 40''",
-     "gcGap": "+ 00h 23' 41''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 13,
      "name": "Domen NOVAK",
      "nat": "SLO",
-     "gcPos": 175,
-     "gcVal": "08h 11' 32''",
-     "gcGap": "+ 00h 32' 33''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 14,
      "name": "Ivo OLIVEIRA",
      "nat": "POR",
-     "gcPos": 141,
-     "gcVal": "08h 05' 49''",
-     "gcGap": "+ 00h 26' 50''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 15,
      "name": "Pavel SIVAKOV",
      "nat": "FRA",
-     "gcPos": 33,
-     "gcVal": "07h 53' 59''",
-     "gcGap": "+ 00h 15' 00''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 16,
      "name": "Pablo TORRES ARIAS",
      "nat": "ESP",
-     "gcPos": 13,
-     "gcVal": "07h 44' 26''",
-     "gcGap": "+ 00h 05' 27''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 17,
      "name": "Kevin VERMAERKE",
      "nat": "USA",
-     "gcPos": 117,
-     "gcVal": "08h 04' 53''",
-     "gcGap": "+ 00h 25' 54''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 18,
      "name": "Jay VINE",
      "nat": "AUS",
-     "gcPos": 10,
-     "gcVal": "07h 43' 10''",
-     "gcGap": "+ 00h 04' 11''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "DECATHLON CMA CGM TEAM",
-   "code": "DCT",
-   "url": "https://www.lavuelta.es/en/team/DCT/decathlon-cma-cgm-team",
-   "gcPos": 2,
-   "gcVal": "23h 13' 02''",
-   "gcGap": "+ 00h 06' 20''",
-   "riders": [
-    {
-     "bib": 41,
-     "name": "Félix GALL",
-     "nat": "AUT",
-     "gcPos": 7,
-     "gcVal": "07h 42' 56''",
-     "gcGap": "+ 00h 03' 57''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 42,
-     "name": "Léo BISIAUX",
-     "nat": "FRA",
-     "gcPos": 18,
-     "gcVal": "07h 47' 43''",
-     "gcGap": "+ 00h 08' 44''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 43,
-     "name": "Andrew OSCAR CHAMBERLAIN",
-     "nat": "AUS",
-     "gcPos": 139,
-     "gcVal": "08h 05' 44''",
-     "gcGap": "+ 00h 26' 45''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 44,
-     "name": "Sander DE PESTEL",
-     "nat": "BEL",
-     "gcPos": 101,
-     "gcVal": "08h 04' 18''",
-     "gcGap": "+ 00h 25' 19''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 45,
-     "name": "Jordan LABROSSE",
-     "nat": "FRA",
-     "gcPos": 52,
-     "gcVal": "08h 02' 27''",
-     "gcGap": "+ 00h 23' 28''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 46,
-     "name": "Gregor Mühlberger",
-     "nat": "AUT",
-     "gcPos": 11,
-     "gcVal": "07h 43' 33''",
-     "gcGap": "+ 00h 04' 34''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 47,
-     "name": "Matthew RICCITELLO",
-     "nat": "USA",
-     "gcPos": 28,
-     "gcVal": "07h 51' 08''",
-     "gcGap": "+ 00h 12' 09''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 48,
-     "name": "Callum SCOTSON",
-     "nat": "AUS",
-     "gcPos": 120,
-     "gcVal": "08h 04' 56''",
-     "gcGap": "+ 00h 25' 57''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "TEAM VISMA | LEASE A BIKE",
-   "code": "TVL",
-   "url": "https://www.lavuelta.es/en/team/TVL/team-visma-lease-a-bike",
-   "gcPos": 3,
-   "gcVal": "23h 17' 08''",
-   "gcGap": "+ 00h 10' 26''",
-   "riders": [
-    {
-     "bib": 31,
-     "name": "Wout VAN AERT",
-     "nat": "BEL",
-     "gcPos": 95,
-     "gcVal": "08h 03' 59''",
-     "gcGap": "+ 00h 25' 00''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 32,
-     "name": "Bruno ARMIRAIL",
-     "nat": "FRA",
-     "gcPos": 43,
-     "gcVal": "07h 57' 07''",
-     "gcGap": "+ 00h 18' 08''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 33,
-     "name": "James MATTHEW BRENNAN",
-     "nat": "GBR",
-     "gcPos": 96,
-     "gcVal": "08h 04' 00''",
-     "gcGap": "+ 00h 25' 01''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 34,
-     "name": "Steven KRUIJSWIJK",
-     "nat": "NED",
-     "gcPos": 155,
-     "gcVal": "08h 06' 32''",
-     "gcGap": "+ 00h 27' 33''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 35,
-     "name": "Sepp KUSS",
-     "nat": "USA",
-     "gcPos": 4,
-     "gcVal": "07h 42' 43''",
-     "gcGap": "+ 00h 03' 44''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 36,
-     "name": "Christophe LAPORTE",
-     "nat": "FRA",
-     "gcPos": 100,
-     "gcVal": "08h 04' 18''",
-     "gcGap": "+ 00h 25' 19''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 37,
-     "name": "Jørgen NORDHAGEN",
-     "nat": "NOR",
-     "gcPos": 22,
-     "gcVal": "07h 48' 25''",
-     "gcGap": "+ 00h 09' 26''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 38,
-     "name": "Ben TULETT",
-     "nat": "GBR",
-     "gcPos": 19,
-     "gcVal": "07h 47' 43''",
-     "gcGap": "+ 00h 08' 44''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "NETCOMPANY INEOS CYCLING TEAM",
-   "code": "NCI",
-   "url": "https://www.lavuelta.es/en/team/NCI/netcompany-ineos-cycling-team",
-   "gcPos": 4,
-   "gcVal": "23h 23' 15''",
-   "gcGap": "+ 00h 16' 33''",
-   "riders": [
-    {
-     "bib": 61,
-     "name": "Oscar ONLEY",
-     "nat": "GBR",
-     "gcPos": 5,
-     "gcVal": "07h 42' 44''",
-     "gcGap": "+ 00h 03' 45''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 62,
-     "name": "Jack HAIG",
-     "nat": "AUS",
-     "gcPos": 34,
-     "gcVal": "07h 54' 03''",
-     "gcGap": "+ 00h 15' 04''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 63,
-     "name": "Lucas HAMILTON",
-     "nat": "AUS",
-     "gcPos": 146,
-     "gcVal": "08h 06' 07''",
-     "gcGap": "+ 00h 27' 08''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 64,
-     "name": "Axel LAURANCE",
-     "nat": "FRA",
-     "gcPos": 55,
-     "gcVal": "08h 02' 30''",
-     "gcGap": "+ 00h 23' 31''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 65,
-     "name": "Carlos RODRIGUEZ",
-     "nat": "ESP",
-     "gcPos": 56,
-     "gcVal": "08h 02' 31''",
-     "gcGap": "+ 00h 23' 32''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 66,
-     "name": "Embret SVESTAD-BÅRDSENG",
-     "nat": "NOR",
-     "gcPos": 26,
-     "gcVal": "07h 49' 51''",
-     "gcGap": "+ 00h 10' 52''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 67,
-     "name": "Joshua TARLING",
-     "nat": "GBR",
-     "gcPos": 136,
-     "gcVal": "08h 05' 39''",
-     "gcGap": "+ 00h 26' 40''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 68,
-     "name": "Ben TURNER",
-     "nat": "GBR",
-     "gcPos": 143,
-     "gcVal": "08h 05' 56''",
-     "gcGap": "+ 00h 26' 57''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "XDS ASTANA TEAM",
-   "code": "XAT",
-   "url": "https://www.lavuelta.es/en/team/XAT/xds-astana-team",
-   "gcPos": 5,
-   "gcVal": "23h 26' 20''",
-   "gcGap": "+ 00h 19' 38''",
-   "riders": [
-    {
-     "bib": 181,
-     "name": "Harold TEJADA",
-     "nat": "COL",
-     "gcPos": 14,
-     "gcVal": "07h 44' 29''",
-     "gcGap": "+ 00h 05' 30''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 182,
-     "name": "Yevgeniy FEDOROV",
-     "nat": "KAZ",
-     "gcPos": 111,
-     "gcVal": "08h 04' 39''",
-     "gcGap": "+ 00h 25' 40''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 183,
-     "name": "Lorenzo FORTUNATO",
-     "nat": "ITA",
-     "gcPos": 40,
-     "gcVal": "07h 55' 00''",
-     "gcGap": "+ 00h 16' 01''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 184,
-     "name": "Victor LANGELLOTTI",
-     "nat": "MON",
-     "gcPos": 64,
-     "gcVal": "08h 02' 48''",
-     "gcGap": "+ 00h 23' 49''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 185,
-     "name": "Henok MULUEBERHAN",
-     "nat": "ERI",
-     "gcPos": 94,
-     "gcVal": "08h 03' 56''",
-     "gcGap": "+ 00h 24' 57''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 186,
-     "name": "Cristian RODRIGUEZ",
-     "nat": "ESP",
-     "gcPos": 24,
-     "gcVal": "07h 48' 50''",
-     "gcGap": "+ 00h 09' 51''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 187,
-     "name": "Alessandro ROMELE",
-     "nat": "ITA",
-     "gcPos": 89,
-     "gcVal": "08h 03' 37''",
-     "gcGap": "+ 00h 24' 38''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 188,
-     "name": "Darren VAN BEKKUM",
-     "nat": "NED",
-     "gcPos": 178,
-     "gcVal": "08h 13' 34''",
-     "gcGap": "+ 00h 34' 35''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "TUDOR PRO CYCLING TEAM",
-   "code": "TUD",
-   "url": "https://www.lavuelta.es/en/team/TUD/tudor-pro-cycling-team",
-   "gcPos": 6,
-   "gcVal": "23h 31' 34''",
-   "gcGap": "+ 00h 24' 52''",
-   "riders": [
-    {
-     "bib": 171,
-     "name": "Marco BRENNER",
-     "nat": "GER",
-     "gcPos": 15,
-     "gcVal": "07h 45' 01''",
-     "gcGap": "+ 00h 06' 02''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 172,
-     "name": "William BARTA",
-     "nat": "USA",
-     "gcPos": 32,
-     "gcVal": "07h 53' 40''",
-     "gcGap": "+ 00h 14' 41''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 173,
-     "name": "Arthur KLUCKERS",
-     "nat": "LUX",
-     "gcPos": 174,
-     "gcVal": "08h 10' 24''",
-     "gcGap": "+ 00h 31' 25''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 174,
-     "name": "Stefan KÜNG",
-     "nat": "SUI",
-     "gcPos": 51,
-     "gcVal": "08h 02' 18''",
-     "gcGap": "+ 00h 23' 19''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 175,
-     "name": "Roland THALMANN",
-     "nat": "SUI",
-     "gcPos": 41,
-     "gcVal": "07h 55' 37''",
-     "gcGap": "+ 00h 16' 38''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 176,
-     "name": "Lawrence WARBASSE",
-     "nat": "USA",
-     "gcPos": 90,
-     "gcVal": "08h 03' 37''",
-     "gcGap": "+ 00h 24' 38''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 177,
-     "name": "Fabian WEISS",
-     "nat": "SUI",
-     "gcPos": 102,
-     "gcVal": "08h 04' 18''",
-     "gcGap": "+ 00h 25' 19''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 178,
-     "name": "Hannes WILKSCH",
-     "nat": "GER",
-     "gcPos": 112,
-     "gcVal": "08h 04' 44''",
-     "gcGap": "+ 00h 25' 45''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "EF EDUCATION - EASYPOST",
-   "code": "EFE",
-   "url": "https://www.lavuelta.es/en/team/EFE/ef-education-easypost",
-   "gcPos": 7,
-   "gcVal": "23h 32' 05''",
-   "gcGap": "+ 00h 25' 23''",
-   "riders": [
-    {
-     "bib": 161,
-     "name": "Richard CARAPAZ",
-     "nat": "ECU",
-     "gcPos": 6,
-     "gcVal": "07h 42' 49''",
-     "gcGap": "+ 00h 03' 50''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 162,
-     "name": "Vincenzo ALBANESE",
-     "nat": "ITA",
-     "gcPos": 98,
-     "gcVal": "08h 04' 08''",
-     "gcGap": "+ 00h 25' 09''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 163,
-     "name": "Markel BELOKI",
-     "nat": "ESP",
-     "gcPos": 109,
-     "gcVal": "08h 04' 35''",
-     "gcGap": "+ 00h 25' 36''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 164,
-     "name": "Alastair MACKELLAR",
-     "nat": "AUS",
-     "gcPos": 159,
-     "gcVal": "08h 06' 44''",
-     "gcGap": "+ 00h 27' 45''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 165,
-     "name": "Darren RAFFERTY",
-     "nat": "IRL",
-     "gcPos": 162,
-     "gcVal": "08h 06' 49''",
-     "gcGap": "+ 00h 27' 50''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 166,
-     "name": "Juan FELIPE RODRIGUEZ CONTRERAS",
-     "nat": "COL",
-     "gcPos": 29,
-     "gcVal": "07h 51' 48''",
-     "gcGap": "+ 00h 12' 49''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 167,
-     "name": "James SHAW",
-     "nat": "GBR",
-     "gcPos": 48,
-     "gcVal": "07h 59' 00''",
-     "gcGap": "+ 00h 20' 01''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 168,
-     "name": "Georg STEINHAUSER",
-     "nat": "GER",
-     "gcPos": 145,
-     "gcVal": "08h 06' 04''",
-     "gcGap": "+ 00h 27' 05''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "GROUPAMA-FDJ UNITED",
-   "code": "GFC",
-   "url": "https://www.lavuelta.es/en/team/GFC/groupama-fdj-united",
-   "gcPos": 8,
-   "gcVal": "23h 36' 54''",
-   "gcGap": "+ 00h 30' 12''",
-   "riders": [
-    {
-     "bib": 91,
-     "name": "Clément BERTHET",
-     "nat": "FRA",
-     "gcPos": 16,
-     "gcVal": "07h 46' 31''",
-     "gcGap": "+ 00h 07' 32''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 92,
-     "name": "Olivier LE GAC",
-     "nat": "FRA",
-     "gcPos": 152,
-     "gcVal": "08h 06' 23''",
-     "gcGap": "+ 00h 27' 24''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 93,
-     "name": "Valentin MADOUAS",
-     "nat": "FRA",
-     "gcPos": 77,
-     "gcVal": "08h 03' 07''",
-     "gcGap": "+ 00h 24' 08''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 94,
-     "name": "Guillaume MARTIN GUYONNET",
-     "nat": "FRA",
-     "gcPos": 21,
-     "gcVal": "07h 48' 24''",
-     "gcGap": "+ 00h 09' 25''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 95,
-     "name": "Rudy MOLARD",
-     "nat": "FRA",
-     "gcPos": 86,
-     "gcVal": "08h 03' 21''",
-     "gcGap": "+ 00h 24' 22''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 96,
-     "name": "Enzo PALENI",
-     "nat": "FRA",
-     "gcPos": 65,
-     "gcVal": "08h 02' 49''",
-     "gcGap": "+ 00h 23' 50''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 97,
-     "name": "Rémy ROCHAS",
-     "nat": "FRA",
-     "gcPos": 79,
-     "gcVal": "08h 03' 09''",
-     "gcGap": "+ 00h 24' 10''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 98,
-     "name": "Bastien TRONCHON",
-     "nat": "FRA",
-     "gcPos": 57,
-     "gcVal": "08h 02' 35''",
-     "gcGap": "+ 00h 23' 36''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     }
    ]
@@ -728,718 +188,268 @@
    "name": "MOVISTAR TEAM",
    "code": "MOV",
    "url": "https://www.lavuelta.es/en/team/MOV/movistar-team",
-   "gcPos": 9,
-   "gcVal": "23h 38' 20''",
-   "gcGap": "+ 00h 31' 38''",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
      "bib": 21,
-     "name": "Enric MAS NICOLAU",
+     "name": "Enric MAS",
      "nat": "ESP",
-     "gcPos": 3,
-     "gcVal": "07h 42' 31''",
-     "gcGap": "+ 00h 03' 32''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 22,
      "name": "Jorge ARCAS",
      "nat": "ESP",
-     "gcPos": 135,
-     "gcVal": "08h 05' 38''",
-     "gcGap": "+ 00h 26' 39''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 23,
      "name": "Orluis ALBERTO AULAR SANABRIA",
      "nat": "VEN",
-     "gcPos": 53,
-     "gcVal": "08h 02' 27''",
-     "gcGap": "+ 00h 23' 28''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 24,
      "name": "Carlos CANAL BLANCO",
      "nat": "ESP",
-     "gcPos": 61,
-     "gcVal": "08h 02' 41''",
-     "gcGap": "+ 00h 23' 42''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 25,
      "name": "Pablo CASTRILLO",
      "nat": "ESP",
-     "gcPos": 103,
-     "gcVal": "08h 04' 19''",
-     "gcGap": "+ 00h 25' 20''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 26,
      "name": "Raul GARCIA",
      "nat": "ESP",
-     "gcPos": 42,
-     "gcVal": "07h 56' 18''",
-     "gcGap": "+ 00h 17' 19''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 27,
      "name": "Ivan ROMEO ABAD",
      "nat": "ESP",
-     "gcPos": 60,
-     "gcVal": "08h 02' 40''",
-     "gcGap": "+ 00h 23' 41''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 28,
      "name": "Cian UIJTDEBROEKS",
      "nat": "BEL",
-     "gcPos": 158,
-     "gcVal": "08h 06' 42''",
-     "gcGap": "+ 00h 27' 43''",
-     "status": "",
-     "statusStage": null
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNS",
+     "statusStage": 5
     }
    ]
   },
   {
-   "name": "BAHRAIN VICTORIOUS",
-   "code": "TBV",
-   "url": "https://www.lavuelta.es/en/team/TBV/bahrain-victorious",
-   "gcPos": 10,
-   "gcVal": "23h 39' 44''",
-   "gcGap": "+ 00h 33' 02''",
+   "name": "TEAM VISMA | LEASE A BIKE",
+   "code": "TVL",
+   "url": "https://www.lavuelta.es/en/team/TVL/team-visma-lease-a-bike",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
-     "bib": 71,
-     "name": "Pello BILBAO",
-     "nat": "ESP",
-     "gcPos": 45,
-     "gcVal": "07h 57' 56''",
-     "gcGap": "+ 00h 18' 57''",
-     "status": "",
+     "bib": 31,
+     "name": "Wout VAN AERT",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 72,
-     "name": "Santiago BUITRAGO",
-     "nat": "COL",
-     "gcPos": 62,
-     "gcVal": "08h 02' 42''",
-     "gcGap": "+ 00h 23' 43''",
-     "status": "",
+     "bib": 32,
+     "name": "Bruno ARMIRAIL",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 73,
-     "name": "Roman ERMAKOV",
-     "nat": "SLO",
-     "gcPos": 130,
-     "gcVal": "08h 05' 24''",
-     "gcGap": "+ 00h 26' 25''",
-     "status": "",
+     "bib": 33,
+     "name": "James MATTHEW BRENNAN",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 74,
-     "name": "Matevž GOVEKAR",
-     "nat": "SLO",
-     "gcPos": 157,
-     "gcVal": "08h 06' 34''",
-     "gcGap": "+ 00h 27' 35''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 75,
-     "name": "Pau MIQUEL DELGADO",
-     "nat": "ESP",
-     "gcPos": 63,
-     "gcVal": "08h 02' 45''",
-     "gcGap": "+ 00h 23' 46''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 76,
-     "name": "Jakob OMRZEL",
-     "nat": "SLO",
-     "gcPos": 20,
-     "gcVal": "07h 48' 16''",
-     "gcGap": "+ 00h 09' 17''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 77,
-     "name": "Mathijs PAASSCHENS",
+     "bib": 34,
+     "name": "Steven KRUIJSWIJK",
      "nat": "NED",
-     "gcPos": 160,
-     "gcVal": "08h 06' 47''",
-     "gcGap": "+ 00h 27' 48''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 78,
-     "name": "Attila VALTER",
-     "nat": "HUN",
-     "gcPos": 46,
-     "gcVal": "07h 58' 09''",
-     "gcGap": "+ 00h 19' 10''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "EQUIPO KERN PHARMA",
-   "code": "EKP",
-   "url": "https://www.lavuelta.es/en/team/EKP/equipo-kern-pharma",
-   "gcPos": 11,
-   "gcVal": "23h 41' 14''",
-   "gcGap": "+ 00h 34' 32''",
-   "riders": [
-    {
-     "bib": 221,
-     "name": "Urko BERRADE FERNANDEZ",
-     "nat": "ESP",
-     "gcPos": 31,
-     "gcVal": "07h 53' 19''",
-     "gcGap": "+ 00h 14' 20''",
-     "status": "",
+     "bib": 35,
+     "name": "Sepp KUSS",
+     "nat": "USA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 222,
-     "name": "Marc BRUSTENGA MASAGUE",
-     "nat": "ESP",
-     "gcPos": 168,
-     "gcVal": "08h 07' 44''",
-     "gcGap": "+ 00h 28' 45''",
-     "status": "",
+     "bib": 36,
+     "name": "Christophe LAPORTE",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 223,
-     "name": "Ivan COBO CAYON",
-     "nat": "ESP",
-     "gcPos": 181,
-     "gcVal": "08h 17' 26''",
-     "gcGap": "+ 00h 38' 27''",
-     "status": "",
+     "bib": 37,
+     "name": "Jørgen NORDHAGEN",
+     "nat": "NOR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 224,
-     "name": "Iñigo ELOSEGUI MOMEÑE",
-     "nat": "ESP",
-     "gcPos": 129,
-     "gcVal": "08h 05' 19''",
-     "gcGap": "+ 00h 26' 20''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 225,
-     "name": "Ibon RUIZ SEDANO",
-     "nat": "ESP",
-     "gcPos": 17,
-     "gcVal": "07h 47' 36''",
-     "gcGap": "+ 00h 08' 37''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 226,
-     "name": "Ivan SOSA",
-     "nat": "COL",
-     "gcPos": 49,
-     "gcVal": "08h 01' 31''",
-     "gcGap": "+ 00h 22' 32''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 227,
-     "name": "Diego URIARTE BELZUNEGI",
-     "nat": "ESP",
-     "gcPos": 171,
-     "gcVal": "08h 08' 13''",
-     "gcGap": "+ 00h 29' 14''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 228,
-     "name": "Mats WENZEL",
-     "nat": "LUX",
-     "gcPos": 138,
-     "gcVal": "08h 05' 43''",
-     "gcGap": "+ 00h 26' 44''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "RED BULL - BORA - HANSGROHE",
-   "code": "RBH",
-   "url": "https://www.lavuelta.es/en/team/RBH/red-bull-bora-hansgrohe",
-   "gcPos": 12,
-   "gcVal": "23h 42' 51''",
-   "gcGap": "+ 00h 36' 09''",
-   "riders": [
-    {
-     "bib": 1,
-     "name": "Primoz ROGLIC",
-     "nat": "SLO",
-     "gcPos": 2,
-     "gcVal": "07h 42' 20''",
-     "gcGap": "+ 00h 03' 21''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 2,
-     "name": "Finn FISHER - BLACK",
-     "nat": "NZL",
-     "gcPos": 54,
-     "gcVal": "08h 02' 29''",
-     "gcGap": "+ 00h 23' 30''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 3,
-     "name": "Jordi MEEUS",
-     "nat": "BEL",
-     "gcPos": 149,
-     "gcVal": "08h 06' 20''",
-     "gcGap": "+ 00h 27' 21''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 4,
-     "name": "Gianni MOSCON",
-     "nat": "ITA",
-     "gcPos": 173,
-     "gcVal": "08h 09' 41''",
-     "gcGap": "+ 00h 30' 42''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 5,
-     "name": "Callum THORNLEY",
+     "bib": 38,
+     "name": "Ben TULETT",
      "nat": "GBR",
-     "gcPos": 166,
-     "gcVal": "08h 07' 26''",
-     "gcGap": "+ 00h 28' 27''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 6,
-     "name": "Luke TUCKWELL",
-     "nat": "AUS",
-     "gcPos": 47,
-     "gcVal": "07h 58' 34''",
-     "gcGap": "+ 00h 19' 35''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 7,
-     "name": "Gianni VERMEERSCH",
-     "nat": "BEL",
-     "gcPos": 99,
-     "gcVal": "08h 04' 14''",
-     "gcGap": "+ 00h 25' 15''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 8,
-     "name": "Frederik WANDAHL",
-     "nat": "DEN",
-     "gcPos": 133,
-     "gcVal": "08h 05' 30''",
-     "gcGap": "+ 00h 26' 31''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     }
    ]
   },
   {
-   "name": "NSN CYCLING TEAM",
-   "code": "NSN",
-   "url": "https://www.lavuelta.es/en/team/NSN/nsn-cycling-team",
-   "gcPos": 13,
-   "gcVal": "23h 44' 47''",
-   "gcGap": "+ 00h 38' 05''",
+   "name": "DECATHLON CMA CGM TEAM",
+   "code": "DCT",
+   "url": "https://www.lavuelta.es/en/team/DCT/decathlon-cma-cgm-team",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
-     "bib": 111,
-     "name": "Alexey LUTSENKO",
-     "nat": "KAZ",
-     "gcPos": 176,
-     "gcVal": "08h 12' 50''",
-     "gcGap": "+ 00h 33' 51''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 112,
-     "name": "George BENNETT",
-     "nat": "NZL",
-     "gcPos": 36,
-     "gcVal": "07h 54' 12''",
-     "gcGap": "+ 00h 15' 13''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 113,
-     "name": "Jan HIRT",
-     "nat": "CZE",
-     "gcPos": 23,
-     "gcVal": "07h 48' 46''",
-     "gcGap": "+ 00h 09' 47''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 114,
-     "name": "Hugo HOFSTETTER",
-     "nat": "FRA",
-     "gcPos": 68,
-     "gcVal": "08h 02' 52''",
-     "gcGap": "+ 00h 23' 53''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 115,
-     "name": "Moritz KRETSCHY",
-     "nat": "GER",
-     "gcPos": 125,
-     "gcVal": "08h 05' 07''",
-     "gcGap": "+ 00h 26' 08''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 116,
-     "name": "Pau MARTI SORIANO",
-     "nat": "ESP",
-     "gcPos": 126,
-     "gcVal": "08h 05' 07''",
-     "gcGap": "+ 00h 26' 08''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 117,
-     "name": "Nicholas SCHULTZ",
-     "nat": "AUS",
-     "gcPos": 132,
-     "gcVal": "08h 05' 29''",
-     "gcGap": "+ 00h 26' 30''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 118,
-     "name": "Floris VAN TRICHT",
-     "nat": "BEL",
-     "gcPos": 107,
-     "gcVal": "08h 04' 29''",
-     "gcGap": "+ 00h 25' 30''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "SOUDAL QUICK-STEP",
-   "code": "SOQ",
-   "url": "https://www.lavuelta.es/en/team/SOQ/soudal-quick-step",
-   "gcPos": 14,
-   "gcVal": "23h 47' 45''",
-   "gcGap": "+ 00h 41' 03''",
-   "riders": [
-    {
-     "bib": 121,
-     "name": "Mikel LANDA",
-     "nat": "ESP",
-     "gcPos": 27,
-     "gcVal": "07h 50' 30''",
-     "gcGap": "+ 00h 11' 31''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 122,
-     "name": "Alberto DAINESE",
-     "nat": "ITA",
-     "gcPos": 84,
-     "gcVal": "08h 03' 17''",
-     "gcGap": "+ 00h 24' 18''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 123,
-     "name": "Gianmarco GAROFOLI",
-     "nat": "ITA",
-     "gcPos": 83,
-     "gcVal": "08h 03' 16''",
-     "gcGap": "+ 00h 24' 17''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 124,
-     "name": "Ethan EDWARD HAYTER",
-     "nat": "GBR",
-     "gcPos": 71,
-     "gcVal": "08h 02' 53''",
-     "gcGap": "+ 00h 23' 54''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 125,
-     "name": "Valentin PARET PEINTRE",
-     "nat": "FRA",
-     "gcPos": 167,
-     "gcVal": "08h 07' 33''",
-     "gcGap": "+ 00h 28' 34''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 126,
-     "name": "Fabio VAN DEN BOSSCHE",
-     "nat": "BEL",
-     "gcPos": 104,
-     "gcVal": "08h 04' 22''",
-     "gcGap": "+ 00h 25' 23''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 127,
-     "name": "Mauri VANSEVENANT",
-     "nat": "BEL",
-     "gcPos": 88,
-     "gcVal": "08h 03' 32''",
-     "gcGap": "+ 00h 24' 33''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 128,
-     "name": "Filippo ZANA",
-     "nat": "ITA",
-     "gcPos": 44,
-     "gcVal": "07h 57' 20''",
-     "gcGap": "+ 00h 18' 21''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "LIDL-TREK",
-   "code": "LTK",
-   "url": "https://www.lavuelta.es/en/team/LTK/lidl-trek",
-   "gcPos": 15,
-   "gcVal": "23h 48' 46''",
-   "gcGap": "+ 00h 42' 04''",
-   "riders": [
-    {
-     "bib": 81,
-     "name": "Mattias SKJELMOSE",
-     "nat": "DEN",
-     "gcPos": 8,
-     "gcVal": "07h 43' 05''",
-     "gcGap": "+ 00h 04' 06''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 82,
-     "name": "Julien BERNARD",
-     "nat": "FRA",
-     "gcPos": 91,
-     "gcVal": "08h 03' 43''",
-     "gcGap": "+ 00h 24' 44''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 83,
-     "name": "Lennard KÄMNA",
-     "nat": "GER",
-     "gcPos": 118,
-     "gcVal": "08h 04' 55''",
-     "gcGap": "+ 00h 25' 56''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 84,
-     "name": "Patrick KONRAD",
+     "bib": 41,
+     "name": "Félix GALL",
      "nat": "AUT",
-     "gcPos": 153,
-     "gcVal": "08h 06' 23''",
-     "gcGap": "+ 00h 27' 24''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 85,
-     "name": "Jacopo MOSCA",
-     "nat": "ITA",
-     "gcPos": 127,
-     "gcVal": "08h 05' 10''",
-     "gcGap": "+ 00h 26' 11''",
-     "status": "",
+     "bib": 42,
+     "name": "Léo BISIAUX",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 86,
-     "name": "Sunekær MATHIAS NORSGAARD",
-     "nat": "DEN",
-     "gcPos": 131,
-     "gcVal": "08h 05' 29''",
-     "gcGap": "+ 00h 26' 30''",
-     "status": "",
+     "bib": 43,
+     "name": "Andrew OSCAR CHAMBERLAIN",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 87,
-     "name": "Thibau NYS",
+     "bib": 44,
+     "name": "Sander DE PESTEL",
      "nat": "BEL",
-     "gcPos": 106,
-     "gcVal": "08h 04' 27''",
-     "gcGap": "+ 00h 25' 28''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 88,
-     "name": "Mads PEDERSEN",
-     "nat": "DEN",
-     "gcPos": 58,
-     "gcVal": "08h 02' 35''",
-     "gcGap": "+ 00h 23' 36''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "LOTTO INTERMARCHE",
-   "code": "LOI",
-   "url": "https://www.lavuelta.es/en/team/LOI/lotto-intermarche",
-   "gcPos": 16,
-   "gcVal": "23h 48' 58''",
-   "gcGap": "+ 00h 42' 16''",
-   "riders": [
-    {
-     "bib": 201,
-     "name": "Jarno WIDAR",
-     "nat": "BEL",
-     "gcPos": 9,
-     "gcVal": "07h 43' 05''",
-     "gcGap": "+ 00h 04' 06''",
-     "status": "",
+     "bib": 45,
+     "name": "Jordan LABROSSE",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 202,
-     "name": "Vito BRAET",
-     "nat": "BEL",
-     "gcPos": 74,
-     "gcVal": "08h 02' 59''",
-     "gcGap": "+ 00h 24' 00''",
-     "status": "",
+     "bib": 46,
+     "name": "Gregor Mühlberger",
+     "nat": "AUT",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 203,
-     "name": "Lars CRAPS",
-     "nat": "BEL",
-     "gcPos": 80,
-     "gcVal": "08h 03' 12''",
-     "gcGap": "+ 00h 24' 13''",
-     "status": "",
+     "bib": 47,
+     "name": "Matthew RICCITELLO",
+     "nat": "USA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 204,
-     "name": "Steffen DE SCHUYTENEER",
-     "nat": "BEL",
-     "gcPos": 163,
-     "gcVal": "08h 07' 01''",
-     "gcGap": "+ 00h 28' 02''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 205,
-     "name": "Lorenzo ROTA",
-     "nat": "ITA",
-     "gcPos": 97,
-     "gcVal": "08h 04' 02''",
-     "gcGap": "+ 00h 25' 03''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 206,
-     "name": "Reuben THOMPSON",
-     "nat": "NZL",
-     "gcPos": 137,
-     "gcVal": "08h 05' 42''",
-     "gcGap": "+ 00h 26' 43''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 207,
-     "name": "Luca VAN BOVEN",
-     "nat": "BEL",
-     "gcPos": 87,
-     "gcVal": "08h 03' 24''",
-     "gcGap": "+ 00h 24' 25''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 208,
-     "name": "Roel VAN SINTMAARTENSDIJK",
-     "nat": "NED",
-     "gcPos": 150,
-     "gcVal": "08h 06' 20''",
-     "gcGap": "+ 00h 27' 21''",
-     "status": "",
+     "bib": 48,
+     "name": "Callum SCOTSON",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     }
    ]
@@ -1448,88 +458,448 @@
    "name": "PINARELLO-Q36.5 PRO CYCLING TEAM",
    "code": "PQT",
    "url": "https://www.lavuelta.es/en/team/PQT/pinarello-q36-5-pro-cycling-team",
-   "gcPos": 17,
-   "gcVal": "23h 50' 35''",
-   "gcGap": "+ 00h 43' 53''",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
      "bib": 51,
      "name": "David DE LA CRUZ",
      "nat": "ESP",
-     "gcPos": 82,
-     "gcVal": "08h 03' 14''",
-     "gcGap": "+ 00h 24' 15''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 52,
      "name": "Xabier AZPARREN IRURZUN",
      "nat": "ESP",
-     "gcPos": 122,
-     "gcVal": "08h 05' 03''",
-     "gcGap": "+ 00h 26' 04''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 53,
      "name": "Walter CALZONI",
      "nat": "ITA",
-     "gcPos": 85,
-     "gcVal": "08h 03' 19''",
-     "gcGap": "+ 00h 24' 20''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 54,
      "name": "Marcel CAMPRUBI PIJUAN",
      "nat": "ESP",
-     "gcPos": 123,
-     "gcVal": "08h 05' 03''",
-     "gcGap": "+ 00h 26' 04''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 55,
      "name": "Edward DUNBAR",
      "nat": "IRL",
-     "gcPos": 38,
-     "gcVal": "07h 54' 32''",
-     "gcGap": "+ 00h 15' 33''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 56,
      "name": "Thomas GLOAG",
      "nat": "GBR",
-     "gcPos": 37,
-     "gcVal": "07h 54' 16''",
-     "gcGap": "+ 00h 15' 17''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 57,
      "name": "David GONZALEZ LOPEZ",
      "nat": "ESP",
-     "gcPos": 67,
-     "gcVal": "08h 02' 51''",
-     "gcGap": "+ 00h 23' 52''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 58,
      "name": "Milan VADER",
      "nat": "NED",
-     "gcPos": 70,
-     "gcVal": "08h 02' 53''",
-     "gcGap": "+ 00h 23' 54''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "NETCOMPANY INEOS CYCLING TEAM",
+   "code": "NCI",
+   "url": "https://www.lavuelta.es/en/team/NCI/netcompany-ineos-cycling-team",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 61,
+     "name": "Oscar ONLEY",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 62,
+     "name": "Jack HAIG",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 63,
+     "name": "Lucas HAMILTON",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 64,
+     "name": "Axel LAURANCE",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 65,
+     "name": "Carlos RODRIGUEZ",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 66,
+     "name": "Embret SVESTAD-BÅRDSENG",
+     "nat": "NOR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 67,
+     "name": "Joshua TARLING",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 68,
+     "name": "Ben TURNER",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "BAHRAIN VICTORIOUS",
+   "code": "TBV",
+   "url": "https://www.lavuelta.es/en/team/TBV/bahrain-victorious",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 71,
+     "name": "Pello BILBAO",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 72,
+     "name": "Santiago BUITRAGO",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 73,
+     "name": "Roman ERMAKOV",
+     "nat": "SLO",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 74,
+     "name": "Matevž GOVEKAR",
+     "nat": "SLO",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 75,
+     "name": "Pau MIQUEL DELGADO",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 76,
+     "name": "Jakob OMRZEL",
+     "nat": "SLO",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 77,
+     "name": "Mathijs PAASSCHENS",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 78,
+     "name": "Attila VALTER",
+     "nat": "HUN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "LIDL-TREK",
+   "code": "LTK",
+   "url": "https://www.lavuelta.es/en/team/LTK/lidl-trek",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 81,
+     "name": "Mattias SKJELMOSE",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 82,
+     "name": "Julien BERNARD",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 83,
+     "name": "Lennard KÄMNA",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 84,
+     "name": "Patrick KONRAD",
+     "nat": "AUT",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 85,
+     "name": "Jacopo MOSCA",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 86,
+     "name": "Sunekær MATHIAS NORSGAARD",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 87,
+     "name": "Thibau NYS",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 88,
+     "name": "Mads PEDERSEN",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "GROUPAMA-FDJ UNITED",
+   "code": "GFC",
+   "url": "https://www.lavuelta.es/en/team/GFC/groupama-fdj-united",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 91,
+     "name": "Clément BERTHET",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 92,
+     "name": "Olivier LE GAC",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 93,
+     "name": "Valentin MADOUAS",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 94,
+     "name": "Guillaume MARTIN GUYONNET",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 95,
+     "name": "Rudy MOLARD",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 96,
+     "name": "Enzo PALENI",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 97,
+     "name": "Rémy ROCHAS",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 98,
+     "name": "Bastien TRONCHON",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     }
    ]
@@ -1538,268 +908,268 @@
    "name": "ALPECIN-PREMIER TECH",
    "code": "APT",
    "url": "https://www.lavuelta.es/en/team/APT/alpecin-premier-tech",
-   "gcPos": 18,
-   "gcVal": "23h 51' 08''",
-   "gcGap": "+ 00h 44' 26''",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
      "bib": 101,
      "name": "Kaden GROVES",
      "nat": "AUS",
-     "gcPos": 148,
-     "gcVal": "08h 06' 17''",
-     "gcGap": "+ 00h 27' 18''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 102,
      "name": "Francesco BUSATTO",
      "nat": "ITA",
-     "gcPos": 73,
-     "gcVal": "08h 02' 58''",
-     "gcGap": "+ 00h 23' 59''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 103,
      "name": "Ramses DEBRUYNE",
      "nat": "BEL",
-     "gcPos": 12,
-     "gcVal": "07h 43' 43''",
-     "gcGap": "+ 00h 04' 44''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 104,
      "name": "Lindsay DE VYLDER",
      "nat": "BEL",
-     "gcPos": 169,
-     "gcVal": "08h 07' 46''",
-     "gcGap": "+ 00h 28' 47''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 105,
      "name": "Gal GLIVAR",
      "nat": "SLO",
-     "gcPos": 114,
-     "gcVal": "08h 04' 48''",
-     "gcGap": "+ 00h 25' 49''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 106,
      "name": "Michael GOGL",
      "nat": "AUT",
-     "gcPos": 108,
-     "gcVal": "08h 04' 30''",
-     "gcGap": "+ 00h 25' 31''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 107,
      "name": "Hugo HOULE",
      "nat": "CAN",
-     "gcPos": 164,
-     "gcVal": "08h 07' 13''",
-     "gcGap": "+ 00h 28' 14''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 108,
      "name": "Sente SENTJENS",
      "nat": "BEL",
-     "gcPos": 182,
-     "gcVal": "08h 22' 17''",
-     "gcGap": "+ 00h 43' 18''",
-     "status": "",
-     "statusStage": null
-    }
-   ]
-  },
-  {
-   "name": "BURGOS-BURPELLET-BH",
-   "code": "BBH",
-   "url": "https://www.lavuelta.es/en/team/BBH/burgos-burpellet-bh",
-   "gcPos": 19,
-   "gcVal": "23h 51' 49''",
-   "gcGap": "+ 00h 45' 07''",
-   "riders": [
-    {
-     "bib": 191,
-     "name": "Jesus HERRADA",
-     "nat": "ESP",
-     "gcPos": 147,
-     "gcVal": "08h 06' 09''",
-     "gcGap": "+ 00h 27' 10''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 192,
-     "name": "Clement ALLENO",
-     "nat": "FRA",
-     "gcPos": 78,
-     "gcVal": "08h 03' 08''",
-     "gcGap": "+ 00h 24' 09''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 193,
-     "name": "Mario APARICIO MUÑOZ",
-     "nat": "ESP",
-     "gcPos": 35,
-     "gcVal": "07h 54' 04''",
-     "gcGap": "+ 00h 15' 05''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 194,
-     "name": "Sergio Geovani CHUMIL GONZALEZ",
-     "nat": "GUA",
      "gcPos": null,
      "gcVal": "",
      "gcGap": "",
      "status": "DNF",
-     "statusStage": 2
-    },
-    {
-     "bib": 195,
-     "name": "Jose MANUEL DIAZ GALLEGO",
-     "nat": "ESP",
-     "gcPos": 116,
-     "gcVal": "08h 04' 52''",
-     "gcGap": "+ 00h 25' 53''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 196,
-     "name": "Jose LUIS FAURA ASENSIO",
-     "nat": "ESP",
-     "gcPos": 105,
-     "gcVal": "08h 04' 25''",
-     "gcGap": "+ 00h 25' 26''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 197,
-     "name": "Sinuhe FERNANDEZ RODRIGUEZ",
-     "nat": "ESP",
-     "gcPos": 161,
-     "gcVal": "08h 06' 49''",
-     "gcGap": "+ 00h 27' 50''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 198,
-     "name": "Cesar MACIAS ESTRADA",
-     "nat": "MEX",
-     "gcPos": 140,
-     "gcVal": "08h 05' 47''",
-     "gcGap": "+ 00h 26' 48''",
-     "status": "",
      "statusStage": null
     }
    ]
   },
   {
-   "name": "TEAM JAYCO ALULA",
-   "code": "JAY",
-   "url": "https://www.lavuelta.es/en/team/JAY/team-jayco-alula",
-   "gcPos": 20,
-   "gcVal": "23h 54' 00''",
-   "gcGap": "+ 00h 47' 18''",
+   "name": "NSN CYCLING TEAM",
+   "code": "NSN",
+   "url": "https://www.lavuelta.es/en/team/NSN/nsn-cycling-team",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
-     "bib": 151,
-     "name": "Alessandro COVI",
-     "nat": "ITA",
-     "gcPos": 75,
-     "gcVal": "08h 03' 03''",
-     "gcGap": "+ 00h 24' 04''",
-     "status": "",
+     "bib": 111,
+     "name": "Alexey LUTSENKO",
+     "nat": "KAZ",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 152,
-     "name": "Koen BOUWMAN",
-     "nat": "NED",
-     "gcPos": 151,
-     "gcVal": "08h 06' 21''",
-     "gcGap": "+ 00h 27' 22''",
-     "status": "",
+     "bib": 112,
+     "name": "George BENNETT",
+     "nat": "NZL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 153,
-     "name": "Paul DOUBLE",
-     "nat": "GBR",
-     "gcPos": 76,
-     "gcVal": "08h 03' 05''",
-     "gcGap": "+ 00h 24' 06''",
-     "status": "",
+     "bib": 113,
+     "name": "Jan HIRT",
+     "nat": "CZE",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 154,
-     "name": "Asbjørn HELLEMOSE",
-     "nat": "DEN",
-     "gcPos": 154,
-     "gcVal": "08h 06' 27''",
-     "gcGap": "+ 00h 27' 28''",
-     "status": "",
+     "bib": 114,
+     "name": "Hugo HOFSTETTER",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
-     "bib": 155,
-     "name": "Hamish MCKENZIE",
-     "nat": "AUS",
-     "gcPos": 180,
-     "gcVal": "08h 16' 03''",
-     "gcGap": "+ 00h 37' 04''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 156,
-     "name": "Xavier FINLAY XAVIER PICKERING",
-     "nat": "GBR",
-     "gcPos": 25,
-     "gcVal": "07h 48' 53''",
-     "gcGap": "+ 00h 09' 54''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 157,
-     "name": "Rudy PORTER",
-     "nat": "AUS",
-     "gcPos": 81,
-     "gcVal": "08h 03' 13''",
-     "gcGap": "+ 00h 24' 14''",
-     "status": "",
-     "statusStage": null
-    },
-    {
-     "bib": 158,
-     "name": "Jasha SÜTTERLIN",
+     "bib": 115,
+     "name": "Moritz KRETSCHY",
      "nat": "GER",
-     "gcPos": 165,
-     "gcVal": "08h 07' 19''",
-     "gcGap": "+ 00h 28' 20''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 116,
+     "name": "Pau MARTI SORIANO",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 117,
+     "name": "Nicholas SCHULTZ",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 118,
+     "name": "Floris VAN TRICHT",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "SOUDAL QUICK-STEP",
+   "code": "SOQ",
+   "url": "https://www.lavuelta.es/en/team/SOQ/soudal-quick-step",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 121,
+     "name": "Mikel LANDA",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 122,
+     "name": "Alberto DAINESE",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 123,
+     "name": "Gianmarco GAROFOLI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 124,
+     "name": "Ethan EDWARD HAYTER",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 125,
+     "name": "Valentin PARET PEINTRE",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 126,
+     "name": "Fabio VAN DEN BOSSCHE",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 127,
+     "name": "Mauri VANSEVENANT",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 128,
+     "name": "Filippo ZANA",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     }
    ]
@@ -1808,88 +1178,88 @@
    "name": "UNO-X MOBILITY",
    "code": "UXM",
    "url": "https://www.lavuelta.es/en/team/UXM/uno-x-mobility",
-   "gcPos": 21,
-   "gcVal": "23h 56' 44''",
-   "gcGap": "+ 00h 50' 02''",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
      "bib": 131,
      "name": "Magnus CORT NIELSEN",
      "nat": "DEN",
-     "gcPos": 172,
-     "gcVal": "08h 08' 20''",
-     "gcGap": "+ 00h 29' 21''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 132,
      "name": "Simon DALBY",
      "nat": "DEN",
-     "gcPos": 50,
-     "gcVal": "08h 02' 00''",
-     "gcGap": "+ 00h 23' 01''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 133,
      "name": "Fredrik DVERSNES",
      "nat": "NOR",
-     "gcPos": 72,
-     "gcVal": "08h 02' 56''",
-     "gcGap": "+ 00h 23' 57''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 134,
      "name": "Tobias JOHANNESSEN",
      "nat": "NOR",
-     "gcPos": 30,
-     "gcVal": "07h 52' 42''",
-     "gcGap": "+ 00h 13' 43''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 135,
      "name": "Andreas KRON",
      "nat": "DEN",
-     "gcPos": 66,
-     "gcVal": "08h 02' 50''",
-     "gcGap": "+ 00h 23' 51''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 136,
      "name": "Andreas LEKNESSUND",
      "nat": "NOR",
-     "gcPos": 134,
-     "gcVal": "08h 05' 31''",
-     "gcGap": "+ 00h 26' 32''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 137,
      "name": "Rasmus TILLER",
      "nat": "NOR",
-     "gcPos": 119,
-     "gcVal": "08h 04' 55''",
-     "gcGap": "+ 00h 25' 56''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 138,
      "name": "Martin TJØTTA",
      "nat": "NOR",
-     "gcPos": 170,
-     "gcVal": "08h 08' 12''",
-     "gcGap": "+ 00h 29' 13''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     }
    ]
@@ -1898,28 +1268,28 @@
    "name": "COFIDIS",
    "code": "COF",
    "url": "https://www.lavuelta.es/en/team/COF/cofidis",
-   "gcPos": 22,
-   "gcVal": "24h 00' 06''",
-   "gcGap": "+ 00h 53' 24''",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
      "bib": 141,
      "name": "Emanuel BUCHMANN",
      "nat": "GER",
-     "gcPos": 39,
-     "gcVal": "07h 55' 00''",
-     "gcGap": "+ 00h 16' 01''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 142,
      "name": "Bryan COQUARD",
      "nat": "FRA",
-     "gcPos": 113,
-     "gcVal": "08h 04' 48''",
-     "gcGap": "+ 00h 25' 49''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
@@ -1936,51 +1306,591 @@
      "bib": 144,
      "name": "Sylvain MONIQUET",
      "nat": "BEL",
-     "gcPos": 92,
-     "gcVal": "08h 03' 45''",
-     "gcGap": "+ 00h 24' 46''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 145,
      "name": "Paul OURSELIN",
      "nat": "FRA",
-     "gcPos": 115,
-     "gcVal": "08h 04' 51''",
-     "gcGap": "+ 00h 25' 52''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 146,
      "name": "Alexis RENARD",
      "nat": "FRA",
-     "gcPos": 142,
-     "gcVal": "08h 05' 52''",
-     "gcGap": "+ 00h 26' 53''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 147,
      "name": "Louis ROULAND",
      "nat": "FRA",
-     "gcPos": 144,
-     "gcVal": "08h 05' 57''",
-     "gcGap": "+ 00h 26' 58''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 148,
      "name": "Sergio SAMITIER SAMITIER",
      "nat": "ESP",
-     "gcPos": 124,
-     "gcVal": "08h 05' 05''",
-     "gcGap": "+ 00h 26' 06''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TEAM JAYCO ALULA",
+   "code": "JAY",
+   "url": "https://www.lavuelta.es/en/team/JAY/team-jayco-alula",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 151,
+     "name": "Alessandro COVI",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 152,
+     "name": "Koen BOUWMAN",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 153,
+     "name": "Paul DOUBLE",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 154,
+     "name": "Asbjørn HELLEMOSE",
+     "nat": "DEN",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 155,
+     "name": "Hamish MCKENZIE",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 156,
+     "name": "Xavier FINLAY XAVIER PICKERING",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 157,
+     "name": "Rudy PORTER",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 158,
+     "name": "Jasha SÜTTERLIN",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "EF EDUCATION - EASYPOST",
+   "code": "EFE",
+   "url": "https://www.lavuelta.es/en/team/EFE/ef-education-easypost",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 161,
+     "name": "Richard CARAPAZ",
+     "nat": "ECU",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 162,
+     "name": "Vincenzo ALBANESE",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 163,
+     "name": "Markel BELOKI",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 164,
+     "name": "Alastair MACKELLAR",
+     "nat": "AUS",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 165,
+     "name": "Darren RAFFERTY",
+     "nat": "IRL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 166,
+     "name": "Juan FELIPE RODRIGUEZ CONTRERAS",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 167,
+     "name": "James SHAW",
+     "nat": "GBR",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 168,
+     "name": "Georg STEINHAUSER",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "TUDOR PRO CYCLING TEAM",
+   "code": "TUD",
+   "url": "https://www.lavuelta.es/en/team/TUD/tudor-pro-cycling-team",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 171,
+     "name": "Marco BRENNER",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 172,
+     "name": "William BARTA",
+     "nat": "USA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 173,
+     "name": "Arthur KLUCKERS",
+     "nat": "LUX",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 174,
+     "name": "Stefan KÜNG",
+     "nat": "SUI",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 175,
+     "name": "Roland THALMANN",
+     "nat": "SUI",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 176,
+     "name": "Lawrence WARBASSE",
+     "nat": "USA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 177,
+     "name": "Fabian WEISS",
+     "nat": "SUI",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 178,
+     "name": "Hannes WILKSCH",
+     "nat": "GER",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "XDS ASTANA TEAM",
+   "code": "XAT",
+   "url": "https://www.lavuelta.es/en/team/XAT/xds-astana-team",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 181,
+     "name": "Harold TEJADA",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 182,
+     "name": "Yevgeniy FEDOROV",
+     "nat": "KAZ",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 183,
+     "name": "Lorenzo FORTUNATO",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 184,
+     "name": "Victor LANGELLOTTI",
+     "nat": "MON",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 185,
+     "name": "Henok MULUEBERHAN",
+     "nat": "ERI",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 186,
+     "name": "Cristian RODRIGUEZ",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 187,
+     "name": "Alessandro ROMELE",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 188,
+     "name": "Darren VAN BEKKUM",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "BURGOS-BURPELLET-BH",
+   "code": "BBH",
+   "url": "https://www.lavuelta.es/en/team/BBH/burgos-burpellet-bh",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 191,
+     "name": "Jesus HERRADA",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 192,
+     "name": "Clement ALLENO",
+     "nat": "FRA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 193,
+     "name": "Mario APARICIO MUÑOZ",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 194,
+     "name": "Sergio Geovani CHUMIL GONZALEZ",
+     "nat": "GUA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 2
+    },
+    {
+     "bib": 195,
+     "name": "Jose MANUEL DIAZ GALLEGO",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 196,
+     "name": "Jose LUIS FAURA ASENSIO",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 197,
+     "name": "Sinuhe FERNANDEZ RODRIGUEZ",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 198,
+     "name": "Cesar MACIAS ESTRADA",
+     "nat": "MEX",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "LOTTO INTERMARCHE",
+   "code": "LOI",
+   "url": "https://www.lavuelta.es/en/team/LOI/lotto-intermarche",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 201,
+     "name": "Jarno WIDAR",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 202,
+     "name": "Vito BRAET",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 203,
+     "name": "Lars CRAPS",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 204,
+     "name": "Steffen DE SCHUYTENEER",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 205,
+     "name": "Lorenzo ROTA",
+     "nat": "ITA",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 206,
+     "name": "Reuben THOMPSON",
+     "nat": "NZL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 207,
+     "name": "Luca VAN BOVEN",
+     "nat": "BEL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 208,
+     "name": "Roel VAN SINTMAARTENSDIJK",
+     "nat": "NED",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": 5
     }
    ]
   },
@@ -1988,93 +1898,183 @@
    "name": "TEAM PICNIC POSTNL",
    "code": "TPP",
    "url": "https://www.lavuelta.es/en/team/TPP/team-picnic-postnl",
-   "gcPos": 23,
-   "gcVal": "24h 10' 20''",
-   "gcGap": "+ 01h 03' 38''",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
    "riders": [
     {
      "bib": 211,
      "name": "Christopher HAMILTON",
      "nat": "AUS",
-     "gcPos": 179,
-     "gcVal": "08h 13' 55''",
-     "gcGap": "+ 00h 34' 56''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 212,
      "name": "Timo DE JONG",
      "nat": "NED",
-     "gcPos": 121,
-     "gcVal": "08h 05' 02''",
-     "gcGap": "+ 00h 26' 03''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 213,
      "name": "Mattia GAFFURI",
      "nat": "ITA",
-     "gcPos": 110,
-     "gcVal": "08h 04' 38''",
-     "gcGap": "+ 00h 25' 39''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 214,
      "name": "Gijs LEEMREIZE",
      "nat": "NED",
-     "gcPos": 69,
-     "gcVal": "08h 02' 52''",
-     "gcGap": "+ 00h 23' 53''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 215,
      "name": "Guillermo JUAN MARTINEZ HUERTAS",
      "nat": "COL",
-     "gcPos": 128,
-     "gcVal": "08h 05' 13''",
-     "gcGap": "+ 00h 26' 14''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 216,
      "name": "Oliver PEACE",
      "nat": "GBR",
-     "gcPos": 177,
-     "gcVal": "08h 13' 23''",
-     "gcGap": "+ 00h 34' 24''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 217,
      "name": "Henri FRANÇOIS RENARD HAQUIN",
      "nat": "FRA",
-     "gcPos": 93,
-     "gcVal": "08h 03' 56''",
-     "gcGap": "+ 00h 24' 57''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     },
     {
      "bib": 218,
      "name": "Timo ROOSEN",
      "nat": "NED",
-     "gcPos": 156,
-     "gcVal": "08h 06' 33''",
-     "gcGap": "+ 00h 27' 34''",
-     "status": "",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    }
+   ]
+  },
+  {
+   "name": "EQUIPO KERN PHARMA",
+   "code": "EKP",
+   "url": "https://www.lavuelta.es/en/team/EKP/equipo-kern-pharma",
+   "gcPos": null,
+   "gcVal": "",
+   "gcGap": "",
+   "riders": [
+    {
+     "bib": 221,
+     "name": "Urko BERRADE FERNANDEZ",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 222,
+     "name": "Marc BRUSTENGA MASAGUE",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 223,
+     "name": "Ivan COBO CAYON",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 224,
+     "name": "Iñigo ELOSEGUI MOMEÑE",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 225,
+     "name": "Ibon RUIZ SEDANO",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 226,
+     "name": "Ivan SOSA",
+     "nat": "COL",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 227,
+     "name": "Diego URIARTE BELZUNEGI",
+     "nat": "ESP",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
+     "statusStage": null
+    },
+    {
+     "bib": 228,
+     "name": "Mats WENZEL",
+     "nat": "LUX",
+     "gcPos": null,
+     "gcVal": "",
+     "gcGap": "",
+     "status": "DNF",
      "statusStage": null
     }
    ]
   }
  ],
- "updated": "2026-08-25T19:30:59.256852+03:00",
- "updatedText": "Päivitetty 25.08.2026 klo 19.30 (Suomen aikaa)"
+ "updated": "2026-08-26T17:39:17.225706+03:00",
+ "updatedText": "Päivitetty 26.08.2026 klo 17.39 (Suomen aikaa)"
 }
