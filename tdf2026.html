@@ -196,7 +196,7 @@ const STRINGS = {
     allWithdrawalsFr: n => `${n} ajajaa jäänyt pois kilpailusta`,
     colReason: 'Syy',
     withdrawalReasons: {DNS:'Ei startannut (DNS)', DNF:'Keskeytti (DNF)', OTL:'Aikaraja ylittyi (OTL)'},
-    teamsStatus: (riders, teams, fin, out) => `<b>Lähtijät:</b> ${teams} joukkuetta ja ${riders} ajajaa — ${fin} ajajaa maalissa Pariisissa, ${out} jäi pois kilpailusta.`,
+    teamsStatus: (riders, teams, fin, out) => `Lähtijät: ${teams} joukkuetta ja ${riders} ajajaa — ${fin} ajajaa maalissa Pariisissa, ${out} jäi pois kilpailusta.`,
     teamsEmpty: 'Ajajalistaa ei saatu ladattua. Lista luetaan tiedostosta <code>data/tdf2026-riders.json</code>, jonka <code>scripts/fetch_riders.py</code> kokoaa letour.fr:n lähtölistasta. Jos avasit sivun suoraan levyltä (file://), selain ei voi lukea tiedostoa.',
     teamClsLine: (pos, val) => `Joukkuekilpailu #${pos} · ${val}`,
     teamClsNone: 'Ei sijoitusta joukkuekilpailussa',
@@ -287,7 +287,7 @@ const STRINGS = {
     allWithdrawalsFr: n => `${n} riders out of the race`,
     colReason: 'Reason',
     withdrawalReasons: {DNS:'Did not start (DNS)', DNF:'Abandoned (DNF)', OTL:'Outside the time limit (OTL)'},
-    teamsStatus: (riders, teams, fin, out) => `<b>Start list:</b> ${teams} teams and ${riders} riders — ${fin} finished in Paris, ${out} left the race.`,
+    teamsStatus: (riders, teams, fin, out) => `Start list: ${teams} teams and ${riders} riders — ${fin} finished in Paris, ${out} left the race.`,
     teamsEmpty: 'The rider list could not be loaded. It is read from <code>data/tdf2026-riders.json</code>, which <code>scripts/fetch_riders.py</code> builds from the letour.fr start list. If you opened this page straight from disk (file://), the browser cannot read that file.',
     teamClsLine: (pos, val) => `Team classification #${pos} · ${val}`,
     teamClsNone: 'Not placed in the team classification',
@@ -378,7 +378,7 @@ const STRINGS = {
     allWithdrawalsFr: n => `${n} coureurs hors course`,
     colReason: 'Motif',
     withdrawalReasons: {DNS:'Non-partant (DNS)', DNF:'Abandon (DNF)', OTL:'Hors délai (OTL)'},
-    teamsStatus: (riders, teams, fin, out) => `<b>Liste des partants :</b> ${teams} équipes et ${riders} coureurs — ${fin} à l’arrivée à Paris, ${out} hors course.`,
+    teamsStatus: (riders, teams, fin, out) => `Liste des partants : ${teams} équipes et ${riders} coureurs — ${fin} à l’arrivée à Paris, ${out} hors course.`,
     teamsEmpty: 'La liste des coureurs n’a pas pu être chargée. Elle provient de <code>data/tdf2026-riders.json</code>, généré par <code>scripts/fetch_riders.py</code> à partir de la liste des partants de letour.fr. Si la page a été ouverte directement depuis le disque (file://), le navigateur ne peut pas lire ce fichier.',
     teamClsLine: (pos, val) => `Classement par équipes #${pos} · ${val}`,
     teamClsNone: 'Non classée au classement par équipes',
@@ -1432,7 +1432,7 @@ function renderRiders(){
   }
 
   const out = RIDERS.riderCount - RIDERS.finishers;
-  const statusHTML = `<div class="teamsstatus">${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out).replace(/<[^>]+>/g,'')}</div>`;
+  const statusHTML = `<div class="teamsstatus">${t('teamsStatus')(RIDERS.riderCount, RIDERS.teamCount, RIDERS.finishers, out)}</div>`;
 
   const cardsHTML = RIDERS.teams.map((team,i)=>{
     const nameHTML = team.url
