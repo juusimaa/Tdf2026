@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-25T06:04:17+03:00",
+ "updated": "2026-08-26T06:58:57+03:00",
  "stages": {
   "1": {
    "start": {
@@ -80,6 +80,30 @@
     "humidity": 89,
     "alt": 1937,
     "town": "Font-Romeu"
+   }
+  },
+  "4": {
+   "start": {
+    "temp": 25,
+    "low": 13,
+    "feels": 25,
+    "cond": "partly",
+    "wind": 10,
+    "dir": "SW",
+    "precip": 0.0,
+    "humidity": 64,
+    "town": "Andorra la Vella"
+   },
+   "finish": {
+    "temp": 26,
+    "low": 14,
+    "feels": 26,
+    "cond": "partly",
+    "wind": 10,
+    "dir": "SW",
+    "precip": 0.0,
+    "humidity": 64,
+    "town": "Andorra la Vella"
    }
   }
  }
