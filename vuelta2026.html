@@ -460,41 +460,6 @@ function todayKey(){
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
 
-/* ---------- ILLUSTRATIVE PROFILE (built from climb positions) ---------- */
-function climbHeight(c){ const gain=(c.len||4)*(c.grad||5); return Math.max(40, Math.min(95, 36 + gain*0.4)); }
-function genProfile(st){
-  const cs=climbsWithKm(st);
-  if(st.type==='itt' || !cs.length) return genericProfile(st);
-  const total=st.km, pts=[[0,18]];
-  let last=0;
-  cs.forEach(c=>{
-    const foot=Math.max(last+1, Math.max(1, c.km-(c.len||4)));
-    if(foot>last+1) pts.push([+foot.toFixed(1),22]);
-    pts.push([c.km, climbHeight(c)]);
-    if(c.km < total-4) pts.push([+Math.min(total, c.km+Math.max(3,(c.len||4)*0.5)).toFixed(1),28]);
-    last=c.km;
-  });
-  const lastPt=pts[pts.length-1];
-  if(lastPt[0] < total-0.5) pts.push([total, st.summit?90:18]);
-  else if(st.summit) lastPt[1]=Math.max(lastPt[1],90);
-  const out=[];
-  pts.forEach(p=>{
-    const x=+Math.max(0,Math.min(total,p[0])).toFixed(1);
-    if(out.length && x===out[out.length-1][0]) out[out.length-1][1]=Math.max(out[out.length-1][1],p[1]);
-    else if(!out.length || x>out[out.length-1][0]) out.push([x,p[1]]);
-  });
-  return out;
-}
-function buildPath(points,totalKm,W,H,padL,padR,padT,padB){
-  const plotW=W-padL-padR, plotH=H-padT-padB;
-  const xs=points.map(p=>padL+(p[0]/totalKm)*plotW);
-  const ys=points.map(p=>padT+plotH-(p[1]/100)*plotH);
-  let d=`M ${xs[0]},${ys[0]}`;
-  for(let i=1;i<xs.length;i++){ const mx=(xs[i-1]+xs[i])/2; d+=` Q ${xs[i-1]},${ys[i-1]} ${mx},${(ys[i-1]+ys[i])/2}`; }
-  d+=` L ${xs[xs.length-1]},${ys[ys.length-1]}`;
-  return {d,plotH};
-}
-function xForKm(km,totalKm,W,padL,padR){ return padL+(km/totalKm)*(W-padL-padR); }
 const STAGE_COORDS = {
   1:[[7.428,43.739],[7.421,43.735]],2:[[7.387,43.734],[5.779,43.841]],3:[[3.063,43.126],[2.036,42.521]],4:[[1.553,42.514],[1.526,42.507]],5:[[0.82,41.144],[0.502,40.822]],6:[[0.248,40.25],[-0.038,39.977]],7:[[-0.011,40.133],[-0.632,40.378]],8:[[-0.31,39.616],[-0.219,39.033]],9:[[-0.214,38.537],[-0.267,38.65]],10:[[-2.537,38.664],[-2.049,38.451]],11:[[-0.951,37.609],[-1.696,37.675]],12:[[-1.892,37.258],[-2.547,37.222]],13:[[-3.609,36.746],[-4.142,37.163]],14:[[-3.743,37.778],[-3.775,37.631]],15:[[-5.28,37.698],[-4.775,37.88]],16:[[-6.822,37.912],[-6.921,37.208]],17:[[-5.925,37.242],[-5.991,37.375]],18:[[-6.231,36.592],[-6.135,36.691]],19:[[-4.138,36.724],[-5.2,36.484]],20:[[-3.088,37.179],[-3.369,37.175]],21:[[-3.61,37.155],[-3.586,37.174]]
 };
@@ -555,121 +520,13 @@ function renderProfile(st){
   return svg;
 }
 
-const ZOOM_LABELS = {fi:{in:'Lähennä',out:'Loitonna'}, fr:{in:'Zoom avant',out:'Zoom arrière'}, en:{in:'Zoom in',out:'Zoom out'}};
-
-/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
-   Per-stage route polylines live in data/vuelta2026-routes.json. Stages
-   missing a route fall back to a straight start→finish line derived from
-   STAGE_COORDS. Same restyled-Leaflet approach as the Tour de France / Giro
-   pages: the map is a real interactive tile map, shown small inline in the
-   detail grid or expanded full-width, with a control-row chrome. */
 let routesData = null, routesPromise = null;
-
 let stageMap = null, stageMapFitBounds = null;
+let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 function initStageMap(st){
-  if(!window.L){ setTimeout(()=>initStageMap(st), 120); return; }
-  const el = document.getElementById('stage-map');
-  if(!el) return;
-  destroyStageMap();
-
-  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true, zoomControl:false});
-  stageMap = map;
-  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-    maxZoom:17,
-    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
-  map.on('zoomend', updateMapZoomLabel);
-
-  const css = getComputedStyle(document.documentElement);
-  const INK = css.getPropertyValue('--color-text').trim() || '#201e1d';
-  const ACCENT = css.getPropertyValue('--color-accent').trim() || '#ec3013';
-
-  const draw = () => {
-    if(stageMap !== map) return;
-    const pts = (routesData.stages || {})[st.n];
-    const c = STAGE_COORDS[st.n];
-    let line, startLL, finishLL, approx = false;
-    if(pts && pts.length){
-      line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
-    }else{
-      approx = true;
-      startLL = [c[0][1], c[0][0]];
-      finishLL = [c[1][1], c[1][0]];
-      line = [startLL, finishLL];
-    }
-    const poly = L.polyline(line, approx
-      ? {color:INK, weight:3, opacity:.85, dashArray:'6,8'}
-      : {color:INK, weight:3.5, opacity:.95}).addTo(map);
-    const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
-    if(!same){
-      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:INK, fillOpacity:1}).addTo(map);
-    }
-    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:ACCENT, fillOpacity:1}).addTo(map);
-    map.fitBounds(poly.getBounds(), {padding:[24,24]});
-    map.invalidateSize();
-    stageMapFitBounds = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[24,24]}); };
-    const cap = document.getElementById('stage-map-caption');
-    if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
-    updateMapZoomLabel();
-  };
-
-  if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
-  setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
+  initStageMapCommon(st, STAGE_COORDS);
 }
-
-function mapControlsHTML(big){
-  const zl = ZOOM_LABELS[lang] || ZOOM_LABELS.en;
-  let html =
-    `<button class="mapctrl-btn" data-map-zoomout title="${zl.out}" aria-label="${zl.out}">−</button>` +
-    `<button class="mapctrl-btn" data-map-zoomin title="${zl.in}" aria-label="${zl.in}">+</button>` +
-    `<button class="mapctrl-btn" data-map-recenter title="${esc(t('minimapRecenter'))}" aria-label="${esc(t('minimapRecenter'))}">◎</button>`;
-  html += big
-    ? `<button class="mapctrl-btn mapctrl-close" data-map-toggle title="${esc(t('minimapCollapse'))}" aria-label="${esc(t('minimapCollapse'))}">×</button>`
-    : `<button class="mapctrl-btn" data-map-toggle title="${esc(t('minimapExpand'))}" aria-label="${esc(t('minimapExpand'))}">⤢</button>`;
-  return html;
-}
-
-function mapCellHTML(st){
-  return `
-    <span class="maprow">
-      <span class="maplabel">${mapLabel()}</span>
-      <span class="mapctrls">${mapControlsHTML(false)}</span>
-    </span>
-    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
-    <span class="mapzoom" id="mapZoomLabel"></span>`;
-}
-
-function bigMapBoxHTML(st){
-  return `<div id="bigmapbox">
-    <span class="maprow">
-      <span class="maplabel">${mapLabel()}</span>
-      <span class="mapctrls">${mapControlsHTML(true)}</span>
-    </span>
-    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
-    <span class="mapmeta">
-      <span class="mapzoom" id="mapZoomLabel"></span>
-      <span class="mapcaption" id="stage-map-caption"></span>
-    </span>
-  </div>`;
-}
-
-function bindMapControls(st){
-  const zoomOutBtn = document.querySelector('[data-map-zoomout]');
-  const zoomInBtn = document.querySelector('[data-map-zoomin]');
-  const recenterBtn = document.querySelector('[data-map-recenter]');
-  const toggleBtn = document.querySelector('[data-map-toggle]');
-  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomOut(); });
-  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomIn(); });
-  if(recenterBtn) recenterBtn.addEventListener('click', ()=>{ if(stageMapFitBounds) stageMapFitBounds(); });
-  if(toggleBtn) toggleBtn.addEventListener('click', ()=>{
-    mapExpanded = !mapExpanded;
-    renderPanel(st);
-    syncStageListHeight();
-  });
-}
-
-let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 /* ---------- STAGE LIST ---------- */
 let activeIdx = 0;
@@ -740,59 +597,6 @@ function stageHasEnded(st){
   return st.n !== 'rest' && st.date < todayKey();
 }
 
-function wxCellHTML(d, kicker){
-  const conds = t('wxConds'), dirs = t('wxDirs');
-  const rows = [
-    {label: t('wxLow'), value: `${d.low}°`},
-    {label: t('wxWind'), value: `${d.wind} km/h ${dirs[d.dir] || d.dir}`},
-    {label: t('wxRain'), value: d.precip ? `${d.precip.toLocaleString(localeTag())} mm` : '—'},
-    {label: t('wxHumidity'), value: `${d.humidity} %`}
-  ];
-  if(d.alt) rows.push({label: t('wxAlt'), value: fmtGain(d.alt)});
-  return `
-    <div class="wxcell">
-      <div class="wxhead">
-        <span class="wxkicker">${kicker}</span>
-        <span class="wxplace">${esc(d.town)}</span>
-      </div>
-      <div class="wxtempline">
-        <span class="wxtemp">${d.temp}°</span>
-        <div class="wxcondwrap">
-          <span class="wxcond">${conds[d.cond] || d.cond}</span>
-          <span class="wxfeels">${t('wxFeels')} ${d.feels}°</span>
-        </div>
-      </div>
-      <div class="wxrows">
-        ${rows.map(r=>`<div class="wxrowitem"><span class="label">${r.label}</span><span class="value">${r.value}</span></div>`).join('')}
-      </div>
-    </div>`;
-}
-
-function wxSectionHTML(st){
-  if(!stageHasEnded(st)) return '';
-  const w = wxFor(st.n);
-  let deltaHTML = '';
-  if(w){
-    const diff = w.finish.temp - w.start.temp;
-    const sign = diff > 0 ? '+' : diff < 0 ? '−' : '±';
-    deltaHTML = `
-      <span class="wxdelta">
-        <span class="value">${sign}${Math.abs(diff)} °C</span>
-        <span class="unit">${t('wxDelta')}</span>
-      </span>`;
-  }
-  return `
-    <div class="wxrow">
-      <span class="label">${t('wxHeader')}</span>
-      ${deltaHTML}
-    </div>
-    ${w
-      ? `<div class="wxgrid">${wxCellHTML(w.start, t('wxAtStart'))}${wxCellHTML(w.finish, t('wxAtFinish'))}</div>
-         <p class="wxnote"><span>${t('wxNote')}</span></p>`
-      : `<p class="wxnodata">${t('wxNoData')}</p>`}
-  `;
-}
-
 /* ---------- RENDER MAIN PANEL ---------- */
 function renderPanel(st){
   const panel=document.getElementById('panel');
@@ -838,7 +642,7 @@ function renderPanel(st){
       <div class="factcell"><span class="label">${t('factSprints')}</span><span class="value">${sprints.length}</span></div>
     </div>
 
-    ${wxSectionHTML(st)}
+    ${stageHasEnded(st) ? wxSectionHTML(st) : ''}
 
     ${mapExpanded ? bigMapBoxHTML(st) : ''}
 
@@ -1106,22 +910,6 @@ function renderStageResult(n){
    order (once the classification exists), riders in bib order. */
 let RIDERS = null;
 
-function riderRowHTML(r){
-  const out = !!r.status;
-  const sub = out
-    ? `${t('withdrawalReasons')[r.status] || r.status} · ${r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown')}`
-    : (r.nat || '');
-  const gcPos = out ? '—' : (r.gcPos || '—');
-  const val = out ? '' : (r.gcGap || r.gcVal || '');
-  return `
-    <tr class="${out ? 'out' : (r.gcPos && r.gcPos<=3 ? 'podium' : '')}">
-      <td class="bib">${r.bib ?? ''}</td>
-      <td class="rider"><span class="rname">${esc(r.name)}</span>${sub?`<span class="rsub">${esc(sub)}</span>`:''}</td>
-      <td class="gcpos">${gcPos}</td>
-      <td class="val">${esc(val)}</td>
-    </tr>`;
-}
-
 function renderRiders(){
   const grid = document.getElementById('teamsGrid');
   if(!RIDERS || !Array.isArray(RIDERS.teams) || !RIDERS.teams.length){
@@ -1271,17 +1059,7 @@ document.getElementById('rankStageSelect').addEventListener('change', e=>{
 
 /* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
 const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
-tabButtons.forEach((tab, i)=>{
-  tab.addEventListener('click', ()=>activateTab(tab, false));
-  tab.addEventListener('keydown', e=>{
-    let idx = null;
-    if(e.key==='ArrowRight' || e.key==='ArrowDown') idx = (i+1) % tabButtons.length;
-    else if(e.key==='ArrowLeft' || e.key==='ArrowUp') idx = (i-1+tabButtons.length) % tabButtons.length;
-    else if(e.key==='Home') idx = 0;
-    else if(e.key==='End') idx = tabButtons.length-1;
-    if(idx!==null){ e.preventDefault(); activateTab(tabButtons[idx], true); }
-  });
-});
+setupTabs(tabButtons);
 
 /* Defaults the Stages tab to whichever stage matches today's date, so a
    visitor lands on the stage actually being raced rather than always stage

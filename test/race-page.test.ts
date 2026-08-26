@@ -9,19 +9,20 @@
 // land on globalThis, from where the tests below call them.
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { runInThisContext } from 'node:vm';
+import vm, { runInThisContext } from 'node:vm';
+import { JSDOM } from 'jsdom';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 const distPath = resolve(process.cwd(), 'dist/race-page.js');
+let distCode = '';
 
 beforeAll(() => {
-  let code: string;
   try {
-    code = readFileSync(distPath, 'utf8');
+    distCode = readFileSync(distPath, 'utf8');
   } catch {
     throw new Error(`${distPath} is missing — run "npm run build" before "npm test".`);
   }
-  runInThisContext(code, { filename: distPath });
+  runInThisContext(distCode, { filename: distPath });
 });
 
 const g = globalThis as any;
@@ -116,5 +117,221 @@ describe('climbsWithKm', () => {
   });
   it('returns an empty array when there are no climbs', () => {
     expect(g.climbsWithKm({ km: 180 })).toEqual([]);
+  });
+});
+
+describe('timeToHours (extended)', () => {
+  it("parses times without hours (e.g. \"18' 42''\")", () => {
+    expect(g.timeToHours("18' 42''")).toBeCloseTo(18 / 60 + 42 / 3600, 10);
+  });
+  it('parses HH:MM:SS format', () => {
+    expect(g.timeToHours('83:22:51')).toBeCloseTo(83 + 22 / 60 + 51 / 3600, 10);
+  });
+  it('parses MM:SS format', () => {
+    expect(g.timeToHours('12:30')).toBeCloseTo(12 / 60 + 30 / 3600, 10);
+  });
+});
+
+describe('buildPath and xForKm', () => {
+  it('calculates proportional x for km', () => {
+    expect(g.xForKm(50, 100, 900, 30, 16)).toBe(30 + 0.5 * (900 - 30 - 16));
+  });
+  it('builds SVG path string from points', () => {
+    const pts = [
+      [0, 20],
+      [50, 60],
+      [100, 20],
+    ];
+    const path = g.buildPath(pts, 100, 900, 250, 30, 16, 22, 30);
+    expect(path.d).toMatch(/^M \d+(\.\d+)?,\d+(\.\d+)? Q/);
+    expect(path.plotW).toBe(900 - 30 - 16);
+    expect(path.plotH).toBe(250 - 22 - 30);
+  });
+});
+
+describe('climbHeight and genProfile', () => {
+  it('calculates climb height bounded between 40 and 95', () => {
+    expect(g.climbHeight({ len: 10, grad: 8 })).toBeGreaterThanOrEqual(40);
+    expect(g.climbHeight({ len: 10, grad: 8 })).toBeLessThanOrEqual(95);
+  });
+  it('generates elevation profile keypoints', () => {
+    const st = { km: 100, climbs: [{ km: 50, len: 5, grad: 6 }] };
+    const prof = g.genProfile(st);
+    expect(prof.length).toBeGreaterThan(2);
+    expect(prof[0]).toEqual([0, 20]);
+    expect(prof[prof.length - 1][0]).toBe(100);
+  });
+});
+
+describe('fmtStartLocal', () => {
+  it('formats CEST start time into local time', () => {
+    g.lang = 'en';
+    const res = g.fmtStartLocal({ dateIso: '2026-07-04', startCEST: '13:00' });
+    expect(res).toBeTruthy();
+    expect(typeof res).toBe('string');
+  });
+  it('returns null if startCEST is missing', () => {
+    expect(g.fmtStartLocal({ dateIso: '2026-07-04' })).toBeNull();
+  });
+});
+
+describe('mapControlsHTML', () => {
+  it('renders zoom and recenter buttons', () => {
+    g.lang = 'en';
+    g.STRINGS = {
+      en: { minimapRecenter: 'Center map', minimapCollapse: 'Collapse', minimapExpand: 'Expand' },
+    };
+    const htmlSmall = g.mapControlsHTML(false);
+    expect(htmlSmall).toContain('data-map-zoomout');
+    expect(htmlSmall).toContain('data-map-zoomin');
+    expect(htmlSmall).toContain('data-map-recenter');
+    expect(htmlSmall).toContain('data-map-toggle');
+    expect(htmlSmall).toContain('⤢');
+
+    const htmlBig = g.mapControlsHTML(true);
+    expect(htmlBig).toContain('×');
+  });
+});
+
+describe('riderRowHTML', () => {
+  it('renders active rider row', () => {
+    g.lang = 'en';
+    g.STRINGS = { en: { withdrawalReasons: {} } };
+    const html = g.riderRowHTML({
+      bib: 1,
+      name: 'Tadej POGACAR',
+      nat: 'SLO',
+      gcPos: 1,
+      gcVal: "83h 22' 51''",
+    });
+    expect(html).toContain('Tadej POGACAR');
+    expect(html).toContain('podium');
+    expect(html).toContain('SLO');
+  });
+  it('renders dropped out rider row', () => {
+    g.lang = 'en';
+    g.STRINGS = {
+      en: {
+        withdrawalReasons: { DNF: 'DNF' },
+        riderOutOnStage: (n: number) => `Stage ${n}`,
+        riderOutUnknown: 'DNF',
+      },
+    };
+    const html = g.riderRowHTML({ bib: 42, name: 'Test RIDER', status: 'DNF', statusStage: 5 });
+    expect(html).toContain('out');
+    expect(html).toContain('Stage 5');
+  });
+});
+
+describe('HTML page scripts initialization', () => {
+  const pages = ['tdf2026.html', 'giro2026.html', 'femmes2026.html', 'vuelta2026.html'];
+
+  pages.forEach((page) => {
+    it(`executes ${page} without syntax or runtime initialization errors`, () => {
+      const html = readFileSync(resolve(__dirname, '..', page), 'utf8');
+      const dom = new JSDOM(html);
+      const scripts: string[] = [];
+      dom.window.document.querySelectorAll('script').forEach((scriptEl) => {
+        const src = scriptEl.getAttribute('src');
+        if (src === 'dist/race-page.js') {
+          scripts.push(distCode);
+        } else if (!src) {
+          scripts.push(scriptEl.textContent ?? '');
+        }
+      });
+
+      const elements: Record<string, any> = {};
+      const makeMock = (name: string) => ({
+        id: name,
+        innerHTML: '',
+        textContent: '',
+        value: '',
+        dataset: { view: 'results' },
+        style: {},
+        classList: { add: () => {}, remove: () => {}, toggle: () => {}, contains: () => false },
+        setAttribute: () => {},
+        getAttribute: () => null,
+        addEventListener: () => {},
+        appendChild: () => {},
+        insertAdjacentElement: () => {},
+        remove: () => {},
+        scrollIntoView: () => {},
+        focus: () => {},
+        closest: () => null,
+        querySelector: (sel: string) => makeMock(sel),
+        querySelectorAll: (sel: string) => [makeMock(sel)],
+        contains: () => false,
+        offsetHeight: 600,
+      });
+
+      const polyMock = {
+        addTo: function () {
+          return this;
+        },
+        getBounds: () => ({}),
+      };
+
+      const context: Record<string, any> = {
+        getComputedStyle: () => ({ getPropertyValue: () => '#201e1d' }),
+        window: {
+          addEventListener: () => {},
+          innerWidth: 1200,
+          getComputedStyle: () => ({ getPropertyValue: () => '#201e1d' }),
+          L: {
+            map: () => ({
+              addTo: () => {},
+              on: () => {},
+              remove: () => {},
+              setView: () => {},
+              fitBounds: () => {},
+              invalidateSize: () => {},
+              zoomIn: () => {},
+              zoomOut: () => {},
+              getZoom: () => 10,
+            }),
+            tileLayer: () => ({ addTo: () => {} }),
+            polyline: () => polyMock,
+            circleMarker: () => ({ addTo: () => {} }),
+          },
+        },
+        document: {
+          documentElement: { lang: 'en' },
+          getElementById: (id: string) => (elements[id] = elements[id] || makeMock(id)),
+          querySelector: (sel: string) => makeMock(sel),
+          querySelectorAll: (sel: string) => [makeMock(sel)],
+          createElement: (tag: string) => makeMock(tag),
+        },
+        localStorage: { getItem: () => null, setItem: () => {} },
+        navigator: { language: 'en' },
+        fetch: () => Promise.resolve({ ok: false }),
+        Intl,
+        Date,
+        Math,
+        String,
+        Number,
+        Array,
+        Object,
+        RegExp,
+        console,
+        setTimeout: (fn: () => void) => fn(),
+      };
+      context.window.document = context.document;
+      context.window.window = context.window;
+      context.globalThis = context.window;
+
+      vm.createContext(context);
+      expect(() => {
+        for (const s of scripts) {
+          vm.runInContext(s, context);
+        }
+        if (typeof context.selectStage === 'function') {
+          context.selectStage(0);
+        }
+        if (typeof context.setLang === 'function') {
+          context.setLang('fi');
+          context.setLang('en');
+        }
+      }).not.toThrow();
+    });
   });
 });
