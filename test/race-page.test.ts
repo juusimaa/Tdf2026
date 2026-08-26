@@ -228,7 +228,7 @@ describe('HTML page scripts initialization', () => {
   pages.forEach((page) => {
     it(`executes ${page} without syntax or runtime initialization errors`, () => {
       const html = readFileSync(resolve(__dirname, '..', page), 'utf8');
-      const scriptRegex = /<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/gi;
+      const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
       let match;
       const scripts: string[] = [];
       while ((match = scriptRegex.exec(html)) !== null) {
