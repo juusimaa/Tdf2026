@@ -597,6 +597,43 @@ function stageHasEnded(st){
   return st.n !== 'rest' && st.date < todayKey();
 }
 
+/* ---------- RENDER MAIN PANEL ---------- */
+function renderPanel(st){
+  const panel=document.getElementById('panel');
+  destroyStageMap();
+
+  const climbs=st.climbs||[];
+  let climbRows='';
+  if(climbs.length){
+    climbRows=climbs.map(c=>`
+      <tr>
+        <td><span class="climbname"><span class="sq" style="background:${CAT_COLOR[c.cat]||UNCAT_COLOR}"></span>${esc(c.name)}</span></td>
+        <td class="num cat">${catChip(c.cat)}</td>
+        <td class="num">${c.len?fmtKm(c.len):'—'}</td>
+        <td class="num">${c.grad?esc(c.grad)+' %':'—'}</td>
+        <td class="loc">${c.km!=null?'~ '+t('atKm')+' '+Math.round(c.km):'—'}</td>
+      </tr>`).join('');
+  }
+
+  const sprints=st.sprints||[];
+  let sprintRows='';
+  if(sprints.length){
+    sprintRows=sprints.map((s,i)=>`
+      <tr>
+        <td>${s.name?esc(s.name):t('sprintChip')+(sprints.length>1?' '+(i+1):'')}</td>
+        <td class="num">${t('atKm')} ${Math.round(s.km)}</td>
+      </tr>`).join('');
+  }
+
+  panel.innerHTML = `
+    <div class="panelhead">
+      <div>
+        <span class="kicker">${t('stagePrefix')} ${st.n} · ${fmtDate(st.date)}</span>
+        <h2>${esc(st.start)} → ${esc(st.finish)}</h2>
+      </div>
+      <span class="typechip">${t('typeLabels')[st.type]}</span>
+    </div>
+
     <div class="factrow">
       <div class="factcell"><span class="label">${t('factDistance')}</span><span class="value">${fmtKm(st.km)}</span></div>
       <div class="factcell"><span class="label">${t('factType')}</span><span class="value">${t('typeLabels')[st.type]}</span></div>

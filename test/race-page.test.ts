@@ -9,19 +9,19 @@
 // land on globalThis, from where the tests below call them.
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { runInThisContext } from 'node:vm';
+import vm, { runInThisContext } from 'node:vm';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 const distPath = resolve(process.cwd(), 'dist/race-page.js');
+let distCode = '';
 
 beforeAll(() => {
-  let code: string;
   try {
-    code = readFileSync(distPath, 'utf8');
+    distCode = readFileSync(distPath, 'utf8');
   } catch {
     throw new Error(`${distPath} is missing — run "npm run build" before "npm test".`);
   }
-  runInThisContext(code, { filename: distPath });
+  runInThisContext(distCode, { filename: distPath });
 });
 
 const g = globalThis as any;
@@ -219,5 +219,118 @@ describe('riderRowHTML', () => {
     const html = g.riderRowHTML({ bib: 42, name: 'Test RIDER', status: 'DNF', statusStage: 5 });
     expect(html).toContain('out');
     expect(html).toContain('Stage 5');
+  });
+});
+
+describe('HTML page scripts initialization', () => {
+  const pages = ['tdf2026.html', 'giro2026.html', 'femmes2026.html', 'vuelta2026.html'];
+
+  pages.forEach((page) => {
+    it(`executes ${page} without syntax or runtime initialization errors`, () => {
+      const html = readFileSync(resolve(__dirname, '..', page), 'utf8');
+      const scriptRegex = /<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/gi;
+      let match;
+      const scripts: string[] = [];
+      while ((match = scriptRegex.exec(html)) !== null) {
+        if (match[0].includes('src="dist/race-page.js"')) {
+          scripts.push(distCode);
+        } else if (!match[0].includes('src=')) {
+          scripts.push(match[1]);
+        }
+      }
+
+      const elements: Record<string, any> = {};
+      const makeMock = (name: string) => ({
+        id: name,
+        innerHTML: '',
+        textContent: '',
+        value: '',
+        dataset: { view: 'results' },
+        style: {},
+        classList: { add: () => {}, remove: () => {}, toggle: () => {}, contains: () => false },
+        setAttribute: () => {},
+        getAttribute: () => null,
+        addEventListener: () => {},
+        appendChild: () => {},
+        insertAdjacentElement: () => {},
+        remove: () => {},
+        scrollIntoView: () => {},
+        focus: () => {},
+        closest: () => null,
+        querySelector: (sel: string) => makeMock(sel),
+        querySelectorAll: (sel: string) => [makeMock(sel)],
+        contains: () => false,
+        offsetHeight: 600,
+      });
+
+      const polyMock = {
+        addTo: function () {
+          return this;
+        },
+        getBounds: () => ({}),
+      };
+
+      const context: Record<string, any> = {
+        getComputedStyle: () => ({ getPropertyValue: () => '#201e1d' }),
+        window: {
+          addEventListener: () => {},
+          innerWidth: 1200,
+          getComputedStyle: () => ({ getPropertyValue: () => '#201e1d' }),
+          L: {
+            map: () => ({
+              addTo: () => {},
+              on: () => {},
+              remove: () => {},
+              setView: () => {},
+              fitBounds: () => {},
+              invalidateSize: () => {},
+              zoomIn: () => {},
+              zoomOut: () => {},
+              getZoom: () => 10,
+            }),
+            tileLayer: () => ({ addTo: () => {} }),
+            polyline: () => polyMock,
+            circleMarker: () => ({ addTo: () => {} }),
+          },
+        },
+        document: {
+          documentElement: { lang: 'en' },
+          getElementById: (id: string) => (elements[id] = elements[id] || makeMock(id)),
+          querySelector: (sel: string) => makeMock(sel),
+          querySelectorAll: (sel: string) => [makeMock(sel)],
+          createElement: (tag: string) => makeMock(tag),
+        },
+        localStorage: { getItem: () => null, setItem: () => {} },
+        navigator: { language: 'en' },
+        fetch: () => Promise.resolve({ ok: false }),
+        Intl,
+        Date,
+        Math,
+        String,
+        Number,
+        Array,
+        Object,
+        RegExp,
+        console,
+        setTimeout: (fn: () => void) => fn(),
+      };
+      context.window.document = context.document;
+      context.window.window = context.window;
+      context.globalThis = context.window;
+
+      vm.createContext(context);
+      expect(() => {
+        for (const s of scripts) {
+          vm.runInContext(s, context);
+        }
+        if (typeof context.selectStage === 'function') {
+          context.selectStage(0);
+        }
+        if (typeof context.setLang === 'function') {
+          context.setLang('fi');
+          context.setLang('en');
+        }
+      }).not.toThrow();
+    });
   });
 });

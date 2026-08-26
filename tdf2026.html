@@ -864,19 +864,6 @@ function selectStage(idx){
    leaves the "no data" note. */
 let WEATHER = null;
 
-function wxCellHTML(d, kicker){
-  const conds = t('wxConds'), dirs = t('wxDirs');
-  const rows = [
-    {label: t('wxLow'), value: `${d.low}°`},
-    {label: t('wxWind'), value: `${d.wind} km/h ${dirs[d.dir] || d.dir}`},
-    {label: t('wxRain'), value: d.precip ? `${d.precip.toLocaleString(localeTag())} mm` : '—'},
-    {label: t('wxHumidity'), value: `${d.humidity} %`}
-  ];
-  if(d.alt) rows.push({label: t('wxAlt'), value: fmtGain(d.alt)});
-  return `
-    <div class="wxcell">
-      <div class="wxhead">
-        <span class="wxkicker">${kicker}</span>
 /* ---------- RENDER MAIN PANEL ---------- */
 function renderPanel(stage){
   const panel = document.getElementById('panel');
