@@ -118,3 +118,106 @@ describe('climbsWithKm', () => {
     expect(g.climbsWithKm({ km: 180 })).toEqual([]);
   });
 });
+
+describe('timeToHours (extended)', () => {
+  it("parses times without hours (e.g. \"18' 42''\")", () => {
+    expect(g.timeToHours("18' 42''")).toBeCloseTo(18 / 60 + 42 / 3600, 10);
+  });
+  it('parses HH:MM:SS format', () => {
+    expect(g.timeToHours('83:22:51')).toBeCloseTo(83 + 22 / 60 + 51 / 3600, 10);
+  });
+  it('parses MM:SS format', () => {
+    expect(g.timeToHours('12:30')).toBeCloseTo(12 / 60 + 30 / 3600, 10);
+  });
+});
+
+describe('buildPath and xForKm', () => {
+  it('calculates proportional x for km', () => {
+    expect(g.xForKm(50, 100, 900, 30, 16)).toBe(30 + 0.5 * (900 - 30 - 16));
+  });
+  it('builds SVG path string from points', () => {
+    const pts = [
+      [0, 20],
+      [50, 60],
+      [100, 20],
+    ];
+    const path = g.buildPath(pts, 100, 900, 250, 30, 16, 22, 30);
+    expect(path.d).toMatch(/^M \d+(\.\d+)?,\d+(\.\d+)? Q/);
+    expect(path.plotW).toBe(900 - 30 - 16);
+    expect(path.plotH).toBe(250 - 22 - 30);
+  });
+});
+
+describe('climbHeight and genProfile', () => {
+  it('calculates climb height bounded between 40 and 95', () => {
+    expect(g.climbHeight({ len: 10, grad: 8 })).toBeGreaterThanOrEqual(40);
+    expect(g.climbHeight({ len: 10, grad: 8 })).toBeLessThanOrEqual(95);
+  });
+  it('generates elevation profile keypoints', () => {
+    const st = { km: 100, climbs: [{ km: 50, len: 5, grad: 6 }] };
+    const prof = g.genProfile(st);
+    expect(prof.length).toBeGreaterThan(2);
+    expect(prof[0]).toEqual([0, 20]);
+    expect(prof[prof.length - 1][0]).toBe(100);
+  });
+});
+
+describe('fmtStartLocal', () => {
+  it('formats CEST start time into local time', () => {
+    g.lang = 'en';
+    const res = g.fmtStartLocal({ dateIso: '2026-07-04', startCEST: '13:00' });
+    expect(res).toBeTruthy();
+    expect(typeof res).toBe('string');
+  });
+  it('returns null if startCEST is missing', () => {
+    expect(g.fmtStartLocal({ dateIso: '2026-07-04' })).toBeNull();
+  });
+});
+
+describe('mapControlsHTML', () => {
+  it('renders zoom and recenter buttons', () => {
+    g.lang = 'en';
+    g.STRINGS = {
+      en: { minimapRecenter: 'Center map', minimapCollapse: 'Collapse', minimapExpand: 'Expand' },
+    };
+    const htmlSmall = g.mapControlsHTML(false);
+    expect(htmlSmall).toContain('data-map-zoomout');
+    expect(htmlSmall).toContain('data-map-zoomin');
+    expect(htmlSmall).toContain('data-map-recenter');
+    expect(htmlSmall).toContain('data-map-toggle');
+    expect(htmlSmall).toContain('⤢');
+
+    const htmlBig = g.mapControlsHTML(true);
+    expect(htmlBig).toContain('×');
+  });
+});
+
+describe('riderRowHTML', () => {
+  it('renders active rider row', () => {
+    g.lang = 'en';
+    g.STRINGS = { en: { withdrawalReasons: {} } };
+    const html = g.riderRowHTML({
+      bib: 1,
+      name: 'Tadej POGACAR',
+      nat: 'SLO',
+      gcPos: 1,
+      gcVal: "83h 22' 51''",
+    });
+    expect(html).toContain('Tadej POGACAR');
+    expect(html).toContain('podium');
+    expect(html).toContain('SLO');
+  });
+  it('renders dropped out rider row', () => {
+    g.lang = 'en';
+    g.STRINGS = {
+      en: {
+        withdrawalReasons: { DNF: 'DNF' },
+        riderOutOnStage: (n: number) => `Stage ${n}`,
+        riderOutUnknown: 'DNF',
+      },
+    };
+    const html = g.riderRowHTML({ bib: 42, name: 'Test RIDER', status: 'DNF', statusStage: 5 });
+    expect(html).toContain('out');
+    expect(html).toContain('Stage 5');
+  });
+});

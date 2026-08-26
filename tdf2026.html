@@ -713,35 +713,6 @@ const stages = [
  }}
 ];
 
-function fmtStartLocal(stage){
-  // startCEST is the TV broadcast start time in Central European Summer
-  // Time (per the HBO Max / TNT Sports / Eurosport schedule). Converted to
-  // the viewer's own time zone using the browser default.
-  if(!stage.startCEST) return null;
-  const d = new Date(`${stage.dateIso}T${stage.startCEST}:00+02:00`);
-  return new Intl.DateTimeFormat(localeTag(), {
-    hour:'2-digit', minute:'2-digit', timeZoneName:'short'
-  }).format(d);
-}
-
-/* Build smooth-ish SVG path from keypoints (simple quadratic smoothing) */
-function buildPath(points, totalKm, W, H, padL, padR, padT, padB){
-  const plotW = W - padL - padR, plotH = H - padT - padB;
-  const xs = points.map(p=>padL + (p[0]/totalKm)*plotW);
-  const ys = points.map(p=>padT + plotH - (p[1]/100)*plotH);
-  let d = `M ${xs[0]},${ys[0]}`;
-  for(let i=1;i<xs.length;i++){
-    const mx = (xs[i-1]+xs[i])/2;
-    d += ` Q ${xs[i-1]},${ys[i-1]} ${mx},${(ys[i-1]+ys[i])/2}`;
-  }
-  d += ` L ${xs[xs.length-1]},${ys[ys.length-1]}`;
-  return {d, xs, ys, plotW, plotH};
-}
-
-function xForKm(km, totalKm, W, padL, padR){
-  const plotW = W - padL - padR;
-  return padL + (km/totalKm)*plotW;
-}
 const STAGE_COORDS = {
   1:[[2.17,41.39],[2.17,41.39]],   2:[[1.25,41.12],[2.17,41.39]],
   3:[[2.29,41.61],[2.07,42.57]],   4:[[2.35,43.21],[1.61,42.96]],
@@ -803,123 +774,13 @@ function renderProfile(stage){
   return svg;
 }
 
-const ZOOM_LABELS = {fi:{in:'Lähennä',out:'Loitonna'}, fr:{in:'Zoom avant',out:'Zoom arrière'}, en:{in:'Zoom in',out:'Zoom out'}};
-
-/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
-   Per-stage route polylines live in data/<TOUR>-routes.json (built by
-   scripts/fetch_routes.py from cyclingstage.com GPX). Stages missing a route
-   fall back to a straight start→finish line derived from STAGE_COORDS. The
-   design's flat SVG map was traded for this real interactive tile map (see
-   handoff discussion); the design's control-row chrome (−/+/◎/⤢) is kept,
-   just wired to Leaflet's own zoom/pan instead of a custom viewBox. No dark
-   styling: this page is light-only, unlike the rest of the site. */
 let routesData = null, routesPromise = null;
-
 let stageMap = null, stageMapFitBounds = null;
+let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 function initStageMap(stage){
-  if(!window.L){ setTimeout(()=>initStageMap(stage), 120); return; }
-  const el = document.getElementById('stage-map');
-  if(!el) return;
-  destroyStageMap();
-
-  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true, zoomControl:false});
-  stageMap = map;
-  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-    maxZoom:17,
-    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
-  map.on('zoomend', updateMapZoomLabel);
-
-  const css = getComputedStyle(document.documentElement);
-  const INK = css.getPropertyValue('--color-text').trim() || '#201e1d';
-  const ACCENT = css.getPropertyValue('--color-accent').trim() || '#ec3013';
-
-  const draw = () => {
-    if(stageMap !== map) return;
-    const pts = (routesData.stages || {})[stage.n];
-    const c = STAGE_COORDS[stage.n];
-    let line, startLL, finishLL, approx = false;
-    if(pts && pts.length){
-      line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
-    }else{
-      approx = true;
-      startLL = [c[0][1], c[0][0]];
-      finishLL = [c[1][1], c[1][0]];
-      line = [startLL, finishLL];
-    }
-    const poly = L.polyline(line, approx
-      ? {color:INK, weight:3, opacity:.85, dashArray:'6,8'}
-      : {color:INK, weight:3.5, opacity:.95}).addTo(map);
-    const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
-    if(!same){
-      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:INK, fillOpacity:1}).addTo(map);
-    }
-    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:ACCENT, fillOpacity:1}).addTo(map);
-    map.fitBounds(poly.getBounds(), {padding:[24,24]});
-    map.invalidateSize();
-    stageMapFitBounds = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[24,24]}); };
-    const cap = document.getElementById('stage-map-caption');
-    if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
-    updateMapZoomLabel();
-  };
-
-  if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
-  setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
+  initStageMapCommon(stage, STAGE_COORDS);
 }
-
-function mapControlsHTML(big){
-  const zl = ZOOM_LABELS[lang] || ZOOM_LABELS.en;
-  let html =
-    `<button class="mapctrl-btn" data-map-zoomout title="${zl.out}" aria-label="${zl.out}">−</button>` +
-    `<button class="mapctrl-btn" data-map-zoomin title="${zl.in}" aria-label="${zl.in}">+</button>` +
-    `<button class="mapctrl-btn" data-map-recenter title="${t('minimapRecenter')}" aria-label="${t('minimapRecenter')}">◎</button>`;
-  html += big
-    ? `<button class="mapctrl-btn mapctrl-close" data-map-toggle title="${t('minimapCollapse')}" aria-label="${t('minimapCollapse')}">×</button>`
-    : `<button class="mapctrl-btn" data-map-toggle title="${t('minimapExpand')}" aria-label="${t('minimapExpand')}">⤢</button>`;
-  return html;
-}
-
-function mapCellHTML(stage){
-  return `
-    <span class="maprow">
-      <span class="maplabel">${mapLabel()}</span>
-      <span class="mapctrls">${mapControlsHTML(false)}</span>
-    </span>
-    <div id="stage-map" role="application" aria-label="${t('minimapAria')(stage.n)}"></div>
-    <span class="mapzoom" id="mapZoomLabel"></span>`;
-}
-
-function bigMapBoxHTML(stage){
-  return `<div id="bigmapbox">
-    <span class="maprow">
-      <span class="maplabel">${mapLabel()}</span>
-      <span class="mapctrls">${mapControlsHTML(true)}</span>
-    </span>
-    <div id="stage-map" role="application" aria-label="${t('minimapAria')(stage.n)}"></div>
-    <span class="mapmeta">
-      <span class="mapzoom" id="mapZoomLabel"></span>
-      <span class="mapcaption" id="stage-map-caption"></span>
-    </span>
-  </div>`;
-}
-
-function bindMapControls(stage){
-  const zoomOutBtn = document.querySelector('[data-map-zoomout]');
-  const zoomInBtn = document.querySelector('[data-map-zoomin]');
-  const recenterBtn = document.querySelector('[data-map-recenter]');
-  const toggleBtn = document.querySelector('[data-map-toggle]');
-  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomOut(); });
-  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomIn(); });
-  if(recenterBtn) recenterBtn.addEventListener('click', ()=>{ if(stageMapFitBounds) stageMapFitBounds(); });
-  if(toggleBtn) toggleBtn.addEventListener('click', ()=>{
-    mapExpanded = !mapExpanded;
-    renderPanel(stage);
-    syncStageListHeight();
-  });
-}
-
-let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 /* ---------- RENDER STAGE LIST ---------- */
 const listEl = document.getElementById('stageList');
@@ -1016,45 +877,6 @@ function wxCellHTML(d, kicker){
     <div class="wxcell">
       <div class="wxhead">
         <span class="wxkicker">${kicker}</span>
-        <span class="wxplace">${d.town}</span>
-      </div>
-      <div class="wxtempline">
-        <span class="wxtemp">${d.temp}°</span>
-        <div class="wxcondwrap">
-          <span class="wxcond">${conds[d.cond] || d.cond}</span>
-          <span class="wxfeels">${t('wxFeels')} ${d.feels}°</span>
-        </div>
-      </div>
-      <div class="wxrows">
-        ${rows.map(r=>`<div class="wxrowitem"><span class="label">${r.label}</span><span class="value">${r.value}</span></div>`).join('')}
-      </div>
-    </div>`;
-}
-
-function wxSectionHTML(stage){
-  const w = wxFor(stage.n);
-  let deltaHTML = '';
-  if(w){
-    const diff = w.finish.temp - w.start.temp;
-    const sign = diff > 0 ? '+' : diff < 0 ? '−' : '±';
-    deltaHTML = `
-      <span class="wxdelta">
-        <span class="value">${sign}${Math.abs(diff)} °C</span>
-        <span class="unit">${t('wxDelta')}</span>
-      </span>`;
-  }
-  return `
-    <div class="wxrow">
-      <span class="label">${t('wxHeader')}</span>
-      ${deltaHTML}
-    </div>
-    ${w
-      ? `<div class="wxgrid">${wxCellHTML(w.start, t('wxAtStart'))}${wxCellHTML(w.finish, t('wxAtFinish'))}</div>
-         <p class="wxnote"><span>${t('wxNote')}</span></p>`
-      : `<p class="wxnodata">${t('wxNoData')}</p>`}
-  `;
-}
-
 /* ---------- RENDER MAIN PANEL ---------- */
 function renderPanel(stage){
   const panel = document.getElementById('panel');
@@ -1405,25 +1227,6 @@ function renderStageResult(n){
    already stored in team-classification order, riders in bib order. */
 let RIDERS = null;
 
-/* One rider row: bib, name + nationality, final GC position, time or gap.
-   A rider who left the race gets the reason + stage folded into the sub
-   line instead of nationality, per the design (no separate status badge). */
-function riderRowHTML(r){
-  const out = !!r.status;
-  const sub = out
-    ? `${t('withdrawalReasons')[r.status] || r.status} · ${r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown')}`
-    : (r.nat || '');
-  const gcPos = out ? '—' : (r.gcPos || '—');
-  const val = out ? '' : (r.gcGap || r.gcVal || '');
-  return `
-    <tr class="${out ? 'out' : (r.gcPos && r.gcPos<=3 ? 'podium' : '')}">
-      <td class="bib">${r.bib}</td>
-      <td class="rider"><span class="rname">${r.name}</span>${sub?`<span class="rsub">${sub}</span>`:''}</td>
-      <td class="gcpos">${gcPos}</td>
-      <td class="val">${val}</td>
-    </tr>`;
-}
-
 function renderRiders(){
   const grid = document.getElementById('teamsGrid');
   if(!RIDERS || !Array.isArray(RIDERS.teams) || !RIDERS.teams.length){
@@ -1510,18 +1313,7 @@ document.getElementById('rankStageSelect').addEventListener('change', e=>{
 
 /* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
 const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
-
-tabButtons.forEach((tab, i)=>{
-  tab.addEventListener('click', ()=>activateTab(tab, false));
-  tab.addEventListener('keydown', e=>{
-    let idx = null;
-    if(e.key==='ArrowRight' || e.key==='ArrowDown') idx = (i+1) % tabButtons.length;
-    else if(e.key==='ArrowLeft' || e.key==='ArrowUp') idx = (i-1+tabButtons.length) % tabButtons.length;
-    else if(e.key==='Home') idx = 0;
-    else if(e.key==='End') idx = tabButtons.length-1;
-    if(idx!==null){ e.preventDefault(); activateTab(tabButtons[idx], true); }
-  });
-});
+setupTabs(tabButtons);
 
 /* ---------- AUTOMATIC DATA LOADING ----------
    The page tries to fetch fresh results from data/<TOUR>-results.json (in

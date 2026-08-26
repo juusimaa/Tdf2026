@@ -346,40 +346,6 @@ const stages = [
    climbs:[], sprints:[{km:77.7}]},
 ];
 const REST_AFTER = {3:'2026-05-11', 9:'2026-05-18', 15:'2026-05-25'};
-function climbHeight(c){ // illustrative peak height 40–95 from length × gradient
-  const gain=(c.len||4)*(c.grad||5); // ~ metres/10
-  return Math.max(40, Math.min(95, 36 + gain*0.4));
-}
-function genProfile(st){
-  const cs=climbsWithKm(st);
-  if(st.type==='itt' || !cs.length) return genericProfile(st);
-  const total=st.km, pts=[[0,18]];
-  let last=0;
-  cs.forEach(c=>{
-    const foot=Math.max(last+1, Math.max(1, c.km-(c.len||4)));
-    if(foot>last+1) pts.push([+foot.toFixed(1),22]);
-    pts.push([c.km, climbHeight(c)]);
-    if(c.km < total-4) pts.push([+Math.min(total, c.km+Math.max(3,(c.len||4)*0.5)).toFixed(1),28]);
-    last=c.km;
-  });
-  const lastPt=pts[pts.length-1];
-  if(lastPt[0] < total-0.5) pts.push([total, st.summit?90:18]);
-  else if(st.summit) lastPt[1]=Math.max(lastPt[1],90);
-  // enforce strictly increasing x
-  const out=[];
-  pts.forEach(p=>{ const x=Math.max(0,Math.min(total,p[0])); if(!out.length || x>out[out.length-1][0]) out.push([+x.toFixed(1),p[1]]); });
-  return out;
-}
-function buildPath(points,totalKm,W,H,padL,padR,padT,padB){
-  const plotW=W-padL-padR, plotH=H-padT-padB;
-  const xs=points.map(p=>padL+(p[0]/totalKm)*plotW);
-  const ys=points.map(p=>padT+plotH-(p[1]/100)*plotH);
-  let d=`M ${xs[0]},${ys[0]}`;
-  for(let i=1;i<xs.length;i++){ const mx=(xs[i-1]+xs[i])/2; d+=` Q ${xs[i-1]},${ys[i-1]} ${mx},${(ys[i-1]+ys[i])/2}`; }
-  d+=` L ${xs[xs.length-1]},${ys[ys.length-1]}`;
-  return {d,plotH};
-}
-function xForKm(km,totalKm,W,padL,padR){ return padL+(km/totalKm)*(W-padL-padR); }
 const STAGE_COORDS = {
   1:[[27.73,42.66],[27.47,42.51]],  2:[[27.47,42.51],[25.62,43.08]],
   3:[[24.75,42.14],[23.32,42.70]],  4:[[16.59,38.91],[16.25,39.30]],
@@ -455,121 +421,13 @@ function renderProfile(st){
   return svg;
 }
 
-const ZOOM_LABELS = {fi:{in:'Lähennä',out:'Loitonna'}, fr:{in:'Zoom avant',out:'Zoom arrière'}, en:{in:'Zoom in',out:'Zoom out'}};
-
-/* ---------- REAL ROUTE MAP (Leaflet + Stadia Maps) ----------
-   Per-stage route polylines live in data/giro2026-routes.json. Stages
-   missing a route fall back to a straight start→finish line derived from
-   STAGE_COORDS. Same restyled-Leaflet approach as the Tour de France page
-   (see design_handoff_tdf2026/): the design's flat SVG map was traded for
-   this real interactive tile map; the control-row chrome is kept. */
 let routesData = null, routesPromise = null;
-
 let stageMap = null, stageMapFitBounds = null;
+let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 function initStageMap(st){
-  if(!window.L){ setTimeout(()=>initStageMap(st), 120); return; }
-  const el = document.getElementById('stage-map');
-  if(!el) return;
-  destroyStageMap();
-
-  const map = L.map(el, {scrollWheelZoom:false, attributionControl:true, zoomControl:false});
-  stageMap = map;
-  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-    maxZoom:17,
-    attribution:'&copy; <a href="https://www.stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
-  map.on('zoomend', updateMapZoomLabel);
-
-  const css = getComputedStyle(document.documentElement);
-  const INK = css.getPropertyValue('--color-text').trim() || '#201e1d';
-  const ACCENT = css.getPropertyValue('--color-accent').trim() || '#ec3013';
-
-  const draw = () => {
-    if(stageMap !== map) return;
-    const pts = (routesData.stages || {})[st.n];
-    const c = STAGE_COORDS[st.n];
-    let line, startLL, finishLL, approx = false;
-    if(pts && pts.length){
-      line = pts; startLL = pts[0]; finishLL = pts[pts.length-1];
-    }else{
-      approx = true;
-      startLL = [c[0][1], c[0][0]];
-      finishLL = [c[1][1], c[1][0]];
-      line = [startLL, finishLL];
-    }
-    const poly = L.polyline(line, approx
-      ? {color:INK, weight:3, opacity:.85, dashArray:'6,8'}
-      : {color:INK, weight:3.5, opacity:.95}).addTo(map);
-    const same = Math.abs(startLL[0]-finishLL[0])<1e-4 && Math.abs(startLL[1]-finishLL[1])<1e-4;
-    if(!same){
-      L.circleMarker(startLL, {radius:6, color:'#fff', weight:2, fillColor:INK, fillOpacity:1}).addTo(map);
-    }
-    L.circleMarker(finishLL, {radius:7, color:'#fff', weight:2, fillColor:ACCENT, fillOpacity:1}).addTo(map);
-    map.fitBounds(poly.getBounds(), {padding:[24,24]});
-    map.invalidateSize();
-    stageMapFitBounds = () => { if(stageMap===map) map.fitBounds(poly.getBounds(), {padding:[24,24]}); };
-    const cap = document.getElementById('stage-map-caption');
-    if(cap) cap.textContent = approx ? t('minimapCaptionApprox') : t('minimapCaption');
-    updateMapZoomLabel();
-  };
-
-  if(routesData) draw(); else loadRoutes().then(()=>{ if(stageMap===map) draw(); });
-  setTimeout(()=>{ if(stageMap===map) map.invalidateSize(); }, 60);
+  initStageMapCommon(st, STAGE_COORDS);
 }
-
-function mapControlsHTML(big){
-  const zl = ZOOM_LABELS[lang] || ZOOM_LABELS.en;
-  let html =
-    `<button class="mapctrl-btn" data-map-zoomout title="${zl.out}" aria-label="${zl.out}">−</button>` +
-    `<button class="mapctrl-btn" data-map-zoomin title="${zl.in}" aria-label="${zl.in}">+</button>` +
-    `<button class="mapctrl-btn" data-map-recenter title="${esc(t('minimapRecenter'))}" aria-label="${esc(t('minimapRecenter'))}">◎</button>`;
-  html += big
-    ? `<button class="mapctrl-btn mapctrl-close" data-map-toggle title="${esc(t('minimapCollapse'))}" aria-label="${esc(t('minimapCollapse'))}">×</button>`
-    : `<button class="mapctrl-btn" data-map-toggle title="${esc(t('minimapExpand'))}" aria-label="${esc(t('minimapExpand'))}">⤢</button>`;
-  return html;
-}
-
-function mapCellHTML(st){
-  return `
-    <span class="maprow">
-      <span class="maplabel">${mapLabel()}</span>
-      <span class="mapctrls">${mapControlsHTML(false)}</span>
-    </span>
-    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
-    <span class="mapzoom" id="mapZoomLabel"></span>`;
-}
-
-function bigMapBoxHTML(st){
-  return `<div id="bigmapbox">
-    <span class="maprow">
-      <span class="maplabel">${mapLabel()}</span>
-      <span class="mapctrls">${mapControlsHTML(true)}</span>
-    </span>
-    <div id="stage-map" role="application" aria-label="${esc(t('minimapAria')(st.n))}"></div>
-    <span class="mapmeta">
-      <span class="mapzoom" id="mapZoomLabel"></span>
-      <span class="mapcaption" id="stage-map-caption"></span>
-    </span>
-  </div>`;
-}
-
-function bindMapControls(st){
-  const zoomOutBtn = document.querySelector('[data-map-zoomout]');
-  const zoomInBtn = document.querySelector('[data-map-zoomin]');
-  const recenterBtn = document.querySelector('[data-map-recenter]');
-  const toggleBtn = document.querySelector('[data-map-toggle]');
-  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomOut(); });
-  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>{ if(stageMap) stageMap.zoomIn(); });
-  if(recenterBtn) recenterBtn.addEventListener('click', ()=>{ if(stageMapFitBounds) stageMapFitBounds(); });
-  if(toggleBtn) toggleBtn.addEventListener('click', ()=>{
-    mapExpanded = !mapExpanded;
-    renderPanel(st);
-    syncStageListHeight();
-  });
-}
-
-let mapExpanded = false; // persists across stage switches; renderPanel reflects it
 
 /* ---------- STAGE LIST ---------- */
 let activeIdx = 0;
@@ -793,22 +651,6 @@ function renderResults(){
    data/giro2026-riders.json. giroditalia.it publishes no reason codes beyond
    DNF, so the sub line always reads "Abandoned (DNF)" for a rider who left —
    folded under the name rather than a separate badge, matching tdf2026.html. */
-function riderRowHTML(r){
-  const out = !r.gcPos;
-  const sub = out
-    ? `${t('dnfTitle')} · ${r.statusStage ? t('riderOutOnStage')(r.statusStage) : t('riderOutUnknown')}`
-    : (r.nat || '');
-  const gcPos = out ? '—' : esc(r.gcPos);
-  const val = out ? '' : esc(r.gcGap || r.gcVal || '');
-  return `
-    <tr class="${out ? 'out' : (r.gcPos<=3 ? 'podium' : '')}">
-      <td class="bib">${esc(r.bib||'')}</td>
-      <td class="rider"><span class="rname">${esc(r.name)}</span>${sub?`<span class="rsub">${esc(sub)}</span>`:''}</td>
-      <td class="gcpos">${gcPos}</td>
-      <td class="val">${val}</td>
-    </tr>`;
-}
-
 function teamCard(team, i, n){
   const nameHTML = team.url
     ? `<a class="team-link" href="${esc(team.url)}" target="_blank" rel="noopener">${esc(team.name)}</a>`
@@ -885,18 +727,7 @@ document.querySelectorAll('#langSel button').forEach(btn=>{
 
 /* ---------- TAB SWITCHING (WAI-ARIA tabs pattern) ---------- */
 const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
-
-tabButtons.forEach((tab, i)=>{
-  tab.addEventListener('click', ()=>activateTab(tab, false));
-  tab.addEventListener('keydown', e=>{
-    let idx = null;
-    if(e.key==='ArrowRight' || e.key==='ArrowDown') idx = (i+1) % tabButtons.length;
-    else if(e.key==='ArrowLeft' || e.key==='ArrowUp') idx = (i-1+tabButtons.length) % tabButtons.length;
-    else if(e.key==='Home') idx = 0;
-    else if(e.key==='End') idx = tabButtons.length-1;
-    if(idx!==null){ e.preventDefault(); activateTab(tabButtons[idx], true); }
-  });
-});
+setupTabs(tabButtons);
 
 /* ---------- DATA LOADING ---------- */
 async function load(){
