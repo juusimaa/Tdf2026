@@ -1,5 +1,5 @@
 {
- "afterStage": 5,
+ "afterStage": 6,
  "stageWinners": [
   {
    "n": 1,
@@ -22,6 +22,10 @@
   {
    "n": 5,
    "winner": "James Matthew BRENNAN"
+  },
+  {
+   "n": 6,
+   "winner": "Tadej POGACAR"
   }
  ],
  "gc": {
@@ -31,1439 +35,1423 @@
     "rider": "Tadej POGACAR",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "SLO",
-    "val": "11h 26' 01''"
+    "val": "15h 38' 27''"
    },
    {
     "pos": 2,
-    "rider": "Primoz ROGLIC",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "SLO",
-    "val": "11h 29' 22''",
-    "gap": "+ 00h 03' 21''"
-   },
-   {
-    "pos": 3,
     "rider": "Enric MAS NICOLAU",
     "team": "MOVISTAR TEAM",
     "nat": "ESP",
-    "val": "11h 29' 33''",
-    "gap": "+ 00h 03' 32''"
+    "val": "15h 42' 01''",
+    "gap": "+ 00h 03' 34''"
+   },
+   {
+    "pos": 3,
+    "rider": "Primoz ROGLIC",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "SLO",
+    "val": "15h 42' 48''",
+    "gap": "+ 00h 04' 21''"
    },
    {
     "pos": 4,
-    "rider": "S. KUSS",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "USA",
-    "val": "11h 29' 45''",
-    "gap": "+ 00h 03' 44''"
-   },
-   {
-    "pos": 5,
-    "rider": "O. ONLEY",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "GBR",
-    "val": "11h 29' 46''",
-    "gap": "+ 00h 03' 45''"
-   },
-   {
-    "pos": 6,
     "rider": "R. CARAPAZ",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "ECU",
-    "val": "11h 29' 51''",
-    "gap": "+ 00h 03' 50''"
+    "val": "15h 43' 17''",
+    "gap": "+ 00h 04' 50''"
    },
    {
-    "pos": 7,
+    "pos": 5,
     "rider": "F. GALL",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "AUT",
-    "val": "11h 29' 58''",
-    "gap": "+ 00h 03' 57''"
+    "val": "15h 43' 22''",
+    "gap": "+ 00h 04' 55''"
+   },
+   {
+    "pos": 6,
+    "rider": "S. KUSS",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "USA",
+    "val": "15h 44' 03''",
+    "gap": "+ 00h 05' 36''"
+   },
+   {
+    "pos": 7,
+    "rider": "O. ONLEY",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "GBR",
+    "val": "15h 44' 04''",
+    "gap": "+ 00h 05' 37''"
    },
    {
     "pos": 8,
-    "rider": "M. SKJELMOSE",
-    "team": "LIDL-TREK",
-    "nat": "DEN",
-    "val": "11h 30' 07''",
-    "gap": "+ 00h 04' 06''"
-   },
-   {
-    "pos": 9,
-    "rider": "J. WIDAR",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 30' 07''",
-    "gap": "+ 00h 04' 06''"
-   },
-   {
-    "pos": 10,
-    "rider": "J. VINE",
-    "team": "UAE TEAM EMIRATES XRG",
-    "nat": "AUS",
-    "val": "11h 30' 12''",
-    "gap": "+ 00h 04' 11''"
-   },
-   {
-    "pos": 11,
-    "rider": "G. Mühlberger",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "AUT",
-    "val": "11h 30' 35''",
-    "gap": "+ 00h 04' 34''"
-   },
-   {
-    "pos": 12,
     "rider": "R. DEBRUYNE",
     "team": "ALPECIN-PREMIER TECH",
     "nat": "BEL",
-    "val": "11h 30' 45''",
-    "gap": "+ 00h 04' 44''"
+    "val": "15h 44' 07''",
+    "gap": "+ 00h 05' 40''"
    },
    {
-    "pos": 13,
-    "rider": "P. TORRES ARIAS",
-    "team": "UAE TEAM EMIRATES XRG",
-    "nat": "ESP",
-    "val": "11h 31' 28''",
-    "gap": "+ 00h 05' 27''"
+    "pos": 9,
+    "rider": "M. SKJELMOSE",
+    "team": "LIDL-TREK",
+    "nat": "DEN",
+    "val": "15h 44' 25''",
+    "gap": "+ 00h 05' 58''"
    },
    {
-    "pos": 14,
+    "pos": 10,
     "rider": "H. TEJADA",
     "team": "XDS ASTANA TEAM",
     "nat": "COL",
-    "val": "11h 31' 31''",
-    "gap": "+ 00h 05' 30''"
+    "val": "15h 44' 57''",
+    "gap": "+ 00h 06' 30''"
    },
    {
-    "pos": 15,
-    "rider": "M. BRENNER",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "GER",
-    "val": "11h 32' 03''",
-    "gap": "+ 00h 06' 02''"
+    "pos": 11,
+    "rider": "J. WIDAR",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "15h 46' 35''",
+    "gap": "+ 00h 08' 08''"
    },
    {
-    "pos": 16,
+    "pos": 12,
+    "rider": "G. Mühlberger",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUT",
+    "val": "15h 47' 03''",
+    "gap": "+ 00h 08' 36''"
+   },
+   {
+    "pos": 13,
     "rider": "C. BERTHET",
     "team": "GROUPAMA-FDJ UNITED",
     "nat": "FRA",
-    "val": "11h 33' 33''",
-    "gap": "+ 00h 07' 32''"
+    "val": "15h 47' 51''",
+    "gap": "+ 00h 09' 24''"
+   },
+   {
+    "pos": 14,
+    "rider": "C. RODRIGUEZ",
+    "team": "XDS ASTANA TEAM",
+    "nat": "ESP",
+    "val": "15h 50' 10''",
+    "gap": "+ 00h 11' 43''"
+   },
+   {
+    "pos": 15,
+    "rider": "J. OMRZEL",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "SLO",
+    "val": "15h 51' 46''",
+    "gap": "+ 00h 13' 19''"
+   },
+   {
+    "pos": 16,
+    "rider": "G. MARTIN GUYONNET",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "15h 51' 54''",
+    "gap": "+ 00h 13' 27''"
    },
    {
     "pos": 17,
-    "rider": "I. RUIZ SEDANO",
-    "team": "EQUIPO KERN PHARMA",
+    "rider": "P. TORRES ARIAS",
+    "team": "UAE TEAM EMIRATES XRG",
     "nat": "ESP",
-    "val": "11h 34' 38''",
-    "gap": "+ 00h 08' 37''"
+    "val": "15h 52' 52''",
+    "gap": "+ 00h 14' 25''"
    },
    {
     "pos": 18,
     "rider": "L. BISIAUX",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "FRA",
-    "val": "11h 34' 45''",
-    "gap": "+ 00h 08' 44''"
+    "val": "15h 53' 10''",
+    "gap": "+ 00h 14' 43''"
    },
    {
     "pos": 19,
-    "rider": "B. TULETT",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "GBR",
-    "val": "11h 34' 45''",
-    "gap": "+ 00h 08' 44''"
+    "rider": "J. VINE",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "AUS",
+    "val": "15h 53' 12''",
+    "gap": "+ 00h 14' 45''"
    },
    {
     "pos": 20,
-    "rider": "J. OMRZEL",
-    "team": "BAHRAIN VICTORIOUS",
-    "nat": "SLO",
-    "val": "11h 35' 18''",
-    "gap": "+ 00h 09' 17''"
-   },
-   {
-    "pos": 21,
-    "rider": "G. MARTIN GUYONNET",
-    "team": "GROUPAMA-FDJ UNITED",
-    "nat": "FRA",
-    "val": "11h 35' 26''",
-    "gap": "+ 00h 09' 25''"
-   },
-   {
-    "pos": 22,
-    "rider": "J. NORDHAGEN",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "NOR",
-    "val": "11h 35' 27''",
-    "gap": "+ 00h 09' 26''"
-   },
-   {
-    "pos": 23,
-    "rider": "J. HIRT",
-    "team": "NSN CYCLING TEAM",
-    "nat": "CZE",
-    "val": "11h 35' 48''",
-    "gap": "+ 00h 09' 47''"
-   },
-   {
-    "pos": 24,
-    "rider": "C. RODRIGUEZ",
-    "team": "XDS ASTANA TEAM",
-    "nat": "ESP",
-    "val": "11h 35' 52''",
-    "gap": "+ 00h 09' 51''"
-   },
-   {
-    "pos": 25,
-    "rider": "X. PICKERING",
-    "team": "TEAM JAYCO ALULA",
-    "nat": "GBR",
-    "val": "11h 35' 55''",
-    "gap": "+ 00h 09' 54''"
-   },
-   {
-    "pos": 26,
     "rider": "E. SVESTAD-BÅRDSENG",
     "team": "NETCOMPANY INEOS CYCLING TEAM",
     "nat": "NOR",
-    "val": "11h 36' 53''",
-    "gap": "+ 00h 10' 52''"
+    "val": "15h 53' 21''",
+    "gap": "+ 00h 14' 54''"
    },
    {
-    "pos": 27,
-    "rider": "M. LANDA",
-    "team": "SOUDAL QUICK-STEP",
+    "pos": 21,
+    "rider": "X. PICKERING",
+    "team": "TEAM JAYCO ALULA",
+    "nat": "GBR",
+    "val": "15h 54' 20''",
+    "gap": "+ 00h 15' 53''"
+   },
+   {
+    "pos": 22,
+    "rider": "I. RUIZ SEDANO",
+    "team": "EQUIPO KERN PHARMA",
     "nat": "ESP",
-    "val": "11h 37' 32''",
-    "gap": "+ 00h 11' 31''"
+    "val": "15h 54' 37''",
+    "gap": "+ 00h 16' 10''"
    },
    {
-    "pos": 28,
+    "pos": 23,
     "rider": "M. RICCITELLO",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "USA",
-    "val": "11h 38' 10''",
-    "gap": "+ 00h 12' 09''"
+    "val": "15h 54' 38''",
+    "gap": "+ 00h 16' 11''"
    },
    {
-    "pos": 29,
+    "pos": 24,
+    "rider": "J. HIRT",
+    "team": "NSN CYCLING TEAM",
+    "nat": "CZE",
+    "val": "15h 57' 12''",
+    "gap": "+ 00h 18' 45''"
+   },
+   {
+    "pos": 25,
+    "rider": "J. NORDHAGEN",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "NOR",
+    "val": "15h 58' 27''",
+    "gap": "+ 00h 20' 00''"
+   },
+   {
+    "pos": 26,
     "rider": "J. RODRIGUEZ CONTRERAS",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "COL",
-    "val": "11h 38' 50''",
-    "gap": "+ 00h 12' 49''"
+    "val": "15h 58' 49''",
+    "gap": "+ 00h 20' 22''"
    },
    {
-    "pos": 30,
+    "pos": 27,
     "rider": "T. JOHANNESSEN",
     "team": "UNO-X MOBILITY",
     "nat": "NOR",
-    "val": "11h 39' 44''",
-    "gap": "+ 00h 13' 43''"
+    "val": "15h 59' 43''",
+    "gap": "+ 00h 21' 16''"
    },
    {
-    "pos": 31,
+    "pos": 28,
+    "rider": "T. GLOAG",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "GBR",
+    "val": "16h 01' 17''",
+    "gap": "+ 00h 22' 50''"
+   },
+   {
+    "pos": 29,
     "rider": "U. BERRADE FERNANDEZ",
     "team": "EQUIPO KERN PHARMA",
     "nat": "ESP",
-    "val": "11h 40' 21''",
-    "gap": "+ 00h 14' 20''"
+    "val": "16h 01' 45''",
+    "gap": "+ 00h 23' 18''"
    },
    {
-    "pos": 32,
+    "pos": 30,
     "rider": "W. BARTA",
     "team": "TUDOR PRO CYCLING TEAM",
     "nat": "USA",
-    "val": "11h 40' 42''",
-    "gap": "+ 00h 14' 41''"
+    "val": "16h 02' 06''",
+    "gap": "+ 00h 23' 39''"
+   },
+   {
+    "pos": 31,
+    "rider": "M. APARICIO MUÑOZ",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "ESP",
+    "val": "16h 03' 18''",
+    "gap": "+ 00h 24' 51''"
+   },
+   {
+    "pos": 32,
+    "rider": "M. LANDA",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "ESP",
+    "val": "16h 03' 28''",
+    "gap": "+ 00h 25' 01''"
    },
    {
     "pos": 33,
     "rider": "P. SIVAKOV",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "FRA",
-    "val": "11h 41' 01''",
-    "gap": "+ 00h 15' 00''"
+    "val": "16h 04' 01''",
+    "gap": "+ 00h 25' 34''"
    },
    {
     "pos": 34,
-    "rider": "T. GLOAG",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "GBR",
-    "val": "11h 41' 18''",
-    "gap": "+ 00h 15' 17''"
-   },
-   {
-    "pos": 35,
-    "rider": "E. DUNBAR",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "IRL",
-    "val": "11h 41' 34''",
-    "gap": "+ 00h 15' 33''"
-   },
-   {
-    "pos": 36,
-    "rider": "E. BUCHMANN",
-    "team": "COFIDIS",
-    "nat": "GER",
-    "val": "11h 42' 31''",
-    "gap": "+ 00h 16' 30''"
-   },
-   {
-    "pos": 37,
     "rider": "F. ZANA",
     "team": "SOUDAL QUICK-STEP",
     "nat": "ITA",
-    "val": "11h 44' 22''",
-    "gap": "+ 00h 18' 21''"
+    "val": "16h 04' 21''",
+    "gap": "+ 00h 25' 54''"
    },
    {
-    "pos": 38,
-    "rider": "P. BILBAO",
-    "team": "BAHRAIN VICTORIOUS",
-    "nat": "ESP",
-    "val": "11h 44' 58''",
-    "gap": "+ 00h 18' 57''"
-   },
-   {
-    "pos": 39,
-    "rider": "M. APARICIO MUÑOZ",
-    "team": "BURGOS-BURPELLET-BH",
-    "nat": "ESP",
-    "val": "11h 45' 06''",
-    "gap": "+ 00h 19' 05''"
-   },
-   {
-    "pos": 40,
-    "rider": "A. VALTER",
-    "team": "BAHRAIN VICTORIOUS",
-    "nat": "HUN",
-    "val": "11h 45' 11''",
-    "gap": "+ 00h 19' 10''"
-   },
-   {
-    "pos": 41,
-    "rider": "G. BENNETT",
-    "team": "NSN CYCLING TEAM",
-    "nat": "NZL",
-    "val": "11h 45' 14''",
-    "gap": "+ 00h 19' 13''"
-   },
-   {
-    "pos": 42,
-    "rider": "L. TUCKWELL",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "AUS",
-    "val": "11h 45' 36''",
-    "gap": "+ 00h 19' 35''"
-   },
-   {
-    "pos": 43,
-    "rider": "R. THALMANN",
+    "pos": 35,
+    "rider": "M. BRENNER",
     "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "SUI",
-    "val": "11h 46' 39''",
-    "gap": "+ 00h 20' 38''"
+    "nat": "GER",
+    "val": "16h 05' 22''",
+    "gap": "+ 00h 26' 55''"
    },
    {
-    "pos": 44,
-    "rider": "R. GARCIA",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "11h 47' 20''",
-    "gap": "+ 00h 21' 19''"
-   },
-   {
-    "pos": 45,
-    "rider": "B. ARMIRAIL",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "FRA",
-    "val": "11h 49' 19''",
-    "gap": "+ 00h 23' 18''"
-   },
-   {
-    "pos": 46,
-    "rider": "S. KÜNG",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "SUI",
-    "val": "11h 49' 20''",
-    "gap": "+ 00h 23' 19''"
-   },
-   {
-    "pos": 47,
-    "rider": "O. AULAR SANABRIA",
-    "team": "MOVISTAR TEAM",
-    "nat": "VEN",
-    "val": "11h 49' 29''",
-    "gap": "+ 00h 23' 28''"
-   },
-   {
-    "pos": 48,
-    "rider": "F. FISHER - BLACK",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "NZL",
-    "val": "11h 49' 31''",
-    "gap": "+ 00h 23' 30''"
-   },
-   {
-    "pos": 49,
-    "rider": "A. LAURANCE",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "FRA",
-    "val": "11h 49' 32''",
-    "gap": "+ 00h 23' 31''"
-   },
-   {
-    "pos": 50,
-    "rider": "C. RODRIGUEZ",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 49' 33''",
-    "gap": "+ 00h 23' 32''"
-   },
-   {
-    "pos": 51,
-    "rider": "B. TRONCHON",
-    "team": "GROUPAMA-FDJ UNITED",
-    "nat": "FRA",
-    "val": "11h 49' 37''",
-    "gap": "+ 00h 23' 36''"
-   },
-   {
-    "pos": 52,
-    "rider": "C. CANAL BLANCO",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "11h 49' 43''",
-    "gap": "+ 00h 23' 42''"
-   },
-   {
-    "pos": 53,
+    "pos": 36,
     "rider": "S. BUITRAGO",
     "team": "BAHRAIN VICTORIOUS",
     "nat": "COL",
-    "val": "11h 49' 44''",
-    "gap": "+ 00h 23' 43''"
+    "val": "16h 06' 12''",
+    "gap": "+ 00h 27' 45''"
    },
    {
-    "pos": 54,
-    "rider": "P. MIQUEL DELGADO",
+    "pos": 37,
+    "rider": "E. BUCHMANN",
+    "team": "COFIDIS",
+    "nat": "GER",
+    "val": "16h 06' 32''",
+    "gap": "+ 00h 28' 05''"
+   },
+   {
+    "pos": 38,
+    "rider": "A. VALTER",
     "team": "BAHRAIN VICTORIOUS",
-    "nat": "ESP",
-    "val": "11h 49' 47''",
-    "gap": "+ 00h 23' 46''"
+    "nat": "HUN",
+    "val": "16h 06' 35''",
+    "gap": "+ 00h 28' 08''"
    },
    {
-    "pos": 55,
-    "rider": "V. LANGELLOTTI",
-    "team": "XDS ASTANA TEAM",
-    "nat": "MON",
-    "val": "11h 49' 50''",
-    "gap": "+ 00h 23' 49''"
-   },
-   {
-    "pos": 56,
-    "rider": "E. PALENI",
-    "team": "GROUPAMA-FDJ UNITED",
-    "nat": "FRA",
-    "val": "11h 49' 51''",
-    "gap": "+ 00h 23' 50''"
-   },
-   {
-    "pos": 57,
-    "rider": "D. GONZALEZ LOPEZ",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 49' 53''",
-    "gap": "+ 00h 23' 52''"
-   },
-   {
-    "pos": 58,
-    "rider": "H. HOFSTETTER",
+    "pos": 39,
+    "rider": "G. BENNETT",
     "team": "NSN CYCLING TEAM",
-    "nat": "FRA",
-    "val": "11h 49' 54''",
-    "gap": "+ 00h 23' 53''"
+    "nat": "NZL",
+    "val": "16h 06' 38''",
+    "gap": "+ 00h 28' 11''"
    },
    {
-    "pos": 59,
-    "rider": "G. LEEMREIZE",
-    "team": "TEAM PICNIC POSTNL",
-    "nat": "NED",
-    "val": "11h 49' 54''",
-    "gap": "+ 00h 23' 53''"
-   },
-   {
-    "pos": 60,
-    "rider": "M. VADER",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "NED",
-    "val": "11h 49' 55''",
-    "gap": "+ 00h 23' 54''"
-   },
-   {
-    "pos": 61,
-    "rider": "F. DVERSNES",
-    "team": "UNO-X MOBILITY",
-    "nat": "NOR",
-    "val": "11h 49' 58''",
-    "gap": "+ 00h 23' 57''"
-   },
-   {
-    "pos": 62,
-    "rider": "V. BRAET",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 50' 01''",
-    "gap": "+ 00h 24' 00''"
-   },
-   {
-    "pos": 63,
-    "rider": "A. COVI",
-    "team": "TEAM JAYCO ALULA",
-    "nat": "ITA",
-    "val": "11h 50' 05''",
-    "gap": "+ 00h 24' 04''"
-   },
-   {
-    "pos": 64,
-    "rider": "V. MADOUAS",
-    "team": "GROUPAMA-FDJ UNITED",
-    "nat": "FRA",
-    "val": "11h 50' 09''",
-    "gap": "+ 00h 24' 08''"
-   },
-   {
-    "pos": 65,
-    "rider": "C. ALLENO",
-    "team": "BURGOS-BURPELLET-BH",
-    "nat": "FRA",
-    "val": "11h 50' 10''",
-    "gap": "+ 00h 24' 09''"
-   },
-   {
-    "pos": 66,
-    "rider": "R. PORTER",
-    "team": "TEAM JAYCO ALULA",
-    "nat": "AUS",
-    "val": "11h 50' 15''",
-    "gap": "+ 00h 24' 14''"
-   },
-   {
-    "pos": 67,
+    "pos": 40,
     "rider": "G. GAROFOLI",
     "team": "SOUDAL QUICK-STEP",
     "nat": "ITA",
-    "val": "11h 50' 18''",
-    "gap": "+ 00h 24' 17''"
+    "val": "16h 06' 44''",
+    "gap": "+ 00h 28' 17''"
    },
    {
-    "pos": 68,
-    "rider": "A. DAINESE",
-    "team": "SOUDAL QUICK-STEP",
-    "nat": "ITA",
-    "val": "11h 50' 19''",
-    "gap": "+ 00h 24' 18''"
-   },
-   {
-    "pos": 69,
-    "rider": "R. MOLARD",
-    "team": "GROUPAMA-FDJ UNITED",
-    "nat": "FRA",
-    "val": "11h 50' 23''",
-    "gap": "+ 00h 24' 22''"
-   },
-   {
-    "pos": 70,
-    "rider": "L. VAN BOVEN",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 50' 26''",
-    "gap": "+ 00h 24' 25''"
-   },
-   {
-    "pos": 71,
-    "rider": "L. FORTUNATO",
-    "team": "XDS ASTANA TEAM",
-    "nat": "ITA",
-    "val": "11h 50' 37''",
-    "gap": "+ 00h 24' 36''"
-   },
-   {
-    "pos": 72,
-    "rider": "A. ROMELE",
-    "team": "XDS ASTANA TEAM",
-    "nat": "ITA",
-    "val": "11h 50' 39''",
-    "gap": "+ 00h 24' 38''"
-   },
-   {
-    "pos": 73,
-    "rider": "L. WARBASSE",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "USA",
-    "val": "11h 50' 39''",
-    "gap": "+ 00h 24' 38''"
-   },
-   {
-    "pos": 74,
-    "rider": "J. BERNARD",
-    "team": "LIDL-TREK",
-    "nat": "FRA",
-    "val": "11h 50' 45''",
-    "gap": "+ 00h 24' 44''"
-   },
-   {
-    "pos": 75,
-    "rider": "J. BRENNAN",
+    "pos": 41,
+    "rider": "B. TULETT",
     "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "GBR",
-    "val": "11h 50' 52''",
-    "gap": "+ 00h 24' 51''"
+    "val": "16h 08' 04''",
+    "gap": "+ 00h 29' 37''"
    },
    {
-    "pos": 76,
-    "rider": "W. VAN AERT",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "BEL",
-    "val": "11h 50' 57''",
-    "gap": "+ 00h 24' 56''"
-   },
-   {
-    "pos": 77,
-    "rider": "H. RENARD HAQUIN",
+    "pos": 42,
+    "rider": "G. LEEMREIZE",
     "team": "TEAM PICNIC POSTNL",
-    "nat": "FRA",
-    "val": "11h 50' 58''",
-    "gap": "+ 00h 24' 57''"
+    "nat": "NED",
+    "val": "16h 08' 06''",
+    "gap": "+ 00h 29' 39''"
    },
    {
-    "pos": 78,
-    "rider": "H. MULUEBERHAN",
-    "team": "XDS ASTANA TEAM",
-    "nat": "ERI",
-    "val": "11h 50' 58''",
-    "gap": "+ 00h 24' 57''"
-   },
-   {
-    "pos": 79,
-    "rider": "L. ROTA",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "ITA",
-    "val": "11h 51' 04''",
-    "gap": "+ 00h 25' 03''"
-   },
-   {
-    "pos": 80,
-    "rider": "V. ALBANESE",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "ITA",
-    "val": "11h 51' 06''",
-    "gap": "+ 00h 25' 05''"
-   },
-   {
-    "pos": 81,
-    "rider": "M. VANSEVENANT",
-    "team": "SOUDAL QUICK-STEP",
-    "nat": "BEL",
-    "val": "11h 51' 17''",
-    "gap": "+ 00h 25' 16''"
-   },
-   {
-    "pos": 82,
-    "rider": "C. LAPORTE",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "FRA",
-    "val": "11h 51' 20''",
-    "gap": "+ 00h 25' 19''"
-   },
-   {
-    "pos": 83,
-    "rider": "F. WEISS",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "SUI",
-    "val": "11h 51' 20''",
-    "gap": "+ 00h 25' 19''"
-   },
-   {
-    "pos": 84,
-    "rider": "F. VAN DEN BOSSCHE",
-    "team": "SOUDAL QUICK-STEP",
-    "nat": "BEL",
-    "val": "11h 51' 24''",
-    "gap": "+ 00h 25' 23''"
-   },
-   {
-    "pos": 85,
-    "rider": "T. NYS",
-    "team": "LIDL-TREK",
-    "nat": "BEL",
-    "val": "11h 51' 29''",
-    "gap": "+ 00h 25' 28''"
-   },
-   {
-    "pos": 86,
-    "rider": "I. ROMEO ABAD",
+    "pos": 43,
+    "rider": "C. CANAL BLANCO",
     "team": "MOVISTAR TEAM",
     "nat": "ESP",
-    "val": "11h 51' 31''",
-    "gap": "+ 00h 25' 30''"
+    "val": "16h 08' 08''",
+    "gap": "+ 00h 29' 41''"
    },
    {
-    "pos": 87,
-    "rider": "B. COQUARD",
-    "team": "COFIDIS",
-    "nat": "FRA",
-    "val": "11h 51' 50''",
-    "gap": "+ 00h 25' 49''"
-   },
-   {
-    "pos": 88,
-    "rider": "J. HAIG",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "AUS",
-    "val": "11h 51' 51''",
-    "gap": "+ 00h 25' 50''"
-   },
-   {
-    "pos": 89,
-    "rider": "R. TILLER",
-    "team": "UNO-X MOBILITY",
-    "nat": "NOR",
-    "val": "11h 51' 57''",
-    "gap": "+ 00h 25' 56''"
-   },
-   {
-    "pos": 90,
-    "rider": "C. SCOTSON",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "AUS",
-    "val": "11h 51' 58''",
-    "gap": "+ 00h 25' 57''"
-   },
-   {
-    "pos": 91,
-    "rider": "X. AZPARREN IRURZUN",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 52' 05''",
-    "gap": "+ 00h 26' 04''"
-   },
-   {
-    "pos": 92,
+    "pos": 44,
     "rider": "M. CAMPRUBI PIJUAN",
     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
     "nat": "ESP",
-    "val": "11h 52' 05''",
-    "gap": "+ 00h 26' 04''"
+    "val": "16h 08' 31''",
+    "gap": "+ 00h 30' 04''"
    },
    {
-    "pos": 93,
-    "rider": "S. MONIQUET",
-    "team": "COFIDIS",
-    "nat": "BEL",
-    "val": "11h 52' 07''",
-    "gap": "+ 00h 26' 06''"
-   },
-   {
-    "pos": 94,
+    "pos": 45,
     "rider": "M. GAFFURI",
     "team": "TEAM PICNIC POSTNL",
     "nat": "ITA",
-    "val": "11h 52' 09''",
-    "gap": "+ 00h 26' 08''"
+    "val": "16h 08' 37''",
+    "gap": "+ 00h 30' 10''"
    },
    {
-    "pos": 95,
-    "rider": "P. MARTI SORIANO",
-    "team": "NSN CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 52' 09''",
-    "gap": "+ 00h 26' 08''"
-   },
-   {
-    "pos": 96,
-    "rider": "N. SCHULTZ",
-    "team": "NSN CYCLING TEAM",
-    "nat": "AUS",
-    "val": "11h 52' 31''",
-    "gap": "+ 00h 26' 30''"
-   },
-   {
-    "pos": 97,
-    "rider": "A. LEKNESSUND",
-    "team": "UNO-X MOBILITY",
-    "nat": "NOR",
-    "val": "11h 52' 33''",
-    "gap": "+ 00h 26' 32''"
-   },
-   {
-    "pos": 98,
-    "rider": "L. KÄMNA",
-    "team": "LIDL-TREK",
-    "nat": "GER",
-    "val": "11h 52' 40''",
-    "gap": "+ 00h 26' 39''"
-   },
-   {
-    "pos": 99,
-    "rider": "J. MEEUS",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "BEL",
-    "val": "11h 53' 16''",
-    "gap": "+ 00h 27' 15''"
-   },
-   {
-    "pos": 100,
-    "rider": "K. BOUWMAN",
-    "team": "TEAM JAYCO ALULA",
-    "nat": "NED",
-    "val": "11h 53' 23''",
-    "gap": "+ 00h 27' 22''"
-   },
-   {
-    "pos": 101,
+    "pos": 46,
     "rider": "P. KONRAD",
     "team": "LIDL-TREK",
     "nat": "AUT",
-    "val": "11h 53' 25''",
-    "gap": "+ 00h 27' 24''"
+    "val": "16h 09' 51''",
+    "gap": "+ 00h 31' 24''"
    },
    {
-    "pos": 102,
-    "rider": "J. LABROSSE",
-    "team": "DECATHLON CMA CGM TEAM",
+    "pos": 47,
+    "rider": "B. ARMIRAIL",
+    "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "FRA",
-    "val": "11h 53' 29''",
-    "gap": "+ 00h 27' 28''"
-   },
-   {
-    "pos": 103,
-    "rider": "L. ROULAND",
-    "team": "COFIDIS",
-    "nat": "FRA",
-    "val": "11h 54' 10''",
-    "gap": "+ 00h 28' 09''"
-   },
-   {
-    "pos": 104,
-    "rider": "R. ROCHAS",
-    "team": "GROUPAMA-FDJ UNITED",
-    "nat": "FRA",
-    "val": "11h 54' 11''",
-    "gap": "+ 00h 28' 10''"
-   },
-   {
-    "pos": 105,
-    "rider": "S. DALBY",
-    "team": "UNO-X MOBILITY",
-    "nat": "DEN",
-    "val": "11h 54' 14''",
-    "gap": "+ 00h 28' 13''"
-   },
-   {
-    "pos": 106,
-    "rider": "D. RAFFERTY",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "IRL",
-    "val": "11h 54' 29''",
-    "gap": "+ 00h 28' 28''"
-   },
-   {
-    "pos": 107,
-    "rider": "J. FAURA ASENSIO",
-    "team": "BURGOS-BURPELLET-BH",
-    "nat": "ESP",
-    "val": "11h 55' 27''",
-    "gap": "+ 00h 29' 26''"
-   },
-   {
-    "pos": 108,
-    "rider": "D. DE LA CRUZ",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 55' 28''",
-    "gap": "+ 00h 29' 27''"
-   },
-   {
-    "pos": 109,
-    "rider": "W. CALZONI",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "ITA",
-    "val": "11h 55' 33''",
-    "gap": "+ 00h 29' 32''"
-   },
-   {
-    "pos": 110,
-    "rider": "Y. FEDOROV",
-    "team": "XDS ASTANA TEAM",
-    "nat": "KAZ",
-    "val": "11h 55' 41''",
-    "gap": "+ 00h 29' 40''"
-   },
-   {
-    "pos": 111,
-    "rider": "H. WILKSCH",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "GER",
-    "val": "11h 55' 46''",
-    "gap": "+ 00h 29' 45''"
-   },
-   {
-    "pos": 112,
-    "rider": "G. GLIVAR",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "SLO",
-    "val": "11h 55' 50''",
-    "gap": "+ 00h 29' 49''"
-   },
-   {
-    "pos": 113,
-    "rider": "P. OURSELIN",
-    "team": "COFIDIS",
-    "nat": "FRA",
-    "val": "11h 55' 53''",
-    "gap": "+ 00h 29' 52''"
-   },
-   {
-    "pos": 114,
-    "rider": "V. PARET PEINTRE",
-    "team": "SOUDAL QUICK-STEP",
-    "nat": "FRA",
-    "val": "11h 56' 00''",
-    "gap": "+ 00h 29' 59''"
-   },
-   {
-    "pos": 115,
-    "rider": "R. ERMAKOV",
-    "team": "BAHRAIN VICTORIOUS",
-    "nat": "SLO",
-    "val": "11h 56' 26''",
-    "gap": "+ 00h 30' 25''"
-   },
-   {
-    "pos": 116,
-    "rider": "R. THOMPSON",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "NZL",
-    "val": "11h 56' 44''",
-    "gap": "+ 00h 30' 43''"
-   },
-   {
-    "pos": 117,
-    "rider": "J. SHAW",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "GBR",
-    "val": "11h 56' 48''",
-    "gap": "+ 00h 30' 47''"
-   },
-   {
-    "pos": 118,
-    "rider": "G. STEINHAUSER",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "GER",
-    "val": "11h 57' 06''",
-    "gap": "+ 00h 31' 05''"
-   },
-   {
-    "pos": 119,
-    "rider": "I. SOSA",
-    "team": "EQUIPO KERN PHARMA",
-    "nat": "COL",
-    "val": "11h 57' 08''",
-    "gap": "+ 00h 31' 07''"
-   },
-   {
-    "pos": 120,
-    "rider": "T. DE JONG",
-    "team": "TEAM PICNIC POSTNL",
-    "nat": "NED",
-    "val": "11h 57' 16''",
-    "gap": "+ 00h 31' 15''"
-   },
-   {
-    "pos": 121,
-    "rider": "M. GOVEKAR",
-    "team": "BAHRAIN VICTORIOUS",
-    "nat": "SLO",
-    "val": "11h 57' 36''",
-    "gap": "+ 00h 31' 35''"
-   },
-   {
-    "pos": 122,
-    "rider": "F. WANDAHL",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "DEN",
-    "val": "11h 57' 44''",
-    "gap": "+ 00h 31' 43''"
-   },
-   {
-    "pos": 123,
-    "rider": "S. DE SCHUYTENEER",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 58' 03''",
-    "gap": "+ 00h 32' 02''"
-   },
-   {
-    "pos": 124,
-    "rider": "J. ALMEIDA",
-    "team": "UAE TEAM EMIRATES XRG",
-    "nat": "POR",
-    "val": "11h 58' 17''",
+    "val": "16h 10' 43''",
     "gap": "+ 00h 32' 16''"
    },
    {
-    "pos": 125,
-    "rider": "C. MACIAS ESTRADA",
-    "team": "BURGOS-BURPELLET-BH",
-    "nat": "MEX",
-    "val": "11h 58' 23''",
-    "gap": "+ 00h 32' 22''"
-   },
-   {
-    "pos": 126,
-    "rider": "F. BUSATTO",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "ITA",
-    "val": "11h 58' 35''",
-    "gap": "+ 00h 32' 34''"
-   },
-   {
-    "pos": 127,
-    "rider": "P. DOUBLE",
-    "team": "TEAM JAYCO ALULA",
-    "nat": "GBR",
-    "val": "11h 58' 42''",
-    "gap": "+ 00h 32' 41''"
-   },
-   {
-    "pos": 128,
-    "rider": "S. KRUIJSWIJK",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "NED",
-    "val": "11h 58' 46''",
-    "gap": "+ 00h 32' 45''"
-   },
-   {
-    "pos": 129,
-    "rider": "L. DE VYLDER",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "BEL",
-    "val": "11h 58' 48''",
-    "gap": "+ 00h 32' 47''"
-   },
-   {
-    "pos": 130,
-    "rider": "L. CRAPS",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 58' 49''",
-    "gap": "+ 00h 32' 48''"
-   },
-   {
-    "pos": 131,
-    "rider": "M. TJØTTA",
-    "team": "UNO-X MOBILITY",
-    "nat": "NOR",
-    "val": "11h 59' 14''",
-    "gap": "+ 00h 33' 13''"
-   },
-   {
-    "pos": 132,
-    "rider": "M. CORT NIELSEN",
-    "team": "UNO-X MOBILITY",
-    "nat": "DEN",
-    "val": "11h 59' 22''",
-    "gap": "+ 00h 33' 21''"
-   },
-   {
-    "pos": 133,
-    "rider": "F. VAN TRICHT",
-    "team": "NSN CYCLING TEAM",
-    "nat": "BEL",
-    "val": "12h 00' 06''",
-    "gap": "+ 00h 34' 05''"
-   },
-   {
-    "pos": 134,
-    "rider": "M. GOGL",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "AUT",
-    "val": "12h 00' 07''",
-    "gap": "+ 00h 34' 06''"
-   },
-   {
-    "pos": 135,
-    "rider": "M. BELOKI",
-    "team": "EF EDUCATION - EASYPOST",
+    "pos": 48,
+    "rider": "P. BILBAO",
+    "team": "BAHRAIN VICTORIOUS",
     "nat": "ESP",
-    "val": "12h 00' 12''",
-    "gap": "+ 00h 34' 11''"
+    "val": "16h 10' 54''",
+    "gap": "+ 00h 32' 27''"
    },
    {
-    "pos": 136,
-    "rider": "M. PEDERSEN",
-    "team": "LIDL-TREK",
-    "nat": "DEN",
-    "val": "12h 00' 23''",
-    "gap": "+ 00h 34' 22''"
+    "pos": 49,
+    "rider": "C. RODRIGUEZ",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 10' 57''",
+    "gap": "+ 00h 32' 30''"
    },
    {
-    "pos": 137,
-    "rider": "K. VERMAERKE",
-    "team": "UAE TEAM EMIRATES XRG",
-    "nat": "USA",
-    "val": "12h 00' 30''",
-    "gap": "+ 00h 34' 29''"
+    "pos": 50,
+    "rider": "L. TUCKWELL",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "AUS",
+    "val": "16h 11' 32''",
+    "gap": "+ 00h 33' 05''"
    },
    {
-    "pos": 138,
-    "rider": "E. HAYTER",
+    "pos": 51,
+    "rider": "V. MADOUAS",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "16h 11' 33''",
+    "gap": "+ 00h 33' 06''"
+   },
+   {
+    "pos": 52,
+    "rider": "C. ALLENO",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "FRA",
+    "val": "16h 11' 34''",
+    "gap": "+ 00h 33' 07''"
+   },
+   {
+    "pos": 53,
+    "rider": "R. MOLARD",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "16h 11' 47''",
+    "gap": "+ 00h 33' 20''"
+   },
+   {
+    "pos": 54,
+    "rider": "M. VANSEVENANT",
     "team": "SOUDAL QUICK-STEP",
-    "nat": "GBR",
-    "val": "12h 00' 35''",
-    "gap": "+ 00h 34' 34''"
+    "nat": "BEL",
+    "val": "16h 12' 41''",
+    "gap": "+ 00h 34' 14''"
    },
    {
-    "pos": 139,
-    "rider": "A. KRON",
-    "team": "UNO-X MOBILITY",
-    "nat": "DEN",
-    "val": "12h 00' 38''",
-    "gap": "+ 00h 34' 37''"
+    "pos": 55,
+    "rider": "M. VADER",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "NED",
+    "val": "16h 12' 55''",
+    "gap": "+ 00h 34' 28''"
    },
    {
-    "pos": 140,
-    "rider": "A. LUTSENKO",
-    "team": "NSN CYCLING TEAM",
-    "nat": "KAZ",
-    "val": "12h 00' 43''",
-    "gap": "+ 00h 34' 42''"
-   },
-   {
-    "pos": 141,
-    "rider": "M. KRETSCHY",
-    "team": "NSN CYCLING TEAM",
-    "nat": "GER",
-    "val": "12h 00' 44''",
-    "gap": "+ 00h 34' 43''"
-   },
-   {
-    "pos": 142,
-    "rider": "G. MARTINEZ HUERTAS",
-    "team": "TEAM PICNIC POSTNL",
-    "nat": "COL",
-    "val": "12h 00' 50''",
+    "pos": 56,
+    "rider": "R. GARCIA",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "16h 13' 16''",
     "gap": "+ 00h 34' 49''"
    },
    {
-    "pos": 143,
-    "rider": "I. ELOSEGUI MOMEÑE",
-    "team": "EQUIPO KERN PHARMA",
-    "nat": "ESP",
-    "val": "12h 00' 56''",
-    "gap": "+ 00h 34' 55''"
-   },
-   {
-    "pos": 144,
-    "rider": "J. ARCAS",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "12h 01' 15''",
-    "gap": "+ 00h 35' 14''"
-   },
-   {
-    "pos": 145,
-    "rider": "J. HERRADA",
-    "team": "BURGOS-BURPELLET-BH",
-    "nat": "ESP",
-    "val": "12h 01' 46''",
-    "gap": "+ 00h 35' 45''"
-   },
-   {
-    "pos": 146,
-    "rider": "O. LE GAC",
-    "team": "GROUPAMA-FDJ UNITED",
+    "pos": 57,
+    "rider": "H. HOFSTETTER",
+    "team": "NSN CYCLING TEAM",
     "nat": "FRA",
-    "val": "12h 02' 00''",
-    "gap": "+ 00h 35' 59''"
+    "val": "16h 13' 55''",
+    "gap": "+ 00h 35' 28''"
    },
    {
-    "pos": 147,
-    "rider": "G. VERMEERSCH",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "BEL",
-    "val": "12h 02' 02''",
-    "gap": "+ 00h 36' 01''"
+    "pos": 58,
+    "rider": "H. WILKSCH",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "GER",
+    "val": "16h 13' 58''",
+    "gap": "+ 00h 35' 31''"
    },
    {
-    "pos": 148,
-    "rider": "S. DE PESTEL",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "BEL",
-    "val": "12h 02' 06''",
-    "gap": "+ 00h 36' 05''"
-   },
-   {
-    "pos": 149,
-    "rider": "P. CASTRILLO",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "12h 02' 07''",
-    "gap": "+ 00h 36' 06''"
-   },
-   {
-    "pos": 150,
-    "rider": "T. ROOSEN",
-    "team": "TEAM PICNIC POSTNL",
+    "pos": 59,
+    "rider": "K. BOUWMAN",
+    "team": "TEAM JAYCO ALULA",
     "nat": "NED",
-    "val": "12h 02' 10''",
-    "gap": "+ 00h 36' 09''"
-   },
-   {
-    "pos": 151,
-    "rider": "A. MACKELLAR",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "AUS",
-    "val": "12h 02' 21''",
+    "val": "16h 14' 47''",
     "gap": "+ 00h 36' 20''"
    },
    {
-    "pos": 152,
-    "rider": "J. DIAZ GALLEGO",
-    "team": "BURGOS-BURPELLET-BH",
+    "pos": 60,
+    "rider": "J. HAIG",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "AUS",
+    "val": "16h 14' 51''",
+    "gap": "+ 00h 36' 24''"
+   },
+   {
+    "pos": 61,
+    "rider": "C. SCOTSON",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUS",
+    "val": "16h 14' 58''",
+    "gap": "+ 00h 36' 31''"
+   },
+   {
+    "pos": 62,
+    "rider": "P. MIQUEL DELGADO",
+    "team": "BAHRAIN VICTORIOUS",
     "nat": "ESP",
-    "val": "12h 02' 40''",
-    "gap": "+ 00h 36' 39''"
-   },
-   {
-    "pos": 153,
-    "rider": "H. HOULE",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "CAN",
-    "val": "12h 02' 50''",
-    "gap": "+ 00h 36' 49''"
-   },
-   {
-    "pos": 154,
-    "rider": "J. MOSCA",
-    "team": "LIDL-TREK",
-    "nat": "ITA",
-    "val": "12h 02' 51''",
-    "gap": "+ 00h 36' 50''"
-   },
-   {
-    "pos": 155,
-    "rider": "S. SAMITIER SAMITIER",
-    "team": "COFIDIS",
-    "nat": "ESP",
-    "val": "12h 02' 53''",
-    "gap": "+ 00h 36' 52''"
-   },
-   {
-    "pos": 156,
-    "rider": "S. NORSGAARD",
-    "team": "LIDL-TREK",
-    "nat": "DEN",
-    "val": "12h 03' 17''",
+    "val": "16h 15' 43''",
     "gap": "+ 00h 37' 16''"
    },
    {
-    "pos": 157,
-    "rider": "M. BRUSTENGA MASAGUE",
-    "team": "EQUIPO KERN PHARMA",
-    "nat": "ESP",
-    "val": "12h 03' 21''",
+    "pos": 63,
+    "rider": "V. LANGELLOTTI",
+    "team": "XDS ASTANA TEAM",
+    "nat": "MON",
+    "val": "16h 15' 46''",
+    "gap": "+ 00h 37' 19''"
+   },
+   {
+    "pos": 64,
+    "rider": "E. PALENI",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "16h 15' 47''",
     "gap": "+ 00h 37' 20''"
    },
    {
-    "pos": 158,
-    "rider": "M. WENZEL",
-    "team": "EQUIPO KERN PHARMA",
-    "nat": "LUX",
-    "val": "12h 03' 24''",
-    "gap": "+ 00h 37' 23''"
+    "pos": 65,
+    "rider": "L. WARBASSE",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "USA",
+    "val": "16h 16' 35''",
+    "gap": "+ 00h 38' 08''"
    },
    {
-    "pos": 159,
-    "rider": "A. CHAMBERLAIN",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "AUS",
-    "val": "12h 03' 25''",
-    "gap": "+ 00h 37' 24''"
-   },
-   {
-    "pos": 160,
-    "rider": "J. TARLING",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "GBR",
-    "val": "12h 03' 27''",
-    "gap": "+ 00h 37' 26''"
-   },
-   {
-    "pos": 161,
-    "rider": "I. OLIVEIRA",
-    "team": "UAE TEAM EMIRATES XRG",
-    "nat": "POR",
-    "val": "12h 03' 37''",
-    "gap": "+ 00h 37' 36''"
-   },
-   {
-    "pos": 162,
-    "rider": "A. RENARD",
-    "team": "COFIDIS",
-    "nat": "FRA",
-    "val": "12h 03' 40''",
-    "gap": "+ 00h 37' 39''"
-   },
-   {
-    "pos": 163,
-    "rider": "B. TURNER",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "GBR",
-    "val": "12h 03' 44''",
-    "gap": "+ 00h 37' 43''"
-   },
-   {
-    "pos": 164,
-    "rider": "L. HAMILTON",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "AUS",
-    "val": "12h 03' 55''",
-    "gap": "+ 00h 37' 54''"
-   },
-   {
-    "pos": 165,
-    "rider": "K. GROVES",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "AUS",
-    "val": "12h 04' 05''",
-    "gap": "+ 00h 38' 04''"
-   },
-   {
-    "pos": 166,
-    "rider": "A. HELLEMOSE",
-    "team": "TEAM JAYCO ALULA",
-    "nat": "DEN",
-    "val": "12h 04' 15''",
+    "pos": 66,
+    "rider": "L. KÄMNA",
+    "team": "LIDL-TREK",
+    "nat": "GER",
+    "val": "16h 16' 41''",
     "gap": "+ 00h 38' 14''"
    },
    {
-    "pos": 167,
-    "rider": "I. COBO CAYON",
-    "team": "EQUIPO KERN PHARMA",
-    "nat": "ESP",
-    "val": "12h 04' 28''",
-    "gap": "+ 00h 38' 27''"
+    "pos": 67,
+    "rider": "V. ALBANESE",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "ITA",
+    "val": "16h 17' 02''",
+    "gap": "+ 00h 38' 35''"
    },
    {
-    "pos": 168,
-    "rider": "S. FERNANDEZ RODRIGUEZ",
+    "pos": 68,
+    "rider": "A. KRON",
+    "team": "UNO-X MOBILITY",
+    "nat": "DEN",
+    "val": "16h 17' 04''",
+    "gap": "+ 00h 38' 37''"
+   },
+   {
+    "pos": 69,
+    "rider": "I. ROMEO ABAD",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "16h 17' 27''",
+    "gap": "+ 00h 39' 00''"
+   },
+   {
+    "pos": 70,
+    "rider": "L. CRAPS",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "16h 17' 57''",
+    "gap": "+ 00h 39' 30''"
+   },
+   {
+    "pos": 71,
+    "rider": "P. MARTI SORIANO",
+    "team": "NSN CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 18' 05''",
+    "gap": "+ 00h 39' 38''"
+   },
+   {
+    "pos": 72,
+    "rider": "N. SCHULTZ",
+    "team": "NSN CYCLING TEAM",
+    "nat": "AUS",
+    "val": "16h 18' 27''",
+    "gap": "+ 00h 40' 00''"
+   },
+   {
+    "pos": 73,
+    "rider": "J. DIAZ GALLEGO",
     "team": "BURGOS-BURPELLET-BH",
     "nat": "ESP",
-    "val": "12h 04' 30''",
-    "gap": "+ 00h 38' 29''"
+    "val": "16h 19' 06''",
+    "gap": "+ 00h 40' 39''"
    },
    {
-    "pos": 169,
-    "rider": "M. PAASSCHENS",
-    "team": "BAHRAIN VICTORIOUS",
+    "pos": 74,
+    "rider": "J. LABROSSE",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "FRA",
+    "val": "16h 19' 25''",
+    "gap": "+ 00h 40' 58''"
+   },
+   {
+    "pos": 75,
+    "rider": "W. VAN AERT",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "BEL",
+    "val": "16h 19' 51''",
+    "gap": "+ 00h 41' 24''"
+   },
+   {
+    "pos": 76,
+    "rider": "H. MULUEBERHAN",
+    "team": "XDS ASTANA TEAM",
+    "nat": "ERI",
+    "val": "16h 19' 52''",
+    "gap": "+ 00h 41' 25''"
+   },
+   {
+    "pos": 77,
+    "rider": "L. ROTA",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "ITA",
+    "val": "16h 19' 58''",
+    "gap": "+ 00h 41' 31''"
+   },
+   {
+    "pos": 78,
+    "rider": "R. THALMANN",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "SUI",
+    "val": "16h 19' 58''",
+    "gap": "+ 00h 41' 31''"
+   },
+   {
+    "pos": 79,
+    "rider": "F. WEISS",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "SUI",
+    "val": "16h 20' 04''",
+    "gap": "+ 00h 41' 37''"
+   },
+   {
+    "pos": 80,
+    "rider": "S. DALBY",
+    "team": "UNO-X MOBILITY",
+    "nat": "DEN",
+    "val": "16h 20' 10''",
+    "gap": "+ 00h 41' 43''"
+   },
+   {
+    "pos": 81,
+    "rider": "X. AZPARREN IRURZUN",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 20' 59''",
+    "gap": "+ 00h 42' 32''"
+   },
+   {
+    "pos": 82,
+    "rider": "E. DUNBAR",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "IRL",
+    "val": "16h 21' 00''",
+    "gap": "+ 00h 42' 33''"
+   },
+   {
+    "pos": 83,
+    "rider": "A. LAURANCE",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "FRA",
+    "val": "16h 21' 44''",
+    "gap": "+ 00h 43' 17''"
+   },
+   {
+    "pos": 84,
+    "rider": "P. OURSELIN",
+    "team": "COFIDIS",
+    "nat": "FRA",
+    "val": "16h 21' 49''",
+    "gap": "+ 00h 43' 22''"
+   },
+   {
+    "pos": 85,
+    "rider": "V. PARET PEINTRE",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "FRA",
+    "val": "16h 21' 56''",
+    "gap": "+ 00h 43' 29''"
+   },
+   {
+    "pos": 86,
+    "rider": "S. KÜNG",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "SUI",
+    "val": "16h 22' 39''",
+    "gap": "+ 00h 44' 12''"
+   },
+   {
+    "pos": 87,
+    "rider": "J. SHAW",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "GBR",
+    "val": "16h 22' 44''",
+    "gap": "+ 00h 44' 17''"
+   },
+   {
+    "pos": 88,
+    "rider": "B. TRONCHON",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "16h 22' 56''",
+    "gap": "+ 00h 44' 29''"
+   },
+   {
+    "pos": 89,
+    "rider": "F. WANDAHL",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "DEN",
+    "val": "16h 23' 40''",
+    "gap": "+ 00h 45' 13''"
+   },
+   {
+    "pos": 90,
+    "rider": "S. MONIQUET",
+    "team": "COFIDIS",
+    "nat": "BEL",
+    "val": "16h 24' 19''",
+    "gap": "+ 00h 45' 52''"
+   },
+   {
+    "pos": 91,
+    "rider": "R. THOMPSON",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "NZL",
+    "val": "16h 25' 38''",
+    "gap": "+ 00h 47' 11''"
+   },
+   {
+    "pos": 92,
+    "rider": "A. LEKNESSUND",
+    "team": "UNO-X MOBILITY",
+    "nat": "NOR",
+    "val": "16h 25' 52''",
+    "gap": "+ 00h 47' 25''"
+   },
+   {
+    "pos": 93,
+    "rider": "F. FISHER - BLACK",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "NZL",
+    "val": "16h 26' 44''",
+    "gap": "+ 00h 48' 17''"
+   },
+   {
+    "pos": 94,
+    "rider": "S. SAMITIER SAMITIER",
+    "team": "COFIDIS",
+    "nat": "ESP",
+    "val": "16h 26' 54''",
+    "gap": "+ 00h 48' 27''"
+   },
+   {
+    "pos": 95,
+    "rider": "D. DE LA CRUZ",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 27' 40''",
+    "gap": "+ 00h 49' 13''"
+   },
+   {
+    "pos": 96,
+    "rider": "S. DE PESTEL",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "BEL",
+    "val": "16h 28' 02''",
+    "gap": "+ 00h 49' 35''"
+   },
+   {
+    "pos": 97,
+    "rider": "J. MOSCA",
+    "team": "LIDL-TREK",
+    "nat": "ITA",
+    "val": "16h 28' 47''",
+    "gap": "+ 00h 50' 20''"
+   },
+   {
+    "pos": 98,
+    "rider": "M. GOGL",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "AUT",
+    "val": "16h 29' 01''",
+    "gap": "+ 00h 50' 34''"
+   },
+   {
+    "pos": 99,
+    "rider": "L. FORTUNATO",
+    "team": "XDS ASTANA TEAM",
+    "nat": "ITA",
+    "val": "16h 30' 03''",
+    "gap": "+ 00h 51' 36''"
+   },
+   {
+    "pos": 100,
+    "rider": "J. ARCAS",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "16h 30' 09''",
+    "gap": "+ 00h 51' 42''"
+   },
+   {
+    "pos": 101,
+    "rider": "G. VERMEERSCH",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "BEL",
+    "val": "16h 30' 56''",
+    "gap": "+ 00h 52' 29''"
+   },
+   {
+    "pos": 102,
+    "rider": "B. COQUARD",
+    "team": "COFIDIS",
+    "nat": "FRA",
+    "val": "16h 31' 16''",
+    "gap": "+ 00h 52' 49''"
+   },
+   {
+    "pos": 103,
+    "rider": "F. DVERSNES",
+    "team": "UNO-X MOBILITY",
+    "nat": "NOR",
+    "val": "16h 31' 29''",
+    "gap": "+ 00h 53' 02''"
+   },
+   {
+    "pos": 104,
+    "rider": "J. ALMEIDA",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "POR",
+    "val": "16h 31' 36''",
+    "gap": "+ 00h 53' 09''"
+   },
+   {
+    "pos": 105,
+    "rider": "H. HOULE",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "CAN",
+    "val": "16h 31' 44''",
+    "gap": "+ 00h 53' 17''"
+   },
+   {
+    "pos": 106,
+    "rider": "F. BUSATTO",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "ITA",
+    "val": "16h 31' 54''",
+    "gap": "+ 00h 53' 27''"
+   },
+   {
+    "pos": 107,
+    "rider": "S. KRUIJSWIJK",
+    "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "NED",
-    "val": "12h 04' 35''",
-    "gap": "+ 00h 38' 34''"
+    "val": "16h 32' 05''",
+    "gap": "+ 00h 53' 38''"
    },
    {
-    "pos": 170,
-    "rider": "J. SÜTTERLIN",
+    "pos": 108,
+    "rider": "M. WENZEL",
+    "team": "EQUIPO KERN PHARMA",
+    "nat": "LUX",
+    "val": "16h 32' 18''",
+    "gap": "+ 00h 53' 51''"
+   },
+   {
+    "pos": 109,
+    "rider": "J. BRENNAN",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "GBR",
+    "val": "16h 32' 23''",
+    "gap": "+ 00h 53' 56''"
+   },
+   {
+    "pos": 110,
+    "rider": "O. AULAR SANABRIA",
+    "team": "MOVISTAR TEAM",
+    "nat": "VEN",
+    "val": "16h 32' 31''",
+    "gap": "+ 00h 54' 04''"
+   },
+   {
+    "pos": 111,
+    "rider": "M. CORT NIELSEN",
+    "team": "UNO-X MOBILITY",
+    "nat": "DEN",
+    "val": "16h 32' 41''",
+    "gap": "+ 00h 54' 14''"
+   },
+   {
+    "pos": 112,
+    "rider": "C. LAPORTE",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "FRA",
+    "val": "16h 32' 51''",
+    "gap": "+ 00h 54' 24''"
+   },
+   {
+    "pos": 113,
+    "rider": "Y. FEDOROV",
+    "team": "XDS ASTANA TEAM",
+    "nat": "KAZ",
+    "val": "16h 32' 54''",
+    "gap": "+ 00h 54' 27''"
+   },
+   {
+    "pos": 114,
+    "rider": "D. GONZALEZ LOPEZ",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 32' 55''",
+    "gap": "+ 00h 54' 28''"
+   },
+   {
+    "pos": 115,
+    "rider": "V. BRAET",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "16h 33' 03''",
+    "gap": "+ 00h 54' 36''"
+   },
+   {
+    "pos": 116,
+    "rider": "A. COVI",
     "team": "TEAM JAYCO ALULA",
-    "nat": "GER",
-    "val": "12h 05' 07''",
-    "gap": "+ 00h 39' 06''"
+    "nat": "ITA",
+    "val": "16h 33' 07''",
+    "gap": "+ 00h 54' 40''"
    },
    {
-    "pos": 171,
+    "pos": 117,
+    "rider": "R. PORTER",
+    "team": "TEAM JAYCO ALULA",
+    "nat": "AUS",
+    "val": "16h 33' 17''",
+    "gap": "+ 00h 54' 50''"
+   },
+   {
+    "pos": 118,
+    "rider": "A. DAINESE",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "ITA",
+    "val": "16h 33' 21''",
+    "gap": "+ 00h 54' 54''"
+   },
+   {
+    "pos": 119,
+    "rider": "L. VAN BOVEN",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "16h 33' 28''",
+    "gap": "+ 00h 55' 01''"
+   },
+   {
+    "pos": 120,
+    "rider": "A. ROMELE",
+    "team": "XDS ASTANA TEAM",
+    "nat": "ITA",
+    "val": "16h 33' 41''",
+    "gap": "+ 00h 55' 14''"
+   },
+   {
+    "pos": 121,
+    "rider": "J. BERNARD",
+    "team": "LIDL-TREK",
+    "nat": "FRA",
+    "val": "16h 33' 47''",
+    "gap": "+ 00h 55' 20''"
+   },
+   {
+    "pos": 122,
+    "rider": "K. VERMAERKE",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "USA",
+    "val": "16h 33' 49''",
+    "gap": "+ 00h 55' 22''"
+   },
+   {
+    "pos": 123,
+    "rider": "D. RAFFERTY",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "IRL",
+    "val": "16h 33' 55''",
+    "gap": "+ 00h 55' 28''"
+   },
+   {
+    "pos": 124,
+    "rider": "H. RENARD HAQUIN",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "FRA",
+    "val": "16h 34' 00''",
+    "gap": "+ 00h 55' 33''"
+   },
+   {
+    "pos": 125,
+    "rider": "M. KRETSCHY",
+    "team": "NSN CYCLING TEAM",
+    "nat": "GER",
+    "val": "16h 34' 03''",
+    "gap": "+ 00h 55' 36''"
+   },
+   {
+    "pos": 126,
     "rider": "C. THORNLEY",
     "team": "RED BULL - BORA - HANSGROHE",
     "nat": "GBR",
-    "val": "12h 05' 14''",
-    "gap": "+ 00h 39' 13''"
+    "val": "16h 34' 08''",
+    "gap": "+ 00h 55' 41''"
    },
    {
-    "pos": 172,
+    "pos": 127,
+    "rider": "F. VAN DEN BOSSCHE",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "BEL",
+    "val": "16h 34' 26''",
+    "gap": "+ 00h 55' 59''"
+   },
+   {
+    "pos": 128,
+    "rider": "T. NYS",
+    "team": "LIDL-TREK",
+    "nat": "BEL",
+    "val": "16h 34' 31''",
+    "gap": "+ 00h 56' 04''"
+   },
+   {
+    "pos": 129,
+    "rider": "R. TILLER",
+    "team": "UNO-X MOBILITY",
+    "nat": "NOR",
+    "val": "16h 34' 59''",
+    "gap": "+ 00h 56' 32''"
+   },
+   {
+    "pos": 130,
+    "rider": "D. VAN BEKKUM",
+    "team": "XDS ASTANA TEAM",
+    "nat": "NED",
+    "val": "16h 35' 07''",
+    "gap": "+ 00h 56' 40''"
+   },
+   {
+    "pos": 131,
+    "rider": "L. ROULAND",
+    "team": "COFIDIS",
+    "nat": "FRA",
+    "val": "16h 35' 41''",
+    "gap": "+ 00h 57' 14''"
+   },
+   {
+    "pos": 132,
+    "rider": "L. HAMILTON",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "AUS",
+    "val": "16h 36' 07''",
+    "gap": "+ 00h 57' 40''"
+   },
+   {
+    "pos": 133,
+    "rider": "B. TURNER",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "GBR",
+    "val": "16h 36' 13''",
+    "gap": "+ 00h 57' 46''"
+   },
+   {
+    "pos": 134,
+    "rider": "J. MEEUS",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "BEL",
+    "val": "16h 36' 18''",
+    "gap": "+ 00h 57' 51''"
+   },
+   {
+    "pos": 135,
+    "rider": "W. CALZONI",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "ITA",
+    "val": "16h 37' 04''",
+    "gap": "+ 00h 58' 37''"
+   },
+   {
+    "pos": 136,
+    "rider": "R. ROCHAS",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "16h 37' 13''",
+    "gap": "+ 00h 58' 46''"
+   },
+   {
+    "pos": 137,
+    "rider": "A. LUTSENKO",
+    "team": "NSN CYCLING TEAM",
+    "nat": "KAZ",
+    "val": "16h 37' 56''",
+    "gap": "+ 00h 59' 29''"
+   },
+   {
+    "pos": 138,
+    "rider": "P. DOUBLE",
+    "team": "TEAM JAYCO ALULA",
+    "nat": "GBR",
+    "val": "16h 38' 08''",
+    "gap": "+ 00h 59' 41''"
+   },
+   {
+    "pos": 139,
+    "rider": "J. FAURA ASENSIO",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "ESP",
+    "val": "16h 38' 29''",
+    "gap": "+ 01h 00' 02''"
+   },
+   {
+    "pos": 140,
+    "rider": "G. GLIVAR",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "SLO",
+    "val": "16h 38' 52''",
+    "gap": "+ 01h 00' 25''"
+   },
+   {
+    "pos": 141,
+    "rider": "R. ERMAKOV",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "SLO",
+    "val": "16h 39' 28''",
+    "gap": "+ 01h 01' 01''"
+   },
+   {
+    "pos": 142,
+    "rider": "S. DE SCHUYTENEER",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "16h 39' 34''",
+    "gap": "+ 01h 01' 07''"
+   },
+   {
+    "pos": 143,
+    "rider": "M. PEDERSEN",
+    "team": "LIDL-TREK",
+    "nat": "DEN",
+    "val": "16h 39' 49''",
+    "gap": "+ 01h 01' 22''"
+   },
+   {
+    "pos": 144,
+    "rider": "G. STEINHAUSER",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "GER",
+    "val": "16h 40' 08''",
+    "gap": "+ 01h 01' 41''"
+   },
+   {
+    "pos": 145,
+    "rider": "I. SOSA",
+    "team": "EQUIPO KERN PHARMA",
+    "nat": "COL",
+    "val": "16h 40' 10''",
+    "gap": "+ 01h 01' 43''"
+   },
+   {
+    "pos": 146,
+    "rider": "T. DE JONG",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "NED",
+    "val": "16h 40' 18''",
+    "gap": "+ 01h 01' 51''"
+   },
+   {
+    "pos": 147,
+    "rider": "M. GOVEKAR",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "SLO",
+    "val": "16h 40' 38''",
+    "gap": "+ 01h 02' 11''"
+   },
+   {
+    "pos": 148,
+    "rider": "C. MACIAS ESTRADA",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "MEX",
+    "val": "16h 41' 25''",
+    "gap": "+ 01h 02' 58''"
+   },
+   {
+    "pos": 149,
+    "rider": "L. DE VYLDER",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "BEL",
+    "val": "16h 41' 50''",
+    "gap": "+ 01h 03' 23''"
+   },
+   {
+    "pos": 150,
+    "rider": "M. TJØTTA",
+    "team": "UNO-X MOBILITY",
+    "nat": "NOR",
+    "val": "16h 42' 16''",
+    "gap": "+ 01h 03' 49''"
+   },
+   {
+    "pos": 151,
+    "rider": "F. VAN TRICHT",
+    "team": "NSN CYCLING TEAM",
+    "nat": "BEL",
+    "val": "16h 43' 08''",
+    "gap": "+ 01h 04' 41''"
+   },
+   {
+    "pos": 152,
+    "rider": "J. HERRADA",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "ESP",
+    "val": "16h 43' 17''",
+    "gap": "+ 01h 04' 50''"
+   },
+   {
+    "pos": 153,
+    "rider": "E. HAYTER",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "GBR",
+    "val": "16h 43' 37''",
+    "gap": "+ 01h 05' 10''"
+   },
+   {
+    "pos": 154,
+    "rider": "P. CASTRILLO",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "16h 43' 38''",
+    "gap": "+ 01h 05' 11''"
+   },
+   {
+    "pos": 155,
+    "rider": "G. MARTINEZ HUERTAS",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "COL",
+    "val": "16h 43' 52''",
+    "gap": "+ 01h 05' 25''"
+   },
+   {
+    "pos": 156,
+    "rider": "I. ELOSEGUI MOMEÑE",
+    "team": "EQUIPO KERN PHARMA",
+    "nat": "ESP",
+    "val": "16h 43' 58''",
+    "gap": "+ 01h 05' 31''"
+   },
+   {
+    "pos": 157,
+    "rider": "J. SÜTTERLIN",
+    "team": "TEAM JAYCO ALULA",
+    "nat": "GER",
+    "val": "16h 44' 33''",
+    "gap": "+ 01h 06' 06''"
+   },
+   {
+    "pos": 158,
+    "rider": "O. LE GAC",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "16h 45' 02''",
+    "gap": "+ 01h 06' 35''"
+   },
+   {
+    "pos": 159,
+    "rider": "T. ROOSEN",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "NED",
+    "val": "16h 45' 12''",
+    "gap": "+ 01h 06' 45''"
+   },
+   {
+    "pos": 160,
+    "rider": "A. MACKELLAR",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "AUS",
+    "val": "16h 45' 23''",
+    "gap": "+ 01h 06' 56''"
+   },
+   {
+    "pos": 161,
+    "rider": "S. NORSGAARD",
+    "team": "LIDL-TREK",
+    "nat": "DEN",
+    "val": "16h 46' 19''",
+    "gap": "+ 01h 07' 52''"
+   },
+   {
+    "pos": 162,
+    "rider": "M. BRUSTENGA MASAGUE",
+    "team": "EQUIPO KERN PHARMA",
+    "nat": "ESP",
+    "val": "16h 46' 23''",
+    "gap": "+ 01h 07' 56''"
+   },
+   {
+    "pos": 163,
+    "rider": "A. CHAMBERLAIN",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUS",
+    "val": "16h 46' 27''",
+    "gap": "+ 01h 08' 00''"
+   },
+   {
+    "pos": 164,
+    "rider": "I. OLIVEIRA",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "POR",
+    "val": "16h 46' 39''",
+    "gap": "+ 01h 08' 12''"
+   },
+   {
+    "pos": 165,
+    "rider": "A. RENARD",
+    "team": "COFIDIS",
+    "nat": "FRA",
+    "val": "16h 46' 42''",
+    "gap": "+ 01h 08' 15''"
+   },
+   {
+    "pos": 166,
+    "rider": "K. GROVES",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "AUS",
+    "val": "16h 47' 07''",
+    "gap": "+ 01h 08' 40''"
+   },
+   {
+    "pos": 167,
+    "rider": "A. HELLEMOSE",
+    "team": "TEAM JAYCO ALULA",
+    "nat": "DEN",
+    "val": "16h 47' 17''",
+    "gap": "+ 01h 08' 50''"
+   },
+   {
+    "pos": 168,
+    "rider": "I. COBO CAYON",
+    "team": "EQUIPO KERN PHARMA",
+    "nat": "ESP",
+    "val": "16h 47' 30''",
+    "gap": "+ 01h 09' 03''"
+   },
+   {
+    "pos": 169,
+    "rider": "S. FERNANDEZ RODRIGUEZ",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "ESP",
+    "val": "16h 47' 32''",
+    "gap": "+ 01h 09' 05''"
+   },
+   {
+    "pos": 170,
+    "rider": "M. PAASSCHENS",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "NED",
+    "val": "16h 47' 33''",
+    "gap": "+ 01h 09' 06''"
+   },
+   {
+    "pos": 171,
     "rider": "D. URIARTE BELZUNEGI",
     "team": "EQUIPO KERN PHARMA",
     "nat": "ESP",
-    "val": "12h 06' 01''",
-    "gap": "+ 00h 40' 00''"
+    "val": "16h 49' 03''",
+    "gap": "+ 01h 10' 36''"
+   },
+   {
+    "pos": 172,
+    "rider": "A. KLUCKERS",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "LUX",
+    "val": "16h 49' 43''",
+    "gap": "+ 01h 11' 16''"
    },
    {
     "pos": 173,
     "rider": "G. MOSCON",
     "team": "RED BULL - BORA - HANSGROHE",
     "nat": "ITA",
-    "val": "12h 07' 29''",
-    "gap": "+ 00h 41' 28''"
+    "val": "16h 50' 31''",
+    "gap": "+ 01h 12' 04''"
    },
    {
     "pos": 174,
-    "rider": "A. KLUCKERS",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "LUX",
-    "val": "12h 08' 12''",
-    "gap": "+ 00h 42' 11''"
-   },
-   {
-    "pos": 175,
     "rider": "O. PEACE",
     "team": "TEAM PICNIC POSTNL",
     "nat": "GBR",
-    "val": "12h 09' 00''",
-    "gap": "+ 00h 42' 59''"
+    "val": "16h 52' 02''",
+    "gap": "+ 01h 13' 35''"
    },
    {
-    "pos": 176,
-    "rider": "D. VAN BEKKUM",
-    "team": "XDS ASTANA TEAM",
-    "nat": "NED",
-    "val": "12h 09' 11''",
-    "gap": "+ 00h 43' 10''"
-   },
-   {
-    "pos": 177,
+    "pos": 175,
     "rider": "D. NOVAK",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "SLO",
-    "val": "12h 09' 20''",
-    "gap": "+ 00h 43' 19''"
+    "val": "16h 52' 22''",
+    "gap": "+ 01h 13' 55''"
    },
    {
-    "pos": 178,
+    "pos": 176,
     "rider": "C. HAMILTON",
     "team": "TEAM PICNIC POSTNL",
     "nat": "AUS",
-    "val": "12h 09' 32''",
-    "gap": "+ 00h 43' 31''"
+    "val": "16h 52' 34''",
+    "gap": "+ 01h 14' 07''"
    },
    {
-    "pos": 179,
+    "pos": 177,
     "rider": "H. MCKENZIE",
     "team": "TEAM JAYCO ALULA",
     "nat": "AUS",
-    "val": "12h 11' 40''",
-    "gap": "+ 00h 45' 39''"
+    "val": "16h 54' 42''",
+    "gap": "+ 01h 16' 15''"
    },
    {
-    "pos": 180,
+    "pos": 178,
     "rider": "S. SENTJENS",
     "team": "ALPECIN-PREMIER TECH",
     "nat": "BEL",
-    "val": "12h 20' 05''",
-    "gap": "+ 00h 54' 04''"
+    "val": "17h 03' 07''",
+    "gap": "+ 01h 24' 40''"
    }
   ]
  },
@@ -1474,325 +1462,374 @@
     "rider": "Tadej POGACAR",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "SLO",
-    "val": "82 PTS"
+    "val": "102 PTS"
    },
    {
     "pos": 2,
+    "rider": "Wout VAN AERT",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "BEL",
+    "val": "69 PTS"
+   },
+   {
+    "pos": 3,
     "rider": "James Matthew BRENNAN",
     "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "GBR",
     "val": "60 PTS"
    },
    {
-    "pos": 3,
-    "rider": "Ethan Edward HAYTER",
+    "pos": 4,
+    "rider": "E. HAYTER",
     "team": "SOUDAL QUICK-STEP",
     "nat": "GBR",
     "val": "57 PTS"
    },
    {
-    "pos": 4,
+    "pos": 5,
     "rider": "C. LAPORTE",
     "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "FRA",
     "val": "52 PTS"
    },
    {
-    "pos": 5,
-    "rider": "W. VAN AERT",
-    "team": "TEAM VISMA | LEASE A BIKE",
+    "pos": 6,
+    "rider": "R. DEBRUYNE",
+    "team": "ALPECIN-PREMIER TECH",
     "nat": "BEL",
-    "val": "49 PTS"
+    "val": "36 PTS"
    },
    {
-    "pos": 6,
+    "pos": 7,
     "rider": "P. MIQUEL DELGADO",
     "team": "BAHRAIN VICTORIOUS",
     "nat": "ESP",
     "val": "31 PTS"
    },
    {
-    "pos": 7,
+    "pos": 8,
     "rider": "A. LAURANCE",
     "team": "NETCOMPANY INEOS CYCLING TEAM",
     "nat": "FRA",
     "val": "28 PTS"
    },
    {
-    "pos": 8,
+    "pos": 9,
+    "rider": "E. MAS",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "27 PTS"
+   },
+   {
+    "pos": 10,
+    "rider": "O. ONLEY",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "GBR",
+    "val": "26 PTS"
+   },
+   {
+    "pos": 11,
+    "rider": "F. GALL",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUT",
+    "val": "25 PTS"
+   },
+   {
+    "pos": 12,
     "rider": "L. BISIAUX",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "FRA",
     "val": "25 PTS"
    },
    {
-    "pos": 9,
+    "pos": 13,
     "rider": "J. MEEUS",
     "team": "RED BULL - BORA - HANSGROHE",
     "nat": "BEL",
     "val": "25 PTS"
    },
    {
-    "pos": 10,
-    "rider": "J. TARLING",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "GBR",
-    "val": "25 PTS"
-   },
-   {
-    "pos": 11,
+    "pos": 14,
     "rider": "A. ROMELE",
     "team": "XDS ASTANA TEAM",
     "nat": "ITA",
     "val": "24 PTS"
    },
    {
-    "pos": 12,
-    "rider": "O. ONLEY",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "GBR",
-    "val": "22 PTS"
-   },
-   {
-    "pos": 13,
+    "pos": 15,
     "rider": "V. ALBANESE",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "ITA",
     "val": "22 PTS"
    },
    {
-    "pos": 14,
+    "pos": 16,
+    "rider": "R. CARAPAZ",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "ECU",
+    "val": "21 PTS"
+   },
+   {
+    "pos": 17,
     "rider": "G. Mühlberger",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "AUT",
     "val": "21 PTS"
    },
    {
-    "pos": 15,
-    "rider": "R. DEBRUYNE",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "BEL",
-    "val": "21 PTS"
-   },
-   {
-    "pos": 16,
+    "pos": 18,
     "rider": "H. HOFSTETTER",
     "team": "NSN CYCLING TEAM",
     "nat": "FRA",
     "val": "21 PTS"
    },
    {
-    "pos": 17,
+    "pos": 19,
     "rider": "F. FISHER - BLACK",
     "team": "RED BULL - BORA - HANSGROHE",
     "nat": "NZL",
     "val": "20 PTS"
    },
    {
-    "pos": 18,
+    "pos": 20,
     "rider": "M. PEDERSEN",
     "team": "LIDL-TREK",
     "nat": "DEN",
     "val": "20 PTS"
    },
    {
-    "pos": 19,
+    "pos": 21,
+    "rider": "P. ROGLIC",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "SLO",
+    "val": "18 PTS"
+   },
+   {
+    "pos": 22,
+    "rider": "P. KONRAD",
+    "team": "LIDL-TREK",
+    "nat": "AUT",
+    "val": "18 PTS"
+   },
+   {
+    "pos": 23,
     "rider": "J. WIDAR",
     "team": "LOTTO INTERMARCHE",
     "nat": "BEL",
     "val": "17 PTS"
    },
    {
-    "pos": 20,
+    "pos": 24,
     "rider": "B. COQUARD",
     "team": "COFIDIS",
     "nat": "FRA",
     "val": "17 PTS"
    },
    {
-    "pos": 21,
-    "rider": "F. GALL",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "AUT",
-    "val": "15 PTS"
+    "pos": 25,
+    "rider": "S. KUSS",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "USA",
+    "val": "16 PTS"
    },
    {
-    "pos": 22,
+    "pos": 26,
     "rider": "T. JOHANNESSEN",
     "team": "UNO-X MOBILITY",
     "nat": "NOR",
     "val": "15 PTS"
    },
    {
-    "pos": 23,
+    "pos": 27,
     "rider": "B. ARMIRAIL",
     "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "FRA",
     "val": "15 PTS"
    },
    {
-    "pos": 24,
+    "pos": 28,
+    "rider": "J. DIAZ GALLEGO",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "ESP",
+    "val": "15 PTS"
+   },
+   {
+    "pos": 29,
     "rider": "V. BRAET",
     "team": "LOTTO INTERMARCHE",
     "nat": "BEL",
     "val": "15 PTS"
    },
    {
-    "pos": 25,
+    "pos": 30,
+    "rider": "H. TEJADA",
+    "team": "XDS ASTANA TEAM",
+    "nat": "COL",
+    "val": "14 PTS"
+   },
+   {
+    "pos": 31,
+    "rider": "M. SKJELMOSE",
+    "team": "LIDL-TREK",
+    "nat": "DEN",
+    "val": "13 PTS"
+   },
+   {
+    "pos": 32,
     "rider": "E. SVESTAD-BÅRDSENG",
     "team": "NETCOMPANY INEOS CYCLING TEAM",
     "nat": "NOR",
     "val": "13 PTS"
    },
    {
-    "pos": 26,
+    "pos": 33,
+    "rider": "T. GLOAG",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "GBR",
+    "val": "13 PTS"
+   },
+   {
+    "pos": 34,
     "rider": "A. DAINESE",
     "team": "SOUDAL QUICK-STEP",
     "nat": "ITA",
     "val": "13 PTS"
    },
    {
-    "pos": 27,
+    "pos": 35,
     "rider": "C. THORNLEY",
     "team": "RED BULL - BORA - HANSGROHE",
     "nat": "GBR",
     "val": "13 PTS"
    },
    {
-    "pos": 28,
+    "pos": 36,
     "rider": "D. GONZALEZ LOPEZ",
     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
     "nat": "ESP",
     "val": "12 PTS"
    },
    {
-    "pos": 29,
-    "rider": "S. KUSS",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "USA",
-    "val": "11 PTS"
-   },
-   {
-    "pos": 30,
-    "rider": "E. MAS",
-    "team": "MOVISTAR TEAM",
+    "pos": 37,
+    "rider": "P. BILBAO",
+    "team": "BAHRAIN VICTORIOUS",
     "nat": "ESP",
     "val": "10 PTS"
    },
    {
-    "pos": 31,
+    "pos": 38,
     "rider": "A. HELLEMOSE",
     "team": "TEAM JAYCO ALULA",
     "nat": "DEN",
     "val": "10 PTS"
    },
    {
-    "pos": 32,
-    "rider": "P. ROGLIC",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "SLO",
-    "val": "9 PTS"
-   },
-   {
-    "pos": 33,
+    "pos": 39,
     "rider": "A. CHAMBERLAIN",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "AUS",
     "val": "9 PTS"
    },
    {
-    "pos": 34,
-    "rider": "R. CARAPAZ",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "ECU",
+    "pos": 40,
+    "rider": "C. RODRIGUEZ",
+    "team": "XDS ASTANA TEAM",
+    "nat": "ESP",
     "val": "8 PTS"
    },
    {
-    "pos": 35,
+    "pos": 41,
     "rider": "J. VINE",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "AUS",
     "val": "8 PTS"
    },
    {
-    "pos": 36,
-    "rider": "M. SKJELMOSE",
-    "team": "LIDL-TREK",
-    "nat": "DEN",
+    "pos": 42,
+    "rider": "C. BERTHET",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
     "val": "7 PTS"
    },
    {
-    "pos": 37,
+    "pos": 43,
     "rider": "B. TULETT",
     "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "GBR",
     "val": "6 PTS"
    },
    {
-    "pos": 38,
+    "pos": 44,
     "rider": "A. KLUCKERS",
     "team": "TUDOR PRO CYCLING TEAM",
     "nat": "LUX",
     "val": "6 PTS"
    },
    {
-    "pos": 39,
+    "pos": 45,
     "rider": "B. TRONCHON",
     "team": "GROUPAMA-FDJ UNITED",
     "nat": "FRA",
     "val": "5 PTS"
    },
    {
-    "pos": 40,
+    "pos": 46,
     "rider": "S. KÜNG",
     "team": "TUDOR PRO CYCLING TEAM",
     "nat": "SUI",
     "val": "4 PTS"
    },
    {
-    "pos": 41,
-    "rider": "H. TEJADA",
-    "team": "XDS ASTANA TEAM",
-    "nat": "COL",
+    "pos": 47,
+    "rider": "A. KRON",
+    "team": "UNO-X MOBILITY",
+    "nat": "DEN",
     "val": "3 PTS"
    },
    {
-    "pos": 42,
+    "pos": 48,
     "rider": "R. TILLER",
     "team": "UNO-X MOBILITY",
     "nat": "NOR",
     "val": "3 PTS"
    },
    {
-    "pos": 43,
+    "pos": 49,
     "rider": "P. TORRES ARIAS",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "ESP",
     "val": "2 PTS"
    },
    {
-    "pos": 44,
+    "pos": 50,
+    "rider": "M. CAMPRUBI PIJUAN",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "ESP",
+    "val": "2 PTS"
+   },
+   {
+    "pos": 51,
     "rider": "H. MULUEBERHAN",
     "team": "XDS ASTANA TEAM",
     "nat": "ERI",
     "val": "2 PTS"
    },
    {
-    "pos": 45,
+    "pos": 52,
     "rider": "I. OLIVEIRA",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "POR",
     "val": "2 PTS"
    },
    {
-    "pos": 46,
+    "pos": 53,
     "rider": "M. BRENNER",
     "team": "TUDOR PRO CYCLING TEAM",
     "nat": "GER",
     "val": "1 PT"
    },
    {
-    "pos": 47,
+    "pos": 54,
     "rider": "O. AULAR SANABRIA",
     "team": "MOVISTAR TEAM",
     "nat": "VEN",
@@ -1807,129 +1844,185 @@
     "rider": "Tadej POGACAR",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "SLO",
-    "val": "23 PTS"
+    "val": "29 PTS"
    },
    {
     "pos": 2,
-    "rider": "Lorenzo FORTUNATO",
-    "team": "XDS ASTANA TEAM",
-    "nat": "ITA",
-    "val": "10 PTS"
+    "rider": "Enric MAS NICOLAU",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "14 PTS"
    },
    {
     "pos": 3,
-    "rider": "Koen BOUWMAN",
+    "rider": "Lorenzo FORTUNATO",
+    "team": "XDS ASTANA TEAM",
+    "nat": "ITA",
+    "val": "13 PTS"
+   },
+   {
+    "pos": 4,
+    "rider": "S. BUITRAGO",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "COL",
+    "val": "11 PTS"
+   },
+   {
+    "pos": 5,
+    "rider": "F. GALL",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUT",
+    "val": "9 PTS"
+   },
+   {
+    "pos": 6,
+    "rider": "K. BOUWMAN",
     "team": "TEAM JAYCO ALULA",
     "nat": "NED",
     "val": "6 PTS"
    },
    {
-    "pos": 4,
-    "rider": "S. KUSS",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "USA",
-    "val": "6 PTS"
-   },
-   {
-    "pos": 5,
+    "pos": 7,
     "rider": "R. CARAPAZ",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "ECU",
     "val": "6 PTS"
    },
    {
-    "pos": 6,
+    "pos": 8,
+    "rider": "S. KUSS",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "USA",
+    "val": "6 PTS"
+   },
+   {
+    "pos": 9,
     "rider": "P. DOUBLE",
     "team": "TEAM JAYCO ALULA",
     "nat": "GBR",
     "val": "6 PTS"
    },
    {
-    "pos": 7,
-    "rider": "F. GALL",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "AUT",
+    "pos": 10,
+    "rider": "J. DIAZ GALLEGO",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "ESP",
     "val": "5 PTS"
    },
    {
-    "pos": 8,
-    "rider": "E. MAS",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "4 PTS"
-   },
-   {
-    "pos": 9,
+    "pos": 11,
     "rider": "O. ONLEY",
     "team": "NETCOMPANY INEOS CYCLING TEAM",
     "nat": "GBR",
     "val": "4 PTS"
    },
    {
-    "pos": 10,
+    "pos": 12,
     "rider": "E. SVESTAD-BÅRDSENG",
     "team": "NETCOMPANY INEOS CYCLING TEAM",
     "nat": "NOR",
     "val": "4 PTS"
    },
    {
-    "pos": 11,
+    "pos": 13,
     "rider": "I. SOSA",
     "team": "EQUIPO KERN PHARMA",
     "nat": "COL",
     "val": "4 PTS"
    },
    {
-    "pos": 12,
+    "pos": 14,
     "rider": "D. URIARTE BELZUNEGI",
     "team": "EQUIPO KERN PHARMA",
     "nat": "ESP",
     "val": "4 PTS"
    },
    {
-    "pos": 13,
+    "pos": 15,
     "rider": "P. SIVAKOV",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "FRA",
     "val": "3 PTS"
    },
    {
-    "pos": 14,
+    "pos": 16,
+    "rider": "P. ROGLIC",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "SLO",
+    "val": "2 PTS"
+   },
+   {
+    "pos": 17,
     "rider": "H. TEJADA",
     "team": "XDS ASTANA TEAM",
     "nat": "COL",
     "val": "2 PTS"
    },
    {
-    "pos": 15,
+    "pos": 18,
+    "rider": "G. LEEMREIZE",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "NED",
+    "val": "2 PTS"
+   },
+   {
+    "pos": 19,
     "rider": "P. CASTRILLO",
     "team": "MOVISTAR TEAM",
     "nat": "ESP",
     "val": "2 PTS"
    },
    {
-    "pos": 16,
+    "pos": 20,
+    "rider": "R. DEBRUYNE",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "BEL",
+    "val": "1 PT"
+   },
+   {
+    "pos": 21,
     "rider": "J. VINE",
     "team": "UAE TEAM EMIRATES XRG",
     "nat": "AUS",
     "val": "1 PT"
    },
    {
-    "pos": 17,
+    "pos": 22,
+    "rider": "T. GLOAG",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "GBR",
+    "val": "1 PT"
+   },
+   {
+    "pos": 23,
+    "rider": "G. BENNETT",
+    "team": "NSN CYCLING TEAM",
+    "nat": "NZL",
+    "val": "1 PT"
+   },
+   {
+    "pos": 24,
     "rider": "B. TULETT",
     "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "GBR",
     "val": "1 PT"
    },
    {
-    "pos": 18,
+    "pos": 25,
+    "rider": "S. KÜNG",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "SUI",
+    "val": "1 PT"
+   },
+   {
+    "pos": 26,
     "rider": "E. HAYTER",
     "team": "SOUDAL QUICK-STEP",
     "nat": "GBR",
     "val": "1 PT"
    },
    {
-    "pos": 19,
+    "pos": 27,
     "rider": "S. FERNANDEZ RODRIGUEZ",
     "team": "BURGOS-BURPELLET-BH",
     "nat": "ESP",
@@ -1944,503 +2037,487 @@
     "rider": "Edgar Oscar ONLEY",
     "team": "NETCOMPANY INEOS CYCLING TEAM",
     "nat": "GBR",
-    "val": "11h 29' 46''"
+    "val": "15h 44' 04''"
    },
    {
     "pos": 2,
-    "rider": "Jarno WIDAR",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 30' 07''",
-    "gap": "+ 00h 00' 21''"
-   },
-   {
-    "pos": 3,
     "rider": "Ramses DEBRUYNE",
     "team": "ALPECIN-PREMIER TECH",
     "nat": "BEL",
-    "val": "11h 30' 45''",
-    "gap": "+ 00h 00' 59''"
+    "val": "15h 44' 07''",
+    "gap": "+ 00h 00' 03''"
+   },
+   {
+    "pos": 3,
+    "rider": "Jarno WIDAR",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "15h 46' 35''",
+    "gap": "+ 00h 02' 31''"
    },
    {
     "pos": 4,
-    "rider": "P. TORRES ARIAS",
-    "team": "UAE TEAM EMIRATES XRG",
-    "nat": "ESP",
-    "val": "11h 31' 28''",
-    "gap": "+ 00h 01' 42''"
+    "rider": "J. OMRZEL",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "SLO",
+    "val": "15h 51' 46''",
+    "gap": "+ 00h 07' 42''"
    },
    {
     "pos": 5,
-    "rider": "M. BRENNER",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "GER",
-    "val": "11h 32' 03''",
-    "gap": "+ 00h 02' 17''"
+    "rider": "P. TORRES ARIAS",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "ESP",
+    "val": "15h 52' 52''",
+    "gap": "+ 00h 08' 48''"
    },
    {
     "pos": 6,
     "rider": "L. BISIAUX",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "FRA",
-    "val": "11h 34' 45''",
-    "gap": "+ 00h 04' 59''"
+    "val": "15h 53' 10''",
+    "gap": "+ 00h 09' 06''"
    },
    {
     "pos": 7,
-    "rider": "B. TULETT",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "GBR",
-    "val": "11h 34' 45''",
-    "gap": "+ 00h 04' 59''"
-   },
-   {
-    "pos": 8,
-    "rider": "J. OMRZEL",
-    "team": "BAHRAIN VICTORIOUS",
-    "nat": "SLO",
-    "val": "11h 35' 18''",
-    "gap": "+ 00h 05' 32''"
-   },
-   {
-    "pos": 9,
-    "rider": "J. NORDHAGEN",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "NOR",
-    "val": "11h 35' 27''",
-    "gap": "+ 00h 05' 41''"
-   },
-   {
-    "pos": 10,
-    "rider": "X. PICKERING",
-    "team": "TEAM JAYCO ALULA",
-    "nat": "GBR",
-    "val": "11h 35' 55''",
-    "gap": "+ 00h 06' 09''"
-   },
-   {
-    "pos": 11,
     "rider": "E. SVESTAD-BÅRDSENG",
     "team": "NETCOMPANY INEOS CYCLING TEAM",
     "nat": "NOR",
-    "val": "11h 36' 53''",
-    "gap": "+ 00h 07' 07''"
+    "val": "15h 53' 21''",
+    "gap": "+ 00h 09' 17''"
    },
    {
-    "pos": 12,
+    "pos": 8,
+    "rider": "X. PICKERING",
+    "team": "TEAM JAYCO ALULA",
+    "nat": "GBR",
+    "val": "15h 54' 20''",
+    "gap": "+ 00h 10' 16''"
+   },
+   {
+    "pos": 9,
     "rider": "M. RICCITELLO",
     "team": "DECATHLON CMA CGM TEAM",
     "nat": "USA",
-    "val": "11h 38' 10''",
-    "gap": "+ 00h 08' 24''"
+    "val": "15h 54' 38''",
+    "gap": "+ 00h 10' 34''"
    },
    {
-    "pos": 13,
+    "pos": 10,
+    "rider": "J. NORDHAGEN",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "NOR",
+    "val": "15h 58' 27''",
+    "gap": "+ 00h 14' 23''"
+   },
+   {
+    "pos": 11,
     "rider": "J. RODRIGUEZ CONTRERAS",
     "team": "EF EDUCATION - EASYPOST",
     "nat": "COL",
-    "val": "11h 38' 50''",
-    "gap": "+ 00h 09' 04''"
+    "val": "15h 58' 49''",
+    "gap": "+ 00h 14' 45''"
    },
    {
-    "pos": 14,
+    "pos": 12,
     "rider": "T. GLOAG",
     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
     "nat": "GBR",
-    "val": "11h 41' 18''",
-    "gap": "+ 00h 11' 32''"
+    "val": "16h 01' 17''",
+    "gap": "+ 00h 17' 13''"
+   },
+   {
+    "pos": 13,
+    "rider": "M. BRENNER",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "GER",
+    "val": "16h 05' 22''",
+    "gap": "+ 00h 21' 18''"
+   },
+   {
+    "pos": 14,
+    "rider": "G. GAROFOLI",
+    "team": "SOUDAL QUICK-STEP",
+    "nat": "ITA",
+    "val": "16h 06' 44''",
+    "gap": "+ 00h 22' 40''"
    },
    {
     "pos": 15,
-    "rider": "L. TUCKWELL",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "AUS",
-    "val": "11h 45' 36''",
-    "gap": "+ 00h 15' 50''"
+    "rider": "B. TULETT",
+    "team": "TEAM VISMA | LEASE A BIKE",
+    "nat": "GBR",
+    "val": "16h 08' 04''",
+    "gap": "+ 00h 24' 00''"
    },
    {
     "pos": 16,
-    "rider": "R. GARCIA",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "11h 47' 20''",
-    "gap": "+ 00h 17' 34''"
-   },
-   {
-    "pos": 17,
-    "rider": "F. FISHER - BLACK",
-    "team": "RED BULL - BORA - HANSGROHE",
-    "nat": "NZL",
-    "val": "11h 49' 31''",
-    "gap": "+ 00h 19' 45''"
-   },
-   {
-    "pos": 18,
-    "rider": "A. LAURANCE",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "FRA",
-    "val": "11h 49' 32''",
-    "gap": "+ 00h 19' 46''"
-   },
-   {
-    "pos": 19,
-    "rider": "C. RODRIGUEZ",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 49' 33''",
-    "gap": "+ 00h 19' 47''"
-   },
-   {
-    "pos": 20,
-    "rider": "B. TRONCHON",
-    "team": "GROUPAMA-FDJ UNITED",
-    "nat": "FRA",
-    "val": "11h 49' 37''",
-    "gap": "+ 00h 19' 51''"
-   },
-   {
-    "pos": 21,
     "rider": "C. CANAL BLANCO",
     "team": "MOVISTAR TEAM",
     "nat": "ESP",
-    "val": "11h 49' 43''",
-    "gap": "+ 00h 19' 57''"
+    "val": "16h 08' 08''",
+    "gap": "+ 00h 24' 04''"
+   },
+   {
+    "pos": 17,
+    "rider": "M. CAMPRUBI PIJUAN",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 08' 31''",
+    "gap": "+ 00h 24' 27''"
+   },
+   {
+    "pos": 18,
+    "rider": "C. RODRIGUEZ",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 10' 57''",
+    "gap": "+ 00h 26' 53''"
+   },
+   {
+    "pos": 19,
+    "rider": "L. TUCKWELL",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "AUS",
+    "val": "16h 11' 32''",
+    "gap": "+ 00h 27' 28''"
+   },
+   {
+    "pos": 20,
+    "rider": "R. GARCIA",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "16h 13' 16''",
+    "gap": "+ 00h 29' 12''"
+   },
+   {
+    "pos": 21,
+    "rider": "H. WILKSCH",
+    "team": "TUDOR PRO CYCLING TEAM",
+    "nat": "GER",
+    "val": "16h 13' 58''",
+    "gap": "+ 00h 29' 54''"
    },
    {
     "pos": 22,
     "rider": "E. PALENI",
     "team": "GROUPAMA-FDJ UNITED",
     "nat": "FRA",
-    "val": "11h 49' 51''",
-    "gap": "+ 00h 20' 05''"
+    "val": "16h 15' 47''",
+    "gap": "+ 00h 31' 43''"
    },
    {
     "pos": 23,
-    "rider": "G. GAROFOLI",
-    "team": "SOUDAL QUICK-STEP",
-    "nat": "ITA",
-    "val": "11h 50' 18''",
-    "gap": "+ 00h 20' 32''"
+    "rider": "I. ROMEO ABAD",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "16h 17' 27''",
+    "gap": "+ 00h 33' 23''"
    },
    {
     "pos": 24,
-    "rider": "A. ROMELE",
-    "team": "XDS ASTANA TEAM",
-    "nat": "ITA",
-    "val": "11h 50' 39''",
-    "gap": "+ 00h 20' 53''"
+    "rider": "L. CRAPS",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "16h 17' 57''",
+    "gap": "+ 00h 33' 53''"
    },
    {
     "pos": 25,
-    "rider": "J. BRENNAN",
-    "team": "TEAM VISMA | LEASE A BIKE",
-    "nat": "GBR",
-    "val": "11h 50' 52''",
-    "gap": "+ 00h 21' 06''"
+    "rider": "P. MARTI SORIANO",
+    "team": "NSN CYCLING TEAM",
+    "nat": "ESP",
+    "val": "16h 18' 05''",
+    "gap": "+ 00h 34' 01''"
    },
    {
     "pos": 26,
-    "rider": "H. RENARD HAQUIN",
-    "team": "TEAM PICNIC POSTNL",
+    "rider": "J. LABROSSE",
+    "team": "DECATHLON CMA CGM TEAM",
     "nat": "FRA",
-    "val": "11h 50' 58''",
-    "gap": "+ 00h 21' 12''"
+    "val": "16h 19' 25''",
+    "gap": "+ 00h 35' 21''"
    },
    {
     "pos": 27,
     "rider": "F. WEISS",
     "team": "TUDOR PRO CYCLING TEAM",
     "nat": "SUI",
-    "val": "11h 51' 20''",
-    "gap": "+ 00h 21' 34''"
+    "val": "16h 20' 04''",
+    "gap": "+ 00h 36' 00''"
    },
    {
     "pos": 28,
-    "rider": "T. NYS",
-    "team": "LIDL-TREK",
-    "nat": "BEL",
-    "val": "11h 51' 29''",
-    "gap": "+ 00h 21' 43''"
-   },
-   {
-    "pos": 29,
-    "rider": "I. ROMEO ABAD",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "11h 51' 31''",
-    "gap": "+ 00h 21' 45''"
-   },
-   {
-    "pos": 30,
-    "rider": "M. CAMPRUBI PIJUAN",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 52' 05''",
-    "gap": "+ 00h 22' 19''"
-   },
-   {
-    "pos": 31,
-    "rider": "P. MARTI SORIANO",
-    "team": "NSN CYCLING TEAM",
-    "nat": "ESP",
-    "val": "11h 52' 09''",
-    "gap": "+ 00h 22' 23''"
-   },
-   {
-    "pos": 32,
-    "rider": "J. LABROSSE",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "FRA",
-    "val": "11h 53' 29''",
-    "gap": "+ 00h 23' 43''"
-   },
-   {
-    "pos": 33,
-    "rider": "L. ROULAND",
-    "team": "COFIDIS",
-    "nat": "FRA",
-    "val": "11h 54' 10''",
-    "gap": "+ 00h 24' 24''"
-   },
-   {
-    "pos": 34,
     "rider": "S. DALBY",
     "team": "UNO-X MOBILITY",
     "nat": "DEN",
-    "val": "11h 54' 14''",
-    "gap": "+ 00h 24' 28''"
+    "val": "16h 20' 10''",
+    "gap": "+ 00h 36' 06''"
    },
    {
-    "pos": 35,
-    "rider": "D. RAFFERTY",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "IRL",
-    "val": "11h 54' 29''",
-    "gap": "+ 00h 24' 43''"
+    "pos": 29,
+    "rider": "A. LAURANCE",
+    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "nat": "FRA",
+    "val": "16h 21' 44''",
+    "gap": "+ 00h 37' 40''"
    },
    {
-    "pos": 36,
-    "rider": "W. CALZONI",
-    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
-    "nat": "ITA",
-    "val": "11h 55' 33''",
-    "gap": "+ 00h 25' 47''"
-   },
-   {
-    "pos": 37,
-    "rider": "H. WILKSCH",
-    "team": "TUDOR PRO CYCLING TEAM",
-    "nat": "GER",
-    "val": "11h 55' 46''",
-    "gap": "+ 00h 26' 00''"
-   },
-   {
-    "pos": 38,
-    "rider": "G. GLIVAR",
-    "team": "ALPECIN-PREMIER TECH",
-    "nat": "SLO",
-    "val": "11h 55' 50''",
-    "gap": "+ 00h 26' 04''"
-   },
-   {
-    "pos": 39,
+    "pos": 30,
     "rider": "V. PARET PEINTRE",
     "team": "SOUDAL QUICK-STEP",
     "nat": "FRA",
-    "val": "11h 56' 00''",
-    "gap": "+ 00h 26' 14''"
+    "val": "16h 21' 56''",
+    "gap": "+ 00h 37' 52''"
    },
    {
-    "pos": 40,
-    "rider": "R. ERMAKOV",
-    "team": "BAHRAIN VICTORIOUS",
-    "nat": "SLO",
-    "val": "11h 56' 26''",
-    "gap": "+ 00h 26' 40''"
+    "pos": 31,
+    "rider": "B. TRONCHON",
+    "team": "GROUPAMA-FDJ UNITED",
+    "nat": "FRA",
+    "val": "16h 22' 56''",
+    "gap": "+ 00h 38' 52''"
    },
    {
-    "pos": 41,
-    "rider": "R. THOMPSON",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "NZL",
-    "val": "11h 56' 44''",
-    "gap": "+ 00h 26' 58''"
-   },
-   {
-    "pos": 42,
-    "rider": "G. STEINHAUSER",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "GER",
-    "val": "11h 57' 06''",
-    "gap": "+ 00h 27' 20''"
-   },
-   {
-    "pos": 43,
+    "pos": 32,
     "rider": "F. WANDAHL",
     "team": "RED BULL - BORA - HANSGROHE",
     "nat": "DEN",
-    "val": "11h 57' 44''",
-    "gap": "+ 00h 27' 58''"
+    "val": "16h 23' 40''",
+    "gap": "+ 00h 39' 36''"
    },
    {
-    "pos": 44,
-    "rider": "S. DE SCHUYTENEER",
+    "pos": 33,
+    "rider": "R. THOMPSON",
     "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 58' 03''",
-    "gap": "+ 00h 28' 17''"
+    "nat": "NZL",
+    "val": "16h 25' 38''",
+    "gap": "+ 00h 41' 34''"
    },
    {
-    "pos": 45,
-    "rider": "C. MACIAS ESTRADA",
-    "team": "BURGOS-BURPELLET-BH",
-    "nat": "MEX",
-    "val": "11h 58' 23''",
-    "gap": "+ 00h 28' 37''"
+    "pos": 34,
+    "rider": "F. FISHER - BLACK",
+    "team": "RED BULL - BORA - HANSGROHE",
+    "nat": "NZL",
+    "val": "16h 26' 44''",
+    "gap": "+ 00h 42' 40''"
    },
    {
-    "pos": 46,
+    "pos": 35,
     "rider": "F. BUSATTO",
     "team": "ALPECIN-PREMIER TECH",
     "nat": "ITA",
-    "val": "11h 58' 35''",
-    "gap": "+ 00h 28' 49''"
+    "val": "16h 31' 54''",
+    "gap": "+ 00h 47' 50''"
    },
    {
-    "pos": 47,
-    "rider": "L. CRAPS",
-    "team": "LOTTO INTERMARCHE",
-    "nat": "BEL",
-    "val": "11h 58' 49''",
-    "gap": "+ 00h 29' 03''"
-   },
-   {
-    "pos": 48,
-    "rider": "M. TJØTTA",
-    "team": "UNO-X MOBILITY",
-    "nat": "NOR",
-    "val": "11h 59' 14''",
-    "gap": "+ 00h 29' 28''"
-   },
-   {
-    "pos": 49,
-    "rider": "F. VAN TRICHT",
-    "team": "NSN CYCLING TEAM",
-    "nat": "BEL",
-    "val": "12h 00' 06''",
-    "gap": "+ 00h 30' 20''"
-   },
-   {
-    "pos": 50,
-    "rider": "M. BELOKI",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "ESP",
-    "val": "12h 00' 12''",
-    "gap": "+ 00h 30' 26''"
-   },
-   {
-    "pos": 51,
-    "rider": "M. KRETSCHY",
-    "team": "NSN CYCLING TEAM",
-    "nat": "GER",
-    "val": "12h 00' 44''",
-    "gap": "+ 00h 30' 58''"
-   },
-   {
-    "pos": 52,
-    "rider": "G. MARTINEZ HUERTAS",
-    "team": "TEAM PICNIC POSTNL",
-    "nat": "COL",
-    "val": "12h 00' 50''",
-    "gap": "+ 00h 31' 04''"
-   },
-   {
-    "pos": 53,
-    "rider": "P. CASTRILLO",
-    "team": "MOVISTAR TEAM",
-    "nat": "ESP",
-    "val": "12h 02' 07''",
-    "gap": "+ 00h 32' 21''"
-   },
-   {
-    "pos": 54,
-    "rider": "A. MACKELLAR",
-    "team": "EF EDUCATION - EASYPOST",
-    "nat": "AUS",
-    "val": "12h 02' 21''",
-    "gap": "+ 00h 32' 35''"
-   },
-   {
-    "pos": 55,
+    "pos": 36,
     "rider": "M. WENZEL",
     "team": "EQUIPO KERN PHARMA",
     "nat": "LUX",
-    "val": "12h 03' 24''",
-    "gap": "+ 00h 33' 38''"
+    "val": "16h 32' 18''",
+    "gap": "+ 00h 48' 14''"
    },
    {
-    "pos": 56,
-    "rider": "A. CHAMBERLAIN",
-    "team": "DECATHLON CMA CGM TEAM",
-    "nat": "AUS",
-    "val": "12h 03' 25''",
-    "gap": "+ 00h 33' 39''"
-   },
-   {
-    "pos": 57,
-    "rider": "J. TARLING",
-    "team": "NETCOMPANY INEOS CYCLING TEAM",
+    "pos": 37,
+    "rider": "J. BRENNAN",
+    "team": "TEAM VISMA | LEASE A BIKE",
     "nat": "GBR",
-    "val": "12h 03' 27''",
-    "gap": "+ 00h 33' 41''"
+    "val": "16h 32' 23''",
+    "gap": "+ 00h 48' 19''"
    },
    {
-    "pos": 58,
+    "pos": 38,
+    "rider": "A. ROMELE",
+    "team": "XDS ASTANA TEAM",
+    "nat": "ITA",
+    "val": "16h 33' 41''",
+    "gap": "+ 00h 49' 37''"
+   },
+   {
+    "pos": 39,
+    "rider": "D. RAFFERTY",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "IRL",
+    "val": "16h 33' 55''",
+    "gap": "+ 00h 49' 51''"
+   },
+   {
+    "pos": 40,
+    "rider": "H. RENARD HAQUIN",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "FRA",
+    "val": "16h 34' 00''",
+    "gap": "+ 00h 49' 56''"
+   },
+   {
+    "pos": 41,
+    "rider": "M. KRETSCHY",
+    "team": "NSN CYCLING TEAM",
+    "nat": "GER",
+    "val": "16h 34' 03''",
+    "gap": "+ 00h 49' 59''"
+   },
+   {
+    "pos": 42,
     "rider": "C. THORNLEY",
     "team": "RED BULL - BORA - HANSGROHE",
     "nat": "GBR",
-    "val": "12h 05' 14''",
-    "gap": "+ 00h 35' 28''"
+    "val": "16h 34' 08''",
+    "gap": "+ 00h 50' 04''"
    },
    {
-    "pos": 59,
-    "rider": "D. URIARTE BELZUNEGI",
-    "team": "EQUIPO KERN PHARMA",
-    "nat": "ESP",
-    "val": "12h 06' 01''",
-    "gap": "+ 00h 36' 15''"
+    "pos": 43,
+    "rider": "T. NYS",
+    "team": "LIDL-TREK",
+    "nat": "BEL",
+    "val": "16h 34' 31''",
+    "gap": "+ 00h 50' 27''"
    },
    {
-    "pos": 60,
-    "rider": "O. PEACE",
-    "team": "TEAM PICNIC POSTNL",
-    "nat": "GBR",
-    "val": "12h 09' 00''",
-    "gap": "+ 00h 39' 14''"
-   },
-   {
-    "pos": 61,
+    "pos": 44,
     "rider": "D. VAN BEKKUM",
     "team": "XDS ASTANA TEAM",
     "nat": "NED",
-    "val": "12h 09' 11''",
-    "gap": "+ 00h 39' 25''"
+    "val": "16h 35' 07''",
+    "gap": "+ 00h 51' 03''"
    },
    {
-    "pos": 62,
+    "pos": 45,
+    "rider": "L. ROULAND",
+    "team": "COFIDIS",
+    "nat": "FRA",
+    "val": "16h 35' 41''",
+    "gap": "+ 00h 51' 37''"
+   },
+   {
+    "pos": 46,
+    "rider": "W. CALZONI",
+    "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+    "nat": "ITA",
+    "val": "16h 37' 04''",
+    "gap": "+ 00h 53' 00''"
+   },
+   {
+    "pos": 47,
+    "rider": "G. GLIVAR",
+    "team": "ALPECIN-PREMIER TECH",
+    "nat": "SLO",
+    "val": "16h 38' 52''",
+    "gap": "+ 00h 54' 48''"
+   },
+   {
+    "pos": 48,
+    "rider": "R. ERMAKOV",
+    "team": "BAHRAIN VICTORIOUS",
+    "nat": "SLO",
+    "val": "16h 39' 28''",
+    "gap": "+ 00h 55' 24''"
+   },
+   {
+    "pos": 49,
+    "rider": "S. DE SCHUYTENEER",
+    "team": "LOTTO INTERMARCHE",
+    "nat": "BEL",
+    "val": "16h 39' 34''",
+    "gap": "+ 00h 55' 30''"
+   },
+   {
+    "pos": 50,
+    "rider": "G. STEINHAUSER",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "GER",
+    "val": "16h 40' 08''",
+    "gap": "+ 00h 56' 04''"
+   },
+   {
+    "pos": 51,
+    "rider": "C. MACIAS ESTRADA",
+    "team": "BURGOS-BURPELLET-BH",
+    "nat": "MEX",
+    "val": "16h 41' 25''",
+    "gap": "+ 00h 57' 21''"
+   },
+   {
+    "pos": 52,
+    "rider": "M. TJØTTA",
+    "team": "UNO-X MOBILITY",
+    "nat": "NOR",
+    "val": "16h 42' 16''",
+    "gap": "+ 00h 58' 12''"
+   },
+   {
+    "pos": 53,
+    "rider": "F. VAN TRICHT",
+    "team": "NSN CYCLING TEAM",
+    "nat": "BEL",
+    "val": "16h 43' 08''",
+    "gap": "+ 00h 59' 04''"
+   },
+   {
+    "pos": 54,
+    "rider": "P. CASTRILLO",
+    "team": "MOVISTAR TEAM",
+    "nat": "ESP",
+    "val": "16h 43' 38''",
+    "gap": "+ 00h 59' 34''"
+   },
+   {
+    "pos": 55,
+    "rider": "G. MARTINEZ HUERTAS",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "COL",
+    "val": "16h 43' 52''",
+    "gap": "+ 00h 59' 48''"
+   },
+   {
+    "pos": 56,
+    "rider": "A. MACKELLAR",
+    "team": "EF EDUCATION - EASYPOST",
+    "nat": "AUS",
+    "val": "16h 45' 23''",
+    "gap": "+ 01h 01' 19''"
+   },
+   {
+    "pos": 57,
+    "rider": "A. CHAMBERLAIN",
+    "team": "DECATHLON CMA CGM TEAM",
+    "nat": "AUS",
+    "val": "16h 46' 27''",
+    "gap": "+ 01h 02' 23''"
+   },
+   {
+    "pos": 58,
+    "rider": "D. URIARTE BELZUNEGI",
+    "team": "EQUIPO KERN PHARMA",
+    "nat": "ESP",
+    "val": "16h 49' 03''",
+    "gap": "+ 01h 04' 59''"
+   },
+   {
+    "pos": 59,
+    "rider": "O. PEACE",
+    "team": "TEAM PICNIC POSTNL",
+    "nat": "GBR",
+    "val": "16h 52' 02''",
+    "gap": "+ 01h 07' 58''"
+   },
+   {
+    "pos": 60,
     "rider": "H. MCKENZIE",
     "team": "TEAM JAYCO ALULA",
     "nat": "AUS",
-    "val": "12h 11' 40''",
-    "gap": "+ 00h 41' 54''"
+    "val": "16h 54' 42''",
+    "gap": "+ 01h 10' 38''"
    },
    {
-    "pos": 63,
+    "pos": 61,
     "rider": "S. SENTJENS",
     "team": "ALPECIN-PREMIER TECH",
     "nat": "BEL",
-    "val": "12h 20' 05''",
-    "gap": "+ 00h 50' 19''"
+    "val": "17h 03' 07''",
+    "gap": "+ 01h 19' 03''"
    }
   ]
  },
@@ -2448,186 +2525,186 @@
   "rows": [
    {
     "pos": 1,
-    "rider": "UAE TEAM EMIRATES XRG",
-    "team": "",
-    "nat": "",
-    "val": "34h 27' 48''"
-   },
-   {
-    "pos": 2,
     "rider": "DECATHLON CMA CGM TEAM",
     "team": "",
     "nat": "",
-    "val": "34h 34' 08''",
-    "gap": "+ 00h 06' 20''"
+    "val": "47h 20' 30''"
+   },
+   {
+    "pos": 2,
+    "rider": "UAE TEAM EMIRATES XRG",
+    "team": "",
+    "nat": "",
+    "val": "47h 24' 52''",
+    "gap": "+ 00h 04' 22''"
    },
    {
     "pos": 3,
-    "rider": "TEAM VISMA | LEASE A BIKE",
-    "team": "",
-    "nat": "",
-    "val": "34h 38' 14''",
-    "gap": "+ 00h 10' 26''"
-   },
-   {
-    "pos": 4,
     "rider": "NETCOMPANY INEOS CYCLING TEAM",
     "team": "",
     "nat": "",
-    "val": "34h 44' 21''",
-    "gap": "+ 00h 16' 33''"
+    "val": "47h 36' 31''",
+    "gap": "+ 00h 16' 01''"
+   },
+   {
+    "pos": 4,
+    "rider": "TEAM VISMA | LEASE A BIKE",
+    "team": "",
+    "nat": "",
+    "val": "47h 36' 56''",
+    "gap": "+ 00h 16' 26''"
    },
    {
     "pos": 5,
     "rider": "XDS ASTANA TEAM",
     "team": "",
     "nat": "",
-    "val": "34h 47' 26''",
-    "gap": "+ 00h 19' 38''"
+    "val": "47h 41' 06''",
+    "gap": "+ 00h 20' 36''"
    },
    {
     "pos": 6,
-    "rider": "TUDOR PRO CYCLING TEAM",
+    "rider": "GROUPAMA-FDJ UNITED",
     "team": "",
     "nat": "",
-    "val": "34h 52' 40''",
-    "gap": "+ 00h 24' 52''"
+    "val": "47h 50' 10''",
+    "gap": "+ 00h 29' 40''"
    },
    {
     "pos": 7,
     "rider": "EF EDUCATION - EASYPOST",
     "team": "",
     "nat": "",
-    "val": "34h 53' 11''",
-    "gap": "+ 00h 25' 23''"
+    "val": "47h 52' 32''",
+    "gap": "+ 00h 32' 02''"
    },
    {
     "pos": 8,
-    "rider": "GROUPAMA-FDJ UNITED",
+    "rider": "BAHRAIN VICTORIOUS",
     "team": "",
     "nat": "",
-    "val": "34h 58' 00''",
-    "gap": "+ 00h 30' 12''"
+    "val": "47h 55' 10''",
+    "gap": "+ 00h 34' 40''"
    },
    {
     "pos": 9,
     "rider": "MOVISTAR TEAM",
     "team": "",
     "nat": "",
-    "val": "34h 59' 26''",
-    "gap": "+ 00h 31' 38''"
+    "val": "47h 56' 27''",
+    "gap": "+ 00h 35' 57''"
    },
    {
     "pos": 10,
-    "rider": "BAHRAIN VICTORIOUS",
+    "rider": "TUDOR PRO CYCLING TEAM",
     "team": "",
     "nat": "",
-    "val": "35h 00' 50''",
-    "gap": "+ 00h 33' 02''"
+    "val": "47h 58' 12''",
+    "gap": "+ 00h 37' 42''"
    },
    {
     "pos": 11,
-    "rider": "EQUIPO KERN PHARMA",
-    "team": "",
-    "nat": "",
-    "val": "35h 02' 20''",
-    "gap": "+ 00h 34' 32''"
-   },
-   {
-    "pos": 12,
-    "rider": "RED BULL - BORA - HANSGROHE",
-    "team": "",
-    "nat": "",
-    "val": "35h 03' 57''",
-    "gap": "+ 00h 36' 09''"
-   },
-   {
-    "pos": 13,
-    "rider": "NSN CYCLING TEAM",
-    "team": "",
-    "nat": "",
-    "val": "35h 05' 53''",
-    "gap": "+ 00h 38' 05''"
-   },
-   {
-    "pos": 14,
-    "rider": "SOUDAL QUICK-STEP",
-    "team": "",
-    "nat": "",
-    "val": "35h 08' 51''",
-    "gap": "+ 00h 41' 03''"
-   },
-   {
-    "pos": 15,
     "rider": "LIDL-TREK",
     "team": "",
     "nat": "",
-    "val": "35h 09' 52''",
-    "gap": "+ 00h 42' 04''"
+    "val": "48h 04' 37''",
+    "gap": "+ 00h 44' 07''"
    },
    {
-    "pos": 16,
-    "rider": "LOTTO INTERMARCHE",
+    "pos": 12,
+    "rider": "SOUDAL QUICK-STEP",
     "team": "",
     "nat": "",
-    "val": "35h 10' 04''",
-    "gap": "+ 00h 42' 16''"
+    "val": "48h 06' 40''",
+    "gap": "+ 00h 46' 10''"
    },
    {
-    "pos": 17,
+    "pos": 13,
+    "rider": "RED BULL - BORA - HANSGROHE",
+    "team": "",
+    "nat": "",
+    "val": "48h 09' 15''",
+    "gap": "+ 00h 48' 45''"
+   },
+   {
+    "pos": 14,
     "rider": "PINARELLO-Q36.5 PRO CYCLING TEAM",
     "team": "",
     "nat": "",
-    "val": "35h 11' 41''",
-    "gap": "+ 00h 43' 53''"
+    "val": "48h 11' 06''",
+    "gap": "+ 00h 50' 36''"
+   },
+   {
+    "pos": 15,
+    "rider": "EQUIPO KERN PHARMA",
+    "team": "",
+    "nat": "",
+    "val": "48h 12' 37''",
+    "gap": "+ 00h 52' 07''"
+   },
+   {
+    "pos": 16,
+    "rider": "NSN CYCLING TEAM",
+    "team": "",
+    "nat": "",
+    "val": "48h 12' 42''",
+    "gap": "+ 00h 52' 12''"
+   },
+   {
+    "pos": 17,
+    "rider": "LOTTO INTERMARCHE",
+    "team": "",
+    "nat": "",
+    "val": "48h 14' 34''",
+    "gap": "+ 00h 54' 04''"
    },
    {
     "pos": 18,
-    "rider": "TEAM JAYCO ALULA",
+    "rider": "BURGOS-BURPELLET-BH",
     "team": "",
     "nat": "",
-    "val": "35h 15' 06''",
-    "gap": "+ 00h 47' 18''"
+    "val": "48h 16' 57''",
+    "gap": "+ 00h 56' 27''"
    },
    {
     "pos": 19,
     "rider": "UNO-X MOBILITY",
     "team": "",
     "nat": "",
-    "val": "35h 17' 50''",
-    "gap": "+ 00h 50' 02''"
+    "val": "48h 20' 11''",
+    "gap": "+ 00h 59' 41''"
    },
    {
     "pos": 20,
     "rider": "ALPECIN-PREMIER TECH",
     "team": "",
     "nat": "",
-    "val": "35h 20' 14''",
-    "gap": "+ 00h 52' 26''"
+    "val": "48h 31' 28''",
+    "gap": "+ 01h 10' 58''"
    },
    {
     "pos": 21,
-    "rider": "BURGOS-BURPELLET-BH",
+    "rider": "TEAM JAYCO ALULA",
     "team": "",
     "nat": "",
-    "val": "35h 20' 55''",
-    "gap": "+ 00h 53' 07''"
+    "val": "48h 34' 21''",
+    "gap": "+ 01h 13' 51''"
    },
    {
     "pos": 22,
     "rider": "COFIDIS",
     "team": "",
     "nat": "",
-    "val": "35h 22' 52''",
-    "gap": "+ 00h 55' 04''"
+    "val": "48h 36' 50''",
+    "gap": "+ 01h 16' 20''"
    },
    {
     "pos": 23,
     "rider": "TEAM PICNIC POSTNL",
     "team": "",
     "nat": "",
-    "val": "35h 31' 55''",
-    "gap": "+ 01h 04' 07''"
+    "val": "48h 49' 37''",
+    "gap": "+ 01h 29' 07''"
    }
   ]
  },
@@ -11942,8 +12019,2399 @@
      "reason": "DNF"
     }
    ]
+  },
+  "6": {
+   "rows": [
+    {
+     "pos": 1,
+     "rider": "Tadej POGACAR",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "SLO",
+     "val": "04h 12' 40''"
+    },
+    {
+     "pos": 2,
+     "rider": "Enric MAS NICOLAU",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 12' 40''"
+    },
+    {
+     "pos": 3,
+     "rider": "Ramses DEBRUYNE",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "BEL",
+     "val": "04h 13' 26''",
+     "gap": "+ 00h 00' 46''"
+    },
+    {
+     "pos": 4,
+     "rider": "R. CARAPAZ",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "ECU",
+     "val": "04h 13' 26''",
+     "gap": "+ 00h 00' 46''"
+    },
+    {
+     "pos": 5,
+     "rider": "H. TEJADA",
+     "team": "XDS ASTANA TEAM",
+     "nat": "COL",
+     "val": "04h 13' 26''",
+     "gap": "+ 00h 00' 46''"
+    },
+    {
+     "pos": 6,
+     "rider": "F. GALL",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "AUT",
+     "val": "04h 13' 26''",
+     "gap": "+ 00h 00' 46''"
+    },
+    {
+     "pos": 7,
+     "rider": "P. ROGLIC",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "SLO",
+     "val": "04h 13' 26''",
+     "gap": "+ 00h 00' 46''"
+    },
+    {
+     "pos": 8,
+     "rider": "C. RODRIGUEZ",
+     "team": "XDS ASTANA TEAM",
+     "nat": "ESP",
+     "val": "04h 14' 18''",
+     "gap": "+ 00h 01' 38''"
+    },
+    {
+     "pos": 9,
+     "rider": "C. BERTHET",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 14' 18''",
+     "gap": "+ 00h 01' 38''"
+    },
+    {
+     "pos": 10,
+     "rider": "M. SKJELMOSE",
+     "team": "LIDL-TREK",
+     "nat": "DEN",
+     "val": "04h 14' 18''",
+     "gap": "+ 00h 01' 38''"
+    },
+    {
+     "pos": 11,
+     "rider": "S. KUSS",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "USA",
+     "val": "04h 14' 18''",
+     "gap": "+ 00h 01' 38''"
+    },
+    {
+     "pos": 12,
+     "rider": "O. ONLEY",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "GBR",
+     "val": "04h 14' 18''",
+     "gap": "+ 00h 01' 38''"
+    },
+    {
+     "pos": 13,
+     "rider": "A. KRON",
+     "team": "UNO-X MOBILITY",
+     "nat": "DEN",
+     "val": "04h 16' 26''",
+     "gap": "+ 00h 03' 46''"
+    },
+    {
+     "pos": 14,
+     "rider": "M. CAMPRUBI PIJUAN",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 16' 26''",
+     "gap": "+ 00h 03' 46''"
+    },
+    {
+     "pos": 15,
+     "rider": "P. KONRAD",
+     "team": "LIDL-TREK",
+     "nat": "AUT",
+     "val": "04h 16' 26''",
+     "gap": "+ 00h 03' 46''"
+    },
+    {
+     "pos": 16,
+     "rider": "J. DIAZ GALLEGO",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "ESP",
+     "val": "04h 16' 26''",
+     "gap": "+ 00h 03' 46''"
+    },
+    {
+     "pos": 17,
+     "rider": "G. GAROFOLI",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "ITA",
+     "val": "04h 16' 26''",
+     "gap": "+ 00h 03' 46''"
+    },
+    {
+     "pos": 18,
+     "rider": "J. OMRZEL",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "SLO",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 19,
+     "rider": "S. BUITRAGO",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "COL",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 20,
+     "rider": "M. GAFFURI",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "ITA",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 21,
+     "rider": "E. SVESTAD-BÅRDSENG",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "NOR",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 22,
+     "rider": "G. MARTIN GUYONNET",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 23,
+     "rider": "M. RICCITELLO",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "USA",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 24,
+     "rider": "J. WIDAR",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 25,
+     "rider": "G. Mühlberger",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "AUT",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 48''"
+    },
+    {
+     "pos": 26,
+     "rider": "G. LEEMREIZE",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "NED",
+     "val": "04h 18' 12''",
+     "gap": "+ 00h 05' 32''"
+    },
+    {
+     "pos": 27,
+     "rider": "M. APARICIO MUÑOZ",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "ESP",
+     "val": "04h 18' 12''",
+     "gap": "+ 00h 05' 32''"
+    },
+    {
+     "pos": 28,
+     "rider": "H. WILKSCH",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "GER",
+     "val": "04h 18' 12''",
+     "gap": "+ 00h 05' 32''"
+    },
+    {
+     "pos": 29,
+     "rider": "X. PICKERING",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "GBR",
+     "val": "04h 18' 25''",
+     "gap": "+ 00h 05' 45''"
+    },
+    {
+     "pos": 30,
+     "rider": "L. BISIAUX",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "FRA",
+     "val": "04h 18' 25''",
+     "gap": "+ 00h 05' 45''"
+    },
+    {
+     "pos": 31,
+     "rider": "C. CANAL BLANCO",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 18' 25''",
+     "gap": "+ 00h 05' 45''"
+    },
+    {
+     "pos": 32,
+     "rider": "L. CRAPS",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 19' 08''",
+     "gap": "+ 00h 06' 28''"
+    },
+    {
+     "pos": 33,
+     "rider": "I. RUIZ SEDANO",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "ESP",
+     "val": "04h 19' 59''",
+     "gap": "+ 00h 07' 19''"
+    },
+    {
+     "pos": 34,
+     "rider": "T. GLOAG",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "GBR",
+     "val": "04h 19' 59''",
+     "gap": "+ 00h 07' 19''"
+    },
+    {
+     "pos": 35,
+     "rider": "J. RODRIGUEZ CONTRERAS",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "COL",
+     "val": "04h 19' 59''",
+     "gap": "+ 00h 07' 19''"
+    },
+    {
+     "pos": 36,
+     "rider": "T. JOHANNESSEN",
+     "team": "UNO-X MOBILITY",
+     "nat": "NOR",
+     "val": "04h 19' 59''",
+     "gap": "+ 00h 07' 19''"
+    },
+    {
+     "pos": 37,
+     "rider": "F. ZANA",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "ITA",
+     "val": "04h 19' 59''",
+     "gap": "+ 00h 07' 19''"
+    },
+    {
+     "pos": 38,
+     "rider": "C. ALLENO",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "FRA",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 39,
+     "rider": "A. VALTER",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "HUN",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 40,
+     "rider": "P. TORRES ARIAS",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "ESP",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 41,
+     "rider": "B. ARMIRAIL",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "FRA",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 42,
+     "rider": "R. MOLARD",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 43,
+     "rider": "V. MADOUAS",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 44,
+     "rider": "W. BARTA",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "USA",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 45,
+     "rider": "J. HIRT",
+     "team": "NSN CYCLING TEAM",
+     "nat": "CZE",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 46,
+     "rider": "K. BOUWMAN",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "NED",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 47,
+     "rider": "G. BENNETT",
+     "team": "NSN CYCLING TEAM",
+     "nat": "NZL",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 48,
+     "rider": "M. VANSEVENANT",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "BEL",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 49,
+     "rider": "C. RODRIGUEZ",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 50,
+     "rider": "U. BERRADE FERNANDEZ",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "ESP",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 08' 44''"
+    },
+    {
+     "pos": 51,
+     "rider": "J. NORDHAGEN",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "NOR",
+     "val": "04h 23' 00''",
+     "gap": "+ 00h 10' 20''"
+    },
+    {
+     "pos": 52,
+     "rider": "P. SIVAKOV",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "FRA",
+     "val": "04h 23' 00''",
+     "gap": "+ 00h 10' 20''"
+    },
+    {
+     "pos": 53,
+     "rider": "M. VADER",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "NED",
+     "val": "04h 23' 00''",
+     "gap": "+ 00h 10' 20''"
+    },
+    {
+     "pos": 54,
+     "rider": "J. VINE",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "AUS",
+     "val": "04h 23' 00''",
+     "gap": "+ 00h 10' 20''"
+    },
+    {
+     "pos": 55,
+     "rider": "C. SCOTSON",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "AUS",
+     "val": "04h 23' 00''",
+     "gap": "+ 00h 10' 20''"
+    },
+    {
+     "pos": 56,
+     "rider": "J. HAIG",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "AUS",
+     "val": "04h 23' 00''",
+     "gap": "+ 00h 10' 20''"
+    },
+    {
+     "pos": 57,
+     "rider": "S. SAMITIER SAMITIER",
+     "team": "COFIDIS",
+     "nat": "ESP",
+     "val": "04h 24' 01''",
+     "gap": "+ 00h 11' 21''"
+    },
+    {
+     "pos": 58,
+     "rider": "L. KÄMNA",
+     "team": "LIDL-TREK",
+     "nat": "GER",
+     "val": "04h 24' 01''",
+     "gap": "+ 00h 11' 21''"
+    },
+    {
+     "pos": 59,
+     "rider": "E. BUCHMANN",
+     "team": "COFIDIS",
+     "nat": "GER",
+     "val": "04h 24' 01''",
+     "gap": "+ 00h 11' 21''"
+    },
+    {
+     "pos": 60,
+     "rider": "H. HOFSTETTER",
+     "team": "NSN CYCLING TEAM",
+     "nat": "FRA",
+     "val": "04h 24' 01''",
+     "gap": "+ 00h 11' 21''"
+    },
+    {
+     "pos": 61,
+     "rider": "J. MOSCA",
+     "team": "LIDL-TREK",
+     "nat": "ITA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 62,
+     "rider": "V. LANGELLOTTI",
+     "team": "XDS ASTANA TEAM",
+     "nat": "MON",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 63,
+     "rider": "E. PALENI",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 64,
+     "rider": "F. WANDAHL",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "DEN",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 65,
+     "rider": "P. OURSELIN",
+     "team": "COFIDIS",
+     "nat": "FRA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 66,
+     "rider": "D. VAN BEKKUM",
+     "team": "XDS ASTANA TEAM",
+     "nat": "NED",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 67,
+     "rider": "R. GARCIA",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 68,
+     "rider": "I. ROMEO ABAD",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 69,
+     "rider": "V. PARET PEINTRE",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "FRA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 70,
+     "rider": "P. MIQUEL DELGADO",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 71,
+     "rider": "L. WARBASSE",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "USA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 72,
+     "rider": "J. LABROSSE",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "FRA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 73,
+     "rider": "M. LANDA",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 74,
+     "rider": "P. BILBAO",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 75,
+     "rider": "V. ALBANESE",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "ITA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 76,
+     "rider": "L. TUCKWELL",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "AUS",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 77,
+     "rider": "S. DE PESTEL",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "BEL",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 78,
+     "rider": "S. DALBY",
+     "team": "UNO-X MOBILITY",
+     "nat": "DEN",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 79,
+     "rider": "P. MARTI SORIANO",
+     "team": "NSN CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 80,
+     "rider": "J. SHAW",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "GBR",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 81,
+     "rider": "N. SCHULTZ",
+     "team": "NSN CYCLING TEAM",
+     "nat": "AUS",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 13' 16''"
+    },
+    {
+     "pos": 82,
+     "rider": "F. WEISS",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "SUI",
+     "val": "04h 28' 44''",
+     "gap": "+ 00h 16' 04''"
+    },
+    {
+     "pos": 83,
+     "rider": "W. VAN AERT",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "BEL",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 84,
+     "rider": "G. VERMEERSCH",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "BEL",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 85,
+     "rider": "M. GOGL",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "AUT",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 86,
+     "rider": "R. THOMPSON",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "NZL",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 87,
+     "rider": "H. MULUEBERHAN",
+     "team": "XDS ASTANA TEAM",
+     "nat": "ERI",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 88,
+     "rider": "J. ARCAS",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 89,
+     "rider": "H. HOULE",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "CAN",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 90,
+     "rider": "C. THORNLEY",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "GBR",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 91,
+     "rider": "X. AZPARREN IRURZUN",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 92,
+     "rider": "M. WENZEL",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "LUX",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 93,
+     "rider": "L. ROTA",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "ITA",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 16' 14''"
+    },
+    {
+     "pos": 94,
+     "rider": "A. LAURANCE",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "FRA",
+     "val": "04h 32' 12''",
+     "gap": "+ 00h 19' 32''"
+    },
+    {
+     "pos": 95,
+     "rider": "S. MONIQUET",
+     "team": "COFIDIS",
+     "nat": "BEL",
+     "val": "04h 32' 12''",
+     "gap": "+ 00h 19' 32''"
+    },
+    {
+     "pos": 96,
+     "rider": "L. HAMILTON",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "AUS",
+     "val": "04h 32' 12''",
+     "gap": "+ 00h 19' 32''"
+    },
+    {
+     "pos": 97,
+     "rider": "D. DE LA CRUZ",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 32' 12''",
+     "gap": "+ 00h 19' 32''"
+    },
+    {
+     "pos": 98,
+     "rider": "B. TURNER",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "GBR",
+     "val": "04h 32' 29''",
+     "gap": "+ 00h 19' 49''"
+    },
+    {
+     "pos": 99,
+     "rider": "S. KÜNG",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "SUI",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 100,
+     "rider": "S. KRUIJSWIJK",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "NED",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 101,
+     "rider": "M. KRETSCHY",
+     "team": "NSN CYCLING TEAM",
+     "nat": "GER",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 102,
+     "rider": "B. TRONCHON",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 103,
+     "rider": "M. BRENNER",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "GER",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 104,
+     "rider": "R. THALMANN",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "SUI",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 105,
+     "rider": "B. TULETT",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "GBR",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 106,
+     "rider": "A. LEKNESSUND",
+     "team": "UNO-X MOBILITY",
+     "nat": "NOR",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 107,
+     "rider": "M. CORT NIELSEN",
+     "team": "UNO-X MOBILITY",
+     "nat": "DEN",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 108,
+     "rider": "F. BUSATTO",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "ITA",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 109,
+     "rider": "K. VERMAERKE",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "USA",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 110,
+     "rider": "J. ALMEIDA",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "POR",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 20' 39''"
+    },
+    {
+     "pos": 111,
+     "rider": "Y. FEDOROV",
+     "team": "XDS ASTANA TEAM",
+     "nat": "KAZ",
+     "val": "04h 37' 13''",
+     "gap": "+ 00h 24' 33''"
+    },
+    {
+     "pos": 112,
+     "rider": "A. LUTSENKO",
+     "team": "NSN CYCLING TEAM",
+     "nat": "KAZ",
+     "val": "04h 37' 13''",
+     "gap": "+ 00h 24' 33''"
+    },
+    {
+     "pos": 113,
+     "rider": "F. FISHER - BLACK",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "NZL",
+     "val": "04h 37' 13''",
+     "gap": "+ 00h 24' 33''"
+    },
+    {
+     "pos": 114,
+     "rider": "J. SÜTTERLIN",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "GER",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 46''"
+    },
+    {
+     "pos": 115,
+     "rider": "P. DOUBLE",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "GBR",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 46''"
+    },
+    {
+     "pos": 116,
+     "rider": "M. PEDERSEN",
+     "team": "LIDL-TREK",
+     "nat": "DEN",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 46''"
+    },
+    {
+     "pos": 117,
+     "rider": "B. COQUARD",
+     "team": "COFIDIS",
+     "nat": "FRA",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 46''"
+    },
+    {
+     "pos": 118,
+     "rider": "E. DUNBAR",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "IRL",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 46''"
+    },
+    {
+     "pos": 119,
+     "rider": "L. FORTUNATO",
+     "team": "XDS ASTANA TEAM",
+     "nat": "ITA",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 46''"
+    },
+    {
+     "pos": 120,
+     "rider": "D. RAFFERTY",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "IRL",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 46''"
+    },
+    {
+     "pos": 121,
+     "rider": "P. CASTRILLO",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 122,
+     "rider": "J. BRENNAN",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "GBR",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 123,
+     "rider": "A. KLUCKERS",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "LUX",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 124,
+     "rider": "W. CALZONI",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "ITA",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 125,
+     "rider": "F. DVERSNES",
+     "team": "UNO-X MOBILITY",
+     "nat": "NOR",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 126,
+     "rider": "J. HERRADA",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "ESP",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 127,
+     "rider": "C. LAPORTE",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "FRA",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 128,
+     "rider": "L. ROULAND",
+     "team": "COFIDIS",
+     "nat": "FRA",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 129,
+     "rider": "S. DE SCHUYTENEER",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 51''"
+    },
+    {
+     "pos": 130,
+     "rider": "M. PAASSCHENS",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "NED",
+     "val": "04h 42' 58''",
+     "gap": "+ 00h 30' 18''"
+    },
+    {
+     "pos": 131,
+     "rider": "D. GONZALEZ LOPEZ",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 132,
+     "rider": "G. STEINHAUSER",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "GER",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 133,
+     "rider": "J. FAURA ASENSIO",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 134,
+     "rider": "O. AULAR SANABRIA",
+     "team": "MOVISTAR TEAM",
+     "nat": "VEN",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 135,
+     "rider": "C. MACIAS ESTRADA",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "MEX",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 136,
+     "rider": "A. DAINESE",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "ITA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 137,
+     "rider": "R. PORTER",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 138,
+     "rider": "R. ROCHAS",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 139,
+     "rider": "M. TJØTTA",
+     "team": "UNO-X MOBILITY",
+     "nat": "NOR",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 140,
+     "rider": "R. TILLER",
+     "team": "UNO-X MOBILITY",
+     "nat": "NOR",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 141,
+     "rider": "L. DE VYLDER",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 142,
+     "rider": "L. VAN BOVEN",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 143,
+     "rider": "J. BERNARD",
+     "team": "LIDL-TREK",
+     "nat": "FRA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 144,
+     "rider": "I. SOSA",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "COL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 145,
+     "rider": "C. HAMILTON",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 146,
+     "rider": "H. MCKENZIE",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 147,
+     "rider": "A. CHAMBERLAIN",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 148,
+     "rider": "A. MACKELLAR",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 149,
+     "rider": "K. GROVES",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 150,
+     "rider": "V. BRAET",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 151,
+     "rider": "F. VAN DEN BOSSCHE",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 152,
+     "rider": "M. GOVEKAR",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "SLO",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 153,
+     "rider": "G. GLIVAR",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "SLO",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 154,
+     "rider": "A. HELLEMOSE",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "DEN",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 155,
+     "rider": "M. BRUSTENGA MASAGUE",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 156,
+     "rider": "I. ELOSEGUI MOMEÑE",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 157,
+     "rider": "O. LE GAC",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 158,
+     "rider": "S. FERNANDEZ RODRIGUEZ",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 159,
+     "rider": "I. COBO CAYON",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 160,
+     "rider": "G. MOSCON",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "ITA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 161,
+     "rider": "A. COVI",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "ITA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 162,
+     "rider": "T. ROOSEN",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "NED",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 163,
+     "rider": "T. DE JONG",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "NED",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 164,
+     "rider": "A. RENARD",
+     "team": "COFIDIS",
+     "nat": "FRA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 165,
+     "rider": "H. RENARD HAQUIN",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "FRA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 166,
+     "rider": "R. ERMAKOV",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "SLO",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 167,
+     "rider": "G. MARTINEZ HUERTAS",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "COL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 168,
+     "rider": "D. URIARTE BELZUNEGI",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 169,
+     "rider": "E. HAYTER",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "GBR",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 170,
+     "rider": "O. PEACE",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "GBR",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 171,
+     "rider": "F. VAN TRICHT",
+     "team": "NSN CYCLING TEAM",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 172,
+     "rider": "S. SENTJENS",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 173,
+     "rider": "T. NYS",
+     "team": "LIDL-TREK",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 174,
+     "rider": "I. OLIVEIRA",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "POR",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 175,
+     "rider": "S. NORSGAARD",
+     "team": "LIDL-TREK",
+     "nat": "DEN",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 176,
+     "rider": "J. MEEUS",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 177,
+     "rider": "A. ROMELE",
+     "team": "XDS ASTANA TEAM",
+     "nat": "ITA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    },
+    {
+     "pos": 178,
+     "rider": "D. NOVAK",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "SLO",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 30' 22''"
+    }
+   ],
+   "points": [
+    {
+     "label": "Sprint intermedio - km 119.6",
+     "rows": [
+      {
+       "pos": 1,
+       "rider": "Wout VAN AERT",
+       "team": "TEAM VISMA | LEASE A BIKE",
+       "nat": "BEL",
+       "val": "20 PTS"
+      },
+      {
+       "pos": 2,
+       "rider": "Patrick KONRAD",
+       "team": "LIDL-TREK",
+       "nat": "AUT",
+       "val": "17 PTS"
+      },
+      {
+       "pos": 3,
+       "rider": "Jose Manuel DIAZ GALLEGO",
+       "team": "BURGOS-BURPELLET-BH",
+       "nat": "ESP",
+       "val": "15 PTS"
+      },
+      {
+       "pos": 4,
+       "rider": "T. GLOAG",
+       "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+       "nat": "GBR",
+       "val": "13 PTS"
+      },
+      {
+       "pos": 5,
+       "rider": "P. BILBAO",
+       "team": "BAHRAIN VICTORIOUS",
+       "nat": "ESP",
+       "val": "10 PTS"
+      }
+     ]
+    },
+    {
+     "label": "Castelló Meta Avda. Chatellerault - km 177",
+     "rows": [
+      {
+       "pos": 1,
+       "rider": "Tadej POGACAR",
+       "team": "UAE TEAM EMIRATES XRG",
+       "nat": "SLO",
+       "val": "20 PTS"
+      },
+      {
+       "pos": 2,
+       "rider": "Enric MAS NICOLAU",
+       "team": "MOVISTAR TEAM",
+       "nat": "ESP",
+       "val": "17 PTS"
+      },
+      {
+       "pos": 3,
+       "rider": "Ramses DEBRUYNE",
+       "team": "ALPECIN-PREMIER TECH",
+       "nat": "BEL",
+       "val": "15 PTS"
+      },
+      {
+       "pos": 4,
+       "rider": "R. CARAPAZ",
+       "team": "EF EDUCATION - EASYPOST",
+       "nat": "ECU",
+       "val": "13 PTS"
+      },
+      {
+       "pos": 5,
+       "rider": "H. TEJADA",
+       "team": "XDS ASTANA TEAM",
+       "nat": "COL",
+       "val": "11 PTS"
+      },
+      {
+       "pos": 6,
+       "rider": "F. GALL",
+       "team": "DECATHLON CMA CGM TEAM",
+       "nat": "AUT",
+       "val": "10 PTS"
+      },
+      {
+       "pos": 7,
+       "rider": "P. ROGLIC",
+       "team": "RED BULL - BORA - HANSGROHE",
+       "nat": "SLO",
+       "val": "9 PTS"
+      },
+      {
+       "pos": 8,
+       "rider": "C. RODRIGUEZ",
+       "team": "XDS ASTANA TEAM",
+       "nat": "ESP",
+       "val": "8 PTS"
+      },
+      {
+       "pos": 9,
+       "rider": "C. BERTHET",
+       "team": "GROUPAMA-FDJ UNITED",
+       "nat": "FRA",
+       "val": "7 PTS"
+      },
+      {
+       "pos": 10,
+       "rider": "M. SKJELMOSE",
+       "team": "LIDL-TREK",
+       "nat": "DEN",
+       "val": "6 PTS"
+      },
+      {
+       "pos": 11,
+       "rider": "S. KUSS",
+       "team": "TEAM VISMA | LEASE A BIKE",
+       "nat": "USA",
+       "val": "5 PTS"
+      },
+      {
+       "pos": 12,
+       "rider": "O. ONLEY",
+       "team": "NETCOMPANY INEOS CYCLING TEAM",
+       "nat": "GBR",
+       "val": "4 PTS"
+      },
+      {
+       "pos": 13,
+       "rider": "A. KRON",
+       "team": "UNO-X MOBILITY",
+       "nat": "DEN",
+       "val": "3 PTS"
+      },
+      {
+       "pos": 14,
+       "rider": "M. CAMPRUBI PIJUAN",
+       "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+       "nat": "ESP",
+       "val": "2 PTS"
+      },
+      {
+       "pos": 15,
+       "rider": "P. KONRAD",
+       "team": "LIDL-TREK",
+       "nat": "AUT",
+       "val": "1 PT"
+      }
+     ]
+    }
+   ],
+   "mountains": [
+    {
+     "label": "PM 2ª La Serratella desnivel 525 mts. distancia 14 km porcentaje 3,8 %   - km 44.1",
+     "rows": [
+      {
+       "pos": 1,
+       "rider": "Santiago BUITRAGO SANCHEZ",
+       "team": "BAHRAIN VICTORIOUS",
+       "nat": "COL",
+       "val": "5 PTS"
+      },
+      {
+       "pos": 2,
+       "rider": "Lorenzo FORTUNATO",
+       "team": "XDS ASTANA TEAM",
+       "nat": "ITA",
+       "val": "3 PTS"
+      },
+      {
+       "pos": 3,
+       "rider": "Stefan KÜNG",
+       "team": "TUDOR PRO CYCLING TEAM",
+       "nat": "SUI",
+       "val": "1 PT"
+      }
+     ]
+    },
+    {
+     "label": "Coll de la Bandereta PM 3ª  desnivel 316 mts. distancia 4,6 km porcentaje 6,7 %   - km 65.6",
+     "rows": [
+      {
+       "pos": 1,
+       "rider": "Santiago BUITRAGO SANCHEZ",
+       "team": "BAHRAIN VICTORIOUS",
+       "nat": "COL",
+       "val": "3 PTS"
+      },
+      {
+       "pos": 2,
+       "rider": "Gijs LEEMREIZE",
+       "team": "TEAM PICNIC POSTNL",
+       "nat": "NED",
+       "val": "2 PTS"
+      },
+      {
+       "pos": 3,
+       "rider": "George BENNETT",
+       "team": "NSN CYCLING TEAM",
+       "nat": "NZL",
+       "val": "1 PT"
+      }
+     ]
+    },
+    {
+     "label": "PM 2ª Desierto de las Palmas desnivel 381 mts. distancia 7,6 km porcentaje 4,9 %   - km 128",
+     "rows": [
+      {
+       "pos": 1,
+       "rider": "Jose Manuel DIAZ GALLEGO",
+       "team": "BURGOS-BURPELLET-BH",
+       "nat": "ESP",
+       "val": "5 PTS"
+      },
+      {
+       "pos": 2,
+       "rider": "Santiago BUITRAGO SANCHEZ",
+       "team": "BAHRAIN VICTORIOUS",
+       "nat": "COL",
+       "val": "3 PTS"
+      },
+      {
+       "pos": 3,
+       "rider": "Thomas GLOAG",
+       "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+       "nat": "GBR",
+       "val": "1 PT"
+      }
+     ]
+    },
+    {
+     "label": "PM 1ª El Bartolo desnivel 657 mts. distancia 9,4 km porcentaje 7,1 %   - km 156.3",
+     "rows": [
+      {
+       "pos": 1,
+       "rider": "Enric MAS NICOLAU",
+       "team": "MOVISTAR TEAM",
+       "nat": "ESP",
+       "val": "10 PTS"
+      },
+      {
+       "pos": 2,
+       "rider": "Tadej POGACAR",
+       "team": "UAE TEAM EMIRATES XRG",
+       "nat": "SLO",
+       "val": "6 PTS"
+      },
+      {
+       "pos": 3,
+       "rider": "Felix GALL",
+       "team": "DECATHLON CMA CGM TEAM",
+       "nat": "AUT",
+       "val": "4 PTS"
+      },
+      {
+       "pos": 4,
+       "rider": "P. ROGLIC",
+       "team": "RED BULL - BORA - HANSGROHE",
+       "nat": "SLO",
+       "val": "2 PTS"
+      },
+      {
+       "pos": 5,
+       "rider": "R. DEBRUYNE",
+       "team": "ALPECIN-PREMIER TECH",
+       "nat": "BEL",
+       "val": "1 PT"
+      }
+     ]
+    }
+   ],
+   "youth": [
+    {
+     "pos": 1,
+     "rider": "Ramses DEBRUYNE",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "BEL",
+     "val": "04h 13' 26''"
+    },
+    {
+     "pos": 2,
+     "rider": "Edgar Oscar ONLEY",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "GBR",
+     "val": "04h 14' 18''",
+     "gap": "+ 00h 00' 52''"
+    },
+    {
+     "pos": 3,
+     "rider": "Marcel CAMPRUBI PIJUAN",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 16' 26''",
+     "gap": "+ 00h 03' 00''"
+    },
+    {
+     "pos": 4,
+     "rider": "G. GAROFOLI",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "ITA",
+     "val": "04h 16' 26''",
+     "gap": "+ 00h 03' 00''"
+    },
+    {
+     "pos": 5,
+     "rider": "J. OMRZEL",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "SLO",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 02''"
+    },
+    {
+     "pos": 6,
+     "rider": "E. SVESTAD-BÅRDSENG",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "NOR",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 02''"
+    },
+    {
+     "pos": 7,
+     "rider": "M. RICCITELLO",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "USA",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 02''"
+    },
+    {
+     "pos": 8,
+     "rider": "J. WIDAR",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 16' 28''",
+     "gap": "+ 00h 03' 02''"
+    },
+    {
+     "pos": 9,
+     "rider": "H. WILKSCH",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "GER",
+     "val": "04h 18' 12''",
+     "gap": "+ 00h 04' 46''"
+    },
+    {
+     "pos": 10,
+     "rider": "X. PICKERING",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "GBR",
+     "val": "04h 18' 25''",
+     "gap": "+ 00h 04' 59''"
+    },
+    {
+     "pos": 11,
+     "rider": "L. BISIAUX",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "FRA",
+     "val": "04h 18' 25''",
+     "gap": "+ 00h 04' 59''"
+    },
+    {
+     "pos": 12,
+     "rider": "C. CANAL BLANCO",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 18' 25''",
+     "gap": "+ 00h 04' 59''"
+    },
+    {
+     "pos": 13,
+     "rider": "L. CRAPS",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 19' 08''",
+     "gap": "+ 00h 05' 42''"
+    },
+    {
+     "pos": 14,
+     "rider": "T. GLOAG",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "GBR",
+     "val": "04h 19' 59''",
+     "gap": "+ 00h 06' 33''"
+    },
+    {
+     "pos": 15,
+     "rider": "J. RODRIGUEZ CONTRERAS",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "COL",
+     "val": "04h 19' 59''",
+     "gap": "+ 00h 06' 33''"
+    },
+    {
+     "pos": 16,
+     "rider": "P. TORRES ARIAS",
+     "team": "UAE TEAM EMIRATES XRG",
+     "nat": "ESP",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 07' 58''"
+    },
+    {
+     "pos": 17,
+     "rider": "C. RODRIGUEZ",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 21' 24''",
+     "gap": "+ 00h 07' 58''"
+    },
+    {
+     "pos": 18,
+     "rider": "J. NORDHAGEN",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "NOR",
+     "val": "04h 23' 00''",
+     "gap": "+ 00h 09' 34''"
+    },
+    {
+     "pos": 19,
+     "rider": "E. PALENI",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 20,
+     "rider": "F. WANDAHL",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "DEN",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 21,
+     "rider": "D. VAN BEKKUM",
+     "team": "XDS ASTANA TEAM",
+     "nat": "NED",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 22,
+     "rider": "R. GARCIA",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 23,
+     "rider": "I. ROMEO ABAD",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 24,
+     "rider": "V. PARET PEINTRE",
+     "team": "SOUDAL QUICK-STEP",
+     "nat": "FRA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 25,
+     "rider": "J. LABROSSE",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "FRA",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 26,
+     "rider": "L. TUCKWELL",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "AUS",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 27,
+     "rider": "S. DALBY",
+     "team": "UNO-X MOBILITY",
+     "nat": "DEN",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 28,
+     "rider": "P. MARTI SORIANO",
+     "team": "NSN CYCLING TEAM",
+     "nat": "ESP",
+     "val": "04h 25' 56''",
+     "gap": "+ 00h 12' 30''"
+    },
+    {
+     "pos": 29,
+     "rider": "F. WEISS",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "SUI",
+     "val": "04h 28' 44''",
+     "gap": "+ 00h 15' 18''"
+    },
+    {
+     "pos": 30,
+     "rider": "R. THOMPSON",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "NZL",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 15' 28''"
+    },
+    {
+     "pos": 31,
+     "rider": "C. THORNLEY",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "GBR",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 15' 28''"
+    },
+    {
+     "pos": 32,
+     "rider": "M. WENZEL",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "LUX",
+     "val": "04h 28' 54''",
+     "gap": "+ 00h 15' 28''"
+    },
+    {
+     "pos": 33,
+     "rider": "A. LAURANCE",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "nat": "FRA",
+     "val": "04h 32' 12''",
+     "gap": "+ 00h 18' 46''"
+    },
+    {
+     "pos": 34,
+     "rider": "M. KRETSCHY",
+     "team": "NSN CYCLING TEAM",
+     "nat": "GER",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 19' 53''"
+    },
+    {
+     "pos": 35,
+     "rider": "B. TRONCHON",
+     "team": "GROUPAMA-FDJ UNITED",
+     "nat": "FRA",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 19' 53''"
+    },
+    {
+     "pos": 36,
+     "rider": "M. BRENNER",
+     "team": "TUDOR PRO CYCLING TEAM",
+     "nat": "GER",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 19' 53''"
+    },
+    {
+     "pos": 37,
+     "rider": "B. TULETT",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "GBR",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 19' 53''"
+    },
+    {
+     "pos": 38,
+     "rider": "F. BUSATTO",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "ITA",
+     "val": "04h 33' 19''",
+     "gap": "+ 00h 19' 53''"
+    },
+    {
+     "pos": 39,
+     "rider": "F. FISHER - BLACK",
+     "team": "RED BULL - BORA - HANSGROHE",
+     "nat": "NZL",
+     "val": "04h 37' 13''",
+     "gap": "+ 00h 23' 47''"
+    },
+    {
+     "pos": 40,
+     "rider": "D. RAFFERTY",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "IRL",
+     "val": "04h 39' 26''",
+     "gap": "+ 00h 26' 00''"
+    },
+    {
+     "pos": 41,
+     "rider": "P. CASTRILLO",
+     "team": "MOVISTAR TEAM",
+     "nat": "ESP",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 05''"
+    },
+    {
+     "pos": 42,
+     "rider": "J. BRENNAN",
+     "team": "TEAM VISMA | LEASE A BIKE",
+     "nat": "GBR",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 05''"
+    },
+    {
+     "pos": 43,
+     "rider": "W. CALZONI",
+     "team": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "nat": "ITA",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 05''"
+    },
+    {
+     "pos": 44,
+     "rider": "L. ROULAND",
+     "team": "COFIDIS",
+     "nat": "FRA",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 05''"
+    },
+    {
+     "pos": 45,
+     "rider": "S. DE SCHUYTENEER",
+     "team": "LOTTO INTERMARCHE",
+     "nat": "BEL",
+     "val": "04h 41' 31''",
+     "gap": "+ 00h 28' 05''"
+    },
+    {
+     "pos": 46,
+     "rider": "G. STEINHAUSER",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "GER",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 47,
+     "rider": "C. MACIAS ESTRADA",
+     "team": "BURGOS-BURPELLET-BH",
+     "nat": "MEX",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 48,
+     "rider": "M. TJØTTA",
+     "team": "UNO-X MOBILITY",
+     "nat": "NOR",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 49,
+     "rider": "H. MCKENZIE",
+     "team": "TEAM JAYCO ALULA",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 50,
+     "rider": "A. CHAMBERLAIN",
+     "team": "DECATHLON CMA CGM TEAM",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 51,
+     "rider": "A. MACKELLAR",
+     "team": "EF EDUCATION - EASYPOST",
+     "nat": "AUS",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 52,
+     "rider": "G. GLIVAR",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "SLO",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 53,
+     "rider": "H. RENARD HAQUIN",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "FRA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 54,
+     "rider": "R. ERMAKOV",
+     "team": "BAHRAIN VICTORIOUS",
+     "nat": "SLO",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 55,
+     "rider": "G. MARTINEZ HUERTAS",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "COL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 56,
+     "rider": "D. URIARTE BELZUNEGI",
+     "team": "EQUIPO KERN PHARMA",
+     "nat": "ESP",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 57,
+     "rider": "O. PEACE",
+     "team": "TEAM PICNIC POSTNL",
+     "nat": "GBR",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 58,
+     "rider": "F. VAN TRICHT",
+     "team": "NSN CYCLING TEAM",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 59,
+     "rider": "S. SENTJENS",
+     "team": "ALPECIN-PREMIER TECH",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 60,
+     "rider": "T. NYS",
+     "team": "LIDL-TREK",
+     "nat": "BEL",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    },
+    {
+     "pos": 61,
+     "rider": "A. ROMELE",
+     "team": "XDS ASTANA TEAM",
+     "nat": "ITA",
+     "val": "04h 43' 02''",
+     "gap": "+ 00h 29' 36''"
+    }
+   ],
+   "teams": [
+    {
+     "pos": 1,
+     "rider": "DECATHLON CMA CGM TEAM",
+     "team": "",
+     "nat": "",
+     "val": "12h 46' 22''"
+    },
+    {
+     "pos": 2,
+     "rider": "GROUPAMA-FDJ UNITED",
+     "team": "",
+     "nat": "",
+     "val": "12h 52' 10''",
+     "gap": "+ 00h 05' 48''"
+    },
+    {
+     "pos": 3,
+     "rider": "NETCOMPANY INEOS CYCLING TEAM",
+     "team": "",
+     "nat": "",
+     "val": "12h 52' 10''",
+     "gap": "+ 00h 05' 48''"
+    },
+    {
+     "pos": 4,
+     "rider": "XDS ASTANA TEAM",
+     "team": "",
+     "nat": "",
+     "val": "12h 53' 40''",
+     "gap": "+ 00h 07' 18''"
+    },
+    {
+     "pos": 5,
+     "rider": "BAHRAIN VICTORIOUS",
+     "team": "",
+     "nat": "",
+     "val": "12h 54' 20''",
+     "gap": "+ 00h 07' 58''"
+    },
+    {
+     "pos": 6,
+     "rider": "LIDL-TREK",
+     "team": "",
+     "nat": "",
+     "val": "12h 54' 45''",
+     "gap": "+ 00h 08' 23''"
+    },
+    {
+     "pos": 7,
+     "rider": "BURGOS-BURPELLET-BH",
+     "team": "",
+     "nat": "",
+     "val": "12h 56' 02''",
+     "gap": "+ 00h 09' 40''"
+    },
+    {
+     "pos": 8,
+     "rider": "MOVISTAR TEAM",
+     "team": "",
+     "nat": "",
+     "val": "12h 57' 01''",
+     "gap": "+ 00h 10' 39''"
+    },
+    {
+     "pos": 9,
+     "rider": "UAE TEAM EMIRATES XRG",
+     "team": "",
+     "nat": "",
+     "val": "12h 57' 04''",
+     "gap": "+ 00h 10' 42''"
+    },
+    {
+     "pos": 10,
+     "rider": "SOUDAL QUICK-STEP",
+     "team": "",
+     "nat": "",
+     "val": "12h 57' 49''",
+     "gap": "+ 00h 11' 27''"
+    },
+    {
+     "pos": 11,
+     "rider": "TEAM VISMA | LEASE A BIKE",
+     "team": "",
+     "nat": "",
+     "val": "12h 58' 42''",
+     "gap": "+ 00h 12' 20''"
+    },
+    {
+     "pos": 12,
+     "rider": "EF EDUCATION - EASYPOST",
+     "team": "",
+     "nat": "",
+     "val": "12h 59' 21''",
+     "gap": "+ 00h 12' 59''"
+    },
+    {
+     "pos": 13,
+     "rider": "PINARELLO-Q36.5 PRO CYCLING TEAM",
+     "team": "",
+     "nat": "",
+     "val": "12h 59' 25''",
+     "gap": "+ 00h 13' 03''"
+    },
+    {
+     "pos": 14,
+     "rider": "UNO-X MOBILITY",
+     "team": "",
+     "nat": "",
+     "val": "13h 02' 21''",
+     "gap": "+ 00h 15' 59''"
+    },
+    {
+     "pos": 15,
+     "rider": "LOTTO INTERMARCHE",
+     "team": "",
+     "nat": "",
+     "val": "13h 04' 30''",
+     "gap": "+ 00h 18' 08''"
+    },
+    {
+     "pos": 16,
+     "rider": "RED BULL - BORA - HANSGROHE",
+     "team": "",
+     "nat": "",
+     "val": "13h 05' 18''",
+     "gap": "+ 00h 18' 56''"
+    },
+    {
+     "pos": 17,
+     "rider": "TUDOR PRO CYCLING TEAM",
+     "team": "",
+     "nat": "",
+     "val": "13h 05' 32''",
+     "gap": "+ 00h 19' 10''"
+    },
+    {
+     "pos": 18,
+     "rider": "NSN CYCLING TEAM",
+     "team": "",
+     "nat": "",
+     "val": "13h 06' 49''",
+     "gap": "+ 00h 20' 27''"
+    },
+    {
+     "pos": 19,
+     "rider": "EQUIPO KERN PHARMA",
+     "team": "",
+     "nat": "",
+     "val": "13h 10' 17''",
+     "gap": "+ 00h 23' 55''"
+    },
+    {
+     "pos": 20,
+     "rider": "ALPECIN-PREMIER TECH",
+     "team": "",
+     "nat": "",
+     "val": "13h 11' 14''",
+     "gap": "+ 00h 24' 52''"
+    },
+    {
+     "pos": 21,
+     "rider": "COFIDIS",
+     "team": "",
+     "nat": "",
+     "val": "13h 13' 58''",
+     "gap": "+ 00h 27' 36''"
+    },
+    {
+     "pos": 22,
+     "rider": "TEAM PICNIC POSTNL",
+     "team": "",
+     "nat": "",
+     "val": "13h 17' 42''",
+     "gap": "+ 00h 31' 20''"
+    },
+    {
+     "pos": 23,
+     "rider": "TEAM JAYCO ALULA",
+     "team": "",
+     "nat": "",
+     "val": "13h 19' 15''",
+     "gap": "+ 00h 32' 53''"
+    }
+   ],
+   "combative": {
+    "rider": "Tadej POGACAR",
+    "team": "UAE TEAM EMIRATES XRG",
+    "nat": "SLO"
+   },
+   "withdrawals": [
+    {
+     "bib": 67,
+     "rider": "TARLING Joshua",
+     "team": "NETCOMPANY INEOS CYCLING TEAM",
+     "reason": "DNF"
+    },
+    {
+     "bib": 163,
+     "rider": "BELOKI Markel",
+     "team": "EF EDUCATION - EASYPOST",
+     "reason": "DNF"
+    }
+   ]
   }
  },
- "updated": "2026-08-26T21:13:45.278757+03:00",
- "updatedText": "Päivitetty 26.08.2026 klo 21.13 (Suomen aikaa)"
+ "updated": "2026-08-27T19:47:18.783096+03:00",
+ "updatedText": "Päivitetty 27.08.2026 klo 19.47 (Suomen aikaa)"
 }
