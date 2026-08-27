@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-27T19:47:23+03:00",
+ "updated": "2026-08-28T02:30:27+03:00",
  "stages": {
   "1": {
    "start": {
@@ -128,6 +128,30 @@
     "precip": 0.4,
     "humidity": 70,
     "town": "Roquetes"
+   }
+  },
+  "6": {
+   "start": {
+    "temp": 32,
+    "low": 22,
+    "feels": 34,
+    "cond": "partly",
+    "wind": 26,
+    "dir": "S",
+    "precip": 0.0,
+    "humidity": 74,
+    "town": "Alcossebre"
+   },
+   "finish": {
+    "temp": 33,
+    "low": 23,
+    "feels": 34,
+    "cond": "partly",
+    "wind": 25,
+    "dir": "S",
+    "precip": 0.0,
+    "humidity": 65,
+    "town": "Castellón"
    }
   }
  }
