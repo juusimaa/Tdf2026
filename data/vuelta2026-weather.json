@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-28T02:30:27+03:00",
+ "updated": "2026-08-29T02:21:51+03:00",
  "stages": {
   "1": {
    "start": {
@@ -152,6 +152,31 @@
     "precip": 0.0,
     "humidity": 65,
     "town": "Castellón"
+   }
+  },
+  "7": {
+   "start": {
+    "temp": 28,
+    "low": 20,
+    "feels": 28,
+    "cond": "overcast",
+    "wind": 15,
+    "dir": "S",
+    "precip": 0.0,
+    "humidity": 55,
+    "town": "Vall d'Alba"
+   },
+   "finish": {
+    "temp": 19,
+    "low": 7,
+    "feels": 16,
+    "cond": "overcast",
+    "wind": 18,
+    "dir": "W",
+    "precip": 0.0,
+    "humidity": 46,
+    "alt": 1963,
+    "town": "Aramón Valdelinares"
    }
   }
  }
