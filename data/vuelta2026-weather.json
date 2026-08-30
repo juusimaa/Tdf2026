@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-29T02:21:51+03:00",
+ "updated": "2026-08-30T08:56:40+03:00",
  "stages": {
   "1": {
    "start": {
@@ -177,6 +177,30 @@
     "humidity": 46,
     "alt": 1963,
     "town": "Aramón Valdelinares"
+   }
+  },
+  "8": {
+   "start": {
+    "temp": 31,
+    "low": 18,
+    "feels": 31,
+    "cond": "clear",
+    "wind": 15,
+    "dir": "E",
+    "precip": 0.0,
+    "humidity": 47,
+    "town": "Puçol"
+   },
+   "finish": {
+    "temp": 30,
+    "low": 18,
+    "feels": 31,
+    "cond": "sunny",
+    "wind": 13,
+    "dir": "SE",
+    "precip": 0.0,
+    "humidity": 61,
+    "town": "Xeraco"
    }
   }
  }
