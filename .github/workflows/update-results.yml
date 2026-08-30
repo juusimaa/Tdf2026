@@ -4,14 +4,27 @@ on:
   schedule:
     # GitHub Actions ALWAYS uses UTC. The 2026 Vuelta a España runs 22 Aug –
     # 13 Sep 2026; its stages typically finish around 17:00-18:30 CEST
-    # (15:00-16:30 UTC). Run every 30 min from 14:00-19:00 UTC on race days
-    # = 17:00-22:00 Finnish time (summer time, UTC+3). Split into an August
-    # and a September cron since a single expression can't span both.
-    - cron: '*/30 14-19 22-31 8 *'
-    - cron: '*/30 14-19 1-13 9 *'
+    # (15:00-16:30 UTC). Cover 14:00-19:59 UTC on race days = 17:00-22:59
+    # Finnish time (summer time, UTC+3). Split into an August and a
+    # September cron since a single expression can't span both.
+    #
+    # Do NOT go back to '*/30 ...'. Scheduled events are best-effort: GitHub
+    # delays and outright drops them under load, and :00 / :30 are the two
+    # most congested minutes on the whole platform, so a public repo on the
+    # free tier is deprioritised there first. During 23-29 Aug 2026 that cost
+    # us most of the window — 12 runs/day on 23 Aug decayed to 2-3/day by
+    # 27-29 Aug, with single runs landing 4-6 HOURS late.
+    #
+    # So: fire at odd minutes well away from the hour boundary, and fire
+    # oftener than we need. Each tick is an independent ~45 s attempt that
+    # no-ops if results haven't changed, and the run is free on a public
+    # repo, so over-scheduling costs nothing and buys redundancy — if half
+    # the ticks are dropped we still publish roughly every 20 minutes.
+    - cron: '7,22,37,52 14-19 22-31 8 *'
+    - cron: '7,22,37,52 14-19 1-13 9 *'
     # Light safety run in the morning in case of late-recorded corrections.
-    - cron: '15 6 22-31 8 *'
-    - cron: '15 6 1-13 9 *'
+    - cron: '23 6 22-31 8 *'
+    - cron: '23 6 1-13 9 *'
     # Remove this schedule block once the 2026 Vuelta a España is over (13
     # Sep 2026) — the way it was removed after the Tour de France — so the
     # workflow doesn't keep polling a site with nothing left to fetch.
