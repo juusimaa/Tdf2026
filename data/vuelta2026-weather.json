@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-30T08:56:40+03:00",
+ "updated": "2026-08-31T17:06:26+03:00",
  "stages": {
   "1": {
    "start": {
@@ -201,6 +201,31 @@
     "precip": 0.0,
     "humidity": 61,
     "town": "Xeraco"
+   }
+  },
+  "9": {
+   "start": {
+    "temp": 29,
+    "low": 22,
+    "feels": 32,
+    "cond": "clear",
+    "wind": 12,
+    "dir": "SW",
+    "precip": 0.0,
+    "humidity": 58,
+    "town": "La Vila Joiosa"
+   },
+   "finish": {
+    "temp": 23,
+    "low": 12,
+    "feels": 24,
+    "cond": "clear",
+    "wind": 11,
+    "dir": "S",
+    "precip": 0.0,
+    "humidity": 51,
+    "alt": 1535,
+    "town": "Alto de Aitana"
    }
   }
  }
