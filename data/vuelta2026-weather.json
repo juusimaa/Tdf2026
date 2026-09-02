@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-08-31T17:06:26+03:00",
+ "updated": "2026-09-02T14:30:37+03:00",
  "stages": {
   "1": {
    "start": {
@@ -226,6 +226,30 @@
     "humidity": 51,
     "alt": 1535,
     "town": "Alto de Aitana"
+   }
+  },
+  "10": {
+   "start": {
+    "temp": 34,
+    "low": 19,
+    "feels": 34,
+    "cond": "showers",
+    "wind": 24,
+    "dir": "S",
+    "precip": 0.3,
+    "humidity": 40,
+    "town": "Alcaraz"
+   },
+   "finish": {
+    "temp": 29,
+    "low": 18,
+    "feels": 32,
+    "cond": "overcast",
+    "wind": 14,
+    "dir": "E",
+    "precip": 0.0,
+    "humidity": 75,
+    "town": "Elche de la Sierra"
    }
   }
  }
