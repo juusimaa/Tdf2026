@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-02T14:30:37+03:00",
+ "updated": "2026-09-03T14:27:31+03:00",
  "stages": {
   "1": {
    "start": {
@@ -250,6 +250,30 @@
     "precip": 0.0,
     "humidity": 75,
     "town": "Elche de la Sierra"
+   }
+  },
+  "11": {
+   "start": {
+    "temp": 31,
+    "low": 22,
+    "feels": 36,
+    "cond": "overcast",
+    "wind": 17,
+    "dir": "NE",
+    "precip": 0.0,
+    "humidity": 80,
+    "town": "Cartagena"
+   },
+   "finish": {
+    "temp": 33,
+    "low": 20,
+    "feels": 36,
+    "cond": "overcast",
+    "wind": 12,
+    "dir": "E",
+    "precip": 0.0,
+    "humidity": 73,
+    "town": "Lorca"
    }
   }
  }
