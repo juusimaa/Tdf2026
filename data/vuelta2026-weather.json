@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-03T14:27:31+03:00",
+ "updated": "2026-09-04T06:37:49+03:00",
  "stages": {
   "1": {
    "start": {
@@ -274,6 +274,31 @@
     "precip": 0.0,
     "humidity": 73,
     "town": "Lorca"
+   }
+  },
+  "12": {
+   "start": {
+    "temp": 30,
+    "low": 23,
+    "feels": 35,
+    "cond": "clear",
+    "wind": 14,
+    "dir": "E",
+    "precip": 0.0,
+    "humidity": 79,
+    "town": "Vera"
+   },
+   "finish": {
+    "temp": 26,
+    "low": 16,
+    "feels": 25,
+    "cond": "showers",
+    "wind": 11,
+    "dir": "S",
+    "precip": 0.4,
+    "humidity": 52,
+    "alt": 2130,
+    "town": "Calar Alto"
    }
   }
  }
