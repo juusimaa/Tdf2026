@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-04T06:37:49+03:00",
+ "updated": "2026-09-05T13:46:14+03:00",
  "stages": {
   "1": {
    "start": {
@@ -299,6 +299,30 @@
     "humidity": 52,
     "alt": 2130,
     "town": "Calar Alto"
+   }
+  },
+  "13": {
+   "start": {
+    "temp": 34,
+    "low": 25,
+    "feels": 37,
+    "cond": "overcast",
+    "wind": 8,
+    "dir": "S",
+    "precip": 0.0,
+    "humidity": 47,
+    "town": "Almuñécar"
+   },
+   "finish": {
+    "temp": 40,
+    "low": 23,
+    "feels": 39,
+    "cond": "overcast",
+    "wind": 19,
+    "dir": "W",
+    "precip": 0.0,
+    "humidity": 36,
+    "town": "Loja"
    }
   }
  }
