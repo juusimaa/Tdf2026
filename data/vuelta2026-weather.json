@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-05T13:46:14+03:00",
+ "updated": "2026-09-06T14:08:16+03:00",
  "stages": {
   "1": {
    "start": {
@@ -323,6 +323,31 @@
     "precip": 0.0,
     "humidity": 36,
     "town": "Loja"
+   }
+  },
+  "14": {
+   "start": {
+    "temp": 38,
+    "low": 27,
+    "feels": 36,
+    "cond": "overcast",
+    "wind": 15,
+    "dir": "W",
+    "precip": 0.0,
+    "humidity": 26,
+    "town": "Jaén"
+   },
+   "finish": {
+    "temp": 30,
+    "low": 17,
+    "feels": 28,
+    "cond": "overcast",
+    "wind": 13,
+    "dir": "NW",
+    "precip": 0.0,
+    "humidity": 28,
+    "alt": 1809,
+    "town": "Sierra de la Pandera"
    }
   }
  }
