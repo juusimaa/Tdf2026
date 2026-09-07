@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-06T14:08:16+03:00",
+ "updated": "2026-09-07T15:47:55+03:00",
  "stages": {
   "1": {
    "start": {
@@ -348,6 +348,30 @@
     "humidity": 28,
     "alt": 1809,
     "town": "Sierra de la Pandera"
+   }
+  },
+  "15": {
+   "start": {
+    "temp": 40,
+    "low": 23,
+    "feels": 41,
+    "cond": "partly",
+    "wind": 10,
+    "dir": "E",
+    "precip": 0.0,
+    "humidity": 27,
+    "town": "Palma del Río"
+   },
+   "finish": {
+    "temp": 40,
+    "low": 23,
+    "feels": 40,
+    "cond": "overcast",
+    "wind": 7,
+    "dir": "W",
+    "precip": 0.0,
+    "humidity": 29,
+    "town": "Córdoba"
    }
   }
  }
