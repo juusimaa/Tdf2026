@@ -23,7 +23,7 @@ modernist.css                         # shared design tokens (colour, type, spac
 theme.css                             # earlier colour theme — no longer linked from any page, kept for reference
 
 data/<tour>-results.json              # classifications + stage winners — auto-updated for vuelta2026, static for the rest
-data/<tour>-riders.json               # start list: teams, riders, each rider's GC position/gap
+data/<tour>-riders.json               # start list: teams, riders, each rider's GC position/gap — GC column auto-updated for tdf2026/vuelta2026
 data/<tour>-routes.json               # per-stage route tracks for the map, from GPX/komoot (see fetch_routes.py)
 data/tdf2026-weather.json             # actual race-day weather, all 21 stages (race is over)
 data/vuelta2026-weather.json          # actual race-day weather, raced stages only — auto-updated
@@ -33,7 +33,13 @@ scripts/fetch_riders.py               # start-list fetch script (letour.fr, leto
 scripts/fetch_routes.py               # route fetch script (cyclingstage.com GPX, or komoot for the Vuelta) — run by hand
 scripts/fetch_weather.py              # race-day weather fetch script (Open-Meteo historical archive)
 .github/workflows/update-results.yml  # GitHub Actions build, test & publish workflow (push to main / schedule)
-.github/workflows/ci.yml              # GitHub Actions build & test workflow (pull requests)
+.github/workflows/ci.yml              # GitHub Actions lint, format, build & test workflow (pull requests)
+
+tsconfig.json                         # TypeScript compiler options (src/ -> dist/, strict)
+vitest.config.mts                     # Vitest config (jsdom environment)
+eslint.config.mjs                     # ESLint flat config — CI fails a PR on any lint error
+.prettierrc.json / .prettierignore    # Prettier config — CI fails a PR on any unformatted file
+TODO.md                               # planned work, kept out of this file
 ```
 
 `index.html` lets the visitor pick a race; each tour page has a back arrow to
@@ -50,17 +56,24 @@ npm install       # once
 npm run build     # compiles src/race-page.ts -> dist/race-page.js
 npm run watch     # or: rebuild on every save, while editing
 npm test          # runs the Vitest suite in test/ against dist/race-page.js (build first)
+npm run lint      # ESLint over the whole repo
+npm run format    # Prettier, rewriting files in place
 ```
+
+**Run `npm run lint` and `npm run format` before pushing.** PR CI gates on
+both (`npm run lint` and `npm run format:check`) _before_ it builds or tests,
+so an unformatted file fails the run on its own.
 
 `dist/` is gitignored (build output, not source) — run `npm run build` after
 a fresh clone before opening any page locally, or nothing will render. CI
 does this automatically (see the workflows) before every deploy, so
 `dist/race-page.js` is always rebuilt fresh from `src/race-page.ts`.
 
-Pull requests run `.github/workflows/ci.yml` (build + `npm test`); pushes to
-`main` additionally run `.github/workflows/update-results.yml`, which fetches
-results/riders/weather and deploys to Pages — its build job runs the same
-tests, and the deploy job (`needs: build`) only runs if they pass.
+Pull requests run `.github/workflows/ci.yml` (lint + format check + build +
+`npm test`); pushes to `main` additionally run
+`.github/workflows/update-results.yml`, which fetches results/riders/weather
+and deploys to Pages — its build job runs the same tests (but not lint or the
+format check), and the deploy job (`needs: build`) only runs if they pass.
 
 ### Live vs. static tours
 
@@ -91,12 +104,16 @@ page that reads it — no script or registry entry needed.
 
 1. GitHub Actions runs the workflow on every push to `main` and on demand
    from the Actions tab. While the Vuelta is being raced it also runs on a
-   schedule (every 30 minutes, 14:00–19:30 UTC on race days, plus a light
-   run at 06:15 UTC for late corrections) — see the `cron:` entries at the top of
-   `.github/workflows/update-results.yml`. That schedule block is meant to be
-   removed once the Vuelta finishes (13 Sep 2026), the same way it was
-   removed after the Tour de France, so the workflow doesn't keep polling a
-   site with nothing left to fetch.
+   schedule (every 15 minutes — at :07, :22, :37 and :52 — from 14:00 to
+   19:59 UTC on race days, plus a light run at 06:23 UTC for late
+   corrections) — see the `cron:` entries at the top of
+   `.github/workflows/update-results.yml`. Those odd minutes and the
+   deliberate over-scheduling are load-bearing — GitHub drops scheduled
+   events under load, hardest on the hour and half-hour — so don't "tidy"
+   them back to `*/30`; the workflow comment has the full story. That
+   schedule block is meant to be removed once the Vuelta finishes (13 Sep
+   2026), the same way it was removed after the Tour de France, so the
+   workflow doesn't keep polling a site with nothing left to fetch.
 2. The workflow runs `fetch_results.py`, which scrapes the official rankings
    pages of every tour in its `TOURS` registry (currently letour.fr for
    `tdf2026`, lavuelta.es for `vuelta2026`): general classification, points,
@@ -160,10 +177,17 @@ differ enough that the script has one handler per source family:
   they are all reported as DNF. Times are restated from `83:22:51` into the
   same `83h 22' 51''` form the other tours use.
 
-The script is deliberately **not** part of the workflow: a start list changes
-only when riders drop out, so it is run by hand when the data needs a
-refresh. Re-running it rewrites nothing unless the content actually changed,
-so it never produces an empty commit:
+The scheduled workflow runs this script too, but only for the tours whose GC
+is still moving: `python scripts/fetch_riders.py tdf2026 vuelta2026`, right
+after `fetch_results.py`, so each rider's position and gap tracks the results
+just fetched instead of staying pinned to whatever stage the script was last
+run at by hand. `giro2026` and `femmes2026` are left out — their
+classifications are final, and the `giro` handler is far pricier (a request
+per stage plus one per team).
+
+Run it by hand for those two, or to pick up a start-list change the GC
+refresh wouldn't catch. Re-running it rewrites nothing unless the content
+actually changed, so it never produces an empty commit:
 
 ```
 pip install requests selectolax
@@ -188,7 +212,9 @@ small (the map is an overview locator, not turn-by-turn nav — ~50 m of
 simplification is invisible at that zoom), and stored as `[lat, lon]` pairs
 rounded to 5 decimals. A stage whose route hasn't been published yet is
 simply omitted; the page falls back to a straight start→finish line for it.
-Like `fetch_riders.py`, this script is run by hand, not part of the workflow:
+Unlike `fetch_results.py`, `fetch_riders.py` and `fetch_weather.py`, this
+script is **not** part of the workflow — a published route doesn't change, so
+it is run by hand:
 
 ```
 python3 scripts/fetch_routes.py            # default: tdf2026
@@ -242,9 +268,9 @@ stops updating.
 
 ## License & disclaimer
 
-The **source code** of this project (`index.html`, `scripts/`, and the
-GitHub Actions workflow) is released under the [MIT License](LICENSE) — feel
-free to use, modify, and share it.
+The **source code** of this project (the HTML pages, `src/`, `test/`,
+`scripts/`, the CSS files and the GitHub Actions workflows) is released under
+the [MIT License](LICENSE) — feel free to use, modify, and share it.
 
 The **results data**, however, is a different matter and the MIT license does
 **not** extend to it:
