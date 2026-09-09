@@ -6,7 +6,7 @@
 
 #### Minor
 
-- Fix stage-profile marker colors to match the official convention (climbs red, sprints green). Right now climbs and intermediate sprints render in the _same_ color family — climbs use `CAT_COLOR` (accent-derived shades) and sprints use `var(--color-accent)`, and the site accent is already a red/orange, so on the chart they're barely distinguishable. Marker code is duplicated per page in each `renderProfile()`: `tdf2026.html`, `giro2026.html`, `femmes2026.html` (all three already draw sprint markers), and `vuelta2026.html` (climbs only for now — sprint locations aren't published yet). Note that color are different for each race.
+- Fix stage-profile marker colors to match the official convention (climbs red, sprints green) in `tdf2026.html`, `giro2026.html` and `femmes2026.html`. In those three, climbs and intermediate sprints render in the _same_ color family — climbs use `CAT_COLOR` (accent-derived shades) and sprints use `var(--color-accent)`, and the site accent is already a red/orange, so on the chart they're barely distinguishable. `vuelta2026.html` is already done (3a40e11): it draws sprints in a dedicated `SPRINT_COLOR = '#3e9b4f'` with a matching legend swatch, on the 19 of 21 stages whose sprint locations are published — copy that pattern. The marker code is still duplicated per page in each `renderProfile()` (`src/race-page.ts` shares the profile geometry, not the marker drawing), so the fix has to be made three times. Note that the climb categories, and their colors, differ per race.
 
 ## Tooling / educational
 
