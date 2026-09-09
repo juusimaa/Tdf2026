@@ -9,11 +9,11 @@ weather current automatically, while the other three are finished and serve
 static data.
 
 ```
-index.html                            # "Grand Tours" landing page (race picker)
-tdf2026.html                          # Tour de France — stages, profiles, map & final results (static)
-giro2026.html                         # Giro d'Italia — stages, profiles, map & final results (static)
-femmes2026.html                       # Tour de France Femmes — stages, profiles, map & final results (static)
-vuelta2026.html                       # Vuelta a España — stages, profiles, map & auto-updating results (live)
+index.html                            # "Grand Tours" landing page (race picker) — year selection is hidden for now, see below
+2026/tdf.html                         # Tour de France — stages, profiles, map & final results (static)
+2026/giro.html                        # Giro d'Italia — stages, profiles, map & final results (static)
+2026/femmes.html                      # Tour de France Femmes — stages, profiles, map & final results (static)
+2026/vuelta.html                      # Vuelta a España — stages, profiles, map & auto-updating results (live)
 src/race-page.ts                      # helper functions shared by all four race pages (i18n, formatting, rendering) — compiles to dist/race-page.js
 src/globals.d.ts                      # ambient types for the globals each page's own inline <script> defines
 dist/race-page.js                     # build output (gitignored) — what the HTML pages actually load, via `npm run build`
@@ -43,7 +43,12 @@ TODO.md                               # planned work, kept out of this file
 ```
 
 `index.html` lets the visitor pick a race; each tour page has a back arrow to
-the landing page.
+the landing page. Race pages live under a season folder (`2026/<race>.html`)
+so a future season can be added alongside it as `2027/<race>.html` without
+touching the existing pages. The landing page's design (`design_handoff_year_selection/`)
+already specifies a year-picker screen in front of the race list for when a
+second season exists; today, with only 2026 published, that screen is not
+built — `index.html` links straight into `2026/`.
 
 ### Local development
 
@@ -122,7 +127,7 @@ page that reads it — no script or registry entry needed.
 3. The script writes `data/<tour>-results.json` for each registered tour. If
    the content changed, the workflow commits it back to the repo.
 4. GitHub Pages serves the site, and each tour page fetches the JSON for its
-   tour in the browser (e.g. `vuelta2026.html` → `fetch('data/vuelta2026-results.json')`).
+   tour in the browser (e.g. `2026/vuelta.html` → `fetch('../data/vuelta2026-results.json')`).
    The page therefore always shows the latest committed standings with zero
    manual intervention.
 
@@ -224,15 +229,15 @@ python3 scripts/fetch_routes.py all
 
 ### Weather
 
-`tdf2026.html` and `vuelta2026.html` each show a "Race-day weather" block per
+`2026/tdf.html` and `2026/vuelta.html` each show a "Race-day weather" block per
 stage — actual recorded conditions (not a forecast), a daily high/low/feels
 at the stage's start and finish location, sourced from Open-Meteo's free
 historical archive (`archive-api.open-meteo.com`, no API key). A stage only
 ever shows once its race day has fully passed, both in what gets fetched and
 in what the page renders — a stage still being raced never shows a same-day,
-not-yet-final reading. The Tour de France is over, so `tdf2026.html` always
-shows all 21 stages; `vuelta2026.html` fills in day by day as the race is
-run. `giro2026.html` and `femmes2026.html` don't have a weather block; their
+not-yet-final reading. The Tour de France is over, so `2026/tdf.html` always
+shows all 21 stages; `2026/vuelta.html` fills in day by day as the race is
+run. `2026/giro.html` and `2026/femmes.html` don't have a weather block; their
 tours aren't registered in `fetch_weather.py`'s `TOURS`.
 
 `scripts/fetch_weather.py` is part of the same scheduled workflow as

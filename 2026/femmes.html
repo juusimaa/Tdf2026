@@ -7,13 +7,13 @@
 <meta name="theme-color" content="#f3f2f2">
 <title>Tour de France Femmes 2026 — reitit, profiilit & tulokset</title>
 <meta name="description" content="Interaktiivinen roadbook Tour de France Femmes 2026 -kilpailuun: kaikki 9 etappia, reitit, korkeusprofiilit ja mäkipisteet (KOM). Lausanne–Nice, 1.–9.8.2026. · Interactive roadbook for the 2026 Tour de France Femmes.">
-<link rel="canonical" href="https://juusimaa.github.io/Tdf2026/femmes2026.html">
+<link rel="canonical" href="https://juusimaa.github.io/Tdf2026/2026/femmes.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tour de France Femmes 2026">
 <meta property="og:title" content="Tour de France Femmes 2026 — reitit, profiilit & tulokset">
 <meta property="og:description" content="Interaktiivinen roadbook: 9 etappia, korkeusprofiilit ja mäkipisteet. Lausanne–Nice, 1.–9.8.2026.">
-<meta property="og:url" content="https://juusimaa.github.io/Tdf2026/femmes2026.html">
+<meta property="og:url" content="https://juusimaa.github.io/Tdf2026/2026/femmes.html">
 <meta property="og:locale" content="fi_FI">
 <meta property="og:locale:alternate" content="en_GB">
 <meta property="og:locale:alternate" content="fr_FR">
@@ -37,8 +37,8 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <!-- Modernist design tokens (shared with index.html / tdf2026.html / giro2026.html / vuelta2026.html). -->
-<link rel="stylesheet" href="modernist.css">
-<link rel="stylesheet" href="race-page.css">
+<link rel="stylesheet" href="../modernist.css">
+<link rel="stylesheet" href="../race-page.css">
 <style>
   @media (max-width:980px){
     .stagelayout{grid-template-columns:1fr;}
@@ -69,7 +69,7 @@
 
 <header class="tdf-header">
   <div class="left">
-    <a class="backlink" id="backLink" href="index.html">← <span id="backLinkText"></span></a>
+    <a class="backlink" id="backLink" href="../index.html">← <span id="backLinkText"></span></a>
     <span class="wordmark">Tour de France Femmes 2026</span>
   </div>
   <div class="tdf-langs" id="langSel" role="group" aria-label="Kieli / Language">
@@ -132,7 +132,7 @@
   <span class="disclabel" id="footerNote"></span>
 </footer>
 
-<script src="dist/race-page.js"></script>
+<script src="../dist/race-page.js"></script>
 <script>
 /* ---------- TOUR ----------
    Tour de France Femmes 2026: Lausanne -> Nice, 9 stages, 1-9 Aug 2026.
@@ -141,9 +141,9 @@
    final start list with each rider's final GC placing (RIDERS, further
    down) -- see scripts/fetch_riders.py. */
 const LANG_KEY = 'tdf2026-lang';
-const ROUTES_URL = 'data/femmes2026-routes.json';
-const RESULTS_URL = 'data/femmes2026-results.json';
-const RIDERS_URL = 'data/femmes2026-riders.json';
+const ROUTES_URL = '../data/femmes2026-routes.json';
+const RESULTS_URL = '../data/femmes2026-results.json';
+const RIDERS_URL = '../data/femmes2026-riders.json';
 
 const STRINGS = {
   fi: {
