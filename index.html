@@ -26,107 +26,81 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Modernist design tokens (Grand Tours hub only — see design_handoff_grand_tours_hub/). -->
+<!-- Modernist design tokens (Grand Tours hub only — see design_handoff_year_selection/). -->
 <link rel="stylesheet" href="modernist.css">
 <style>
-  html,body{margin:0;padding:0;min-height:100vh;}
+  html,body{margin:0;padding:0;}
+  body{min-height:100vh;display:flex;flex-direction:column;}
+  a{color:var(--color-text);text-decoration:none;}
+  :focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}
 
   .gt-header{
-    display:flex;align-items:stretch;justify-content:space-between;
-    border-bottom:2px solid var(--color-divider);
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    gap:16px;padding:18px 24px;border-bottom:2px solid var(--color-divider);
   }
   .gt-brand{
-    padding:var(--space-4) clamp(20px,4vw,48px);
     font-family:var(--font-heading);font-weight:700;font-size:15px;
     letter-spacing:.14em;text-transform:uppercase;
   }
-  .gt-langs{display:flex;border-left:2px solid var(--color-divider);}
+  .gt-langs{display:flex;gap:14px;}
   .langbtn{
-    font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.14em;
-    min-width:56px;padding:0 18px;border:0;border-left:2px solid var(--color-divider);
-    cursor:pointer;background:transparent;color:var(--color-neutral-700);
-    transition:background .15s ease;
+    appearance:none;border:0;background:transparent;cursor:pointer;padding:0;
+    font-family:var(--font-heading);font-size:13px;font-weight:600;letter-spacing:.12em;
+    color:var(--color-neutral-700);
   }
-  .gt-langs .langbtn:first-child{border-left:0;}
-  .langbtn:hover{background:var(--color-accent-100);}
-  .langbtn.active{background:var(--color-accent);color:#fff;}
-  .langbtn.active:hover{background:var(--color-accent);}
+  .langbtn.active{color:var(--color-accent);}
+  .langbtn:hover{color:var(--color-accent-700);}
 
-  .gt-hero{
-    padding:clamp(36px,7vw,88px) clamp(20px,4vw,48px) clamp(28px,5vw,56px);
-    border-bottom:2px solid var(--color-divider);
-    display:flex;flex-direction:column;gap:var(--space-4);
-  }
+  main{flex:1;display:flex;flex-direction:column;}
+
+  .gt-hero{padding:56px 24px 28px;display:flex;flex-direction:column;gap:14px;}
   .kicker{
-    font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
     color:var(--color-accent-700);
   }
   .gt-hero h1{
-    font-family:var(--font-heading);font-weight:700;
-    font-size:clamp(44px,10vw,116px);line-height:.9;letter-spacing:-.03em;
-    margin:0;text-transform:uppercase;
-  }
-  .lede{
-    max-width:46ch;font-size:clamp(16px,1.6vw,19px);line-height:1.45;
-    color:var(--color-neutral-700);margin:0;text-wrap:pretty;
+    margin:0;font-family:var(--font-heading);font-weight:700;
+    font-size:clamp(44px,9vw,104px);line-height:.92;letter-spacing:-.02em;
   }
 
-  .grid{display:grid;grid-template-columns:1fr 1fr;}
-  @media (max-width:860px){ .grid{grid-template-columns:1fr;} }
-
+  .race-list{border-top:2px solid var(--color-divider);}
   .race{
-    display:flex;flex-direction:column;gap:var(--space-4);
-    min-height:clamp(220px,26vw,300px);
-    padding:clamp(22px,3.2vw,40px) clamp(20px,4vw,48px);
-    color:var(--color-text);text-decoration:none;
-    transition:background .15s ease;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    padding:24px;border-bottom:2px solid var(--color-divider);
+    transition:background 120ms ease;
   }
-  .race:nth-child(1),.race:nth-child(3){border-right:2px solid var(--color-divider);}
-  .race:nth-child(1),.race:nth-child(2){border-bottom:2px solid var(--color-divider);}
   .race:hover{background:var(--color-accent-100);}
-  .race:hover .arrow{transform:translateX(8px);}
-  .race:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;}
-
-  .race-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);}
+  .race-left{display:flex;align-items:center;gap:20px;min-width:0;}
   .race-num{
-    font-family:var(--font-heading);font-size:13px;font-weight:700;
-    letter-spacing:.14em;color:var(--color-neutral-600);
+    flex:none;font-family:var(--font-heading);font-size:13px;font-weight:600;
+    letter-spacing:.1em;color:var(--color-accent-700);
   }
-  .race-country{
-    font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--color-neutral-600);
+  .race-flag{flex:none;width:30px;height:20px;}
+  .race-name{
+    font-family:var(--font-heading);font-size:clamp(20px,3.2vw,34px);
+    font-weight:600;letter-spacing:-.01em;
   }
-
-  .flagstripe{display:flex;height:10px;width:120px;}
-  .flagstripe span{flex:1;}
-
-  .race h2{
-    font-family:var(--font-heading);font-weight:700;
-    font-size:clamp(24px,3.2vw,40px);line-height:1;letter-spacing:-.02em;
-    margin:0;text-transform:uppercase;max-width:14ch;
-  }
-
-  .race-cta{
-    display:flex;align-items:center;gap:10px;
-    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--color-accent-700);margin-top:auto;
-  }
-  .arrow{display:inline-block;transition:transform .18s ease;}
+  .race-arrow{flex:none;font-size:24px;line-height:1;color:var(--color-accent-700);}
 
   .gt-footer{
-    display:flex;flex-wrap:wrap;gap:var(--space-4);justify-content:space-between;
-    padding:var(--space-4) clamp(20px,4vw,48px);
-    border-top:2px solid var(--color-divider);
-    font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--color-neutral-600);
+    display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding:32px 24px 40px;
+  }
+  .footer-note{
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--color-neutral-700);
+  }
+  .footer-year{
+    font-family:var(--font-heading);font-size:clamp(40px,8vw,88px);font-weight:700;
+    line-height:.85;letter-spacing:-.03em;color:var(--color-accent);
   }
 </style>
 </head>
 <body>
 <header class="gt-header">
-  <div class="gt-brand">Grand Tours &rsquo;26</div>
+  <div class="gt-brand">Grand Tours</div>
   <div class="gt-langs" id="langSel" role="group" aria-label="Kieli / Language">
     <button class="langbtn" data-lang="fi" aria-label="Suomeksi" aria-pressed="false">FI</button>
     <button class="langbtn" data-lang="fr" aria-label="En français" aria-pressed="false">FR</button>
@@ -134,55 +108,55 @@
   </div>
 </header>
 
-<section class="gt-hero">
-  <span class="kicker" id="kicker"></span>
-  <h1 id="heroTitle">Grand Tours</h1>
-  <p class="lede" id="lede"></p>
-</section>
+<main>
+  <div class="gt-hero">
+    <span class="kicker" id="kicker"></span>
+    <h1>Grand Tours</h1>
+  </div>
 
-<!-- Cells in the order the design specifies: Giro, Tour, Femmes, Vuelta. -->
-<div class="grid">
-  <a class="race" href="giro2026.html">
-    <div class="race-top">
-      <span class="race-num">01</span>
-      <span class="race-country" id="c-giro"></span>
-    </div>
-    <div class="flagstripe"><span style="background:#008c45"></span><span style="background:#ffffff"></span><span style="background:#ce2b37"></span></div>
-    <h2>Giro d&rsquo;Italia</h2>
-    <span class="race-cta"><span id="cta-giro"></span><span class="arrow">→</span></span>
-  </a>
-  <a class="race" href="tdf2026.html">
-    <div class="race-top">
-      <span class="race-num">02</span>
-      <span class="race-country" id="c-tdf"></span>
-    </div>
-    <div class="flagstripe"><span style="background:#0055a4"></span><span style="background:#ffffff"></span><span style="background:#ef4135"></span></div>
-    <h2>Tour de France</h2>
-    <span class="race-cta"><span id="cta-tdf"></span><span class="arrow">→</span></span>
-  </a>
-  <a class="race" href="femmes2026.html">
-    <div class="race-top">
-      <span class="race-num">03</span>
-      <span class="race-country" id="c-femmes"></span>
-    </div>
-    <div class="flagstripe"><span style="background:#0055a4"></span><span style="background:#ffffff"></span><span style="background:#ef4135"></span></div>
-    <h2>Tour de France Femmes</h2>
-    <span class="race-cta"><span id="cta-femmes"></span><span class="arrow">→</span></span>
-  </a>
-  <a class="race" href="vuelta2026.html">
-    <div class="race-top">
-      <span class="race-num">04</span>
-      <span class="race-country" id="c-vuelta"></span>
-    </div>
-    <div class="flagstripe"><span style="background:#c60b1e"></span><span style="background:#ffc400"></span><span style="background:#c60b1e"></span></div>
-    <h2>Vuelta a España</h2>
-    <span class="race-cta"><span id="cta-vuelta"></span><span class="arrow">→</span></span>
-  </a>
-</div>
+  <!-- Race order per the design: Giro, Tour, Femmes, Vuelta. Links are
+       scoped to the 2026 season folder — see design_handoff_year_selection/
+       for the (currently hidden) year-picker screen that will front this
+       once a second season's pages exist. -->
+  <div class="race-list">
+    <a class="race" href="2026/giro.html">
+      <span class="race-left">
+        <span class="race-num">01</span>
+        <span class="race-flag" style="background:linear-gradient(to right, #008c45 0 33.33%, #f4f5f0 33.33% 66.66%, #cd212a 66.66% 100%)" aria-hidden="true"></span>
+        <span class="race-name">Giro d&rsquo;Italia</span>
+      </span>
+      <span class="race-arrow">→</span>
+    </a>
+    <a class="race" href="2026/tdf.html">
+      <span class="race-left">
+        <span class="race-num">02</span>
+        <span class="race-flag" style="background:linear-gradient(to right, #002395 0 33.33%, #f4f5f0 33.33% 66.66%, #ed2939 66.66% 100%)" aria-hidden="true"></span>
+        <span class="race-name">Tour de France</span>
+      </span>
+      <span class="race-arrow">→</span>
+    </a>
+    <a class="race" href="2026/femmes.html">
+      <span class="race-left">
+        <span class="race-num">03</span>
+        <span class="race-flag" style="background:linear-gradient(to right, #002395 0 33.33%, #f4f5f0 33.33% 66.66%, #ed2939 66.66% 100%)" aria-hidden="true"></span>
+        <span class="race-name">Tour de France Femmes</span>
+      </span>
+      <span class="race-arrow">→</span>
+    </a>
+    <a class="race" href="2026/vuelta.html">
+      <span class="race-left">
+        <span class="race-num">04</span>
+        <span class="race-flag" style="background:linear-gradient(to bottom, #aa151b 0 25%, #f1bf00 25% 75%, #aa151b 75% 100%)" aria-hidden="true"></span>
+        <span class="race-name">Vuelta a España</span>
+      </span>
+      <span class="race-arrow">→</span>
+    </a>
+  </div>
+</main>
 
 <footer class="gt-footer">
-  <span id="footerNote"></span>
-  <span>2026</span>
+  <span class="footer-note" id="footerNote"></span>
+  <span class="footer-year">2026</span>
 </footer>
 
 <script>
@@ -192,34 +166,24 @@ const LANG_KEY = 'tdf2026-lang';
 
 const STRINGS = {
   fi: {
-    kicker: 'Kausi 2026',
-    title: 'Grand Tours',
-    lede: 'Valitse kilpailu: reitit, profiilit ja tulokset kolmelta suurkierrokselta sekä naisten Tour de Francelta.',
-    view: 'Avaa',
-    footer: 'Reitit · Profiilit · Tulokset',
-    countries: { giro: 'Italia', tdf: 'Ranska', vuelta: 'Espanja', femmes: 'Ranska' },
+    kicker: 'Valitse kilpailu',
+    footer: 'Reitit · profiilit · tulokset',
   },
   en: {
-    kicker: '2026 season',
-    title: 'Grand Tours',
-    lede: 'Pick a race: routes, stage profiles and results from the three grand tours — plus the Tour de France Femmes.',
-    view: 'Open',
-    footer: 'Routes · Profiles · Results',
-    countries: { giro: 'Italy', tdf: 'France', vuelta: 'Spain', femmes: 'France' },
+    kicker: 'Pick a Grand Tour',
+    footer: 'Routes · profiles · results',
   },
   fr: {
-    kicker: 'Saison 2026',
-    title: 'Grands Tours',
-    lede: 'Choisissez votre course : parcours, profils et résultats des trois grands tours et du Tour de France Femmes.',
-    view: 'Ouvrir',
-    footer: 'Parcours · Profils · Résultats',
-    countries: { giro: 'Italie', tdf: 'France', vuelta: 'Espagne', femmes: 'France' },
+    kicker: 'Choisissez une course',
+    footer: 'Parcours · profils · résultats',
   },
 };
 
 function detectLang(){
-  const saved = localStorage.getItem(LANG_KEY);
-  if(saved==='fi' || saved==='en' || saved==='fr') return saved;
+  try {
+    const saved = localStorage.getItem(LANG_KEY);
+    if(saved==='fi' || saved==='en' || saved==='fr') return saved;
+  } catch (e) {}
   const nav = (navigator.language||'en').toLowerCase();
   if(nav.startsWith('fi')) return 'fi';
   if(nav.startsWith('fr')) return 'fr';
@@ -233,19 +197,7 @@ function t(key){
 
 function render(){
   document.getElementById('kicker').textContent = t('kicker');
-  document.getElementById('heroTitle').textContent = t('title');
-  document.getElementById('lede').textContent = t('lede');
   document.getElementById('footerNote').textContent = t('footer');
-  const countries = STRINGS[lang].countries;
-  document.getElementById('c-giro').textContent = countries.giro;
-  document.getElementById('c-tdf').textContent = countries.tdf;
-  document.getElementById('c-vuelta').textContent = countries.vuelta;
-  document.getElementById('c-femmes').textContent = countries.femmes;
-  const view = t('view');
-  document.getElementById('cta-giro').textContent = view;
-  document.getElementById('cta-tdf').textContent = view;
-  document.getElementById('cta-vuelta').textContent = view;
-  document.getElementById('cta-femmes').textContent = view;
   document.querySelectorAll('#langSel .langbtn').forEach(b=>{
     const active = b.dataset.lang===lang;
     b.classList.toggle('active', active);
@@ -257,7 +209,7 @@ function render(){
 document.querySelectorAll('#langSel .langbtn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     lang = btn.dataset.lang;
-    localStorage.setItem(LANG_KEY, lang);
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
     render();
   });
 });

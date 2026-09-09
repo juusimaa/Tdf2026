@@ -7,12 +7,12 @@
 <meta name="theme-color" content="#f3f2f2">
 <title>Vuelta a España 2026 — stages & profiles</title>
 <meta name="description" content="Interactive roadbook for the 2026 Vuelta a España: all 21 stages, routes, illustrative elevation profiles and known climbs. Monaco → Granada, 22 Aug – 13 Sep 2026.">
-<link rel="canonical" href="https://juusimaa.github.io/Tdf2026/vuelta2026.html">
+<link rel="canonical" href="https://juusimaa.github.io/Tdf2026/2026/vuelta.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vuelta a España 2026">
 <meta property="og:title" content="Vuelta a España 2026 — stages & profiles">
 <meta property="og:description" content="Interactive roadbook: 21 stages, routes, illustrative profiles and climbs. Monaco → Granada, 22 Aug – 13 Sep 2026.">
-<meta property="og:url" content="https://juusimaa.github.io/Tdf2026/vuelta2026.html">
+<meta property="og:url" content="https://juusimaa.github.io/Tdf2026/2026/vuelta.html">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A22'/%3E%3Cpath d='M4 23 L11 12 L16 17 L22 7 L28 23 Z' fill='%23C99A2E'/%3E%3Ccircle cx='22' cy='7' r='2.6' fill='%23B23B32'/%3E%3C/svg%3E">
 
@@ -29,8 +29,8 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <!-- Modernist design tokens (shared with index.html / tdf2026.html / giro2026.html). -->
-<link rel="stylesheet" href="modernist.css">
-<link rel="stylesheet" href="race-page.css">
+<link rel="stylesheet" href="../modernist.css">
+<link rel="stylesheet" href="../race-page.css">
 </head>
 <body>
 <noscript>
@@ -47,7 +47,7 @@
 
 <header class="tdf-header">
   <div class="left">
-    <a class="backlink" id="backLink" href="index.html">← <span id="backLinkText"></span></a>
+    <a class="backlink" id="backLink" href="../index.html">← <span id="backLinkText"></span></a>
     <span class="wordmark">Vuelta a España 2026</span>
   </div>
   <div class="tdf-langs" id="langSel" role="group" aria-label="Kieli / Language">
@@ -107,14 +107,14 @@
   <span class="disclabel" id="footerNote"></span>
 </footer>
 
-<script src="dist/race-page.js"></script>
+<script src="../dist/race-page.js"></script>
 <script>
 /* Language preference is shared with the rest of the site via the same key. */
 const LANG_KEY = 'tdf2026-lang';
-const ROUTES_URL = 'data/vuelta2026-routes.json';
-const RIDERS_URL = 'data/vuelta2026-riders.json';
-const RESULTS_URL = 'data/vuelta2026-results.json';
-const WEATHER_URL = 'data/vuelta2026-weather.json';
+const ROUTES_URL = '../data/vuelta2026-routes.json';
+const RIDERS_URL = '../data/vuelta2026-riders.json';
+const RESULTS_URL = '../data/vuelta2026-results.json';
+const WEATHER_URL = '../data/vuelta2026-weather.json';
 
 const STRINGS = {
   fi: {

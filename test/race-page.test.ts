@@ -224,7 +224,7 @@ describe('riderRowHTML', () => {
 });
 
 describe('HTML page scripts initialization', () => {
-  const pages = ['tdf2026.html', 'giro2026.html', 'femmes2026.html', 'vuelta2026.html'];
+  const pages = ['2026/tdf.html', '2026/giro.html', '2026/femmes.html', '2026/vuelta.html'];
 
   pages.forEach((page) => {
     it(`executes ${page} without syntax or runtime initialization errors`, () => {
@@ -233,7 +233,7 @@ describe('HTML page scripts initialization', () => {
       const scripts: string[] = [];
       dom.window.document.querySelectorAll('script').forEach((scriptEl) => {
         const src = scriptEl.getAttribute('src');
-        if (src === 'dist/race-page.js') {
+        if (src === '../dist/race-page.js') {
           scripts.push(distCode);
         } else if (!src) {
           scripts.push(scriptEl.textContent ?? '');
