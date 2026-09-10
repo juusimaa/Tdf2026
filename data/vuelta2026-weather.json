@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-09T06:35:15+03:00",
+ "updated": "2026-09-10T14:32:48+03:00",
  "stages": {
   "1": {
    "start": {
@@ -396,6 +396,30 @@
     "precip": 0.0,
     "humidity": 52,
     "town": "La Rábida"
+   }
+  },
+  "17": {
+   "start": {
+    "temp": 33,
+    "low": 21,
+    "feels": 35,
+    "cond": "overcast",
+    "wind": 21,
+    "dir": "W",
+    "precip": 0.0,
+    "humidity": 54,
+    "town": "Dos Hermanas"
+   },
+   "finish": {
+    "temp": 33,
+    "low": 23,
+    "feels": 34,
+    "cond": "showers",
+    "wind": 17,
+    "dir": "W",
+    "precip": 0.2,
+    "humidity": 44,
+    "town": "Sevilla"
    }
   }
  }
