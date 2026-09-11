@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-10T14:32:48+03:00",
+ "updated": "2026-09-11T14:34:11+03:00",
  "stages": {
   "1": {
    "start": {
@@ -420,6 +420,30 @@
     "precip": 0.2,
     "humidity": 44,
     "town": "Sevilla"
+   }
+  },
+  "18": {
+   "start": {
+    "temp": 26,
+    "low": 20,
+    "feels": 29,
+    "cond": "partly",
+    "wind": 16,
+    "dir": "SW",
+    "precip": 0.0,
+    "humidity": 79,
+    "town": "El Puerto de Santa María"
+   },
+   "finish": {
+    "temp": 29,
+    "low": 20,
+    "feels": 31,
+    "cond": "overcast",
+    "wind": 13,
+    "dir": "S",
+    "precip": 0.0,
+    "humidity": 74,
+    "town": "Jerez de la Frontera"
    }
   }
  }
