@@ -7,7 +7,7 @@
   "rain": "mm",
   "humidity": "%"
  },
- "updated": "2026-09-11T14:34:11+03:00",
+ "updated": "2026-09-12T13:59:00+03:00",
  "stages": {
   "1": {
    "start": {
@@ -444,6 +444,31 @@
     "precip": 0.0,
     "humidity": 74,
     "town": "Jerez de la Frontera"
+   }
+  },
+  "19": {
+   "start": {
+    "temp": 29,
+    "low": 20,
+    "feels": 32,
+    "cond": "clear",
+    "wind": 17,
+    "dir": "SE",
+    "precip": 0.0,
+    "humidity": 63,
+    "town": "Vélez-Málaga"
+   },
+   "finish": {
+    "temp": 20,
+    "low": 12,
+    "feels": 20,
+    "cond": "clear",
+    "wind": 16,
+    "dir": "E",
+    "precip": 0.0,
+    "humidity": 70,
+    "alt": 1284,
+    "town": "Peñas Blancas"
    }
   }
  }
